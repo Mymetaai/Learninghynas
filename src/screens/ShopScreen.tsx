@@ -260,6 +260,7 @@ const ShopScreen: FC = () => {
                             src={drawnCard.imageUrl}
                             alt={drawnCard.name}
                             className="h-full object-contain filter drop-shadow-md py-1"
+                            referrerPolicy="no-referrer"
                             onError={() => setImageErrors(prev => ({ ...prev, [drawnCard.id]: true }))}
                           />
                         )}
@@ -431,6 +432,7 @@ const ShopScreen: FC = () => {
                           src={card.imageUrl}
                           alt={card.name}
                           className="h-full object-contain filter drop-shadow-md py-0.5"
+                          referrerPolicy="no-referrer"
                           onError={() => setImageErrors(prev => ({ ...prev, [card.id]: true }))}
                         />
                       )}
@@ -585,6 +587,7 @@ const ShopScreen: FC = () => {
                       src={selectedCard.imageUrl}
                       alt={selectedCard.name}
                       className="h-full object-contain filter drop-shadow-md py-1"
+                      referrerPolicy="no-referrer"
                       onError={() => setImageErrors(prev => ({ ...prev, [selectedCard.id]: true }))}
                     />
                   )}
