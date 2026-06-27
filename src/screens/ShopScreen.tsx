@@ -14,6 +14,10 @@ import {
 } from 'lucide-react';
 
 const HOTSPOTS = {
+  series: {
+    title: "OP Franchise Designation",
+    explanation: "Stands for 'One Piece'. This watermark designates that this card belongs to the official One Piece series set, validating its compatibility in standard cross-franchise matches and deck construction rules."
+  },
   faction: {
     title: "Faction & Card Type",
     explanation: "Represents the pirate crew or group affiliation. In the official rule manual (Page 3), the card type determines what synergies, crew effects, and searcher abilities apply to it in deck building."
@@ -62,7 +66,8 @@ const ShopScreen: FC = () => {
   const [selectedCard, setSelectedCard] = useState<OnePieceCard | null>(null);
   const [filterRarity, setFilterRarity] = useState<'all' | 'common' | 'rare' | 'epic' | 'legendary'>('all');
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
-  const [selectedHotspot, setSelectedHotspot] = useState<'faction' | 'rarity' | 'portrait' | 'name' | 'bounty' | 'attack' | null>(null);
+  const [selectedHotspot, setSelectedHotspot] = useState<'series' | 'faction' | 'rarity' | 'portrait' | 'name' | 'bounty' | 'attack' | null>(null);
+  const [gachaOpTooltip, setGachaOpTooltip] = useState(false);
 
   // Rarity distribution count
   const stats = useMemo(() => {
@@ -100,6 +105,7 @@ const ShopScreen: FC = () => {
     setDrawnCard(null);
     setIsFlipped(false);
     setDrawResult(null);
+    setGachaOpTooltip(false);
 
     // Deduct coins
     spendCoins(DRAW_COST);
@@ -250,9 +256,40 @@ const ShopScreen: FC = () => {
 
                       {/* Card Illustration */}
                       <div className={`my-3 h-32 w-full rounded-xl bg-gradient-to-tr ${drawnCard.color} flex items-center justify-center text-6xl shadow-inner relative overflow-hidden select-none`}>
-                        <div className="absolute top-0 right-0 p-1 opacity-10 font-bold text-4xl select-none">
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setGachaOpTooltip(!gachaOpTooltip);
+                          }}
+                          className="absolute top-0 right-0 p-1 opacity-20 hover:opacity-60 hover:scale-105 transition-all font-black text-4xl select-none cursor-pointer text-paper leading-none z-20"
+                          title="OP Series Info"
+                        >
                           OP
-                        </div>
+                        </button>
+
+                        {/* OP Series Tooltip */}
+                        {gachaOpTooltip && (
+                          <div className="absolute inset-0 bg-ink/95 text-paper p-3 flex flex-col justify-center items-center text-center z-40 border border-pencil/20 rounded-xl">
+                            <h4 className="font-hud text-xs font-bold text-marigold uppercase tracking-wider flex items-center gap-1">
+                              <Sparkles size={12} className="text-marigold animate-spin-slow" /> OP Series
+                            </h4>
+                            <p className="text-[10px] leading-relaxed text-pencil mt-1.5 px-2 font-body">
+                              Stands for <strong>One Piece</strong>. This card belongs to the official core One Piece series dataset.
+                            </p>
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setGachaOpTooltip(false);
+                              }}
+                              className="mt-3 bg-marigold hover:bg-marigold/90 text-ink font-hud text-[8px] uppercase font-bold px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
+                            >
+                              Got it
+                            </button>
+                          </div>
+                        )}
+
                         {imageErrors[drawnCard.id] ? (
                           drawnCard.emoji
                         ) : (
@@ -503,83 +540,103 @@ const ShopScreen: FC = () => {
                 <button
                   type="button"
                   onClick={() => setSelectedHotspot(selectedHotspot === 'faction' ? null : 'faction')}
-                  className={`absolute top-1.5 left-14 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-marigold border border-ink text-ink font-bold text-[9px] animate-pulse shadow-md transition-all cursor-pointer ${
-                    selectedHotspot === 'faction' ? 'scale-125 bg-terracotta text-paper ring-1 ring-marigold' : ''
+                  className={`absolute top-1.5 left-14 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-marigold border border-ink text-ink shadow-md transition-all cursor-pointer ${
+                    selectedHotspot === 'faction' ? 'scale-125 bg-terracotta text-paper ring-1 ring-marigold' : 'animate-pulse hover:scale-110'
                   }`}
                   title="Faction Info"
                 >
-                  ?
+                  <Info size={10} className="stroke-[3.5]" />
                 </button>
 
                 {/* Hotspot Portrait */}
                 <button
                   type="button"
                   onClick={() => setSelectedHotspot(selectedHotspot === 'portrait' ? null : 'portrait')}
-                  className={`absolute top-20 left-[50%] -translate-x-[50%] z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-marigold border border-ink text-ink font-bold text-[9px] animate-pulse shadow-md transition-all cursor-pointer ${
-                    selectedHotspot === 'portrait' ? 'scale-125 bg-terracotta text-paper ring-1 ring-marigold' : ''
+                  className={`absolute top-20 left-[50%] -translate-x-[50%] z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-marigold border border-ink text-ink shadow-md transition-all cursor-pointer ${
+                    selectedHotspot === 'portrait' ? 'scale-125 bg-terracotta text-paper ring-1 ring-marigold' : 'animate-pulse hover:scale-110'
                   }`}
                   title="Portrait Info"
                 >
-                  ?
+                  <Info size={10} className="stroke-[3.5]" />
                 </button>
 
                 {/* Hotspot Name */}
                 <button
                   type="button"
                   onClick={() => setSelectedHotspot(selectedHotspot === 'name' ? null : 'name')}
-                  className={`absolute bottom-[94px] right-6 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-marigold border border-ink text-ink font-bold text-[9px] animate-pulse shadow-md transition-all cursor-pointer ${
-                    selectedHotspot === 'name' ? 'scale-125 bg-terracotta text-paper ring-1 ring-marigold' : ''
+                  className={`absolute bottom-[94px] right-6 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-marigold border border-ink text-ink shadow-md transition-all cursor-pointer ${
+                    selectedHotspot === 'name' ? 'scale-125 bg-terracotta text-paper ring-1 ring-marigold' : 'animate-pulse hover:scale-110'
                   }`}
                   title="Name Info"
                 >
-                  ?
+                  <Info size={10} className="stroke-[3.5]" />
                 </button>
 
                 {/* Hotspot Bounty */}
                 <button
                   type="button"
                   onClick={() => setSelectedHotspot(selectedHotspot === 'bounty' ? null : 'bounty')}
-                  className={`absolute bottom-[68px] right-6 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-marigold border border-ink text-ink font-bold text-[9px] animate-pulse shadow-md transition-all cursor-pointer ${
-                    selectedHotspot === 'bounty' ? 'scale-125 bg-terracotta text-paper ring-1 ring-marigold' : ''
+                  className={`absolute bottom-[68px] right-6 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-marigold border border-ink text-ink shadow-md transition-all cursor-pointer ${
+                    selectedHotspot === 'bounty' ? 'scale-125 bg-terracotta text-paper ring-1 ring-marigold' : 'animate-pulse hover:scale-110'
                   }`}
                   title="Bounty Info"
                 >
-                  ?
+                  <Info size={10} className="stroke-[3.5]" />
                 </button>
 
                 {/* Hotspot Rarity */}
                 <button
                   type="button"
                   onClick={() => setSelectedHotspot(selectedHotspot === 'rarity' ? null : 'rarity')}
-                  className={`absolute bottom-2.5 left-4 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-marigold border border-ink text-ink font-bold text-[9px] animate-pulse shadow-md transition-all cursor-pointer ${
-                    selectedHotspot === 'rarity' ? 'scale-125 bg-terracotta text-paper ring-1 ring-marigold' : ''
+                  className={`absolute bottom-2.5 left-4 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-marigold border border-ink text-ink shadow-md transition-all cursor-pointer ${
+                    selectedHotspot === 'rarity' ? 'scale-125 bg-terracotta text-paper ring-1 ring-marigold' : 'animate-pulse hover:scale-110'
                   }`}
                   title="Rarity Info"
                 >
-                  ?
+                  <Info size={10} className="stroke-[3.5]" />
                 </button>
 
                 {/* Hotspot Special Attack */}
                 <button
                   type="button"
                   onClick={() => setSelectedHotspot(selectedHotspot === 'attack' ? null : 'attack')}
-                  className={`absolute bottom-2.5 right-4 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-marigold border border-ink text-ink font-bold text-[9px] animate-pulse shadow-md transition-all cursor-pointer ${
-                    selectedHotspot === 'attack' ? 'scale-125 bg-terracotta text-paper ring-1 ring-marigold' : ''
+                  className={`absolute bottom-2.5 right-4 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-marigold border border-ink text-ink shadow-md transition-all cursor-pointer ${
+                    selectedHotspot === 'attack' ? 'scale-125 bg-terracotta text-paper ring-1 ring-marigold' : 'animate-pulse hover:scale-110'
                   }`}
                   title="Attack Info"
                 >
-                  ?
+                  <Info size={10} className="stroke-[3.5]" />
                 </button>
 
-                <div className={`absolute top-2 left-2 text-[8px] font-hud text-pencil uppercase font-bold tracking-widest transition-all ${
-                  selectedHotspot === 'faction' ? 'ring-2 ring-marigold rounded px-1.5 py-0.5 text-marigold scale-105 bg-marigold/10' : ''
-                }`}>
+                {/* Left Header label (OP-Card) - now clickable for OP series details */}
+                <button
+                  type="button"
+                  onClick={() => setSelectedHotspot(selectedHotspot === 'series' ? null : 'series')}
+                  className={`absolute top-2 left-2 text-[8px] font-hud text-pencil uppercase font-bold tracking-widest transition-all cursor-pointer hover:text-marigold ${
+                    selectedHotspot === 'series' ? 'text-marigold scale-105 ring-2 ring-marigold rounded px-1.5 py-0.5 bg-marigold/10' : ''
+                  }`}
+                >
                   OP-Card
-                </div>
+                </button>
                 
                 <div className={`h-36 w-full rounded-lg bg-gradient-to-tr ${selectedCard.color} flex items-center justify-center text-7xl shadow-inner relative overflow-hidden select-none mb-4 transition-all ${
                   selectedHotspot === 'portrait' ? 'ring-4 ring-marigold scale-95 shadow-lg' : ''
                 }`}>
+                  {/* OP series watermark inside portrait - clickable */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedHotspot(selectedHotspot === 'series' ? null : 'series');
+                    }}
+                    className={`absolute top-0 right-0 p-1.5 opacity-20 hover:opacity-60 hover:scale-105 transition-all font-black text-5xl select-none cursor-pointer text-paper leading-none z-20 ${
+                      selectedHotspot === 'series' ? 'opacity-85 text-marigold scale-110' : ''
+                    }`}
+                    title="Click for OP Series Info"
+                  >
+                    OP
+                  </button>
+
                   {imageErrors[selectedCard.id] ? (
                     selectedCard.emoji
                   ) : (
@@ -635,8 +692,10 @@ const ShopScreen: FC = () => {
                     </p>
                   </motion.div>
                 ) : (
-                  <div className="mt-4 p-3 bg-paper/5 border border-pencil/10 rounded-xl font-body text-xs text-pencil text-center">
-                    💡 Tip: Tap any pulsing <span className="text-marigold font-bold">?</span> dot on the card to inspect its anatomy and game rules!
+                  <div className="mt-4 p-3 bg-paper/5 border border-pencil/10 rounded-xl font-body text-[11px] text-pencil text-center flex items-center justify-center flex-wrap gap-1">
+                    <span>💡 Tip: Tap any pulsing</span>
+                    <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-marigold border border-ink text-ink"><Info size={8} className="stroke-[3.5]" /></span>
+                    <span>dot or the <strong>OP</strong> label to inspect the card anatomy!</span>
                   </div>
                 )}
               </AnimatePresence>
