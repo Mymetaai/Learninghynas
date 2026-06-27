@@ -2,6 +2,7 @@ import { useState, useMemo, type FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStatsStore } from '../state/statsStore';
 import { ONE_PIECE_CARDS, type OnePieceCard } from '../content/onePieceCards';
+import { DEMON_SLAYER_CARDS, type DemonSlayerCard } from '../content/demonSlayerCards';
 import {
   ShoppingBag,
   Sparkles,
@@ -62,8 +63,11 @@ const ShopScreen: FC = () => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [drawResult, setDrawResult] = useState<'new' | 'duplicate' | null>(null);
   
+  // Series selector state
+  const [selectedSeries, setSelectedSeries] = useState<'one-piece' | 'demon-slayer'>('one-piece');
+
   // Modal states
-  const [selectedCard, setSelectedCard] = useState<OnePieceCard | null>(null);
+  const [selectedCard, setSelectedCard] = useState<OnePieceCard | DemonSlayerCard | null>(null);
   const [filterRarity, setFilterRarity] = useState<'all' | 'common' | 'rare' | 'epic' | 'legendary'>('all');
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
   const [selectedHotspot, setSelectedHotspot] = useState<'series' | 'faction' | 'rarity' | 'portrait' | 'name' | 'bounty' | 'attack' | null>(null);
@@ -71,15 +75,20 @@ const ShopScreen: FC = () => {
 
   // Rarity distribution count
   const stats = useMemo(() => {
-    const total = ONE_PIECE_CARDS.length;
-    const collectedCount = collectedCardIds.length;
+    const currentPool = selectedSeries === 'one-piece' ? ONE_PIECE_CARDS : DEMON_SLAYER_CARDS;
+    const total = currentPool.length;
+    
+    // filter collectedCardIds that belong to the current pool
+    const poolIds = currentPool.map(c => c.id);
+    const currentCollected = collectedCardIds.filter(id => poolIds.includes(id));
+    const collectedCount = currentCollected.length;
     const rate = total > 0 ? Math.round((collectedCount / total) * 100) : 0;
     
     let legendaryCount = 0;
     let epicCount = 0;
     
-    collectedCardIds.forEach(id => {
-      const card = ONE_PIECE_CARDS.find(c => c.id === id);
+    currentCollected.forEach(id => {
+      const card = currentPool.find(c => c.id === id);
       if (card) {
         if (card.rarity === 'legendary') legendaryCount++;
         if (card.rarity === 'epic') epicCount++;
@@ -87,12 +96,13 @@ const ShopScreen: FC = () => {
     });
 
     return { total, collectedCount, rate, legendaryCount, epicCount };
-  }, [collectedCardIds]);
+  }, [collectedCardIds, selectedSeries]);
 
   const filteredCards = useMemo(() => {
-    if (filterRarity === 'all') return ONE_PIECE_CARDS;
-    return ONE_PIECE_CARDS.filter(c => c.rarity === filterRarity);
-  }, [filterRarity]);
+    const currentPool = selectedSeries === 'one-piece' ? ONE_PIECE_CARDS : DEMON_SLAYER_CARDS;
+    if (filterRarity === 'all') return currentPool;
+    return currentPool.filter(c => c.rarity === filterRarity);
+  }, [filterRarity, selectedSeries]);
 
   // Main summon / draw action
   const handleDraw = () => {
@@ -123,7 +133,8 @@ const ShopScreen: FC = () => {
       rarity = 'common';
     }
 
-    const pool = ONE_PIECE_CARDS.filter(c => c.rarity === rarity);
+    const currentPool = selectedSeries === 'one-piece' ? ONE_PIECE_CARDS : DEMON_SLAYER_CARDS;
+    const pool = currentPool.filter(c => c.rarity === rarity);
     const chosenCard = pool[Math.floor(Math.random() * pool.length)];
 
     // Simulate summon delay
@@ -165,8 +176,27 @@ const ShopScreen: FC = () => {
               Anime Card Shop
             </h1>
             <p className="text-pencil text-sm mt-1">
-              Spend your hard-earned coins to summon mystical One Piece character cards!
+              {selectedSeries === 'one-piece'
+                ? 'Spend your hard-earned coins to summon mystical One Piece character cards!'
+                : 'Spend your hard-earned coins to summon powerful Demon Slayer corps & demon cards!'}
             </p>
+
+            {/* Series Dropdown Selector */}
+            <div className="mt-3 flex items-center gap-2">
+              <span className="text-[10px] uppercase font-hud text-pencil tracking-wider">Series:</span>
+              <select
+                value={selectedSeries}
+                onChange={(e) => {
+                  setSelectedSeries(e.target.value as 'one-piece' | 'demon-slayer');
+                  setSelectedCard(null);
+                  setSelectedHotspot(null);
+                }}
+                className="bg-paper/10 hover:bg-paper/15 border border-pencil/30 text-paper font-hud text-xs rounded-xl px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-marigold transition-all cursor-pointer font-bold"
+              >
+                <option value="one-piece" className="bg-ink text-paper">🏴‍☠️ One Piece Set</option>
+                <option value="demon-slayer" className="bg-ink text-paper">⚔️ Demon Slayer Set</option>
+              </select>
+            </div>
           </div>
 
           <div className="flex items-center gap-3">
@@ -243,7 +273,7 @@ const ShopScreen: FC = () => {
                       {/* Card Rarity Badge & Rarity Name */}
                       <div className="flex items-center justify-between border-b border-pencil/10 pb-2">
                         <span className="font-hud text-[9px] uppercase tracking-wider text-pencil font-semibold">
-                          Wanted
+                          {selectedSeries === 'one-piece' ? 'Wanted' : 'Kimetsu'}
                         </span>
                         <span className={`font-hud text-[9px] uppercase px-2 py-0.5 rounded-full font-bold ${
                           drawnCard.rarity === 'legendary' ? 'bg-amber-500 text-ink' :
@@ -263,19 +293,19 @@ const ShopScreen: FC = () => {
                             setGachaOpTooltip(!gachaOpTooltip);
                           }}
                           className="absolute top-0 right-0 p-1 opacity-20 hover:opacity-60 hover:scale-105 transition-all font-black text-4xl select-none cursor-pointer text-paper leading-none z-20"
-                          title="OP Series Info"
+                          title={`${selectedSeries === 'one-piece' ? 'OP' : 'DS'} Series Info`}
                         >
-                          OP
+                          {selectedSeries === 'one-piece' ? 'OP' : 'DS'}
                         </button>
 
-                        {/* OP Series Tooltip */}
+                        {/* OP/DS Series Tooltip */}
                         {gachaOpTooltip && (
                           <div className="absolute inset-0 bg-ink/95 text-paper p-3 flex flex-col justify-center items-center text-center z-40 border border-pencil/20 rounded-xl">
                             <h4 className="font-hud text-xs font-bold text-marigold uppercase tracking-wider flex items-center gap-1">
-                              <Sparkles size={12} className="text-marigold animate-spin-slow" /> OP Series
+                              <Sparkles size={12} className="text-marigold animate-spin-slow" /> {selectedSeries === 'one-piece' ? 'OP' : 'DS'} Series
                             </h4>
                             <p className="text-[10px] leading-relaxed text-pencil mt-1.5 px-2 font-body">
-                              Stands for <strong>One Piece</strong>. This card belongs to the official core One Piece series dataset.
+                              Stands for <strong>{selectedSeries === 'one-piece' ? 'One Piece' : 'Demon Slayer'}</strong>. This card belongs to the official core {selectedSeries === 'one-piece' ? 'One Piece' : 'Demon Slayer'} series dataset.
                             </p>
                             <button
                               type="button"
@@ -336,7 +366,7 @@ const ShopScreen: FC = () => {
             <div>
               <h2 className="font-display text-xl font-bold text-paper">Summoning Altar</h2>
               <p className="text-pencil text-xs mt-2 leading-relaxed">
-                Unlock 18 mystical bounty cards. Epic and Legendary cards contain brilliant glowing borders and unique Haki features!
+                Unlock {selectedSeries === 'one-piece' ? ONE_PIECE_CARDS.length : DEMON_SLAYER_CARDS.length} mystical cards from this set. Epic and Legendary cards contain brilliant glowing borders and unique Haki/Aura features!
               </p>
             </div>
 
@@ -608,7 +638,7 @@ const ShopScreen: FC = () => {
                   <Info size={10} className="stroke-[3.5]" />
                 </button>
 
-                {/* Left Header label (OP-Card) - now clickable for OP series details */}
+                {/* Left Header label (OP-Card / DS-Card) - now clickable for series details */}
                 <button
                   type="button"
                   onClick={() => setSelectedHotspot(selectedHotspot === 'series' ? null : 'series')}
@@ -616,13 +646,13 @@ const ShopScreen: FC = () => {
                     selectedHotspot === 'series' ? 'text-marigold scale-105 ring-2 ring-marigold rounded px-1.5 py-0.5 bg-marigold/10' : ''
                   }`}
                 >
-                  OP-Card
+                  {selectedCard.id.startsWith('ds-') ? 'DS-Card' : 'OP-Card'}
                 </button>
                 
                 <div className={`h-36 w-full rounded-lg bg-gradient-to-tr ${selectedCard.color} flex items-center justify-center text-7xl shadow-inner relative overflow-hidden select-none mb-4 transition-all ${
                   selectedHotspot === 'portrait' ? 'ring-4 ring-marigold scale-95 shadow-lg' : ''
                 }`}>
-                  {/* OP series watermark inside portrait - clickable */}
+                  {/* Franchise series watermark inside portrait - clickable */}
                   <button
                     type="button"
                     onClick={(e) => {
@@ -632,9 +662,9 @@ const ShopScreen: FC = () => {
                     className={`absolute top-0 right-0 p-1.5 opacity-20 hover:opacity-60 hover:scale-105 transition-all font-black text-5xl select-none cursor-pointer text-paper leading-none z-20 ${
                       selectedHotspot === 'series' ? 'opacity-85 text-marigold scale-110' : ''
                     }`}
-                    title="Click for OP Series Info"
+                    title={`Click for ${selectedCard.id.startsWith('ds-') ? 'DS' : 'OP'} Series Info`}
                   >
-                    OP
+                    {selectedCard.id.startsWith('ds-') ? 'DS' : 'OP'}
                   </button>
 
                   {imageErrors[selectedCard.id] ? (
@@ -688,14 +718,18 @@ const ShopScreen: FC = () => {
                       <Sparkles size={10} /> {HOTSPOTS[selectedHotspot].title}
                     </h4>
                     <p className="mt-1 leading-relaxed text-ink/80 text-[11px]">
-                      {HOTSPOTS[selectedHotspot].explanation}
+                      {selectedHotspot === 'series'
+                        ? (selectedCard.id.startsWith('ds-')
+                            ? "Stands for 'Demon Slayer'. This watermark designates that this card belongs to the official Demon Slayer series set, validating its compatibility in standard cross-franchise matches and deck construction rules."
+                            : HOTSPOTS.series.explanation)
+                        : HOTSPOTS[selectedHotspot].explanation}
                     </p>
                   </motion.div>
                 ) : (
                   <div className="mt-4 p-3 bg-paper/5 border border-pencil/10 rounded-xl font-body text-[11px] text-pencil text-center flex items-center justify-center flex-wrap gap-1">
                     <span>💡 Tip: Tap any pulsing</span>
                     <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-marigold border border-ink text-ink"><Info size={8} className="stroke-[3.5]" /></span>
-                    <span>dot or the <strong>OP</strong> label to inspect the card anatomy!</span>
+                    <span>dot or the <strong>{selectedCard.id.startsWith('ds-') ? 'DS' : 'OP'}</strong> label to inspect the card anatomy!</span>
                   </div>
                 )}
               </AnimatePresence>
