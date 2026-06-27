@@ -16,7 +16,7 @@ const TrainingScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/Pr
 const AICompanionScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/ConversationScreen'));
 const VoiceArenaScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/SpeakingScreen'));
 const DailyQuestScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/DailyQuestScreen'));
-const AchievementsScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/ProfileScreen'));
+const ShopScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/ShopScreen'));
 const ProfileSettingsScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/ProfileScreen'));
 const QuestCompletionScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/QuestCompletionScreen'));
 const BossBattleScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/BossBattleScreen'));
@@ -33,7 +33,7 @@ export type RouteId =
   | 'companion'
   | 'voice'
   | 'daily'
-  | 'achievements'
+  | 'shop'
   | 'profile'
   | 'quest-complete'
   | 'boss';
@@ -79,7 +79,7 @@ export const ROUTES: RouteDef[] = [
     label: 'Quests',
     icon: 'ScrollText',
     component: QuestPreviewScreen,
-    showInNav: true,
+    showInNav: false,
     navOrder: 2,
   },
   {
@@ -137,11 +137,11 @@ export const ROUTES: RouteDef[] = [
     navOrder: 7,
   },
   {
-    id: 'achievements',
-    path: '/achievements',
-    label: 'Achievements',
-    icon: 'Trophy',
-    component: AchievementsScreen,
+    id: 'shop',
+    path: '/shop',
+    label: 'Shop',
+    icon: 'ShoppingBag',
+    component: ShopScreen,
     showInNav: true,
     navOrder: 8,
   },
@@ -151,7 +151,7 @@ export const ROUTES: RouteDef[] = [
     label: 'Profile',
     icon: 'User',
     component: ProfileSettingsScreen,
-    showInNav: true,
+    showInNav: false,
     navOrder: 9,
   },
   {

@@ -26,6 +26,8 @@ interface StatsState {
   lastActiveDate: string;
   /** Vocabulary the player has encountered/learned. */
   learnedVocab: LearnedVocabEntry[];
+  /** Collected One Piece card ids in the shop. */
+  collectedCardIds: string[];
 
   /** Grant XP and coins for completing a quest (idempotent per quest). */
   grantQuestRewards: (questId: string, xp: number, coins: number) => void;
@@ -35,6 +37,8 @@ interface StatsState {
   learnVocab: (words: string[], questId: string) => void;
   /** Spend coins (returns false if not enough). */
   spendCoins: (amount: number) => boolean;
+  /** Collect a drawn shop card. */
+  collectCard: (cardId: string) => void;
   /** Reset all stats to zero (fresh account / testing). */
   reset: () => void;
 }
@@ -61,6 +65,7 @@ const DEFAULT_STATE = {
   streak: 0,
   lastActiveDate: '',
   learnedVocab: [] as LearnedVocabEntry[],
+  collectedCardIds: [] as string[],
 };
 
 export const useStatsStore = create<StatsState>()(
@@ -122,6 +127,13 @@ export const useStatsStore = create<StatsState>()(
         return true;
       },
 
+      collectCard: (cardId) => {
+        set((state) => {
+          if (state.collectedCardIds.includes(cardId)) return state;
+          return { collectedCardIds: [...state.collectedCardIds, cardId] };
+        });
+      },
+
       reset: () => set({ ...DEFAULT_STATE }),
     }),
     {
@@ -132,6 +144,7 @@ export const useStatsStore = create<StatsState>()(
         streak: state.streak,
         lastActiveDate: state.lastActiveDate,
         learnedVocab: state.learnedVocab,
+        collectedCardIds: state.collectedCardIds,
       }),
     },
   ),

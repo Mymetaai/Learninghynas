@@ -7,6 +7,7 @@ import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ALL_WORLDS } from '../content';
 import { useAvatarQuestId, useProgressStore } from '../state/progressStore';
+import { Lock } from 'lucide-react';
 
 const WorldMapScreen = () => {
   const navigate = useNavigate();
@@ -130,7 +131,7 @@ const RegionCard = ({
                   p.unlocked ? `Open ${p.quest.title}` : `${p.quest.title} (locked)`
                 }
               >
-                {p.done ? '✓' : p.unlocked ? p.index + 1 : '?'}
+                {p.done ? '✓' : p.unlocked ? p.index + 1 : <Lock size={12} className="text-pencil/70" />}
               </button>
               {/* Avatar token on the furthest unlocked pin */}
               {p.isAvatar && !fogged && (
@@ -162,8 +163,8 @@ const RegionCard = ({
       {fogged && (
         <div className="absolute inset-0 flex items-center justify-center bg-ink/70 backdrop-blur-[1px]">
           <div className="text-center">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border-2 border-paper/30 bg-paper/10 font-display text-2xl text-paper/70">
-              ?
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border-2 border-paper/30 bg-paper/10 text-paper/70">
+              <Lock size={26} />
             </div>
             <p className="mt-2 font-body text-xs text-paper/60">Locked region</p>
             <p className="font-hud text-[9px] uppercase tracking-widest text-paper/40">
@@ -178,8 +179,8 @@ const RegionCard = ({
 
 const EmptyWorldPin = () => (
   <li className="relative flex items-start gap-3">
-    <span className="relative z-10 mt-0.5 flex h-7 w-7 items-center justify-center rounded-full border-2 border-pencil/30 bg-paper text-pencil">
-      ?
+    <span className="relative z-10 mt-0.5 flex h-7 w-7 items-center justify-center rounded-full border-2 border-pencil/30 bg-paper text-pencil/70">
+      <Lock size={11} />
     </span>
     <p className="font-body text-xs italic text-pencil/60">
       Content coming in a later region…

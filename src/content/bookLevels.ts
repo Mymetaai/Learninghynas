@@ -5,12 +5,12 @@ import type { Quest } from './types';
 export const BOOK_LEVELS: Quest[] = [
   {
     id: 'book-lvl-1',
-    title: 'Level 1: Introduction to the Spanish Language',
+    title: 'Level 1: First Steps: Greetings & Core Phrases',
     subtitle: 'Pages 10–19 · 53 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-1'],
     storyLines: [
-      '📖 Welcome to Level 1: "Introduction to the Spanish Language".',
+      '📖 Welcome to Level 1: "First Steps: Greetings & Core Phrases".',
       'New word: "hola" means "hello".',
       'New word: "bien" means "well".',
       'New word: "mal" means "not well".',
@@ -421,12 +421,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-2',
-    title: 'Level 2: Subject Pronouns and the Verb Ser',
+    title: 'Level 2: Identity & Essence: Subject Pronouns & Ser',
     subtitle: 'Pages 20–29 · 76 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-2'],
     storyLines: [
-      '📖 Welcome to Level 2: "Subject Pronouns and the Verb Ser".',
+      '📖 Welcome to Level 2: "Identity & Essence: Subject Pronouns & Ser".',
       'New word: "yo" means "I".',
       'New word: "tú" means "you".',
       'New word: "usted" means "you".',
@@ -837,12 +837,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-3',
-    title: 'Level 3: Regular -ar Verbs in the Present',
+    title: 'Level 3: Everyday Actions: Regular -ar Verbs',
     subtitle: 'Pages 30–39 · 50 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-3'],
     storyLines: [
-      '📖 Welcome to Level 3: "Regular -ar Verbs in the Present".',
+      '📖 Welcome to Level 3: "Everyday Actions: Regular -ar Verbs".',
       'New word: "un" means "a".',
       'New word: "una" means "a".',
       'New word: "el estudiante" means "male student".',
@@ -1253,12 +1253,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-4',
-    title: 'Level 4: The Verb Estar and Numbers over 100',
+    title: 'Level 4: Location & Numbers: The Verb Estar',
     subtitle: 'Pages 40–49 · 27 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-4'],
     storyLines: [
-      '📖 Welcome to Level 4: "The Verb Estar and Numbers over 100".',
+      '📖 Welcome to Level 4: "Location & Numbers: The Verb Estar".',
       'New word: "comer" means "to eat".',
       'New word: "leer" means "to read".',
       'New word: "beber" means "to drink".',
@@ -1669,12 +1669,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-5',
-    title: 'Level 5: Regular -er and -ir Verbs in the Present',
+    title: 'Level 5: Describing Routines: Regular -er and -ir Verbs',
     subtitle: 'Pages 50–59 · 49 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-5'],
     storyLines: [
-      '📖 Welcome to Level 5: "Regular -er and -ir Verbs in the Present".',
+      '📖 Welcome to Level 5: "Describing Routines: Regular -er and -ir Verbs".',
       'New word: "nuevo" means "new".',
       'New word: "la manera" means "way".',
       'New word: "la palabra" means "word".',
@@ -2085,12 +2085,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-6',
-    title: 'Level 6: Expressing Time in Spanish',
+    title: 'Level 6: Mastering Time: Scheduling and Hours',
     subtitle: 'Pages 60–69 · 22 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-6'],
     storyLines: [
-      '📖 Welcome to Level 6: "Expressing Time in Spanish".',
+      '📖 Welcome to Level 6: "Mastering Time: Scheduling and Hours".',
       'New word: "el número" means "number".',
       'New word: "la característica" means "characteristic".',
       'New word: "la expresión" means "expression".',
@@ -2501,12 +2501,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-7',
-    title: 'Level 7: Expressions Using the Verb Tener',
+    title: 'Level 7: Age, Hunger, and Feelings: Expressions with Tener',
     subtitle: 'Pages 70–79 · 39 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-7'],
     storyLines: [
-      '📖 Welcome to Level 7: "Expressions Using the Verb Tener".',
+      '📖 Welcome to Level 7: "Age, Hunger, and Feelings: Expressions with Tener".',
       'New word: "hacer" means "to make".',
       'New word: "poner" means "to put".',
       'New word: "salir" means "to leave".',
@@ -2917,12 +2917,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-8',
-    title: 'Level 8: The Verbs Saber and Conocer',
+    title: 'Level 8: Knowledge vs. Connection: Saber and Conocer',
     subtitle: 'Pages 80–89 · 41 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-8'],
     storyLines: [
-      '📖 Welcome to Level 8: "The Verbs Saber and Conocer".',
+      '📖 Welcome to Level 8: "Knowledge vs. Connection: Saber and Conocer".',
       'New word: "el cambio" means "change".',
       'New word: "la raíz" means "root".',
       'New word: "la conjugación" means "conjugation".',
@@ -3333,12 +3333,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-9',
-    title: 'Level 9: Ver, Dar, and Other Irregular Verbs',
+    title: 'Level 9: Action Packed: Common Irregular Verbs',
     subtitle: 'Pages 90–99 · 23 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-9'],
     storyLines: [
-      '📖 Welcome to Level 9: "Ver, Dar, and Other Irregular Verbs".',
+      '📖 Welcome to Level 9: "Action Packed: Common Irregular Verbs".',
       'New word: "en este momento" means "at this moment".',
       'New word: "posible" means "possible".',
       'New word: "el tenis" means "tennis".',
@@ -3749,12 +3749,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-10',
-    title: 'Level 10: Direct Object Pronouns and Adverbs',
+    title: 'Level 10: Smooth Sentences: Object Pronouns & Adverbs',
     subtitle: 'Pages 100–109 · 53 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-10'],
     storyLines: [
-      '📖 Welcome to Level 10: "Direct Object Pronouns and Adverbs".',
+      '📖 Welcome to Level 10: "Smooth Sentences: Object Pronouns & Adverbs".',
       'New word: "me" means "me".',
       'New word: "te" means "you".',
       'New word: "lo" means "him".',
@@ -4165,12 +4165,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-11',
-    title: 'Level 11: Affirmatives, Negatives, and Demonstratives',
+    title: 'Level 11: Pointing & Negating: Advanced Sentence Modifiers',
     subtitle: 'Pages 110–119 · 51 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-11'],
     storyLines: [
-      '📖 Welcome to Level 11: "Affirmatives, Negatives, and Demonstratives".',
+      '📖 Welcome to Level 11: "Pointing & Negating: Advanced Sentence Modifiers".',
       'New word: "de nuevo" means "again".',
       'New word: "mejor" means "better".',
       'New word: "favorito" means "favorite".',
@@ -4581,12 +4581,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-12',
-    title: 'Level 12: Indirect Object Pronouns',
+    title: 'Level 12: To Whom? Mastering Indirect Object Pronouns',
     subtitle: 'Pages 120–129 · 46 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-12'],
     storyLines: [
-      '📖 Welcome to Level 12: "Indirect Object Pronouns".',
+      '📖 Welcome to Level 12: "To Whom? Mastering Indirect Object Pronouns".',
       'New word: "el garaje" means "garage".',
       'New word: "la sala" means "living room".',
       'New word: "la habitación" means "bedroom".',
@@ -4997,12 +4997,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-13',
-    title: 'Level 13: Reflexive Verbs',
+    title: 'Level 13: Self-Reflection: Daily Routines & Reflexive Verbs',
     subtitle: 'Pages 130–139 · 21 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-13'],
     storyLines: [
-      '📖 Welcome to Level 13: "Reflexive Verbs".',
+      '📖 Welcome to Level 13: "Self-Reflection: Daily Routines & Reflexive Verbs".',
       'New word: "el intercambio" means "exchange".',
       'New word: "sumo" means "extreme".',
       'New word: "sumamente" means "extremely".',
@@ -5413,12 +5413,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-14',
-    title: 'Level 14: Talking about the Past: ¿Desde Cuándo…?',
+    title: 'Level 14: Exploring History: Talking about the Past',
     subtitle: 'Pages 140–149 · 36 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-14'],
     storyLines: [
-      '📖 Welcome to Level 14: "Talking about the Past: ¿Desde Cuándo…?".',
+      '📖 Welcome to Level 14: "Exploring History: Talking about the Past".',
       'New word: "escuche" means "listen".',
       'New word: "barra el suelo" means "sweep the floor".',
       'New word: "tanto como" means "as well as".',
@@ -5829,12 +5829,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-15',
-    title: 'Level 15: Informal Commands',
+    title: 'Level 15: Direct Action: Informal Commands & Orders',
     subtitle: 'Pages 150–159 · 37 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-15'],
     storyLines: [
-      '📖 Welcome to Level 15: "Informal Commands".',
+      '📖 Welcome to Level 15: "Direct Action: Informal Commands & Orders".',
       'New word: "al aire libre" means "outdoors".',
       'New word: "la liga" means "league".',
       'New word: "el fútbol" means "soccer".',
@@ -6245,12 +6245,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-16',
-    title: 'Level 16: Regular -ar Verbs in the Preterite',
+    title: 'Level 16: Past Achievements: Regular -ar Preterite Tense',
     subtitle: 'Pages 160–169 · 31 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-16'],
     storyLines: [
-      '📖 Welcome to Level 16: "Regular -ar Verbs in the Preterite".',
+      '📖 Welcome to Level 16: "Past Achievements: Regular -ar Preterite Tense".',
       'New word: "la terminación" means "ending".',
       'New word: "la formación" means "formation".',
       'New word: "el muchacho" means "boy".',
@@ -6661,12 +6661,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-17',
-    title: 'Level 17: Irregular Verbs in the Preterite',
+    title: 'Level 17: Tales of Yesterday: Irregular Past Actions',
     subtitle: 'Pages 170–179 · 16 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-17'],
     storyLines: [
-      '📖 Welcome to Level 17: "Irregular Verbs in the Preterite".',
+      '📖 Welcome to Level 17: "Tales of Yesterday: Irregular Past Actions".',
       'New word: "la profesión" means "profession".',
       'New word: "el maestro" means "teacher".',
       'New word: "el abogado" means "lawyer".',
@@ -7037,12 +7037,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-18',
-    title: 'Level 18: Book Level 18',
+    title: 'Level 18: Street Speak: Local Colloquialisms and Idioms',
     subtitle: 'Pages 180–189 · 206 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-18'],
     storyLines: [
-      '📖 Welcome to Level 18: "Book Level 18".',
+      '📖 Welcome to Level 18: "Street Speak: Local Colloquialisms and Idioms".',
       'New word: "saludar" means "to greet".',
       'New word: "hola" means "hello".',
       'New word: "bien" means "well".',
@@ -7254,8 +7254,8 @@ export const BOOK_LEVELS: Quest[] = [
     ],
     grammarNotes: [
       {
-        title: 'Book Level 18',
-        explanation: 'This level covers: Book Level 18. Master the vocabulary and complete the exercises to advance.',
+        title: 'Street Speak: Local Colloquialisms and Idioms',
+        explanation: 'This level covers: Street Speak: Local Colloquialisms and Idioms. Master the vocabulary and complete the exercises to advance.',
         exampleFromStory: '"saludar" = "to greet"',
       },
     ],
@@ -7453,12 +7453,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-19',
-    title: 'Level 19: Book Level 19',
+    title: 'Level 19: Desires & Hopes: Introducing the Subjunctive Mood',
     subtitle: 'Pages 190–199 · 605 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-19'],
     storyLines: [
-      '📖 Welcome to Level 19: "Book Level 19".',
+      '📖 Welcome to Level 19: "Desires & Hopes: Introducing the Subjunctive Mood".',
       'New word: "el color" means "color".',
       'New word: "rojo" means "red".',
       'New word: "anaranjado" means "orange".',
@@ -7670,8 +7670,8 @@ export const BOOK_LEVELS: Quest[] = [
     ],
     grammarNotes: [
       {
-        title: 'Book Level 19',
-        explanation: 'This level covers: Book Level 19. Master the vocabulary and complete the exercises to advance.',
+        title: 'Desires & Hopes: Introducing the Subjunctive Mood',
+        explanation: 'This level covers: Desires & Hopes: Introducing the Subjunctive Mood. Master the vocabulary and complete the exercises to advance.',
         exampleFromStory: '"el color" = "color"',
       },
     ],
@@ -7869,12 +7869,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-20',
-    title: 'Level 20: Book Level 20',
+    title: 'Level 20: Hypothetically Speaking: Mastering the Conditional',
     subtitle: 'Pages 200–209 · 550 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-20'],
     storyLines: [
-      '📖 Welcome to Level 20: "Book Level 20".',
+      '📖 Welcome to Level 20: "Hypothetically Speaking: Mastering the Conditional".',
       'New word: "a" means "to".',
       'New word: "en" means "in".',
       'New word: "de" means "of".',
@@ -8086,8 +8086,8 @@ export const BOOK_LEVELS: Quest[] = [
     ],
     grammarNotes: [
       {
-        title: 'Book Level 20',
-        explanation: 'This level covers: Book Level 20. Master the vocabulary and complete the exercises to advance.',
+        title: 'Hypothetically Speaking: Mastering the Conditional',
+        explanation: 'This level covers: Hypothetically Speaking: Mastering the Conditional. Master the vocabulary and complete the exercises to advance.',
         exampleFromStory: '"a" = "to"',
       },
     ],
@@ -8285,12 +8285,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-21',
-    title: 'Level 21: Book Level 21',
+    title: 'Level 21: Social Echoes: Advanced Debates & Public Policy',
     subtitle: 'Pages 210–219 · 723 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-21'],
     storyLines: [
-      '📖 Welcome to Level 21: "Book Level 21".',
+      '📖 Welcome to Level 21: "Social Echoes: Advanced Debates & Public Policy".',
       'New word: "el brócoli" means "broccoli".',
       'New word: "bucear" means "to scuba dive".',
       'New word: "el buceo" means "scuba diving".',
@@ -8502,8 +8502,8 @@ export const BOOK_LEVELS: Quest[] = [
     ],
     grammarNotes: [
       {
-        title: 'Book Level 21',
-        explanation: 'This level covers: Book Level 21. Master the vocabulary and complete the exercises to advance.',
+        title: 'Social Echoes: Advanced Debates & Public Policy',
+        explanation: 'This level covers: Social Echoes: Advanced Debates & Public Policy. Master the vocabulary and complete the exercises to advance.',
         exampleFromStory: '"el brócoli" = "broccoli"',
       },
     ],
@@ -8701,12 +8701,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-22',
-    title: 'Level 22: Book Level 22',
+    title: 'Level 22: Global Trade: Business Spanish & Negotiations',
     subtitle: 'Pages 220–229 · 603 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-22'],
     storyLines: [
-      '📖 Welcome to Level 22: "Book Level 22".',
+      '📖 Welcome to Level 22: "Global Trade: Business Spanish & Negotiations".',
       'New word: "peor" means "worse".',
       'New word: "pequeño" means "small".',
       'New word: "la pera" means "pear".',
@@ -8918,8 +8918,8 @@ export const BOOK_LEVELS: Quest[] = [
     ],
     grammarNotes: [
       {
-        title: 'Book Level 22',
-        explanation: 'This level covers: Book Level 22. Master the vocabulary and complete the exercises to advance.',
+        title: 'Global Trade: Business Spanish & Negotiations',
+        explanation: 'This level covers: Global Trade: Business Spanish & Negotiations. Master the vocabulary and complete the exercises to advance.',
         exampleFromStory: '"peor" = "worse"',
       },
     ],
@@ -9117,12 +9117,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-23',
-    title: 'Level 23: Book Level 23',
+    title: 'Level 23: Cultural Masterpieces: Art, Music & Literature',
     subtitle: 'Pages 230–239 · 620 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-23'],
     storyLines: [
-      '📖 Welcome to Level 23: "Book Level 23".',
+      '📖 Welcome to Level 23: "Cultural Masterpieces: Art, Music & Literature".',
       'New word: "fall asleep" means "dormirse (o à ue)".',
       'New word: "fall in love" means "enamorarse de".',
       'New word: "family" means "la familia".',
@@ -9334,8 +9334,8 @@ export const BOOK_LEVELS: Quest[] = [
     ],
     grammarNotes: [
       {
-        title: 'Book Level 23',
-        explanation: 'This level covers: Book Level 23. Master the vocabulary and complete the exercises to advance.',
+        title: 'Cultural Masterpieces: Art, Music & Literature',
+        explanation: 'This level covers: Cultural Masterpieces: Art, Music & Literature. Master the vocabulary and complete the exercises to advance.',
         exampleFromStory: '"fall asleep" = "dormirse (o à ue)"',
       },
     ],
@@ -9533,12 +9533,12 @@ export const BOOK_LEVELS: Quest[] = [
   },
   {
     id: 'book-lvl-24',
-    title: 'Level 24: Book Level 24',
+    title: 'Level 24: Infinite Horizons: Advanced Dialects & Nuances',
     subtitle: 'Pages 240–241 · 27 vocabulary items',
     estimatedMinutes: 8,
     topicFocus: ['book-level-24'],
     storyLines: [
-      '📖 Welcome to Level 24: "Book Level 24".',
+      '📖 Welcome to Level 24: "Infinite Horizons: Advanced Dialects & Nuances".',
       'New word: "waist" means "la cintura".',
       'New word: "wait for" means "esperar".',
       'New word: "waiter" means "el mesero".',
@@ -9750,8 +9750,8 @@ export const BOOK_LEVELS: Quest[] = [
     ],
     grammarNotes: [
       {
-        title: 'Book Level 24',
-        explanation: 'This level covers: Book Level 24. Master the vocabulary and complete the exercises to advance.',
+        title: 'Infinite Horizons: Advanced Dialects & Nuances',
+        explanation: 'This level covers: Infinite Horizons: Advanced Dialects & Nuances. Master the vocabulary and complete the exercises to advance.',
         exampleFromStory: '"waist" = "la cintura"',
       },
     ],

@@ -16,6 +16,7 @@ import { BOOK_LEVELS } from './bookLevels';
 export * from './types';
 export { ALL_WORLDS } from './worlds';
 export { BOOK_LEVELS, BOOK_LEVEL_IDS, TOTAL_BOOK_LEVELS } from './bookLevels';
+export * from './onePieceCards';
 
 export const curriculum: Curriculum = { worlds: ALL_WORLDS };
 

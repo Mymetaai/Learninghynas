@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useStatsStore } from '../state/statsStore';
 import { useProgressStore } from '../state/progressStore';
 import { useSettingsStore } from '../state/settingsStore';
+import { useCompanionStore } from '../state/companionStore';
+import { useDailyQuestStore } from '../state/dailyQuestStore';
 import { translateWordToHinglish } from '../utils/hinglish';
 import {
   Sparkles,
@@ -28,6 +30,23 @@ const HomeScreen: FC = () => {
   
   const completedQuests = useProgressStore((s) => s.completedQuestIds);
   const { language } = useSettingsStore();
+
+  const handleResetProgress = () => {
+    if (window.confirm("Are you sure you want to reset all your progress, stats, and conversations? This cannot be undone.")) {
+      useProgressStore.getState().reset();
+      useStatsStore.getState().reset();
+      useCompanionStore.getState().resetConversations();
+      useDailyQuestStore.setState({
+        activeDate: '',
+        completedMicroQuestIds: [],
+        totalCorrect: 0,
+        totalAnswered: 0,
+        dailyBonusClaimed: false,
+      });
+      alert("All progress, stats, and conversations have been reset! Ready to start again.");
+      window.location.reload();
+    }
+  };
 
   // Local state for interactive overlays
   const [activeModal, setActiveModal] = useState<'review' | 'progress' | 'listening' | null>(null);
@@ -120,8 +139,8 @@ const HomeScreen: FC = () => {
             <h1 className="font-display text-3xl font-bold text-paper flex items-center gap-2">
               ¡Hola! 👋
             </h1>
-            <p className="text-pencil text-sm mt-1">
-              Welcome back! Ready to continue your Spanish journey?
+            <p className="glitter-text text-sm mt-1">
+              Yo, you're back! Time to level up your Spanish. Vamos!
             </p>
           </div>
           
@@ -144,9 +163,17 @@ const HomeScreen: FC = () => {
           
           {/* Card 1: Your Progress */}
           <div className="bg-paper/5 border border-pencil/20 rounded-2xl p-5 shadow-lg flex flex-col justify-between h-[340px]">
-            <div className="flex items-center gap-2 border-b border-pencil/10 pb-3">
-              <Target className="h-5 w-5 text-terracotta" />
-              <h2 className="font-display text-base font-bold text-paper">Your Progress</h2>
+            <div className="flex items-center justify-between border-b border-pencil/10 pb-3">
+              <div className="flex items-center gap-2">
+                <Target className="h-5 w-5 text-terracotta" />
+                <h2 className="font-display text-base font-bold text-paper">Your Progress</h2>
+              </div>
+              <button
+                onClick={handleResetProgress}
+                className="text-[10px] uppercase font-hud tracking-wider text-terracotta hover:text-red-500 hover:underline cursor-pointer bg-transparent border-none p-0"
+              >
+                Reset Progress
+              </button>
             </div>
 
             <div className="flex items-center gap-4 py-4 flex-1">
@@ -681,7 +708,7 @@ const HomeScreen: FC = () => {
                 </h4>
                 {completedQuests.length > 0 ? (
                   <div className="space-y-1 text-xs">
-                    {completedQuests.map((qId) => (
+                    {completedQuests.map((qId: string) => (
                       <p key={qId} className="flex items-center gap-1.5 text-ink font-semibold">
                         <CheckCircle2 className="h-3.5 w-3.5 text-teal-deep shrink-0" />
                         Quest: <span className="font-mono text-[10px]">{qId}</span> - Complete

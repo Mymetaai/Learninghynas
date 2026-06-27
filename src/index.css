@@ -20,3 +20,36 @@
     -moz-osx-font-smoothing: grayscale;
   }
 }
+
+/* ── Glitter Text Animation ── */
+@keyframes glitter {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.glitter-text {
+  font-weight: 700;
+  background: linear-gradient(
+    120deg,
+    #ffc300,
+    #ffb703,
+    #ff4d6d,
+    #fb8500,
+    #06d6a0,
+    #ffc300
+  );
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glitter 3s ease infinite;
+  text-shadow: 0 0 10px rgba(255, 183, 3, 0.3);
+  display: inline-block;
+}
+

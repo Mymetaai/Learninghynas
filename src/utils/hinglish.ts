@@ -65,7 +65,32 @@ const SENTENCE_TRANSLATIONS: Record<string, string> = {
 
   "Yes, please! It sounds delicious.": "Haan, please! Yeh bahut delicious lag raha hai.",
   "I prefer sweet bread with butter.": "Mujhe butter ke sath sweet bread prefer hai.",
-  "How do you prepare the sourdough starter?": "Aap sourdough starter kaise prepare karte ho?"
+  "How do you prepare the sourdough starter?": "Aap sourdough starter kaise prepare karte ho?",
+
+  // Voice Arena challenges (sp-10 to sp-32)
+  "Good morning, how did you wake up?": "Good morning, aap kaise amanecieron (kya haal hain)?",
+  "A mixed salad, please.": "Ek mixed salad, please.",
+  "Does this dish have spicy ingredients?": "Kya iss dish mein spicy ingredients hain?",
+  "I am lost, can you help me?": "Main kho gaya hoon, kya aap meri help kar sakte hain?",
+  "What time does the next bus leave?": "Next bus kitne baje nikalti hai?",
+  "This museum has famous works of art.": "Iss museum mein famous art works hain.",
+  "The hotel is near the beach.": "Hotel beach ke paas hai.",
+  "Do you accept credit cards here?": "Kya aap yahan credit cards accept karte hain?",
+  "It is very hot today in the afternoon.": "Aaj dopahar ko bahut garmi hai.",
+  "I would like to buy a typical souvenir.": "Main ek typical souvenir kharidna chahta hoon.",
+  "Excuse me, where is the public restroom?": "Excuse me, public restroom kahan hai?",
+  "Practice makes perfect.": "Práctica se hi perfect bante hain.",
+  "The blue car runs very fast.": "Blue car bahut fast bhaagti hai.",
+  "I love listening to classical music.": "Mujhe classical music sunna bahut pasand hai.",
+  "What is your favorite movie?": "Aapki favorite movie kaun si hai?",
+  "Spring brings many beautiful flowers.": "Spring season bahut saare beautiful flowers lata hai.",
+  "Success requires constant effort.": "Success ke liye constant effort lagta hai.",
+  "My family lives in a big house.": "Meri family ek bade ghar mein rehti hai.",
+  "Can you recommend a good restaurant?": "Kya aap ek accha restaurant recommend kar sakte hain?",
+  "The water in this river is very cold.": "Iss river ka paani bahut thanda hai.",
+  "The cat sleeps under the warm sun.": "Cat garam sun ke neeche so rahi hai.",
+  "What plans do you have for the weekend?": "Weekend ke liye aapke kya plans hain?",
+  "Education is the most powerful weapon.": "Education sabse powerful weapon hai."
 };
 
 const WORD_TRANSLATIONS: Record<string, string> = {
