@@ -621,8 +621,10 @@ const ShopScreen: FC = () => {
                 <button
                   type="button"
                   onClick={() => setSelectedHotspot(selectedHotspot === 'faction' ? null : 'faction')}
-                  className={`absolute top-1.5 left-14 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-marigold border border-ink text-ink shadow-md transition-all cursor-pointer ${
-                    selectedHotspot === 'faction' ? 'scale-125 bg-terracotta text-paper ring-1 ring-marigold' : 'animate-pulse hover:scale-110'
+                  className={`absolute top-1.5 left-14 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full border shadow-lg transition-all cursor-pointer ${
+                    selectedHotspot === 'faction' 
+                      ? 'scale-125 bg-marigold text-ink border-marigold ring-2 ring-marigold/40 shadow-[0_0_10px_rgba(251,191,36,0.8)]' 
+                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-paper animate-pulse hover:scale-110 hover:bg-paper/40'
                   }`}
                   title="Faction Info"
                 >
@@ -633,8 +635,10 @@ const ShopScreen: FC = () => {
                 <button
                   type="button"
                   onClick={() => setSelectedHotspot(selectedHotspot === 'portrait' ? null : 'portrait')}
-                  className={`absolute top-20 left-[50%] -translate-x-[50%] z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-marigold border border-ink text-ink shadow-md transition-all cursor-pointer ${
-                    selectedHotspot === 'portrait' ? 'scale-125 bg-terracotta text-paper ring-1 ring-marigold' : 'animate-pulse hover:scale-110'
+                  className={`absolute top-20 left-[50%] -translate-x-[50%] z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full border shadow-lg transition-all cursor-pointer ${
+                    selectedHotspot === 'portrait' 
+                      ? 'scale-125 bg-marigold text-ink border-marigold ring-2 ring-marigold/40 shadow-[0_0_10px_rgba(251,191,36,0.8)]' 
+                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-paper animate-pulse hover:scale-110 hover:bg-paper/40'
                   }`}
                   title="Portrait Info"
                 >
@@ -645,8 +649,10 @@ const ShopScreen: FC = () => {
                 <button
                   type="button"
                   onClick={() => setSelectedHotspot(selectedHotspot === 'name' ? null : 'name')}
-                  className={`absolute bottom-[94px] right-6 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-marigold border border-ink text-ink shadow-md transition-all cursor-pointer ${
-                    selectedHotspot === 'name' ? 'scale-125 bg-terracotta text-paper ring-1 ring-marigold' : 'animate-pulse hover:scale-110'
+                  className={`absolute bottom-[94px] right-6 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full border shadow-lg transition-all cursor-pointer ${
+                    selectedHotspot === 'name' 
+                      ? 'scale-125 bg-marigold text-ink border-marigold ring-2 ring-marigold/40 shadow-[0_0_10px_rgba(251,191,36,0.8)]' 
+                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-paper animate-pulse hover:scale-110 hover:bg-paper/40'
                   }`}
                   title="Name Info"
                 >
@@ -657,8 +663,10 @@ const ShopScreen: FC = () => {
                 <button
                   type="button"
                   onClick={() => setSelectedHotspot(selectedHotspot === 'bounty' ? null : 'bounty')}
-                  className={`absolute bottom-[68px] right-6 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-marigold border border-ink text-ink shadow-md transition-all cursor-pointer ${
-                    selectedHotspot === 'bounty' ? 'scale-125 bg-terracotta text-paper ring-1 ring-marigold' : 'animate-pulse hover:scale-110'
+                  className={`absolute bottom-[68px] right-6 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full border shadow-lg transition-all cursor-pointer ${
+                    selectedHotspot === 'bounty' 
+                      ? 'scale-125 bg-marigold text-ink border-marigold ring-2 ring-marigold/40 shadow-[0_0_10px_rgba(251,191,36,0.8)]' 
+                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-paper animate-pulse hover:scale-110 hover:bg-paper/40'
                   }`}
                   title="Bounty Info"
                 >
@@ -669,8 +677,10 @@ const ShopScreen: FC = () => {
                 <button
                   type="button"
                   onClick={() => setSelectedHotspot(selectedHotspot === 'rarity' ? null : 'rarity')}
-                  className={`absolute bottom-2.5 left-4 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-marigold border border-ink text-ink shadow-md transition-all cursor-pointer ${
-                    selectedHotspot === 'rarity' ? 'scale-125 bg-terracotta text-paper ring-1 ring-marigold' : 'animate-pulse hover:scale-110'
+                  className={`absolute bottom-2.5 left-4 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full border shadow-lg transition-all cursor-pointer ${
+                    selectedHotspot === 'rarity' 
+                      ? 'scale-125 bg-marigold text-ink border-marigold ring-2 ring-marigold/40 shadow-[0_0_10px_rgba(251,191,36,0.8)]' 
+                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-paper animate-pulse hover:scale-110 hover:bg-paper/40'
                   }`}
                   title="Rarity Info"
                 >
@@ -681,8 +691,10 @@ const ShopScreen: FC = () => {
                 <button
                   type="button"
                   onClick={() => setSelectedHotspot(selectedHotspot === 'attack' ? null : 'attack')}
-                  className={`absolute bottom-2.5 right-4 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-marigold border border-ink text-ink shadow-md transition-all cursor-pointer ${
-                    selectedHotspot === 'attack' ? 'scale-125 bg-terracotta text-paper ring-1 ring-marigold' : 'animate-pulse hover:scale-110'
+                  className={`absolute bottom-2.5 right-4 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full border shadow-lg transition-all cursor-pointer ${
+                    selectedHotspot === 'attack' 
+                      ? 'scale-125 bg-marigold text-ink border-marigold ring-2 ring-marigold/40 shadow-[0_0_10px_rgba(251,191,36,0.8)]' 
+                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-paper animate-pulse hover:scale-110 hover:bg-paper/40'
                   }`}
                   title="Attack Info"
                 >
