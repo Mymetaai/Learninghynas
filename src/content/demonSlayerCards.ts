@@ -12,7 +12,7 @@ export interface DemonSlayerCard {
 }
 
 export const DEMON_SLAYER_CARDS: DemonSlayerCard[] = [
-  // ── LEGENDARY (5) ───────────────────────────────────────────
+  // ── LEGENDARY (11) ───────────────────────────────────────────
   {
     id: 'ds-yoriichi',
     name: 'Yoriichi Tsugikuni',
@@ -73,20 +73,80 @@ export const DEMON_SLAYER_CARDS: DemonSlayerCard[] = [
     color: 'from-teal-600 via-red-600 to-amber-500 text-paper',
     glowColor: 'shadow-[0_0_25px_rgba(20,184,166,0.8)] border-teal-500'
   },
-
-  // ── EPIC (8) ───────────────────────────────────────────────
   {
     id: 'ds-rengoku',
     name: 'Kyojuro Rengoku',
-    rarity: 'epic',
+    rarity: 'legendary',
     emoji: '🔥🦉',
     imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/d/de/Kyojuro_anime_right_face.png',
-    bounty: 'Flame Hashira (Epic)',
+    bounty: 'Flame Hashira (Legendary)',
     description: 'The charismatic and enthusiastic Flame Hashira. Possesses an unwavering sense of justice and duty, promising to protect all humans.',
     specialMove: 'Flame Breathing Ninth Form: Rengoku',
     color: 'from-orange-600 via-amber-500 to-red-700 text-paper',
-    glowColor: 'shadow-[0_0_15px_rgba(249,115,22,0.7)] border-orange-500'
+    glowColor: 'shadow-[0_0_25px_rgba(251,191,36,0.8)] border-yellow-400'
   },
+  {
+    id: 'ds-gyutaro',
+    name: 'Gyutaro',
+    rarity: 'legendary',
+    emoji: '🪓🐍',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/f/f4/Gyutaro_Anime.png',
+    bounty: 'Upper Moon Six (Legendary)',
+    description: 'Daki\'s older brother and the true possessor of the Upper Moon Six seat. Fights with dual sickle blades loaded with lethal poison.',
+    specialMove: 'Blood Demon Art: Flying Blood Sickles',
+    color: 'from-zinc-900 via-green-950 to-black text-paper',
+    glowColor: 'shadow-[0_0_25px_rgba(251,191,36,0.8)] border-yellow-400'
+  },
+  {
+    id: 'ds-shinobu',
+    name: 'Shinobu Kocho',
+    rarity: 'legendary',
+    emoji: '🦋🧪',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/e/e5/Shinobu_anime.png',
+    bounty: 'Insect Hashira (Legendary)',
+    description: 'The cheerful but secretly angry Insect Hashira. Lacking the strength to cut off demon heads, she uses wisteria poisons to kill them.',
+    specialMove: 'Insect Breathing: Dance of the Bee Sting',
+    color: 'from-fuchsia-600 via-purple-500 to-slate-900 text-paper',
+    glowColor: 'shadow-[0_0_25px_rgba(251,191,36,0.8)] border-yellow-400'
+  },
+  {
+    id: 'ds-zenitsu',
+    name: 'Zenitsu Agatsuma',
+    rarity: 'legendary',
+    emoji: '⚡🐦',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/4/4f/Zenitsu_anime_right_face.png',
+    bounty: 'Thunder Breathing User (Legendary)',
+    description: 'A cowardly Demon Slayer who only fights when unconscious. When asleep, he becomes lightning fast and deadly.',
+    specialMove: 'Thunderclap and Flash: Six Fold',
+    color: 'from-amber-400 via-yellow-300 to-amber-700 text-ink',
+    glowColor: 'shadow-[0_0_25px_rgba(251,191,36,0.8)] border-yellow-400'
+  },
+  {
+    id: 'ds-inosuke',
+    name: 'Inosuke Hashibira',
+    rarity: 'legendary',
+    emoji: '🐗⚔️',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/d/d4/Inosuke_anime.png',
+    bounty: 'Beast Breathing Creator (Legendary)',
+    description: 'A wild, hot-blooded boy raised by boars. Wields dual jagged swords and created his own Beast Breathing style.',
+    specialMove: 'Beast Breathing: Spatial Awareness',
+    color: 'from-cyan-700 via-sky-500 to-slate-800 text-paper',
+    glowColor: 'shadow-[0_0_25px_rgba(251,191,36,0.8)] border-yellow-400'
+  },
+  {
+    id: 'ds-tengen',
+    name: 'Tengen Uzui',
+    rarity: 'legendary',
+    emoji: '💎🔊',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/0/07/Tengen_anime.png',
+    bounty: 'Sound Hashira (Legendary)',
+    description: 'The flashy and flamboyant Sound Hashira. A former ninja who uses giant twin cleavers explosive blades and sound score analysis.',
+    specialMove: 'Sound Breathing: Symphony of Shrill Strings',
+    color: 'from-emerald-500 via-teal-400 to-indigo-950 text-paper',
+    glowColor: 'shadow-[0_0_25px_rgba(251,191,36,0.8)] border-yellow-400'
+  },
+
+  // ── EPIC (5) ───────────────────────────────────────────────
   {
     id: 'ds-giyu',
     name: 'Giyu Tomioka',
@@ -136,18 +196,6 @@ export const DEMON_SLAYER_CARDS: DemonSlayerCard[] = [
     glowColor: 'shadow-[0_0_15px_rgba(244,63,94,0.7)] border-rose-500'
   },
   {
-    id: 'ds-gyutaro',
-    name: 'Gyutaro',
-    rarity: 'epic',
-    emoji: '🪓🐍',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/f/f4/Gyutaro_Anime.png',
-    bounty: 'Upper Moon Six - Brother (Epic)',
-    description: 'Daki\'s older brother and the true possessor of the Upper Moon Six seat. Fights with dual sickle blades loaded with lethal poison.',
-    specialMove: 'Blood Demon Art: Flying Blood Sickles',
-    color: 'from-zinc-900 via-green-950 to-black text-paper',
-    glowColor: 'shadow-[0_0_15px_rgba(34,197,94,0.7)] border-green-800'
-  },
-  {
     id: 'ds-nezuko',
     name: 'Nezuko Kamado',
     rarity: 'epic',
@@ -159,56 +207,8 @@ export const DEMON_SLAYER_CARDS: DemonSlayerCard[] = [
     color: 'from-rose-500 via-pink-400 to-slate-900 text-paper',
     glowColor: 'shadow-[0_0_15px_rgba(244,63,94,0.7)] border-rose-500'
   },
-  {
-    id: 'ds-zenitsu',
-    name: 'Zenitsu Agatsuma',
-    rarity: 'epic',
-    emoji: '⚡🐦',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/4/4f/Zenitsu_anime_right_face.png',
-    bounty: 'Thunder Breathing User (Epic)',
-    description: 'A cowardly Demon Slayer who only fights when unconscious. When asleep, he becomes lightning fast and deadly.',
-    specialMove: 'Thunderclap and Flash: Six Fold',
-    color: 'from-amber-400 via-yellow-300 to-amber-700 text-ink',
-    glowColor: 'shadow-[0_0_15px_rgba(251,191,36,0.7)] border-yellow-400'
-  },
 
-  // ── RARE (7) ────────────────────────────────────────────────
-  {
-    id: 'ds-inosuke',
-    name: 'Inosuke Hashibira',
-    rarity: 'rare',
-    emoji: '🐗⚔️',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/d/d4/Inosuke_anime.png',
-    bounty: 'Beast Breathing Creator (Rare)',
-    description: 'A wild, hot-blooded boy raised by boars. Wields dual jagged swords and created his own Beast Breathing style.',
-    specialMove: 'Beast Breathing: Spatial Awareness',
-    color: 'from-cyan-700 via-sky-500 to-slate-800 text-paper',
-    glowColor: 'shadow-[0_0_10px_rgba(6,182,212,0.5)] border-cyan-500'
-  },
-  {
-    id: 'ds-shinobu',
-    name: 'Shinobu Kocho',
-    rarity: 'rare',
-    emoji: '🦋🧪',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/e/e5/Shinobu_anime.png',
-    bounty: 'Insect Hashira (Rare)',
-    description: 'The cheerful but secretly angry Insect Hashira. Lacking the strength to cut off demon heads, she uses wisteria poisons to kill them.',
-    specialMove: 'Insect Breathing: Dance of the Bee Sting',
-    color: 'from-fuchsia-600 via-purple-500 to-slate-900 text-paper',
-    glowColor: 'shadow-[0_0_10px_rgba(192,38,211,0.5)] border-fuchsia-500'
-  },
-  {
-    id: 'ds-tengen',
-    name: 'Tengen Uzui',
-    rarity: 'rare',
-    emoji: '💎🔊',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/0/07/Tengen_anime.png',
-    bounty: 'Sound Hashira (Rare)',
-    description: 'The flashy and flamboyant Sound Hashira. A former ninja who uses giant twin cleavers explosive blades and sound score analysis.',
-    specialMove: 'Sound Breathing: Symphony of Shrill Strings',
-    color: 'from-emerald-500 via-teal-400 to-indigo-950 text-paper',
-    glowColor: 'shadow-[0_0_10px_rgba(16,185,129,0.5)] border-emerald-500'
-  },
+  // ── RARE (6) ────────────────────────────────────────────────
   {
     id: 'ds-rui',
     name: 'Rui',
@@ -257,8 +257,32 @@ export const DEMON_SLAYER_CARDS: DemonSlayerCard[] = [
     color: 'from-slate-700 via-blue-900 to-zinc-950 text-paper',
     glowColor: 'shadow-[0_0_10px_rgba(59,130,246,0.5)] border-blue-700'
   },
+  {
+    id: 'ds-tamayo',
+    name: 'Tamayo',
+    rarity: 'rare',
+    emoji: '🌸🧪',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/1/19/Tamayo_anime.png',
+    bounty: 'Demon Physician (Rare)',
+    description: 'A skilled doctor demon who broke free from Muzan\'s curse. She dedicates her life to researching a cure to turn demons back into humans.',
+    specialMove: 'Blood Demon Art: Blood Bewitchment',
+    color: 'from-indigo-700 via-fuchsia-800 to-zinc-950 text-paper',
+    glowColor: 'shadow-[0_0_10px_rgba(109,40,217,0.5)] border-indigo-500'
+  },
+  {
+    id: 'ds-yushiro',
+    name: 'Yushiro',
+    rarity: 'rare',
+    emoji: '👁️📜',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/0/01/Yushiro_Anime.png',
+    bounty: 'Tamayo\'s Sentinel (Rare)',
+    description: 'Tamayo\'s loyal assistant who was turned into a demon by her. He wields paper talismans that grant invisibility and share vision.',
+    specialMove: 'Blood Demon Art: Blind Spot / Vision Sharing',
+    color: 'from-teal-700 via-emerald-800 to-zinc-900 text-paper',
+    glowColor: 'shadow-[0_0_10px_rgba(16,185,129,0.5)] border-emerald-500'
+  },
 
-  // ── COMMON (8) ──────────────────────────────────────────────
+  // ── COMMON (13) ──────────────────────────────────────────────
   {
     id: 'ds-kanao',
     name: 'Kanao Tsuyuri',
@@ -354,5 +378,65 @@ export const DEMON_SLAYER_CARDS: DemonSlayerCard[] = [
     specialMove: 'Crushing Giant Fist Grab',
     color: 'from-lime-800 to-stone-900 text-paper',
     glowColor: 'shadow-md border-lime-800'
+  },
+  {
+    id: 'ds-temple-demon',
+    name: 'Temple Demon',
+    rarity: 'common',
+    emoji: '🛕👹',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/3/38/Temple_Demon_anime.png',
+    bounty: 'Temple Lurker (Common)',
+    description: 'A minor demon who attacked Tanjiro in a temple. He was surprised by Nezuko\'s strength when she kicked his head off.',
+    specialMove: 'Head Claw Attack / Body Reanimation',
+    color: 'from-amber-800 to-stone-900 text-paper',
+    glowColor: 'shadow-md border-amber-800'
+  },
+  {
+    id: 'ds-swamp-demon',
+    name: 'Swamp Demon',
+    rarity: 'common',
+    emoji: '🖤👹',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/8/8b/Swamp_Demon.png',
+    bounty: 'Kidnapper of Girls (Common)',
+    description: 'A demon who kidnaps 16-year-old girls by dragging them into his swamp portal. He can divide himself into three separate clones.',
+    specialMove: 'Blood Demon Art: Kidnapper\'s Bog / Swamp Portals',
+    color: 'from-teal-900 to-black text-paper',
+    glowColor: 'shadow-md border-teal-950'
+  },
+  {
+    id: 'ds-tongue-demon',
+    name: 'Tongue Demon',
+    rarity: 'common',
+    emoji: '👅👹',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/c/ca/Tongue_Demon.png',
+    bounty: 'Mansion Dweller (Common)',
+    description: 'A multi-eyed demon residing inside the Tsuzumi Mansion. He attacks with an extremely long, sharp tongue that acts like a blade.',
+    specialMove: 'Long Razor Tongue Whip',
+    color: 'from-neutral-700 to-zinc-900 text-paper',
+    glowColor: 'shadow-md border-neutral-700'
+  },
+  {
+    id: 'ds-horned-demon',
+    name: 'Horned Demon',
+    rarity: 'common',
+    emoji: '🐂👹',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/6/64/Horned_Demon.png',
+    bounty: 'Mansion Intruder (Common)',
+    description: 'A large, slow, obese demon in the Tsuzumi Mansion who stole one of Kyogai\'s drums. He was defeated by Inosuke\'s Beast Breathing.',
+    specialMove: 'Brute Force Charge',
+    color: 'from-yellow-900 to-stone-950 text-paper',
+    glowColor: 'shadow-md border-yellow-900'
+  },
+  {
+    id: 'ds-slasher-demon',
+    name: 'Slasher',
+    rarity: 'common',
+    emoji: '⚡👹',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/9/9a/Slasher.png',
+    bounty: 'Railway Terror (Common)',
+    description: 'A sadistic demon of incredible speed who terrorized railway workers before the Mugen Train departed. He was defeated by Kyojuro Rengoku.',
+    specialMove: 'High Speed Slash',
+    color: 'from-rose-900 to-zinc-950 text-paper',
+    glowColor: 'shadow-md border-rose-900'
   }
 ];

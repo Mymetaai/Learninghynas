@@ -10,7 +10,6 @@ import {
   Coins,
   X,
   Trophy,
-  RefreshCw,
   Info
 } from 'lucide-react';
 
@@ -125,7 +124,6 @@ const ShopScreen: FC = () => {
   // Gacha states
   const [isDrawing, setIsDrawing] = useState(false);
   const [drawnCard, setDrawnCard] = useState<OnePieceCard | null>(null);
-  const [isFlipped, setIsFlipped] = useState(false);
   const [drawResult, setDrawResult] = useState<'new' | 'duplicate' | null>(null);
   
   // Series selector state
@@ -136,7 +134,81 @@ const ShopScreen: FC = () => {
   const [filterRarity, setFilterRarity] = useState<'all' | 'common' | 'rare' | 'epic' | 'legendary'>('all');
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
   const [selectedHotspot, setSelectedHotspot] = useState<'series' | 'faction' | 'rarity' | 'portrait' | 'name' | 'bounty' | 'attack' | null>(null);
-  const [gachaOpTooltip, setGachaOpTooltip] = useState(false);
+
+  // Cinematic states
+  const [summonPhase, setSummonPhase] = useState<'s-altar' | 's-transition' | 's-rise' | 's-begin' | 's-intensity' | 's-reveal'>('s-altar');
+  const [lightningFlash, setLightningFlash] = useState(false);
+  const [lightningBolts, setLightningBolts] = useState<{ id: number; path: string }[]>([]);
+  const [gachaParticles, setGachaParticles] = useState<{ id: number; gold: boolean; left: number; drift: number; duration: number }[]>([]);
+
+  const spawnBolt = () => {
+    const id = Math.random();
+    const startX = 20 + Math.random() * 60;
+    let d = `M ${startX}% 0%`;
+    let x = startX;
+    let y = 0;
+    while (y < 100) {
+      y += 10 + Math.random() * 15;
+      x += (Math.random() - 0.5) * 16;
+      d += ` L ${x}% ${y}%`;
+    }
+    setLightningBolts(prev => [...prev, { id, path: d }]);
+    setLightningFlash(true);
+    setTimeout(() => setLightningFlash(false), 150);
+    setTimeout(() => {
+      setLightningBolts(prev => prev.filter(b => b.id !== id));
+    }, 420);
+  };
+
+  const spawnParticles = (count: number) => {
+    const newParticles = Array.from({ length: count }).map(() => ({
+      id: Math.random(),
+      gold: Math.random() > 0.5,
+      left: 42 + Math.random() * 16,
+      drift: Math.random() * 120 - 60,
+      duration: 0.9 + Math.random() * 0.9
+    }));
+    setGachaParticles(prev => [...prev, ...newParticles]);
+    newParticles.forEach(p => {
+      setTimeout(() => {
+        setGachaParticles(prev => prev.filter(item => item.id !== p.id));
+      }, p.duration * 1000);
+    });
+  };
+
+  const playThunderSound = (isExplosion = false) => {
+    try {
+      const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioContextClass) return;
+      const ctx = new AudioContextClass();
+      
+      const bufferSize = ctx.sampleRate * (isExplosion ? 1.2 : 2.2);
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = Math.random() * 2 - 1;
+      }
+      
+      const noise = ctx.createBufferSource();
+      noise.buffer = buffer;
+      
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(isExplosion ? 110 : 75, ctx.currentTime);
+      filter.frequency.exponentialRampToValueAtTime(10, ctx.currentTime + (isExplosion ? 0.8 : 1.8));
+      
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(isExplosion ? 0.35 : 0.2, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + (isExplosion ? 1.1 : 2.1));
+      
+      noise.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+      noise.start();
+    } catch (err) {
+      console.warn("Audio Context blocked or failed:", err);
+    }
+  };
 
   const isDs = selectedCard?.id.startsWith('ds-');
   const activeHotspots = isDs ? DEMON_SLAYER_HOTSPOTS : ONE_PIECE_HOTSPOTS;
@@ -181,14 +253,12 @@ const ShopScreen: FC = () => {
 
     setIsDrawing(true);
     setDrawnCard(null);
-    setIsFlipped(false);
     setDrawResult(null);
-    setGachaOpTooltip(false);
 
     // Deduct coins
     spendCoins(DRAW_COST);
 
-    // Determine random card
+    // Roll card
     const rand = Math.random() * 100;
     let rarity: 'common' | 'rare' | 'epic' | 'legendary';
     if (rand < 5) {
@@ -205,8 +275,48 @@ const ShopScreen: FC = () => {
     const pool = currentPool.filter(c => c.rarity === rarity);
     const chosenCard = pool[Math.floor(Math.random() * pool.length)];
 
-    // Simulate summon delay
+    // STEP 1 — transition
+    setSummonPhase('s-transition');
+
+    // STEP 2 — altar rises (900ms)
     setTimeout(() => {
+      setSummonPhase('s-rise');
+    }, 900);
+
+    // STEP 3 — summoning begins (2300ms)
+    setTimeout(() => {
+      setSummonPhase('s-begin');
+      playThunderSound(false);
+      let count = 0;
+      const boltLoop = setInterval(() => {
+        spawnBolt();
+        spawnParticles(4);
+        count++;
+        if (count >= 5) clearInterval(boltLoop);
+      }, 360);
+    }, 2300);
+
+    // STEP 4 — building intensity (4100ms)
+    setTimeout(() => {
+      setSummonPhase('s-intensity');
+      playThunderSound(false);
+      let count = 0;
+      const boltLoop = setInterval(() => {
+        spawnBolt();
+        spawnParticles(8);
+        count++;
+        if (count >= 7) clearInterval(boltLoop);
+      }, 180);
+    }, 4100);
+
+    // STEP 5 — reveal (5900ms)
+    setTimeout(() => {
+      setSummonPhase('s-reveal');
+      playThunderSound(true);
+      spawnBolt();
+      spawnBolt();
+      spawnParticles(15);
+      
       setDrawnCard(chosenCard);
       setIsDrawing(false);
       
@@ -220,12 +330,7 @@ const ShopScreen: FC = () => {
         // Refund duplicate coins
         addRewards(0, DUP_REFUND);
       }
-
-      // Flip card open
-      setTimeout(() => {
-        setIsFlipped(true);
-      }, 300);
-    }, 1500);
+    }, 5900);
   };
 
   const claimCheatCoins = () => {
@@ -293,63 +398,196 @@ const ShopScreen: FC = () => {
         </div>
 
         {/* ── SUMMONING ALTAR (GACHA PANEL) ─────────────────────────── */}
-        <div className="bg-paper/5 border border-pencil/20 rounded-2xl p-6 mb-8 flex flex-col md:flex-row items-center justify-center gap-8 shadow-xl relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-terracotta/5 via-transparent to-teal-deep/5 pointer-events-none" />
-          
-          {/* Card Showcase Frame with 3D Flip */}
-          <div className="relative w-64 h-96 flex items-center justify-center">
-            {/* Inner card wrapper */}
-            <div 
-              style={{ perspective: 1000 }} 
-              className={`w-full h-full transition-transform duration-700 transform-gpu ${isDrawing ? 'animate-bounce' : ''}`}
-            >
-              <div 
-                className={`relative w-full h-full transition-transform duration-700 transform-gpu preserve-3d cursor-pointer ${
-                  isFlipped ? 'rotate-y-180' : ''
-                }`}
-                style={{ transformStyle: 'preserve-3d' }}
-              >
-                
-                {/* CARD BACK */}
-                <div 
-                  className="absolute inset-0 bg-gradient-to-br from-terracotta via-amber-600 to-ink border-4 border-marigold/70 rounded-2xl flex flex-col items-center justify-center p-6 shadow-2xl backface-hidden"
-                  style={{ backfaceVisibility: 'hidden' }}
-                >
-                  <div className="h-16 w-16 rounded-full bg-paper/10 border-2 border-paper/30 flex items-center justify-center text-3xl mb-4 animate-pulse">
-                    🏴‍☠️
+        <div className={`gacha-stage-panel stage border rounded-3xl p-6 mb-8 flex flex-col md:flex-row items-center justify-center gap-8 shadow-xl relative overflow-hidden transition-all duration-700 ${summonPhase} ${
+          summonPhase !== 's-altar' ? 'bg-[#07060a] border-purple/30 shadow-[0_0_50px_rgba(139,63,251,0.25)] min-h-[500px]' : 'bg-paper/5 border-pencil/20'
+        }`}>
+          {/* Grain overlay */}
+          <div className="grain-overlay pointer-events-none absolute inset-0 z-5 opacity-[0.03]" />
+          <div className="vignette-overlay pointer-events-none absolute inset-0 z-5" />
+
+          {/* Background Summoning Circle (glyph-wrap) */}
+          <div className="glyph-wrap pointer-events-none absolute z-1">
+            <svg viewBox="0 0 200 200" className="w-full h-full">
+              <g className="glyph-ring r1" transform="translate(100,100)">
+                <circle r="92" fill="none" stroke="#8b3ffb" strokeOpacity="0.4" strokeWidth="0.8" />
+                <g stroke="#f3c969" strokeOpacity="0.5" strokeWidth="0.8">
+                  <line x1="0" y1="-92" x2="0" y2="-82" /><line x1="0" y1="92" x2="0" y2="82" />
+                  <line x1="-92" y1="0" x2="-82" y2="0" /><line x1="92" y1="0" x2="82" y2="0" />
+                  <line x1="-65" y1="-65" x2="-58" y2="-58" /><line x1="65" y1="-65" x2="58" y2="-58" />
+                  <line x1="-65" y1="65" x2="-58" y2="58" /><line x1="65" y1="65" x2="58" y2="58" />
+                </g>
+              </g>
+              <g className="glyph-ring r2" transform="translate(100,100)">
+                <circle r="70" fill="none" stroke="#f3c969" strokeOpacity="0.3" strokeWidth="0.8" strokeDasharray="2 4" />
+              </g>
+              <g className="glyph-ring r3" transform="translate(100,100)">
+                <circle r="46" fill="none" stroke="#8b3ffb" strokeOpacity="0.4" strokeWidth="0.8" />
+                <path d="M0,-46 L13,-13 L46,0 L13,13 L0,46 L-13,13 L-46,0 L-13,-13 Z" fill="none" stroke="#f3c969" strokeOpacity="0.35" strokeWidth="0.8" />
+              </g>
+            </svg>
+          </div>
+
+          {/* Lightning SVG Layer */}
+          <div className="fx-layer absolute inset-0 z-4 pointer-events-none">
+            {lightningFlash && (
+              <div className="absolute inset-0 bg-white/10 z-4 pointer-events-none" />
+            )}
+            <svg viewBox="0 0 1000 1000" className="w-full h-full" preserveAspectRatio="none">
+              {lightningBolts.map((bolt) => (
+                <path
+                  key={bolt.id}
+                  d={bolt.path}
+                  className="bolt-path"
+                  stroke="#8b3ffb"
+                  strokeWidth="3.5"
+                  fill="none"
+                  filter="drop-shadow(0 0 8px #8b3ffb)"
+                />
+              ))}
+            </svg>
+          </div>
+
+          {/* Particle Layer */}
+          <div className="particles-layer absolute inset-0 z-3 pointer-events-none overflow-hidden">
+            {gachaParticles.map((p) => (
+              <div
+                key={p.id}
+                className={`gacha-particle absolute rounded-sm ${p.gold ? 'gold' : ''}`}
+                style={{
+                  left: `${p.left}%`,
+                  '--drift': `${p.drift}px`,
+                  animationDuration: `${p.duration}s`,
+                } as React.CSSProperties}
+              />
+            ))}
+          </div>
+
+          {/* ── STEP 0: INITIAL VIEW (s-altar) ─────────────────────────── */}
+          {summonPhase === 's-altar' && (
+            <>
+              {/* Static Card Back Showcase */}
+              <div className="card-static-wrap z-10 relative flex items-center justify-center">
+                <div className="card-custom">
+                  <div className="card-emblem">
+                    <div className="text-4xl mb-2 select-none">
+                      {selectedSeries === 'one-piece' ? '🏴‍☠️' : '⚔️'}
+                    </div>
                   </div>
-                  <h3 className="font-display text-lg font-bold text-paper tracking-wider text-center">
-                    ONE PIECE
-                  </h3>
-                  <p className="font-hud text-[10px] text-marigold uppercase tracking-[0.2em] mt-1">
-                    Mystery Card
-                  </p>
-                  <span className="absolute bottom-4 font-body text-[10px] text-paper/40">
+                  <div>
+                    <div className="card-title select-none font-display text-sm tracking-wider text-paper">
+                      {selectedSeries === 'one-piece' ? 'ONE PIECE CARD' : 'KIMETSU CARD'}
+                    </div>
+                    <div className="card-subtitle select-none font-mono text-[9px] tracking-widest text-[#ff7a3c] mt-1">
+                      MYSTERY CARD
+                    </div>
+                  </div>
+                  <div className="card-cost select-none font-mono text-[10px] text-pencil/60">
                     Cost: {DRAW_COST} Coins
-                  </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Actions Panel */}
+              <div className="flex-1 max-w-sm space-y-6 z-10 relative">
+                <div>
+                  <h2 className="font-display text-xl font-bold text-paper">Summoning Altar</h2>
+                  <p className="text-pencil text-xs mt-2 leading-relaxed">
+                    Unlock {selectedSeries === 'one-piece' ? ONE_PIECE_CARDS.length : DEMON_SLAYER_CARDS.length} mystical cards from this set.
+                  </p>
+                  
+                  {/* Dynamic Series Lore Box */}
+                  <div className="mt-3.5 p-3 bg-paper/5 border border-pencil/15 rounded-xl flex items-start gap-2.5 shadow-md">
+                    <span className="text-xl select-none mt-0.5">
+                      {selectedSeries === 'one-piece' ? '🏴‍☠️' : '⚔️'}
+                    </span>
+                    <div>
+                      <h4 className="font-hud text-[9px] uppercase font-bold text-marigold tracking-wider leading-none">
+                        {selectedSeries === 'one-piece' ? 'Pirate King Lore' : 'Corps Motto'}
+                      </h4>
+                      <p className="text-[11px] italic text-paper/85 leading-relaxed mt-1">
+                        {selectedSeries === 'one-piece'
+                          ? '"Inherited Will, the Destiny of Age, and the Dreams of People. As long as people continue to pursue the meaning of Freedom, these things will never cease to be!"'
+                          : '"No matter how many people you lose, you have no choice but to go on living. Set your heart ablaze and surpass your limits!"'}
+                      </p>
+                    </div>
+                  </div>
                 </div>
 
-                {/* CARD FRONT */}
-                <div 
-                  className="absolute inset-0 bg-ink border-4 rounded-2xl p-4 flex flex-col justify-between shadow-2xl backface-hidden rotate-y-180 animate-sparkle-border"
-                  style={{ 
-                    backfaceVisibility: 'hidden', 
-                    transform: 'rotateY(180deg)',
-                    ...(drawnCard ? getCardSparkleColors(drawnCard.rarity) : {}) 
-                  } as React.CSSProperties}
+                <div className="space-y-2 border-y border-pencil/10 py-4 font-hud text-xs text-pencil">
+                  <div className="flex justify-between">
+                    <span>Legendary Drop Rate:</span>
+                    <span className="text-[#f3c969] font-bold">5%</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Epic Drop Rate:</span>
+                    <span className="text-[#b388ff] font-bold">20%</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Rare Drop Rate:</span>
+                    <span className="text-[#5fb6ff] font-bold">35%</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Common Drop Rate:</span>
+                    <span className="text-paper/60 font-bold">40%</span>
+                  </div>
+                </div>
+
+                <button
+                  onClick={handleDraw}
+                  disabled={isDrawing || coins < DRAW_COST}
+                  className="w-full summon-btn"
                 >
+                  ✦ Summon Card ({DRAW_COST} Coins)
+                </button>
+              </div>
+            </>
+          )}
+
+          {/* ── STEPS 1-5: ACTIVE RITUAL STAGE ─────────────────────────── */}
+          {summonPhase !== 's-altar' && (
+            <div className={`ritual-stage-wrap z-10 relative flex flex-col items-center justify-center w-full min-h-[460px] ${
+              summonPhase === 's-intensity' ? 'stage-shake' : ''
+            }`}>
+              {/* Altar Pedestal Platform */}
+              <div className="platform-custom" />
+
+              {/* Floating Card Wrapper */}
+              <div className="card-wrap-custom">
+                <div className={`card-3d-custom ${summonPhase}`}>
+                  
+                  {/* Card Face Back */}
+                  <div className="card-face-custom back">
+                    <div className="h-16 w-16 rounded-full bg-paper/5 border border-purple-500/20 flex items-center justify-center text-4xl mb-4 select-none animate-pulse">
+                      {selectedSeries === 'one-piece' ? '🏴‍☠️' : '⚔️'}
+                    </div>
+                    <h3 className="font-display text-base font-bold text-purple-300 tracking-wider text-center">
+                      {selectedSeries === 'one-piece' ? 'ONE PIECE' : 'DEMON SLAYER'}
+                    </h3>
+                  </div>
+
+                  {/* Card Face Front */}
                   {drawnCard && (
-                    <>
-                      {/* Card Rarity Badge & Rarity Name */}
-                      <div className="flex items-center justify-between border-b border-pencil/10 pb-2">
-                        <span className="font-hud text-[9px] uppercase tracking-wider text-pencil font-semibold">
+                    <div 
+                      className="card-face-custom front"
+                      style={{
+                        '--rarity-color': drawnCard.rarity === 'legendary' ? '#f3c969' :
+                                         drawnCard.rarity === 'epic' ? '#b388ff' :
+                                         drawnCard.rarity === 'rare' ? '#5fb6ff' : '#bfb6a8',
+                        '--bg1': drawnCard.rarity === 'legendary' ? '#3a2a08' :
+                                 drawnCard.rarity === 'epic' ? '#241338' :
+                                 drawnCard.rarity === 'rare' ? '#0c2438' : '#211d18',
+                        '--bg2': drawnCard.rarity === 'legendary' ? '#1f1505' :
+                                 drawnCard.rarity === 'epic' ? '#150b22' :
+                                 drawnCard.rarity === 'rare' ? '#06151f' : '#15120e',
+                      } as React.CSSProperties}
+                    >
+                      {/* Card Rarity Header */}
+                      <div className="w-full flex items-center justify-between border-b border-white/10 pb-2">
+                        <span className="font-hud text-[9px] uppercase tracking-wider text-[#a89b8a] font-semibold">
                           {selectedSeries === 'one-piece' ? 'Wanted' : 'Kimetsu'}
                         </span>
-                        <span className={`font-hud text-[9px] uppercase px-2 py-0.5 rounded-full font-bold ${
-                          drawnCard.rarity === 'legendary' ? 'bg-amber-500 text-ink' :
-                          drawnCard.rarity === 'epic' ? 'bg-purple-600 text-paper' :
-                          drawnCard.rarity === 'rare' ? 'bg-sky-500 text-paper' : 'bg-pencil/20 text-pencil'
-                        }`}>
+                        <span className="font-hud text-[9px] uppercase text-ink font-bold px-2 py-0.5 rounded-full"
+                              style={{ backgroundColor: 'var(--rarity-color)' }}>
                           {drawnCard.rarity}
                         </span>
                       </div>
@@ -357,40 +595,6 @@ const ShopScreen: FC = () => {
                       {/* Card Illustration */}
                       <div className={`my-3 h-32 w-full rounded-xl bg-gradient-to-tr ${drawnCard.color} flex items-center justify-center text-6xl shadow-inner relative overflow-hidden select-none`}>
                         <div className="absolute inset-0 animate-shimmer pointer-events-none z-10" />
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setGachaOpTooltip(!gachaOpTooltip);
-                          }}
-                          className="absolute top-0 right-0 p-1 opacity-20 hover:opacity-60 hover:scale-105 transition-all font-black text-4xl select-none cursor-pointer text-paper leading-none z-20"
-                          title={`${selectedSeries === 'one-piece' ? 'OP' : 'DS'} Series Info`}
-                        >
-                          {selectedSeries === 'one-piece' ? 'OP' : 'DS'}
-                        </button>
-
-                        {/* OP/DS Series Tooltip */}
-                        {gachaOpTooltip && (
-                          <div className="absolute inset-0 bg-ink/95 text-paper p-3 flex flex-col justify-center items-center text-center z-40 border border-pencil/20 rounded-xl">
-                            <h4 className="font-hud text-xs font-bold text-marigold uppercase tracking-wider flex items-center gap-1">
-                              <Sparkles size={12} className="text-marigold animate-spin-slow" /> {selectedSeries === 'one-piece' ? 'OP' : 'DS'} Series
-                            </h4>
-                            <p className="text-[10px] leading-relaxed text-pencil mt-1.5 px-2 font-body">
-                              Stands for <strong>{selectedSeries === 'one-piece' ? 'One Piece' : 'Demon Slayer'}</strong>. This card belongs to the official core {selectedSeries === 'one-piece' ? 'One Piece' : 'Demon Slayer'} series dataset.
-                            </p>
-                            <button
-                              type="button"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setGachaOpTooltip(false);
-                              }}
-                              className="mt-3 bg-marigold hover:bg-marigold/90 text-ink font-hud text-[8px] uppercase font-bold px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
-                            >
-                              Got it
-                            </button>
-                          </div>
-                        )}
-
                         {imageErrors[drawnCard.id] ? (
                           drawnCard.emoji
                         ) : (
@@ -404,80 +608,27 @@ const ShopScreen: FC = () => {
                         )}
                       </div>
 
-                      {/* Details */}
+                      {/* Character Info */}
                       <div className="flex-1 flex flex-col justify-center text-center">
                         <h4 className="font-display text-base font-extrabold text-paper leading-tight">
                           {drawnCard.name}
                         </h4>
-                        <p className="font-hud text-[10px] text-marigold font-bold mt-1">
+                        <p className="font-hud text-[10px] font-bold mt-1" style={{ color: 'var(--rarity-color)' }}>
                           {drawnCard.bounty}
-                        </p>
-                        <p className="text-[10px] text-pencil line-clamp-2 mt-2 leading-relaxed italic">
-                          "{drawnCard.description}"
                         </p>
                       </div>
 
                       {/* Special Move Footer */}
-                      <div className="border-t border-pencil/10 pt-2 flex flex-col">
-                        <span className="text-[8px] uppercase font-hud text-pencil tracking-wider">Special Move</span>
+                      <div className="w-full border-t border-white/10 pt-2 flex flex-col text-left">
+                        <span className="text-[7px] uppercase font-hud text-[#a89b8a] tracking-wider">Signature Attack</span>
                         <span className="text-[10px] text-paper font-semibold truncate mt-0.5">
                           {drawnCard.specialMove}
                         </span>
                       </div>
-                    </>
+                    </div>
                   )}
                 </div>
-
               </div>
-            </div>
-          </div>
-
-          {/* Summoning Actions Panel */}
-          <div className="flex-1 max-w-sm space-y-6">
-            <div>
-              <h2 className="font-display text-xl font-bold text-paper">Summoning Altar</h2>
-              <p className="text-pencil text-xs mt-2 leading-relaxed">
-                Unlock {selectedSeries === 'one-piece' ? ONE_PIECE_CARDS.length : DEMON_SLAYER_CARDS.length} mystical cards from this set. Epic and Legendary cards contain brilliant glowing borders and unique Haki/Aura features!
-              </p>
-            </div>
-
-            <div className="space-y-2 border-y border-pencil/10 py-4 font-hud text-xs text-pencil">
-              <div className="flex justify-between">
-                <span>Legendary Drop Rate:</span>
-                <span className="text-marigold font-bold">5%</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Epic Drop Rate:</span>
-                <span className="text-purple-400 font-bold">20%</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Rare Drop Rate:</span>
-                <span className="text-sky-400 font-bold">35%</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Common Drop Rate:</span>
-                <span className="text-paper/60 font-bold">40%</span>
-              </div>
-            </div>
-
-            <div className="space-y-3">
-              <button
-                onClick={handleDraw}
-                disabled={isDrawing || coins < DRAW_COST}
-                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-terracotta to-amber-500 hover:from-terracotta/90 hover:to-amber-500/90 text-paper font-hud text-sm font-bold uppercase py-3.5 px-6 rounded-xl transition-all shadow-lg hover:shadow-terracotta/20 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none"
-              >
-                {isDrawing ? (
-                  <>
-                    <RefreshCw className="animate-spin h-4 w-4" />
-                    Summoning...
-                  </>
-                ) : (
-                  <>
-                    <Sparkles className="h-4 w-4" />
-                    Summon Card (-{DRAW_COST} Coins)
-                  </>
-                )}
-              </button>
 
               {/* Status Banner */}
               <AnimatePresence mode="wait">
@@ -505,7 +656,7 @@ const ShopScreen: FC = () => {
                 )}
               </AnimatePresence>
             </div>
-          </div>
+          )}
         </div>
 
         {/* ── CARD STATS ─────────────────────────────────────────────── */}
@@ -872,7 +1023,7 @@ const ShopScreen: FC = () => {
       <AnimatePresence>
         {drawnCard && (
           <div 
-            onClick={() => { setDrawnCard(null); setDrawResult(null); setIsFlipped(false); }}
+            onClick={() => { setDrawnCard(null); setDrawResult(null); setSummonPhase('s-altar'); }}
             className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-ink/90 backdrop-blur-md cursor-pointer"
           >
             {/* Reveal Header */}
@@ -1060,6 +1211,273 @@ const ShopScreen: FC = () => {
           background-image: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 60%, transparent 70%);
           background-size: 200% 100%;
           animation: shimmerSweep 5s infinite linear;
+        }
+
+        /* CSS Summoning Ritual Stage Stylesheet */
+        .stage {
+          --void: #07060a;
+          --gold: #f3c969;
+          --gold-deep: #b8842e;
+          --gold-dim: #6e5326;
+          --purple: #8b3ffb;
+          --purple-deep: #4a1d96;
+          --ember: #ff7a3c;
+          --text-bright: #f3ecdc;
+          --text-muted: #a89b8a;
+          --text-faint: #6b6058;
+        }
+
+        .grain-overlay {
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+          mix-blend-mode: overlay;
+        }
+
+        .vignette-overlay {
+          background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.85) 100%);
+        }
+
+        /* Summoning Circle Rotating Glyphs */
+        .glyph-wrap {
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 520px;
+          height: 520px;
+          opacity: 0.2;
+          transition: all 1.2s ease;
+        }
+        .stage.s-transition .glyph-wrap { opacity: 0.18; }
+        .stage.s-rise .glyph-wrap { opacity: 0.55; }
+        .stage.s-begin .glyph-wrap { opacity: 0.8; }
+        .stage.s-intensity .glyph-wrap { opacity: 1.0; }
+        .stage.s-reveal .glyph-wrap { opacity: 0.6; }
+
+        .glyph-ring { transform-origin: 50% 50%; }
+        .glyph-ring.r1 { animation: spinRunesR1 60s linear infinite; }
+        .glyph-ring.r2 { animation: spinRunesR2 40s linear infinite reverse; }
+        .glyph-ring.r3 { animation: spinRunesR3 90s linear infinite; }
+
+        @keyframes spinRunesR1 { to { transform: rotate(360deg); } }
+        @keyframes spinRunesR2 { to { transform: rotate(-360deg); } }
+        @keyframes spinRunesR3 { to { transform: rotate(360deg); } }
+
+        /* Lightning Bolts Flash overlay */
+        .fx-layer {
+          transform: scale(1.02);
+        }
+        .bolt-path {
+          stroke: #8b3ffb;
+          stroke-width: 3.5;
+          fill: none;
+          filter: drop-shadow(0 0 6px #8b3ffb);
+          animation: boltFlashEffect 0.42s ease-out forwards;
+        }
+        @keyframes boltFlashEffect {
+          0% { opacity: 0; }
+          8% { opacity: 1; }
+          18% { opacity: 0.3; }
+          26% { opacity: 1; }
+          100% { opacity: 0; }
+        }
+
+        /* Gold/Ember Particles */
+        .gacha-particle {
+          bottom: 30%;
+          width: 6px;
+          height: 6px;
+          background: #ff7a3c;
+          box-shadow: 0 0 8px #ff7a3c;
+          animation: particleRise linear forwards;
+        }
+        .gacha-particle.gold {
+          background: #f3c969;
+          box-shadow: 0 0 8px #f3c969;
+        }
+        @keyframes particleRise {
+          0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+          100% { transform: translateY(-340px) translateX(var(--drift, 0px)) rotate(220deg); opacity: 0; }
+        }
+
+        /* Camera Shake on intensity */
+        .stage-shake {
+          animation: shakeKfEffect 0.22s ease-in-out infinite;
+        }
+        @keyframes shakeKfEffect {
+          0%, 100% { transform: translate(0,0); }
+          20% { transform: translate(-3px, 2px); }
+          40% { transform: translate(3px, -2px); }
+          60% { transform: translate(-2px, -3px); }
+          80% { transform: translate(2px, 3px); }
+        }
+
+        /* Step 0: Static Card Back style */
+        .card-static-wrap {
+          perspective: 1200px;
+        }
+        .card-custom {
+          width: 210px;
+          height: 310px;
+          border-radius: 14px;
+          background: linear-gradient(160deg, #2c1608, #1a0d05 55%, #0d0703);
+          border: 2px solid #6e5326;
+          box-shadow: 0 0 0 1px rgba(243, 201, 105, 0.15), 0 18px 50px rgba(0,0,0,0.6), 0 0 40px rgba(255, 122, 60, 0.12);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+          padding: 22px 16px 18px;
+          text-align: center;
+        }
+        .card-custom .card-emblem {
+          height: 60px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        /* Summon Button styling matching the theme */
+        .summon-btn {
+          width: 100%;
+          padding: 14px 0;
+          border-radius: 8px;
+          border: 1px solid #ff7a3c;
+          background: linear-gradient(135deg, #ff7a3c, #c2410c);
+          color: #1a0900;
+          font-family: 'Cinzel', serif;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+          font-size: 13px;
+          text-transform: uppercase;
+          cursor: pointer;
+          box-shadow: 0 6px 22px rgba(255, 122, 60, 0.35);
+          transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .summon-btn:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 10px 28px rgba(255, 122, 60, 0.45);
+        }
+        .summon-btn:active {
+          transform: translateY(0);
+        }
+        .summon-btn:disabled {
+          opacity: 0.5;
+          cursor: default;
+          transform: none;
+        }
+
+        /* Altar Pedestal Platform */
+        .platform-custom {
+          position: absolute;
+          bottom: 12%;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 480px;
+          height: 90px;
+          background: radial-gradient(ellipse at center, rgba(243, 201, 105, 0.35) 0%, rgba(255, 122, 60, 0.12) 45%, transparent 75%);
+          box-shadow: 0 0 80px 10px rgba(255, 122, 60, 0.25);
+          border-radius: 50%;
+          transition: all 0.9s ease;
+          pointer-events: none;
+          z-index: 2;
+        }
+
+        /* Card 3D Wrap and tumble animations */
+        .card-wrap-custom {
+          perspective: 1400px;
+          position: relative;
+          z-index: 10;
+        }
+        .card-3d-custom {
+          width: 220px;
+          height: 320px;
+          position: relative;
+          transform-style: preserve-3d;
+          transition: transform 0.8s cubic-bezier(0.6, 0.1, 0.2, 1);
+        }
+        .card-3d-custom.s-transition {
+          transform: rotateY(90deg) scale(0.95);
+        }
+        .card-3d-custom.s-rise {
+          transform: rotateY(180deg) scale(1);
+        }
+        .card-3d-custom.s-begin {
+          animation: cardTumbleBegin 1.8s ease-in-out forwards;
+        }
+        .card-3d-custom.s-intensity {
+          animation: cardTumbleFast 0.9s linear infinite;
+        }
+        .card-3d-custom.s-reveal {
+          transform: rotateY(360deg) scale(1.05);
+          animation: none;
+        }
+
+        @keyframes cardTumbleBegin {
+          0% { transform: rotateY(180deg) rotate(0deg) scale(1); }
+          50% { transform: rotateY(540deg) rotate(8deg) scale(1.04); }
+          100% { transform: rotateY(900deg) rotate(-4deg) scale(1.02); }
+        }
+        @keyframes cardTumbleFast {
+          0% { transform: rotateY(0deg) rotate(-6deg) scale(1.05); }
+          50% { transform: rotateY(180deg) rotate(6deg) scale(1.1); }
+          100% { transform: rotateY(360deg) rotate(-6deg) scale(1.05); }
+        }
+
+        /* Card Faces inside 3D environment */
+        .card-face-custom {
+          position: absolute;
+          inset: 0;
+          border-radius: 14px;
+          backface-visibility: hidden;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+          padding: 22px 16px 18px;
+          text-align: center;
+        }
+        .card-face-custom.back {
+          background: linear-gradient(160deg, #1c1426, #110a18 55%, #07050b);
+          border: 2px solid #4a1d96;
+          box-shadow: 0 0 0 1px rgba(139, 63, 251, 0.25), 0 0 50px rgba(139, 63, 251, 0.25);
+          justify-content: center;
+        }
+        .card-face-custom.front {
+          transform: rotateY(180deg);
+          background: linear-gradient(160deg, var(--bg1, #2c1608), var(--bg2, #1a0d05) 55%, #0d0703);
+          border: 2px solid var(--rarity-color);
+          box-shadow: 0 0 0 1px color-mix(in srgb, var(--rarity-color) 40%, transparent), 0 0 60px color-mix(in srgb, var(--rarity-color) 45%, transparent);
+        }
+
+        /* Reveal panel at step 5 */
+        .reveal-panel-custom {
+          position: absolute;
+          bottom: 3%;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 15;
+          text-align: center;
+          animation: revealPanelFadeIn 0.6s ease-out forwards;
+        }
+        @keyframes revealPanelFadeIn {
+          from { opacity: 0; transform: translate(-50%, 15px); }
+          to { opacity: 1; transform: translate(-50%, 0); }
+        }
+
+        .again-btn-custom {
+          padding: 10px 24px;
+          border-radius: 8px;
+          border: 1px solid #2a2230;
+          background: rgba(255, 255, 255, 0.04);
+          color: #f3ecdc;
+          font-family: 'Cinzel', serif;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: border-color 0.2s ease, background 0.2s ease;
+        }
+        .again-btn-custom:hover {
+          border-color: #b8842e;
+          background: rgba(243, 201, 105, 0.08);
         }
       `}</style>
     </div>
