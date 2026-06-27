@@ -48,7 +48,7 @@ const getCardSparkleColors = (rarity: 'common' | 'rare' | 'epic' | 'legendary') 
   };
 };
 
-const HOTSPOTS = {
+const ONE_PIECE_HOTSPOTS = {
   series: {
     title: "OP Franchise Designation",
     explanation: "Stands for 'One Piece'. This watermark designates that this card belongs to the official One Piece series set, validating its compatibility in standard cross-franchise matches and deck construction rules."
@@ -79,6 +79,37 @@ const HOTSPOTS = {
   }
 };
 
+const DEMON_SLAYER_HOTSPOTS = {
+  series: {
+    title: "DS Franchise Designation",
+    explanation: "Stands for 'Demon Slayer'. This watermark designates that this card belongs to the official Demon Slayer series set, validating its compatibility in standard cross-franchise matches and deck construction rules."
+  },
+  faction: {
+    title: "Faction & Character Type",
+    explanation: "Represents their faction (Demon Slayer Corps or Twelve Kizuki). Determines what synergies, breathing style enhancements, or blood demon art effects apply in battle."
+  },
+  rarity: {
+    title: "Rarity Designation",
+    explanation: "Defines the collection value. Epic (purple) and Legendary (gold) cards feature special holographic frames and glowing borders."
+  },
+  portrait: {
+    title: "Illustration Portrait",
+    explanation: "A high-fidelity transparent render of the character. Tapping a legendary card triggers a unique breathing style aura animation."
+  },
+  name: {
+    title: "Character Name",
+    explanation: "The name of the character, registered in either the Demon Slayer Corps registry or recognized as one of the Demon King's Twelve Kizuki."
+  },
+  bounty: {
+    title: "Slayer Rank / Level",
+    explanation: "Denotes their slayer rank (Hashira, Mizunoto) or demon tier (Upper/Lower Moon). Higher ranks denote exceptional skill, breathing forms, or dangerous blood demon arts."
+  },
+  attack: {
+    title: "Signature Combat Technique",
+    explanation: "The character's primary combat technique, showcasing their breathing forms or unique Blood Demon Art."
+  }
+};
+
 const DRAW_COST = 20;
 const DUP_REFUND = 5;
 
@@ -106,6 +137,9 @@ const ShopScreen: FC = () => {
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
   const [selectedHotspot, setSelectedHotspot] = useState<'series' | 'faction' | 'rarity' | 'portrait' | 'name' | 'bounty' | 'attack' | null>(null);
   const [gachaOpTooltip, setGachaOpTooltip] = useState(false);
+
+  const isDs = selectedCard?.id.startsWith('ds-');
+  const activeHotspots = isDs ? DEMON_SLAYER_HOTSPOTS : ONE_PIECE_HOTSPOTS;
 
   // Rarity distribution count
   const stats = useMemo(() => {
@@ -784,14 +818,10 @@ const ShopScreen: FC = () => {
                       <X size={12} />
                     </button>
                     <h4 className="font-hud text-[10px] uppercase font-bold text-terracotta tracking-wider flex items-center gap-1">
-                      <Sparkles size={10} /> {HOTSPOTS[selectedHotspot].title}
+                      <Sparkles size={10} /> {activeHotspots[selectedHotspot].title}
                     </h4>
                     <p className="mt-1 leading-relaxed text-ink/80 text-[11px]">
-                      {selectedHotspot === 'series'
-                        ? (selectedCard.id.startsWith('ds-')
-                            ? "Stands for 'Demon Slayer'. This watermark designates that this card belongs to the official Demon Slayer series set, validating its compatibility in standard cross-franchise matches and deck construction rules."
-                            : HOTSPOTS.series.explanation)
-                        : HOTSPOTS[selectedHotspot].explanation}
+                      {activeHotspots[selectedHotspot].explanation}
                     </p>
                   </motion.div>
                 ) : (
