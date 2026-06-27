@@ -540,17 +540,21 @@ const ShopScreen: FC = () => {
       {/* ── CARD DETAILED MODAL OVERLAY ─────────────────────────────── */}
       <AnimatePresence>
         {selectedCard && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/80 backdrop-blur-sm">
+          <div 
+            onClick={() => { setSelectedCard(null); setSelectedHotspot(null); }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/80 backdrop-blur-sm cursor-pointer"
+          >
             {/* Modal Box */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-sm overflow-hidden bg-paper border border-[#D5C0A0] rounded-2xl shadow-2xl p-6 text-ink font-body"
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-sm max-h-[90vh] overflow-y-auto modal-scroll bg-paper border border-[#D5C0A0] rounded-2xl shadow-2xl p-4 sm:p-6 text-ink font-body cursor-default"
             >
               <button
                 onClick={() => { setSelectedCard(null); setSelectedHotspot(null); }}
-                className="absolute top-4 right-4 text-pencil hover:text-ink transition-colors cursor-pointer"
+                className="absolute top-4 right-4 text-pencil hover:text-ink transition-colors cursor-pointer z-30"
               >
                 <X size={20} />
               </button>
@@ -768,8 +772,126 @@ const ShopScreen: FC = () => {
           </div>
         )}
       </AnimatePresence>
+
+      {/* ── GACHA DRAW REVEAL MODAL OVERLAY ─────────────────────────── */}
+      <AnimatePresence>
+        {drawnCard && (
+          <div 
+            onClick={() => { setDrawnCard(null); setDrawResult(null); setIsFlipped(false); }}
+            className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-ink/90 backdrop-blur-md cursor-pointer"
+          >
+            {/* Reveal Header */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="text-center mb-6 pointer-events-none select-none"
+            >
+              {drawResult === 'new' ? (
+                <div>
+                  <h2 className="font-display text-3xl font-extrabold text-marigold tracking-widest drop-shadow-[0_0_10px_rgba(251,191,36,0.5)] flex items-center justify-center gap-2 animate-bounce">
+                    <Sparkles className="animate-spin-slow" /> NEW CARD UNLOCKED!
+                  </h2>
+                  <p className="text-pencil text-xs mt-2 font-hud tracking-widest uppercase">Added to your collection</p>
+                </div>
+              ) : (
+                <div>
+                  <h2 className="font-display text-2xl font-extrabold text-paper tracking-wider flex items-center justify-center gap-2">
+                    🔄 DUPLICATE DRAW
+                  </h2>
+                  <p className="text-pencil text-xs mt-2 font-hud tracking-wider uppercase text-marigold">Converted: +15 XP & +10 Coins</p>
+                </div>
+              )}
+            </motion.div>
+
+            {/* Magnificent Card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.7, rotateY: -180 }}
+              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+              exit={{ opacity: 0, scale: 0.7, rotateY: 180 }}
+              transition={{ type: 'spring', damping: 15, stiffness: 100 }}
+              onClick={(e) => e.stopPropagation()}
+              className={`relative w-72 h-[450px] bg-ink border-4 rounded-3xl p-6 flex flex-col justify-between shadow-[0_0_50px_rgba(0,0,0,0.8)] cursor-default overflow-hidden ${drawnCard.glowColor}`}
+            >
+              {/* Backglow element */}
+              <div className={`absolute inset-0 opacity-10 bg-gradient-to-tr ${drawnCard.color} pointer-events-none`} />
+
+              {/* Card Rarity Badge & Rarity Name */}
+              <div className="flex items-center justify-between border-b border-pencil/10 pb-3 z-10">
+                <span className="font-hud text-[10px] uppercase tracking-wider text-pencil font-bold">
+                  {selectedSeries === 'one-piece' ? 'Wanted Poster' : 'Kimetsu Card'}
+                </span>
+                <span className={`font-hud text-[10px] uppercase px-2.5 py-0.5 rounded-full font-black ${
+                  drawnCard.rarity === 'legendary' ? 'bg-amber-500 text-ink animate-pulse' :
+                  drawnCard.rarity === 'epic' ? 'bg-purple-600 text-paper' :
+                  drawnCard.rarity === 'rare' ? 'bg-sky-500 text-paper' : 'bg-pencil/20 text-pencil'
+                }`}>
+                  {drawnCard.rarity}
+                </span>
+              </div>
+
+              {/* Left Header label (OP-Card / DS-Card) */}
+              <div className="absolute top-16 left-6 text-[8px] font-hud text-pencil uppercase font-bold tracking-widest opacity-80 z-10">
+                {drawnCard.id.startsWith('ds-') ? 'DS-Card' : 'OP-Card'}
+              </div>
+
+              {/* Card Illustration */}
+              <div className={`my-4 h-48 w-full rounded-2xl bg-gradient-to-tr ${drawnCard.color} flex items-center justify-center text-8xl shadow-inner relative overflow-hidden select-none z-10`}>
+                {/* Series Watermark */}
+                <div className="absolute top-1 right-2 opacity-15 font-black text-5xl select-none text-paper leading-none">
+                  {drawnCard.id.startsWith('ds-') ? 'DS' : 'OP'}
+                </div>
+
+                {imageErrors[drawnCard.id] ? (
+                  drawnCard.emoji
+                ) : (
+                  <img
+                    src={drawnCard.imageUrl}
+                    alt={drawnCard.name}
+                    className="h-full object-contain filter drop-shadow-lg py-2 hover:scale-105 transition-transform duration-300"
+                    referrerPolicy="no-referrer"
+                    onError={() => setImageErrors(prev => ({ ...prev, [drawnCard.id]: true }))}
+                  />
+                )}
+              </div>
+
+              {/* Details & Lore */}
+              <div className="flex-1 flex flex-col justify-center text-center z-10 px-2">
+                <h3 className="font-display text-xl font-black text-paper leading-tight tracking-wide">
+                  {drawnCard.name}
+                </h3>
+                <p className="font-hud text-xs text-marigold font-extrabold tracking-wider mt-1">
+                  {drawnCard.bounty}
+                </p>
+                <p className="text-[11px] text-pencil line-clamp-3 mt-2.5 leading-relaxed italic px-1">
+                  "{drawnCard.description}"
+                </p>
+              </div>
+
+              {/* Special Move Footer */}
+              <div className="border-t border-pencil/10 pt-3 flex flex-col z-10 mt-2">
+                <span className="text-[8px] uppercase font-hud text-pencil tracking-widest">Signature Attack</span>
+                <span className="text-xs text-paper font-bold truncate mt-0.5 text-terracotta">
+                  {drawnCard.specialMove}
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Click to Continue Help */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ delay: 0.5 }}
+              className="text-pencil text-xs mt-6 font-hud tracking-widest uppercase animate-pulse pointer-events-none select-none"
+            >
+              Tap anywhere on screen to continue
+            </motion.p>
+          </div>
+        )}
+      </AnimatePresence>
       
-      {/* CSS flip properties injected directly */}
+      {/* CSS flip and scrollbar properties injected directly */}
       <style>{`
         .rotate-y-180 {
           transform: rotateY(180deg);
@@ -779,6 +901,20 @@ const ShopScreen: FC = () => {
         }
         .backface-hidden {
           backface-visibility: hidden;
+        }
+        /* Custom scrollbar for constrained height modals */
+        .modal-scroll::-webkit-scrollbar {
+          width: 6px;
+        }
+        .modal-scroll::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .modal-scroll::-webkit-scrollbar-thumb {
+          background-color: rgba(144, 144, 144, 0.3);
+          border-radius: 4px;
+        }
+        .modal-scroll::-webkit-scrollbar-thumb:hover {
+          background-color: rgba(144, 144, 144, 0.5);
         }
       `}</style>
     </div>
