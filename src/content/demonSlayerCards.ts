@@ -4,7 +4,7 @@ export interface DemonSlayerCard {
   rarity: 'common' | 'rare' | 'epic' | 'legendary';
   emoji: string;
   imageUrl: string;
-  bounty: string; // Used for Slayer Rank / Level
+  bounty: string; // Used for Slayer Rank / Level / Threat Tier
   description: string;
   specialMove: string;
   color: string; // Gradient class
@@ -12,7 +12,7 @@ export interface DemonSlayerCard {
 }
 
 export const DEMON_SLAYER_CARDS: DemonSlayerCard[] = [
-  // Legendary
+  // ── LEGENDARY (5) ───────────────────────────────────────────
   {
     id: 'ds-yoriichi',
     name: 'Yoriichi Tsugikuni',
@@ -50,6 +50,18 @@ export const DEMON_SLAYER_CARDS: DemonSlayerCard[] = [
     glowColor: 'shadow-[0_0_25px_rgba(147,51,234,0.8)] border-purple-500'
   },
   {
+    id: 'ds-doma',
+    name: 'Doma',
+    rarity: 'legendary',
+    emoji: '🪭❄️',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/2/24/Anime_Doma%27s_cult_wear.png',
+    bounty: 'Upper Moon Two (Legendary)',
+    description: 'The charismatic cult leader demon holding the Upper Moon Two position. Wields dual golden fans and generates deadly freezing ice powder.',
+    specialMove: 'Blood Demon Art: Crystalline Divine Bodhisattva',
+    color: 'from-slate-300 via-rose-300 to-amber-200 text-ink',
+    glowColor: 'shadow-[0_0_25px_rgba(224,242,254,0.8)] border-sky-200'
+  },
+  {
     id: 'ds-tanjiro',
     name: 'Tanjiro Kamado',
     rarity: 'legendary',
@@ -61,7 +73,8 @@ export const DEMON_SLAYER_CARDS: DemonSlayerCard[] = [
     color: 'from-teal-600 via-red-600 to-amber-500 text-paper',
     glowColor: 'shadow-[0_0_25px_rgba(20,184,166,0.8)] border-teal-500'
   },
-  // Epic
+
+  // ── EPIC (8) ───────────────────────────────────────────────
   {
     id: 'ds-rengoku',
     name: 'Kyojuro Rengoku',
@@ -99,13 +112,49 @@ export const DEMON_SLAYER_CARDS: DemonSlayerCard[] = [
     glowColor: 'shadow-[0_0_15px_rgba(219,39,119,0.7)] border-pink-500'
   },
   {
+    id: 'ds-hantengu',
+    name: 'Hantengu',
+    rarity: 'epic',
+    emoji: '😰👹',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/9/9a/Hantengu_Full_Body_Anime.png',
+    bounty: 'Upper Moon Four (Epic)',
+    description: 'A cowardly demon who splits into multiple powerful clones representing different emotions (Anger, Pleasure, Sorrow, Joy) when threatened.',
+    specialMove: 'Emotion Clone Splitting / Zohakuten Drum Strike',
+    color: 'from-slate-800 via-amber-800 to-stone-900 text-paper',
+    glowColor: 'shadow-[0_0_15px_rgba(217,119,6,0.7)] border-amber-600'
+  },
+  {
+    id: 'ds-daki',
+    name: 'Daki',
+    rarity: 'epic',
+    emoji: '👘🎗️',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/e/e7/Daki_Anime_%28Awakened%29.png',
+    bounty: 'Upper Moon Six - Sister (Epic)',
+    description: 'A vain and cruel demon who operates in the Entertainment District, utilizing sharp, elastic flesh-sash belts in battle.',
+    specialMove: 'Blood Demon Art: Eight-Layered Obi Slash',
+    color: 'from-rose-600 via-pink-400 to-indigo-900 text-paper',
+    glowColor: 'shadow-[0_0_15px_rgba(244,63,94,0.7)] border-rose-500'
+  },
+  {
+    id: 'ds-gyutaro',
+    name: 'Gyutaro',
+    rarity: 'epic',
+    emoji: '🪓🐍',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/f/f4/Gyutaro_Anime.png',
+    bounty: 'Upper Moon Six - Brother (Epic)',
+    description: 'Daki\'s older brother and the true possessor of the Upper Moon Six seat. Fights with dual sickle blades loaded with lethal poison.',
+    specialMove: 'Blood Demon Art: Flying Blood Sickles',
+    color: 'from-zinc-900 via-green-950 to-black text-paper',
+    glowColor: 'shadow-[0_0_15px_rgba(34,197,94,0.7)] border-green-800'
+  },
+  {
     id: 'ds-nezuko',
     name: 'Nezuko Kamado',
     rarity: 'epic',
     emoji: '🎋🌸',
     imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/0/0e/Nezuko_anime_right_face.png',
     bounty: 'Demonized Sister (Epic)',
-    description: 'Tanjiros sister who was transformed into a demon. She retains her human emotions, protecting humans and utilizing exploding blood.',
+    description: 'Tanjiro\'s sister who was transformed into a demon. She retains her human emotions, protecting humans and utilizing exploding blood.',
     specialMove: 'Blood Demon Art: Exploding Blood',
     color: 'from-rose-500 via-pink-400 to-slate-900 text-paper',
     glowColor: 'shadow-[0_0_15px_rgba(244,63,94,0.7)] border-rose-500'
@@ -122,7 +171,8 @@ export const DEMON_SLAYER_CARDS: DemonSlayerCard[] = [
     color: 'from-amber-400 via-yellow-300 to-amber-700 text-ink',
     glowColor: 'shadow-[0_0_15px_rgba(251,191,36,0.7)] border-yellow-400'
   },
-  // Rare
+
+  // ── RARE (7) ────────────────────────────────────────────────
   {
     id: 'ds-inosuke',
     name: 'Inosuke Hashibira',
@@ -171,7 +221,44 @@ export const DEMON_SLAYER_CARDS: DemonSlayerCard[] = [
     color: 'from-slate-500 via-red-900 to-zinc-900 text-paper',
     glowColor: 'shadow-[0_0_10px_rgba(239,68,68,0.5)] border-red-800'
   },
-  // Common
+  {
+    id: 'ds-nakime',
+    name: 'Nakime',
+    rarity: 'rare',
+    emoji: '👁️🪕',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/3/38/Nakime_%28Anime%29.png',
+    bounty: 'Upper Moon Four - New (Rare)',
+    description: 'The mysterious lute-playing demon who controls the spatial layout of the Infinity Castle with her Biwa.',
+    specialMove: 'Castle Portal Manipulation / Teleportation',
+    color: 'from-zinc-800 via-purple-950 to-black text-paper',
+    glowColor: 'shadow-[0_0_10px_rgba(168,85,247,0.5)] border-purple-800'
+  },
+  {
+    id: 'ds-gyokko',
+    name: 'Gyokko',
+    rarity: 'rare',
+    emoji: '🏺🐙',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/2/2b/Anime_Gyokko_2.png',
+    bounty: 'Upper Moon Five (Rare)',
+    description: 'A grotesque demon nested inside an ornamental vase. Obsessed with art and porcelain, he summons water and fish minions.',
+    specialMove: 'Blood Demon Art: Ten Thousand Gliding Slime-Fish',
+    color: 'from-teal-800 via-stone-700 to-emerald-950 text-paper',
+    glowColor: 'shadow-[0_0_10px_rgba(20,184,166,0.5)] border-teal-600'
+  },
+  {
+    id: 'ds-kaigaku',
+    name: 'Kaigaku',
+    rarity: 'rare',
+    emoji: '🍑⚡',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/6/66/Demon_Kaigaku_%28Anime%29.png',
+    bounty: 'Upper Moon Six - New (Rare)',
+    description: 'Zenitsu\'s former senior disciple who betrayed the Slayer Corps for demonhood. Wields black electricity Thunder Breathing.',
+    specialMove: 'Thunder Breathing: Distant Thunder / Electrokinesis',
+    color: 'from-slate-700 via-blue-900 to-zinc-950 text-paper',
+    glowColor: 'shadow-[0_0_10px_rgba(59,130,246,0.5)] border-blue-700'
+  },
+
+  // ── COMMON (8) ──────────────────────────────────────────────
   {
     id: 'ds-kanao',
     name: 'Kanao Tsuyuri',
@@ -191,7 +278,7 @@ export const DEMON_SLAYER_CARDS: DemonSlayerCard[] = [
     emoji: '🔫🩸',
     imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/c/cb/Genya_Shinazugawa_Full_Body_%28Anime%29.png',
     bounty: 'Demon Eater Slayer (Common)',
-    description: 'The Wind Hashiras brother. He cannot use breathing styles but possesses the unique ability to eat demon flesh to temporarily gain powers.',
+    description: 'The Wind Hashira\'s brother. He cannot use breathing styles but possesses the unique ability to eat demon flesh to temporarily gain powers.',
     specialMove: 'Flesh Gun Blast',
     color: 'from-slate-400 to-slate-600 text-paper',
     glowColor: 'shadow-md border-slate-400'
@@ -219,5 +306,53 @@ export const DEMON_SLAYER_CARDS: DemonSlayerCard[] = [
     specialMove: 'Forced Unconscious Hypnosis',
     color: 'from-zinc-400 to-zinc-600 text-paper',
     glowColor: 'shadow-md border-zinc-400'
+  },
+  {
+    id: 'ds-kyogai',
+    name: 'Kyogai',
+    rarity: 'common',
+    emoji: '🪘🥁',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/d/db/Kyogai.png',
+    bounty: 'Drum Demon (Common)',
+    description: 'A former Lower Moon Six demon. Fights by striking the tsuzumi drums embedded in his body to rotate rooms and launch claw slashes.',
+    specialMove: 'Rapid Tsuzumi Drum Slashes',
+    color: 'from-stone-600 to-stone-800 text-paper',
+    glowColor: 'shadow-md border-stone-500'
+  },
+  {
+    id: 'ds-susamaru',
+    name: 'Susamaru',
+    rarity: 'common',
+    emoji: '🥎💪',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/d/de/Susamaru_anime.png',
+    bounty: 'Temari Demon (Common)',
+    description: 'A playful yet destructive demon who throws extremely hard, fast Temari handball projectiles to crush her opponents.',
+    specialMove: 'Blood Demon Art: Six-Armed Handball Volley',
+    color: 'from-orange-400 to-orange-600 text-paper',
+    glowColor: 'shadow-md border-orange-500'
+  },
+  {
+    id: 'ds-yahaba',
+    name: 'Yahaba',
+    rarity: 'common',
+    emoji: '👁️➡️',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/3/37/Yahaba_Profile.png',
+    bounty: 'Arrow Demon (Common)',
+    description: 'A demon who works in tandem with Susamaru. Wields eyeballs in the palms of his hands to manipulate invisible kinetic vector arrows.',
+    specialMove: 'Blood Demon Art: Koketsu Vector Arrows',
+    color: 'from-emerald-600 to-zinc-800 text-paper',
+    glowColor: 'shadow-md border-emerald-600'
+  },
+  {
+    id: 'ds-hand-demon',
+    name: 'Hand Demon',
+    rarity: 'common',
+    emoji: '🤢🫱',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/3/3e/Hand_Demon_about_to_kill_Sabito.png',
+    bounty: 'Final Selection Demon (Common)',
+    description: 'A mutated multi-armed demon trapped by Urokodaki on Mt. Fujikasane. Harbors a deep hatred for Urokodaki\'s disciples.',
+    specialMove: 'Crushing Giant Fist Grab',
+    color: 'from-lime-800 to-stone-900 text-paper',
+    glowColor: 'shadow-md border-lime-800'
   }
 ];
