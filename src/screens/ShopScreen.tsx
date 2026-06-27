@@ -14,36 +14,8 @@ import {
   Info
 } from 'lucide-react';
 
-const getCardSparkleColors = (cardId: string, rarity: 'common' | 'rare' | 'epic' | 'legendary') => {
-  const isLegendary = rarity === 'legendary';
-  const isEpic = rarity === 'epic';
-  const isRare = rarity === 'rare';
-  
-  if (isLegendary) {
-    if (cardId.includes('yoriichi') || cardId.includes('tanjiro') || cardId.includes('luffy')) {
-      return {
-        '--glow-color': 'rgba(239, 68, 68, 0.8)',
-        '--border-color': '#ef4444',
-        '--border-color-bright': '#fca5a5',
-        '--border-color-dim': '#b91c1c'
-      };
-    }
-    if (cardId.includes('muzan')) {
-      return {
-        '--glow-color': 'rgba(225, 29, 72, 0.8)',
-        '--border-color': '#e11d48',
-        '--border-color-bright': '#fda4af',
-        '--border-color-dim': '#9f1239'
-      };
-    }
-    if (cardId.includes('doma')) {
-      return {
-        '--glow-color': 'rgba(186, 230, 253, 0.8)',
-        '--border-color': '#bae6fd',
-        '--border-color-bright': '#f0f9ff',
-        '--border-color-dim': '#7dd3fc'
-      };
-    }
+const getCardSparkleColors = (rarity: 'common' | 'rare' | 'epic' | 'legendary') => {
+  if (rarity === 'legendary') {
     return {
       '--glow-color': 'rgba(251, 191, 36, 0.8)',
       '--border-color': '#fbbf24',
@@ -51,32 +23,7 @@ const getCardSparkleColors = (cardId: string, rarity: 'common' | 'rare' | 'epic'
       '--border-color-dim': '#ca8a04'
     };
   }
-  
-  if (isEpic) {
-    if (cardId.includes('giyu') || cardId.includes('jinbe')) {
-      return {
-        '--glow-color': 'rgba(59, 130, 246, 0.8)',
-        '--border-color': '#3b82f6',
-        '--border-color-bright': '#93c5fd',
-        '--border-color-dim': '#1d4ed8'
-      };
-    }
-    if (cardId.includes('akaza') || cardId.includes('nezuko') || cardId.includes('hancock')) {
-      return {
-        '--glow-color': 'rgba(244, 63, 94, 0.8)',
-        '--border-color': '#f43f5e',
-        '--border-color-bright': '#fecdd3',
-        '--border-color-dim': '#be123c'
-      };
-    }
-    if (cardId.includes('rengoku') || cardId.includes('ace')) {
-      return {
-        '--glow-color': 'rgba(249, 115, 22, 0.8)',
-        '--border-color': '#f97316',
-        '--border-color-bright': '#ffedd5',
-        '--border-color-dim': '#c2410c'
-      };
-    }
+  if (rarity === 'epic') {
     return {
       '--glow-color': 'rgba(168, 85, 247, 0.8)',
       '--border-color': '#a855f7',
@@ -84,24 +31,15 @@ const getCardSparkleColors = (cardId: string, rarity: 'common' | 'rare' | 'epic'
       '--border-color-dim': '#7e22ce'
     };
   }
-  
-  if (isRare) {
-    if (cardId.includes('tengen') || cardId.includes('zoro') || cardId.includes('gyokko')) {
-      return {
-        '--glow-color': 'rgba(16, 185, 129, 0.8)',
-        '--border-color': '#10b981',
-        '--border-color-bright': '#a7f3d0',
-        '--border-color-dim': '#047857'
-      };
-    }
+  if (rarity === 'rare') {
     return {
-      '--glow-color': 'rgba(14, 165, 233, 0.8)',
-      '--border-color': '#0ea5e9',
-      '--border-color-bright': '#bae6fd',
-      '--border-color-dim': '#0369a1'
+      '--glow-color': 'rgba(59, 130, 246, 0.8)',
+      '--border-color': '#3b82f6',
+      '--border-color-bright': '#93c5fd',
+      '--border-color-dim': '#1d4ed8'
     };
   }
-  
+  // Common
   return {
     '--glow-color': 'rgba(148, 163, 184, 0.4)',
     '--border-color': '#94a3b8',
@@ -363,7 +301,7 @@ const ShopScreen: FC = () => {
                   style={{ 
                     backfaceVisibility: 'hidden', 
                     transform: 'rotateY(180deg)',
-                    ...(drawnCard ? getCardSparkleColors(drawnCard.id, drawnCard.rarity) : {}) 
+                    ...(drawnCard ? getCardSparkleColors(drawnCard.rarity) : {}) 
                   } as React.CSSProperties}
                 >
                   {drawnCard && (
@@ -584,10 +522,15 @@ const ShopScreen: FC = () => {
                   <button
                     key={card.id}
                     onClick={() => setSelectedCard(card)}
-                    style={getCardSparkleColors(card.id, card.rarity) as React.CSSProperties}
+                    style={getCardSparkleColors(card.rarity) as React.CSSProperties}
                     className="group relative flex flex-col p-2.5 rounded-xl bg-ink border transition-all duration-300 hover:scale-105 cursor-pointer text-left animate-sparkle-border"
                   >
-                    <div className="absolute top-1 right-1 text-[8px] uppercase tracking-wider font-hud text-pencil font-bold">
+                    <div className={`absolute top-1.5 right-1.5 text-[8px] uppercase tracking-wider font-hud px-1.5 py-0.5 rounded font-black z-20 ${
+                      card.rarity === 'legendary' ? 'bg-amber-500 text-ink shadow-[0_0_5px_rgba(245,158,11,0.4)]' :
+                      card.rarity === 'epic' ? 'bg-purple-600 text-paper shadow-[0_0_5px_rgba(147,51,234,0.4)]' :
+                      card.rarity === 'rare' ? 'bg-blue-600 text-paper shadow-[0_0_5px_rgba(37,99,235,0.4)]' :
+                      'bg-stone-500 text-paper/90'
+                    }`}>
                       {card.rarity[0]}
                     </div>
                     {/* Art thumbnail */}
@@ -670,7 +613,7 @@ const ShopScreen: FC = () => {
 
               {/* WANTED Poster style */}
               <div 
-                style={getCardSparkleColors(selectedCard.id, selectedCard.rarity) as React.CSSProperties}
+                style={getCardSparkleColors(selectedCard.rarity) as React.CSSProperties}
                 className="p-4 rounded-xl bg-ink text-paper border-4 animate-sparkle-border flex flex-col items-center justify-center text-center shadow-lg relative"
               >
                 
@@ -799,8 +742,13 @@ const ShopScreen: FC = () => {
                 }`}>
                   {selectedCard.bounty}
                 </p>
-                <span className={`mt-2 font-hud text-[9px] uppercase px-2 py-0.5 rounded-full font-bold bg-paper/10 text-paper/80 transition-all ${
-                  selectedHotspot === 'rarity' ? 'bg-marigold text-ink scale-105 font-extrabold shadow-md' : ''
+                <span className={`mt-2 font-hud text-[9px] uppercase px-2.5 py-0.5 rounded-full font-bold transition-all ${
+                  selectedCard.rarity === 'legendary' ? 'bg-amber-500 text-ink font-black shadow-[0_0_10px_rgba(245,158,11,0.5)]' :
+                  selectedCard.rarity === 'epic' ? 'bg-purple-600 text-paper font-extrabold shadow-[0_0_10px_rgba(147,51,234,0.5)]' :
+                  selectedCard.rarity === 'rare' ? 'bg-blue-600 text-paper font-extrabold shadow-[0_0_10px_rgba(37,99,235,0.5)]' :
+                  'bg-stone-500 text-paper/90 font-medium'
+                } ${
+                  selectedHotspot === 'rarity' ? 'scale-110 ring-2 ring-marigold' : ''
                 }`}>
                   {selectedCard.rarity}
                 </span>
@@ -916,7 +864,7 @@ const ShopScreen: FC = () => {
               exit={{ opacity: 0, scale: 0.7, rotateY: 180 }}
               transition={{ type: 'spring', damping: 15, stiffness: 100 }}
               onClick={(e) => e.stopPropagation()}
-              style={getCardSparkleColors(drawnCard.id, drawnCard.rarity) as React.CSSProperties}
+              style={getCardSparkleColors(drawnCard.rarity) as React.CSSProperties}
               className="relative w-72 h-[450px] bg-ink border-4 rounded-3xl p-6 flex flex-col justify-between shadow-[0_0_50px_rgba(0,0,0,0.8)] cursor-default overflow-hidden animate-sparkle-border"
             >
               {/* Backglow element */}
