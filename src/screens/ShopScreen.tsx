@@ -14,6 +14,102 @@ import {
   Info
 } from 'lucide-react';
 
+const getCardSparkleColors = (cardId: string, rarity: 'common' | 'rare' | 'epic' | 'legendary') => {
+  const isLegendary = rarity === 'legendary';
+  const isEpic = rarity === 'epic';
+  const isRare = rarity === 'rare';
+  
+  if (isLegendary) {
+    if (cardId.includes('yoriichi') || cardId.includes('tanjiro') || cardId.includes('luffy')) {
+      return {
+        '--glow-color': 'rgba(239, 68, 68, 0.8)',
+        '--border-color': '#ef4444',
+        '--border-color-bright': '#fca5a5',
+        '--border-color-dim': '#b91c1c'
+      };
+    }
+    if (cardId.includes('muzan')) {
+      return {
+        '--glow-color': 'rgba(225, 29, 72, 0.8)',
+        '--border-color': '#e11d48',
+        '--border-color-bright': '#fda4af',
+        '--border-color-dim': '#9f1239'
+      };
+    }
+    if (cardId.includes('doma')) {
+      return {
+        '--glow-color': 'rgba(186, 230, 253, 0.8)',
+        '--border-color': '#bae6fd',
+        '--border-color-bright': '#f0f9ff',
+        '--border-color-dim': '#7dd3fc'
+      };
+    }
+    return {
+      '--glow-color': 'rgba(251, 191, 36, 0.8)',
+      '--border-color': '#fbbf24',
+      '--border-color-bright': '#fef08a',
+      '--border-color-dim': '#ca8a04'
+    };
+  }
+  
+  if (isEpic) {
+    if (cardId.includes('giyu') || cardId.includes('jinbe')) {
+      return {
+        '--glow-color': 'rgba(59, 130, 246, 0.8)',
+        '--border-color': '#3b82f6',
+        '--border-color-bright': '#93c5fd',
+        '--border-color-dim': '#1d4ed8'
+      };
+    }
+    if (cardId.includes('akaza') || cardId.includes('nezuko') || cardId.includes('hancock')) {
+      return {
+        '--glow-color': 'rgba(244, 63, 94, 0.8)',
+        '--border-color': '#f43f5e',
+        '--border-color-bright': '#fecdd3',
+        '--border-color-dim': '#be123c'
+      };
+    }
+    if (cardId.includes('rengoku') || cardId.includes('ace')) {
+      return {
+        '--glow-color': 'rgba(249, 115, 22, 0.8)',
+        '--border-color': '#f97316',
+        '--border-color-bright': '#ffedd5',
+        '--border-color-dim': '#c2410c'
+      };
+    }
+    return {
+      '--glow-color': 'rgba(168, 85, 247, 0.8)',
+      '--border-color': '#a855f7',
+      '--border-color-bright': '#e9d5ff',
+      '--border-color-dim': '#7e22ce'
+    };
+  }
+  
+  if (isRare) {
+    if (cardId.includes('tengen') || cardId.includes('zoro') || cardId.includes('gyokko')) {
+      return {
+        '--glow-color': 'rgba(16, 185, 129, 0.8)',
+        '--border-color': '#10b981',
+        '--border-color-bright': '#a7f3d0',
+        '--border-color-dim': '#047857'
+      };
+    }
+    return {
+      '--glow-color': 'rgba(14, 165, 233, 0.8)',
+      '--border-color': '#0ea5e9',
+      '--border-color-bright': '#bae6fd',
+      '--border-color-dim': '#0369a1'
+    };
+  }
+  
+  return {
+    '--glow-color': 'rgba(148, 163, 184, 0.4)',
+    '--border-color': '#94a3b8',
+    '--border-color-bright': '#cbd5e1',
+    '--border-color-dim': '#64748b'
+  };
+};
+
 const HOTSPOTS = {
   series: {
     title: "OP Franchise Designation",
@@ -263,10 +359,12 @@ const ShopScreen: FC = () => {
 
                 {/* CARD FRONT */}
                 <div 
-                  className={`absolute inset-0 bg-ink border-4 rounded-2xl p-4 flex flex-col justify-between shadow-2xl backface-hidden rotate-y-180 ${
-                    drawnCard ? drawnCard.glowColor : 'border-pencil/20'
-                  }`}
-                  style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+                  className="absolute inset-0 bg-ink border-4 rounded-2xl p-4 flex flex-col justify-between shadow-2xl backface-hidden rotate-y-180 animate-sparkle-border"
+                  style={{ 
+                    backfaceVisibility: 'hidden', 
+                    transform: 'rotateY(180deg)',
+                    ...(drawnCard ? getCardSparkleColors(drawnCard.id, drawnCard.rarity) : {}) 
+                  } as React.CSSProperties}
                 >
                   {drawnCard && (
                     <>
@@ -286,6 +384,7 @@ const ShopScreen: FC = () => {
 
                       {/* Card Illustration */}
                       <div className={`my-3 h-32 w-full rounded-xl bg-gradient-to-tr ${drawnCard.color} flex items-center justify-center text-6xl shadow-inner relative overflow-hidden select-none`}>
+                        <div className="absolute inset-0 animate-shimmer pointer-events-none z-10" />
                         <button
                           type="button"
                           onClick={(e) => {
@@ -485,13 +584,15 @@ const ShopScreen: FC = () => {
                   <button
                     key={card.id}
                     onClick={() => setSelectedCard(card)}
-                    className={`group relative flex flex-col p-2.5 rounded-xl bg-ink border transition-all duration-300 hover:scale-105 cursor-pointer text-left ${card.glowColor}`}
+                    style={getCardSparkleColors(card.id, card.rarity) as React.CSSProperties}
+                    className="group relative flex flex-col p-2.5 rounded-xl bg-ink border transition-all duration-300 hover:scale-105 cursor-pointer text-left animate-sparkle-border"
                   >
                     <div className="absolute top-1 right-1 text-[8px] uppercase tracking-wider font-hud text-pencil font-bold">
                       {card.rarity[0]}
                     </div>
                     {/* Art thumbnail */}
                     <div className={`h-20 w-full rounded-lg bg-gradient-to-tr ${card.color} flex items-center justify-center text-4xl shadow-inner relative overflow-hidden select-none`}>
+                      <div className="absolute inset-0 animate-shimmer pointer-events-none z-10" />
                       {imageErrors[card.id] ? (
                         card.emoji
                       ) : (
@@ -568,7 +669,10 @@ const ShopScreen: FC = () => {
               </div>
 
               {/* WANTED Poster style */}
-              <div className={`p-4 rounded-xl bg-ink text-paper border-4 ${selectedCard.glowColor} flex flex-col items-center justify-center text-center shadow-lg relative`}>
+              <div 
+                style={getCardSparkleColors(selectedCard.id, selectedCard.rarity) as React.CSSProperties}
+                className="p-4 rounded-xl bg-ink text-paper border-4 animate-sparkle-border flex flex-col items-center justify-center text-center shadow-lg relative"
+              >
                 
                 {/* Hotspot Faction */}
                 <button
@@ -656,6 +760,7 @@ const ShopScreen: FC = () => {
                 <div className={`h-36 w-full rounded-lg bg-gradient-to-tr ${selectedCard.color} flex items-center justify-center text-7xl shadow-inner relative overflow-hidden select-none mb-4 transition-all ${
                   selectedHotspot === 'portrait' ? 'ring-4 ring-marigold scale-95 shadow-lg' : ''
                 }`}>
+                  <div className="absolute inset-0 animate-shimmer pointer-events-none z-10" />
                   {/* Franchise series watermark inside portrait - clickable */}
                   <button
                     type="button"
@@ -811,7 +916,8 @@ const ShopScreen: FC = () => {
               exit={{ opacity: 0, scale: 0.7, rotateY: 180 }}
               transition={{ type: 'spring', damping: 15, stiffness: 100 }}
               onClick={(e) => e.stopPropagation()}
-              className={`relative w-72 h-[450px] bg-ink border-4 rounded-3xl p-6 flex flex-col justify-between shadow-[0_0_50px_rgba(0,0,0,0.8)] cursor-default overflow-hidden ${drawnCard.glowColor}`}
+              style={getCardSparkleColors(drawnCard.id, drawnCard.rarity) as React.CSSProperties}
+              className="relative w-72 h-[450px] bg-ink border-4 rounded-3xl p-6 flex flex-col justify-between shadow-[0_0_50px_rgba(0,0,0,0.8)] cursor-default overflow-hidden animate-sparkle-border"
             >
               {/* Backglow element */}
               <div className={`absolute inset-0 opacity-10 bg-gradient-to-tr ${drawnCard.color} pointer-events-none`} />
@@ -837,6 +943,7 @@ const ShopScreen: FC = () => {
 
               {/* Card Illustration */}
               <div className={`my-4 h-48 w-full rounded-2xl bg-gradient-to-tr ${drawnCard.color} flex items-center justify-center text-8xl shadow-inner relative overflow-hidden select-none z-10`}>
+                <div className="absolute inset-0 animate-shimmer pointer-events-none z-10" />
                 {/* Series Watermark */}
                 <div className="absolute top-1 right-2 opacity-15 font-black text-5xl select-none text-paper leading-none">
                   {drawnCard.id.startsWith('ds-') ? 'DS' : 'OP'}
@@ -915,6 +1022,54 @@ const ShopScreen: FC = () => {
         }
         .modal-scroll::-webkit-scrollbar-thumb:hover {
           background-color: rgba(144, 144, 144, 0.5);
+        }
+        
+        /* Sparkle Border Glow Keyframes */
+        @keyframes sparkleGlow {
+          0%, 100% {
+            box-shadow: 0 0 15px var(--glow-color, rgba(251, 191, 36, 0.6)), inset 0 0 5px var(--glow-color, rgba(251, 191, 36, 0.3));
+            border-color: var(--border-color, #fbbf24);
+            filter: brightness(1);
+          }
+          20% {
+            box-shadow: 0 0 25px var(--glow-color, rgba(251, 191, 36, 0.9)), inset 0 0 10px var(--glow-color, rgba(251, 191, 36, 0.5));
+            border-color: var(--border-color-bright, #fef08a);
+            filter: brightness(1.15);
+          }
+          40% {
+            box-shadow: 0 0 12px var(--glow-color, rgba(251, 191, 36, 0.4)), inset 0 0 4px var(--glow-color, rgba(251, 191, 36, 0.2));
+            border-color: var(--border-color-dim, #ca8a04);
+            filter: brightness(0.95);
+          }
+          60% {
+            box-shadow: 0 0 28px var(--glow-color, rgba(251, 191, 36, 1)), inset 0 0 12px var(--glow-color, rgba(251, 191, 36, 0.6));
+            border-color: var(--border-color-bright, #fef08a);
+            filter: brightness(1.2);
+          }
+          80% {
+            box-shadow: 0 0 18px var(--glow-color, rgba(251, 191, 36, 0.7)), inset 0 0 6px var(--glow-color, rgba(251, 191, 36, 0.35));
+            border-color: var(--border-color, #fbbf24);
+            filter: brightness(1.05);
+          }
+        }
+        .animate-sparkle-border {
+          animation: sparkleGlow 2.5s infinite ease-in-out;
+          border-width: 4px;
+        }
+
+        /* Diagonal Foil Gloss Shimmer Sweep */
+        @keyframes shimmerSweep {
+          0% {
+            background-position: -200% 0;
+          }
+          100% {
+            background-position: 200% 0;
+          }
+        }
+        .animate-shimmer {
+          background-image: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 60%, transparent 70%);
+          background-size: 200% 100%;
+          animation: shimmerSweep 5s infinite linear;
         }
       `}</style>
     </div>
