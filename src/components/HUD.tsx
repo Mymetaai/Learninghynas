@@ -146,7 +146,15 @@ const HUD: FC = () => {
               value={streak}
               className="text-terracotta"
               title={`${streak}-day streak`}
-              icon="🔥"
+              icon={
+                <div className="flame-3d-container" aria-hidden="true">
+                  <div className="flame-3d">
+                    <div className="flame-layer flame-layer-1" />
+                    <div className="flame-layer flame-layer-2" />
+                    <div className="flame-layer flame-layer-3" />
+                  </div>
+                </div>
+              }
             />
             <Link
               to="/daily"
