@@ -1,8 +1,10 @@
 // Persistent top HUD bar with stats + navigation tabs.
 // Row 1: brand, XP/coins/streak stats.
-// Row 2: horizontally-scrollable nav tabs for all primary screens.
+// Row 2: horizontally-scrollable nav tabs inside a Liquid Glass capsule
+//         with a sliding glass indicator that tracks the active tab.
+import { useRef, useLayoutEffect, useState, useCallback } from 'react';
 import type { FC } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { NAV_TABS } from '../app/routes';
 import { useStatsStore } from '../state/statsStore';
 import { useSettingsStore } from '../state/settingsStore';
@@ -12,10 +14,44 @@ const HUD: FC = () => {
   const coins = useStatsStore((s) => s.coins);
   const streak = useStatsStore((s) => s.streak);
   const { language, setLanguage } = useSettingsStore();
+  const location = useLocation();
+
+  // ── Sliding indicator state ──────────────────────────────────────────
+  const navScrollRef = useRef<HTMLDivElement>(null);
+  const tabRefs = useRef<Map<string, HTMLAnchorElement>>(new Map());
+  const [indicator, setIndicator] = useState({ left: 0, width: 0, visible: false });
+
+  const setTabRef = useCallback(
+    (id: string) => (el: HTMLAnchorElement | null) => {
+      if (el) tabRefs.current.set(id, el);
+      else tabRefs.current.delete(id);
+    },
+    [],
+  );
+
+  // Measure the active tab and position the indicator
+  useLayoutEffect(() => {
+    const scrollContainer = navScrollRef.current;
+    if (!scrollContainer) return;
+
+    // Find the active NavLink by aria-current
+    const activeTab = scrollContainer.querySelector<HTMLAnchorElement>('a[aria-current="page"]');
+    if (activeTab) {
+      const containerRect = scrollContainer.getBoundingClientRect();
+      const tabRect = activeTab.getBoundingClientRect();
+      setIndicator({
+        left: tabRect.left - containerRect.left + scrollContainer.scrollLeft,
+        width: tabRect.width,
+        visible: true,
+      });
+    } else {
+      setIndicator((prev) => ({ ...prev, visible: false }));
+    }
+  }, [location.pathname]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-pencil/20 bg-ink/95 backdrop-blur">
-      <div className="mx-auto max-w-3xl">
+    <header className="glass-surface sticky top-0 z-40 border-b border-white/[0.08]">
+      <div className="relative z-10 mx-auto max-w-3xl">
         {/* Row 1 — Brand + stats */}
         <div className="flex h-14 items-center justify-between gap-3 px-4">
           {/* Brand / home link */}
@@ -76,28 +112,42 @@ const HUD: FC = () => {
           </div>
         </div>
 
-        {/* Row 2 — Navigation tabs */}
-        <nav
-          aria-label="Main navigation"
-          className="border-t border-pencil/10"
-        >
-          <div className="flex gap-1 overflow-x-auto px-2 py-1.5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-            {NAV_TABS.map((tab) => (
-              <NavLink
-                key={tab.id}
-                to={tab.path}
-                end={tab.id === 'dashboard'}
-                className={({ isActive }) =>
-                  `whitespace-nowrap rounded-md px-2.5 py-1 font-hud text-[11px] transition-colors ${
-                    isActive
-                      ? 'bg-terracotta text-paper'
-                      : 'text-pencil hover:bg-pencil/10 hover:text-paper'
-                  }`
-                }
-              >
-                {tab.label}
-              </NavLink>
-            ))}
+        {/* Row 2 — Navigation tabs in a glass capsule */}
+        <nav aria-label="Main navigation" className="px-3 pb-2 pt-0.5">
+          <div className="glass-nav-capsule">
+            <div
+              ref={navScrollRef}
+              className="relative flex gap-1 overflow-x-auto px-2 py-1.5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {/* Sliding glass indicator */}
+              {indicator.visible && (
+                <span
+                  className="glass-tab-indicator"
+                  style={{
+                    left: `${indicator.left}px`,
+                    width: `${indicator.width}px`,
+                  }}
+                />
+              )}
+
+              {NAV_TABS.map((tab) => (
+                <NavLink
+                  key={tab.id}
+                  to={tab.path}
+                  end={tab.id === 'dashboard'}
+                  ref={setTabRef(tab.id)}
+                  className={({ isActive }) =>
+                    `relative z-10 whitespace-nowrap rounded-full px-3 py-1.5 font-hud text-[11px] transition-colors duration-200 ${
+                      isActive
+                        ? 'text-paper'
+                        : 'text-pencil hover:text-paper/80'
+                    }`
+                  }
+                >
+                  {tab.label}
+                </NavLink>
+              ))}
+            </div>
           </div>
         </nav>
       </div>

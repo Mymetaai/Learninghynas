@@ -53,3 +53,113 @@
   display: inline-block;
 }
 
+/* ══════════════════════════════════════════════════════════════════════════
+   LIQUID GLASS DESIGN SYSTEM — iOS 26 / macOS Tahoe inspired
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Glass Surface — reusable translucent material ────────────────────── */
+.glass-surface {
+  background: rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  position: relative;
+}
+
+/* Specular highlight — top-edge "light hitting curved glass" */
+.glass-surface::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.07) 0%,
+    transparent 40%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Glass Nav Capsule — pill-shaped container for tabs ────────────────── */
+.glass-nav-capsule {
+  background: rgba(255, 255, 255, 0.05);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 999px;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  position: relative;
+}
+
+/* ── Sliding Glass Tab Indicator ──────────────────────────────────────── */
+.glass-tab-indicator {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: calc(100% - 8px);
+  border-radius: 999px;
+  background: rgba(193, 80, 46, 0.22);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(193, 80, 46, 0.25);
+  box-shadow:
+    0 0 20px rgba(193, 80, 46, 0.35),
+    0 0 40px rgba(193, 80, 46, 0.10),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  /* Spring-like slide animation */
+  transition:
+    left 280ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    width 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Ambient Background Blobs ─────────────────────────────────────────── */
+.ambient-blob-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 30; /* Below header z-40 */
+}
+
+.ambient-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  will-change: transform;
+}
+
+.ambient-blob--terracotta {
+  width: 320px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(193, 80, 46, 0.14) 0%, transparent 70%);
+  top: -60px;
+  left: 15%;
+}
+
+.ambient-blob--teal {
+  width: 380px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(28, 92, 92, 0.12) 0%, transparent 70%);
+  top: -40px;
+  right: 10%;
+}
+
+.ambient-blob--marigold {
+  width: 260px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(232, 163, 61, 0.08) 0%, transparent 70%);
+  top: -30px;
+  left: 55%;
+}
+

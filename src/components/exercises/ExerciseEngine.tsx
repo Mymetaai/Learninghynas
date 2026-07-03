@@ -1,25 +1,36 @@
 // STEP 8 — Exercise Engine orchestrator.
 // Manages the sequence of exercises for a quest, tracks score, and shows a
 // results summary when all exercises are done. Navigates to quest-complete
-// on finish.
+// on finish (or calls onSessionComplete for training sessions).
 import { useState, useCallback, type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import type { Exercise } from '../../content/types';
+import { useTrainingStore } from '../../state/trainingStore';
 import ExerciseCard from './ExerciseCard';
 
 interface ExerciseEngineProps {
   exercises: Exercise[];
   questId: string;
   questTitle: string;
+  /** If set, called on session completion instead of navigating to quest-complete. */
+  onSessionComplete?: (score: { correct: number; total: number }) => void;
+  /** If set, the "Continue" button navigates here instead of quest-complete. */
+  returnPath?: string;
+  /** If true, records wrong answers to the training store for Weak Spots review. */
+  trackMistakes?: boolean;
 }
 
 const ExerciseEngine: FC<ExerciseEngineProps> = ({
   exercises,
   questId,
   questTitle,
+  onSessionComplete,
+  returnPath,
+  trackMistakes = true,
 }) => {
   const navigate = useNavigate();
+  const recordMistake = useTrainingStore((s) => s.recordMistake);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState({ correct: 0, total: 0 });
   const [finished, setFinished] = useState(false);
@@ -29,10 +40,25 @@ const ExerciseEngine: FC<ExerciseEngineProps> = ({
   const progress = ((currentIndex) / exercises.length) * 100;
 
   const handleAnswer = useCallback((correct: boolean) => {
+    const exercise = exercises[currentIndex];
+
     setScore((prev) => ({
       correct: prev.correct + (correct ? 1 : 0),
       total: prev.total + 1,
     }));
+
+    // Record wrong answers for Weak Spots review
+    if (!correct && trackMistakes && exercise) {
+      const today = new Date();
+      const dateStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+      recordMistake({
+        word: exercise.prompt,
+        correctAnswer: exercise.answer,
+        wrongAnswer: '', // We don't have the exact wrong answer from ExerciseCard
+        exerciseType: exercise.type,
+        date: dateStr,
+      });
+    }
 
     // Move to next exercise after a brief delay (ExerciseCard also has a delay)
     if (currentIndex < exercises.length - 1) {
@@ -41,12 +67,25 @@ const ExerciseEngine: FC<ExerciseEngineProps> = ({
         setCurrentKey((prev) => prev + 1);
       }, 800);
     } else {
-      setTimeout(() => setFinished(true), 800);
+      setTimeout(() => {
+        const finalScore = {
+          correct: score.correct + (correct ? 1 : 0),
+          total: score.total + 1,
+        };
+        if (onSessionComplete) {
+          onSessionComplete(finalScore);
+        }
+        setFinished(true);
+      }, 800);
     }
-  }, [currentIndex, exercises.length]);
+  }, [currentIndex, exercises, score, trackMistakes, recordMistake, onSessionComplete]);
 
   const handleFinish = () => {
-    navigate(`/quest-complete?quest=${questId}`);
+    if (returnPath) {
+      navigate(returnPath);
+    } else {
+      navigate(`/quest-complete?quest=${questId}`);
+    }
   };
 
   // Results summary screen

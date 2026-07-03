@@ -5,6 +5,7 @@ import { useProgressStore } from '../state/progressStore';
 import { useSettingsStore } from '../state/settingsStore';
 import { useCompanionStore } from '../state/companionStore';
 import { useDailyQuestStore } from '../state/dailyQuestStore';
+import { useTrainingStore } from '../state/trainingStore';
 import { translateWordToHinglish } from '../utils/hinglish';
 import {
   Sparkles,
@@ -30,12 +31,14 @@ const HomeScreen: FC = () => {
   
   const completedQuests = useProgressStore((s) => s.completedQuestIds);
   const { language } = useSettingsStore();
+  const mistakeCount = useTrainingStore((s) => s.mistakes.length);
 
   const handleResetProgress = () => {
     if (window.confirm("Are you sure you want to reset all your progress, stats, and conversations? This cannot be undone.")) {
       useProgressStore.getState().reset();
       useStatsStore.getState().reset();
       useCompanionStore.getState().resetConversations();
+      useTrainingStore.getState().clearAllMistakes();
       useDailyQuestStore.setState({
         activeDate: '',
         completedMicroQuestIds: [],
@@ -248,8 +251,8 @@ const HomeScreen: FC = () => {
                     <AlertCircle className="h-4 w-4" />
                   </div>
                   <div className="min-w-0">
-                    <p className="font-body text-xs font-semibold text-paper truncate">Weak area: Past Tense Verbs</p>
-                    <p className="font-body text-[10px] text-pencil truncate">Mistakes in 42% of exercises.</p>
+                     <p className="font-body text-xs font-semibold text-paper truncate">{mistakeCount > 0 ? `${mistakeCount} weak spot${mistakeCount !== 1 ? 's' : ''} to review` : 'Weak area: Past Tense Verbs'}</p>
+                     <p className="font-body text-[10px] text-pencil truncate">{mistakeCount > 0 ? 'Practice these to level up faster!' : 'Keep practicing to track your weak areas.'}</p>
                   </div>
                 </div>
                 <button
