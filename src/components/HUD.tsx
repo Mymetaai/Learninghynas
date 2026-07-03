@@ -2,7 +2,7 @@
 // Row 1: brand, XP/coins/streak stats.
 // Row 2: horizontally-scrollable nav tabs inside a Liquid Glass capsule
 //         with a sliding glass indicator that tracks the active tab.
-import { useRef, useLayoutEffect, useState, useCallback } from 'react';
+import { useRef, useLayoutEffect, useState, useCallback, useEffect } from 'react';
 import type { FC } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { NAV_TABS } from '../app/routes';
@@ -20,6 +20,55 @@ const HUD: FC = () => {
   const navScrollRef = useRef<HTMLDivElement>(null);
   const tabRefs = useRef<Map<string, HTMLAnchorElement>>(new Map());
   const [indicator, setIndicator] = useState({ left: 0, width: 0, visible: false });
+
+  // ── Edge-Hover Auto-Scrolling ─────────────────────────────────────────
+  const scrollIntervalRef = useRef<number | null>(null);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const container = navScrollRef.current;
+    if (!container) return;
+
+    const rect = container.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const scrollSpeed = 5;
+
+    if (scrollIntervalRef.current) {
+      cancelAnimationFrame(scrollIntervalRef.current);
+      scrollIntervalRef.current = null;
+    }
+
+    const scroll = () => {
+      const containerCurrent = navScrollRef.current;
+      if (!containerCurrent) return;
+
+      if (mouseX < 60) {
+        containerCurrent.scrollLeft -= scrollSpeed;
+        scrollIntervalRef.current = requestAnimationFrame(scroll);
+      } else if (mouseX > rect.width - 60) {
+        containerCurrent.scrollLeft += scrollSpeed;
+        scrollIntervalRef.current = requestAnimationFrame(scroll);
+      }
+    };
+
+    if (mouseX < 60 || mouseX > rect.width - 60) {
+      scrollIntervalRef.current = requestAnimationFrame(scroll);
+    }
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    if (scrollIntervalRef.current) {
+      cancelAnimationFrame(scrollIntervalRef.current);
+      scrollIntervalRef.current = null;
+    }
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (scrollIntervalRef.current) {
+        cancelAnimationFrame(scrollIntervalRef.current);
+      }
+    };
+  }, []);
 
   const setTabRef = useCallback(
     (id: string) => (el: HTMLAnchorElement | null) => {
@@ -117,6 +166,8 @@ const HUD: FC = () => {
           <div className="glass-nav-capsule">
             <div
               ref={navScrollRef}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
               className="relative flex gap-1 overflow-x-auto px-2 py-1.5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
             >
               {/* Sliding glass indicator */}
