@@ -9,13 +9,78 @@ interface Message {
   timestamp: Date;
 }
 
-const NARRATIVE_RESPONSES = {
-  hello: "¡Hola! I am Yuki, your 3D Nine-Tailed Kitsune companion! Ready to study Spanish together? Dattebayo! 🦊✨",
-  greet: "¡Hola! Ready to train your Spanish? Let's level up together, believe it! 🌟",
-  tip: "Ninja Study Tip: Repetition is the ultimate training. Check out the 'Training Grounds' tab to review your weak spots! 🏋️",
-  cards: "Unlocking legendary Demon Slayer cards is like mastering a forbidden jutsu! Keep completing quests and check the Shop! ⚔️",
-  spanish: "Spanish is awesome! For example, 'amigo' means friend, and 'fuego' means fire (just like my fire style!). 🔥",
-  default: "Dattebayo! Keep practicing every day. You're building a massive reserve of learning chakra! Ask me for a 'tip', about 'cards', or 'Spanish'!"
+// Comprehensive response matcher covering academy features, workbook data, and Spanish grammar tips
+const getYukiResponse = (input: string): string => {
+  const query = input.toLowerCase().trim();
+
+  // 1. GREETINGS & WHO IS YUKI
+  if (query.includes('hola') || query.includes('hello') || query.includes('hi') || query.includes('greet')) {
+    return "¡Hola, amigo! I'm Yuki, your 3D Nine-Tailed Kitsune spirit guide! 🦊✨ I'm here to help you master Spanish and navigate this academy. How can I help you train today? Dattebayo!";
+  }
+  if (query.includes('who are you') || query.includes('what are you') || query.includes('yuki') || query.includes('kitsune') || query.includes('fox')) {
+    return "I am Yuki, a legendary Nine-Tailed Kitsune! I'm your loyal study companion. When we chat, I wag my tails because I'm excited about your progress! Ask me anything about Spanish or how to use this app! 🦊💙";
+  }
+
+  // 2. REWARDS: COINS & XP
+  if (query.includes('coin') || query.includes('gold') || query.includes('xp') || query.includes('earn') || query.includes('reward')) {
+    return "You can earn Gold Coins and XP by: \n1. Completing interactive drills in 'Basic Español'.\n2. Passing the Course Exam (rewards up to 50 coins!).\n3. Finishing quests in the 'Daily Quests' menu (click the calendar icon in the top right!). 🪙✨";
+  }
+  if (query.includes('daily') || query.includes('quest') || query.includes('calendar') || query.includes('task')) {
+    return "Daily Quests reset every day! Click the checklist icon in the top right header to see your active tasks (e.g. practicing pronunciation, completing a lesson, or maintaining your streak) and claim your rewards! 📅🎯";
+  }
+
+  // 3. SHOP & CARDS
+  if (query.includes('shop') || query.includes('card') || query.includes('collectible') || query.includes('buy') || query.includes('unlock') || query.includes('one piece') || query.includes('demon slayer')) {
+    return "In the Shop, you can spend your earned gold coins to unlock legendary cards from One Piece and Demon Slayer! Complete quests to earn coins, then expand your deck! ⚔️🏴‍☠️";
+  }
+
+  // 4. SPANISH LESSONS (Workbook-Aligned Data!)
+  if (query.includes('lesson 1') || query.includes('alphabet') || query.includes('pronunciation') || query.includes('greeting')) {
+    return "Lesson 1 covers Spanish Pronunciation & Greetings. Key tips: \n• 'H' is always silent (like in 'hola'). \n• 'Ñ' sounds like 'ny' in canyon. \n• 'Buenos días' = Good morning. \n• '¿Cómo estás?' = How are you? 🗣️";
+  }
+  if (query.includes('lesson 2') || query.includes('pronoun') || query.includes('subject')) {
+    return "Lesson 2 covers Subject Pronouns: Yo (I), Tú (you, informal), Él/Ella (he/she), Nosotros (we), Vosotros (you all, Spain), and Ellos/Ellas (they). Master these to start forming sentences! 👥";
+  }
+  if (query.includes('ser') || query.includes('estar') || query.includes('to be')) {
+    return "Ah, the golden rule of Spanish! Both mean 'To Be', but:\n• SER: Used for permanent qualities (D.O.C.T.O.R: Description, Occupation, Characteristics, Time, Origin, Relation).\n• ESTAR: Used for temporary states/locations (P.L.A.C.E: Position, Location, Action, Condition, Emotion). ⚖️";
+  }
+  if (query.includes('lesson 3') || query.includes('noun') || query.includes('article') || query.includes('gender')) {
+    return "Lesson 3 covers Nouns & Articles. All nouns are Masculine (use 'el' / 'un') or Feminine (use 'la' / 'una'). Usually, nouns ending in -o are masculine (el libro) and -a are feminine (la mesa). 📚";
+  }
+  if (query.includes('lesson 4') || query.includes('phrase') || query.includes('simple sentence') || query.includes('sentence')) {
+    return "Lesson 4 teaches you to build Everyday Sentences! For example: 'Yo hablo español' (I speak Spanish) or '¿Dónde está el baño?' (Where is the bathroom?). Keep it subject-verb-object! 💬";
+  }
+  if (query.includes('exam') || query.includes('test') || query.includes('quiz')) {
+    return "The Workbook Exam is at the bottom of the 'Basic Español' screen. It contains 8 interactive questions summarizing the entire workbook. Scoring 100% awards you 50 coins and a legendary achievement badge! 🏆📝";
+  }
+
+  // 5. APP NAVIGATION & TABS
+  if (query.includes('dashboard') || query.includes('home') || query.includes('stats')) {
+    return "The Dashboard (1st tab) is your command center! Here you can check your weekly study hours, current streak, active quests, and see your overall academy rank. Keep an eye on it to track your progress! 📊";
+  }
+  if (query.includes('basic espanol') || query.includes('espanol') || query.includes('course') || query.includes('workbook')) {
+    return "The 'Basic Español' tab contains 4 complete lessons based on the course workbook: alphabet/greetings, pronouns, articles, and phrases. Complete drills there to earn coins! 📖✨";
+  }
+  if (query.includes('adventure') || query.includes('map') || query.includes('world')) {
+    return "The 'Adventure Map' lets you embark on learning quests across different worlds! Complete lessons to unlock nodes, defeat bosses, and advance your Spanish journey! 🗺️⚔️";
+  }
+  if (query.includes('why us') || query.includes('pitch') || query.includes('about')) {
+    return "The 'Why Us' tab showcases what makes our academy unique: our beautiful Glassmorphic interface, interactive 3D elements (like me!), gamified rewards, and workbook-aligned materials! 🌟💎";
+  }
+
+  // 6. NARRATIVE STUDY TIPS
+  if (query.includes('tip') || query.includes('advice') || query.includes('help') || query.includes('study')) {
+    const tips = [
+      "Kitsune Tip: Try speaking Spanish words out loud! Pronouncing them helps cement the neural pathways in your brain. 🗣️",
+      "Kitsune Tip: Don't rush! Spend 10 minutes a day on the 'Basic Español' drills rather than 1 hour all at once. Consistency is key! 📅",
+      "Kitsune Tip: Use the Shop cards as motivation. Tell yourself: 'If I finish this lesson, I'll buy a One Piece card!' 🏴‍☠️",
+      "Kitsune Tip: Review Lesson 2's Ser vs Estar differences—it's the most common mistake for beginners! ⚖️"
+    ];
+    return tips[Math.floor(Math.random() * tips.length)];
+  }
+
+  // DEFAULT FALLBACK
+  return "Dattebayo! I'm not fully sure about that spell. You can ask me about 'Lesson 1', 'Ser vs Estar', 'how to earn coins', 'how the Shop works', or for a 'study tip'! I'm here to help you guide your learning chakra! 🦊🌀";
 };
 
 const ChibiPet: FC = () => {
@@ -32,7 +97,7 @@ const ChibiPet: FC = () => {
   const [bubbleText, setBubbleText] = useState<string | null>("Let's study! 🇪🇸");
   
   // Roaming states
-  const [position, setPosition] = useState(80); // percentage (starts near bottom-right)
+  const [position, setPosition] = useState(80);
   const [direction, setDirection] = useState<'left' | 'right'>('left');
 
   const chatEndRef = useRef<HTMLDivElement>(null);
@@ -44,9 +109,9 @@ const ChibiPet: FC = () => {
     }
   }, [messages, isTyping]);
 
-  // Roaming Loop (witch walks left and right across the screen)
+  // Roaming Loop (fox walks left and right across the screen)
   useEffect(() => {
-    if (isOpen) return; // Freeze roaming when chat is open
+    if (isOpen) return;
 
     const interval = setInterval(() => {
       setPosition((prev) => {
@@ -64,7 +129,7 @@ const ChibiPet: FC = () => {
           return prev - 0.25;
         }
       });
-    }, 40); // 40ms interval for extremely smooth walking
+    }, 40);
 
     return () => clearInterval(interval);
   }, [direction, isOpen]);
@@ -73,10 +138,10 @@ const ChibiPet: FC = () => {
   useEffect(() => {
     const speechOptions = [
       "Let's practice Spanish! 🇪🇸",
-      "Cast a learning spell! 🪄",
-      "Have you checked your weak spots today? 🎯",
-      "Brew some study potions! 🧪",
-      "Check out the 3D gold coins! 🪙"
+      "Ask me about Ser vs Estar! ⚖️",
+      "Have you checked your daily tasks? 🎯",
+      "Need a study tip? 💡",
+      "Wagging my tails for you! 🦊"
     ];
 
     const interval = setInterval(() => {
@@ -102,19 +167,7 @@ const ChibiPet: FC = () => {
     setIsTyping(true);
 
     setTimeout(() => {
-      let reply = NARRATIVE_RESPONSES.default;
-      const lowerMsg = userMsg.toLowerCase();
-
-      if (lowerMsg.includes('hola') || lowerMsg.includes('hello') || lowerMsg.includes('greet') || lowerMsg.includes('hi')) {
-        reply = NARRATIVE_RESPONSES.hello;
-      } else if (lowerMsg.includes('tip') || lowerMsg.includes('advice') || lowerMsg.includes('study')) {
-        reply = NARRATIVE_RESPONSES.tip;
-      } else if (lowerMsg.includes('card') || lowerMsg.includes('shop') || lowerMsg.includes('demon slayer') || lowerMsg.includes('one piece')) {
-        reply = NARRATIVE_RESPONSES.cards;
-      } else if (lowerMsg.includes('spanish') || lowerMsg.includes('language') || lowerMsg.includes('espanol')) {
-        reply = NARRATIVE_RESPONSES.spanish;
-      }
-
+      const reply = getYukiResponse(userMsg);
       setMessages((prev) => [
         ...prev,
         { sender: 'pet', text: reply, timestamp: new Date() }
@@ -130,7 +183,7 @@ const ChibiPet: FC = () => {
     >
       <div className="relative w-full h-full max-w-7xl mx-auto px-4">
         
-        {/* Chat Window Panel (floats above the current x position of the pet) */}
+        {/* Chat Window Panel */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
@@ -169,7 +222,7 @@ const ChibiPet: FC = () => {
                     key={index}
                     className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
-                    <div className={`max-w-[80%] rounded-2xl px-3 py-2 text-xs font-body ${
+                    <div className={`max-w-[80%] rounded-2xl px-3 py-2 text-xs font-body whitespace-pre-line ${
                       msg.sender === 'user' 
                         ? 'bg-terracotta/20 border border-terracotta/30 text-paper rounded-tr-none' 
                         : 'bg-paper/5 border border-white/5 text-paper/90 rounded-tl-none'
@@ -193,22 +246,22 @@ const ChibiPet: FC = () => {
               {/* Suggested quick buttons */}
               <div className="px-3 pb-2 flex gap-1.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 <button 
-                  onClick={() => { setInputValue('Give me a study tip'); }}
+                  onClick={() => { setInputValue('Ser vs Estar'); }}
                   className="text-[9px] font-hud bg-paper/5 hover:bg-paper/10 border border-white/10 text-pencil hover:text-paper px-2.5 py-1 rounded-full cursor-pointer shrink-0 transition-colors"
                 >
-                  💡 Study Tip
+                  ⚖️ Ser vs Estar
                 </button>
                 <button 
-                  onClick={() => { setInputValue('Tell me about cards'); }}
+                  onClick={() => { setInputValue('How to earn coins'); }}
                   className="text-[9px] font-hud bg-paper/5 hover:bg-paper/10 border border-white/10 text-pencil hover:text-paper px-2.5 py-1 rounded-full cursor-pointer shrink-0 transition-colors"
                 >
-                  ⚔️ Collectibles
+                  🪙 Earn Rewards
                 </button>
                 <button 
-                  onClick={() => { setInputValue('Spanish magic style'); }}
+                  onClick={() => { setInputValue('Workbook exam'); }}
                   className="text-[9px] font-hud bg-paper/5 hover:bg-paper/10 border border-white/10 text-pencil hover:text-paper px-2.5 py-1 rounded-full cursor-pointer shrink-0 transition-colors"
                 >
-                  🔥 Spanish
+                  📝 Final Exam
                 </button>
               </div>
 
@@ -219,7 +272,7 @@ const ChibiPet: FC = () => {
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                  placeholder="Ask Luna..."
+                  placeholder="Ask Yuki..."
                   className="flex-1 bg-paper/5 border border-white/10 rounded-xl px-3 py-2 text-xs text-paper focus:outline-none focus:border-pencil/40 placeholder-pencil/50"
                 />
                 <button 
@@ -233,7 +286,7 @@ const ChibiPet: FC = () => {
           )}
         </AnimatePresence>
 
-        {/* Floating Pet Wrapper (moves edge-to-edge horizontally) */}
+        {/* Floating Pet Wrapper */}
         <div 
           className="absolute bottom-0 flex items-center gap-3 pointer-events-auto"
           style={{ 
@@ -264,9 +317,9 @@ const ChibiPet: FC = () => {
             className="h-28 w-28 cursor-pointer drop-shadow-[0_8px_20px_rgba(74,151,242,0.5)] hover:drop-shadow-[0_12px_32px_rgba(74,151,242,0.7)] transition-all duration-300 relative select-none shrink-0"
           >
             <Kitsune3D direction={direction} mode={isOpen ? 'wag' : 'walk'} />
-            {/* Notification bubble if there is a pending tip */}
+            {/* Notification bubble if there is a pending tip - positioned lower relative to the fox geometry */}
             {!isOpen && (
-              <span className="absolute -top-0.5 -right-0.5 flex h-3.5 w-3.5">
+              <span className="absolute top-12 right-2 flex h-3.5 w-3.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-marigold opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-marigold"></span>
               </span>
