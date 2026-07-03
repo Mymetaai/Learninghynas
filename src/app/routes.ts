@@ -20,6 +20,7 @@ const ShopScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/ShopSc
 const ProfileSettingsScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/ProfileScreen'));
 const QuestCompletionScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/QuestCompletionScreen'));
 const BossBattleScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/BossBattleScreen'));
+const BasicEspanolScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/BasicEspanolScreen'));
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -36,7 +37,8 @@ export type RouteId =
   | 'shop'
   | 'profile'
   | 'quest-complete'
-  | 'boss';
+  | 'boss'
+  | 'basic-espanol';
 
 export interface RouteDef {
   id: RouteId;
@@ -72,6 +74,15 @@ export const ROUTES: RouteDef[] = [
     component: WorldMapScreen,
     showInNav: true,
     navOrder: 1,
+  },
+  {
+    id: 'basic-espanol',
+    path: '/basic-espanol',
+    label: 'Basic Español',
+    icon: 'GraduationCap',
+    component: BasicEspanolScreen,
+    showInNav: true,
+    navOrder: 2,
   },
   {
     id: 'quests',
