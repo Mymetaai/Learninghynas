@@ -132,6 +132,14 @@ const HUD: FC = () => {
               value={coins}
               className="text-marigold"
               title={`${coins} coins`}
+              icon={
+                <div className="coin-3d-container" aria-hidden="true">
+                  <div className="coin-3d">
+                    <div className="coin-front" />
+                    <div className="coin-back" />
+                  </div>
+                </div>
+              }
             />
             <Stat
               label="day streak"
@@ -211,7 +219,7 @@ interface StatProps {
   value: number;
   className?: string;
   title?: string;
-  icon?: string;
+  icon?: React.ReactNode;
 }
 
 const Stat: FC<StatProps> = ({ label, value, className, title, icon }) => (
@@ -219,7 +227,7 @@ const Stat: FC<StatProps> = ({ label, value, className, title, icon }) => (
     className={`flex items-center gap-1 whitespace-nowrap ${className ?? ''}`}
     title={title}
   >
-    {icon ? <span aria-hidden>{icon}</span> : null}
+    {icon}
     <span className="font-semibold tabular-nums">{value}</span>
     <span className="hidden text-pencil/80 sm:inline">{label}</span>
   </span>
