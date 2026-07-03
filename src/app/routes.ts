@@ -66,7 +66,7 @@ export const ROUTES: RouteDef[] = [
     icon: 'LayoutDashboard',
     component: DashboardScreen,
     showInNav: true,
-    navOrder: 0,
+    navOrder: 2,
   },
   {
     id: 'map',
@@ -84,7 +84,7 @@ export const ROUTES: RouteDef[] = [
     icon: 'GraduationCap',
     component: BasicEspanolScreen,
     showInNav: true,
-    navOrder: 2,
+    navOrder: 0,
   },
   {
     id: 'quests',
@@ -93,7 +93,7 @@ export const ROUTES: RouteDef[] = [
     icon: 'ScrollText',
     component: QuestPreviewScreen,
     showInNav: false,
-    navOrder: 2,
+    navOrder: 3,
   },
   {
     id: 'quest-journey',
@@ -111,7 +111,7 @@ export const ROUTES: RouteDef[] = [
     icon: 'BookOpen',
     component: StoryScreen,
     showInNav: true,
-    navOrder: 3,
+    navOrder: 4,
   },
   {
     id: 'training',
@@ -120,7 +120,7 @@ export const ROUTES: RouteDef[] = [
     icon: 'Dumbbell',
     component: TrainingScreen,
     showInNav: true,
-    navOrder: 4,
+    navOrder: 5,
   },
   {
     id: 'companion',
@@ -129,7 +129,7 @@ export const ROUTES: RouteDef[] = [
     icon: 'MessageCircle',
     component: AICompanionScreen,
     showInNav: true,
-    navOrder: 5,
+    navOrder: 6,
   },
   {
     id: 'voice',
@@ -138,7 +138,7 @@ export const ROUTES: RouteDef[] = [
     icon: 'Mic',
     component: VoiceArenaScreen,
     showInNav: true,
-    navOrder: 6,
+    navOrder: 7,
   },
   {
     id: 'daily',
@@ -147,7 +147,7 @@ export const ROUTES: RouteDef[] = [
     icon: 'Sun',
     component: DailyQuestScreen,
     showInNav: true,
-    navOrder: 7,
+    navOrder: 8,
   },
   {
     id: 'shop',
@@ -156,7 +156,7 @@ export const ROUTES: RouteDef[] = [
     icon: 'ShoppingBag',
     component: ShopScreen,
     showInNav: true,
-    navOrder: 8,
+    navOrder: 9,
   },
   {
     id: 'profile',
