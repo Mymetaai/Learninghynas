@@ -66,7 +66,7 @@ export const ROUTES: RouteDef[] = [
     icon: 'LayoutDashboard',
     component: DashboardScreen,
     showInNav: true,
-    navOrder: 2,
+    navOrder: 0,
   },
   {
     id: 'map',
@@ -75,7 +75,7 @@ export const ROUTES: RouteDef[] = [
     icon: 'Map',
     component: WorldMapScreen,
     showInNav: true,
-    navOrder: 1,
+    navOrder: 2,
   },
   {
     id: 'basic-espanol',
@@ -84,7 +84,7 @@ export const ROUTES: RouteDef[] = [
     icon: 'GraduationCap',
     component: BasicEspanolScreen,
     showInNav: true,
-    navOrder: 0,
+    navOrder: 1,
   },
   {
     id: 'quests',
