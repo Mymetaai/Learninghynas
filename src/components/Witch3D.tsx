@@ -23,19 +23,30 @@ const Witch3D: FC<Witch3DProps> = ({ direction, isWalking }) => {
     const scene = new THREE.Scene();
 
     // 2. Camera setup
+    const width = container.clientWidth || 112;
+    const height = container.clientHeight || 112;
     const camera = new THREE.PerspectiveCamera(
       45,
-      container.clientWidth / container.clientHeight,
+      width / height,
       0.1,
       100
     );
-    camera.position.set(0, 1.2, 3.2);
+    camera.position.set(0, 0.25, 2.4);
 
     // 3. Renderer setup
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setSize(width, height);
     renderer.shadowMap.enabled = true;
+    
+    // Constrain canvas dimensions explicitly
+    renderer.domElement.style.width = '100%';
+    renderer.domElement.style.height = '100%';
+    renderer.domElement.style.position = 'absolute';
+    renderer.domElement.style.top = '0';
+    renderer.domElement.style.left = '0';
+    renderer.domElement.style.display = 'block';
+    
     container.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
@@ -124,8 +135,8 @@ const Witch3D: FC<Witch3DProps> = ({ direction, isWalking }) => {
         });
 
         // Center and scale down the model (FBX imports are usually huge)
-        fbx.scale.set(0.012, 0.012, 0.012);
-        fbx.position.set(0, -0.4, 0);
+        fbx.scale.set(0.0007, 0.0007, 0.0007);
+        fbx.position.set(0, -0.7, 0);
         scene.add(fbx);
 
         // Animations
@@ -172,10 +183,10 @@ const Witch3D: FC<Witch3DProps> = ({ direction, isWalking }) => {
 
         // Add a gentle floating/breathing animation if idle
         if (!isWalking) {
-          modelRef.current.position.y = -0.4 + Math.sin(clockRef.current.getElapsedTime() * 2) * 0.05;
+          modelRef.current.position.y = -0.7 + Math.sin(clockRef.current.getElapsedTime() * 2) * 0.03;
         } else {
           // Walking step bobbing
-          modelRef.current.position.y = -0.4 + Math.abs(Math.sin(clockRef.current.getElapsedTime() * 8)) * 0.03;
+          modelRef.current.position.y = -0.7 + Math.abs(Math.sin(clockRef.current.getElapsedTime() * 8)) * 0.02;
         }
       }
 

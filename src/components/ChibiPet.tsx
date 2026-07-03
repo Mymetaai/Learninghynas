@@ -125,8 +125,8 @@ const ChibiPet: FC = () => {
 
   return (
     <div 
-      className="fixed bottom-6 left-0 right-0 z-50 pointer-events-none"
-      style={{ minHeight: '440px' }}
+      className="fixed bottom-0 left-0 right-0 z-50 pointer-events-none"
+      style={{ height: '440px' }}
     >
       <div className="relative w-full h-full max-w-7xl mx-auto px-4">
         
