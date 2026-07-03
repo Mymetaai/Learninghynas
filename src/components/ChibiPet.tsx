@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, type FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, X } from 'lucide-react';
-import Witch3D from './Witch3D';
+import Kitsune3D from './Kitsune3D';
 
 interface Message {
   sender: 'user' | 'pet';
@@ -10,12 +10,12 @@ interface Message {
 }
 
 const NARRATIVE_RESPONSES = {
-  hello: "¡Hola! I am Luna, your 3D Dark Witch companion! Ready to cast some Spanish learning spells today? Dattebayo! 🧙‍♀️✨",
+  hello: "¡Hola! I am Yuki, your 3D Nine-Tailed Kitsune companion! Ready to study Spanish together? Dattebayo! 🦊✨",
   greet: "¡Hola! Ready to train your Spanish? Let's level up together, believe it! 🌟",
-  tip: "Witchy Study Tip: Repetition is like brewing a perfect potion. Check out 'Training Grounds' to review your weak spots! 🧪",
-  cards: "Unlocking legendary Demon Slayer cards is like mastering a high-level magic spell! Keep completing quests and check the Shop! ⚔️",
-  spanish: "Spanish is magical! For example, 'amigo' means friend, and 'fuego' means fire (perfect for casting fire spells!). 🔥",
-  default: "Dattebayo! Keep practicing every day. You're building a massive reserve of learning mana! Ask me for a 'tip', about 'cards', or 'Spanish'!"
+  tip: "Ninja Study Tip: Repetition is the ultimate training. Check out the 'Training Grounds' tab to review your weak spots! 🏋️",
+  cards: "Unlocking legendary Demon Slayer cards is like mastering a forbidden jutsu! Keep completing quests and check the Shop! ⚔️",
+  spanish: "Spanish is awesome! For example, 'amigo' means friend, and 'fuego' means fire (just like my fire style!). 🔥",
+  default: "Dattebayo! Keep practicing every day. You're building a massive reserve of learning chakra! Ask me for a 'tip', about 'cards', or 'Spanish'!"
 };
 
 const ChibiPet: FC = () => {
@@ -23,7 +23,7 @@ const ChibiPet: FC = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       sender: 'pet',
-      text: "¡Hola! I'm Luna, your 3D Dark Witch companion! Let's master Spanish together. Ask me for a 'tip', about 'cards', or just say 'hola'! Dattebayo! 🧙‍♀️✨",
+      text: "¡Hola! I'm Yuki, your 3D Nine-Tailed Kitsune companion! Let's master Spanish together. Ask me for a 'tip', about 'cards', or just say 'hola'! Dattebayo! 🦊✨",
       timestamp: new Date()
     }
   ]);
@@ -147,11 +147,11 @@ const ChibiPet: FC = () => {
               <div className="bg-gradient-to-r from-terracotta/20 via-marigold/10 to-teal-deep/20 px-4 py-3 border-b border-white/10 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <div className="h-6 w-6 rounded-full bg-paper/10 flex items-center justify-center text-xs shrink-0 select-none">
-                    🧙‍♀️
+                    🦊
                   </div>
                   <div>
-                    <h3 className="font-display text-xs font-bold text-paper">Luna</h3>
-                    <span className="font-hud text-[8px] text-teal-deep font-semibold tracking-wider uppercase block leading-none">Dark Witch Guide</span>
+                    <h3 className="font-display text-xs font-bold text-paper">Yuki</h3>
+                    <span className="font-hud text-[8px] text-teal-deep font-semibold tracking-wider uppercase block leading-none">Nine-Tailed Guide</span>
                   </div>
                 </div>
                 <button 
@@ -257,13 +257,13 @@ const ChibiPet: FC = () => {
             )}
           </AnimatePresence>
 
-          {/* 3D Witch Character Wrapper */}
+          {/* 3D Kitsune Character Wrapper */}
           <motion.div
             whileHover={{ scale: 1.15 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="h-28 w-28 cursor-pointer drop-shadow-[0_8px_20px_rgba(130,50,240,0.5)] hover:drop-shadow-[0_12px_32px_rgba(130,50,240,0.7)] transition-all duration-300 relative select-none shrink-0"
+            className="h-28 w-28 cursor-pointer drop-shadow-[0_8px_20px_rgba(74,151,242,0.5)] hover:drop-shadow-[0_12px_32px_rgba(74,151,242,0.7)] transition-all duration-300 relative select-none shrink-0"
           >
-            <Witch3D direction={direction} isWalking={!isOpen} />
+            <Kitsune3D direction={direction} mode={isOpen ? 'wag' : 'walk'} />
             {/* Notification bubble if there is a pending tip */}
             {!isOpen && (
               <span className="absolute -top-0.5 -right-0.5 flex h-3.5 w-3.5">
