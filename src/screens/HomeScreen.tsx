@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useStatsStore } from '../state/statsStore';
 import { useProgressStore } from '../state/progressStore';
 import { useSettingsStore } from '../state/settingsStore';
-import { useCompanionStore } from '../state/companionStore';
-import { useDailyQuestStore } from '../state/dailyQuestStore';
 import { useTrainingStore } from '../state/trainingStore';
 import { translateWordToHinglish } from '../utils/hinglish';
 import {
@@ -36,17 +34,13 @@ const HomeScreen: FC = () => {
 
   const handleResetProgress = () => {
     if (window.confirm("Are you sure you want to reset all your progress, stats, and conversations? This cannot be undone.")) {
-      useProgressStore.getState().reset();
-      useStatsStore.getState().reset();
-      useCompanionStore.getState().resetConversations();
-      useTrainingStore.getState().clearAllMistakes();
-      useDailyQuestStore.setState({
-        activeDate: '',
-        completedMicroQuestIds: [],
-        totalCorrect: 0,
-        totalAnswered: 0,
-        dailyBonusClaimed: false,
-      });
+      // Wipe all persisted state keys from localStorage
+      localStorage.removeItem('wayfarer-progress');
+      localStorage.removeItem('wayfarer-stats');
+      localStorage.removeItem('wayfarer-companions');
+      localStorage.removeItem('wayfarer-training');
+      localStorage.removeItem('wayfarer-daily-quest');
+      
       alert("All progress, stats, and conversations have been reset! Ready to start again.");
       window.location.reload();
     }
