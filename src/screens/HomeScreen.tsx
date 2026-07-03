@@ -19,7 +19,8 @@ import {
   CheckCircle2,
   AlertCircle,
   X,
-  Volume2
+  Volume2,
+  Trophy
 } from 'lucide-react';
 
 const HomeScreen: FC = () => {
@@ -530,6 +531,33 @@ const HomeScreen: FC = () => {
               </button>
             </div>
 
+          </div>
+        </div>
+
+        {/* ── ROW 4: WHY US — PROMOTIONAL BANNER ───────────────────── */}
+        <div
+          onClick={() => navigate('/why-us')}
+          className="relative overflow-hidden bg-gradient-to-r from-terracotta/15 via-marigold/10 to-teal-deep/15 border border-pencil/20 rounded-2xl p-5 shadow-lg cursor-pointer group hover:border-pencil/40 transition-all duration-300 mb-6"
+        >
+          {/* Shimmer overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.04] to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+          
+          <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex items-start gap-3">
+              <div className="h-10 w-10 rounded-xl bg-marigold/15 border border-marigold/30 flex items-center justify-center text-marigold shrink-0">
+                <Trophy className="h-5 w-5" />
+              </div>
+              <div>
+                <h2 className="font-display text-base font-bold text-paper">Why We Stand Out</h2>
+                <p className="font-body text-xs text-pencil mt-0.5 max-w-md">
+                  See how TheLearningHyena compares to Duolingo, Preply & Babbel — plus calculate ROI savings for your school or organization.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-1.5 bg-marigold/15 border border-marigold/30 text-marigold font-hud text-[10px] uppercase tracking-wider px-4 py-2 rounded-full shrink-0 group-hover:bg-marigold/25 transition-colors">
+              Explore
+              <ChevronRight className="h-3.5 w-3.5" />
+            </div>
           </div>
         </div>
 

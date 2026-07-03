@@ -21,6 +21,7 @@ const ProfileSettingsScreen: LazyExoticComponent<FC> = lazy(() => import('../scr
 const QuestCompletionScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/QuestCompletionScreen'));
 const BossBattleScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/BossBattleScreen'));
 const BasicEspanolScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/BasicEspanolScreen'));
+const WhyUsScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/WhyUsScreen'));
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -38,7 +39,8 @@ export type RouteId =
   | 'profile'
   | 'quest-complete'
   | 'boss'
-  | 'basic-espanol';
+  | 'basic-espanol'
+  | 'why-us';
 
 export interface RouteDef {
   id: RouteId;
@@ -180,6 +182,15 @@ export const ROUTES: RouteDef[] = [
     label: 'Boss Battle',
     icon: 'Sword',
     component: BossBattleScreen,
+    showInNav: false,
+    navOrder: 0,
+  },
+  {
+    id: 'why-us',
+    path: '/why-us',
+    label: 'Why Us',
+    icon: 'Trophy',
+    component: WhyUsScreen,
     showInNav: false,
     navOrder: 0,
   },
