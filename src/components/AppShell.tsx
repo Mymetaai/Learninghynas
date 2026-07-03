@@ -4,6 +4,7 @@
 import type { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 import HUD from './HUD';
+import ChibiPet from './ChibiPet';
 
 const AppShell: FC = () => {
   return (
@@ -18,6 +19,7 @@ const AppShell: FC = () => {
       <main className="flex-1 overflow-y-auto">
         <Outlet />
       </main>
+      <ChibiPet />
     </div>
   );
 };
