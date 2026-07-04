@@ -64,7 +64,7 @@ const TypewriterText: FC<TypewriterTextProps> = ({
           {ls.text.length > 0 ? renderLine(ls.text, ls.index, ls.isFullyRevealed) : null}
           {/* Blinking cursor on the currently-typing line */}
           {!skipped && !ls.isFullyRevealed && ls.text.length > 0 && (
-            <span className="inline-block w-0.5 animate-pulse bg-ink/60 align-middle" />
+            <span className="inline-block w-0.5 animate-pulse bg-bg-base/60 align-middle" />
           )}
         </div>
       ))}

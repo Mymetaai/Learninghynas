@@ -82,7 +82,7 @@ const SectionTitle: FC<{
         {label}
       </p>
     )}
-    <h2 className="font-display text-3xl font-bold text-paper sm:text-4xl">
+    <h2 className="font-display text-3xl font-bold text-text-primary sm:text-4xl">
       {title}
     </h2>
     {subtitle && (
@@ -139,7 +139,7 @@ const HeroSection: FC = () => {
               key={badge.label}
               variants={fadeUp}
               custom={i + 2}
-              className="glass-nav-capsule flex items-center gap-2 px-5 py-2.5 font-hud text-xs text-paper"
+              className="glass-nav-capsule flex items-center gap-2 px-5 py-2.5 font-hud text-xs text-text-primary"
             >
               <span className="text-marigold">{badge.icon}</span>
               {badge.label}
@@ -162,9 +162,9 @@ const problems = [
     tag: 'Duolingo',
     description:
       "Translation-matching games don't build real fluency. 1000-day streaks, still can't order food.",
-    color: 'text-terracotta',
-    bg: 'bg-terracotta/10',
-    border: 'border-terracotta/20',
+    color: 'text-error',
+    bg: 'bg-error/10',
+    border: 'border-error/20',
   },
   {
     icon: <Users size={28} />,
@@ -172,9 +172,9 @@ const problems = [
     tag: 'Preply',
     description:
       '$20–50/hour for live tutors. High anxiety speaking with strangers. Scheduling friction kills consistency.',
-    color: 'text-marigold',
-    bg: 'bg-marigold/10',
-    border: 'border-marigold/20',
+    color: 'text-accent-action',
+    bg: 'bg-accent-action/10',
+    border: 'border-accent-action/20',
   },
   {
     icon: <AlertTriangle size={28} />,
@@ -215,7 +215,7 @@ const ProblemSection: FC = () => (
           >
             {p.icon}
           </div>
-          <h3 className="font-display text-lg font-bold text-paper">
+          <h3 className="font-display text-lg font-bold text-text-primary">
             {p.competitor}
           </h3>
           <span
@@ -307,7 +307,7 @@ const CellValue: FC<{ value: string; highlight?: boolean }> = ({
     <span
       className={`font-body text-sm leading-snug ${
         highlight
-          ? 'font-semibold text-paper'
+          ? 'font-semibold text-text-primary'
           : isCross
             ? 'text-terracotta/80'
             : isCheck
@@ -367,7 +367,7 @@ const ComparisonSection: FC = () => (
                   i % 2 === 0 ? 'bg-paper/[0.02]' : ''
                 }`}
               >
-                <td className="px-6 py-4 font-display text-sm font-semibold text-paper">
+                <td className="px-6 py-4 font-display text-sm font-semibold text-text-primary">
                   {row.feature}
                 </td>
                 <td className="px-4 py-4">
@@ -399,7 +399,7 @@ const ComparisonSection: FC = () => (
             key={row.feature}
             className="rounded-xl border border-pencil/15 bg-paper/[0.03] p-4"
           >
-            <p className="mb-3 font-display text-sm font-bold text-paper">
+            <p className="mb-3 font-display text-sm font-bold text-text-primary">
               {row.feature}
             </p>
             <div className="grid grid-cols-2 gap-2 text-xs">
@@ -425,7 +425,7 @@ const ComparisonSection: FC = () => (
                 <span className="font-hud text-[10px] text-marigold">
                   🐆 Hyena
                 </span>
-                <p className="mt-0.5 font-semibold text-paper">{row.hyena}</p>
+                <p className="mt-0.5 font-semibold text-text-primary">{row.hyena}</p>
               </div>
             </div>
           </div>
@@ -445,27 +445,27 @@ const solutions = [
     title: 'Anime & TCG Collectibles',
     description:
       'Unlock rare Demon Slayer and One Piece cards as you learn. Boss battles test your knowledge. Streaks feel epic, not tedious.',
-    accentColor: 'text-terracotta',
-    bg: 'bg-terracotta/10',
-    borderGlow: 'hover:border-terracotta/40',
+    accentColor: 'text-accent-action',
+    bg: 'bg-accent-action/10',
+    borderGlow: 'hover:border-accent-action/40',
   },
   {
     icon: <Bot size={28} />,
     title: 'Zero-Stress AI Companion',
     description:
       'Practice conversations 24/7 with our AI chatbot. No judgment, no scheduling, no anxiety. Just real practice.',
-    accentColor: 'text-teal-deep',
-    bg: 'bg-teal-deep/10',
-    borderGlow: 'hover:border-teal-deep/40',
+    accentColor: 'text-info',
+    bg: 'bg-info/10',
+    borderGlow: 'hover:border-info/40',
   },
   {
     icon: <Mic size={28} />,
     title: 'Voice Arena',
     description:
       'Get instant pronunciation feedback. Compete with yourself. No awkward tutor sessions.',
-    accentColor: 'text-marigold',
-    bg: 'bg-marigold/10',
-    borderGlow: 'hover:border-marigold/40',
+    accentColor: 'text-accent-action',
+    bg: 'bg-accent-action/10',
+    borderGlow: 'hover:border-accent-action/40',
   },
 ];
 
@@ -502,7 +502,7 @@ const SolutionSection: FC = () => (
             >
               {s.icon}
             </div>
-            <h3 className="font-display text-lg font-bold text-paper">
+            <h3 className="font-display text-lg font-bold text-text-primary">
               {s.title}
             </h3>
             <p className="mt-3 font-body text-sm leading-relaxed text-pencil">
@@ -533,16 +533,16 @@ const institutionBenefits = [
     title: 'Student Progress Dashboard',
     description:
       "Track every student's weak spots, XP, and completion rates in real-time.",
-    color: 'text-marigold',
-    bg: 'bg-marigold/10',
+    color: 'text-info',
+    bg: 'bg-info/10',
   },
   {
     icon: <PiggyBank size={28} />,
     title: 'Massive Cost Savings',
     description:
       'Replace $20/hr tutoring with unlimited AI practice for a flat platform fee.',
-    color: 'text-terracotta',
-    bg: 'bg-terracotta/10',
+    color: 'text-success',
+    bg: 'bg-success/10',
   },
 ];
 
@@ -575,7 +575,7 @@ const InstitutionsSection: FC = () => (
           </div>
           <div className="flex items-center gap-2">
             <School size={14} className="text-pencil/60" />
-            <h3 className="font-display text-lg font-bold text-paper">
+            <h3 className="font-display text-lg font-bold text-text-primary">
               {b.title}
             </h3>
           </div>
@@ -624,7 +624,7 @@ const ROICalculator: FC = () => {
           {/* Students slider */}
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <label className="font-display text-sm font-semibold text-paper">
+              <label className="font-display text-sm font-semibold text-text-primary">
                 Number of Students
               </label>
               <span className="font-hud text-lg tabular-nums text-marigold">
@@ -638,9 +638,9 @@ const ROICalculator: FC = () => {
               step={5}
               value={students}
               onChange={(e) => setStudents(Number(e.target.value))}
-              className="h-2 w-full cursor-pointer appearance-none rounded-full bg-pencil/20 accent-terracotta"
+              className="h-2 w-full cursor-pointer appearance-none rounded-full bg-structural accent-accent-action"
             />
-            <div className="mt-1 flex justify-between font-hud text-[10px] text-pencil/50">
+            <div className="mt-1 flex justify-between font-body text-[10px] text-text-secondary/50">
               <span>10</span>
               <span>500</span>
             </div>
@@ -649,10 +649,10 @@ const ROICalculator: FC = () => {
           {/* Hours slider */}
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <label className="font-display text-sm font-semibold text-paper">
+              <label className="font-display text-sm font-semibold text-text-primary">
                 Practice Hours / Week per Student
               </label>
-              <span className="font-hud text-lg tabular-nums text-marigold">
+              <span className="font-body text-lg font-bold tabular-nums text-accent-action">
                 {hoursPerWeek}h
               </span>
             </div>
@@ -663,9 +663,9 @@ const ROICalculator: FC = () => {
               step={1}
               value={hoursPerWeek}
               onChange={(e) => setHoursPerWeek(Number(e.target.value))}
-              className="h-2 w-full cursor-pointer appearance-none rounded-full bg-pencil/20 accent-terracotta"
+              className="h-2 w-full cursor-pointer appearance-none rounded-full bg-structural accent-accent-action"
             />
-            <div className="mt-1 flex justify-between font-hud text-[10px] text-pencil/50">
+            <div className="mt-1 flex justify-between font-body text-[10px] text-text-secondary/50">
               <span>1h</span>
               <span>10h</span>
             </div>
@@ -673,7 +673,7 @@ const ROICalculator: FC = () => {
         </div>
 
         {/* Divider */}
-        <div className="my-8 h-px bg-pencil/15" />
+        <div className="my-8 h-px bg-structural" />
 
         {/* Results */}
         <div className="grid gap-4 sm:grid-cols-2">
@@ -683,32 +683,32 @@ const ROICalculator: FC = () => {
             initial={{ scale: 0.95, opacity: 0.7 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-            className="rounded-xl border border-terracotta/20 bg-terracotta/10 p-5 text-center"
+            className="rounded-xl border border-error/20 bg-error/10 p-5 text-center"
           >
             <div className="flex items-center justify-center gap-2">
-              <TrendingDown size={16} className="text-terracotta" />
-              <p className="font-hud text-[10px] uppercase tracking-widest text-terracotta">
+              <TrendingDown size={16} className="text-error" />
+              <p className="font-body text-[10px] uppercase tracking-widest text-error">
                 Traditional Tutoring
               </p>
             </div>
-            <p className="mt-2 font-hud text-3xl font-bold tabular-nums text-terracotta">
+            <p className="mt-2 font-body text-3xl font-bold tabular-nums text-error">
               {formatCurrency(traditionalMonthlyCost)}
             </p>
-            <p className="mt-1 font-body text-xs text-pencil">/month</p>
+            <p className="mt-1 font-body text-xs text-text-secondary">/month</p>
           </motion.div>
 
           {/* Hyena Cost */}
-          <div className="rounded-xl border border-teal-deep/20 bg-teal-deep/10 p-5 text-center">
+          <div className="rounded-xl border border-success/20 bg-success/10 p-5 text-center">
             <div className="flex items-center justify-center gap-2">
-              <Check size={16} className="text-teal-deep" />
-              <p className="font-hud text-[10px] uppercase tracking-widest text-teal-deep">
+              <Check size={16} className="text-success" />
+              <p className="font-body text-[10px] uppercase tracking-widest text-success">
                 With TheLearningHyena
               </p>
             </div>
-            <p className="mt-2 font-hud text-3xl font-bold tabular-nums text-teal-deep">
+            <p className="mt-2 font-body text-3xl font-bold tabular-nums text-success">
               $299
             </p>
-            <p className="mt-1 font-body text-xs text-pencil">/month flat</p>
+            <p className="mt-1 font-body text-xs text-text-secondary">/month flat</p>
           </div>
 
           {/* Monthly Savings */}
@@ -717,12 +717,12 @@ const ROICalculator: FC = () => {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: 'spring', stiffness: 280, damping: 22 }}
-            className="rounded-xl border border-marigold/30 bg-marigold/10 p-5 text-center"
+            className="rounded-xl border border-accent-action/30 bg-accent-action/10 p-5 text-center"
           >
-            <p className="font-hud text-[10px] uppercase tracking-widest text-marigold">
+            <p className="font-body text-[10px] uppercase tracking-widest text-accent-action font-semibold">
               Monthly Savings
             </p>
-            <p className="mt-2 font-hud text-4xl font-bold tabular-nums text-marigold">
+            <p className="mt-2 font-body text-4xl font-bold tabular-nums text-accent-action">
               {formatCurrency(monthlySavings)}
             </p>
           </motion.div>
@@ -738,15 +738,15 @@ const ROICalculator: FC = () => {
               damping: 22,
               delay: 0.05,
             }}
-            className="rounded-xl border border-marigold/20 bg-paper/[0.04] p-5 text-center"
+            className="rounded-xl border border-structural bg-bg-elevated p-5 text-center"
           >
-            <p className="font-hud text-[10px] uppercase tracking-widest text-pencil">
+            <p className="font-body text-[10px] uppercase tracking-widest text-text-secondary">
               Annual Savings
             </p>
-            <p className="mt-2 font-display text-3xl font-bold tabular-nums text-paper">
+            <p className="mt-2 font-display text-3xl font-bold tabular-nums text-text-primary">
               {formatCurrency(annualSavings)}
             </p>
-            <p className="mt-1 font-body text-xs text-marigold">per year</p>
+            <p className="mt-1 font-body text-xs text-accent-action font-semibold">per year</p>
           </motion.div>
         </div>
       </motion.div>
@@ -767,10 +767,10 @@ const CTASection: FC = () => (
       transition={{ duration: 0.6 }}
       className="text-center"
     >
-      <h2 className="font-display text-3xl font-bold text-paper sm:text-4xl">
+      <h2 className="font-display text-3xl font-bold text-text-primary sm:text-4xl">
         Ready to Transform Language Learning?
       </h2>
-      <p className="mx-auto mt-4 max-w-xl font-body text-base text-pencil">
+      <p className="mx-auto mt-4 max-w-xl font-body text-base text-text-secondary">
         Join thousands of learners and institutions already using
         TheLearningHyena to build real fluency — faster and cheaper.
       </p>
@@ -779,7 +779,7 @@ const CTASection: FC = () => (
         <motion.button
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.97 }}
-          className="flex items-center gap-2 rounded-xl bg-terracotta px-8 py-3.5 font-display text-base font-semibold text-paper shadow-lg transition-colors hover:bg-terracotta/90"
+          className="flex items-center gap-2 rounded-xl bg-accent-action px-8 py-3.5 font-body text-base font-semibold text-bg-base shadow-lg transition-colors hover:bg-accent-action-hover border-none cursor-pointer"
         >
           <Zap size={18} />
           Start Free Trial
@@ -788,11 +788,11 @@ const CTASection: FC = () => (
         <motion.button
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.97 }}
-          className="glass-nav-capsule flex items-center gap-2 rounded-xl px-8 py-3.5 font-display text-base font-semibold text-paper transition-colors hover:bg-paper/10"
+          className="glass-nav-capsule flex items-center gap-2 rounded-xl px-8 py-3.5 font-body text-base font-semibold text-text-primary transition-all hover:bg-bg-elevated border-none cursor-pointer"
         >
-          <School size={18} className="text-marigold" />
+          <School size={18} className="text-accent-action" />
           Contact for Schools
-          <ArrowRight size={16} className="text-pencil" />
+          <ArrowRight size={16} className="text-text-secondary" />
         </motion.button>
       </div>
     </motion.div>
@@ -805,7 +805,7 @@ const CTASection: FC = () => (
 
 const WhyUsScreen: FC = () => {
   return (
-    <div className="min-h-screen bg-ink">
+    <div className="min-h-screen bg-bg-base">
       {/* Ambient background blobs for depth */}
       <div className="ambient-blob-container" aria-hidden>
         <div className="ambient-blob ambient-blob--terracotta" />

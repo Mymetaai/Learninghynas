@@ -34,11 +34,11 @@ const WorldMapScreen = () => {
   return (
     <div className="min-h-[calc(100vh-3.5rem)]">
       {/* Header */}
-      <div className="border-b border-pencil/20 bg-ink px-4 py-4">
+      <div className="border-b border-pencil/20 bg-bg-base px-4 py-4">
         <p className="font-hud text-[10px] uppercase tracking-[0.3em] text-pencil">
           El Mapa del Camino
         </p>
-        <h1 className="font-display text-2xl font-bold text-paper">World Map</h1>
+        <h1 className="font-display text-2xl font-bold text-text-primary">World Map</h1>
       </div>
 
       {/* Horizontally scrollable parchment path */}
@@ -122,7 +122,7 @@ const RegionCard = ({
                 onClick={() => p.unlocked && onPinTap(p.quest.id)}
                 className={`relative z-10 mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 text-sm transition-transform ${
                   p.done
-                    ? 'border-teal-deep bg-teal-deep text-paper'
+                    ? 'border-teal-deep bg-teal-deep text-text-primary'
                     : p.unlocked
                       ? 'border-terracotta bg-marigold text-ink hover:scale-110'
                       : 'border-pencil/40 bg-paper text-pencil'
@@ -161,13 +161,13 @@ const RegionCard = ({
 
       {/* Fog-of-war overlay for locked worlds */}
       {fogged && (
-        <div className="absolute inset-0 flex items-center justify-center bg-ink/70 backdrop-blur-[1px]">
+        <div className="absolute inset-0 flex items-center justify-center bg-bg-base/70 backdrop-blur-[1px]">
           <div className="text-center">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border-2 border-paper/30 bg-paper/10 text-paper/70">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border-2 border-paper/30 bg-paper/10 text-text-primary/70">
               <Lock size={26} />
             </div>
-            <p className="mt-2 font-body text-xs text-paper/60">Locked region</p>
-            <p className="font-hud text-[9px] uppercase tracking-widest text-paper/40">
+            <p className="mt-2 font-body text-xs text-text-primary/60">Locked region</p>
+            <p className="font-hud text-[9px] uppercase tracking-widest text-text-primary/40">
               Beat the previous boss
             </p>
           </div>

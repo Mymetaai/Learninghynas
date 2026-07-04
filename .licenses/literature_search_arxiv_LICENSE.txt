@@ -1,0 +1,2 @@
+Notification: Checked and notified user of arXiv API terms of use (https://info.arxiv.org/help/api/index.html) and instructed to verify retrieved papers' licenses.
+Timestamp: 2026-07-04T00:30:00+05:30

@@ -197,26 +197,26 @@ const ChibiPet: FC = () => {
               }}
             >
               {/* Header */}
-              <div className="bg-gradient-to-r from-terracotta/20 via-marigold/10 to-teal-deep/20 px-4 py-3 border-b border-white/10 flex items-center justify-between">
+              <div className="bg-gradient-to-r from-accent-action/10 via-info/10 to-success/10 px-4 py-3 border-b border-structural flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="h-6 w-6 rounded-full bg-paper/10 flex items-center justify-center text-xs shrink-0 select-none">
+                  <div className="h-6 w-6 rounded-full bg-bg-elevated-2 flex items-center justify-center text-xs shrink-0 select-none">
                     🦊
                   </div>
                   <div>
-                    <h3 className="font-display text-xs font-bold text-paper">Yuki</h3>
-                    <span className="font-hud text-[8px] text-teal-deep font-semibold tracking-wider uppercase block leading-none">Nine-Tailed Guide</span>
+                    <h3 className="font-body text-xs font-semibold text-text-primary">Yuki</h3>
+                    <span className="font-body text-[8px] text-text-secondary font-semibold tracking-wider uppercase block leading-none mt-0.5">Nine-Tailed Guide</span>
                   </div>
                 </div>
                 <button 
                   onClick={() => setIsOpen(false)}
-                  className="text-pencil hover:text-paper transition-colors cursor-pointer"
+                  className="text-text-secondary hover:text-text-primary transition-colors cursor-pointer"
                 >
                   <X className="h-4 w-4" />
                 </button>
               </div>
 
               {/* Chat Messages Area */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-3 [scrollbar-width:thin] scrollbar-thin scrollbar-thumb-pencil/20 scrollbar-track-transparent">
+              <div className="flex-1 overflow-y-auto p-4 space-y-3 [scrollbar-width:thin] scrollbar-thin scrollbar-thumb-text-tertiary/20 scrollbar-track-transparent">
                 {messages.map((msg, index) => (
                   <div 
                     key={index}
@@ -224,8 +224,8 @@ const ChibiPet: FC = () => {
                   >
                     <div className={`max-w-[80%] rounded-2xl px-3 py-2 text-xs font-body whitespace-pre-line ${
                       msg.sender === 'user' 
-                        ? 'bg-terracotta/20 border border-terracotta/30 text-paper rounded-tr-none' 
-                        : 'bg-paper/5 border border-white/5 text-paper/90 rounded-tl-none'
+                        ? 'bg-accent-action/15 border border-accent-action/30 text-text-primary rounded-tr-none' 
+                        : 'bg-bg-elevated border border-structural text-text-primary/95 rounded-tl-none'
                     }`}>
                       {msg.text}
                     </div>
@@ -233,10 +233,10 @@ const ChibiPet: FC = () => {
                 ))}
                 {isTyping && (
                   <div className="flex justify-start">
-                    <div className="bg-paper/5 border border-white/5 rounded-2xl rounded-tl-none px-4 py-3 text-xs text-pencil flex gap-1 items-center">
-                      <span className="h-1.5 w-1.5 bg-pencil rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                      <span className="h-1.5 w-1.5 bg-pencil rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                      <span className="h-1.5 w-1.5 bg-pencil rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                    <div className="bg-bg-elevated border border-structural rounded-2xl rounded-tl-none px-4 py-3 text-xs text-text-secondary flex gap-1 items-center">
+                      <span className="h-1.5 w-1.5 bg-text-secondary rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                      <span className="h-1.5 w-1.5 bg-text-secondary rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <span className="h-1.5 w-1.5 bg-text-secondary rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                     </div>
                   </div>
                 )}
@@ -247,37 +247,37 @@ const ChibiPet: FC = () => {
               <div className="px-3 pb-2 flex gap-1.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 <button 
                   onClick={() => { setInputValue('Ser vs Estar'); }}
-                  className="text-[9px] font-hud bg-paper/5 hover:bg-paper/10 border border-white/10 text-pencil hover:text-paper px-2.5 py-1 rounded-full cursor-pointer shrink-0 transition-colors"
+                  className="text-[9px] font-body bg-bg-elevated hover:bg-bg-elevated-2 border border-structural text-text-secondary hover:text-text-primary px-2.5 py-1 rounded-full cursor-pointer shrink-0 transition-colors"
                 >
                   ⚖️ Ser vs Estar
                 </button>
                 <button 
                   onClick={() => { setInputValue('How to earn coins'); }}
-                  className="text-[9px] font-hud bg-paper/5 hover:bg-paper/10 border border-white/10 text-pencil hover:text-paper px-2.5 py-1 rounded-full cursor-pointer shrink-0 transition-colors"
+                  className="text-[9px] font-body bg-bg-elevated hover:bg-bg-elevated-2 border border-structural text-text-secondary hover:text-text-primary px-2.5 py-1 rounded-full cursor-pointer shrink-0 transition-colors"
                 >
                   🪙 Earn Rewards
                 </button>
                 <button 
                   onClick={() => { setInputValue('Workbook exam'); }}
-                  className="text-[9px] font-hud bg-paper/5 hover:bg-paper/10 border border-white/10 text-pencil hover:text-paper px-2.5 py-1 rounded-full cursor-pointer shrink-0 transition-colors"
+                  className="text-[9px] font-body bg-bg-elevated hover:bg-bg-elevated-2 border border-structural text-text-secondary hover:text-text-primary px-2.5 py-1 rounded-full cursor-pointer shrink-0 transition-colors"
                 >
                   📝 Final Exam
                 </button>
               </div>
 
               {/* Input Footer */}
-              <div className="p-3 border-t border-white/10 bg-ink/40 flex items-center gap-2">
+              <div className="p-3 border-t border-structural bg-bg-base/40 flex items-center gap-2">
                 <input 
                   type="text" 
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                   placeholder="Ask Yuki..."
-                  className="flex-1 bg-paper/5 border border-white/10 rounded-xl px-3 py-2 text-xs text-paper focus:outline-none focus:border-pencil/40 placeholder-pencil/50"
+                  className="flex-1 bg-bg-elevated border border-structural rounded-xl px-3 py-2 text-xs text-text-primary focus:outline-none focus:border-text-secondary/40 placeholder-text-tertiary"
                 />
                 <button 
                   onClick={handleSend}
-                  className="h-8 w-8 rounded-xl bg-terracotta/20 border border-terracotta/30 text-terracotta flex items-center justify-center hover:bg-terracotta/30 transition-colors cursor-pointer"
+                  className="h-8 w-8 rounded-xl bg-accent-action text-bg-base flex items-center justify-center hover:bg-accent-action-hover transition-colors cursor-pointer"
                 >
                   <Send className="h-3.5 w-3.5" />
                 </button>
@@ -302,10 +302,10 @@ const ChibiPet: FC = () => {
                 initial={{ opacity: 0, scale: 0.8, x: 20 }}
                 animate={{ opacity: 1, scale: 1, x: 0 }}
                 exit={{ opacity: 0, scale: 0.8, x: 20 }}
-                className="bg-[#FAF6EE] text-ink font-body text-[10px] font-semibold px-3 py-2 rounded-xl rounded-br-none shadow-lg border border-[#DDD0B5] max-w-[145px] relative select-none shrink-0"
+                className="bg-bg-elevated text-text-primary font-body text-[10px] font-semibold px-3 py-2 rounded-xl rounded-br-none shadow-lg border border-structural max-w-[145px] relative select-none shrink-0"
               >
                 {bubbleText}
-                <div className="absolute right-0 bottom-[-5px] w-2 h-2 bg-[#FAF6EE] border-r border-b border-[#DDD0B5] rotate-45" />
+                <div className="absolute right-0 bottom-[-5px] w-2 h-2 bg-bg-elevated border-r border-b border-structural rotate-45" />
               </motion.div>
             )}
           </AnimatePresence>
@@ -314,14 +314,14 @@ const ChibiPet: FC = () => {
           <motion.div
             whileHover={{ scale: 1.15 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="h-28 w-28 cursor-pointer drop-shadow-[0_8px_20px_rgba(74,151,242,0.5)] hover:drop-shadow-[0_12px_32px_rgba(74,151,242,0.7)] transition-all duration-300 relative select-none shrink-0"
+            className="h-28 w-28 cursor-pointer drop-shadow-[0_8px_20px_rgba(74,151,242,0.3)] hover:drop-shadow-[0_12px_32px_rgba(74,151,242,0.5)] transition-all duration-300 relative select-none shrink-0"
           >
             <Kitsune3D direction={direction} mode={isOpen ? 'wag' : 'walk'} />
             {/* Notification bubble if there is a pending tip - positioned lower relative to the fox geometry */}
             {!isOpen && (
               <span className="absolute top-12 right-2 flex h-3.5 w-3.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-marigold opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-marigold"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-action opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-accent-action"></span>
               </span>
             )}
           </motion.div>

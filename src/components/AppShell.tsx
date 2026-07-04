@@ -8,7 +8,7 @@ import ChibiPet from './ChibiPet';
 
 const AppShell: FC = () => {
   return (
-    <div className="flex min-h-screen flex-col bg-ink">
+    <div className="flex min-h-screen flex-col bg-bg-base">
       {/* Ambient blobs — gives backdrop-filter something to refract */}
       <div className="ambient-blob-container" aria-hidden="true">
         <div className="ambient-blob ambient-blob--terracotta" />

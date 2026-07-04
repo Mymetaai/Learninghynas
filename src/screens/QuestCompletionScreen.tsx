@@ -43,7 +43,7 @@ const QuestCompletionScreen: FC = () => {
   }
 
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] bg-ink px-4 py-6">
+    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base px-4 py-6">
       <div className="mx-auto max-w-lg">
         {/* Wax-seal stamp — drops from top */}
         <div className="mb-6 flex justify-center">
@@ -72,7 +72,7 @@ const QuestCompletionScreen: FC = () => {
           <p className="font-hud text-[10px] uppercase tracking-[0.3em] text-marigold">
             Quest Complete
           </p>
-          <h1 className="mt-2 font-display text-3xl font-bold text-paper">
+          <h1 className="mt-2 font-display text-3xl font-bold text-text-primary">
             {quest.title}
           </h1>
         </motion.div>
@@ -125,7 +125,7 @@ const QuestCompletionScreen: FC = () => {
                     {vocab.word.charAt(0).toUpperCase()}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="font-display text-sm font-semibold text-paper">
+                    <p className="font-display text-sm font-semibold text-text-primary">
                       {vocab.word}
                     </p>
                     <p className="font-body text-xs text-pencil">{vocab.meaning}</p>
@@ -147,7 +147,7 @@ const QuestCompletionScreen: FC = () => {
           transition={{ delay: 1.4 + quest.vocabulary.length * 0.08 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => navigate('/map')}
-          className="mt-8 w-full rounded-xl bg-terracotta px-4 py-3 font-display text-base font-semibold text-paper shadow-lg transition-colors hover:bg-terracotta/90"
+          className="mt-8 w-full rounded-xl bg-terracotta px-4 py-3 font-display text-base font-semibold text-text-primary shadow-lg transition-colors hover:bg-terracotta/90"
         >
           Continue to Map →
         </motion.button>

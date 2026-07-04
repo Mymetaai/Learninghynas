@@ -56,26 +56,26 @@ const ReorderList: FC<ReorderListProps> = ({
   return (
     <div>
       {context && (
-        <p className="mb-2 font-hud text-[10px] text-pencil">{context}</p>
+        <p className="mb-2 font-body text-[10px] text-text-secondary">{context}</p>
       )}
-      <p className="mb-4 font-body text-base text-ink">{prompt}</p>
+      <p className="mb-4 font-body text-base text-text-primary">{prompt}</p>
 
       <div className="space-y-2">
         {items.map((item, index) => {
           const status = getItemStatus(item, index);
           const statusClasses =
             status === 'correct'
-              ? 'border-teal-deep/60 bg-teal-deep/10 text-teal-deep font-semibold'
+              ? 'border-success/60 bg-success/10 text-success font-semibold'
               : status === 'wrong'
-                ? 'border-terracotta/60 bg-terracotta/10 text-terracotta'
-                : 'border-pencil/20 bg-paper text-ink';
+                ? 'border-error/60 bg-error/10 text-error'
+                : 'border-structural bg-bg-elevated text-text-primary';
 
           return (
             <div
               key={`${item}-${index}`}
               className={`flex items-center gap-2 rounded-xl border px-3 py-2.5 ${statusClasses}`}
             >
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ink/10 font-hud text-[10px] text-pencil">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-bg-elevated-2 font-body text-[10px] text-text-secondary">
                 {index + 1}
               </span>
               <span className="flex-1 font-body text-sm">{item}</span>
@@ -85,7 +85,7 @@ const ReorderList: FC<ReorderListProps> = ({
                     type="button"
                     disabled={index === 0}
                     onClick={() => moveUp(index)}
-                    className="flex h-6 w-6 items-center justify-center rounded border border-pencil/20 text-pencil transition-colors hover:bg-ink/10 disabled:opacity-30"
+                    className="flex h-6 w-6 items-center justify-center rounded border border-structural text-text-secondary hover:bg-bg-elevated-2 cursor-pointer bg-transparent"
                     aria-label="Move up"
                   >
                     ▲
@@ -94,15 +94,15 @@ const ReorderList: FC<ReorderListProps> = ({
                     type="button"
                     disabled={index === items.length - 1}
                     onClick={() => moveDown(index)}
-                    className="flex h-6 w-6 items-center justify-center rounded border border-pencil/20 text-pencil transition-colors hover:bg-ink/10 disabled:opacity-30"
+                    className="flex h-6 w-6 items-center justify-center rounded border border-structural text-text-secondary hover:bg-bg-elevated-2 cursor-pointer bg-transparent"
                     aria-label="Move down"
                   >
                     ▼
                   </button>
                 </div>
               )}
-              {status === 'correct' && <span className="text-teal-deep">✓</span>}
-              {status === 'wrong' && <span className="text-terracotta">✗</span>}
+              {status === 'correct' && <span className="text-success font-bold">✓</span>}
+              {status === 'wrong' && <span className="text-error font-bold">✗</span>}
             </div>
           );
         })}
@@ -113,7 +113,7 @@ const ReorderList: FC<ReorderListProps> = ({
           type="button"
           whileTap={{ scale: 0.98 }}
           onClick={handleConfirm}
-          className="mt-4 w-full rounded-xl bg-terracotta px-4 py-2.5 font-display text-sm font-semibold text-paper transition-colors hover:bg-terracotta/90"
+          className="mt-4 w-full rounded-xl bg-accent-action px-4 py-2.5 font-display text-sm font-semibold text-bg-base transition-colors hover:bg-accent-action-hover border-none shadow-md cursor-pointer"
         >
           Check Order
         </motion.button>
@@ -123,7 +123,7 @@ const ReorderList: FC<ReorderListProps> = ({
         <motion.p
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-3 font-body text-sm text-teal-deep"
+          className="mt-3 font-body text-sm text-success"
         >
           ✓ Correct order:{' '}
           <span className="font-semibold">{correctOrder.join(', ')}</span>

@@ -58,13 +58,13 @@ const DragDrop: FC<DragDropProps> = ({
   return (
     <div>
       {context && (
-        <p className="mb-2 font-hud text-[10px] text-pencil">{context}</p>
+        <p className="mb-2 font-body text-[10px] text-text-secondary">{context}</p>
       )}
-      <p className="mb-4 font-body text-base text-ink">{prompt}</p>
+      <p className="mb-4 font-body text-base text-text-primary">{prompt}</p>
 
       {/* Drop zone — shows selected items */}
-      <div className="mb-4 min-h-[3rem] rounded-xl border border-dashed border-terracotta/40 bg-terracotta/5 p-3">
-        <p className="mb-1 font-hud text-[9px] uppercase tracking-[0.2em] text-terracotta">
+      <div className="mb-4 min-h-[3rem] rounded-xl border border-dashed border-accent-action/40 bg-accent-action/5 p-3">
+        <p className="mb-1 font-body text-[9px] font-bold uppercase tracking-[0.2em] text-accent-action">
           Selected
         </p>
         {selectedItems.length > 0 ? (
@@ -75,23 +75,23 @@ const DragDrop: FC<DragDropProps> = ({
                 type="button"
                 whileTap={confirmed ? undefined : { scale: 0.95 }}
                 onClick={() => toggleItem(item)}
-                className={`inline-flex items-center rounded-full border px-3 py-1.5 font-body text-sm transition-colors ${
+                className={`inline-flex items-center rounded-full border px-3 py-1.5 font-body text-sm transition-colors border-none ${
                   confirmed
                     ? correctItems.has(item)
-                      ? 'border-teal-deep/60 bg-teal-deep/10 text-teal-deep font-semibold'
-                      : 'border-terracotta/60 bg-terracotta/10 text-terracotta line-through'
-                    : 'border-terracotta/40 bg-marigold/10 text-terracotta hover:bg-terracotta/20'
+                      ? 'border border-success/60 bg-success/10 text-success font-bold'
+                      : 'border border-error/60 bg-error/10 text-error line-through'
+                    : 'border border-accent-action/40 bg-accent-action/10 text-accent-action hover:bg-accent-action/20'
                 }`}
               >
                 {item}
                 {!confirmed && (
-                  <span className="ml-1 text-xs text-terracotta/60">✕</span>
+                  <span className="ml-1 text-xs text-accent-action/60">✕</span>
                 )}
               </motion.button>
             ))}
           </div>
         ) : (
-          <p className="font-body text-xs text-terracotta/40">
+          <p className="font-body text-xs text-accent-action/40">
             Tap items below to select…
           </p>
         )}
@@ -105,8 +105,8 @@ const DragDrop: FC<DragDropProps> = ({
             type="button"
             whileTap={{ scale: 0.95 }}
             onClick={() => toggleItem(item)}
-            className={`inline-flex items-center rounded-full border border-pencil/20 bg-paper px-3 py-1.5 font-body text-sm text-ink transition-colors hover:border-pencil/40 hover:bg-ink/5 ${
-              confirmed ? (correctItems.has(item) ? 'opacity-40' : 'opacity-40') : ''
+            className={`inline-flex items-center rounded-full border border-structural bg-bg-elevated px-3 py-1.5 font-body text-sm text-text-primary transition-colors hover:border-text-secondary/40 hover:bg-bg-elevated-2 ${
+              confirmed ? 'opacity-40' : ''
             }`}
           >
             {item}
@@ -120,7 +120,7 @@ const DragDrop: FC<DragDropProps> = ({
           type="button"
           whileTap={{ scale: 0.98 }}
           onClick={handleConfirm}
-          className="mt-4 w-full rounded-xl bg-terracotta px-4 py-2.5 font-display text-sm font-semibold text-paper transition-colors hover:bg-terracotta/90"
+          className="mt-4 w-full rounded-xl bg-accent-action px-4 py-2.5 font-display text-sm font-semibold text-bg-base transition-colors hover:bg-accent-action-hover border-none shadow-md cursor-pointer"
         >
           Check Selection
         </motion.button>
@@ -133,8 +133,8 @@ const DragDrop: FC<DragDropProps> = ({
           className={`mt-3 font-body text-sm ${
             selected.size === correctItems.size &&
             [...selected].every((item) => correctItems.has(item))
-              ? 'text-teal-deep'
-              : 'text-terracotta'
+              ? 'text-success'
+              : 'text-error'
           }`}
         >
           {selected.size === correctItems.size &&

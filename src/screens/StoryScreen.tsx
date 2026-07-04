@@ -106,7 +106,7 @@ const StoriesLibrary: FC = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] bg-ink text-paper font-body py-6 px-4">
+    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary font-body py-6 px-4">
       <div className="max-w-6xl mx-auto space-y-6">
         
         {/* Header */}
@@ -115,7 +115,7 @@ const StoriesLibrary: FC = () => {
             <p className="font-hud text-[10px] uppercase tracking-[0.3em] text-pencil">
               Biblioteca de Lectura
             </p>
-            <h1 className="font-display text-2xl font-bold text-paper">Stories Library</h1>
+            <h1 className="font-display text-2xl font-bold text-text-primary">Stories Library</h1>
             <p className="font-body text-xs text-pencil mt-1">
               Explore 50 hand-crafted stories designed to build Spanish proficiency from Starter to Expert level.
             </p>
@@ -127,7 +127,7 @@ const StoriesLibrary: FC = () => {
               placeholder="Search stories..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-transparent text-xs text-paper focus:outline-none w-full placeholder:text-pencil/50"
+              className="bg-transparent text-xs text-text-primary focus:outline-none w-full placeholder:text-pencil/50"
             />
           </div>
         </div>
@@ -140,8 +140,8 @@ const StoriesLibrary: FC = () => {
               onClick={() => setSelectedLevel(lvl)}
               className={`px-3 py-1 rounded-lg border text-xs font-hud transition-all cursor-pointer ${
                 selectedLevel === lvl
-                  ? 'bg-terracotta text-paper border-terracotta shadow-md scale-105'
-                  : 'bg-paper/5 border-pencil/20 text-pencil hover:bg-paper/10 hover:text-paper'
+                  ? 'bg-terracotta text-text-primary border-terracotta shadow-md scale-105'
+                  : 'bg-paper/5 border-pencil/20 text-pencil hover:bg-paper/10 hover:text-text-primary'
               }`}
             >
               {lvl === 'All' ? 'Todos' : lvl}
@@ -168,11 +168,11 @@ const StoriesLibrary: FC = () => {
                     <span className={`font-hud text-[9px] uppercase px-2 py-0.5 rounded-full border ${getLevelBadgeStyles(story.level)}`}>
                       {story.levelLabel}
                     </span>
-                    <span className="font-hud text-[10px] text-pencil group-hover:text-paper transition-colors">
+                    <span className="font-hud text-[10px] text-pencil group-hover:text-text-primary transition-colors">
                       {story.storyLines.length} líneas
                     </span>
                   </div>
-                  <h3 className="font-display font-bold text-lg text-paper group-hover:text-terracotta transition-colors line-clamp-1">
+                  <h3 className="font-display font-bold text-lg text-text-primary group-hover:text-terracotta transition-colors line-clamp-1">
                     {story.title}
                   </h3>
                   <p className="font-body text-xs text-pencil mt-2 line-clamp-3 leading-relaxed">
@@ -296,7 +296,7 @@ const StoryChapter: FC<StoryChapterProps> = ({
   );
 
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] bg-ink px-4 py-8">
+    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base px-4 py-8">
       <div className="mx-auto max-w-lg">
         
         {/* Breadcrumb Header */}
@@ -305,7 +305,7 @@ const StoryChapter: FC<StoryChapterProps> = ({
             <p className="font-hud text-[10px] uppercase tracking-[0.3em] text-pencil">
               {subtitle} · {questId}
             </p>
-            <h1 className="font-display text-2xl font-bold text-paper mt-1">{questTitle}</h1>
+            <h1 className="font-display text-2xl font-bold text-text-primary mt-1">{questTitle}</h1>
           </div>
           <div className="flex items-center gap-2">
             {storyTranslations && storyTranslations.length > 0 && (
@@ -313,8 +313,8 @@ const StoryChapter: FC<StoryChapterProps> = ({
                 onClick={() => setShowFullTranslation(!showFullTranslation)}
                 className={`flex items-center gap-1.5 text-xs font-hud px-2.5 py-1 rounded transition-colors cursor-pointer border ${
                   showFullTranslation 
-                    ? 'bg-terracotta text-paper border-terracotta'
-                    : 'bg-paper/5 border-pencil/20 text-pencil hover:bg-paper/10 hover:text-paper'
+                    ? 'bg-terracotta text-text-primary border-terracotta'
+                    : 'bg-paper/5 border-pencil/20 text-pencil hover:bg-paper/10 hover:text-text-primary'
                 }`}
               >
                 <Languages className="h-3.5 w-3.5" />
@@ -324,7 +324,7 @@ const StoryChapter: FC<StoryChapterProps> = ({
             {isLibrary && (
               <button
                 onClick={onContinue}
-                className="flex items-center gap-1 font-hud text-xs text-pencil hover:text-paper transition-colors cursor-pointer border border-pencil/20 rounded px-2.5 py-1 bg-paper/5 hover:bg-paper/10 shadow"
+                className="flex items-center gap-1 font-hud text-xs text-pencil hover:text-text-primary transition-colors cursor-pointer border border-pencil/20 rounded px-2.5 py-1 bg-paper/5 hover:bg-paper/10 shadow"
               >
                 <ArrowLeft className="h-3 w-3" /> Biblioteca
               </button>
@@ -369,10 +369,10 @@ const StoryChapter: FC<StoryChapterProps> = ({
                 key={i}
                 className="rounded-xl border border-pencil/20 bg-paper/5 p-4 relative"
               >
-                <h3 className="font-display text-sm font-semibold text-paper">
+                <h3 className="font-display text-sm font-semibold text-text-primary">
                   {gn.title}
                 </h3>
-                <p className="mt-1.5 font-body text-xs leading-relaxed text-paper/85">
+                <p className="mt-1.5 font-body text-xs leading-relaxed text-text-primary/85">
                   {gn.explanation}
                 </p>
                 <p className="mt-2.5 font-body text-xs italic text-terracotta bg-terracotta/5 border border-terracotta/10 rounded px-2.5 py-1">
@@ -388,7 +388,7 @@ const StoryChapter: FC<StoryChapterProps> = ({
           <button
             type="button"
             onClick={onContinue}
-            className="mt-6 w-full rounded-xl bg-terracotta px-4 py-3 font-display text-base font-semibold text-paper shadow-lg hover:bg-terracotta/90 transition-colors cursor-pointer text-center block"
+            className="mt-6 w-full rounded-xl bg-terracotta px-4 py-3 font-display text-base font-semibold text-text-primary shadow-lg hover:bg-terracotta/90 transition-colors cursor-pointer text-center block"
           >
             {isLibrary ? 'Volver a la Biblioteca' : 'Continuar a Ejercicios →'}
           </button>

@@ -99,44 +99,42 @@ const ExerciseEngine: FC<ExerciseEngineProps> = ({
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ type: 'spring', damping: 20 }}
-          className="rounded-xl border border-pencil/20 bg-paper p-8 text-center shadow-[0_8px_30px_rgba(0,0,0,0.3)]"
+          className="rounded-xl border border-structural bg-bg-elevated p-8 text-center shadow-2xl"
         >
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.2, type: 'spring', damping: 15 }}
-            className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 text-3xl"
-            style={{
-              borderColor: passed ? 'var(--tw-colors-teal-deep)' : 'var(--tw-colors-terracotta)',
-              backgroundColor: passed ? 'rgba(28,92,92,0.1)' : 'rgba(193,80,46,0.1)',
-            }}
+            className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 text-3xl ${
+              passed ? 'border-success/40 bg-success/10 text-success' : 'border-error/40 bg-error/10 text-error'
+            }`}
           >
             {passed ? '🎉' : '💪'}
           </motion.div>
 
-          <h2 className="font-display text-2xl font-bold text-ink">
+          <h2 className="font-display text-2xl font-bold text-text-primary">
             {passed ? 'Well Done!' : 'Keep Practicing!'}
           </h2>
-          <p className="mt-1 font-body text-sm text-pencil">{questTitle}</p>
+          <p className="mt-1 font-body text-sm text-text-secondary">{questTitle}</p>
 
           {/* Score */}
           <div className="mt-6 flex items-center justify-center gap-6">
             <div>
               <p
-                className={`font-hud text-3xl font-semibold tabular-nums ${
-                  passed ? 'text-teal-deep' : 'text-terracotta'
+                className={`font-body text-3xl font-bold tabular-nums ${
+                  passed ? 'text-success' : 'text-error'
                 }`}
               >
                 {percentage}%
               </p>
-              <p className="font-body text-xs text-pencil">accuracy</p>
+              <p className="font-body text-xs text-text-secondary">accuracy</p>
             </div>
-            <div className="h-8 w-px bg-pencil/20" />
+            <div className="h-8 w-px bg-structural" />
             <div>
-              <p className="font-hud text-3xl font-semibold tabular-nums text-marigold">
+              <p className="font-body text-3xl font-bold tabular-nums text-accent-action">
                 {score.correct}
               </p>
-              <p className="font-body text-xs text-pencil">
+              <p className="font-body text-xs text-text-secondary">
                 of {score.total} correct
               </p>
             </div>
@@ -150,7 +148,7 @@ const ExerciseEngine: FC<ExerciseEngineProps> = ({
             transition={{ delay: 0.4 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleFinish}
-            className="mt-6 w-full rounded-xl bg-terracotta px-4 py-3 font-display text-base font-semibold text-paper shadow-lg transition-colors hover:bg-terracotta/90"
+            className="mt-6 w-full rounded-xl bg-accent-action px-4 py-3 font-display text-base font-semibold text-bg-base border-none shadow-md transition-colors hover:bg-accent-action-hover cursor-pointer"
           >
             Continue →
           </motion.button>
@@ -164,16 +162,16 @@ const ExerciseEngine: FC<ExerciseEngineProps> = ({
       {/* Progress bar */}
       <div className="mb-4">
         <div className="flex items-center justify-between">
-          <p className="font-hud text-[10px] uppercase tracking-[0.25em] text-pencil">
+          <p className="font-body text-[10px] uppercase tracking-[0.25em] text-text-secondary">
             Exercise {currentIndex + 1} of {exercises.length}
           </p>
-          <p className="font-hud text-[10px] text-marigold">
+          <p className="font-body text-[10px] text-success font-bold">
             {score.correct}✓
           </p>
         </div>
-        <div className="mt-1 h-1 rounded-full bg-pencil/20">
+        <div className="mt-1 h-1 rounded-full bg-structural">
           <motion.div
-            className="h-1 rounded-full bg-terracotta"
+            className="h-1 rounded-full bg-accent-action"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.3 }}

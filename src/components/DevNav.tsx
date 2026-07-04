@@ -10,7 +10,7 @@ const DevNav = () => {
   return (
     <nav
       aria-label="Developer screen navigation"
-      className="sticky bottom-0 z-40 border-t border-pencil/20 bg-ink/95 backdrop-blur"
+      className="sticky bottom-0 z-40 border-t border-structural bg-bg-base/95 backdrop-blur"
     >
       <div className="mx-auto flex max-w-3xl gap-1 overflow-x-auto px-2 py-2">
         {ROUTES.map((r) => (
@@ -18,10 +18,10 @@ const DevNav = () => {
             key={r.id}
             to={r.path}
             className={({ isActive }) =>
-              `whitespace-nowrap rounded-md px-2.5 py-1 font-hud text-[11px] transition-colors ${
+              `whitespace-nowrap rounded-md px-2.5 py-1 font-body text-[11px] transition-colors ${
                 isActive
-                  ? 'bg-terracotta text-paper'
-                  : 'text-pencil hover:bg-pencil/10 hover:text-paper'
+                  ? 'bg-accent-action text-bg-base font-bold'
+                  : 'text-text-secondary hover:bg-bg-elevated hover:text-text-primary'
               }`
             }
           >

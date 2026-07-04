@@ -45,7 +45,7 @@ const QuestPreviewScreen = () => {
       {/* Dim backdrop — click to go back */}
       <button
         type="button"
-        className="absolute inset-0 z-0 bg-ink/60"
+        className="absolute inset-0 z-0 bg-bg-base/60"
         onClick={handleBack}
         aria-label="Go back to map"
       />
@@ -67,7 +67,7 @@ const QuestPreviewScreen = () => {
         <p className="mt-1 font-body text-sm text-pencil">{quest.subtitle}</p>
 
         {/* Stats row */}
-        <div className="mt-5 flex items-center gap-6 rounded-xl border border-pencil/20 bg-ink/5 px-4 py-3">
+        <div className="mt-5 flex items-center gap-6 rounded-xl border border-pencil/20 bg-bg-base/5 px-4 py-3">
           <Stat icon="⏱" label="Est. time" value={`${quest.estimatedMinutes} min`} />
           <Stat icon="✨" label="XP" value={`${quest.rewards.xp}`} />
           <Stat icon="🪙" label="Coins" value={`${quest.rewards.coins}`} />
@@ -85,14 +85,14 @@ const QuestPreviewScreen = () => {
               {quest.vocabulary.slice(0, 5).map((v) => (
                 <span
                   key={v.word}
-                  className="inline-flex items-center gap-1 rounded-full border border-pencil/20 bg-ink/5 px-2.5 py-1 font-body text-xs text-ink"
+                  className="inline-flex items-center gap-1 rounded-full border border-pencil/20 bg-bg-base/5 px-2.5 py-1 font-body text-xs text-ink"
                 >
                   {v.word}
                   <span className="text-pencil">({language === 'hinglish' ? translateWordToHinglish(v.meaning) : v.meaning})</span>
                 </span>
               ))}
               {quest.vocabulary.length > 5 && (
-                <span className="inline-flex items-center rounded-full border border-pencil/20 bg-ink/5 px-2.5 py-1 font-body text-xs text-pencil">
+                <span className="inline-flex items-center rounded-full border border-pencil/20 bg-bg-base/5 px-2.5 py-1 font-body text-xs text-pencil">
                   +{quest.vocabulary.length - 5} more
                 </span>
               )}
@@ -113,7 +113,7 @@ const QuestPreviewScreen = () => {
             <button
               type="button"
               onClick={handleBegin}
-              className="flex-1 rounded-xl border border-teal-deep/40 bg-teal-deep px-4 py-3 font-display text-sm font-semibold text-paper transition-colors hover:bg-teal-deep/90"
+              className="flex-1 rounded-xl border border-teal-deep/40 bg-teal-deep px-4 py-3 font-display text-sm font-semibold text-text-primary transition-colors hover:bg-teal-deep/90"
             >
               ✓ Replay
             </button>
@@ -124,7 +124,7 @@ const QuestPreviewScreen = () => {
               onClick={handleBegin}
               className={`flex-1 rounded-xl px-4 py-3 font-display text-sm font-semibold transition-colors ${
                 unlocked
-                  ? 'bg-terracotta text-paper hover:bg-terracotta/90'
+                  ? 'bg-terracotta text-text-primary hover:bg-terracotta/90'
                   : 'cursor-not-allowed border border-pencil/30 bg-paper text-pencil'
               }`}
             >

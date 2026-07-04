@@ -31,27 +31,27 @@ const MultipleChoice: FC<MultipleChoiceProps> = ({
   return (
     <div>
       {context && (
-        <p className="mb-2 font-hud text-[10px] text-pencil">{context}</p>
+        <p className="mb-2 font-body text-[10px] text-text-secondary">{context}</p>
       )}
-      <p className="mb-4 font-body text-base text-ink">{prompt}</p>
+      <p className="mb-4 font-body text-base text-text-primary">{prompt}</p>
       <div className="space-y-2">
         {options.map((option) => {
           let classes =
-            'w-full rounded-xl border border-pencil/20 bg-paper px-4 py-3 font-body text-sm text-ink text-left transition-colors';
+            'w-full rounded-xl border border-structural bg-bg-elevated-2 px-4 py-3 font-body text-sm text-text-primary text-left transition-all';
 
           if (answered) {
             if (option === answer) {
               classes =
-                'w-full rounded-xl border border-teal-deep/60 bg-teal-deep/10 px-4 py-3 font-body text-sm font-semibold text-teal-deep text-left';
+                'w-full rounded-xl border border-success/60 bg-success/10 px-4 py-3 font-body text-sm font-bold text-success text-left';
             } else if (option === selected && option !== answer) {
               classes =
-                'w-full rounded-xl border border-terracotta/60 bg-terracotta/10 px-4 py-3 font-body text-sm text-terracotta text-left';
+                'w-full rounded-xl border border-error/60 bg-error/10 px-4 py-3 font-body text-sm text-error text-left';
             } else {
               classes +=
                 ' opacity-40';
             }
           } else {
-            classes += ' hover:bg-ink/5 hover:border-pencil/40';
+            classes += ' hover:bg-structural hover:border-text-secondary/40';
           }
 
           return (
@@ -71,7 +71,7 @@ const MultipleChoice: FC<MultipleChoiceProps> = ({
         <motion.p
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-3 font-body text-sm text-teal-deep"
+          className="mt-3 font-body text-sm text-success"
         >
           ✓ Correct answer: <span className="font-semibold">{answer}</span>
         </motion.p>

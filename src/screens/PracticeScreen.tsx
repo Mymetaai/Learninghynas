@@ -210,7 +210,7 @@ const PracticeScreen: FC = () => {
     // Session completion overlay
     if (sessionResult) {
       return (
-        <div className="min-h-[calc(100vh-3.5rem)] bg-ink px-4 py-6">
+        <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base px-4 py-6">
           <div className="mx-auto max-w-lg">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -227,7 +227,7 @@ const PracticeScreen: FC = () => {
                 🎉
               </motion.div>
 
-              <h2 className="font-display text-2xl font-bold text-paper">
+              <h2 className="font-display text-2xl font-bold text-text-primary">
                 Session Complete!
               </h2>
               <p className="mt-1 font-body text-sm text-pencil">
@@ -266,7 +266,7 @@ const PracticeScreen: FC = () => {
                 transition={{ delay: 0.4 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleBackToHub}
-                className="mt-6 w-full rounded-xl bg-terracotta px-4 py-3 font-display text-base font-semibold text-paper shadow-lg transition-colors hover:bg-terracotta/90 cursor-pointer"
+                className="mt-6 w-full rounded-xl bg-terracotta px-4 py-3 font-display text-base font-semibold text-text-primary shadow-lg transition-colors hover:bg-terracotta/90 cursor-pointer"
               >
                 Back to Training Grounds
               </motion.button>
@@ -279,7 +279,7 @@ const PracticeScreen: FC = () => {
     // Active session — ExerciseEngine handles the flow
     if (sessionExercises.length === 0) {
       return (
-        <div className="min-h-[calc(100vh-3.5rem)] bg-ink px-4 py-6">
+        <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base px-4 py-6">
           <div className="mx-auto max-w-lg text-center">
             <p className="font-body text-sm text-pencil mt-12">
               No exercises available for this session right now.
@@ -296,17 +296,17 @@ const PracticeScreen: FC = () => {
     }
 
     return (
-      <div className="min-h-[calc(100vh-3.5rem)] bg-ink px-4 py-6">
+      <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base px-4 py-6">
         {/* Back button */}
         <div className="mx-auto max-w-lg mb-4">
           <button
             onClick={handleBackToHub}
-            className="flex items-center gap-1.5 font-hud text-[11px] text-pencil hover:text-paper transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 font-hud text-[11px] text-pencil hover:text-text-primary transition-colors cursor-pointer"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             Back to Training Grounds
           </button>
-          <h2 className="font-display text-lg font-bold text-paper mt-2">
+          <h2 className="font-display text-lg font-bold text-text-primary mt-2">
             {TILE_CONFIG[activeMode].title}
           </h2>
         </div>
@@ -325,7 +325,7 @@ const PracticeScreen: FC = () => {
   // ── Hub View ─────────────────────────────────────────────────────────────
 
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] bg-ink text-paper p-4 sm:p-6 lg:p-8">
+    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary p-4 sm:p-6 lg:p-8">
       <div className="mx-auto max-w-4xl">
         {/* Header */}
         <div className="mb-8">
@@ -335,7 +335,7 @@ const PracticeScreen: FC = () => {
               Training Grounds
             </p>
           </div>
-          <h1 className="font-display text-3xl font-bold text-paper">
+          <h1 className="font-display text-3xl font-bold text-text-primary">
             Quick practice, whenever you need it 💪
           </h1>
           <p className="mt-2 font-body text-sm text-pencil">
@@ -501,7 +501,7 @@ const DrillTile: FC<DrillTileProps> = ({
         >
           {icon}
         </div>
-        <h3 className="font-display text-lg font-bold text-paper">{title}</h3>
+        <h3 className="font-display text-lg font-bold text-text-primary">{title}</h3>
 
         {/* Subtitle / Empty State */}
         <p className="mt-1 font-body text-xs text-pencil min-h-[2em]">

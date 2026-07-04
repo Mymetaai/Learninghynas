@@ -34,52 +34,52 @@ const ListeningExercise: FC<ListeningExerciseProps> = ({
   return (
     <div>
       {context && (
-        <p className="mb-2 font-hud text-[10px] text-terracotta">{context}</p>
+        <p className="mb-2 font-body text-[10px] text-accent-action font-semibold">{context}</p>
       )}
 
       {/* Audio playback stub — pronunciation card */}
-      <div className="mb-4 rounded-xl border border-pencil/20 bg-ink/5 p-4 text-center">
+      <div className="mb-4 rounded-xl border border-structural bg-bg-elevated-2 p-4 text-center">
         <button
           type="button"
           onClick={() => setRevealed(true)}
-          className="flex mx-auto h-12 w-12 items-center justify-center rounded-full border border-pencil/30 bg-paper text-ink transition-colors hover:bg-marigold/20"
+          className="flex mx-auto h-12 w-12 items-center justify-center rounded-full border border-structural bg-bg-elevated text-text-primary transition-all hover:bg-accent-action/25 cursor-pointer"
           aria-label="Play pronunciation"
         >
           🔊
         </button>
-        <p className="mt-2 font-body text-sm text-pencil">
+        <p className="mt-2 font-body text-sm text-text-secondary">
           {revealed ? prompt : 'Tap to hear pronunciation'}
         </p>
         {revealed && (
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="mt-1 font-hud text-lg font-semibold text-terracotta"
+            className="mt-1 font-target text-[18px] tracking-[0.015em] font-semibold text-accent-action"
           >
             {prompt}
           </motion.p>
         )}
       </div>
 
-      <p className="mb-3 font-body text-base text-ink">Which word is it?</p>
+      <p className="mb-3 font-body text-base text-text-primary">Which word is it?</p>
 
       <div className="space-y-2">
         {options.map((option) => {
           let classes =
-            'w-full rounded-xl border border-pencil/20 bg-paper px-4 py-3 font-body text-sm text-ink text-left transition-colors';
+            'w-full rounded-xl border border-structural bg-bg-elevated px-4 py-3 font-body text-sm text-text-primary text-left transition-all';
 
           if (answered) {
             if (option === answer) {
               classes =
-                'w-full rounded-xl border border-teal-deep/60 bg-teal-deep/10 px-4 py-3 font-body text-sm font-semibold text-teal-deep text-left';
+                'w-full rounded-xl border border-success/60 bg-success/10 px-4 py-3 font-body text-sm font-bold text-success text-left';
             } else if (option === selected && option !== answer) {
               classes =
-                'w-full rounded-xl border border-terracotta/60 bg-terracotta/10 px-4 py-3 font-body text-sm text-terracotta text-left';
+                'w-full rounded-xl border border-error/60 bg-error/10 px-4 py-3 font-body text-sm text-error text-left';
             } else {
               classes += ' opacity-40';
             }
           } else {
-            classes += ' hover:bg-ink/5 hover:border-pencil/40';
+            classes += ' hover:bg-structural hover:border-text-secondary/40';
           }
 
           return (
@@ -100,7 +100,7 @@ const ListeningExercise: FC<ListeningExerciseProps> = ({
         <motion.p
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-3 font-body text-sm text-teal-deep"
+          className="mt-3 font-body text-sm text-success"
         >
           ✓ Correct answer: <span className="font-semibold">{answer}</span>
         </motion.p>

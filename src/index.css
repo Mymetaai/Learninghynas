@@ -1,24 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@400;500;600&family=Atkinson+Hyperlegible+Next:ital,wght@0,400..700;1,400..700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg-base: #FBE9D0;        /* Soft warm cream background */
+  --bg-elevated: #FFFFFF;    /* Crisp clean white for cards */
+  --bg-elevated-2: #FFF3E3;  /* Nested warm highlights */
+  --structural: #E1D3C0;     /* Warm light border outline */
+
+  --text-primary: #244855;   /* Deep Slate Navy for high-contrast primary text */
+  --text-secondary: #4D6470; /* Muted Slate Gray for sub-labels */
+  --text-tertiary: #7C919D;  /* Muted placeholder text */
+
+  --accent-action: #E64833;  /* High-Contrast Amber/Orange for primary CTAs */
+  --accent-action-hover: #CF3A27;
+
+  --success: #2E7D32;        /* Vibrant success green */
+  --error: #C62828;          /* Muted red/coral for incorrect states */
+
+  --info: #244855;           /* Deep Slate Blue informational accents */
+  --streak-warm: #E64833;    /* Streak flame warm orange-red */
+}
+
 /* ── STEP 1 — global defaults from design tokens ───────────────────────
-   Body uses the `body` font family + ink/paper base; everything else is
-   opt-in via Tailwind utilities. Titles are NOT forced to display here —
-   screens apply `font-display` deliberately where a title belongs.
+   Body uses the new token variables for background and text; fonts are opt-in
+   via Tailwind utilities.
 */
 @layer base {
   html {
     color-scheme: light;
   }
   body {
-    @apply bg-ink text-paper font-body antialiased;
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
     margin: 0;
     min-height: 100vh;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+}
+
+/* ── Target Language class to apply Atkinson Hyperlegible Next ── */
+.font-target {
+  font-family: 'Atkinson Hyperlegible Next', ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0.02em;
+  line-height: 1.6;
 }
 
 /* ── Glitter Text Animation ── */
@@ -62,25 +92,35 @@
 
 /* ── Glass Surface — reusable translucent material ────────────────────── */
 .glass-surface {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.7); /* Translucent light white */
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--structural);
   box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    0 8px 24px rgba(36, 72, 85, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  position: relative;
+}
+
+/* Custom nav-glass for header chrome */
+.nav-glass {
+  background: rgba(255, 255, 255, 0.8); /* var(--bg-elevated) tint */
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--structural);
+  box-shadow: 0 4px 16px rgba(36, 72, 85, 0.05);
   position: relative;
 }
 
 /* Specular highlight — top-edge "light hitting curved glass" */
-.glass-surface::before {
+.glass-surface::before, .nav-glass::before {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.07) 0%,
+    rgba(255, 255, 255, 0.6) 0%,
     transparent 40%
   );
   pointer-events: none;
@@ -89,14 +129,14 @@
 
 /* ── Glass Nav Capsule — pill-shaped container for tabs ────────────────── */
 .glass-nav-capsule {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.6); /* var(--bg-elevated-2) with opacity */
   -webkit-backdrop-filter: blur(16px) saturate(160%);
   backdrop-filter: blur(16px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  border: 1px solid var(--structural);
   border-radius: 999px;
   box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    0 4px 12px rgba(36, 72, 85, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
   position: relative;
 }
 
@@ -107,14 +147,13 @@
   transform: translateY(-50%);
   height: calc(100% - 8px);
   border-radius: 999px;
-  background: rgba(193, 80, 46, 0.22);
+  background: rgba(230, 72, 51, 0.18); /* var(--accent-action) with opacity */
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(193, 80, 46, 0.25);
+  border: 1px solid rgba(230, 72, 51, 0.35);
   box-shadow:
-    0 0 20px rgba(193, 80, 46, 0.35),
-    0 0 40px rgba(193, 80, 46, 0.10),
-    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    0 0 16px rgba(230, 72, 51, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8);
   /* Spring-like slide animation */
   transition:
     left 280ms cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -145,7 +184,7 @@
 .ambient-blob--terracotta {
   width: 320px;
   height: 280px;
-  background: radial-gradient(circle, rgba(193, 80, 46, 0.14) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(91, 143, 168, 0.12) 0%, transparent 70%); /* Map to --info */
   top: -60px;
   left: 15%;
 }
@@ -153,7 +192,7 @@
 .ambient-blob--teal {
   width: 380px;
   height: 300px;
-  background: radial-gradient(circle, rgba(28, 92, 92, 0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(44, 62, 80, 0.15) 0%, transparent 70%); /* Map to --structural */
   top: -40px;
   right: 10%;
 }
@@ -161,7 +200,7 @@
 .ambient-blob--marigold {
   width: 260px;
   height: 220px;
-  background: radial-gradient(circle, rgba(232, 163, 61, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(245, 166, 35, 0.08) 0%, transparent 70%); /* Map to --accent-action */
   top: -30px;
   left: 55%;
 }
@@ -192,7 +231,7 @@
   border-radius: 50%;
   background: radial-gradient(circle, #ffe066 10%, #f5b041 80%, #d35400 100%);
   border: 1px solid #d35400;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 0 3px rgba(255,255,255,0.6);
+  box-shadow: 0 1px 3px rgba(20,24,28,0.4), inset 0 0 3px rgba(232,234,237,0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -200,11 +239,11 @@
 
 .coin-front::after, .coin-back::after {
   content: '¢';
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 9px;
   font-weight: 800;
   color: #7e5109;
-  text-shadow: 0.5px 0.5px 0px rgba(255,255,255,0.4);
+  text-shadow: 0.5px 0.5px 0px rgba(232,234,237,0.4);
 }
 
 .coin-back {
@@ -242,7 +281,7 @@
   left: 50%;
   width: 10px;
   height: 14px;
-  background: radial-gradient(circle at bottom, #ffea00 20%, #ff5e00 65%, rgba(255, 0, 0, 0) 100%);
+  background: radial-gradient(circle at bottom, #ffea00 20%, var(--streak-warm) 65%, rgba(251, 133, 0, 0) 100%);
   border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
   transform-origin: bottom center;
   filter: blur(0.8px);
@@ -256,13 +295,13 @@
 .flame-layer-2 {
   transform: translateX(-50%) rotateY(60deg) scaleX(0.85);
   animation: flicker-flame-2 0.5s ease-in-out infinite alternate;
-  background: radial-gradient(circle at bottom, #ffffff 10%, #ff9d00 50%, rgba(255, 0, 0, 0) 100%);
+  background: radial-gradient(circle at bottom, #ffffff 10%, #ffb703 50%, rgba(251, 133, 0, 0) 100%);
 }
 
 .flame-layer-3 {
   transform: translateX(-50%) rotateY(-60deg) scaleX(0.7);
   animation: flicker-flame-3 0.6s ease-in-out infinite alternate;
-  background: radial-gradient(circle at bottom, #ffea00 30%, #ff0000 80%, rgba(255, 0, 0, 0) 100%);
+  background: radial-gradient(circle at bottom, #ffea00 30%, var(--streak-warm) 80%, rgba(251, 133, 0, 0) 100%);
 }
 
 @keyframes float-flame {

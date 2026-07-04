@@ -131,15 +131,15 @@ const ConversationScreen: FC = () => {
     .find((m) => m.sender === 'companion');
 
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] bg-ink text-paper font-body">
+    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary font-body">
       {/* Upper header */}
-      <div className="border-b border-pencil/20 bg-ink px-4 py-4 sm:px-6">
+      <div className="border-b border-pencil/20 bg-bg-base px-4 py-4 sm:px-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 max-w-6xl mx-auto">
           <div>
             <p className="font-hud text-[10px] uppercase tracking-[0.3em] text-pencil">
               Correspondencia Escrita
             </p>
-            <h1 className="font-display text-2xl font-bold text-paper">AI Companion</h1>
+            <h1 className="font-display text-2xl font-bold text-text-primary">AI Companion</h1>
           </div>
           <div className="flex items-center gap-4 text-xs font-hud text-pencil">
             <span className="flex items-center gap-1">
@@ -174,7 +174,7 @@ const ConversationScreen: FC = () => {
                   className={`w-full text-left rounded-xl border p-4 transition-all duration-200 cursor-pointer shadow ${
                     isActive
                       ? 'bg-paper border-terracotta text-ink scale-[1.01] ring-1 ring-terracotta/30'
-                      : 'bg-paper/5 border-pencil/20 text-paper hover:bg-paper/10'
+                      : 'bg-paper/5 border-pencil/20 text-text-primary hover:bg-paper/10'
                   }`}
                 >
                   <div className="flex items-center gap-3">
@@ -233,13 +233,13 @@ const ConversationScreen: FC = () => {
                 <div className="flex items-center justify-center gap-2">
                   <button
                     onClick={handleReset}
-                    className="rounded bg-terracotta hover:bg-terracotta/90 px-3 py-1 font-display text-xs text-paper shadow transition-colors cursor-pointer"
+                    className="rounded bg-terracotta hover:bg-terracotta/90 px-3 py-1 font-display text-xs text-text-primary shadow transition-colors cursor-pointer"
                   >
                     Sí, borrar
                   </button>
                   <button
                     onClick={() => setShowConfirmReset(false)}
-                    className="rounded border border-pencil/30 hover:bg-paper/10 px-3 py-1 font-display text-xs text-paper transition-colors cursor-pointer"
+                    className="rounded border border-pencil/30 hover:bg-paper/10 px-3 py-1 font-display text-xs text-text-primary transition-colors cursor-pointer"
                   >
                     Cancelar
                   </button>
@@ -248,7 +248,7 @@ const ConversationScreen: FC = () => {
             ) : (
               <button
                 onClick={() => setShowConfirmReset(true)}
-                className="flex items-center justify-center gap-2 mx-auto text-pencil/80 hover:text-paper font-hud text-xs transition-colors cursor-pointer"
+                className="flex items-center justify-center gap-2 mx-auto text-text-secondary hover:text-text-primary font-body text-xs transition-colors cursor-pointer bg-transparent border-none p-0"
               >
                 <RefreshCw className="h-3.5 w-3.5" /> Reiniciar Historial
               </button>
@@ -257,21 +257,21 @@ const ConversationScreen: FC = () => {
         </section>
 
         {/* Right column: Correspondence Board */}
-        <section className="lg:col-span-8 flex flex-col h-[70vh] min-h-[500px] border border-pencil/30 rounded-2xl overflow-hidden shadow-2xl bg-paper/5">
+        <section className="lg:col-span-8 flex flex-col h-[70vh] min-h-[500px] border border-structural rounded-2xl overflow-hidden shadow-2xl bg-bg-elevated">
           
           {/* Active Companion Header */}
-          <div className="bg-paper text-ink p-4 border-b border-pencil/30 flex items-center justify-between">
+          <div className="bg-bg-elevated-2 text-text-primary p-4 border-b border-structural flex items-center justify-between">
             <div className="flex items-center gap-3">
               <span className="text-3xl" role="img" aria-hidden="true">
                 {activeCompanion.avatar}
               </span>
               <div>
                 <h2 className="font-display text-lg font-bold leading-tight">{activeCompanion.name}</h2>
-                <p className="font-body text-xs text-pencil italic">{activeCompanion.role}</p>
+                <p className="font-body text-xs text-text-secondary italic">{activeCompanion.role}</p>
               </div>
             </div>
             <div className="text-right">
-              <span className="font-hud text-xs text-terracotta bg-terracotta/10 px-2.5 py-1 rounded-full border border-terracotta/20">
+              <span className="font-body text-xs text-accent-action bg-accent-action/10 px-2.5 py-1 rounded-full border border-accent-action/20">
                 📬 {conversation.letterCount} cartas
               </span>
             </div>
@@ -291,12 +291,12 @@ const ConversationScreen: FC = () => {
                 // User's letter: styled like a quick notebook entry
                 return (
                   <div key={msg.id} className="flex justify-end pl-12">
-                    <div className="relative max-w-lg bg-paper/90 border border-pencil/30 text-ink rounded-lg p-4 shadow-md font-body text-sm relative border-l-4 border-l-terracotta/60">
-                      <div className="absolute top-2 right-2 text-[10px] font-hud text-pencil/80">
+                    <div className="relative max-w-lg bg-bg-elevated-2 border border-structural text-text-primary rounded-lg p-4 shadow-md font-body text-sm border-l-4 border-l-accent-action/60">
+                      <div className="absolute top-2 right-2 text-[10px] font-body text-text-secondary/80">
                         {msg.timestamp}
                       </div>
                       
-                      <p className="font-hud text-[9px] uppercase tracking-wider text-terracotta/80 mb-2">
+                      <p className="font-body text-[9px] uppercase tracking-wider text-accent-action/80 mb-2">
                         Carta de TheLearningHyena
                       </p>
                       
@@ -308,25 +308,25 @@ const ConversationScreen: FC = () => {
                 // Companion's letter: styled like a folded handwritten document
                 return (
                   <div key={msg.id} className="flex justify-start pr-12">
-                    <div className="relative max-w-xl bg-[#FAF6EE] border border-[#DDD0B5] text-ink rounded-xl p-5 shadow-lg relative flex flex-col">
+                    <div className="relative max-w-xl bg-bg-elevated-2 border border-structural text-text-primary rounded-xl p-5 shadow-lg flex flex-col">
                       
                       {/* Postage stamp / postmark decoration */}
                       <div className="absolute top-4 right-4 flex items-center gap-1.5 opacity-80 pointer-events-none select-none">
-                        <div className="w-8 h-8 border border-dashed border-pencil/30 rounded flex items-center justify-center font-display text-xs text-pencil select-none">
+                        <div className="w-8 h-8 border border-dashed border-structural rounded flex items-center justify-center font-display text-xs text-text-secondary select-none">
                           {activeCompanion.avatar}
                         </div>
-                        <div className="w-6 h-6 rounded-full border border-pencil/35 border-dashed flex items-center justify-center text-[7px] text-pencil font-hud rotate-12">
+                        <div className="w-6 h-6 rounded-full border border-structural border-dashed flex items-center justify-center text-[7px] text-text-secondary font-body rotate-12">
                           REC
                         </div>
                       </div>
 
                       {/* Header date */}
-                      <div className="font-hud text-[10px] text-pencil mb-3">
+                      <div className="font-body text-[10px] text-text-secondary mb-3">
                         {msg.timestamp}
                       </div>
 
                       {/* Salutation */}
-                      <p className="font-display italic text-sm font-semibold mb-3">
+                      <p className="font-display italic text-sm font-semibold mb-3 text-text-primary">
                         Estimado TheLearningHyena,
                       </p>
 
@@ -403,10 +403,10 @@ const ConversationScreen: FC = () => {
                       key={i}
                       onClick={() => handleSend(reply.text, reply.nextNodeId)}
                       disabled={isTyping}
-                      className="cursor-pointer text-left rounded-lg border border-[#DDD0B5] bg-paper/40 hover:bg-paper/90 px-3 py-1.5 font-body text-xs text-ink transition-all hover:border-terracotta hover:scale-[1.02] shadow-sm flex flex-col group disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="cursor-pointer text-left rounded-lg border border-structural bg-bg-elevated hover:bg-bg-elevated-2 px-3 py-1.5 font-body text-xs text-text-primary transition-all hover:border-accent-action hover:scale-[1.02] shadow-sm flex flex-col group disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      <span className="font-semibold text-ink group-hover:text-terracotta">{reply.text}</span>
-                      <span className="text-[10px] text-pencil/80 italic">
+                      <span className="font-semibold text-text-primary group-hover:text-accent-action">{reply.text}</span>
+                      <span className="text-[10px] text-text-secondary/80 italic">
                         {language === 'hinglish' ? translateToHinglish(reply.translation) : reply.translation}
                       </span>
                     </button>
@@ -430,7 +430,7 @@ const ConversationScreen: FC = () => {
                   onChange={(e) => setInputText(e.target.value)}
                   disabled={isTyping}
                   placeholder={`Escribe una carta a ${activeCompanion.name} en español...`}
-                  className="w-full bg-paper border border-[#DDD0B5] rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-terracotta focus:border-terracotta placeholder:text-pencil/60 disabled:opacity-50"
+                  className="w-full bg-bg-elevated border border-structural text-text-primary rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-accent-action focus:border-accent-action placeholder:text-text-tertiary disabled:opacity-50"
                 />
                 <span className="absolute right-3 top-3.5 text-xs opacity-40 pointer-events-none">
                   ✍️
@@ -439,7 +439,7 @@ const ConversationScreen: FC = () => {
               <button
                 type="submit"
                 disabled={!inputText.trim() || isTyping}
-                className="bg-terracotta text-paper rounded-xl px-5 py-3 hover:bg-terracotta/90 transition-colors flex items-center justify-center gap-1.5 shadow font-display text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer shrink-0"
+                className="bg-accent-action text-bg-base rounded-xl px-5 py-3 hover:bg-accent-action-hover transition-colors flex items-center justify-center gap-1.5 shadow font-body text-sm font-bold border-none disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer shrink-0"
               >
                 <Send className="h-4 w-4" /> Enviar
               </button>

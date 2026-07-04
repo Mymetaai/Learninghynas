@@ -89,9 +89,9 @@ const MatchPairs: FC<MatchPairsProps> = ({
   return (
     <div>
       {context && (
-        <p className="mb-2 font-hud text-[10px] text-pencil">{context}</p>
+        <p className="mb-2 font-body text-[10px] text-text-secondary">{context}</p>
       )}
-      <p className="mb-4 font-body text-base text-ink">{prompt}</p>
+      <p className="mb-4 font-body text-base text-text-primary">{prompt}</p>
 
       <div className="flex gap-4">
         {/* Left column */}
@@ -105,12 +105,12 @@ const MatchPairs: FC<MatchPairsProps> = ({
                 type="button"
                 whileTap={!matched ? { scale: 0.97 } : undefined}
                 onClick={() => !matched && setSelectedLeft(item)}
-                className={`w-full rounded-xl border px-3 py-2.5 font-body text-sm text-left transition-colors ${
+                className={`w-full rounded-xl border px-3 py-2.5 font-body text-sm text-left transition-colors border-none cursor-pointer ${
                   matched
-                    ? 'border-teal-deep/60 bg-teal-deep/10 text-teal-deep font-semibold'
+                    ? 'border border-success/60 bg-success/10 text-success font-bold'
                     : selected
-                      ? 'border-terracotta bg-terracotta/20 text-terracotta font-semibold'
-                      : 'border-pencil/20 bg-paper text-ink hover:border-pencil/40'
+                      ? 'border border-accent-action bg-accent-action/20 text-accent-action font-bold'
+                      : 'border border-structural bg-bg-elevated text-text-primary hover:border-text-secondary/40 hover:bg-bg-elevated-2'
                 }`}
               >
                 {item}
@@ -132,12 +132,12 @@ const MatchPairs: FC<MatchPairsProps> = ({
                 transition={{ duration: 0.4 }}
                 whileTap={!matched && selectedLeft ? { scale: 0.97 } : undefined}
                 onClick={() => !matched && selectedLeft && handleRightTap(item)}
-                className={`w-full rounded-xl border px-3 py-2.5 font-body text-sm text-left transition-colors ${
+                className={`w-full rounded-xl border px-3 py-2.5 font-body text-sm text-left transition-colors border-none cursor-pointer ${
                   matched
-                    ? 'border-teal-deep/60 bg-teal-deep/10 text-teal-deep font-semibold'
+                    ? 'border border-success/60 bg-success/10 text-success font-bold'
                     : selectedLeft
-                      ? 'border-pencil/20 bg-paper text-ink hover:border-pencil/40'
-                      : 'border-pencil/20 bg-paper text-ink opacity-60'
+                      ? 'border border-structural bg-bg-elevated text-text-primary hover:border-text-secondary/40 hover:bg-bg-elevated-2'
+                      : 'border border-structural bg-bg-elevated text-text-secondary/60 opacity-60'
                 }`}
               >
                 {item}
@@ -151,7 +151,7 @@ const MatchPairs: FC<MatchPairsProps> = ({
         <motion.p
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-3 font-body text-sm text-teal-deep"
+          className="mt-3 font-body text-sm text-success font-semibold"
         >
           ✓ All pairs matched!
         </motion.p>

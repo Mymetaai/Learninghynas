@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, type FC } from 'react';
+import { useState, useEffect, useRef, useCallback, type FC } from 'react';
 import { useStatsStore } from '../state/statsStore';
 import { useSettingsStore } from '../state/settingsStore';
 import { translateToHinglish } from '../utils/hinglish';
@@ -261,6 +261,34 @@ const SpeakingScreen: FC = () => {
   const activeChallenge = CHALLENGES[activeChallengeIndex];
   const recognitionRef = useRef<any>(null);
 
+  const cleanWord = useCallback((w: string) => 
+    w.toLowerCase().trim().replace(/[¡!¿?,/#!$%^&*;:{}=\-_`~()]/g, ""), []);
+
+  const evaluateSpeech = useCallback((userText: string) => {
+    const targetPhrase = activeChallenge.phrase;
+    const targetWords = targetPhrase.split(/\s+/);
+    const userWords = userText.split(/\s+/).map(cleanWord);
+
+    let matchCount = 0;
+    const evaluated = targetWords.map((word) => {
+      const cleanTarget = cleanWord(word);
+      const isMatch = userWords.includes(cleanTarget);
+      if (isMatch) {
+        matchCount++;
+      }
+      return { word, correct: isMatch };
+    });
+
+    const accuracyScore = Math.round((matchCount / targetWords.length) * 100);
+    setScore(accuracyScore);
+    setFeedbackWords(evaluated);
+
+    if (accuracyScore >= 80) {
+      setHasEarnedBonus(true);
+      addRewards(10, 5); // Grant rewards for good pronunciation
+    }
+  }, [activeChallenge.phrase, cleanWord, addRewards]);
+
   // Initialize Speech Recognition
   useEffect(() => {
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -301,7 +329,7 @@ const SpeakingScreen: FC = () => {
     } else {
       console.warn('Speech Recognition not supported in this browser.');
     }
-  }, [activeChallengeIndex]);
+  }, [activeChallengeIndex, evaluateSpeech]);
 
   // Fallback simulator in case of missing speech recognition or for offline testing
   const simulateSpeechInput = () => {
@@ -369,36 +397,8 @@ const SpeakingScreen: FC = () => {
     }
   };
 
-  const cleanWord = (w: string) => 
-    w.toLowerCase().trim().replace(/[¡!¿?.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
-
-  const evaluateSpeech = (userText: string) => {
-    const targetPhrase = activeChallenge.phrase;
-    const targetWords = targetPhrase.split(/\s+/);
-    const userWords = userText.split(/\s+/).map(cleanWord);
-
-    let matchCount = 0;
-    const evaluated = targetWords.map((word) => {
-      const cleanTarget = cleanWord(word);
-      const isMatch = userWords.includes(cleanTarget);
-      if (isMatch) {
-        matchCount++;
-      }
-      return { word, correct: isMatch };
-    });
-
-    const accuracyScore = Math.round((matchCount / targetWords.length) * 100);
-    setScore(accuracyScore);
-    setFeedbackWords(evaluated);
-
-    if (accuracyScore >= 80) {
-      setHasEarnedBonus(true);
-      addRewards(10, 5); // Grant rewards for good pronunciation
-    }
-  };
-
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] bg-ink text-paper p-4 sm:p-6 lg:p-8">
+    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary p-4 sm:p-6 lg:p-8">
       <div className="mx-auto max-w-5xl">
         
         {/* Header */}
@@ -406,7 +406,7 @@ const SpeakingScreen: FC = () => {
           <p className="font-hud text-[10px] uppercase tracking-[0.3em] text-pencil">
             Desafío de Pronunciación
           </p>
-          <h1 className="font-display text-2xl font-bold text-paper mt-1">Voice Arena</h1>
+          <h1 className="font-display text-2xl font-bold text-text-primary mt-1">Voice Arena</h1>
           <p className="text-pencil text-xs mt-1">
             Listen to native pronunciations, record your own voice, and get live feedback to master your Spanish speaking skills.
           </p>
@@ -435,24 +435,24 @@ const SpeakingScreen: FC = () => {
                     }}
                     className={`w-full text-left rounded-xl border p-3.5 transition-all duration-200 cursor-pointer ${
                       isActive
-                        ? 'bg-paper border-terracotta text-ink scale-[1.01] shadow-md'
-                        : 'bg-paper/5 border-pencil/20 text-paper hover:bg-paper/10'
+                        ? 'bg-bg-elevated border-accent-action text-text-primary scale-[1.01] shadow-md'
+                        : 'bg-bg-elevated-2 border-structural text-text-primary hover:bg-structural'
                     }`}
                   >
                     <div className="flex items-center justify-between gap-2">
-                      <span className={`font-hud text-[9px] uppercase px-1.5 py-0.5 rounded ${
+                      <span className={`font-body text-[9px] font-bold uppercase px-1.5 py-0.5 rounded ${
                         ch.difficulty === 'Fácil'
-                          ? 'bg-teal-deep/15 text-teal-deep border border-teal-deep/30'
+                          ? 'bg-success/15 text-success border border-success/30'
                           : ch.difficulty === 'Medio'
-                            ? 'bg-marigold/15 text-marigold border border-marigold/30'
-                            : 'bg-terracotta/15 text-terracotta border border-terracotta/30'
+                            ? 'bg-info/15 text-info border border-info/30'
+                            : 'bg-accent-action/15 text-accent-action border border-accent-action/30'
                       } ${isActive ? '' : 'brightness-125'}`}>
                         {ch.difficulty}
                       </span>
-                      <span className="font-hud text-[9px] text-pencil">Test #{idx + 1}</span>
+                      <span className="font-body text-[9px] text-text-secondary">Test #{idx + 1}</span>
                     </div>
-                    <p className="font-display font-bold text-sm mt-2 truncate">{ch.phrase}</p>
-                    <p className={`font-body text-[11px] mt-0.5 truncate ${isActive ? 'text-pencil' : 'text-pencil/80'}`}>
+                    <p className="font-target text-base font-bold mt-2 truncate">{ch.phrase}</p>
+                    <p className={`font-body text-[11px] mt-0.5 truncate ${isActive ? 'text-text-secondary' : 'text-text-tertiary'}`}>
                       {language === 'hinglish' ? translateToHinglish(ch.translation) : ch.translation}
                     </p>
                   </button>
@@ -467,7 +467,7 @@ const SpeakingScreen: FC = () => {
             {/* Active Challenge Display */}
             <div className="text-center py-4 bg-paper/[0.02] border border-pencil/10 rounded-xl p-5">
               <span className="font-hud text-[9px] uppercase tracking-widest text-pencil">Spanish Phrase to Speak</span>
-              <p className="font-display text-2xl sm:text-3xl font-extrabold text-paper mt-2 tracking-wide">
+              <p className="font-display text-2xl sm:text-3xl font-extrabold text-text-primary mt-2 tracking-wide">
                 {activeChallenge.phrase}
               </p>
               <p className="font-body text-sm text-pencil/90 mt-2 italic">
@@ -487,49 +487,49 @@ const SpeakingScreen: FC = () => {
 
             {/* Pronunciation Tip Box */}
             <div className="my-5 p-4 rounded-xl border border-marigold/20 bg-marigold/5 flex items-start gap-3">
-              <HelpCircle className="h-5 w-5 text-marigold shrink-0 mt-0.5" />
+              <HelpCircle className="h-5 w-5 text-info shrink-0 mt-0.5" />
               <div>
-                <h4 className="font-hud text-[10px] uppercase tracking-wider text-marigold font-bold">Pronunciation Tip</h4>
-                <p className="font-body text-xs text-paper/90 mt-1 leading-relaxed">{activeChallenge.pronunciationTip}</p>
+                <h4 className="font-body text-[10px] uppercase tracking-wider text-info font-bold">Pronunciation Tip</h4>
+                <p className="font-body text-xs text-text-primary mt-1 leading-relaxed">{activeChallenge.pronunciationTip}</p>
               </div>
             </div>
 
             {/* Recording Controls */}
-            <div className="flex flex-col items-center justify-center gap-4 py-6 border-t border-b border-pencil/10">
+            <div className="flex flex-col items-center justify-center gap-4 py-6 border-t border-b border-structural">
               {isRecording ? (
                 <div className="flex flex-col items-center gap-4 w-full">
                   {/* Waveform Animation */}
                   <div className="flex items-end justify-center gap-1.5 h-10 w-full max-w-[200px]">
-                    <span className="w-1 bg-terracotta rounded animate-bounce h-6" style={{ animationDelay: '0.1s', animationDuration: '0.6s' }} />
-                    <span className="w-1 bg-terracotta rounded animate-bounce h-9" style={{ animationDelay: '0.3s', animationDuration: '0.8s' }} />
-                    <span className="w-1 bg-terracotta rounded animate-bounce h-5" style={{ animationDelay: '0.5s', animationDuration: '0.5s' }} />
-                    <span className="w-1 bg-terracotta rounded animate-bounce h-10" style={{ animationDelay: '0.2s', animationDuration: '0.7s' }} />
-                    <span className="w-1 bg-terracotta rounded animate-bounce h-7" style={{ animationDelay: '0.4s', animationDuration: '0.9s' }} />
-                    <span className="w-1 bg-terracotta rounded animate-bounce h-4" style={{ animationDelay: '0.6s', animationDuration: '0.4s' }} />
+                    <span className="w-1 bg-accent-action rounded animate-bounce h-6" style={{ animationDelay: '0.1s', animationDuration: '0.6s' }} />
+                    <span className="w-1 bg-accent-action rounded animate-bounce h-9" style={{ animationDelay: '0.3s', animationDuration: '0.8s' }} />
+                    <span className="w-1 bg-accent-action rounded animate-bounce h-5" style={{ animationDelay: '0.5s', animationDuration: '0.5s' }} />
+                    <span className="w-1 bg-accent-action rounded animate-bounce h-10" style={{ animationDelay: '0.2s', animationDuration: '0.7s' }} />
+                    <span className="w-1 bg-accent-action rounded animate-bounce h-7" style={{ animationDelay: '0.4s', animationDuration: '0.9s' }} />
+                    <span className="w-1 bg-accent-action rounded animate-bounce h-4" style={{ animationDelay: '0.6s', animationDuration: '0.4s' }} />
                   </div>
                   <button
                     onClick={stopRecording}
-                    className="h-16 w-16 rounded-full bg-terracotta border-4 border-paper/10 flex items-center justify-center text-paper hover:scale-105 transition-transform cursor-pointer animate-pulse"
+                    className="h-16 w-16 rounded-full bg-error border-4 border-bg-elevated flex items-center justify-center text-bg-base hover:scale-105 transition-transform cursor-pointer animate-pulse border-none"
                   >
                     <MicOff className="h-7 w-7" />
                   </button>
-                  <p className="font-hud text-xs text-terracotta animate-pulse font-bold">Escuchando... Di la frase en español</p>
+                  <p className="font-body text-xs text-error animate-pulse font-bold">Escuchando... Di la frase en español</p>
                 </div>
               ) : (
                 <div className="flex flex-col items-center gap-3">
                   <button
                     onClick={startRecording}
-                    className="h-16 w-16 rounded-full bg-teal-deep hover:bg-teal-deep/90 border-4 border-paper/10 flex items-center justify-center text-paper hover:scale-105 transition-transform cursor-pointer shadow-lg"
+                    className="h-16 w-16 rounded-full bg-accent-action hover:bg-accent-action-hover border-4 border-bg-elevated flex items-center justify-center text-bg-base hover:scale-105 transition-transform cursor-pointer shadow-lg border-none"
                   >
                     <Mic className="h-7 w-7" />
                   </button>
-                  <p className="font-hud text-xs text-pencil">Tap the microphone to speak</p>
+                  <p className="font-body text-xs text-text-secondary">Tap the microphone to speak</p>
                 </div>
               )}
 
               {/* Permission/Error display */}
               {speakingError && (
-                <div className="mt-2 p-3 bg-terracotta/10 border border-terracotta/20 rounded-xl flex items-center gap-2.5 max-w-md text-center text-xs text-terracotta">
+                <div className="mt-2 p-3 bg-error/10 border border-error/20 rounded-xl flex items-center gap-2.5 max-w-md text-center text-xs text-error animate-fadeIn">
                   <AlertTriangle className="h-4 w-4 shrink-0" />
                   <span>{speakingError}</span>
                 </div>
@@ -538,20 +538,20 @@ const SpeakingScreen: FC = () => {
 
             {/* Speaking results / feedback */}
             {(transcript || score !== null) && (
-              <div className="mt-5 p-4 rounded-xl bg-paper/[0.01] border border-pencil/20 space-y-4 animate-fadeIn">
+              <div className="mt-5 p-4 rounded-xl bg-bg-elevated border border-structural space-y-4 animate-fadeIn">
                 
                 {/* Transcript breakdown */}
                 <div>
-                  <span className="font-hud text-[9px] uppercase tracking-widest text-pencil">Pronunciation feedback</span>
-                  <div className="mt-2 flex flex-wrap gap-x-2 gap-y-1 text-lg font-display">
+                  <span className="font-body text-[9px] uppercase tracking-widest text-text-secondary">Pronunciation feedback</span>
+                  <div className="mt-2 flex flex-wrap gap-x-2 gap-y-1 text-lg font-target tracking-[0.015em]">
                     {feedbackWords.length > 0 ? (
                       feedbackWords.map((item, idx) => (
                         <span
                           key={idx}
                           className={`relative font-semibold ${
                             item.correct
-                              ? 'text-teal-deep'
-                              : 'text-terracotta underline decoration-wavy decoration-terracotta/70'
+                              ? 'text-success'
+                              : 'text-error underline decoration-wavy decoration-error/70'
                           }`}
                           title={item.correct ? 'Correct pronunciation' : 'Mispronounced/Not heard'}
                         >
@@ -559,40 +559,39 @@ const SpeakingScreen: FC = () => {
                         </span>
                       ))
                     ) : (
-                      <span className="text-pencil italic text-sm">Evaluating...</span>
+                      <span className="text-text-secondary italic text-sm font-body">Evaluating...</span>
                     )}
                   </div>
                 </div>
 
                 {/* Score and Award Banner */}
                 {score !== null && (
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-3 border-t border-pencil/10">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-3 border-t border-structural">
                     <div className="flex items-center gap-3">
                       {/* Score Ring */}
                       <div className="relative w-14 h-14 shrink-0">
                         <svg width="56" height="56" className="transform -rotate-90">
-                          <circle cx="28" cy="28" r="23" className="stroke-paper/10 fill-none" strokeWidth="4" />
+                          <circle cx="28" cy="28" r="23" className="stroke-structural fill-none" strokeWidth="4" />
                           <circle
                             cx="28"
                             cy="28"
                             r="23"
-                            className={`fill-none ${score >= 80 ? 'stroke-teal-deep' : 'stroke-terracotta'}`}
+                            className={`fill-none ${score >= 80 ? 'stroke-success' : 'stroke-error'}`}
                             strokeWidth="4"
                             strokeDasharray="144.5"
                             strokeDashoffset={144.5 - (144.5 * score) / 100}
                             strokeLinecap="round"
                           />
                         </svg>
-                        <div className="absolute inset-0 flex items-center justify-center font-hud text-xs font-bold">
+                        <div className="absolute inset-0 flex items-center justify-center font-body text-xs font-bold text-text-primary">
                           {score}%
                         </div>
                       </div>
-                      
                       <div>
-                        <h4 className="font-display font-bold text-sm">
+                        <h4 className="font-display font-bold text-sm text-text-primary">
                           {score >= 80 ? '¡Excelente Trabajo!' : 'Inténtalo de Nuevo'}
                         </h4>
-                        <p className="text-pencil text-xs mt-0.5">
+                        <p className="text-text-secondary text-xs mt-0.5">
                           {score >= 80 
                             ? 'Your pronunciation matches native speech parameters!'
                             : 'Focus on the guide tips above and try recording once more.'
@@ -603,11 +602,11 @@ const SpeakingScreen: FC = () => {
 
                     {/* Rewards Bonus Banner */}
                     {hasEarnedBonus && (
-                      <div className="bg-marigold/10 border border-marigold/20 rounded-xl px-3 py-2 flex items-center gap-2 text-marigold animate-fadeIn shrink-0">
+                      <div className="bg-accent-action/10 border border-accent-action/20 rounded-xl px-3 py-2 flex items-center gap-2 text-accent-action animate-fadeIn shrink-0">
                         <Trophy className="h-4.5 w-4.5 shrink-0" />
-                        <div className="font-hud text-[10px] leading-tight">
+                        <div className="font-body text-[10px] leading-tight">
                           <p className="font-bold uppercase tracking-wider">Bonus Awarded</p>
-                          <p className="mt-0.5 text-paper">+10 XP · +5 Coins</p>
+                          <p className="mt-0.5 text-text-primary">+10 XP · +5 Coins</p>
                         </div>
                       </div>
                     )}

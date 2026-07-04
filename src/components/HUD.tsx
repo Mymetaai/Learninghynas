@@ -99,7 +99,7 @@ const HUD: FC = () => {
   }, [location.pathname]);
 
   return (
-    <header className="glass-surface sticky top-0 z-40 border-b border-white/[0.08]">
+    <header className="nav-glass sticky top-0 z-40">
       <div className="relative z-10 mx-auto max-w-3xl">
         {/* Row 1 — Brand + stats */}
         <div className="flex h-14 items-center justify-between gap-3 px-4">
@@ -114,23 +114,23 @@ const HUD: FC = () => {
               alt="TheLearningHyena Logo"
               className="h-7 w-7 object-contain"
             />
-            <span className="hidden font-display text-sm font-semibold text-paper sm:inline">
+            <span className="hidden font-display text-sm font-semibold text-text-primary sm:inline">
               TheLearningHyena
             </span>
           </Link>
 
-          {/* Stats cluster — HUD/data font */}
-          <div className="flex items-center gap-2 font-hud text-xs sm:gap-4 sm:text-sm">
+          {/* Stats cluster — Unified stats font-body / text-primary */}
+          <div className="flex items-center gap-2 font-body text-xs sm:gap-4 sm:text-sm">
             <Stat
               label="XP"
               value={xp}
-              className="text-paper"
+              className="text-text-primary"
               title={`${xp} experience points`}
             />
             <Stat
               label="coins"
               value={coins}
-              className="text-marigold"
+              className="text-text-primary"
               title={`${coins} coins`}
               icon={
                 <div className="coin-3d-container" aria-hidden="true">
@@ -144,7 +144,7 @@ const HUD: FC = () => {
             <Stat
               label="day streak"
               value={streak}
-              className="text-terracotta"
+              className="text-text-primary"
               title={`${streak}-day streak`}
               icon={
                 <div className="flame-3d-container" aria-hidden="true">
@@ -158,7 +158,7 @@ const HUD: FC = () => {
             />
             <Link
               to="/daily"
-              className="flex h-8 w-8 items-center justify-center rounded-md border border-pencil/30 text-paper transition-colors hover:border-pencil/60 hover:bg-pencil/10"
+              className="flex h-8 w-8 items-center justify-center rounded-md border border-structural text-text-primary transition-colors hover:border-text-secondary hover:bg-bg-elevated-2"
               aria-label="Daily Quests"
               title="Daily Quests"
             >
@@ -167,7 +167,7 @@ const HUD: FC = () => {
             <select
               value={language}
               onChange={(e) => setLanguage(e.target.value as any)}
-              className="h-8 rounded-md border border-pencil/30 bg-ink/90 text-[11px] font-hud text-paper px-2 transition-colors hover:border-pencil/60 focus:border-pencil/60 focus:outline-none cursor-pointer"
+              className="h-8 rounded-md border border-structural bg-bg-elevated text-[11px] font-body text-text-primary px-2 transition-colors hover:border-text-secondary focus:border-text-secondary focus:outline-none cursor-pointer"
               aria-label="Select translation language"
               title="Select Translation Language"
             >
@@ -204,10 +204,10 @@ const HUD: FC = () => {
                   end={tab.id === 'dashboard'}
                   ref={setTabRef(tab.id)}
                   className={({ isActive }) =>
-                    `relative z-10 whitespace-nowrap rounded-full px-3 py-1.5 font-hud text-[11px] transition-colors duration-200 ${
+                    `relative z-10 whitespace-nowrap rounded-full px-3 py-1.5 font-body text-[11px] transition-colors duration-200 ${
                       isActive
-                        ? 'text-paper'
-                        : 'text-pencil hover:text-paper/80'
+                        ? 'text-text-primary font-medium'
+                        : 'text-text-secondary hover:text-text-primary/80'
                     }`
                   }
                 >

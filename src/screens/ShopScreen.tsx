@@ -338,13 +338,13 @@ const ShopScreen: FC = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] bg-ink text-paper p-4 sm:p-6 lg:p-8 font-body pb-20">
+    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary p-4 sm:p-6 lg:p-8 font-body pb-20">
       <div className="mx-auto max-w-5xl">
         
         {/* ── HEADER ────────────────────────────────────────────────── */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
           <div>
-            <h1 className="font-display text-3xl font-bold text-paper flex items-center gap-2">
+            <h1 className="font-display text-3xl font-bold text-text-primary flex items-center gap-2">
               <ShoppingBag className="text-terracotta h-8 w-8" />
               Anime Card Shop
             </h1>
@@ -364,10 +364,10 @@ const ShopScreen: FC = () => {
                   setSelectedCard(null);
                   setSelectedHotspot(null);
                 }}
-                className="bg-paper/10 hover:bg-paper/15 border border-pencil/30 text-paper font-hud text-xs rounded-xl px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-marigold transition-all cursor-pointer font-bold"
+                className="bg-paper/10 hover:bg-paper/15 border border-pencil/30 text-text-primary font-hud text-xs rounded-xl px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-marigold transition-all cursor-pointer font-bold"
               >
-                <option value="one-piece" className="bg-ink text-paper">🏴‍☠️ One Piece Set</option>
-                <option value="demon-slayer" className="bg-ink text-paper">⚔️ Demon Slayer Set</option>
+                <option value="one-piece" className="bg-bg-base text-text-primary">🏴‍☠️ One Piece Set</option>
+                <option value="demon-slayer" className="bg-bg-base text-text-primary">⚔️ Demon Slayer Set</option>
               </select>
             </div>
           </div>
@@ -474,7 +474,7 @@ const ShopScreen: FC = () => {
                     </div>
                   </div>
                   <div>
-                    <div className="card-title select-none font-display text-sm tracking-wider text-paper">
+                    <div className="card-title select-none font-display text-sm tracking-wider text-text-primary">
                       {selectedSeries === 'one-piece' ? 'ONE PIECE CARD' : 'KIMETSU CARD'}
                     </div>
                     <div className="card-subtitle select-none font-mono text-[9px] tracking-widest text-[#ff7a3c] mt-1">
@@ -490,7 +490,7 @@ const ShopScreen: FC = () => {
               {/* Actions Panel */}
               <div className="flex-1 max-w-sm space-y-6 z-10 relative">
                 <div>
-                  <h2 className="font-display text-xl font-bold text-paper">Summoning Altar</h2>
+                  <h2 className="font-display text-xl font-bold text-text-primary">Summoning Altar</h2>
                   <p className="text-pencil text-xs mt-2 leading-relaxed">
                     Unlock {selectedSeries === 'one-piece' ? ONE_PIECE_CARDS.length : DEMON_SLAYER_CARDS.length} mystical cards from this set.
                   </p>
@@ -504,7 +504,7 @@ const ShopScreen: FC = () => {
                       <h4 className="font-hud text-[9px] uppercase font-bold text-marigold tracking-wider leading-none">
                         {selectedSeries === 'one-piece' ? 'Pirate King Lore' : 'Corps Motto'}
                       </h4>
-                      <p className="text-[11px] italic text-paper/85 leading-relaxed mt-1">
+                      <p className="text-[11px] italic text-text-primary/85 leading-relaxed mt-1">
                         {selectedSeries === 'one-piece'
                           ? '"Inherited Will, the Destiny of Age, and the Dreams of People. As long as people continue to pursue the meaning of Freedom, these things will never cease to be!"'
                           : '"No matter how many people you lose, you have no choice but to go on living. Set your heart ablaze and surpass your limits!"'}
@@ -528,7 +528,7 @@ const ShopScreen: FC = () => {
                   </div>
                   <div className="flex justify-between">
                     <span>Common Drop Rate:</span>
-                    <span className="text-paper/60 font-bold">40%</span>
+                    <span className="text-text-primary/60 font-bold">40%</span>
                   </div>
                 </div>
 
@@ -610,7 +610,7 @@ const ShopScreen: FC = () => {
 
                       {/* Character Info */}
                       <div className="flex-1 flex flex-col justify-center text-center">
-                        <h4 className="font-display text-base font-extrabold text-paper leading-tight">
+                        <h4 className="font-display text-base font-extrabold text-text-primary leading-tight">
                           {drawnCard.name}
                         </h4>
                         <p className="font-hud text-[10px] font-bold mt-1" style={{ color: 'var(--rarity-color)' }}>
@@ -621,7 +621,7 @@ const ShopScreen: FC = () => {
                       {/* Special Move Footer */}
                       <div className="w-full border-t border-white/10 pt-2 flex flex-col text-left">
                         <span className="text-[7px] uppercase font-hud text-[#a89b8a] tracking-wider">Signature Attack</span>
-                        <span className="text-[10px] text-paper font-semibold truncate mt-0.5">
+                        <span className="text-[10px] text-text-primary font-semibold truncate mt-0.5">
                           {drawnCard.specialMove}
                         </span>
                       </div>
@@ -671,7 +671,7 @@ const ShopScreen: FC = () => {
         <div className="border border-pencil/20 bg-paper/5 rounded-2xl p-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b border-pencil/10 pb-4">
             <div>
-              <h3 className="font-display text-lg font-bold text-paper flex items-center gap-1.5">
+              <h3 className="font-display text-lg font-bold text-text-primary flex items-center gap-1.5">
                 🏴‍☠️ Card Collection Gallery
               </h3>
               <p className="text-pencil text-xs mt-0.5">
@@ -687,7 +687,7 @@ const ShopScreen: FC = () => {
                   onClick={() => setFilterRarity(r)}
                   className={`px-3 py-1 rounded-lg font-hud text-[10px] uppercase border tracking-wider transition-colors cursor-pointer ${
                     filterRarity === r
-                      ? 'bg-terracotta border-terracotta text-paper font-semibold'
+                      ? 'bg-terracotta border-terracotta text-text-primary font-semibold'
                       : 'border-pencil/20 hover:border-pencil/50 text-pencil bg-transparent'
                   }`}
                 >
@@ -708,13 +708,13 @@ const ShopScreen: FC = () => {
                     key={card.id}
                     onClick={() => setSelectedCard(card)}
                     style={getCardSparkleColors(card.rarity) as React.CSSProperties}
-                    className="group relative flex flex-col p-2.5 rounded-xl bg-ink border transition-all duration-300 hover:scale-105 cursor-pointer text-left animate-sparkle-border"
+                    className="group relative flex flex-col p-2.5 rounded-xl bg-bg-base border transition-all duration-300 hover:scale-105 cursor-pointer text-left animate-sparkle-border"
                   >
                     <div className={`absolute top-1.5 right-1.5 text-[8px] uppercase tracking-wider font-hud px-1.5 py-0.5 rounded font-black z-20 ${
                       card.rarity === 'legendary' ? 'bg-amber-500 text-ink shadow-[0_0_5px_rgba(245,158,11,0.4)]' :
-                      card.rarity === 'epic' ? 'bg-purple-600 text-paper shadow-[0_0_5px_rgba(147,51,234,0.4)]' :
-                      card.rarity === 'rare' ? 'bg-blue-600 text-paper shadow-[0_0_5px_rgba(37,99,235,0.4)]' :
-                      'bg-stone-500 text-paper/90'
+                      card.rarity === 'epic' ? 'bg-purple-600 text-text-primary shadow-[0_0_5px_rgba(147,51,234,0.4)]' :
+                      card.rarity === 'rare' ? 'bg-blue-600 text-text-primary shadow-[0_0_5px_rgba(37,99,235,0.4)]' :
+                      'bg-stone-500 text-text-primary/90'
                     }`}>
                       {card.rarity[0]}
                     </div>
@@ -733,7 +733,7 @@ const ShopScreen: FC = () => {
                         />
                       )}
                     </div>
-                    <p className="mt-2 font-display text-[11px] font-bold text-paper truncate leading-tight group-hover:text-marigold">
+                    <p className="mt-2 font-display text-[11px] font-bold text-text-primary truncate leading-tight group-hover:text-marigold">
                       {card.name}
                     </p>
                     <p className="font-hud text-[9px] text-marigold mt-0.5">
@@ -747,7 +747,7 @@ const ShopScreen: FC = () => {
               return (
                 <div
                   key={card.id}
-                  className="relative flex flex-col p-2.5 rounded-xl bg-ink/50 border border-pencil/10 opacity-40 select-none items-center justify-center h-[142px]"
+                  className="relative flex flex-col p-2.5 rounded-xl bg-bg-base/50 border border-pencil/10 opacity-40 select-none items-center justify-center h-[142px]"
                 >
                   <div className="h-10 w-10 rounded-full bg-paper/5 border border-pencil/20 flex items-center justify-center text-pencil">
                     <Lock size={14} />
@@ -771,7 +771,7 @@ const ShopScreen: FC = () => {
         {selectedCard && (
           <div 
             onClick={() => { setSelectedCard(null); setSelectedHotspot(null); }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/80 backdrop-blur-sm cursor-pointer"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bg-base/80 backdrop-blur-sm cursor-pointer"
           >
             {/* Modal Box */}
             <motion.div
@@ -799,7 +799,7 @@ const ShopScreen: FC = () => {
               {/* WANTED Poster style */}
               <div 
                 style={getCardSparkleColors(selectedCard.rarity) as React.CSSProperties}
-                className="p-4 rounded-xl bg-ink text-paper border-4 animate-sparkle-border flex flex-col items-center justify-center text-center shadow-lg relative"
+                className="p-4 rounded-xl bg-bg-base text-text-primary border-4 animate-sparkle-border flex flex-col items-center justify-center text-center shadow-lg relative"
               >
                 
                 {/* Hotspot Faction */}
@@ -809,7 +809,7 @@ const ShopScreen: FC = () => {
                   className={`absolute top-1.5 left-14 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full border shadow-lg transition-all cursor-pointer ${
                     selectedHotspot === 'faction' 
                       ? 'scale-125 bg-marigold text-ink border-marigold ring-2 ring-marigold/40 shadow-[0_0_10px_rgba(251,191,36,0.8)]' 
-                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-paper animate-pulse hover:scale-110 hover:bg-paper/40'
+                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-text-primary animate-pulse hover:scale-110 hover:bg-paper/40'
                   }`}
                   title="Faction Info"
                 >
@@ -823,7 +823,7 @@ const ShopScreen: FC = () => {
                   className={`absolute top-20 left-[50%] -translate-x-[50%] z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full border shadow-lg transition-all cursor-pointer ${
                     selectedHotspot === 'portrait' 
                       ? 'scale-125 bg-marigold text-ink border-marigold ring-2 ring-marigold/40 shadow-[0_0_10px_rgba(251,191,36,0.8)]' 
-                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-paper animate-pulse hover:scale-110 hover:bg-paper/40'
+                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-text-primary animate-pulse hover:scale-110 hover:bg-paper/40'
                   }`}
                   title="Portrait Info"
                 >
@@ -837,7 +837,7 @@ const ShopScreen: FC = () => {
                   className={`absolute bottom-[94px] right-6 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full border shadow-lg transition-all cursor-pointer ${
                     selectedHotspot === 'name' 
                       ? 'scale-125 bg-marigold text-ink border-marigold ring-2 ring-marigold/40 shadow-[0_0_10px_rgba(251,191,36,0.8)]' 
-                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-paper animate-pulse hover:scale-110 hover:bg-paper/40'
+                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-text-primary animate-pulse hover:scale-110 hover:bg-paper/40'
                   }`}
                   title="Name Info"
                 >
@@ -851,7 +851,7 @@ const ShopScreen: FC = () => {
                   className={`absolute bottom-[68px] right-6 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full border shadow-lg transition-all cursor-pointer ${
                     selectedHotspot === 'bounty' 
                       ? 'scale-125 bg-marigold text-ink border-marigold ring-2 ring-marigold/40 shadow-[0_0_10px_rgba(251,191,36,0.8)]' 
-                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-paper animate-pulse hover:scale-110 hover:bg-paper/40'
+                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-text-primary animate-pulse hover:scale-110 hover:bg-paper/40'
                   }`}
                   title="Bounty Info"
                 >
@@ -865,7 +865,7 @@ const ShopScreen: FC = () => {
                   className={`absolute bottom-2.5 left-4 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full border shadow-lg transition-all cursor-pointer ${
                     selectedHotspot === 'rarity' 
                       ? 'scale-125 bg-marigold text-ink border-marigold ring-2 ring-marigold/40 shadow-[0_0_10px_rgba(251,191,36,0.8)]' 
-                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-paper animate-pulse hover:scale-110 hover:bg-paper/40'
+                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-text-primary animate-pulse hover:scale-110 hover:bg-paper/40'
                   }`}
                   title="Rarity Info"
                 >
@@ -879,7 +879,7 @@ const ShopScreen: FC = () => {
                   className={`absolute bottom-2.5 right-4 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full border shadow-lg transition-all cursor-pointer ${
                     selectedHotspot === 'attack' 
                       ? 'scale-125 bg-marigold text-ink border-marigold ring-2 ring-marigold/40 shadow-[0_0_10px_rgba(251,191,36,0.8)]' 
-                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-paper animate-pulse hover:scale-110 hover:bg-paper/40'
+                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-text-primary animate-pulse hover:scale-110 hover:bg-paper/40'
                   }`}
                   title="Attack Info"
                 >
@@ -908,7 +908,7 @@ const ShopScreen: FC = () => {
                       e.stopPropagation();
                       setSelectedHotspot(selectedHotspot === 'series' ? null : 'series');
                     }}
-                    className={`absolute top-0 right-0 p-1.5 opacity-20 hover:opacity-60 hover:scale-105 transition-all font-black text-5xl select-none cursor-pointer text-paper leading-none z-20 ${
+                    className={`absolute top-0 right-0 p-1.5 opacity-20 hover:opacity-60 hover:scale-105 transition-all font-black text-5xl select-none cursor-pointer text-text-primary leading-none z-20 ${
                       selectedHotspot === 'series' ? 'opacity-85 text-marigold scale-110' : ''
                     }`}
                     title={`Click for ${selectedCard.id.startsWith('ds-') ? 'DS' : 'OP'} Series Info`}
@@ -929,7 +929,7 @@ const ShopScreen: FC = () => {
                   )}
                 </div>
 
-                <h3 className={`font-display text-lg font-black text-paper tracking-wide transition-all ${
+                <h3 className={`font-display text-lg font-black text-text-primary tracking-wide transition-all ${
                   selectedHotspot === 'name' ? 'text-marigold scale-105 ring-2 ring-marigold rounded px-2 bg-marigold/10' : ''
                 }`}>
                   {selectedCard.name}
@@ -941,9 +941,9 @@ const ShopScreen: FC = () => {
                 </p>
                 <span className={`mt-2 font-hud text-[9px] uppercase px-2.5 py-0.5 rounded-full font-bold transition-all ${
                   selectedCard.rarity === 'legendary' ? 'bg-amber-500 text-ink font-black shadow-[0_0_10px_rgba(245,158,11,0.5)]' :
-                  selectedCard.rarity === 'epic' ? 'bg-purple-600 text-paper font-extrabold shadow-[0_0_10px_rgba(147,51,234,0.5)]' :
-                  selectedCard.rarity === 'rare' ? 'bg-blue-600 text-paper font-extrabold shadow-[0_0_10px_rgba(37,99,235,0.5)]' :
-                  'bg-stone-500 text-paper/90 font-medium'
+                  selectedCard.rarity === 'epic' ? 'bg-purple-600 text-text-primary font-extrabold shadow-[0_0_10px_rgba(147,51,234,0.5)]' :
+                  selectedCard.rarity === 'rare' ? 'bg-blue-600 text-text-primary font-extrabold shadow-[0_0_10px_rgba(37,99,235,0.5)]' :
+                  'bg-stone-500 text-text-primary/90 font-medium'
                 } ${
                   selectedHotspot === 'rarity' ? 'scale-110 ring-2 ring-marigold' : ''
                 }`}>
@@ -1010,7 +1010,7 @@ const ShopScreen: FC = () => {
               {/* Close Button */}
               <button
                 onClick={() => { setSelectedCard(null); setSelectedHotspot(null); }}
-                className="mt-6 w-full bg-ink hover:bg-ink/90 text-paper font-hud text-xs uppercase py-2.5 rounded-xl transition-colors cursor-pointer font-bold"
+                className="mt-6 w-full bg-bg-base hover:bg-bg-base/90 text-text-primary font-hud text-xs uppercase py-2.5 rounded-xl transition-colors cursor-pointer font-bold"
               >
                 Close Inspect
               </button>
@@ -1024,7 +1024,7 @@ const ShopScreen: FC = () => {
         {drawnCard && (
           <div 
             onClick={() => { setDrawnCard(null); setDrawResult(null); setSummonPhase('s-altar'); }}
-            className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-ink/90 backdrop-blur-md cursor-pointer"
+            className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-bg-base/90 backdrop-blur-md cursor-pointer"
           >
             {/* Reveal Header */}
             <motion.div
@@ -1042,7 +1042,7 @@ const ShopScreen: FC = () => {
                 </div>
               ) : (
                 <div>
-                  <h2 className="font-display text-2xl font-extrabold text-paper tracking-wider flex items-center justify-center gap-2">
+                  <h2 className="font-display text-2xl font-extrabold text-text-primary tracking-wider flex items-center justify-center gap-2">
                     🔄 DUPLICATE DRAW
                   </h2>
                   <p className="text-pencil text-xs mt-2 font-hud tracking-wider uppercase text-marigold">Converted: +15 XP & +10 Coins</p>
@@ -1058,7 +1058,7 @@ const ShopScreen: FC = () => {
               transition={{ type: 'spring', damping: 15, stiffness: 100 }}
               onClick={(e) => e.stopPropagation()}
               style={getCardSparkleColors(drawnCard.rarity) as React.CSSProperties}
-              className="relative w-72 h-[450px] bg-ink border-4 rounded-3xl p-6 flex flex-col justify-between shadow-[0_0_50px_rgba(0,0,0,0.8)] cursor-default overflow-hidden animate-sparkle-border"
+              className="relative w-72 h-[450px] bg-bg-base border-4 rounded-3xl p-6 flex flex-col justify-between shadow-[0_0_50px_rgba(0,0,0,0.8)] cursor-default overflow-hidden animate-sparkle-border"
             >
               {/* Backglow element */}
               <div className={`absolute inset-0 opacity-10 bg-gradient-to-tr ${drawnCard.color} pointer-events-none`} />
@@ -1070,8 +1070,8 @@ const ShopScreen: FC = () => {
                 </span>
                 <span className={`font-hud text-[10px] uppercase px-2.5 py-0.5 rounded-full font-black ${
                   drawnCard.rarity === 'legendary' ? 'bg-amber-500 text-ink animate-pulse' :
-                  drawnCard.rarity === 'epic' ? 'bg-purple-600 text-paper' :
-                  drawnCard.rarity === 'rare' ? 'bg-sky-500 text-paper' : 'bg-pencil/20 text-pencil'
+                  drawnCard.rarity === 'epic' ? 'bg-purple-600 text-text-primary' :
+                  drawnCard.rarity === 'rare' ? 'bg-sky-500 text-text-primary' : 'bg-pencil/20 text-pencil'
                 }`}>
                   {drawnCard.rarity}
                 </span>
@@ -1086,7 +1086,7 @@ const ShopScreen: FC = () => {
               <div className={`my-4 h-48 w-full rounded-2xl bg-gradient-to-tr ${drawnCard.color} flex items-center justify-center text-8xl shadow-inner relative overflow-hidden select-none z-10`}>
                 <div className="absolute inset-0 animate-shimmer pointer-events-none z-10" />
                 {/* Series Watermark */}
-                <div className="absolute top-1 right-2 opacity-15 font-black text-5xl select-none text-paper leading-none">
+                <div className="absolute top-1 right-2 opacity-15 font-black text-5xl select-none text-text-primary leading-none">
                   {drawnCard.id.startsWith('ds-') ? 'DS' : 'OP'}
                 </div>
 
@@ -1105,7 +1105,7 @@ const ShopScreen: FC = () => {
 
               {/* Details & Lore */}
               <div className="flex-1 flex flex-col justify-center text-center z-10 px-2">
-                <h3 className="font-display text-xl font-black text-paper leading-tight tracking-wide">
+                <h3 className="font-display text-xl font-black text-text-primary leading-tight tracking-wide">
                   {drawnCard.name}
                 </h3>
                 <p className="font-hud text-xs text-marigold font-extrabold tracking-wider mt-1">
@@ -1119,7 +1119,7 @@ const ShopScreen: FC = () => {
               {/* Special Move Footer */}
               <div className="border-t border-pencil/10 pt-3 flex flex-col z-10 mt-2">
                 <span className="text-[8px] uppercase font-hud text-pencil tracking-widest">Signature Attack</span>
-                <span className="text-xs text-paper font-bold truncate mt-0.5 text-terracotta">
+                <span className="text-xs text-text-primary font-bold truncate mt-0.5 text-terracotta">
                   {drawnCard.specialMove}
                 </span>
               </div>
@@ -1491,7 +1491,7 @@ interface StatBoxProps {
   icon?: React.ReactNode;
 }
 
-const StatBox: FC<StatBoxProps> = ({ label, value, color = "text-paper", icon }) => (
+const StatBox: FC<StatBoxProps> = ({ label, value, color = "text-text-primary", icon }) => (
   <div className="bg-paper/5 border border-pencil/20 rounded-xl p-4 text-center flex flex-col justify-center items-center shadow-md">
     {icon && <div className="text-pencil/70 mb-1">{icon}</div>}
     <div className={`text-xl font-bold font-hud leading-none ${color}`}>{value}</div>

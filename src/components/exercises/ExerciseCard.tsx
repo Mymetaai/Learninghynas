@@ -47,14 +47,14 @@ const ExerciseCard: FC<ExerciseCardProps> = ({
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.25 }}
-      className="rounded-xl border border-pencil/20 bg-paper p-6 text-ink shadow-[0_8px_30px_rgba(0,0,0,0.3)]"
+      className="rounded-xl border border-structural bg-bg-elevated p-6 text-text-primary shadow-2xl"
     >
       {/* Exercise header */}
       <div className="mb-4 flex items-center justify-between">
-        <p className="font-hud text-[10px] uppercase tracking-[0.25em] text-terracotta">
+        <p className="font-body text-[10px] font-bold uppercase tracking-[0.25em] text-accent-action">
           {TYPE_LABELS[exercise.type] ?? exercise.type}
         </p>
-        <p className="font-hud text-[10px] text-pencil">
+        <p className="font-body text-[10px] text-text-secondary">
           {index} / {total}
         </p>
       </div>

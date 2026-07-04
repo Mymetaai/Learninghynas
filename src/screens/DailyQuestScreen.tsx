@@ -61,7 +61,7 @@ const DailyQuestScreen: FC = () => {
   // ── Active play view ────────────────────────────────────────────────────
   if (activeQuest) {
     return (
-      <div className="min-h-[calc(100vh-3.5rem)] bg-ink px-4 py-6">
+      <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base px-4 py-6">
         <Confetti fire={confetti} />
         <div className="mx-auto max-w-lg">
           <MicroQuestPlayer
@@ -77,22 +77,22 @@ const DailyQuestScreen: FC = () => {
 
   // ── Dashboard list view ─────────────────────────────────────────────────
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] bg-ink text-paper font-body">
+    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary font-body">
       <Confetti fire={confetti} />
 
       {/* Hero header */}
-      <div className="relative overflow-hidden border-b border-pencil/20 bg-gradient-to-br from-amber-500/15 via-ink to-terracotta/15 px-4 py-8">
+      <div className="relative overflow-hidden border-b border-structural bg-gradient-to-br from-accent-action/10 via-bg-base to-streak-warm/10 px-4 py-8">
         <div className="mx-auto max-w-3xl">
           <div className="flex items-center gap-2">
-            <Sun size={16} className="text-amber-400" />
-            <p className="font-hud text-[10px] uppercase tracking-[0.3em] text-amber-400">
+            <Sun size={16} className="text-accent-action" />
+            <p className="font-body text-[10px] uppercase tracking-[0.3em] text-accent-action font-semibold">
               Misión Diaria
             </p>
           </div>
-          <h1 className="mt-1 font-display text-3xl font-bold text-paper">
+          <h1 className="mt-1 font-display text-3xl font-bold text-text-primary">
             Today's Quest
           </h1>
-          <p className="mt-2 font-body text-sm text-pencil">
+          <p className="mt-2 font-body text-sm text-text-secondary">
             5 fresh micro-quests shuffle in every day. Complete them all for a
             bonus, and watch your score climb.
           </p>
@@ -100,22 +100,22 @@ const DailyQuestScreen: FC = () => {
           {/* Live stats */}
           <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
             <DashStat
-              icon={<Flame size={14} className="text-terracotta" />}
+              icon={<Flame size={14} className="text-streak-warm animate-pulse" />}
               label="Streak"
               value={`${streak}`}
             />
             <DashStat
-              icon={<Star size={14} className="text-amber-400" />}
+              icon={<Star size={14} className="text-accent-action" />}
               label="Done"
               value={`${doneCount}/${microQuests.length}`}
             />
             <DashStat
-              icon={<Zap size={14} className="text-marigold" />}
+              icon={<Zap size={14} className="text-accent-action" />}
               label="Accuracy"
               value={`${accuracy}%`}
             />
             <DashStat
-              icon={<Coins size={14} className="text-amber-300" />}
+              icon={<Coins size={14} className="text-accent-action" />}
               label="Coins"
               value={`${coins}`}
             />
@@ -124,16 +124,16 @@ const DailyQuestScreen: FC = () => {
           {/* Daily progress bar */}
           <div className="mt-4">
             <div className="mb-1 flex items-center justify-between">
-              <span className="font-hud text-[10px] uppercase tracking-wider text-pencil">
+              <span className="font-body text-[10px] uppercase tracking-wider text-text-secondary">
                 Daily progress
               </span>
-              <span className="font-hud text-[10px] text-amber-400">
+              <span className="font-body text-[10px] text-accent-action font-semibold">
                 {Math.round((doneCount / microQuests.length) * 100)}%
               </span>
             </div>
-            <div className="h-2 w-full rounded-full bg-pencil/20">
+            <div className="h-2 w-full rounded-full bg-structural">
               <motion.div
-                className="h-2 rounded-full bg-gradient-to-r from-amber-400 to-terracotta"
+                className="h-2 rounded-full bg-gradient-to-r from-accent-action to-streak-warm"
                 initial={{ width: 0 }}
                 animate={{
                   width: `${(doneCount / microQuests.length) * 100}%`,
@@ -227,26 +227,26 @@ const MicroQuestRow: FC<MicroQuestRowProps> = ({
       whileTap={unlocked ? { scale: 0.99 } : undefined}
       className={`group flex w-full items-center gap-4 rounded-xl border p-4 text-left transition-colors ${
         done
-          ? 'border-teal-deep/40 bg-teal-deep/10'
+          ? 'border-success/30 bg-success/10'
           : unlocked
-            ? 'border-pencil/25 bg-paper/5 hover:border-terracotta/40 hover:bg-paper/10'
-            : 'cursor-not-allowed border-pencil/10 bg-ink/40 opacity-50'
+            ? 'border-structural bg-bg-elevated hover:border-accent-action/40 hover:bg-bg-elevated-2'
+            : 'cursor-not-allowed border-structural/50 bg-bg-base/40 opacity-50'
       }`}
     >
       {/* Status badge */}
       <div
         className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border ${
           done
-            ? 'border-teal-deep/40 bg-teal-deep/20 text-teal-deep'
+            ? 'border-success/30 bg-success/20 text-success'
             : unlocked
-              ? 'border-terracotta/40 bg-terracotta/10 text-terracotta'
-              : 'border-pencil/20 bg-ink/40 text-pencil'
+              ? 'border-accent-action/30 bg-accent-action/10 text-accent-action'
+              : 'border-structural bg-bg-base/50 text-text-tertiary'
         }`}
       >
         {done ? (
           <CheckCircle2 size={18} />
         ) : unlocked ? (
-          <span className="font-hud text-sm font-bold">{index + 1}</span>
+          <span className="font-body text-sm font-bold">{index + 1}</span>
         ) : (
           <Lock size={16} />
         )}
@@ -254,26 +254,26 @@ const MicroQuestRow: FC<MicroQuestRowProps> = ({
 
       {/* Title + meta */}
       <div className="min-w-0 flex-1">
-        <p className="font-display text-sm font-bold text-paper leading-tight">
+        <p className="font-display text-sm font-bold text-text-primary leading-tight">
           {microQuest.title}
         </p>
-        <div className="mt-1 flex flex-wrap items-center gap-2 font-body text-[11px] text-pencil">
+        <div className="mt-1 flex flex-wrap items-center gap-2 font-body text-[11px] text-text-secondary">
           <span>📘 Level {microQuest.sourceLevel}</span>
           <span>·</span>
           <span>✏️ {microQuest.exercises.length} quick questions</span>
           <span>·</span>
-          <span className="text-marigold">⚡ up to 40 XP</span>
+          <span className="text-accent-action font-semibold">⚡ up to 40 XP</span>
         </div>
       </div>
 
       {/* Action */}
       <div className="shrink-0">
         {done ? (
-          <span className="font-hud text-[10px] uppercase tracking-wider text-teal-deep">
+          <span className="font-body text-[10px] uppercase tracking-wider text-success font-bold">
             Done
           </span>
         ) : unlocked ? (
-          <span className="font-display text-xs font-semibold text-terracotta group-hover:translate-x-0.5 transition-transform">
+          <span className="font-body text-xs font-bold text-accent-action group-hover:translate-x-0.5 transition-transform">
             Play →
           </span>
         ) : null}
@@ -342,40 +342,40 @@ const MicroQuestPlayer: FC<MicroQuestPlayerProps> = ({
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ type: 'spring', damping: 20 }}
-        className="rounded-2xl border border-pencil/20 bg-paper p-8 text-center shadow-[0_8px_40px_rgba(0,0,0,0.4)]"
+        className="rounded-2xl border border-structural bg-bg-elevated p-8 text-center shadow-2xl"
       >
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, type: 'spring', damping: 12 }}
-          className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 border-terracotta/40 bg-terracotta/10 text-3xl"
+          className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 border-accent-action/30 bg-accent-action/10 text-3xl"
         >
           🎉
         </motion.div>
 
-        <h2 className="font-display text-2xl font-bold text-ink">
+        <h2 className="font-display text-2xl font-bold text-text-primary">
           {passed ? '¡Excelente!' : '¡Buen trabajo!'}
         </h2>
-        <p className="mt-1 font-body text-sm text-pencil">{microQuest.title}</p>
+        <p className="mt-1 font-body text-sm text-text-secondary">{microQuest.title}</p>
 
         {/* Score */}
         <div className="mt-6 flex items-center justify-center gap-6">
           <div>
             <p
-              className={`font-hud text-3xl font-semibold tabular-nums ${
-                passed ? 'text-teal-deep' : 'text-terracotta'
+              className={`font-body text-3xl font-bold tabular-nums ${
+                passed ? 'text-success' : 'text-error'
               }`}
             >
               {pct}%
             </p>
-            <p className="font-body text-xs text-pencil">accuracy</p>
+            <p className="font-body text-xs text-text-secondary">accuracy</p>
           </div>
-          <div className="h-8 w-px bg-pencil/20" />
+          <div className="h-8 w-px bg-structural" />
           <div>
-            <p className="font-hud text-3xl font-semibold tabular-nums text-marigold">
+            <p className="font-body text-3xl font-bold tabular-nums text-accent-action">
               {score.correct}
             </p>
-            <p className="font-body text-xs text-pencil">
+            <p className="font-body text-xs text-text-secondary">
               of {score.total} correct
             </p>
           </div>
@@ -383,7 +383,7 @@ const MicroQuestPlayer: FC<MicroQuestPlayerProps> = ({
 
         {/* Points earned */}
         {alreadyDone ? (
-          <p className="mt-5 font-body text-xs italic text-pencil">
+          <p className="mt-5 font-body text-xs italic text-text-secondary">
             Already completed today — no extra points, but nice practice!
           </p>
         ) : (
@@ -391,12 +391,12 @@ const MicroQuestPlayer: FC<MicroQuestPlayerProps> = ({
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="mt-5 flex items-center justify-center gap-4 rounded-xl border border-marigold/30 bg-marigold/10 py-2"
+            className="mt-5 flex items-center justify-center gap-4 rounded-xl border border-accent-action/20 bg-accent-action/10 py-2"
           >
-            <span className="flex items-center gap-1 font-hud text-sm text-marigold">
+            <span className="flex items-center gap-1 font-body text-sm text-accent-action font-semibold">
               <Zap size={14} /> +{earnedXp} XP
             </span>
-            <span className="flex items-center gap-1 font-hud text-sm text-amber-400">
+            <span className="flex items-center gap-1 font-body text-sm text-accent-action font-semibold">
               <Coins size={14} /> +{earnedCoins}
             </span>
           </motion.div>
@@ -405,7 +405,7 @@ const MicroQuestPlayer: FC<MicroQuestPlayerProps> = ({
         <button
           type="button"
           onClick={onExit}
-          className="mt-6 w-full rounded-xl bg-terracotta px-4 py-3 font-display text-base font-semibold text-paper shadow-lg transition-colors hover:bg-terracotta/90"
+          className="mt-6 w-full rounded-xl bg-accent-action hover:bg-accent-action-hover px-4 py-3 font-display text-base font-semibold text-bg-base border-none shadow-md cursor-pointer transition-all duration-200"
         >
           Back to Today's Quest
         </button>
@@ -421,21 +421,21 @@ const MicroQuestPlayer: FC<MicroQuestPlayerProps> = ({
         <button
           type="button"
           onClick={onExit}
-          className="flex items-center gap-1 font-hud text-xs text-pencil transition-colors hover:text-paper"
+          className="flex items-center gap-1 font-body text-xs text-text-secondary transition-colors hover:text-text-primary bg-transparent border-none p-0 cursor-pointer"
         >
           <ChevronLeft size={14} /> Today's Quest
         </button>
-        <p className="font-hud text-[10px] uppercase tracking-[0.25em] text-pencil">
+        <p className="font-body text-[10px] uppercase tracking-[0.25em] text-text-secondary">
           Micro-quest · Lvl {microQuest.sourceLevel}
         </p>
       </div>
 
       <div className="mb-3">
         <div className="flex items-center justify-between">
-          <p className="font-display text-sm font-bold text-paper">
+          <p className="font-display text-sm font-bold text-text-primary">
             {microQuest.title}
           </p>
-          <p className="font-hud text-[10px] text-marigold">
+          <p className="font-body text-[10px] text-success font-bold">
             {score.correct}✓
           </p>
         </div>
@@ -444,13 +444,13 @@ const MicroQuestPlayer: FC<MicroQuestPlayerProps> = ({
       {/* Progress */}
       <div className="mb-4">
         <div className="flex items-center justify-between">
-          <p className="font-hud text-[10px] uppercase tracking-[0.25em] text-pencil">
+          <p className="font-body text-[10px] uppercase tracking-[0.25em] text-text-secondary">
             Question {currentIndex + 1} of {exercises.length}
           </p>
         </div>
-        <div className="mt-1 h-1 rounded-full bg-pencil/20">
+        <div className="mt-1 h-1 rounded-full bg-structural">
           <motion.div
-            className="h-1 rounded-full bg-terracotta"
+            className="h-1 rounded-full bg-accent-action"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.3 }}
@@ -483,10 +483,10 @@ interface DashStatProps {
 }
 
 const DashStat: FC<DashStatProps> = ({ icon, label, value }) => (
-  <div className="flex items-center gap-2 rounded-lg border border-pencil/15 bg-ink/40 px-3 py-2">
+  <div className="flex items-center gap-2 rounded-lg border border-pencil/15 bg-bg-base/40 px-3 py-2">
     {icon}
     <div>
-      <p className="font-hud text-base font-bold leading-none text-paper tabular-nums">
+      <p className="font-hud text-base font-bold leading-none text-text-primary tabular-nums">
         {value}
       </p>
       <p className="text-[9px] uppercase tracking-wide text-pencil">{label}</p>
