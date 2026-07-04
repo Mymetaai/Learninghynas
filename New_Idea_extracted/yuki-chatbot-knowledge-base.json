@@ -1,0 +1,60 @@
+{
+  "app": {
+    "name": "Learning Hyena",
+    "mascot": "Yuki, the 3D Nine-Tailed Kitsune spirit guide",
+    "tabs": [
+      { "id": "home", "label": "Home", "purpose": "Daily overview: streak, next lesson, quick stats" },
+      { "id": "lessons", "label": "Lessons", "purpose": "Structured Spanish curriculum, CEFR-aligned" },
+      { "id": "practice", "label": "Practice", "purpose": "Flashcards, listening drills, speaking exercises" },
+      { "id": "adventure", "label": "Adventure", "purpose": "Gamified world map tying progress to a story" },
+      { "id": "shop", "label": "Shop", "purpose": "Spend Kitsune Coins on cosmetics and boosts" },
+      { "id": "profile", "label": "Profile", "purpose": "Progress, badges, tail collection, settings" }
+    ]
+  },
+  "course": {
+    "language": "Spanish",
+    "levels": [
+      { "code": "A1", "name": "Pueblo Inicial", "focus": ["greetings", "numbers", "family", "basic verbs"] },
+      { "code": "A2", "name": "Bosque de Verbos", "focus": ["present tense", "daily routines", "food", "directions"] },
+      { "code": "B1", "name": "Ciudad Fluida", "focus": ["past tense", "opinions", "travel", "conversation flow"] },
+      { "code": "B2", "name": "Montana Avanzada", "focus": ["subjunctive", "idioms", "debate", "nuance"] },
+      { "code": "C1", "name": "Templo Maestro", "focus": ["fluency polish", "regional dialects", "literature", "humor"] }
+    ],
+    "planned_languages": ["French", "Japanese", "Portuguese"]
+  },
+  "economy": {
+    "currency_name": "Kitsune Coins",
+    "currency_short": "KC",
+    "earning": [
+      { "action": "Complete a lesson", "amount": 10 },
+      { "action": "Perfect quiz score", "amount": 15 },
+      { "action": "Daily streak (per day, scales up)", "amount": "5 + 2 per consecutive day, capped at 50" },
+      { "action": "Win a Guardian Battle (Adventure boss fight)", "amount": 100 },
+      { "action": "Weekly challenge completion", "amount": 75 },
+      { "action": "Refer a friend who completes onboarding", "amount": 50 }
+    ],
+    "spending": "See shop-items-data.json for the full catalog"
+  },
+  "faq": [
+    {
+      "q": "I lost my streak, can I get it back?",
+      "a": "Streak Freeze items in the shop prevent this in future. A one-time manual restore may be available from support depending on the situation."
+    },
+    {
+      "q": "How do I level up faster?",
+      "a": "Finish daily lessons, keep your streak alive, and clear Adventure zones — Guardian Battles give the biggest single payout."
+    },
+    {
+      "q": "Can I switch languages later?",
+      "a": "Spanish is the only language live right now. French, Japanese, and Portuguese are planned."
+    },
+    {
+      "q": "What happens if I fail a Guardian Battle?",
+      "a": "No penalty — you can retry after reviewing the zone's lessons, or use a Boss Retry Token from the shop to try again immediately."
+    }
+  ],
+  "tone_notes": {
+    "persona_file": "yuki-system-prompt.md",
+    "reminder": "Always answer in Yuki's voice, never as a generic assistant"
+  }
+}
