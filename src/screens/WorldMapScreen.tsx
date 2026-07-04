@@ -1,12 +1,12 @@
 // Adventure Tab — "Kitsune's Path"
-// A story-driven vertical trail through themed regions. Each region awards
-// kitsune tails (9 total). Only the current in-progress region is expanded;
-// completed and locked regions render as collapsed summary cards.
+// A story-driven vertical trail through themed regions. Each region features
+// a horizontal winding SVG path with lesson nodes and a guardian battle at the end.
+// Features a Daily Quest banner and interactive node selection details.
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ALL_WORLDS } from '../content';
 import { useAvatarQuestId, useProgressStore } from '../state/progressStore';
-import { Lock, Swords, ChevronDown, ChevronUp, Check, Sparkles } from 'lucide-react';
+import { Lock, Swords, ChevronDown, ChevronUp, Check, Sparkles, ClipboardList } from 'lucide-react';
 
 // ── Tail counter helper ──────────────────────────────────────────────────
 const useTailCount = () => {
@@ -21,9 +21,6 @@ const useTailCount = () => {
   }
   return { earned, total: 9 };
 };
-
-// ── Region status helper ─────────────────────────────────────────────────
-type RegionStatus = 'completed' | 'current' | 'locked';
 
 // ── Main screen ──────────────────────────────────────────────────────────
 const WorldMapScreen = () => {
@@ -72,18 +69,32 @@ const WorldMapScreen = () => {
         </div>
       </div>
 
-      {/* Vertical trail */}
-      <div className="mx-auto max-w-2xl px-4 py-6 space-y-4">
-        {regions.map((region, idx) => (
-          <RegionCard
-            key={region.world.id}
-            world={region.world}
-            pins={region.pins}
-            unlocked={region.unlocked}
-            regionIndex={idx}
-            onPinTap={(questId) => navigate(`/quests?quest=${questId}`)}
-          />
-        ))}
+      <div className="mx-auto max-w-2xl px-4 py-6 space-y-5">
+        {/* Daily Quest Banner */}
+        <div className="flex items-center justify-between rounded-xl border border-structural bg-bg-elevated p-3.5 shadow-sm">
+          <div className="flex items-center gap-2.5">
+            <ClipboardList className="h-5 w-5 text-text-secondary" />
+            <div>
+              <p className="font-body text-xs font-semibold text-text-primary">Daily quest: finish 2 lessons today</p>
+              <p className="font-body text-[10px] text-text-secondary">Complete quizzes or speaking tasks</p>
+            </div>
+          </div>
+          <span className="font-hud text-xs font-bold text-accent-action bg-accent-action/10 px-2.5 py-1 rounded-full">+30 KC</span>
+        </div>
+
+        {/* Vertical trail of regions */}
+        <div className="space-y-4">
+          {regions.map((region, idx) => (
+            <RegionCard
+              key={region.world.id}
+              world={region.world}
+              pins={region.pins}
+              unlocked={region.unlocked}
+              regionIndex={idx}
+              onPinTap={(questId) => navigate(`/quests?quest=${questId}`)}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Footer hint */}
@@ -117,16 +128,58 @@ const RegionCard = ({
   onPinTap,
 }: RegionCardProps) => {
   const allDone = pins.length > 0 && pins.every((p) => p.done);
-  const status: RegionStatus = !unlocked ? 'locked' : allDone ? 'completed' : 'current';
+  const status: 'completed' | 'current' | 'locked' = !unlocked ? 'locked' : allDone ? 'completed' : 'current';
 
-  // Current region starts expanded; others start collapsed
+  // Current region expanded by default; others collapsed
   const [expanded, setExpanded] = useState(status === 'current');
 
   const completedCount = pins.filter((p) => p.done).length;
   const totalNodes = pins.length;
   const progressPercent = totalNodes > 0 ? Math.round((completedCount / totalNodes) * 100) : 0;
 
-  // Determine previous guardian name for locked accessibility text
+  // Selected node index for detailed info view below map
+  const defaultSelectedIdx = useMemo(() => {
+    const firstActiveIdx = pins.findIndex((p) => p.unlocked && !p.done);
+    return firstActiveIdx !== -1 ? firstActiveIdx : Math.max(0, pins.length - 1);
+  }, [pins]);
+
+  const [selectedPinIdx, setSelectedPinIdx] = useState<number | null>(null);
+  const activePinIdx = selectedPinIdx !== null ? selectedPinIdx : defaultSelectedIdx;
+  const selectedPin = pins[activePinIdx];
+
+  // Generate dynamic winding coordinates for this region's nodes
+  const coordinates = useMemo(() => {
+    if (pins.length === 0) return [];
+    const coords: { x: number; y: number }[] = [];
+    const startX = 40;
+    const endX = 500;
+    // Add 1 extra slot for the Guardian node at the end
+    const totalPoints = pins.length + 1;
+    for (let i = 0; i < totalPoints; i++) {
+      const t = i / (totalPoints - 1);
+      const x = startX + t * (endX - startX);
+      // Nice wavy winding path using sine curve
+      const y = 110 + Math.sin(t * Math.PI * 2.5) * 55;
+      coords.push({ x: Math.round(x), y: Math.round(y) });
+    }
+    return coords;
+  }, [pins]);
+
+  // Construct SVG Bezier path linking the nodes
+  const pathD = useMemo(() => {
+    if (coordinates.length === 0) return '';
+    let d = `M ${coordinates[0].x} ${coordinates[0].y}`;
+    for (let i = 1; i < coordinates.length; i++) {
+      const prev = coordinates[i - 1];
+      const curr = coordinates[i];
+      const cpX = (prev.x + curr.x) / 2;
+      const cpY = prev.y;
+      d += ` Q ${cpX} ${cpY} ${curr.x} ${curr.y}`;
+    }
+    return d;
+  }, [coordinates]);
+
+  // Guardian name accessibility helper
   const prevGuardian = regionIndex > 0 ? ALL_WORLDS[regionIndex - 1].guardian : null;
 
   if (status === 'locked') {
@@ -175,10 +228,9 @@ const RegionCard = ({
       <button
         type="button"
         onClick={() => setExpanded(!expanded)}
-        className="w-full px-5 py-4 flex items-center justify-between bg-transparent border-none cursor-pointer text-left"
+        className="w-full px-5 py-4 flex items-center justify-between bg-transparent border-none cursor-pointer text-left focus:outline-none"
       >
         <div className="flex items-center gap-3">
-          {/* Region icon */}
           <div
             className={`flex h-10 w-10 items-center justify-center rounded-full border-2 ${
               status === 'completed'
@@ -231,138 +283,168 @@ const RegionCard = ({
         </div>
       </button>
 
-      {/* Guardian subtitle (always visible) */}
-      <div className="px-5 -mt-1 pb-3 flex items-center gap-1.5 border-b border-structural/30">
-        <Swords size={12} className="text-accent-action/70" />
-        <span className="font-body text-[10px] text-text-secondary">
-          Guardian: {world.guardian}
-        </span>
-      </div>
-
-      {/* Expanded node trail */}
+      {/* Expanded map content */}
       {expanded && (
-        <div className="px-5 py-4">
-          <p className="font-body text-xs text-text-secondary mb-4">{world.description}</p>
-
-          {/* Winding path */}
-          <ol className="relative space-y-0">
-            {/* Vertical connector line */}
-            <span
-              className="absolute left-[15px] top-4 bottom-4 w-0.5 bg-structural/30"
-              aria-hidden="true"
-            />
-
-            {pins.length === 0 ? (
-              <li className="relative flex items-center gap-3 py-3">
-                <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-structural/40 bg-bg-elevated">
-                  <Lock size={14} className="text-text-secondary" />
-                </span>
-                <p className="font-body text-xs italic text-text-secondary">
-                  Content coming soon…
-                </p>
-              </li>
-            ) : (
-              pins.map((p, i) => {
-                // Zigzag offset for winding trail effect
-                const zigzag = i % 2 === 0 ? '' : 'ml-6';
-
-                return (
-                  <li
-                    key={p.quest.id}
-                    className={`relative flex items-center gap-3 py-2 transition-all ${zigzag}`}
-                  >
-                    {/* Node circle */}
-                    <button
-                      type="button"
-                      disabled={!p.unlocked}
-                      onClick={() => p.unlocked && onPinTap(p.quest.id)}
-                      className={`relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 text-xs font-bold transition-all ${
-                        p.done
-                          ? 'border-success bg-success text-white shadow-[0_0_8px_rgba(34,197,94,0.3)]'
-                          : p.unlocked
-                            ? 'border-accent-action bg-accent-action/15 text-accent-action hover:scale-110 hover:shadow-[0_0_12px_rgba(230,72,51,0.3)] animate-pulse'
-                            : 'border-structural bg-bg-elevated text-text-secondary cursor-not-allowed'
-                      }`}
-                      aria-label={
-                        p.done
-                          ? `${p.quest.title} — completed`
-                          : p.unlocked
-                            ? `Open ${p.quest.title}`
-                            : `${p.quest.title} — locked`
-                      }
-                    >
-                      {p.done ? (
-                        <Check size={14} />
-                      ) : p.unlocked ? (
-                        <span>{p.index + 1}</span>
-                      ) : (
-                        <Lock size={12} />
-                      )}
-                    </button>
-
-                    {/* Avatar indicator */}
-                    {p.isAvatar && (
-                      <span
-                        className="absolute -top-1 left-0.5 z-20 text-base"
-                        role="img"
-                        aria-label="You are here"
-                      >
-                        🧭
-                      </span>
-                    )}
-
-                    {/* Label */}
-                    <div className="min-w-0 flex-1">
-                      <p
-                        className={`font-display text-sm font-semibold ${
-                          p.done
-                            ? 'text-success'
-                            : p.unlocked
-                              ? 'text-text-primary'
-                              : 'text-text-secondary/50'
-                        }`}
-                      >
-                        {p.quest.title}
-                      </p>
-                      <p className="font-body text-[11px] text-text-secondary truncate">
-                        {p.quest.subtitle}
-                      </p>
-                    </div>
-                  </li>
-                );
-              })
-            )}
-
-            {/* Guardian battle node (always at the end of each region) */}
-            {pins.length > 0 && (
-              <li className="relative flex items-center gap-3 py-3 mt-2">
-                <div
-                  className={`relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 ${
-                    allDone
-                      ? 'border-success bg-success/15'
-                      : 'border-accent-action bg-accent-action/10'
-                  }`}
-                >
-                  <Swords
-                    size={18}
-                    className={allDone ? 'text-success' : 'text-accent-action'}
+        <div className="px-5 pb-5 pt-2 border-t border-structural/20">
+          <p className="font-body text-xs text-text-secondary mb-3">{world.description}</p>
+          
+          {pins.length === 0 ? (
+            <div className="flex items-center gap-3 py-4 text-text-secondary italic text-xs">
+              <Lock size={14} />
+              Quests coming soon to this region!
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {/* Map Box */}
+              <div className="relative border border-structural bg-bg-base/30 rounded-xl overflow-hidden p-3 shadow-inner">
+                <svg viewBox="0 0 540 220" className="w-full h-auto" role="img" aria-label="Winding quest path">
+                  {/* Spline Path */}
+                  <path
+                    d={pathD}
+                    fill="none"
+                    stroke="var(--structural)"
+                    strokeWidth="3.5"
+                    strokeDasharray="3 8"
+                    strokeLinecap="round"
                   />
-                </div>
-                <div>
-                  <p
-                    className={`font-display text-sm font-bold ${
-                      allDone ? 'text-success' : 'text-accent-action'
+
+                  {/* Render Lesson Nodes */}
+                  {pins.map((p, i) => {
+                    const coord = coordinates[i];
+                    if (!coord) return null;
+                    const isSelected = activePinIdx === i;
+
+                    return (
+                      <g
+                        key={p.quest.id}
+                        className="cursor-pointer group"
+                        onClick={() => setSelectedPinIdx(i)}
+                      >
+                        {p.done ? (
+                          // Success Node
+                          <>
+                            <circle cx={coord.x} cy={coord.y} r="16" fill="var(--success)" className="transition-transform group-hover:scale-110" />
+                            <path d={`M ${coord.x - 5} ${coord.y} l 3.5 3.5 l 7 -7`} stroke="white" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                          </>
+                        ) : p.unlocked ? (
+                          // Unlocked / Active Node
+                          <>
+                            {isSelected && (
+                              <circle cx={coord.x} cy={coord.y} r="21" fill="none" stroke="var(--accent-action)" strokeWidth="1.5" className="animate-ping" style={{ transformOrigin: `${coord.x}px ${coord.y}px` }} />
+                            )}
+                            <circle cx={coord.x} cy={coord.y} r="16" fill={isSelected ? "var(--accent-action)" : "var(--bg-elevated)"} stroke="var(--accent-action)" strokeWidth="2.5" className="transition-transform group-hover:scale-115" />
+                            <text x={coord.x} y={coord.y + 4.5} textAnchor="middle" fontSize="11" fontWeight="bold" fill={isSelected ? "white" : "var(--accent-action)"}>
+                              {i + 1}
+                            </text>
+                          </>
+                        ) : (
+                          // Locked Node
+                          <g opacity="0.55">
+                            <circle cx={coord.x} cy={coord.y} r="14" fill="var(--bg-elevated)" stroke="var(--structural)" strokeWidth="1.5" />
+                            <text x={coord.x} y={coord.y + 4} textAnchor="middle" fontSize="10" fontWeight="semibold" fill="var(--text-secondary)">
+                              {i + 1}
+                            </text>
+                          </g>
+                        )}
+                        {/* Avatar indicator */}
+                        {p.isAvatar && (
+                          <text x={coord.x - 9} y={coord.y - 14} fontSize="14">🧭</text>
+                        )}
+                      </g>
+                    );
+                  })}
+
+                  {/* Render Guardian Battle Node */}
+                  {(() => {
+                    const coord = coordinates[coordinates.length - 1];
+                    if (!coord) return null;
+                    const isSelected = activePinIdx === pins.length; // guardian node index
+
+                    return (
+                      <g
+                        className="cursor-pointer group"
+                        onClick={() => setSelectedPinIdx(pins.length)}
+                      >
+                        <rect
+                          x={coord.x - 22}
+                          y={coord.y - 22}
+                          width="44"
+                          height="44"
+                          rx="10"
+                          fill={allDone ? "var(--success)" : isSelected ? "var(--accent-action)" : "var(--bg-elevated)"}
+                          stroke={allDone ? "var(--success)" : "var(--accent-action)"}
+                          strokeWidth="2.5"
+                          className="transition-transform group-hover:scale-110"
+                          opacity={allDone ? 1 : 0.6}
+                        />
+                        <text x={coord.x} y={coord.y + 6} textAnchor="middle" fontSize="18" fill={allDone || isSelected ? "white" : "var(--accent-action)"}>
+                          ⚔️
+                        </text>
+                      </g>
+                    );
+                  })()}
+                </svg>
+              </div>
+
+              {/* Node Details Card */}
+              {selectedPin ? (
+                <div className="bg-bg-elevated border border-structural rounded-xl p-4 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div className="min-w-0">
+                    <span className="font-hud text-[9px] uppercase tracking-wider text-accent-action font-bold bg-accent-action/10 px-2 py-0.5 rounded">
+                      Lesson {activePinIdx + 1}
+                    </span>
+                    <h3 className="font-display text-sm font-bold text-text-primary mt-1.5">{selectedPin.quest.title}</h3>
+                    <p className="font-body text-xs text-text-secondary mt-0.5">{selectedPin.quest.subtitle}</p>
+                  </div>
+                  <button
+                    type="button"
+                    disabled={!selectedPin.unlocked}
+                    onClick={() => selectedPin.unlocked && onPinTap(selectedPin.quest.id)}
+                    className={`shrink-0 px-4 py-2.5 rounded-xl font-body text-xs font-bold transition-all shadow-sm border-none ${
+                      selectedPin.done
+                        ? 'bg-success/15 hover:bg-success/20 text-success cursor-pointer'
+                        : selectedPin.unlocked
+                          ? 'bg-accent-action hover:bg-accent-action-hover text-white cursor-pointer hover:scale-103'
+                          : 'bg-structural/35 text-text-secondary/65 cursor-not-allowed'
                     }`}
                   >
-                    ⚔️ {world.guardian}
-                  </p>
-                  <p className="font-body text-[10px] text-text-secondary">
-                    {allDone ? 'Guardian defeated!' : 'Complete all lessons to challenge the guardian'}
-                  </p>
+                    {selectedPin.done ? 'Review Quiz' : selectedPin.unlocked ? 'Start Quiz →' : 'Locked'}
+                  </button>
                 </div>
-              </li>
-            )}
-          </ol>
+              ) : (
+                // Guardian Node Details Card
+                <div className="bg-bg-elevated border border-structural rounded-xl p-4 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div className="min-w-0">
+                    <span className="font-hud text-[9px] uppercase tracking-wider text-accent-action font-bold bg-accent-action/10 px-2 py-0.5 rounded">
+                      Guardian Battle
+                    </span>
+                    <h3 className="font-display text-sm font-bold text-text-primary mt-1.5">{world.guardian}</h3>
+                    <p className="font-body text-xs text-text-secondary mt-0.5">
+                      {allDone ? 'You defeated the guardian and secured this tail!' : 'Challenge the guardian in a timed boss fight.'}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    disabled={!allDone}
+                    onClick={() => allDone && onPinTap(pins[pins.length - 1].quest.id)}
+                    className={`shrink-0 px-4 py-2.5 rounded-xl font-body text-xs font-bold transition-all shadow-sm border-none ${
+                      allDone
+                        ? 'bg-success hover:bg-success-hover text-white cursor-pointer hover:scale-103'
+                        : 'bg-structural/35 text-text-secondary/65 cursor-not-allowed'
+                    }`}
+                  >
+                    {allDone ? 'Challenge Again' : 'Locked'}
+                  </button>
+                </div>
+              )}
+
+              {/* Dynamic Status line at the bottom */}
+              <div className="flex justify-between items-center text-[10px] text-text-secondary tracking-wide uppercase font-hud px-1">
+                <span>Node {pins.findIndex(p => p.unlocked && !p.done) + 1 || pins.length} in progress</span>
+                <span>Guardian battle unlocked until node {pins.length}</span>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </section>

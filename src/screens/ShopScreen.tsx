@@ -5,47 +5,12 @@ import { ONE_PIECE_CARDS, type OnePieceCard } from '../content/onePieceCards';
 import { DEMON_SLAYER_CARDS, type DemonSlayerCard } from '../content/demonSlayerCards';
 import {
   ShoppingBag,
-  Sparkles,
-  Lock,
+    Lock,
   Coins,
   X,
   Trophy,
   Info
 } from 'lucide-react';
-
-const getCardSparkleColors = (rarity: 'common' | 'rare' | 'epic' | 'legendary') => {
-  if (rarity === 'legendary') {
-    return {
-      '--glow-color': 'rgba(251, 191, 36, 0.8)',
-      '--border-color': '#fbbf24',
-      '--border-color-bright': '#fef08a',
-      '--border-color-dim': '#ca8a04'
-    };
-  }
-  if (rarity === 'epic') {
-    return {
-      '--glow-color': 'rgba(168, 85, 247, 0.8)',
-      '--border-color': '#a855f7',
-      '--border-color-bright': '#e9d5ff',
-      '--border-color-dim': '#7e22ce'
-    };
-  }
-  if (rarity === 'rare') {
-    return {
-      '--glow-color': 'rgba(59, 130, 246, 0.8)',
-      '--border-color': '#3b82f6',
-      '--border-color-bright': '#93c5fd',
-      '--border-color-dim': '#1d4ed8'
-    };
-  }
-  // Common
-  return {
-    '--glow-color': 'rgba(148, 163, 184, 0.4)',
-    '--border-color': '#94a3b8',
-    '--border-color-bright': '#cbd5e1',
-    '--border-color-dim': '#64748b'
-  };
-};
 
 const ONE_PIECE_HOTSPOTS = {
   series: {
@@ -112,6 +77,54 @@ const DEMON_SLAYER_HOTSPOTS = {
 const DRAW_COST = 20;
 const DUP_REFUND = 5;
 
+interface ShopInventory {
+  streak_freeze: number;
+  hint_token: number;
+  boss_retry: number;
+  auras: string[];
+  themes: string[];
+}
+
+const initialInventory: ShopInventory = {
+  streak_freeze: 0,
+  hint_token: 0,
+  boss_retry: 0,
+  auras: [],
+  themes: [],
+};
+
+const SHOP_CATEGORIES = [
+  {
+    id: "power_ups",
+    label: "Power-Ups",
+    description: "Consumable boosts that help with lessons and streaks.",
+    items: [
+      { id: "streak_freeze", name: "Streak Freeze", price: 80, effect: "Protects your streak for one missed day", icon: "🔥", consumableKey: "streak_freeze" as const },
+      { id: "hint_token", name: "Hint Token", price: 30, effect: "Reveals one letter/word in a quiz question", icon: "💡", consumableKey: "hint_token" as const },
+      { id: "boss_retry", name: "Guardian Retry Token", price: 100, effect: "Immediately retry a failed Guardian Battle", icon: "🛡️", consumableKey: "boss_retry" as const },
+    ]
+  },
+  {
+    id: "yuki_auras",
+    label: "Yuki's Auras",
+    description: "Cosmetic tail-flame colors for your Yuki companion.",
+    items: [
+      { id: "aura_sakura", name: "Sakura Bloom Aura", price: 150, effect: "Pink petal tail-glow effect for Yuki", icon: "🌸", auraId: "aura_sakura" },
+      { id: "aura_ocean", name: "Ocean Mist Aura", price: 150, effect: "Blue wave tail-glow effect for Yuki", icon: "🌊", auraId: "aura_ocean" },
+      { id: "aura_shadow", name: "Shadow Flame Aura", price: 400, effect: "Purple void tail-glow effect for Yuki", icon: "💜", auraId: "aura_shadow" },
+    ]
+  },
+  {
+    id: "themes",
+    label: "App Themes",
+    description: "Recolor the whole app interface.",
+    items: [
+      { id: "theme_midnight", name: "Midnight Kitsune Theme", price: 300, effect: "Deep dark indigo UI theme override", icon: "🌌", themeId: "theme_midnight" },
+      { id: "theme_sakura", name: "Sakura Season Theme", price: 300, effect: "Soft pastel pink UI theme override", icon: "🌸", themeId: "theme_sakura" },
+    ]
+  }
+];
+
 const ShopScreen: FC = () => {
   const coins = useStatsStore((s) => s.coins);
   const spendCoins = useStatsStore((s) => s.spendCoins);
@@ -120,6 +133,106 @@ const ShopScreen: FC = () => {
   
   // Add direct reward cheat button for testing
   const addRewards = useStatsStore((s) => s.addRewards);
+
+  // Kitsune Shop tabs & state
+  const [activeTab, setActiveTab] = useState<'kitsune' | 'anime-gacha'>('kitsune');
+  const [inventory, setInventory] = useState<ShopInventory>(() => {
+    const saved = localStorage.getItem('wayfarer_shop_inventory');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    return initialInventory;
+  });
+  const [chestReward, setChestReward] = useState<{ title: string; detail: string } | null>(null);
+  const [purchaseCelebration, setPurchaseCelebration] = useState<{ name: string; cost: number; desc?: string } | null>(null);
+  const [showCoinTips, setShowCoinTips] = useState(false);
+
+  const saveInventory = (newInv: ShopInventory) => {
+    setInventory(newInv);
+    localStorage.setItem('wayfarer_shop_inventory', JSON.stringify(newInv));
+  };
+
+  const addAura = (auraId: string) => {
+    if (inventory.auras.includes(auraId)) return;
+    const newInv = { ...inventory, auras: [...inventory.auras, auraId] };
+    saveInventory(newInv);
+  };
+
+  const addTheme = (themeId: string) => {
+    if (inventory.themes.includes(themeId)) return;
+    const newInv = { ...inventory, themes: [...inventory.themes, themeId] };
+    saveInventory(newInv);
+  };
+
+  const addConsumable = (key: 'streak_freeze' | 'hint_token' | 'boss_retry', amount: number) => {
+    const newInv = { ...inventory, [key]: (inventory[key] || 0) + amount };
+    saveInventory(newInv);
+  };
+
+  const handleBuyItem = (item: any) => {
+    if (coins < item.price) return;
+    spendCoins(item.price);
+
+    if (item.consumableKey) {
+      addConsumable(item.consumableKey, 1);
+    } else if (item.auraId) {
+      addAura(item.auraId);
+    } else if (item.themeId) {
+      addTheme(item.themeId);
+    }
+
+    setPurchaseCelebration({ name: item.name, cost: item.price, desc: item.effect });
+  };
+
+  const handleBuyFeatured = () => {
+    const price = 720;
+    if (coins < price) return;
+    spendCoins(price);
+    addAura('aura_golden');
+    setPurchaseCelebration({ name: 'Golden Nine-Tail Aura', cost: price, desc: 'Volumetric golden aura effect for your Kitsune companion' });
+  };
+
+  const handleOpenChest = () => {
+    const price = 200;
+    if (coins < price) return;
+    spendCoins(price);
+
+    const rand = Math.random() * 100;
+    let rewardTitle = '';
+    let rewardDetail = '';
+
+    if (rand < 40) {
+      const refund = 50 + Math.floor(Math.random() * 101);
+      addRewards(0, refund);
+      rewardTitle = refund + ' KC Refund';
+      rewardDetail = 'You opened the chest and found a refund of ' + refund + ' Kitsune Coins inside!';
+    } else if (rand < 65) {
+      const auras = ['Sakura Bloom Aura', 'Ocean Mist Aura'];
+      const chosen = auras[Math.floor(Math.random() * auras.length)];
+      const auraId = chosen.indexOf('Sakura') !== -1 ? 'aura_sakura' : 'aura_ocean';
+      addAura(auraId);
+      rewardTitle = chosen;
+      rewardDetail = 'You unlocked the cosmetic ' + chosen + ' for Yuki!';
+    } else if (rand < 85) {
+      addConsumable('hint_token', 2);
+      rewardTitle = '2x Hint Tokens';
+      rewardDetail = 'You found 2 consumable Hint Tokens to reveal difficult quiz letters!';
+    } else if (rand < 95) {
+      addAura('aura_shadow');
+      rewardTitle = 'Shadow Flame Aura';
+      rewardDetail = 'A rare cosmic purple tail-glow effect for Yuki!';
+    } else {
+      addAura('aura_golden');
+      rewardTitle = 'Golden Nine-Tail Aura';
+      rewardDetail = 'JACKPOT! You obtained the legendary Golden Nine-Tail Aura!';
+    }
+
+    setChestReward({ title: rewardTitle, detail: rewardDetail });
+  };
 
   // Gacha states
   const [isDrawing, setIsDrawing] = useState(false);
@@ -342,46 +455,27 @@ const ShopScreen: FC = () => {
       <div className="mx-auto max-w-5xl">
         
         {/* ── HEADER ────────────────────────────────────────────────── */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
           <div>
             <h1 className="font-display text-3xl font-bold text-text-primary flex items-center gap-2">
-              <ShoppingBag className="text-terracotta h-8 w-8" />
-              Anime Card Shop
+              <ShoppingBag className="text-accent-action h-8 w-8" />
+              Kitsune Shop
             </h1>
-            <p className="text-pencil text-sm mt-1">
-              {selectedSeries === 'one-piece'
-                ? 'Spend your hard-earned coins to summon mystical One Piece character cards!'
-                : 'Spend your hard-earned coins to summon powerful Demon Slayer corps & demon cards!'}
+            <p className="text-text-secondary text-sm mt-1">
+              Spend your hard-earned Kitsune Coins (KC) on boosts, cosmetic companion auras, and mystery chests!
             </p>
-
-            {/* Series Dropdown Selector */}
-            <div className="mt-3 flex items-center gap-2">
-              <span className="text-[10px] uppercase font-hud text-pencil tracking-wider">Series:</span>
-              <select
-                value={selectedSeries}
-                onChange={(e) => {
-                  setSelectedSeries(e.target.value as 'one-piece' | 'demon-slayer');
-                  setSelectedCard(null);
-                  setSelectedHotspot(null);
-                }}
-                className="bg-paper/10 hover:bg-paper/15 border border-pencil/30 text-text-primary font-hud text-xs rounded-xl px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-marigold transition-all cursor-pointer font-bold"
-              >
-                <option value="one-piece" className="bg-bg-base text-text-primary">🏴‍☠️ One Piece Set</option>
-                <option value="demon-slayer" className="bg-bg-base text-text-primary">⚔️ Demon Slayer Set</option>
-              </select>
-            </div>
           </div>
 
           <div className="flex items-center gap-3">
             {/* Coins indicator */}
-            <div className="flex items-center gap-2 bg-paper/5 border border-pencil/20 rounded-xl px-4 py-2.5 shadow-md">
-              <Coins className="h-5 w-5 text-marigold" />
+            <div className="flex items-center gap-2 bg-bg-elevated border-2 border-structural rounded-xl px-4 py-2.5 shadow-md">
+              <Coins className="h-5 w-5 text-accent-action" />
               <div className="flex flex-col">
-                <span className="font-hud text-lg font-bold leading-none text-marigold">
-                  {coins}
+                <span className="font-hud text-lg font-bold leading-none text-accent-action">
+                  {coins} KC
                 </span>
-                <span className="font-body text-[9px] uppercase tracking-wider text-pencil mt-0.5">
-                  Your Coins
+                <span className="font-body text-[9px] uppercase tracking-wider text-text-secondary mt-0.5">
+                  Balance
                 </span>
               </div>
             </div>
@@ -389,7 +483,7 @@ const ShopScreen: FC = () => {
             {/* Dev Coin Booster */}
             <button
               onClick={claimCheatCoins}
-              className="bg-teal-deep/10 hover:bg-teal-deep/20 border border-teal-deep/30 text-teal-deep font-hud text-[9px] uppercase px-3 py-2.5 rounded-xl transition-colors cursor-pointer"
+              className="bg-info/10 hover:bg-info/20 border border-info/30 text-info font-hud text-[9px] uppercase px-3 py-2.5 rounded-xl transition-colors cursor-pointer"
               title="Get free coins for quick testing"
             >
               +100 Coins (Test)
@@ -397,858 +491,874 @@ const ShopScreen: FC = () => {
           </div>
         </div>
 
-        {/* ── SUMMONING ALTAR (GACHA PANEL) ─────────────────────────── */}
-        <div className={`gacha-stage-panel stage border rounded-3xl p-6 mb-8 flex flex-col md:flex-row items-center justify-center gap-8 shadow-xl relative overflow-hidden transition-all duration-700 ${summonPhase} ${
-          summonPhase !== 's-altar' ? 'bg-[#07060a] border-purple/30 shadow-[0_0_50px_rgba(139,63,251,0.25)] min-h-[500px]' : 'bg-paper/5 border-pencil/20'
-        }`}>
-          {/* Grain overlay */}
-          <div className="grain-overlay pointer-events-none absolute inset-0 z-5 opacity-[0.03]" />
-          <div className="vignette-overlay pointer-events-none absolute inset-0 z-5" />
+        {/* ── TAB SWITCHER ───────────────────────────────────────────── */}
+        <div className="flex border-b border-structural mb-6">
+          <button
+            onClick={() => setActiveTab('kitsune')}
+            className={`px-5 py-2.5 font-display text-sm font-bold border-b-2 bg-transparent cursor-pointer transition-all ${
+              activeTab === 'kitsune'
+                ? 'border-accent-action text-accent-action'
+                : 'border-transparent text-text-secondary hover:text-text-primary'
+            }`}
+          >
+            🦊 Kitsune Store
+          </button>
+          <button
+            onClick={() => setActiveTab('anime-gacha')}
+            className={`px-5 py-2.5 font-display text-sm font-bold border-b-2 bg-transparent cursor-pointer transition-all ${
+              activeTab === 'anime-gacha'
+                ? 'border-accent-action text-accent-action'
+                : 'border-transparent text-text-secondary hover:text-text-primary'
+            }`}
+          >
+            🏴‍☠️ Anime Gacha Altar
+          </button>
+        </div>
 
-          {/* Background Summoning Circle (glyph-wrap) */}
-          <div className="glyph-wrap pointer-events-none absolute z-1">
-            <svg viewBox="0 0 200 200" className="w-full h-full">
-              <g className="glyph-ring r1" transform="translate(100,100)">
-                <circle r="92" fill="none" stroke="#8b3ffb" strokeOpacity="0.4" strokeWidth="0.8" />
-                <g stroke="#f3c969" strokeOpacity="0.5" strokeWidth="0.8">
-                  <line x1="0" y1="-92" x2="0" y2="-82" /><line x1="0" y1="92" x2="0" y2="82" />
-                  <line x1="-92" y1="0" x2="-82" y2="0" /><line x1="92" y1="0" x2="82" y2="0" />
-                  <line x1="-65" y1="-65" x2="-58" y2="-58" /><line x1="65" y1="-65" x2="58" y2="-58" />
-                  <line x1="-65" y1="65" x2="-58" y2="58" /><line x1="65" y1="65" x2="58" y2="58" />
-                </g>
-              </g>
-              <g className="glyph-ring r2" transform="translate(100,100)">
-                <circle r="70" fill="none" stroke="#f3c969" strokeOpacity="0.3" strokeWidth="0.8" strokeDasharray="2 4" />
-              </g>
-              <g className="glyph-ring r3" transform="translate(100,100)">
-                <circle r="46" fill="none" stroke="#8b3ffb" strokeOpacity="0.4" strokeWidth="0.8" />
-                <path d="M0,-46 L13,-13 L46,0 L13,13 L0,46 L-13,13 L-46,0 L-13,-13 Z" fill="none" stroke="#f3c969" strokeOpacity="0.35" strokeWidth="0.8" />
-              </g>
-            </svg>
-          </div>
-
-          {/* Lightning SVG Layer */}
-          <div className="fx-layer absolute inset-0 z-4 pointer-events-none">
-            {lightningFlash && (
-              <div className="absolute inset-0 bg-white/10 z-4 pointer-events-none" />
-            )}
-            <svg viewBox="0 0 1000 1000" className="w-full h-full" preserveAspectRatio="none">
-              {lightningBolts.map((bolt) => (
-                <path
-                  key={bolt.id}
-                  d={bolt.path}
-                  className="bolt-path"
-                  stroke="#8b3ffb"
-                  strokeWidth="3.5"
-                  fill="none"
-                  filter="drop-shadow(0 0 8px #8b3ffb)"
-                />
-              ))}
-            </svg>
-          </div>
-
-          {/* Particle Layer */}
-          <div className="particles-layer absolute inset-0 z-3 pointer-events-none overflow-hidden">
-            {gachaParticles.map((p) => (
-              <div
-                key={p.id}
-                className={`gacha-particle absolute rounded-sm ${p.gold ? 'gold' : ''}`}
-                style={{
-                  left: `${p.left}%`,
-                  '--drift': `${p.drift}px`,
-                  animationDuration: `${p.duration}s`,
-                } as React.CSSProperties}
-              />
-            ))}
-          </div>
-
-          {/* ── STEP 0: INITIAL VIEW (s-altar) ─────────────────────────── */}
-          {summonPhase === 's-altar' && (
-            <>
-              {/* Static Card Back Showcase */}
-              <div className="card-static-wrap z-10 relative flex items-center justify-center">
-                <div className="card-custom">
-                  <div className="card-emblem">
-                    <div className="text-4xl mb-2 select-none">
-                      {selectedSeries === 'one-piece' ? '🏴‍☠️' : '⚔️'}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="card-title select-none font-display text-sm tracking-wider text-text-primary">
-                      {selectedSeries === 'one-piece' ? 'ONE PIECE CARD' : 'KIMETSU CARD'}
-                    </div>
-                    <div className="card-subtitle select-none font-mono text-[9px] tracking-widest text-[#ff7a3c] mt-1">
-                      MYSTERY CARD
-                    </div>
-                  </div>
-                  <div className="card-cost select-none font-mono text-[10px] text-pencil/60">
-                    Cost: {DRAW_COST} Coins
-                  </div>
+        {/* ── TAB CONTENT: KITSUNE SHOP ──────────────────────────────── */}
+        {activeTab === 'kitsune' ? (
+          <div className="space-y-6">
+            
+            {/* Featured Daily Deal */}
+            <div className="relative overflow-hidden rounded-2xl border-2 border-accent-action bg-bg-elevated p-5 shadow-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <div className="absolute top-0 right-0 bg-accent-action text-white font-hud text-[9px] uppercase tracking-widest px-3 py-1 rounded-bl-xl font-bold">
+                Featured Deal • 24h Left
+              </div>
+              <div className="space-y-1">
+                <span className="font-hud text-[9px] uppercase tracking-wider text-accent-action font-bold bg-accent-action/10 px-2 py-0.5 rounded">
+                  Daily Special
+                </span>
+                <h3 className="font-display text-lg font-bold text-text-primary mt-2">Golden Nine-tail Aura</h3>
+                <p className="font-body text-xs text-text-secondary">Volumetric golden aura effect for your Kitsune companion, Yuki.</p>
+                <div className="flex items-center gap-2 mt-1.5">
+                  <span className="font-hud text-base font-bold text-accent-action">720 KC</span>
+                  <span className="font-hud text-xs text-text-secondary/65 line-through">900 KC</span>
                 </div>
               </div>
+              <button
+                onClick={handleBuyFeatured}
+                disabled={coins < 720 || inventory.auras.includes('aura_golden')}
+                className={`px-6 py-3 rounded-xl font-body text-xs font-bold shadow-sm transition-all border-none ${
+                  inventory.auras.includes('aura_golden')
+                    ? 'bg-success/15 text-success cursor-default'
+                    : coins >= 720
+                      ? 'bg-accent-action hover:bg-accent-action-hover text-white cursor-pointer hover:scale-103'
+                      : 'bg-structural/35 text-text-secondary/65 cursor-not-allowed'
+                }`}
+              >
+                {inventory.auras.includes('aura_golden') ? 'Owned' : 'Buy Deal'}
+              </button>
+            </div>
 
-              {/* Actions Panel */}
-              <div className="flex-1 max-w-sm space-y-6 z-10 relative">
+            {/* Main Item Categories Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              
+              {/* Render Standard Categories */}
+              {SHOP_CATEGORIES.map((cat) => (
+                <div key={cat.id} className="bg-bg-elevated border-2 border-structural rounded-2xl p-5 shadow-md flex flex-col justify-between">
+                  <div>
+                    <h3 className="font-display text-base font-bold text-text-primary border-b border-structural pb-2 mb-2">
+                      {cat.label}
+                    </h3>
+                    <p className="text-text-secondary text-xs mb-4 leading-relaxed">
+                      {cat.description}
+                    </p>
+                    
+                    <div className="space-y-4">
+                      {cat.items.map((item: any) => {
+                        const isOwned = (item.auraId && inventory.auras.includes(item.auraId)) || 
+                                        (item.themeId && inventory.themes.includes(item.themeId));
+                        const consumableKey = item.consumableKey as 'streak_freeze' | 'hint_token' | 'boss_retry' | undefined;
+                        const quantity = consumableKey ? inventory[consumableKey] || 0 : 0;
+                        const affordable = coins >= item.price;
+
+                        return (
+                          <div key={item.id} className="border border-structural bg-bg-base/15 rounded-xl p-3 flex flex-col justify-between">
+                            <div>
+                              <div className="flex justify-between items-start">
+                                <span className="text-xl" role="img" aria-label={item.name}>{item.icon}</span>
+                                {consumableKey && quantity > 0 && (
+                                  <span className="font-hud text-[9px] uppercase tracking-wider text-success font-bold bg-success/10 px-2 py-0.5 rounded">
+                                    Owned: {quantity}
+                                  </span>
+                                )}
+                                {isOwned && (
+                                  <span className="font-hud text-[9px] uppercase tracking-wider text-success font-bold bg-success/10 px-2 py-0.5 rounded">
+                                    Owned
+                                  </span>
+                                )}
+                              </div>
+                              <h4 className="font-display text-sm font-bold text-text-primary mt-1.5">{item.name}</h4>
+                              <p className="font-body text-[11px] text-text-secondary mt-0.5">{item.effect}</p>
+                            </div>
+                            
+                            <div className="mt-3 pt-2 border-t border-structural/20 flex items-center justify-between">
+                              <span className="font-hud text-xs font-bold text-accent-action">{item.price} KC</span>
+                              <button
+                                onClick={() => handleBuyItem(item)}
+                                disabled={isOwned || !affordable}
+                                className={`px-3 py-1.5 rounded-lg font-body text-[11px] font-bold border-none transition-all ${
+                                  isOwned
+                                    ? 'bg-success/10 text-success cursor-default'
+                                    : affordable
+                                      ? 'bg-accent-action hover:bg-accent-action-hover text-white cursor-pointer hover:scale-103'
+                                      : 'bg-structural/35 text-text-secondary/65 cursor-not-allowed'
+                                }`}
+                              >
+                                {isOwned ? 'Owned' : 'Buy'}
+                              </button>
+                            </div>
+
+                            {/* Almost There Progress Bar */}
+                            {!isOwned && !affordable && (
+                              (() => {
+                                const pct = Math.round((coins / item.price) * 100);
+                                const needed = item.price - coins;
+                                return (
+                                  <div className="mt-2 pt-2 border-t border-structural/10">
+                                    <div className="flex justify-between text-[9px] font-body font-semibold text-text-secondary">
+                                      <span>Almost there! ({pct}%)</span>
+                                      <span>Need {needed} KC</span>
+                                    </div>
+                                    <div className="w-full h-1 bg-structural/30 rounded-full overflow-hidden mt-1">
+                                      <div className="h-full bg-accent-action rounded-full" style={{ width: `${pct}%` }} />
+                                    </div>
+                                  </div>
+                                );
+                              })()
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              {/* Mystery Kitsune Chest Box (Categorized on its own) */}
+              <div className="bg-bg-elevated border-2 border-accent-action/30 rounded-2xl p-5 shadow-md flex flex-col justify-between">
                 <div>
-                  <h2 className="font-display text-xl font-bold text-text-primary">Summoning Altar</h2>
-                  <p className="text-pencil text-xs mt-2 leading-relaxed">
-                    Unlock {selectedSeries === 'one-piece' ? ONE_PIECE_CARDS.length : DEMON_SLAYER_CARDS.length} mystical cards from this set.
+                  <h3 className="font-display text-base font-bold text-text-primary border-b border-structural pb-2 mb-2">
+                    Mystery Chest
+                  </h3>
+                  <p className="text-text-secondary text-xs mb-4 leading-relaxed">
+                    Weighted random reward. The engagement centerpiece of the shop!
                   </p>
                   
-                  {/* Dynamic Series Lore Box */}
-                  <div className="mt-3.5 p-3 bg-paper/5 border border-pencil/15 rounded-xl flex items-start gap-2.5 shadow-md">
-                    <span className="text-xl select-none mt-0.5">
-                      {selectedSeries === 'one-piece' ? '🏴‍☠️' : '⚔️'}
-                    </span>
+                  <div className="border-2 border-dashed border-accent-action/25 bg-accent-action/5 rounded-xl p-4 text-center space-y-3">
+                    <span className="text-4xl block animate-bounce" role="img" aria-label="Chest">🎁</span>
                     <div>
-                      <h4 className="font-hud text-[9px] uppercase font-bold text-marigold tracking-wider leading-none">
-                        {selectedSeries === 'one-piece' ? 'Pirate King Lore' : 'Corps Motto'}
-                      </h4>
-                      <p className="text-[11px] italic text-text-primary/85 leading-relaxed mt-1">
-                        {selectedSeries === 'one-piece'
-                          ? '"Inherited Will, the Destiny of Age, and the Dreams of People. As long as people continue to pursue the meaning of Freedom, these things will never cease to be!"'
-                          : '"No matter how many people you lose, you have no choice but to go on living. Set your heart ablaze and surpass your limits!"'}
-                      </p>
+                      <h4 className="font-display text-sm font-bold text-text-primary">Kitsune Chest</h4>
+                      <p className="font-body text-[11px] text-text-secondary mt-1">Random aura, refunds, or hint tokens! Jackpot rate: 5%</p>
+                    </div>
+
+                    <div className="border-t border-structural/25 pt-2 text-[10px] text-text-secondary/70 font-hud text-left space-y-1">
+                      <div className="flex justify-between">
+                        <span>Pouch Refund (50-150 KC):</span>
+                        <span className="font-semibold text-text-primary">40%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Common Aura:</span>
+                        <span className="font-semibold text-text-primary">25%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>2x Hint Tokens:</span>
+                        <span className="font-semibold text-text-primary">20%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Rare Aura:</span>
+                        <span className="font-semibold text-text-primary">10%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Epic Aura (Jackpot):</span>
+                        <span className="font-semibold text-text-primary">5%</span>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="space-y-2 border-y border-pencil/10 py-4 font-hud text-xs text-pencil">
-                  <div className="flex justify-between">
-                    <span>Legendary Drop Rate:</span>
-                    <span className="text-[#f3c969] font-bold">5%</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Epic Drop Rate:</span>
-                    <span className="text-[#b388ff] font-bold">20%</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Rare Drop Rate:</span>
-                    <span className="text-[#5fb6ff] font-bold">35%</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Common Drop Rate:</span>
-                    <span className="text-text-primary/60 font-bold">40%</span>
-                  </div>
+                <div className="mt-4 pt-3 border-t border-structural/20 flex items-center justify-between">
+                  <span className="font-hud text-xs font-bold text-accent-action">200 KC</span>
+                  <button
+                    onClick={handleOpenChest}
+                    disabled={coins < 200}
+                    className={`px-4 py-2 rounded-xl font-body text-xs font-bold border-none transition-all shadow-sm ${
+                      coins >= 200
+                        ? 'bg-accent-action hover:bg-accent-action-hover text-white cursor-pointer hover:scale-103'
+                        : 'bg-structural/35 text-text-secondary/65 cursor-not-allowed'
+                    }`}
+                  >
+                    Open Chest
+                  </button>
                 </div>
 
-                <button
-                  onClick={handleDraw}
-                  disabled={isDrawing || coins < DRAW_COST}
-                  className="w-full summon-btn"
-                >
-                  ✦ Summon Card ({DRAW_COST} Coins)
-                </button>
+                {/* Almost There Progress Bar for Chest */}
+                {coins < 200 && (
+                  (() => {
+                    const pct = Math.round((coins / 200) * 100);
+                    const needed = 200 - coins;
+                    return (
+                      <div className="mt-2 pt-2 border-t border-structural/10">
+                        <div className="flex justify-between text-[9px] font-body font-semibold text-text-secondary">
+                          <span>Almost there! ({pct}%)</span>
+                          <span>Need {needed} KC</span>
+                        </div>
+                        <div className="w-full h-1 bg-structural/30 rounded-full overflow-hidden mt-1">
+                          <div className="h-full bg-accent-action rounded-full" style={{ width: `${pct}%` }} />
+                        </div>
+                      </div>
+                    );
+                  })()
+                )}
               </div>
-            </>
-          )}
 
-          {/* ── STEPS 1-5: ACTIVE RITUAL STAGE ─────────────────────────── */}
-          {summonPhase !== 's-altar' && (
-            <div className={`ritual-stage-wrap z-10 relative flex flex-col items-center justify-center w-full min-h-[460px] ${
-              summonPhase === 's-intensity' ? 'stage-shake' : ''
+            </div>
+
+            {/* Help / Tip Link */}
+            <p className="text-center font-body text-xs text-text-secondary pt-4">
+              Need more coins?{' '}
+              <button
+                onClick={() => setShowCoinTips(true)}
+                className="text-accent-action font-semibold hover:underline bg-transparent border-none cursor-pointer p-0"
+              >
+                How do I earn coins faster? ↗
+              </button>
+            </p>
+          </div>
+        ) : (
+          /* ── TAB CONTENT: ORIGINAL ANIME GACHA ALTAR ────────────────── */
+          <>
+            {/* Series Dropdown Selector inside the Gacha Altar tab */}
+            <div className="mb-4 flex items-center gap-2">
+              <span className="text-[10px] uppercase font-hud text-text-secondary tracking-wider font-bold">Set:</span>
+              <select
+                value={selectedSeries}
+                onChange={(e) => {
+                  setSelectedSeries(e.target.value as 'one-piece' | 'demon-slayer');
+                  setSelectedCard(null);
+                  setSelectedHotspot(null);
+                }}
+                className="bg-bg-elevated hover:bg-bg-elevated/80 border-2 border-structural text-text-primary font-hud text-xs rounded-xl px-3 py-1.5 focus:outline-none transition-all cursor-pointer font-bold"
+              >
+                <option value="one-piece">🏴‍☠️ One Piece Set</option>
+                <option value="demon-slayer">⚔️ Demon Slayer Set</option>
+              </select>
+            </div>
+
+            <div className={`gacha-stage-panel stage border rounded-3xl p-6 mb-8 flex flex-col md:flex-row items-center justify-center gap-8 shadow-xl relative overflow-hidden transition-all duration-700 ${summonPhase} ${
+              summonPhase !== 's-altar' ? 'bg-[#07060a] border-purple/30 shadow-[0_0_50px_rgba(139,63,251,0.25)] min-h-[500px]' : 'bg-paper/5 border-pencil/20'
             }`}>
-              {/* Altar Pedestal Platform */}
-              <div className="platform-custom" />
+              {/* Grain overlay */}
+              <div className="grain-overlay pointer-events-none absolute inset-0 z-5 opacity-[0.03]" />
+              <div className="vignette-overlay pointer-events-none absolute inset-0 z-5" />
 
-              {/* Floating Card Wrapper */}
-              <div className="card-wrap-custom">
-                <div className={`card-3d-custom ${summonPhase}`}>
-                  
-                  {/* Card Face Back */}
-                  <div className="card-face-custom back">
-                    <div className="h-16 w-16 rounded-full bg-paper/5 border border-purple-500/20 flex items-center justify-center text-4xl mb-4 select-none animate-pulse">
-                      {selectedSeries === 'one-piece' ? '🏴‍☠️' : '⚔️'}
+              {/* Background Summoning Circle */}
+              <div className="glyph-wrap pointer-events-none absolute z-1">
+                <svg viewBox="0 0 200 200" className="w-full h-full">
+                  <g className="glyph-ring r1" transform="translate(100,100)">
+                    <circle r="92" fill="none" stroke="#8b3ffb" strokeOpacity="0.4" strokeWidth="0.8" />
+                    <g stroke="#f3c969" strokeOpacity="0.5" strokeWidth="0.8">
+                      <line x1="0" y1="-92" x2="0" y2="-82" /><line x1="0" y1="92" x2="0" y2="82" />
+                      <line x1="-92" y1="0" x2="-82" y2="0" /><line x1="92" y1="0" x2="82" y2="0" />
+                      <line x1="-65" y1="-65" x2="-58" y2="-58" /><line x1="65" y1="-65" x2="58" y2="-58" />
+                      <line x1="-65" y1="65" x2="-58" y2="58" /><line x1="65" y1="65" x2="58" y2="58" />
+                    </g>
+                  </g>
+                  <g className="glyph-ring r2" transform="translate(100,100)">
+                    <circle r="70" fill="none" stroke="#f3c969" strokeOpacity="0.3" strokeWidth="0.8" strokeDasharray="2 4" />
+                  </g>
+                  <g className="glyph-ring r3" transform="translate(100,100)">
+                    <circle r="46" fill="none" stroke="#8b3ffb" strokeOpacity="0.4" strokeWidth="0.8" />
+                    <path d="M0,-46 L13,-13 L46,0 L13,13 L0,46 L-13,13 L-46,0 L-13,-13 Z" fill="none" stroke="#f3c969" strokeOpacity="0.35" strokeWidth="0.8" />
+                  </g>
+                </svg>
+              </div>
+
+              {/* Lightning SVG Layer */}
+              <div className="fx-layer absolute inset-0 z-4 pointer-events-none">
+                {lightningFlash && (
+                  <div className="absolute inset-0 bg-white/10 z-4 pointer-events-none" />
+                )}
+                <svg viewBox="0 0 1000 1000" className="w-full h-full" preserveAspectRatio="none">
+                  {lightningBolts.map((bolt) => (
+                    <path
+                      key={bolt.id}
+                      d={bolt.path}
+                      className="bolt-path"
+                      stroke="#8b3ffb"
+                      strokeWidth="3.5"
+                      fill="none"
+                      filter="drop-shadow(0 0 8px #8b3ffb)"
+                    />
+                  ))}
+                </svg>
+              </div>
+
+              {/* Particle Layer */}
+              <div className="particles-layer absolute inset-0 z-3 pointer-events-none overflow-hidden">
+                {gachaParticles.map((p) => (
+                  <div
+                    key={p.id}
+                    className={`gacha-particle absolute rounded-sm ${p.gold ? 'gold' : ''}`}
+                    style={{
+                      left: `${p.left}%`,
+                      '--drift': `${p.drift}px`,
+                      animationDuration: `${p.duration}s`,
+                    } as React.CSSProperties}
+                  />
+                ))}
+              </div>
+
+              {/* STEP 0: INITIAL VIEW (s-altar) */}
+              {summonPhase === 's-altar' && (
+                <>
+                  <div className="card-static-wrap z-10 relative flex items-center justify-center">
+                    <div className="card-custom">
+                      <div className="card-emblem">
+                        <div className="text-4xl mb-2 select-none">
+                          {selectedSeries === 'one-piece' ? '🏴‍☠️' : '⚔️'}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="card-title select-none font-display text-sm tracking-wider text-text-primary">
+                          {selectedSeries === 'one-piece' ? 'ONE PIECE CARD' : 'KIMETSU CARD'}
+                        </div>
+                        <div className="card-subtitle select-none font-mono text-[9px] tracking-widest text-[#ff7a3c] mt-1">
+                          MYSTERY CARD
+                        </div>
+                      </div>
+                      <div className="card-cost select-none font-mono text-[10px] text-pencil/60">
+                        Cost: {DRAW_COST} Coins
+                      </div>
                     </div>
-                    <h3 className="font-display text-base font-bold text-purple-300 tracking-wider text-center">
-                      {selectedSeries === 'one-piece' ? 'ONE PIECE' : 'DEMON SLAYER'}
-                    </h3>
                   </div>
 
-                  {/* Card Face Front */}
-                  {drawnCard && (
-                    <div 
-                      className="card-face-custom front"
-                      style={{
-                        '--rarity-color': drawnCard.rarity === 'legendary' ? '#f3c969' :
-                                         drawnCard.rarity === 'epic' ? '#b388ff' :
-                                         drawnCard.rarity === 'rare' ? '#5fb6ff' : '#bfb6a8',
-                        '--bg1': drawnCard.rarity === 'legendary' ? '#3a2a08' :
-                                 drawnCard.rarity === 'epic' ? '#241338' :
-                                 drawnCard.rarity === 'rare' ? '#0c2438' : '#211d18',
-                        '--bg2': drawnCard.rarity === 'legendary' ? '#1f1505' :
-                                 drawnCard.rarity === 'epic' ? '#150b22' :
-                                 drawnCard.rarity === 'rare' ? '#06151f' : '#15120e',
-                      } as React.CSSProperties}
+                  <div className="flex-1 max-w-sm space-y-6 z-10 relative">
+                    <div>
+                      <h2 className="font-display text-xl font-bold text-text-primary">Summoning Altar</h2>
+                      <p className="text-pencil text-xs mt-2 leading-relaxed">
+                        Unlock {selectedSeries === 'one-piece' ? ONE_PIECE_CARDS.length : DEMON_SLAYER_CARDS.length} mystical cards from this set.
+                      </p>
+                      
+                      <div className="mt-3.5 p-3 bg-paper/5 border border-pencil/15 rounded-xl flex items-start gap-2.5 shadow-md">
+                        <span className="text-xl select-none mt-0.5">
+                          {selectedSeries === 'one-piece' ? '🏴‍☠️' : '⚔️'}
+                        </span>
+                        <div>
+                          <h4 className="font-hud text-[9px] uppercase font-bold text-marigold tracking-wider leading-none">
+                            {selectedSeries === 'one-piece' ? 'Pirate King Lore' : 'Corps Motto'}
+                          </h4>
+                          <p className="text-[11px] italic text-text-primary/85 leading-relaxed mt-1">
+                            {selectedSeries === 'one-piece'
+                              ? '"Inherited Will, the Destiny of Age, and the Dreams of People. As long as people continue to pursue the meaning of Freedom, these things will never cease to be!"'
+                              : '"No matter how many people you lose, you have no choice but to go on living. Set your heart ablaze and surpass your limits!"'}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 border-y border-pencil/10 py-4 font-hud text-xs text-pencil">
+                      <div className="flex justify-between">
+                        <span>Legendary Drop Rate:</span>
+                        <span className="text-[#f3c969] font-bold">5%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Epic Drop Rate:</span>
+                        <span className="text-[#b388ff] font-bold">20%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Rare Drop Rate:</span>
+                        <span className="text-[#5fb6ff] font-bold">35%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Common Drop Rate:</span>
+                        <span className="text-text-primary/60 font-bold">40%</span>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={handleDraw}
+                      disabled={isDrawing || coins < DRAW_COST}
+                      className="w-full summon-btn"
                     >
-                      {/* Card Rarity Header */}
-                      <div className="w-full flex items-center justify-between border-b border-white/10 pb-2">
-                        <span className="font-hud text-[9px] uppercase tracking-wider text-[#a89b8a] font-semibold">
-                          {selectedSeries === 'one-piece' ? 'Wanted' : 'Kimetsu'}
-                        </span>
-                        <span className="font-hud text-[9px] uppercase text-ink font-bold px-2 py-0.5 rounded-full"
-                              style={{ backgroundColor: 'var(--rarity-color)' }}>
-                          {drawnCard.rarity}
-                        </span>
+                      ✦ Summon Card ({DRAW_COST} Coins)
+                    </button>
+                  </div>
+                </>
+              )}
+
+              {/* ACTIVE SUMMON ACTIVE RITUAL STAGE */}
+              {summonPhase !== 's-altar' && (
+                <div className={`ritual-stage-wrap z-10 relative flex flex-col items-center justify-center w-full min-h-[460px] ${
+                  summonPhase === 's-intensity' ? 'stage-shake' : ''
+                }`}>
+                  <div className="platform-custom" />
+
+                  <div className="card-wrap-custom">
+                    <div className={`card-3d-custom ${summonPhase}`}>
+                      
+                      <div className="card-face-custom back">
+                        <div className="h-16 w-16 rounded-full bg-paper/5 border border-purple-500/20 flex items-center justify-center text-4xl mb-4 select-none animate-pulse">
+                          {selectedSeries === 'one-piece' ? '🏴‍☠️' : '⚔️'}
+                        </div>
+                        <h3 className="font-display text-base font-bold text-purple-300 tracking-wider text-center">
+                          {selectedSeries === 'one-piece' ? 'ONE PIECE' : 'DEMON SLAYER'}
+                        </h3>
                       </div>
 
-                      {/* Card Illustration */}
-                      <div className={`my-3 h-32 w-full rounded-xl bg-gradient-to-tr ${drawnCard.color} flex items-center justify-center text-6xl shadow-inner relative overflow-hidden select-none`}>
-                        <div className="absolute inset-0 animate-shimmer pointer-events-none z-10" />
-                        {imageErrors[drawnCard.id] ? (
-                          drawnCard.emoji
-                        ) : (
-                          <img
-                            src={drawnCard.imageUrl}
-                            alt={drawnCard.name}
-                            className="h-full object-contain filter drop-shadow-md py-1"
-                            referrerPolicy="no-referrer"
-                            onError={() => setImageErrors(prev => ({ ...prev, [drawnCard.id]: true }))}
-                          />
-                        )}
-                      </div>
+                      {drawnCard && (
+                        <div 
+                          className="card-face-custom front"
+                          style={{
+                            '--rarity-color': drawnCard.rarity === 'legendary' ? '#f3c969' :
+                                             drawnCard.rarity === 'epic' ? '#b388ff' :
+                                             drawnCard.rarity === 'rare' ? '#5fb6ff' : '#bfb6a8',
+                            '--bg1': drawnCard.rarity === 'legendary' ? '#3a2a08' :
+                                     drawnCard.rarity === 'epic' ? '#241338' :
+                                     drawnCard.rarity === 'rare' ? '#0c2438' : '#211d18',
+                            '--bg2': drawnCard.rarity === 'legendary' ? '#1f1505' :
+                                     drawnCard.rarity === 'epic' ? '#150b22' :
+                                     drawnCard.rarity === 'rare' ? '#06151f' : '#15120e',
+                          } as React.CSSProperties}
+                        >
+                          <div className="w-full flex items-center justify-between border-b border-white/10 pb-2">
+                            <span className="font-hud text-[9px] uppercase tracking-wider text-[#a89b8a] font-semibold">
+                              {selectedSeries === 'one-piece' ? 'Wanted' : 'Kimetsu'}
+                            </span>
+                            <span className="font-hud text-[9px] uppercase text-ink font-bold px-2 py-0.5 rounded-full"
+                                  style={{ backgroundColor: 'var(--rarity-color)' }}>
+                              {drawnCard.rarity}
+                            </span>
+                          </div>
 
-                      {/* Character Info */}
-                      <div className="flex-1 flex flex-col justify-center text-center">
-                        <h4 className="font-display text-base font-extrabold text-text-primary leading-tight">
-                          {drawnCard.name}
-                        </h4>
-                        <p className="font-hud text-[10px] font-bold mt-1" style={{ color: 'var(--rarity-color)' }}>
-                          {drawnCard.bounty}
-                        </p>
-                      </div>
+                          <div className={`my-3 h-32 w-full rounded-xl bg-gradient-to-tr ${drawnCard.color} flex items-center justify-center text-6xl shadow-inner relative overflow-hidden select-none`}>
+                            <div className="absolute inset-0 animate-shimmer pointer-events-none z-10" />
+                            {imageErrors[drawnCard.id] ? (
+                              drawnCard.emoji
+                            ) : (
+                              <img
+                                src={drawnCard.imageUrl}
+                                alt={drawnCard.name}
+                                onError={() => setImageErrors((prev) => ({ ...prev, [drawnCard.id]: true }))}
+                                className="h-full w-full object-cover relative z-5"
+                              />
+                            )}
+                          </div>
 
-                      {/* Special Move Footer */}
-                      <div className="w-full border-t border-white/10 pt-2 flex flex-col text-left">
-                        <span className="text-[7px] uppercase font-hud text-[#a89b8a] tracking-wider">Signature Attack</span>
-                        <span className="text-[10px] text-text-primary font-semibold truncate mt-0.5">
-                          {drawnCard.specialMove}
-                        </span>
-                      </div>
+                          <div className="w-full text-left space-y-1">
+                            <span className="font-hud text-[8px] uppercase tracking-widest text-pencil/80">Character</span>
+                            <h3 className="font-display text-sm font-bold text-text-primary truncate">{drawnCard.name}</h3>
+                            <p className="font-body text-[10px] text-pencil/90 truncate italic">"{drawnCard.description}"</p>
+                          </div>
+
+                          <div className="w-full border-t border-white/10 pt-2 flex items-center justify-between font-hud text-[9px] text-[#ff7a3c] font-semibold">
+                            <span>Power: {drawnCard.bounty}</span>
+                            <span>{drawnCard.specialMove}</span>
+                          </div>
+                        </div>
+                      )}
+
+                    </div>
+                  </div>
+
+                  {summonPhase === 's-reveal' && (
+                    <div className="reveal-panel-custom">
+                      <p className="text-xl font-bold text-white mb-2">
+                        {drawResult === 'new' ? '✨ NEW CARD UNLOCKED! ✨' : `Duplicate! (Refunded +${DUP_REFUND} Coins)`}
+                      </p>
+                      <button
+                        onClick={() => setSummonPhase('s-altar')}
+                        className="again-btn-custom"
+                      >
+                        Okay
+                      </button>
                     </div>
                   )}
                 </div>
+              )}
+            </div>
+
+            {/* Stats Dashboard */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+              <StatBox label="Owned Cards" value={stats.collectedCount} color="text-text-primary" />
+              <StatBox label="Completion Rate" value={`${stats.rate}%`} color="text-info" />
+              <StatBox label="Legendaries Found" value={stats.legendaryCount} color="text-accent-action" />
+              <StatBox label="Epics Found" value={stats.epicCount} color="text-success" />
+            </div>
+
+            {/* Card Binder Section */}
+            <div className="bg-bg-elevated border-2 border-structural rounded-3xl p-6 shadow-md">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b border-structural pb-4">
+                <div>
+                  <h2 className="font-display text-xl font-bold text-text-primary flex items-center gap-2">
+                    <Trophy className="text-accent-action h-6 w-6" />
+                    Card Album
+                  </h2>
+                  <p className="text-text-secondary text-xs mt-1">Review your collected cards and study active hotspots</p>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {(['all', 'common', 'rare', 'epic', 'legendary'] as const).map((r) => (
+                    <button
+                      key={r}
+                      onClick={() => setFilterRarity(r)}
+                      className={`px-3 py-1.5 rounded-xl font-hud text-[10px] uppercase font-bold border transition-all cursor-pointer ${
+                        filterRarity === r
+                          ? 'bg-accent-action border-accent-action text-white shadow-sm'
+                          : 'bg-transparent border-structural text-text-secondary hover:border-text-secondary hover:text-text-primary'
+                      }`}
+                    >
+                      {r}
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              {/* Status Banner */}
-              <AnimatePresence mode="wait">
-                {drawResult && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className={`p-3 rounded-xl border text-center font-hud text-xs ${
-                      drawResult === 'new'
-                        ? 'bg-teal-deep/10 border-teal-deep/30 text-teal-deep'
-                        : 'bg-paper/5 border-pencil/20 text-pencil'
-                    }`}
-                  >
-                    {drawResult === 'new' ? (
-                      <span className="font-bold flex items-center justify-center gap-1.5 animate-bounce">
-                        ✨ NEW CARD COLLECTED! ✨
-                      </span>
-                    ) : (
-                      <span>
-                        Duplicate Card! Refunded <span className="text-marigold font-bold">+{DUP_REFUND} Coins</span>
-                      </span>
-                    )}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          )}
-        </div>
-
-        {/* ── CARD STATS ─────────────────────────────────────────────── */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <StatBox label="Collected Count" value={`${stats.collectedCount} / ${stats.total}`} color="text-teal-deep" icon={<Trophy size={16} />} />
-          <StatBox label="Collection Rate" value={`${stats.rate}%`} color="text-marigold" icon={<Sparkles size={16} />} />
-          <StatBox label="Epic Cards" value={stats.epicCount} color="text-purple-400" />
-          <StatBox label="Legendary Cards" value={stats.legendaryCount} color="text-amber-500" />
-        </div>
-
-        {/* ── BESTIARY / COLLECTION GALLERY ─────────────────────────── */}
-        <div className="border border-pencil/20 bg-paper/5 rounded-2xl p-6">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b border-pencil/10 pb-4">
-            <div>
-              <h3 className="font-display text-lg font-bold text-text-primary flex items-center gap-1.5">
-                🏴‍☠️ Card Collection Gallery
-              </h3>
-              <p className="text-pencil text-xs mt-0.5">
-                Review your collected One Piece crew. Tap any card to inspect full details and abilities!
-              </p>
-            </div>
-
-            {/* Filter chips */}
-            <div className="flex flex-wrap gap-1.5">
-              {(['all', 'common', 'rare', 'epic', 'legendary'] as const).map((r) => (
-                <button
-                  key={r}
-                  onClick={() => setFilterRarity(r)}
-                  className={`px-3 py-1 rounded-lg font-hud text-[10px] uppercase border tracking-wider transition-colors cursor-pointer ${
-                    filterRarity === r
-                      ? 'bg-terracotta border-terracotta text-text-primary font-semibold'
-                      : 'border-pencil/20 hover:border-pencil/50 text-pencil bg-transparent'
-                  }`}
-                >
-                  {r}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Cards Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {filteredCards.map((card) => {
-              const isCollected = true; // Unlock all cards for review
-              
-              if (isCollected) {
-                return (
-                  <button
-                    key={card.id}
-                    onClick={() => setSelectedCard(card)}
-                    style={getCardSparkleColors(card.rarity) as React.CSSProperties}
-                    className="group relative flex flex-col p-2.5 rounded-xl bg-bg-base border transition-all duration-300 hover:scale-105 cursor-pointer text-left animate-sparkle-border"
-                  >
-                    <div className={`absolute top-1.5 right-1.5 text-[8px] uppercase tracking-wider font-hud px-1.5 py-0.5 rounded font-black z-20 ${
-                      card.rarity === 'legendary' ? 'bg-amber-500 text-ink shadow-[0_0_5px_rgba(245,158,11,0.4)]' :
-                      card.rarity === 'epic' ? 'bg-purple-600 text-text-primary shadow-[0_0_5px_rgba(147,51,234,0.4)]' :
-                      card.rarity === 'rare' ? 'bg-blue-600 text-text-primary shadow-[0_0_5px_rgba(37,99,235,0.4)]' :
-                      'bg-stone-500 text-text-primary/90'
-                    }`}>
-                      {card.rarity[0]}
-                    </div>
-                    {/* Art thumbnail */}
-                    <div className={`h-20 w-full rounded-lg bg-gradient-to-tr ${card.color} flex items-center justify-center text-4xl shadow-inner relative overflow-hidden select-none`}>
-                      <div className="absolute inset-0 animate-shimmer pointer-events-none z-10" />
-                      {imageErrors[card.id] ? (
-                        card.emoji
-                      ) : (
-                        <img
-                          src={card.imageUrl}
-                          alt={card.name}
-                          className="h-full object-contain filter drop-shadow-md py-0.5"
-                          referrerPolicy="no-referrer"
-                          onError={() => setImageErrors(prev => ({ ...prev, [card.id]: true }))}
-                        />
-                      )}
-                    </div>
-                    <p className="mt-2 font-display text-[11px] font-bold text-text-primary truncate leading-tight group-hover:text-marigold">
-                      {card.name}
-                    </p>
-                    <p className="font-hud text-[9px] text-marigold mt-0.5">
-                      {card.bounty}
-                    </p>
-                  </button>
-                );
-              }
-
-              // Locked Placeholder
-              return (
-                <div
-                  key={card.id}
-                  className="relative flex flex-col p-2.5 rounded-xl bg-bg-base/50 border border-pencil/10 opacity-40 select-none items-center justify-center h-[142px]"
-                >
-                  <div className="h-10 w-10 rounded-full bg-paper/5 border border-pencil/20 flex items-center justify-center text-pencil">
-                    <Lock size={14} />
-                  </div>
-                  <p className="mt-3 font-display text-[10px] font-medium text-pencil/80 text-center truncate w-full">
-                    {card.name.replace(/[a-zA-Z]/g, '•')}
-                  </p>
-                  <p className="font-hud text-[8px] uppercase tracking-wider text-pencil/40 mt-1">
-                    Locked
-                  </p>
+              {filteredCards.length === 0 ? (
+                <p className="text-center text-text-secondary text-xs py-8">No cards matching this rarity filter.</p>
+              ) : (
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                  {filteredCards.map((card) => {
+                    const isCollected = collectedCardIds.includes(card.id);
+                    return (
+                      <div
+                        key={card.id}
+                        onClick={() => isCollected && setSelectedCard(card)}
+                        className={`relative rounded-xl border p-3 flex flex-col items-center justify-between text-center transition-all ${
+                          isCollected
+                            ? 'bg-bg-base/20 border-structural cursor-pointer hover:-translate-y-1 hover:shadow-md'
+                            : 'bg-bg-base/5 border-structural/35 opacity-40 select-none'
+                        }`}
+                      >
+                        <div className={`h-24 w-full rounded-lg bg-gradient-to-tr ${isCollected ? card.color : 'from-structural to-structural/50'} flex items-center justify-center text-4xl shadow-inner relative overflow-hidden`}>
+                          {!isCollected && <Lock className="text-text-secondary/70 h-6 w-6 absolute z-10" />}
+                          {isCollected && (
+                            imageErrors[card.id] ? (
+                              card.emoji
+                            ) : (
+                              <img
+                                src={card.imageUrl}
+                                alt={card.name}
+                                onError={() => setImageErrors((prev) => ({ ...prev, [card.id]: true }))}
+                                className="h-full w-full object-cover"
+                              />
+                            )
+                          )}
+                        </div>
+                        <h4 className="font-display text-xs font-bold text-text-primary mt-2 truncate w-full">{card.name}</h4>
+                        <span className="font-hud text-[8px] uppercase tracking-wider text-text-secondary mt-1 block">
+                          {card.rarity}
+                        </span>
+                      </div>
+                    );
+                  })}
                 </div>
-              );
-            })}
-          </div>
-        </div>
+              )}
+            </div>
+          </>
+        )}
 
       </div>
 
-      {/* ── CARD DETAILED MODAL OVERLAY ─────────────────────────────── */}
+      {/* ── MODALS & OVERLAYS ─────────────────────────────────────────── */}
+      
+      {/* Gacha Card Spotlight Modal */}
       <AnimatePresence>
         {selectedCard && (
-          <div 
-            onClick={() => { setSelectedCard(null); setSelectedHotspot(null); }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bg-base/80 backdrop-blur-sm cursor-pointer"
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-bg-base/80 backdrop-blur-md z-50 flex items-center justify-center p-4"
           >
-            {/* Modal Box */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-sm max-h-[90vh] overflow-y-auto modal-scroll bg-paper border border-[#D5C0A0] rounded-2xl shadow-2xl p-4 sm:p-6 text-ink font-body cursor-default"
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="bg-bg-elevated border-2 border-structural rounded-3xl max-w-2xl w-full p-5 shadow-2xl relative flex flex-col md:flex-row gap-6"
             >
               <button
-                onClick={() => { setSelectedCard(null); setSelectedHotspot(null); }}
-                className="absolute top-4 right-4 text-pencil hover:text-ink transition-colors cursor-pointer z-30"
+                onClick={() => {
+                  setSelectedCard(null);
+                  setSelectedHotspot(null);
+                }}
+                className="absolute top-4 right-4 bg-transparent border-none text-text-secondary hover:text-text-primary cursor-pointer focus:outline-none"
               >
                 <X size={20} />
               </button>
 
-              {/* Rarity & Header */}
-              <div className="flex items-center gap-1.5 border-b border-[#DDD0B5] pb-3 mb-4">
-                <Trophy size={16} className="text-terracotta" />
-                <span className="font-hud text-[10px] uppercase tracking-wider text-pencil font-bold">
-                  Card Anatomy & Lore
-                </span>
+              <div className="flex-1 flex flex-col items-center">
+                <div
+                  className="w-[200px] h-[300px] rounded-2xl border-2 p-4 text-center flex flex-col justify-between relative shadow-xl overflow-hidden animate-glow"
+                  style={{
+                    borderColor: selectedCard.rarity === 'legendary' ? '#f3c969' :
+                                 selectedCard.rarity === 'epic' ? '#b388ff' :
+                                 selectedCard.rarity === 'rare' ? '#5fb6ff' : '#cbd5e1',
+                    background: selectedCard.rarity === 'legendary' ? 'linear-gradient(160deg, #3a2a08, #1f1505)' :
+                                selectedCard.rarity === 'epic' ? 'linear-gradient(160deg, #241338, #150b22)' :
+                                selectedCard.rarity === 'rare' ? 'linear-gradient(160deg, #0c2438, #06151f)' : 'linear-gradient(160deg, #211d18, #15120e)',
+                  }}
+                >
+                  <div className="w-full flex items-center justify-between border-b border-white/10 pb-1.5 text-[8px] font-hud font-semibold text-text-secondary/80">
+                    <span>Card Registry</span>
+                    <span className="text-ink px-2 py-0.5 rounded-full"
+                          style={{ backgroundColor: selectedCard.rarity === 'legendary' ? '#f3c969' :
+                                                     selectedCard.rarity === 'epic' ? '#b388ff' :
+                                                     selectedCard.rarity === 'rare' ? '#5fb6ff' : '#bfb6a8' }}>
+                      {selectedCard.rarity}
+                    </span>
+                  </div>
+
+                  <div className={`my-2 h-32 w-full rounded-xl bg-gradient-to-tr ${selectedCard.color} flex items-center justify-center text-5xl shadow-inner relative overflow-hidden select-none`}>
+                    {imageErrors[selectedCard.id] ? (
+                      selectedCard.emoji
+                    ) : (
+                      <img
+                        src={selectedCard.imageUrl}
+                        alt={selectedCard.name}
+                        onError={() => setImageErrors((prev) => ({ ...prev, [selectedCard.id]: true }))}
+                        className="h-full w-full object-cover"
+                      />
+                    )}
+                  </div>
+
+                  <div className="text-left space-y-1">
+                    <h3 className="font-display text-sm font-bold text-white truncate">{selectedCard.name}</h3>
+                    <p className="font-body text-[10px] text-text-secondary italic line-clamp-2">"\\${selectedCard.description}"</p>
+                  </div>
+
+                  <div className="w-full border-t border-white/10 pt-1.5 flex items-center justify-between font-hud text-[8px] text-[#ff7a3c] font-semibold">
+                    <span>Power: {selectedCard.bounty}</span>
+                    <span>{selectedCard.specialMove}</span>
+                  </div>
+                </div>
               </div>
 
-              {/* WANTED Poster style */}
-              <div 
-                style={getCardSparkleColors(selectedCard.rarity) as React.CSSProperties}
-                className="p-4 rounded-xl bg-bg-base text-text-primary border-4 animate-sparkle-border flex flex-col items-center justify-center text-center shadow-lg relative"
-              >
-                
-                {/* Hotspot Faction */}
-                <button
-                  type="button"
-                  onClick={() => setSelectedHotspot(selectedHotspot === 'faction' ? null : 'faction')}
-                  className={`absolute top-1.5 left-14 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full border shadow-lg transition-all cursor-pointer ${
-                    selectedHotspot === 'faction' 
-                      ? 'scale-125 bg-marigold text-ink border-marigold ring-2 ring-marigold/40 shadow-[0_0_10px_rgba(251,191,36,0.8)]' 
-                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-text-primary animate-pulse hover:scale-110 hover:bg-paper/40'
-                  }`}
-                  title="Faction Info"
-                >
-                  <Info size={10} className="stroke-[3.5]" />
-                </button>
+              <div className="flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="font-display text-lg font-bold text-text-primary">Card Hotspot Analyzer</h3>
+                  <p className="text-xs text-text-secondary mt-1">Tap a section header below to analyze its design mechanics and gameplay synergy details.</p>
+                  
+                  <div className="mt-4 grid grid-cols-2 gap-2">
+                    {Object.entries(activeHotspots).map(([key, value]) => (
+                      <button
+                        key={key}
+                        onClick={() => setSelectedHotspot(key as any)}
+                        className={`text-left p-2.5 rounded-xl border text-[11px] font-semibold transition-all cursor-pointer ${
+                          selectedHotspot === key
+                            ? 'bg-accent-action border-accent-action text-white shadow-sm'
+                            : 'bg-bg-base/15 border-structural text-text-secondary hover:border-text-secondary hover:text-text-primary'
+                        }`}
+                      >
+                        {value.title}
+                      </button>
+                    ))}
+                  </div>
 
-                {/* Hotspot Portrait */}
-                <button
-                  type="button"
-                  onClick={() => setSelectedHotspot(selectedHotspot === 'portrait' ? null : 'portrait')}
-                  className={`absolute top-20 left-[50%] -translate-x-[50%] z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full border shadow-lg transition-all cursor-pointer ${
-                    selectedHotspot === 'portrait' 
-                      ? 'scale-125 bg-marigold text-ink border-marigold ring-2 ring-marigold/40 shadow-[0_0_10px_rgba(251,191,36,0.8)]' 
-                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-text-primary animate-pulse hover:scale-110 hover:bg-paper/40'
-                  }`}
-                  title="Portrait Info"
-                >
-                  <Info size={10} className="stroke-[3.5]" />
-                </button>
-
-                {/* Hotspot Name */}
-                <button
-                  type="button"
-                  onClick={() => setSelectedHotspot(selectedHotspot === 'name' ? null : 'name')}
-                  className={`absolute bottom-[94px] right-6 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full border shadow-lg transition-all cursor-pointer ${
-                    selectedHotspot === 'name' 
-                      ? 'scale-125 bg-marigold text-ink border-marigold ring-2 ring-marigold/40 shadow-[0_0_10px_rgba(251,191,36,0.8)]' 
-                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-text-primary animate-pulse hover:scale-110 hover:bg-paper/40'
-                  }`}
-                  title="Name Info"
-                >
-                  <Info size={10} className="stroke-[3.5]" />
-                </button>
-
-                {/* Hotspot Bounty */}
-                <button
-                  type="button"
-                  onClick={() => setSelectedHotspot(selectedHotspot === 'bounty' ? null : 'bounty')}
-                  className={`absolute bottom-[68px] right-6 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full border shadow-lg transition-all cursor-pointer ${
-                    selectedHotspot === 'bounty' 
-                      ? 'scale-125 bg-marigold text-ink border-marigold ring-2 ring-marigold/40 shadow-[0_0_10px_rgba(251,191,36,0.8)]' 
-                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-text-primary animate-pulse hover:scale-110 hover:bg-paper/40'
-                  }`}
-                  title="Bounty Info"
-                >
-                  <Info size={10} className="stroke-[3.5]" />
-                </button>
-
-                {/* Hotspot Rarity */}
-                <button
-                  type="button"
-                  onClick={() => setSelectedHotspot(selectedHotspot === 'rarity' ? null : 'rarity')}
-                  className={`absolute bottom-2.5 left-4 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full border shadow-lg transition-all cursor-pointer ${
-                    selectedHotspot === 'rarity' 
-                      ? 'scale-125 bg-marigold text-ink border-marigold ring-2 ring-marigold/40 shadow-[0_0_10px_rgba(251,191,36,0.8)]' 
-                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-text-primary animate-pulse hover:scale-110 hover:bg-paper/40'
-                  }`}
-                  title="Rarity Info"
-                >
-                  <Info size={10} className="stroke-[3.5]" />
-                </button>
-
-                {/* Hotspot Special Attack */}
-                <button
-                  type="button"
-                  onClick={() => setSelectedHotspot(selectedHotspot === 'attack' ? null : 'attack')}
-                  className={`absolute bottom-2.5 right-4 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full border shadow-lg transition-all cursor-pointer ${
-                    selectedHotspot === 'attack' 
-                      ? 'scale-125 bg-marigold text-ink border-marigold ring-2 ring-marigold/40 shadow-[0_0_10px_rgba(251,191,36,0.8)]' 
-                      : 'bg-paper/20 backdrop-blur-sm border-paper/30 text-text-primary animate-pulse hover:scale-110 hover:bg-paper/40'
-                  }`}
-                  title="Attack Info"
-                >
-                  <Info size={10} className="stroke-[3.5]" />
-                </button>
-
-                {/* Left Header label (OP-Card / DS-Card) - now clickable for series details */}
-                <button
-                  type="button"
-                  onClick={() => setSelectedHotspot(selectedHotspot === 'series' ? null : 'series')}
-                  className={`absolute top-2 left-2 text-[8px] font-hud text-pencil uppercase font-bold tracking-widest transition-all cursor-pointer hover:text-marigold ${
-                    selectedHotspot === 'series' ? 'text-marigold scale-105 ring-2 ring-marigold rounded px-1.5 py-0.5 bg-marigold/10' : ''
-                  }`}
-                >
-                  {selectedCard.id.startsWith('ds-') ? 'DS-Card' : 'OP-Card'}
-                </button>
-                
-                <div className={`h-36 w-full rounded-lg bg-gradient-to-tr ${selectedCard.color} flex items-center justify-center text-7xl shadow-inner relative overflow-hidden select-none mb-4 transition-all ${
-                  selectedHotspot === 'portrait' ? 'ring-4 ring-marigold scale-95 shadow-lg' : ''
-                }`}>
-                  <div className="absolute inset-0 animate-shimmer pointer-events-none z-10" />
-                  {/* Franchise series watermark inside portrait - clickable */}
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedHotspot(selectedHotspot === 'series' ? null : 'series');
-                    }}
-                    className={`absolute top-0 right-0 p-1.5 opacity-20 hover:opacity-60 hover:scale-105 transition-all font-black text-5xl select-none cursor-pointer text-text-primary leading-none z-20 ${
-                      selectedHotspot === 'series' ? 'opacity-85 text-marigold scale-110' : ''
-                    }`}
-                    title={`Click for ${selectedCard.id.startsWith('ds-') ? 'DS' : 'OP'} Series Info`}
-                  >
-                    {selectedCard.id.startsWith('ds-') ? 'DS' : 'OP'}
-                  </button>
-
-                  {imageErrors[selectedCard.id] ? (
-                    selectedCard.emoji
-                  ) : (
-                    <img
-                      src={selectedCard.imageUrl}
-                      alt={selectedCard.name}
-                      className="h-full object-contain filter drop-shadow-md py-1"
-                      referrerPolicy="no-referrer"
-                      onError={() => setImageErrors(prev => ({ ...prev, [selectedCard.id]: true }))}
-                    />
+                  {selectedHotspot && (
+                    <div className="mt-4 p-3 bg-bg-base/35 border border-structural rounded-2xl">
+                      <h4 className="font-display text-xs font-bold text-text-primary flex items-center gap-1.5">
+                        <Info size={13} className="text-accent-action" />
+                        {activeHotspots[selectedHotspot].title}
+                      </h4>
+                      <p className="text-xs text-text-secondary mt-1 leading-relaxed">
+                        {activeHotspots[selectedHotspot].explanation}
+                      </p>
+                    </div>
                   )}
                 </div>
 
-                <h3 className={`font-display text-lg font-black text-text-primary tracking-wide transition-all ${
-                  selectedHotspot === 'name' ? 'text-marigold scale-105 ring-2 ring-marigold rounded px-2 bg-marigold/10' : ''
-                }`}>
-                  {selectedCard.name}
-                </h3>
-                <p className={`font-hud text-xs text-marigold font-extrabold tracking-wider mt-1.5 transition-all ${
-                  selectedHotspot === 'bounty' ? 'text-terracotta scale-105 ring-2 ring-terracotta rounded px-2 bg-terracotta/10' : ''
-                }`}>
-                  {selectedCard.bounty}
-                </p>
-                <span className={`mt-2 font-hud text-[9px] uppercase px-2.5 py-0.5 rounded-full font-bold transition-all ${
-                  selectedCard.rarity === 'legendary' ? 'bg-amber-500 text-ink font-black shadow-[0_0_10px_rgba(245,158,11,0.5)]' :
-                  selectedCard.rarity === 'epic' ? 'bg-purple-600 text-text-primary font-extrabold shadow-[0_0_10px_rgba(147,51,234,0.5)]' :
-                  selectedCard.rarity === 'rare' ? 'bg-blue-600 text-text-primary font-extrabold shadow-[0_0_10px_rgba(37,99,235,0.5)]' :
-                  'bg-stone-500 text-text-primary/90 font-medium'
-                } ${
-                  selectedHotspot === 'rarity' ? 'scale-110 ring-2 ring-marigold' : ''
-                }`}>
-                  {selectedCard.rarity}
-                </span>
-              </div>
-
-              {/* Interactive Anatomy Guide Parchment Box */}
-              <AnimatePresence mode="wait">
-                {selectedHotspot ? (
-                  <motion.div
-                    key={selectedHotspot}
-                    initial={{ opacity: 0, y: 5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -5 }}
-                    className="mt-4 p-3 bg-terracotta/10 border border-terracotta/30 rounded-xl font-body text-ink text-left relative"
+                <div className="border-t border-structural pt-3 mt-4 flex items-center justify-between">
+                  <span className="font-hud text-[9px] uppercase tracking-wider text-text-secondary">
+                    Card ID: {selectedCard.id}
+                  </span>
+                  <button
+                    onClick={() => {
+                      setSelectedCard(null);
+                      setSelectedHotspot(null);
+                    }}
+                    className="bg-accent-action hover:bg-accent-action-hover text-white font-body text-xs font-semibold px-4 py-2 rounded-xl transition-colors cursor-pointer border-none"
                   >
-                    <button
-                      type="button"
-                      onClick={() => setSelectedHotspot(null)}
-                      className="absolute top-2 right-2 text-pencil hover:text-ink cursor-pointer"
-                    >
-                      <X size={12} />
-                    </button>
-                    <h4 className="font-hud text-[10px] uppercase font-bold text-terracotta tracking-wider flex items-center gap-1">
-                      <Sparkles size={10} /> {activeHotspots[selectedHotspot].title}
-                    </h4>
-                    <p className="mt-1 leading-relaxed text-ink/80 text-[11px]">
-                      {activeHotspots[selectedHotspot].explanation}
-                    </p>
-                  </motion.div>
-                ) : (
-                  <div className="mt-4 p-3 bg-paper/5 border border-pencil/10 rounded-xl font-body text-[11px] text-pencil text-center flex items-center justify-center flex-wrap gap-1">
-                    <span>💡 Tip: Tap any pulsing</span>
-                    <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-marigold border border-ink text-ink"><Info size={8} className="stroke-[3.5]" /></span>
-                    <span>dot or the <strong>{selectedCard.id.startsWith('ds-') ? 'DS' : 'OP'}</strong> label to inspect the card anatomy!</span>
-                  </div>
-                )}
-              </AnimatePresence>
-
-              {/* Details & Lore */}
-              <div className="mt-5 space-y-4">
-                <div>
-                  <h4 className="font-hud text-[9px] uppercase tracking-wider text-pencil font-bold flex items-center gap-1">
-                    <Info size={10} /> Character Bio
-                  </h4>
-                  <p className="text-xs text-ink/80 mt-1 leading-relaxed italic">
-                    "{selectedCard.description}"
-                  </p>
-                </div>
-
-                <div className={`border-t border-[#DDD0B5] pt-3 transition-all ${
-                  selectedHotspot === 'attack' ? 'ring-2 ring-terracotta rounded p-2 bg-terracotta/5' : ''
-                }`}>
-                  <h4 className="font-hud text-[9px] uppercase tracking-wider text-pencil font-bold">
-                    Signature Attack
-                  </h4>
-                  <p className="text-xs font-bold text-terracotta mt-1">
-                    {selectedCard.specialMove}
-                  </p>
+                    Close Entry
+                  </button>
                 </div>
               </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-              {/* Close Button */}
+      {/* Chest Reward Modal */}
+      <AnimatePresence>
+        {chestReward && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-bg-base/80 backdrop-blur-md z-50 flex items-center justify-center p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="bg-bg-elevated border-2 border-accent-action rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl relative space-y-4"
+            >
+              <span className="text-5xl block animate-bounce" role="img" aria-label="Gift">🎁</span>
+              <div>
+                <h3 className="font-display text-lg font-bold text-text-primary">Chest Opened!</h3>
+                <p className="font-body text-xs text-text-secondary mt-1">Here is the random reward you pulled:</p>
+              </div>
+
+              <div className="bg-bg-base/40 border border-structural rounded-2xl p-4">
+                <h4 className="font-display text-base font-extrabold text-accent-action">{chestReward.title}</h4>
+                <p className="font-body text-xs text-text-secondary mt-1.5 leading-relaxed">{chestReward.detail}</p>
+              </div>
+
               <button
-                onClick={() => { setSelectedCard(null); setSelectedHotspot(null); }}
-                className="mt-6 w-full bg-bg-base hover:bg-bg-base/90 text-text-primary font-hud text-xs uppercase py-2.5 rounded-xl transition-colors cursor-pointer font-bold"
+                onClick={() => setChestReward(null)}
+                className="w-full bg-accent-action hover:bg-accent-action-hover text-white font-body text-xs font-bold py-2.5 rounded-xl border-none cursor-pointer hover:scale-103 transition-transform"
               >
-                Close Inspect
+                Claim Reward
               </button>
             </motion.div>
-          </div>
+          </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ── GACHA DRAW REVEAL MODAL OVERLAY ─────────────────────────── */}
+      {/* Purchase Celebration Modal */}
       <AnimatePresence>
-        {drawnCard && (
-          <div 
-            onClick={() => { setDrawnCard(null); setDrawResult(null); setSummonPhase('s-altar'); }}
-            className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-bg-base/90 backdrop-blur-md cursor-pointer"
+        {purchaseCelebration && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-bg-base/80 backdrop-blur-md z-50 flex items-center justify-center p-4"
           >
-            {/* Reveal Header */}
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="text-center mb-6 pointer-events-none select-none"
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="bg-bg-elevated border-2 border-success rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl space-y-4"
             >
-              {drawResult === 'new' ? (
-                <div>
-                  <h2 className="font-display text-3xl font-extrabold text-marigold tracking-widest drop-shadow-[0_0_10px_rgba(251,191,36,0.5)] flex items-center justify-center gap-2 animate-bounce">
-                    <Sparkles className="animate-spin-slow" /> NEW CARD UNLOCKED!
-                  </h2>
-                  <p className="text-pencil text-xs mt-2 font-hud tracking-widest uppercase">Added to your collection</p>
-                </div>
-              ) : (
-                <div>
-                  <h2 className="font-display text-2xl font-extrabold text-text-primary tracking-wider flex items-center justify-center gap-2">
-                    🔄 DUPLICATE DRAW
-                  </h2>
-                  <p className="text-pencil text-xs mt-2 font-hud tracking-wider uppercase text-marigold">Converted: +15 XP & +10 Coins</p>
-                </div>
-              )}
-            </motion.div>
-
-            {/* Magnificent Card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.7, rotateY: -180 }}
-              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-              exit={{ opacity: 0, scale: 0.7, rotateY: 180 }}
-              transition={{ type: 'spring', damping: 15, stiffness: 100 }}
-              onClick={(e) => e.stopPropagation()}
-              style={getCardSparkleColors(drawnCard.rarity) as React.CSSProperties}
-              className="relative w-72 h-[450px] bg-bg-base border-4 rounded-3xl p-6 flex flex-col justify-between shadow-[0_0_50px_rgba(0,0,0,0.8)] cursor-default overflow-hidden animate-sparkle-border"
-            >
-              {/* Backglow element */}
-              <div className={`absolute inset-0 opacity-10 bg-gradient-to-tr ${drawnCard.color} pointer-events-none`} />
-
-              {/* Card Rarity Badge & Rarity Name */}
-              <div className="flex items-center justify-between border-b border-pencil/10 pb-3 z-10">
-                <span className="font-hud text-[10px] uppercase tracking-wider text-pencil font-bold">
-                  {selectedSeries === 'one-piece' ? 'Wanted Poster' : 'Kimetsu Card'}
-                </span>
-                <span className={`font-hud text-[10px] uppercase px-2.5 py-0.5 rounded-full font-black ${
-                  drawnCard.rarity === 'legendary' ? 'bg-amber-500 text-ink animate-pulse' :
-                  drawnCard.rarity === 'epic' ? 'bg-purple-600 text-text-primary' :
-                  drawnCard.rarity === 'rare' ? 'bg-sky-500 text-text-primary' : 'bg-pencil/20 text-pencil'
-                }`}>
-                  {drawnCard.rarity}
-                </span>
+              <span className="text-5xl block animate-pulse" role="img" aria-label="Celebration">🎉</span>
+              <div>
+                <h3 className="font-display text-lg font-bold text-text-primary">Purchase Successful!</h3>
+                <p className="font-body text-xs text-text-secondary mt-1">Thank you for your purchase!</p>
               </div>
 
-              {/* Left Header label (OP-Card / DS-Card) */}
-              <div className="absolute top-16 left-6 text-[8px] font-hud text-pencil uppercase font-bold tracking-widest opacity-80 z-10">
-                {drawnCard.id.startsWith('ds-') ? 'DS-Card' : 'OP-Card'}
-              </div>
-
-              {/* Card Illustration */}
-              <div className={`my-4 h-48 w-full rounded-2xl bg-gradient-to-tr ${drawnCard.color} flex items-center justify-center text-8xl shadow-inner relative overflow-hidden select-none z-10`}>
-                <div className="absolute inset-0 animate-shimmer pointer-events-none z-10" />
-                {/* Series Watermark */}
-                <div className="absolute top-1 right-2 opacity-15 font-black text-5xl select-none text-text-primary leading-none">
-                  {drawnCard.id.startsWith('ds-') ? 'DS' : 'OP'}
-                </div>
-
-                {imageErrors[drawnCard.id] ? (
-                  drawnCard.emoji
-                ) : (
-                  <img
-                    src={drawnCard.imageUrl}
-                    alt={drawnCard.name}
-                    className="h-full object-contain filter drop-shadow-lg py-2 hover:scale-105 transition-transform duration-300"
-                    referrerPolicy="no-referrer"
-                    onError={() => setImageErrors(prev => ({ ...prev, [drawnCard.id]: true }))}
-                  />
+              <div className="bg-bg-base/40 border border-structural rounded-2xl p-4">
+                <h4 className="font-display text-sm font-extrabold text-success">{purchaseCelebration.name}</h4>
+                <p className="font-body text-[11px] text-text-secondary mt-1">Cost: {purchaseCelebration.cost} KC</p>
+                {purchaseCelebration.desc && (
+                  <p className="font-body text-xs text-text-secondary/90 italic mt-2 border-t border-structural/20 pt-2">{purchaseCelebration.desc}</p>
                 )}
               </div>
 
-              {/* Details & Lore */}
-              <div className="flex-1 flex flex-col justify-center text-center z-10 px-2">
-                <h3 className="font-display text-xl font-black text-text-primary leading-tight tracking-wide">
-                  {drawnCard.name}
-                </h3>
-                <p className="font-hud text-xs text-marigold font-extrabold tracking-wider mt-1">
-                  {drawnCard.bounty}
-                </p>
-                <p className="text-[11px] text-pencil line-clamp-3 mt-2.5 leading-relaxed italic px-1">
-                  "{drawnCard.description}"
-                </p>
-              </div>
-
-              {/* Special Move Footer */}
-              <div className="border-t border-pencil/10 pt-3 flex flex-col z-10 mt-2">
-                <span className="text-[8px] uppercase font-hud text-pencil tracking-widest">Signature Attack</span>
-                <span className="text-xs text-text-primary font-bold truncate mt-0.5 text-terracotta">
-                  {drawnCard.specialMove}
-                </span>
-              </div>
+              <button
+                onClick={() => setPurchaseCelebration(null)}
+                className="w-full bg-success hover:bg-success-hover text-white font-body text-xs font-bold py-2.5 rounded-xl border-none cursor-pointer hover:scale-103 transition-transform"
+              >
+                Continue
+              </button>
             </motion.div>
-
-            {/* Click to Continue Help */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ delay: 0.5 }}
-              className="text-pencil text-xs mt-6 font-hud tracking-widest uppercase animate-pulse pointer-events-none select-none"
-            >
-              Tap anywhere on screen to continue
-            </motion.p>
-          </div>
+          </motion.div>
         )}
       </AnimatePresence>
-      
-      {/* CSS flip and scrollbar properties injected directly */}
+
+      {/* Coin Tips Modal */}
+      <AnimatePresence>
+        {showCoinTips && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-bg-base/80 backdrop-blur-md z-50 flex items-center justify-center p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="bg-bg-elevated border-2 border-structural rounded-3xl max-w-md w-full p-6 shadow-2xl relative space-y-4"
+            >
+              <button
+                onClick={() => setShowCoinTips(false)}
+                className="absolute top-4 right-4 bg-transparent border-none text-text-secondary hover:text-text-primary cursor-pointer focus:outline-none"
+              >
+                <X size={18} />
+              </button>
+
+              <h3 className="font-display text-lg font-bold text-text-primary border-b border-structural pb-2">
+                💰 How to Earn Kitsune Coins Faster
+              </h3>
+
+              <div className="space-y-3.5 font-body text-xs text-text-secondary leading-relaxed">
+                <div className="flex gap-2.5 items-start">
+                  <span className="text-base select-none">📅</span>
+                  <div>
+                    <h4 className="font-bold text-text-primary">Daily Streaks</h4>
+                    <p>Maintain your daily log streak! The higher your streak, the higher your coin multiplier becomes when doing general activities.</p>
+                  </div>
+                </div>
+                <div className="flex gap-2.5 items-start">
+                  <span className="text-base select-none">📋</span>
+                  <div>
+                    <h4 className="font-bold text-text-primary">Daily Quest Board</h4>
+                    <p>Complete your daily rotating quest (visible on the Adventure tab) to secure huge bonus payments like +30 KC.</p>
+                  </div>
+                </div>
+                <div className="flex gap-2.5 items-start">
+                  <span className="text-base select-none">📖</span>
+                  <div>
+                    <h4 className="font-bold text-text-primary">Mastering Vocabulary</h4>
+                    <p>Learn and review new words in the dictionary. Reviewing weak words awards random coin drops!</p>
+                  </div>
+                </div>
+                <div className="flex gap-2.5 items-start">
+                  <span className="text-base select-none">⚔️</span>
+                  <div>
+                    <h4 className="font-bold text-text-primary">Guardian Battles</h4>
+                    <p>Beating a region guardian boss fight awards a large lump sum of coins and secures your kitsune tails!</p>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setShowCoinTips(false)}
+                className="w-full bg-accent-action hover:bg-accent-action-hover text-white font-body text-xs font-bold py-2.5 rounded-xl border-none cursor-pointer mt-4"
+              >
+                Understood
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <style>{`
-        .rotate-y-180 {
-          transform: rotateY(180deg);
-        }
-        .preserve-3d {
-          transform-style: preserve-3d;
-        }
-        .backface-hidden {
-          backface-visibility: hidden;
-        }
-        /* Custom scrollbar for constrained height modals */
-        .modal-scroll::-webkit-scrollbar {
-          width: 6px;
-        }
-        .modal-scroll::-webkit-scrollbar-track {
-          background: transparent;
-        }
-        .modal-scroll::-webkit-scrollbar-thumb {
-          background-color: rgba(144, 144, 144, 0.3);
-          border-radius: 4px;
-        }
-        .modal-scroll::-webkit-scrollbar-thumb:hover {
-          background-color: rgba(144, 144, 144, 0.5);
+        /* ── CSS STYLES FOR GACHA COMPONENT ─────────────────────────── */
+        .gacha-stage-panel {
+          min-height: 440px;
+          perspective: 1200px;
         }
         
-        /* Sparkle Border Glow Keyframes */
-        @keyframes sparkleGlow {
-          0%, 100% {
-            box-shadow: 0 0 15px var(--glow-color, rgba(251, 191, 36, 0.6)), inset 0 0 5px var(--glow-color, rgba(251, 191, 36, 0.3));
-            border-color: var(--border-color, #fbbf24);
-            filter: brightness(1);
-          }
-          20% {
-            box-shadow: 0 0 25px var(--glow-color, rgba(251, 191, 36, 0.9)), inset 0 0 10px var(--glow-color, rgba(251, 191, 36, 0.5));
-            border-color: var(--border-color-bright, #fef08a);
-            filter: brightness(1.15);
-          }
-          40% {
-            box-shadow: 0 0 12px var(--glow-color, rgba(251, 191, 36, 0.4)), inset 0 0 4px var(--glow-color, rgba(251, 191, 36, 0.2));
-            border-color: var(--border-color-dim, #ca8a04);
-            filter: brightness(0.95);
-          }
-          60% {
-            box-shadow: 0 0 28px var(--glow-color, rgba(251, 191, 36, 1)), inset 0 0 12px var(--glow-color, rgba(251, 191, 36, 0.6));
-            border-color: var(--border-color-bright, #fef08a);
-            filter: brightness(1.2);
-          }
-          80% {
-            box-shadow: 0 0 18px var(--glow-color, rgba(251, 191, 36, 0.7)), inset 0 0 6px var(--glow-color, rgba(251, 191, 36, 0.35));
-            border-color: var(--border-color, #fbbf24);
-            filter: brightness(1.05);
-          }
-        }
-        .animate-sparkle-border {
-          animation: sparkleGlow 2.5s infinite ease-in-out;
-          border-width: 4px;
-        }
-
-        /* Diagonal Foil Gloss Shimmer Sweep */
-        @keyframes shimmerSweep {
-          0% {
-            background-position: -200% 0;
-          }
-          100% {
-            background-position: 200% 0;
-          }
-        }
-        .animate-shimmer {
-          background-image: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 60%, transparent 70%);
-          background-size: 200% 100%;
-          animation: shimmerSweep 5s infinite linear;
-        }
-
-        /* CSS Summoning Ritual Stage Stylesheet */
-        .stage {
-          --void: #07060a;
-          --gold: #f3c969;
-          --gold-deep: #b8842e;
-          --gold-dim: #6e5326;
-          --purple: #8b3ffb;
-          --purple-deep: #4a1d96;
-          --ember: #ff7a3c;
-          --text-bright: #f3ecdc;
-          --text-muted: #a89b8a;
-          --text-faint: #6b6058;
-        }
-
-        .grain-overlay {
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-          mix-blend-mode: overlay;
-        }
-
         .vignette-overlay {
-          background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.85) 100%);
+          background: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.85));
         }
 
-        /* Summoning Circle Rotating Glyphs */
+        .stage.s-transition { background: #0c0814; }
+        .stage.s-rise { background: #0c0814; }
+        .stage.s-begin { background: #0c0814; }
+        .stage.s-intensity { background: #12091f; }
+        .stage.s-reveal { background: #0a0610; }
+
         .glyph-wrap {
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%);
-          width: 520px;
-          height: 520px;
+          width: 320px;
+          height: 320px;
           opacity: 0.2;
-          transition: all 1.2s ease;
+          transition: opacity 0.8s ease;
         }
-        .stage.s-transition .glyph-wrap { opacity: 0.18; }
-        .stage.s-rise .glyph-wrap { opacity: 0.55; }
-        .stage.s-begin .glyph-wrap { opacity: 0.8; }
+        .stage.s-transition .glyph-wrap { opacity: 0.45; }
+        .stage.s-rise .glyph-wrap { opacity: 0.6; }
+        .stage.s-begin .glyph-wrap { opacity: 0.75; }
         .stage.s-intensity .glyph-wrap { opacity: 1.0; }
         .stage.s-reveal .glyph-wrap { opacity: 0.6; }
 
