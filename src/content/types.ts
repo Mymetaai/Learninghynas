@@ -116,7 +116,7 @@ export interface Quest {
 /** A region on the World Map — one per level. */
 export interface World {
   id: string;
-  /** Display name, e.g. "La Aldea" (the village). */
+  /** Display name, e.g. "Pueblo Inicial". */
   name: string;
   /** Flavor line describing the region. */
   description: string;
@@ -128,6 +128,10 @@ export interface World {
    * previous world whose boss (Step 16) must be beaten.
    */
   unlockRequirement: 'first' | string;
+  /** Guardian boss name for this region's final battle. */
+  guardian: string;
+  /** Number of kitsune tails earned by completing this region (total across all = 9). */
+  tailsAwarded: number;
 }
 
 /** The full curriculum. */
