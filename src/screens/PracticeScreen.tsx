@@ -2,6 +2,9 @@
 // Replaces the old placeholder with a functional 4-tile drill hub.
 // Each tile launches a short practice session (5-10 items) and awards XP.
 import { useState, useMemo, useCallback, type FC } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import { getQuest } from '../content';
+import { useProgressStore } from '../state/progressStore';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Target,
@@ -21,7 +24,7 @@ import ExerciseEngine from '../components/exercises/ExerciseEngine';
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
-type DrillMode = 'weak-spots' | 'vocab-drill' | 'listening-reps' | 'speaking-reps';
+type DrillMode = 'weak-spots' | 'vocab-drill' | 'listening-reps' | 'speaking-reps' | 'quest';
 type ScreenView = 'hub' | 'session';
 
 interface SessionResult {
@@ -139,8 +142,13 @@ function generateVocabExercises(
 // ── Main Component ───────────────────────────────────────────────────────────
 
 const PracticeScreen: FC = () => {
-  const [view, setView] = useState<ScreenView>('hub');
-  const [activeMode, setActiveMode] = useState<DrillMode | null>(null);
+  const [params] = useSearchParams();
+  const navigate = useNavigate();
+  const questId = params.get('quest');
+  const quest = useMemo(() => (questId ? getQuest(questId) : null), [questId]);
+
+  const [view, setView] = useState<ScreenView>(quest ? 'session' : 'hub');
+  const [activeMode, setActiveMode] = useState<DrillMode | null>(quest ? 'quest' : null);
   const [sessionResult, setSessionResult] = useState<SessionResult | null>(null);
 
   // Data sources (existing stores)
@@ -157,6 +165,9 @@ const PracticeScreen: FC = () => {
 
   // Session exercises — generated when a mode is activated
   const sessionExercises = useMemo<Exercise[]>(() => {
+    if (quest) {
+      return quest.exercises;
+    }
     if (!activeMode) return [];
     switch (activeMode) {
       case 'weak-spots':
@@ -168,7 +179,7 @@ const PracticeScreen: FC = () => {
       default:
         return [];
     }
-  }, [activeMode, mistakes, learnedVocab, listeningExercises]);
+  }, [activeMode, mistakes, learnedVocab, listeningExercises, quest]);
 
   const handleStartSession = useCallback((mode: DrillMode) => {
     setActiveMode(mode);
@@ -176,33 +187,54 @@ const PracticeScreen: FC = () => {
     setView('session');
   }, []);
 
+  const completeQuest = useProgressStore((s) => s.completeQuest);
+  const grantQuestRewards = useStatsStore((s) => s.grantQuestRewards);
+  const learnVocab = useStatsStore((s) => s.learnVocab);
+
   const handleSessionComplete = useCallback(
     (score: { correct: number; total: number }) => {
-      const { xp, coins } = grantTrainingRewards(score.correct, score.total);
+      if (quest && questId) {
+        completeQuest(questId);
+        grantQuestRewards(questId, quest.rewards.xp, quest.rewards.coins);
+        const vocabWords = quest.vocabulary.map((v) => v.word);
+        learnVocab(vocabWords, questId);
 
-      // For weak spots: mark correctly-answered items as reviewed
-      if (activeMode === 'weak-spots') {
-        mistakes.forEach((m) => {
-          // Mark all reviewed — individual tracking happens via the engine
-          markReviewedCorrectly(m.word);
+        setSessionResult({
+          ...score,
+          xp: quest.rewards.xp,
+          coins: quest.rewards.coins,
+          mode: 'quest',
+        });
+      } else {
+        const { xp, coins } = grantTrainingRewards(score.correct, score.total);
+
+        // For weak spots: mark correctly-answered items as reviewed
+        if (activeMode === 'weak-spots') {
+          mistakes.forEach((m) => {
+            markReviewedCorrectly(m.word);
+          });
+        }
+
+        setSessionResult({
+          ...score,
+          xp,
+          coins,
+          mode: activeMode!,
         });
       }
-
-      setSessionResult({
-        ...score,
-        xp,
-        coins,
-        mode: activeMode!,
-      });
     },
-    [activeMode, grantTrainingRewards, markReviewedCorrectly, mistakes],
+    [activeMode, grantTrainingRewards, markReviewedCorrectly, mistakes, quest, questId, completeQuest, grantQuestRewards, learnVocab],
   );
 
   const handleBackToHub = useCallback(() => {
-    setView('hub');
-    setActiveMode(null);
-    setSessionResult(null);
-  }, []);
+    if (quest) {
+      navigate('/map');
+    } else {
+      setView('hub');
+      setActiveMode(null);
+      setSessionResult(null);
+    }
+  }, [quest, navigate]);
 
   // ── Session View ─────────────────────────────────────────────────────────
 
@@ -228,10 +260,10 @@ const PracticeScreen: FC = () => {
               </motion.div>
 
               <h2 className="font-display text-2xl font-bold text-text-primary">
-                Session Complete!
+                {quest ? 'Quest Complete!' : 'Session Complete!'}
               </h2>
               <p className="mt-1 font-body text-sm text-pencil">
-                {TILE_CONFIG[sessionResult.mode].title}
+                {quest ? quest.title : TILE_CONFIG[sessionResult.mode].title}
               </p>
 
               <div className="mt-6 flex items-center justify-center gap-6">
@@ -268,7 +300,7 @@ const PracticeScreen: FC = () => {
                 onClick={handleBackToHub}
                 className="mt-6 w-full rounded-xl bg-terracotta px-4 py-3 font-display text-base font-semibold text-text-primary shadow-lg transition-colors hover:bg-terracotta/90 cursor-pointer"
               >
-                Back to Training Grounds
+                {quest ? 'Back to Adventure Map' : 'Back to Training Grounds'}
               </motion.button>
             </motion.div>
           </div>
@@ -304,7 +336,7 @@ const PracticeScreen: FC = () => {
             className="flex items-center gap-1.5 font-hud text-[11px] text-pencil hover:text-text-primary transition-colors cursor-pointer"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
-            Back to Training Grounds
+            {quest ? 'Back to Adventure Map' : 'Back to Training Grounds'}
           </button>
           <h2 className="font-display text-lg font-bold text-text-primary mt-2">
             {TILE_CONFIG[activeMode].title}
@@ -444,6 +476,7 @@ const TILE_CONFIG: Record<DrillMode, { title: string }> = {
   'vocab-drill': { title: 'Vocabulary Drill' },
   'listening-reps': { title: 'Listening Reps' },
   'speaking-reps': { title: 'Speaking Reps' },
+  'quest': { title: 'Quest Quiz' },
 };
 
 // ── DrillTile Component ──────────────────────────────────────────────────────
