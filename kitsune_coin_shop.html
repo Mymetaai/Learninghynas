@@ -1,0 +1,58 @@
+<h2 class="sr-only">Mockup of the Shop tab showing a coin balance, a featured daily deal, and item cards across categories including a mystery chest</h2>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+  <span style="font-size: 15px; font-weight: 500;">Shop</span>
+  <div style="display: flex; align-items: center; gap: 6px; background: var(--bg-warning); border-radius: 999px; padding: 5px 12px;">
+    <i class="ti ti-coin" style="font-size: 15px; color: var(--text-warning);" aria-hidden="true"></i>
+    <span style="font-size: 13px; font-weight: 500; color: var(--text-warning);">640 KC</span>
+  </div>
+</div>
+
+<div style="background: var(--surface-1); border: 2px solid var(--border-accent); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+  <div>
+    <span style="background: var(--bg-accent); color: var(--text-accent); font-size: 11px; padding: 3px 9px; border-radius: var(--radius); display: inline-block; margin-bottom: 6px;">Featured deal, 24h left</span>
+    <p style="font-weight: 500; font-size: 15px; margin: 0;">Golden nine-tail aura</p>
+    <p style="font-size: 13px; color: var(--text-secondary); margin: 2px 0 0;">720 KC <span style="text-decoration: line-through; color: var(--text-muted); margin-left: 4px;">900 KC</span></p>
+  </div>
+  <button style="font-size: 13px; padding: 8px 16px;">Buy</button>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;">
+  <div style="background: var(--surface-2); border: 0.5px solid var(--border); border-radius: 12px; padding: 1rem;">
+    <i class="ti ti-flame" style="font-size: 20px; color: var(--text-danger);" aria-hidden="true"></i>
+    <p style="font-weight: 500; font-size: 14px; margin: 10px 0 2px;">Streak freeze</p>
+    <p style="font-size: 12px; color: var(--text-secondary); margin: 0 0 10px;">Protects one missed day</p>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <span style="font-size: 13px; font-weight: 500;">80 KC</span>
+      <button style="font-size: 12px; padding: 5px 10px;">Buy</button>
+    </div>
+  </div>
+  <div style="background: var(--surface-2); border: 0.5px solid var(--border); border-radius: 12px; padding: 1rem;">
+    <i class="ti ti-bulb" style="font-size: 20px; color: var(--text-warning);" aria-hidden="true"></i>
+    <p style="font-weight: 500; font-size: 14px; margin: 10px 0 2px;">Hint token</p>
+    <p style="font-size: 12px; color: var(--text-secondary); margin: 0 0 10px;">Reveals part of an answer</p>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <span style="font-size: 13px; font-weight: 500;">30 KC</span>
+      <button style="font-size: 12px; padding: 5px 10px;">Buy</button>
+    </div>
+  </div>
+  <div style="background: var(--surface-2); border: 0.5px solid var(--border); border-radius: 12px; padding: 1rem;">
+    <i class="ti ti-shield-star" style="font-size: 20px; color: var(--text-accent);" aria-hidden="true"></i>
+    <p style="font-weight: 500; font-size: 14px; margin: 10px 0 2px;">Guardian retry</p>
+    <p style="font-size: 12px; color: var(--text-secondary); margin: 0 0 10px;">Retry a failed boss fight</p>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <span style="font-size: 13px; font-weight: 500;">100 KC</span>
+      <button style="font-size: 12px; padding: 5px 10px;">Buy</button>
+    </div>
+  </div>
+  <div style="background: var(--surface-2); border: 0.5px solid var(--border); border-radius: 12px; padding: 1rem;">
+    <i class="ti ti-gift" style="font-size: 20px; color: var(--text-pro);" aria-hidden="true"></i>
+    <p style="font-weight: 500; font-size: 14px; margin: 10px 0 2px;">Kitsune chest</p>
+    <p style="font-size: 12px; color: var(--text-secondary); margin: 0 0 10px;">Random reward, jackpot odds 5%</p>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <span style="font-size: 13px; font-weight: 500;">200 KC</span>
+      <button style="font-size: 12px; padding: 5px 10px;">Open</button>
+    </div>
+  </div>
+</div>
+
+<p style="font-size: 12px; color: var(--text-muted); margin-top: 1rem;">Need 60 more coins for the next item — <a href="#" onclick="sendPrompt('What is the fastest way to earn more Kitsune Coins?'); return false;">how do I earn coins faster?↗</a></p>
