@@ -2,7 +2,7 @@
 // Shows a pronunciation guide (simulated audio — real audio comes later) and
 // asks the user to pick the correct word from options. Uses the `context`
 // field for an additional hint.
-import { useState, type FC } from 'react';
+import { useState, useMemo, type FC } from 'react';
 import { motion } from 'framer-motion';
 
 interface ListeningExerciseProps {
@@ -23,6 +23,16 @@ const ListeningExercise: FC<ListeningExerciseProps> = ({
   const [revealed, setRevealed] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
   const [answered, setAnswered] = useState(false);
+
+  const optionsKey = options.join('\u0000');
+  const shuffledOptions = useMemo(() => {
+    const arr = optionsKey.split('\u0000');
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }, [optionsKey]);
 
   const handleSelect = (option: string) => {
     if (answered) return;
@@ -64,7 +74,7 @@ const ListeningExercise: FC<ListeningExerciseProps> = ({
       <p className="mb-3 font-body text-base text-text-primary">Which word is it?</p>
 
       <div className="space-y-2">
-        {options.map((option) => {
+        {shuffledOptions.map((option) => {
           let classes =
             'w-full rounded-xl border border-structural bg-bg-elevated px-4 py-3 font-body text-sm text-text-primary text-left transition-all';
 

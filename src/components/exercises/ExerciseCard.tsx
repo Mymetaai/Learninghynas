@@ -18,6 +18,7 @@ interface ExerciseCardProps {
   index: number;
   total: number;
   onAnswer: (correct: boolean) => void;
+  onAnswerStart?: () => void;
 }
 
 const TYPE_LABELS: Record<string, string> = {
@@ -35,8 +36,10 @@ const ExerciseCard: FC<ExerciseCardProps> = ({
   index,
   total,
   onAnswer,
+  onAnswerStart,
 }) => {
   const handleAnswer = (correct: boolean) => {
+    if (onAnswerStart) onAnswerStart();
     // Brief delay so the user sees feedback before moving on
     setTimeout(() => onAnswer(correct), 1200);
   };

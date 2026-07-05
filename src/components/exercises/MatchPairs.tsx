@@ -18,6 +18,19 @@ interface Pair {
   right: string;
 }
 
+/**
+ * Shuffles an array using the stable Fisher-Yates algorithm.
+ * Returns a new array, leaving the input array unmodified.
+ */
+function fisherYatesShuffle<T>(array: T[]): T[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
 const MatchPairs: FC<MatchPairsProps> = ({
   prompt,
   answer,
@@ -33,15 +46,19 @@ const MatchPairs: FC<MatchPairsProps> = ({
     });
   }, [answer]);
 
-  // Split options into left and right columns
+  // Split options into left and right columns and shuffle them independently
+  const optionsKey = options.join('\u0000');
   const { leftItems, rightItems } = useMemo(() => {
     const leftSet = new Set(correctPairs.map((p) => p.left));
     const rightSet = new Set(correctPairs.map((p) => p.right));
+    const optionsArray = optionsKey.split('\u0000');
+    const leftFiltered = optionsArray.filter((o) => leftSet.has(o));
+    const rightFiltered = optionsArray.filter((o) => rightSet.has(o));
     return {
-      leftItems: options.filter((o) => leftSet.has(o)),
-      rightItems: options.filter((o) => rightSet.has(o)),
+      leftItems: fisherYatesShuffle(leftFiltered),
+      rightItems: fisherYatesShuffle(rightFiltered),
     };
-  }, [options, correctPairs]);
+  }, [optionsKey, correctPairs]);
 
   const [selectedLeft, setSelectedLeft] = useState<string | null>(null);
   const [matchedPairs, setMatchedPairs] = useState<Set<string>>(new Set());

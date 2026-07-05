@@ -50,9 +50,19 @@ const DragDrop: FC<DragDropProps> = ({
     () => [...selected],
     [selected],
   );
+  const optionsKey = options.join('\u0000');
+  const shuffledOptions = useMemo(() => {
+    const arr = optionsKey.split('\u0000');
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }, [optionsKey]);
+
   const unselectedItems = useMemo(
-    () => options.filter((o) => !selected.has(o)),
-    [options, selected],
+    () => shuffledOptions.filter((o) => !selected.has(o)),
+    [shuffledOptions, selected],
   );
 
   return (

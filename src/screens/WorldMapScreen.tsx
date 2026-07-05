@@ -10,12 +10,10 @@ import { Lock, Swords, ChevronDown, ChevronUp, Check, Sparkles, ClipboardList } 
 
 // ── Tail counter helper ──────────────────────────────────────────────────
 const useTailCount = () => {
-  const completed = useProgressStore((s) => s.completedQuestIds);
+  const defeatedGuardians = useProgressStore((s) => s.defeatedGuardianWorldIds);
   let earned = 0;
   for (const world of ALL_WORLDS) {
-    if (world.quests.length === 0) continue;
-    const lastQuest = world.quests.at(-1);
-    if (lastQuest && completed.includes(lastQuest.id)) {
+    if (defeatedGuardians.includes(world.id)) {
       earned += world.tailsAwarded;
     }
   }
@@ -127,6 +125,10 @@ const RegionCard = ({
   regionIndex,
   onPinTap,
 }: RegionCardProps) => {
+  const navigate = useNavigate();
+  const defeatedGuardians = useProgressStore((s) => s.defeatedGuardianWorldIds);
+  const isGuardianDefeated = defeatedGuardians.includes(world.id);
+
   const allDone = pins.length > 0 && pins.every((p) => p.done);
   const status: 'completed' | 'current' | 'locked' = !unlocked ? 'locked' : allDone ? 'completed' : 'current';
 
@@ -363,7 +365,12 @@ const RegionCard = ({
                     return (
                       <g
                         className="cursor-pointer group"
-                        onClick={() => setSelectedPinIdx(pins.length)}
+                        onClick={() => {
+                          setSelectedPinIdx(pins.length);
+                          if (allDone) {
+                            navigate(`/boss?region=${world.id}`);
+                          }
+                        }}
                       >
                         <rect
                           x={coord.x - 22}
@@ -371,13 +378,13 @@ const RegionCard = ({
                           width="44"
                           height="44"
                           rx="10"
-                          fill={allDone ? "var(--success)" : isSelected ? "var(--accent-action)" : "var(--bg-elevated)"}
-                          stroke={allDone ? "var(--success)" : "var(--accent-action)"}
+                          fill={isGuardianDefeated ? "var(--success)" : isSelected ? "var(--accent-action)" : "var(--bg-elevated)"}
+                          stroke={isGuardianDefeated ? "var(--success)" : "var(--accent-action)"}
                           strokeWidth="2.5"
                           className="transition-transform group-hover:scale-110"
                           opacity={allDone ? 1 : 0.6}
                         />
-                        <text x={coord.x} y={coord.y + 6} textAnchor="middle" fontSize="18" fill={allDone || isSelected ? "white" : "var(--accent-action)"}>
+                        <text x={coord.x} y={coord.y + 6} textAnchor="middle" fontSize="18" fill={isGuardianDefeated || isSelected ? "white" : "var(--accent-action)"}>
                           ⚔️
                         </text>
                       </g>
@@ -420,20 +427,20 @@ const RegionCard = ({
                     </span>
                     <h3 className="font-display text-sm font-bold text-text-primary mt-1.5">{world.guardian}</h3>
                     <p className="font-body text-xs text-text-secondary mt-0.5">
-                      {allDone ? 'You defeated the guardian and secured this tail!' : 'Challenge the guardian in a timed boss fight.'}
+                      {isGuardianDefeated ? 'You defeated the guardian and secured this tail!' : 'Challenge the guardian in a timed boss fight.'}
                     </p>
                   </div>
                   <button
                     type="button"
                     disabled={!allDone}
-                    onClick={() => allDone && onPinTap(pins[pins.length - 1].quest.id)}
+                    onClick={() => allDone && navigate(`/boss?region=${world.id}`)}
                     className={`shrink-0 px-4 py-2.5 rounded-xl font-body text-xs font-bold transition-all shadow-sm border-none ${
                       allDone
                         ? 'bg-success hover:bg-success-hover text-white cursor-pointer hover:scale-103'
                         : 'bg-structural/35 text-text-secondary/65 cursor-not-allowed'
                     }`}
                   >
-                    {allDone ? 'Challenge Again' : 'Locked'}
+                    {allDone ? (isGuardianDefeated ? 'Challenge Again' : 'Challenge Guardian') : 'Locked'}
                   </button>
                 </div>
               )}

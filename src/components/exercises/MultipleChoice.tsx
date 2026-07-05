@@ -1,6 +1,6 @@
 // STEP 8 — Multiple Choice exercise.
 // Shows a prompt and 4 option buttons. User taps one, gets feedback.
-import { useState, type FC } from 'react';
+import { useState, useMemo, type FC } from 'react';
 import { motion } from 'framer-motion';
 
 interface MultipleChoiceProps {
@@ -21,6 +21,16 @@ const MultipleChoice: FC<MultipleChoiceProps> = ({
   const [selected, setSelected] = useState<string | null>(null);
   const [answered, setAnswered] = useState(false);
 
+  const optionsKey = options.join('\u0000');
+  const shuffledOptions = useMemo(() => {
+    const arr = optionsKey.split('\u0000');
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }, [optionsKey]);
+
   const handleSelect = (option: string) => {
     if (answered) return;
     setSelected(option);
@@ -35,7 +45,7 @@ const MultipleChoice: FC<MultipleChoiceProps> = ({
       )}
       <p className="mb-4 font-body text-base text-text-primary">{prompt}</p>
       <div className="space-y-2">
-        {options.map((option) => {
+        {shuffledOptions.map((option) => {
           let classes =
             'w-full rounded-xl border border-structural bg-bg-elevated-2 px-4 py-3 font-body text-sm text-text-primary text-left transition-all';
 

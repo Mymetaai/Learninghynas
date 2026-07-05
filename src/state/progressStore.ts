@@ -9,8 +9,12 @@ import { ALL_WORLDS, getQuest, getWorld, BOOK_LEVELS } from '../content';
 interface ProgressState {
   /** Quest ids the player has completed (set, but stored as array). */
   completedQuestIds: string[];
+  /** World ids where the guardian has been defeated. */
+  defeatedGuardianWorldIds: string[];
   /** Mark a quest complete and unlock the next one in its world. */
   completeQuest: (questId: string) => void;
+  /** Mark a guardian defeated for a world. */
+  defeatGuardian: (worldId: string) => void;
   /** Is this quest playable (unlocked) right now? */
   isQuestUnlocked: (questId: string) => boolean;
   /** Is this world's first quest accessible (its prerequisite world beaten)? */
@@ -30,11 +34,18 @@ export const useProgressStore = create<ProgressState>()(
   persist(
     (set, get) => ({
       completedQuestIds: [],
+      defeatedGuardianWorldIds: [],
 
       completeQuest: (questId) =>
         set((state) => {
           if (state.completedQuestIds.includes(questId)) return state;
           return { completedQuestIds: [...state.completedQuestIds, questId] };
+        }),
+
+      defeatGuardian: (worldId) =>
+        set((state) => {
+          if (state.defeatedGuardianWorldIds.includes(worldId)) return state;
+          return { defeatedGuardianWorldIds: [...state.defeatedGuardianWorldIds, worldId] };
         }),
 
       isQuestUnlocked: (questId) => {
@@ -61,20 +72,19 @@ export const useProgressStore = create<ProgressState>()(
         if (!world) return false;
         if (world.unlockRequirement === 'first') return true;
         // Unlock requirement is the previous world's id; unlocked when the
-        // previous world's last quest is completed.
-        const prevWorld = getWorld(world.unlockRequirement);
-        if (!prevWorld) return false;
-        const lastQuestId = prevWorld.quests.at(-1)?.id;
-        if (!lastQuestId) return false;
-        return get().completedQuestIds.includes(lastQuestId);
+        // previous world's guardian has been defeated.
+        return get().defeatedGuardianWorldIds.includes(world.unlockRequirement);
       },
 
-      reset: () => set({ completedQuestIds: [] }),
+      reset: () => set({ completedQuestIds: [], defeatedGuardianWorldIds: [] }),
     }),
     {
       name: 'wayfarer-progress',
       // Only persist the raw data, not the functions.
-      partialize: (state) => ({ completedQuestIds: state.completedQuestIds }),
+      partialize: (state) => ({
+        completedQuestIds: state.completedQuestIds,
+        defeatedGuardianWorldIds: state.defeatedGuardianWorldIds,
+      }),
     },
   ),
 );
