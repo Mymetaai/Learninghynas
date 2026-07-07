@@ -113,6 +113,24 @@ export interface Quest {
   topicFocus: TopicTag[];
 }
 
+export interface Boss {
+  type: 'sentinel' | 'guardian';
+  id: string;
+  name: string;
+  hp: number;
+  coinReward: number;
+  tailsAwarded?: number;
+}
+
+export interface Chapter {
+  id: string;
+  chapterNumber: number;
+  name: string;
+  description: string;
+  quests: Quest[];
+  endBoss: Boss;
+}
+
 /** A region on the World Map — one per level. */
 export interface World {
   id: string;
@@ -123,6 +141,8 @@ export interface World {
   level: Level;
   /** Quests in the order they unlock along the map path. */
   quests: Quest[];
+  /** Chapter grouping inside this world. */
+  chapters?: Chapter[];
   /**
    * Unlock requirement: 'first' = always unlocked, otherwise the id of the
    * previous world whose boss (Step 16) must be beaten.

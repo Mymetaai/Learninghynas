@@ -23,27 +23,41 @@ const BossBattleScreen = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const regionId = searchParams.get('region') ?? 'world-pre-a1';
+  const sentinelId = searchParams.get('sentinel');
 
   // Load World & Exercises
   const world = useMemo(() => getWorld(regionId) ?? getWorld('world-pre-a1')!, [regionId]);
   
+  // Find sentinel details if applicable
+  const sentinelBoss = useMemo(() => {
+    if (!sentinelId) return null;
+    return world.chapters?.find((c) => c.endBoss.id === sentinelId)?.endBoss;
+  }, [world, sentinelId]);
+
   // Track reset count to reshuffle exercises when the battle is restarted
   const [resetCount, setResetCount] = useState(0);
 
   const exercises = useMemo(() => {
     void resetCount;
-    let raw = world.quests.flatMap((q) => q.exercises);
+    let raw = [];
+    if (sentinelId) {
+      const chapter = world.chapters?.find((c) => c.endBoss.id === sentinelId);
+      raw = chapter ? chapter.quests.flatMap((q) => q.exercises) : [];
+    } else {
+      raw = world.quests.flatMap((q) => q.exercises);
+    }
     // Fallback to pre-a1 questions if stub region has no exercises
     if (raw.length === 0) {
       const defaultWorld = getWorld('world-pre-a1');
       raw = defaultWorld ? defaultWorld.quests.flatMap((q) => q.exercises) : [];
     }
     return shuffle(raw);
-  }, [world, resetCount]);
+  }, [world, sentinelId, resetCount]);
 
   // Stores
   const addRewards = useStatsStore((s) => s.addRewards);
   const defeatGuardian = useProgressStore((s) => s.defeatGuardian);
+  const defeatSentinel = useProgressStore((s) => s.defeatSentinel);
 
   // Gameplay State
   const [gameState, setGameState] = useState<'intro' | 'playing' | 'victory' | 'defeat'>('intro');
@@ -51,6 +65,10 @@ const BossBattleScreen = () => {
   const [playerLives, setPlayerLives] = useState(3);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [comboCount, setComboCount] = useState(0);
+
+  useEffect(() => {
+    setGuardianHp(sentinelBoss ? sentinelBoss.hp : 8);
+  }, [sentinelBoss]);
 
   // Timer State
   const [timerEnabled, setTimerEnabled] = useState(true);
@@ -115,11 +133,14 @@ const BossBattleScreen = () => {
 
   const triggerVictory = useCallback(() => {
     setGameState('victory');
-    // Grant rewards
-    addRewards(0, 100);
-    // Mark world guardian defeated
-    defeatGuardian(world.id);
-  }, [addRewards, defeatGuardian, world.id]);
+    if (sentinelId) {
+      addRewards(0, sentinelBoss ? sentinelBoss.coinReward : 50);
+      defeatSentinel(sentinelId);
+    } else {
+      addRewards(0, 100);
+      defeatGuardian(world.id);
+    }
+  }, [addRewards, defeatGuardian, defeatSentinel, world.id, sentinelId, sentinelBoss]);
 
   const handleAnswerStart = useCallback(() => {
     setIsAnswered(true);
@@ -167,7 +188,7 @@ const BossBattleScreen = () => {
   }, [comboCount, gameState, goToNextExercise, triggerPlayerShake, triggerVictory]);
 
   const resetBattle = () => {
-    setGuardianHp(8);
+    setGuardianHp(sentinelBoss ? sentinelBoss.hp : 8);
     setPlayerLives(3);
     setCurrentIndex(0);
     setComboCount(0);
@@ -219,9 +240,9 @@ const BossBattleScreen = () => {
             <div className="h-32 w-32 mx-auto mb-4">
               <Kitsune3D direction="right" mode="idle" />
             </div>
-            <h2 className="font-display text-2xl font-bold mb-2 text-text-primary">Challenge {world.guardian}</h2>
+            <h2 className="font-display text-2xl font-bold mb-2 text-text-primary">Challenge {sentinelBoss ? sentinelBoss.name : world.guardian}</h2>
             <p className="text-sm text-text-secondary mb-6">
-              Test your Spanish skills in an HP Duel! Beat the guardian to unlock the next region.
+              Test your Spanish skills in an HP Duel! Beat the {sentinelId ? 'sentinel' : 'guardian'} to unlock the next {sentinelId ? 'chapter' : 'region'}.
             </p>
             <button
               onClick={() => setGameState('playing')}
@@ -249,13 +270,16 @@ const BossBattleScreen = () => {
                 className="p-4 rounded-xl border border-structural bg-bg-elevated shadow-md relative"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-display text-base font-bold text-text-primary">{world.guardian}</span>
-                  <span className="text-xs font-semibold px-2 py-0.5 rounded bg-error/10 text-error">BOSS</span>
+                  <span className="font-display text-base font-bold text-text-primary">{sentinelBoss ? sentinelBoss.name : world.guardian}</span>
+                  <span className="text-xs font-semibold px-2 py-0.5 rounded bg-error/10 text-error">{sentinelId ? 'SENTINEL' : 'BOSS'}</span>
                 </div>
 
-                {/* 8-segment Guardian HP bar */}
-                <div className="grid grid-cols-8 gap-1 mb-2">
-                  {Array.from({ length: 8 }).map((_, i) => (
+                {/* Segmented Guardian HP bar */}
+                <div
+                  className="grid gap-1 mb-2"
+                  style={{ gridTemplateColumns: `repeat(${sentinelBoss ? sentinelBoss.hp : 8}, minmax(0, 1fr))` }}
+                >
+                  {Array.from({ length: sentinelBoss ? sentinelBoss.hp : 8 }).map((_, i) => (
                     <motion.div
                       key={i}
                       animate={isHitFlashing && i >= guardianHp ? { scale: [1, 0, 1] } : {}}
@@ -268,7 +292,7 @@ const BossBattleScreen = () => {
                   ))}
                 </div>
                 <div className="text-right text-xs text-text-secondary font-bold font-hud">
-                  HP: {guardianHp}/8
+                  HP: {guardianHp}/{sentinelBoss ? sentinelBoss.hp : 8}
                 </div>
               </motion.div>
 
@@ -396,49 +420,57 @@ const BossBattleScreen = () => {
           >
             <h2 className="font-display text-3xl font-bold text-success mb-2">Victory!</h2>
             <p className="text-sm text-text-secondary mb-6">
-              You defeated {world.guardian} and proved your Spanish mastery!
+              You defeated {sentinelBoss ? sentinelBoss.name : world.guardian} and proved your Spanish mastery!
             </p>
 
-            {/* Yuki's Tail Reveal Animation */}
-            <div className="mb-6">
-              <p className="text-xs uppercase tracking-wider text-text-secondary font-bold mb-3">
-                Yuki's Power Unleashed: 9 Tails Revealed!
-              </p>
-              <div className="flex justify-center gap-1.5 mb-4">
-                {Array.from({ length: 9 }).map((_, i) => (
-                  <motion.div
-                    key={i}
-                    custom={i}
-                    variants={{
-                      hidden: { scale: 0, opacity: 0 },
-                      visible: (idx: number) => ({
-                        scale: [0, 1.3, 1],
-                        opacity: 1,
-                        transition: { delay: idx * 0.15, type: 'spring' }
-                      })
-                    }}
-                    initial="hidden"
-                    animate="visible"
-                    className="text-2xl"
-                  >
-                    🔥
-                  </motion.div>
-                ))}
+            {/* Yuki's Tail Reveal Animation — only for main Guardian battles */}
+            {!sentinelId ? (
+              <div className="mb-6">
+                <p className="text-xs uppercase tracking-wider text-text-secondary font-bold mb-3">
+                  Yuki's Power Unleashed: 9 Tails Revealed!
+                </p>
+                <div className="flex justify-center gap-1.5 mb-4">
+                  {Array.from({ length: 9 }).map((_, i) => (
+                    <motion.div
+                      key={i}
+                      custom={i}
+                      variants={{
+                        hidden: { scale: 0, opacity: 0 },
+                        visible: (idx: number) => ({
+                          scale: [0, 1.3, 1],
+                          opacity: 1,
+                          transition: { delay: idx * 0.15, type: 'spring' }
+                        })
+                      }}
+                      initial="hidden"
+                      animate="visible"
+                      className="text-2xl"
+                    >
+                      🔥
+                    </motion.div>
+                  ))}
+                </div>
+                <div className="h-32 w-32 mx-auto">
+                  <Kitsune3D direction="right" mode="wag" />
+                </div>
               </div>
-              <div className="h-32 w-32 mx-auto">
-                <Kitsune3D direction="right" mode="wag" />
+            ) : (
+              <div className="mb-6">
+                <div className="h-32 w-32 mx-auto">
+                  <Kitsune3D direction="right" mode="wag" />
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Rewards */}
             <div className="p-4 rounded-xl bg-bg-elevated-2 border border-structural flex items-center justify-around mb-6 font-hud">
               <div className="flex items-center gap-2 text-text-primary">
                 <Coins className="h-5 w-5 text-accent-action" />
-                <span className="font-display font-bold">+100 Coins</span>
+                <span className="font-display font-bold">+{sentinelBoss ? sentinelBoss.coinReward : (sentinelId ? 50 : 100)} Coins</span>
               </div>
               <div className="flex items-center gap-2 text-text-primary">
                 <Trophy className="h-5 w-5 text-success" />
-                <span className="font-display font-bold">Region Unlocked</span>
+                <span className="font-display font-bold">{sentinelId ? 'Chapter Cleared' : 'Region Unlocked'}</span>
               </div>
             </div>
 

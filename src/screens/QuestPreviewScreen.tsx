@@ -113,7 +113,7 @@ const QuestPreviewScreen = () => {
             <button
               type="button"
               onClick={handleBegin}
-              className="flex-1 rounded-xl border border-teal-deep/40 bg-teal-deep px-4 py-3 font-display text-sm font-semibold text-text-primary transition-colors hover:bg-teal-deep/90"
+              className="flex-1 rounded-xl border border-teal-deep/40 bg-teal-deep px-4 py-3 font-display text-sm font-semibold text-white transition-colors hover:bg-teal-deep/90"
             >
               ✓ Replay
             </button>
@@ -124,7 +124,7 @@ const QuestPreviewScreen = () => {
               onClick={handleBegin}
               className={`flex-1 rounded-xl px-4 py-3 font-display text-sm font-semibold transition-colors ${
                 unlocked
-                  ? 'bg-terracotta text-text-primary hover:bg-terracotta/90'
+                  ? 'bg-terracotta text-white hover:bg-terracotta/90'
                   : 'cursor-not-allowed border border-pencil/30 bg-paper text-pencil'
               }`}
             >

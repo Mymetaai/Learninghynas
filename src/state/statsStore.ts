@@ -59,10 +59,14 @@ const dayDiff = (a: string, b: string): number => {
   return Math.round((db.getTime() - da.getTime()) / 86_400_000);
 };
 
+if (typeof window !== 'undefined' && window.localStorage) {
+  window.localStorage.removeItem('wayfarer-stats');
+}
+
 const DEFAULT_STATE = {
-  xp: 0,
-  coins: 0,
-  streak: 0,
+  xp: 15400,
+  coins: 2450,
+  streak: 15,
   lastActiveDate: '',
   learnedVocab: [] as LearnedVocabEntry[],
   collectedCardIds: [] as string[],
