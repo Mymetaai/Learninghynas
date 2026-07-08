@@ -324,3 +324,256 @@
   100% { transform: translateX(-50%) rotateY(-60deg) scale(0.95) skewX(1deg); }
 }
 
+/* ══════════════════════════════════════════════════════════════════════════
+   VOICE ARENA — Animations & Utilities
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Stagger Fade-In for card list entrance ────────────────────────────── */
+@keyframes stagger-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.stagger-item {
+  animation: stagger-fade-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Word Pop — word-by-word phrase display ────────────────────────────── */
+@keyframes word-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.92);
+    filter: blur(4px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.02);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+.word-pop-item {
+  animation: word-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  display: inline-block;
+}
+
+/* ── Pulse Ring — concentric rings around mic button ──────────────────── */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  70% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+.pulse-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-action);
+  animation: pulse-ring 1.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.pulse-ring-2 {
+  animation-delay: 0.6s;
+}
+
+.pulse-ring-3 {
+  animation-delay: 1.2s;
+}
+
+/* ── Recording pulse ─────────────────────────────────────────────────── */
+@keyframes recording-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(198, 40, 40, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 18px rgba(198, 40, 40, 0);
+  }
+}
+
+.recording-pulse {
+  animation: recording-pulse 1.5s ease-in-out infinite;
+}
+
+/* ── Blur Reveal — hover to reveal translations ──────────────────────── */
+.blur-reveal {
+  filter: blur(6px);
+  transition: filter 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  user-select: none;
+  cursor: help;
+}
+
+.blur-reveal:hover,
+.blur-reveal.revealed {
+  filter: blur(0px);
+  user-select: auto;
+}
+
+/* Lighter blur for sidebar cards */
+.blur-reveal-light {
+  filter: blur(4px);
+  transition: filter 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  user-select: none;
+}
+
+.blur-reveal-light:hover {
+  filter: blur(0px);
+  user-select: auto;
+}
+
+/* ── Enhanced Waveform Bars ──────────────────────────────────────────── */
+@keyframes waveform-bar {
+  0%, 100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.waveform-bar {
+  width: 3px;
+  border-radius: 99px;
+  transform-origin: bottom;
+  animation: waveform-bar ease-in-out infinite;
+  background: linear-gradient(to top, var(--accent-action), rgba(230, 72, 51, 0.4));
+}
+
+/* ── Score Count Up Animation ────────────────────────────────────────── */
+@keyframes score-reveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotateX(45deg);
+  }
+  60% {
+    transform: scale(1.1) rotateX(-5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateX(0deg);
+  }
+}
+
+.score-reveal {
+  animation: score-reveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* ── CEFR Tab Gradient Indicator ─────────────────────────────────────── */
+.cefr-tab-indicator {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: calc(100% - 6px);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    left 300ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    width 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 300ms ease;
+  pointer-events: none;
+  z-index: 0;
+  box-shadow:
+    0 0 12px rgba(0, 0, 0, 0.08),
+    inset 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+/* ── Level Progress Bar ──────────────────────────────────────────────── */
+@keyframes progress-fill {
+  from { width: 0%; }
+}
+
+.progress-bar-fill {
+  animation: progress-fill 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Card Hover Lift ─────────────────────────────────────────────────── */
+.card-hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(36, 72, 85, 0.1);
+}
+
+/* ── Fade Slide In (generic) ─────────────────────────────────────────── */
+@keyframes fade-slide-in {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-slide-in {
+  animation: fade-slide-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Custom Scrollbar for exercise list ──────────────────────────────── */
+.exercise-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.exercise-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.exercise-scroll::-webkit-scrollbar-thumb {
+  background: var(--structural);
+  border-radius: 99px;
+}
+
+.exercise-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+/* ── Shimmer effect for auto-advance timer ───────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer-bar {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* ── Streak fire animation ───────────────────────────────────────────── */
+@keyframes streak-glow {
+  0%, 100% {
+    text-shadow: 0 0 4px rgba(230, 72, 51, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 12px rgba(230, 72, 51, 0.6), 0 0 24px rgba(230, 72, 51, 0.3);
+  }
+}
+
+.streak-glow {
+  animation: streak-glow 2s ease-in-out infinite;
+}
+
