@@ -1,0 +1,1402 @@
+[
+  {
+    "id": "a1-001",
+    "level": "A1",
+    "category": "Saludos",
+    "es": "Hola",
+    "en": "Hello"
+  },
+  {
+    "id": "a1-002",
+    "level": "A1",
+    "category": "Saludos",
+    "es": "Buenos días",
+    "en": "Good morning"
+  },
+  {
+    "id": "a1-003",
+    "level": "A1",
+    "category": "Saludos",
+    "es": "Buenas tardes",
+    "en": "Good afternoon"
+  },
+  {
+    "id": "a1-004",
+    "level": "A1",
+    "category": "Saludos",
+    "es": "Buenas noches",
+    "en": "Good night / evening"
+  },
+  {
+    "id": "a1-005",
+    "level": "A1",
+    "category": "Saludos",
+    "es": "¿Cómo estás?",
+    "en": "How are you? (informal)"
+  },
+  {
+    "id": "a1-006",
+    "level": "A1",
+    "category": "Saludos",
+    "es": "¿Cómo está usted?",
+    "en": "How are you? (formal)"
+  },
+  {
+    "id": "a1-007",
+    "level": "A1",
+    "category": "Saludos",
+    "es": "Muy bien, gracias",
+    "en": "Very well, thanks"
+  },
+  {
+    "id": "a1-008",
+    "level": "A1",
+    "category": "Saludos",
+    "es": "¿Y tú?",
+    "en": "And you? (informal)"
+  },
+  {
+    "id": "a1-009",
+    "level": "A1",
+    "category": "Saludos",
+    "es": "¿Y usted?",
+    "en": "And you? (formal)"
+  },
+  {
+    "id": "a1-010",
+    "level": "A1",
+    "category": "Saludos",
+    "es": "Me llamo...",
+    "en": "My name is..."
+  },
+  {
+    "id": "a1-011",
+    "level": "A1",
+    "category": "Saludos",
+    "es": "¿Cómo te llamas?",
+    "en": "What's your name?"
+  },
+  {
+    "id": "a1-012",
+    "level": "A1",
+    "category": "Saludos",
+    "es": "Mucho gusto",
+    "en": "Nice to meet you"
+  },
+  {
+    "id": "a1-013",
+    "level": "A1",
+    "category": "Saludos",
+    "es": "Encantado/a",
+    "en": "Pleased to meet you"
+  },
+  {
+    "id": "a1-014",
+    "level": "A1",
+    "category": "Saludos",
+    "es": "Adiós",
+    "en": "Goodbye"
+  },
+  {
+    "id": "a1-015",
+    "level": "A1",
+    "category": "Saludos",
+    "es": "Hasta luego",
+    "en": "See you later"
+  },
+  {
+    "id": "a1-016",
+    "level": "A1",
+    "category": "Saludos",
+    "es": "Hasta mañana",
+    "en": "See you tomorrow"
+  },
+  {
+    "id": "a1-017",
+    "level": "A1",
+    "category": "Saludos",
+    "es": "Nos vemos",
+    "en": "See you around"
+  },
+  {
+    "id": "a1-018",
+    "level": "A1",
+    "category": "Verbos",
+    "es": "trabajar",
+    "en": "to work"
+  },
+  {
+    "id": "a1-019",
+    "level": "A1",
+    "category": "Verbos",
+    "es": "comer",
+    "en": "to eat"
+  },
+  {
+    "id": "a1-020",
+    "level": "A1",
+    "category": "Verbos",
+    "es": "estudiar",
+    "en": "to study"
+  },
+  {
+    "id": "a1-021",
+    "level": "A1",
+    "category": "Verbos",
+    "es": "dormir",
+    "en": "to sleep"
+  },
+  {
+    "id": "a1-022",
+    "level": "A1",
+    "category": "Verbos",
+    "es": "despertarse",
+    "en": "to wake up"
+  },
+  {
+    "id": "a1-023",
+    "level": "A1",
+    "category": "Verbos",
+    "es": "levantarse",
+    "en": "to get up"
+  },
+  {
+    "id": "a1-024",
+    "level": "A1",
+    "category": "Verbos",
+    "es": "desayunar",
+    "en": "to have breakfast"
+  },
+  {
+    "id": "a1-025",
+    "level": "A1",
+    "category": "Verbos",
+    "es": "almorzar",
+    "en": "to have lunch"
+  },
+  {
+    "id": "a1-026",
+    "level": "A1",
+    "category": "Verbos",
+    "es": "cenar",
+    "en": "to have dinner"
+  },
+  {
+    "id": "a1-027",
+    "level": "A1",
+    "category": "Verbos",
+    "es": "leer",
+    "en": "to read"
+  },
+  {
+    "id": "a1-028",
+    "level": "A1",
+    "category": "Verbos",
+    "es": "escribir",
+    "en": "to write"
+  },
+  {
+    "id": "a1-029",
+    "level": "A1",
+    "category": "Verbos",
+    "es": "hablar",
+    "en": "to speak"
+  },
+  {
+    "id": "a1-030",
+    "level": "A1",
+    "category": "Verbos",
+    "es": "escuchar",
+    "en": "to listen"
+  },
+  {
+    "id": "a1-031",
+    "level": "A1",
+    "category": "Verbos",
+    "es": "caminar",
+    "en": "to walk"
+  },
+  {
+    "id": "a1-032",
+    "level": "A1",
+    "category": "Verbos",
+    "es": "conducir",
+    "en": "to drive"
+  },
+  {
+    "id": "a1-033",
+    "level": "A1",
+    "category": "Verbos",
+    "es": "limpiar",
+    "en": "to clean"
+  },
+  {
+    "id": "a1-034",
+    "level": "A1",
+    "category": "Verbos",
+    "es": "cocinar",
+    "en": "to cook"
+  },
+  {
+    "id": "a1-035",
+    "level": "A1",
+    "category": "Verbos",
+    "es": "descansar",
+    "en": "to rest"
+  },
+  {
+    "id": "a1-036",
+    "level": "A1",
+    "category": "Verbos",
+    "es": "salir",
+    "en": "to go out"
+  },
+  {
+    "id": "a1-037",
+    "level": "A1",
+    "category": "Verbos",
+    "es": "llegar",
+    "en": "to arrive"
+  },
+  {
+    "id": "a1-038",
+    "level": "A1",
+    "category": "Casa",
+    "es": "la mesa",
+    "en": "the table"
+  },
+  {
+    "id": "a1-039",
+    "level": "A1",
+    "category": "Casa",
+    "es": "la silla",
+    "en": "the chair"
+  },
+  {
+    "id": "a1-040",
+    "level": "A1",
+    "category": "Casa",
+    "es": "el televisor",
+    "en": "the TV set"
+  },
+  {
+    "id": "a1-041",
+    "level": "A1",
+    "category": "Casa",
+    "es": "la cama",
+    "en": "the bed"
+  },
+  {
+    "id": "a1-042",
+    "level": "A1",
+    "category": "Casa",
+    "es": "el sofá",
+    "en": "the sofa"
+  },
+  {
+    "id": "a1-043",
+    "level": "A1",
+    "category": "Casa",
+    "es": "la cocina",
+    "en": "the kitchen"
+  },
+  {
+    "id": "a1-044",
+    "level": "A1",
+    "category": "Casa",
+    "es": "el baño",
+    "en": "the bathroom"
+  },
+  {
+    "id": "a1-045",
+    "level": "A1",
+    "category": "Casa",
+    "es": "la nevera",
+    "en": "the fridge"
+  },
+  {
+    "id": "a1-046",
+    "level": "A1",
+    "category": "Casa",
+    "es": "la puerta",
+    "en": "the door"
+  },
+  {
+    "id": "a1-047",
+    "level": "A1",
+    "category": "Casa",
+    "es": "la ventana",
+    "en": "the window"
+  },
+  {
+    "id": "a1-048",
+    "level": "A1",
+    "category": "Casa",
+    "es": "el armario",
+    "en": "the closet"
+  },
+  {
+    "id": "a1-049",
+    "level": "A1",
+    "category": "Casa",
+    "es": "la lámpara",
+    "en": "the lamp"
+  },
+  {
+    "id": "a1-050",
+    "level": "A1",
+    "category": "Casa",
+    "es": "el espejo",
+    "en": "the mirror"
+  },
+  {
+    "id": "a1-051",
+    "level": "A1",
+    "category": "Casa",
+    "es": "la almohada",
+    "en": "the pillow"
+  },
+  {
+    "id": "a1-052",
+    "level": "A1",
+    "category": "Casa",
+    "es": "la manta",
+    "en": "the blanket"
+  },
+  {
+    "id": "a1-053",
+    "level": "A1",
+    "category": "Casa",
+    "es": "el fregadero",
+    "en": "the sink"
+  },
+  {
+    "id": "a1-054",
+    "level": "A1",
+    "category": "Casa",
+    "es": "la estufa",
+    "en": "the stove"
+  },
+  {
+    "id": "a1-055",
+    "level": "A1",
+    "category": "Casa",
+    "es": "el microondas",
+    "en": "the microwave"
+  },
+  {
+    "id": "a1-056",
+    "level": "A1",
+    "category": "Hora",
+    "es": "¿Qué hora es?",
+    "en": "What time is it?"
+  },
+  {
+    "id": "a1-057",
+    "level": "A1",
+    "category": "Hora",
+    "es": "Es la una",
+    "en": "It's one o'clock"
+  },
+  {
+    "id": "a1-058",
+    "level": "A1",
+    "category": "Hora",
+    "es": "Son las dos",
+    "en": "It's two o'clock"
+  },
+  {
+    "id": "a1-059",
+    "level": "A1",
+    "category": "Hora",
+    "es": "Son las tres y media",
+    "en": "It's 3:30"
+  },
+  {
+    "id": "a1-060",
+    "level": "A1",
+    "category": "Hora",
+    "es": "Son las cuatro y cuarto",
+    "en": "It's 4:15"
+  },
+  {
+    "id": "a1-061",
+    "level": "A1",
+    "category": "Hora",
+    "es": "Son las cinco menos cuarto",
+    "en": "It's 4:45"
+  },
+  {
+    "id": "a1-062",
+    "level": "A1",
+    "category": "Hora",
+    "es": "de la mañana",
+    "en": "in the morning"
+  },
+  {
+    "id": "a1-063",
+    "level": "A1",
+    "category": "Hora",
+    "es": "de la tarde",
+    "en": "in the afternoon"
+  },
+  {
+    "id": "a1-064",
+    "level": "A1",
+    "category": "Hora",
+    "es": "de la noche",
+    "en": "at night"
+  },
+  {
+    "id": "a1-065",
+    "level": "A1",
+    "category": "Hora",
+    "es": "en punto",
+    "en": "on the dot"
+  },
+  {
+    "id": "a1-066",
+    "level": "A1",
+    "category": "Hora",
+    "es": "mediodía",
+    "en": "noon"
+  },
+  {
+    "id": "a1-067",
+    "level": "A1",
+    "category": "Hora",
+    "es": "medianoche",
+    "en": "midnight"
+  },
+  {
+    "id": "a1-068",
+    "level": "A1",
+    "category": "Clima",
+    "es": "Hace sol",
+    "en": "It's sunny"
+  },
+  {
+    "id": "a1-069",
+    "level": "A1",
+    "category": "Clima",
+    "es": "Hace calor",
+    "en": "It's hot"
+  },
+  {
+    "id": "a1-070",
+    "level": "A1",
+    "category": "Clima",
+    "es": "Hace frío",
+    "en": "It's cold"
+  },
+  {
+    "id": "a1-071",
+    "level": "A1",
+    "category": "Clima",
+    "es": "Hace viento",
+    "en": "It's windy"
+  },
+  {
+    "id": "a1-072",
+    "level": "A1",
+    "category": "Clima",
+    "es": "Llueve",
+    "en": "It's raining"
+  },
+  {
+    "id": "a1-073",
+    "level": "A1",
+    "category": "Clima",
+    "es": "Nieva",
+    "en": "It's snowing"
+  },
+  {
+    "id": "a1-074",
+    "level": "A1",
+    "category": "Clima",
+    "es": "Está nublado",
+    "en": "It's cloudy"
+  },
+  {
+    "id": "a1-075",
+    "level": "A1",
+    "category": "Clima",
+    "es": "Hace buen tiempo",
+    "en": "The weather's nice"
+  },
+  {
+    "id": "a1-076",
+    "level": "A1",
+    "category": "Clima",
+    "es": "Hace mal tiempo",
+    "en": "The weather's bad"
+  },
+  {
+    "id": "a1-077",
+    "level": "A1",
+    "category": "Clima",
+    "es": "Hay tormenta",
+    "en": "There's a storm"
+  },
+  {
+    "id": "a1-078",
+    "level": "A1",
+    "category": "Prepositions",
+    "es": "de",
+    "en": "letter: d"
+  },
+  {
+    "id": "a1-079",
+    "level": "A1",
+    "category": "Pronouns",
+    "es": "ella",
+    "en": "she, her (used subjectively and after prepositions)"
+  },
+  {
+    "id": "a1-080",
+    "level": "A1",
+    "category": "Pronouns",
+    "es": "que",
+    "en": "that"
+  },
+  {
+    "id": "a1-081",
+    "level": "A1",
+    "category": "General",
+    "es": "el",
+    "en": "masculine singular definite article; the"
+  },
+  {
+    "id": "a1-082",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "ser",
+    "en": "to be (essentially or identified as)"
+  },
+  {
+    "id": "a1-083",
+    "level": "A1",
+    "category": "Prepositions",
+    "es": "en",
+    "en": "in, at, on"
+  },
+  {
+    "id": "a1-084",
+    "level": "A1",
+    "category": "Pronouns",
+    "es": "él",
+    "en": "he, him, masculine personal third person subject and disjunctive pronoun (used as a subject and after prepositions)"
+  },
+  {
+    "id": "a1-085",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "estar",
+    "en": "to be (have a temporary or permanent location in space)"
+  },
+  {
+    "id": "a1-086",
+    "level": "A1",
+    "category": "General",
+    "es": "uno",
+    "en": "one"
+  },
+  {
+    "id": "a1-087",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "haber",
+    "en": "have; forms the perfect aspect [+masculine singular past participle]"
+  },
+  {
+    "id": "a1-088",
+    "level": "A1",
+    "category": "Pronouns",
+    "es": "yo",
+    "en": "first-person singular pronoun in the nominative case; I"
+  },
+  {
+    "id": "a1-089",
+    "level": "A1",
+    "category": "Prepositions",
+    "es": "por",
+    "en": "by"
+  },
+  {
+    "id": "a1-090",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "tener",
+    "en": "to have; to possess"
+  },
+  {
+    "id": "a1-091",
+    "level": "A1",
+    "category": "Pronouns",
+    "es": "se",
+    "en": "abbreviation of \"sudeste\"; southeast"
+  },
+  {
+    "id": "a1-092",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "ir",
+    "en": "to go (away from speaker and listener)"
+  },
+  {
+    "id": "a1-093",
+    "level": "A1",
+    "category": "Prepositions",
+    "es": "con",
+    "en": "with"
+  },
+  {
+    "id": "a1-094",
+    "level": "A1",
+    "category": "Pronouns",
+    "es": "qué",
+    "en": "(see usage notes) what; which"
+  },
+  {
+    "id": "a1-095",
+    "level": "A1",
+    "category": "General",
+    "es": "suyo",
+    "en": "his, hers, its"
+  },
+  {
+    "id": "a1-096",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "hacer",
+    "en": "to do"
+  },
+  {
+    "id": "a1-097",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "poder",
+    "en": "to be able to, can"
+  },
+  {
+    "id": "a1-098",
+    "level": "A1",
+    "category": "Prepositions",
+    "es": "para",
+    "en": "for, to (expressing a recipient)"
+  },
+  {
+    "id": "a1-099",
+    "level": "A1",
+    "category": "General",
+    "es": "del",
+    "en": "of the, from the (+ a masculine noun in singular)"
+  },
+  {
+    "id": "a1-100",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "decir",
+    "en": "to say, to tell"
+  },
+  {
+    "id": "a1-101",
+    "level": "A1",
+    "category": "Nouns",
+    "es": "te",
+    "en": "letter: t"
+  },
+  {
+    "id": "a1-102",
+    "level": "A1",
+    "category": "General",
+    "es": "este",
+    "en": "this"
+  },
+  {
+    "id": "a1-103",
+    "level": "A1",
+    "category": "General",
+    "es": "todo",
+    "en": "all; every"
+  },
+  {
+    "id": "a1-104",
+    "level": "A1",
+    "category": "General",
+    "es": "mío",
+    "en": "mine; of mine"
+  },
+  {
+    "id": "a1-105",
+    "level": "A1",
+    "category": "Connectors",
+    "es": "pero",
+    "en": "but"
+  },
+  {
+    "id": "a1-106",
+    "level": "A1",
+    "category": "Connectors",
+    "es": "si",
+    "en": "A @abbrev of:Sinaloa state, Mexico"
+  },
+  {
+    "id": "a1-107",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "querer",
+    "en": "to desire, to want, to want to"
+  },
+  {
+    "id": "a1-108",
+    "level": "A1",
+    "category": "General",
+    "es": "al",
+    "en": "initialism of \"América Latina\""
+  },
+  {
+    "id": "a1-109",
+    "level": "A1",
+    "category": "Pronouns",
+    "es": "sí",
+    "en": "yes, yeah, (used to respond affirmatively to a question, used both informally and formally)"
+  },
+  {
+    "id": "a1-110",
+    "level": "A1",
+    "category": "Connectors",
+    "es": "como",
+    "en": "Como (A city and comune in capital in province of Como, Lombardy.)"
+  },
+  {
+    "id": "a1-111",
+    "level": "A1",
+    "category": "Pronouns",
+    "es": "ése",
+    "en": "that one (near you)"
+  },
+  {
+    "id": "a1-112",
+    "level": "A1",
+    "category": "Adverbs",
+    "es": "bien",
+    "en": "well (adverbial form of bueno)"
+  },
+  {
+    "id": "a1-113",
+    "level": "A1",
+    "category": "Adverbs",
+    "es": "más",
+    "en": "more; -er (used to make comparisons)"
+  },
+  {
+    "id": "a1-114",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "ver",
+    "en": "to see, to spot"
+  },
+  {
+    "id": "a1-115",
+    "level": "A1",
+    "category": "General",
+    "es": "tuyo",
+    "en": "yours"
+  },
+  {
+    "id": "a1-116",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "saber",
+    "en": "to know, to understand (a fact)"
+  },
+  {
+    "id": "a1-117",
+    "level": "A1",
+    "category": "Adjectives",
+    "es": "bueno",
+    "en": "surname"
+  },
+  {
+    "id": "a1-118",
+    "level": "A1",
+    "category": "General",
+    "es": "ese",
+    "en": "letter: s"
+  },
+  {
+    "id": "a1-119",
+    "level": "A1",
+    "category": "Adverbs",
+    "es": "aquí",
+    "en": "here"
+  },
+  {
+    "id": "a1-120",
+    "level": "A1",
+    "category": "Pronouns",
+    "es": "éste",
+    "en": "this one"
+  },
+  {
+    "id": "a1-121",
+    "level": "A1",
+    "category": "Pronouns",
+    "es": "tú",
+    "en": "second person pronoun in singular tense; you"
+  },
+  {
+    "id": "a1-122",
+    "level": "A1",
+    "category": "Pronouns",
+    "es": "nosotros",
+    "en": "we (masculine plural)"
+  },
+  {
+    "id": "a1-123",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "creer",
+    "en": "to believe"
+  },
+  {
+    "id": "a1-124",
+    "level": "A1",
+    "category": "Adverbs",
+    "es": "ya",
+    "en": "(with present tenses or the imperative) now (often as opposed to before), anymore, no longer"
+  },
+  {
+    "id": "a1-125",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "dar",
+    "en": "to give, to give out"
+  },
+  {
+    "id": "a1-126",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "deber",
+    "en": "to owe"
+  },
+  {
+    "id": "a1-127",
+    "level": "A1",
+    "category": "Adverbs",
+    "es": "mucho",
+    "en": "much, a lot of"
+  },
+  {
+    "id": "a1-128",
+    "level": "A1",
+    "category": "General",
+    "es": "otro",
+    "en": "other, another"
+  },
+  {
+    "id": "a1-129",
+    "level": "A1",
+    "category": "Adverbs",
+    "es": "así",
+    "en": "like this; like that; as such; thus; so; thereby; this way, that way"
+  },
+  {
+    "id": "a1-130",
+    "level": "A1",
+    "category": "Adverbs",
+    "es": "ahora",
+    "en": "now (at the present time)"
+  },
+  {
+    "id": "a1-131",
+    "level": "A1",
+    "category": "Nouns",
+    "es": "vez",
+    "en": "time, instance"
+  },
+  {
+    "id": "a1-132",
+    "level": "A1",
+    "category": "Connectors",
+    "es": "cuando",
+    "en": "when"
+  },
+  {
+    "id": "a1-133",
+    "level": "A1",
+    "category": "Pronouns",
+    "es": "algo",
+    "en": "something, anything"
+  },
+  {
+    "id": "a1-134",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "dejar",
+    "en": "to leave (to place)"
+  },
+  {
+    "id": "a1-135",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "pasar",
+    "en": "to pass, to hand, to slip"
+  },
+  {
+    "id": "a1-136",
+    "level": "A1",
+    "category": "Pronouns",
+    "es": "nada",
+    "en": "nothing, zero, zilch, not...anything"
+  },
+  {
+    "id": "a1-137",
+    "level": "A1",
+    "category": "Adverbs",
+    "es": "cómo",
+    "en": "how?"
+  },
+  {
+    "id": "a1-138",
+    "level": "A1",
+    "category": "Adverbs",
+    "es": "solo",
+    "en": "sole; one; only; single (unique)"
+  },
+  {
+    "id": "a1-139",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "sentir",
+    "en": "to feel"
+  },
+  {
+    "id": "a1-140",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "pensar",
+    "en": "to think, ponder"
+  },
+  {
+    "id": "a1-141",
+    "level": "A1",
+    "category": "Connectors",
+    "es": "porque",
+    "en": "because"
+  },
+  {
+    "id": "a1-142",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "esperar",
+    "en": "to hope [+direct object (for something) or infinitive (to do something) or que (+ subjunctive clause) (that something happens)]"
+  },
+  {
+    "id": "a1-143",
+    "level": "A1",
+    "category": "Pronouns",
+    "es": "usted",
+    "en": "second person formal; you (singular)"
+  },
+  {
+    "id": "a1-144",
+    "level": "A1",
+    "category": "Nouns",
+    "es": "día",
+    "en": "day (any period of 24 hours)"
+  },
+  {
+    "id": "a1-145",
+    "level": "A1",
+    "category": "Nouns",
+    "es": "año",
+    "en": "surname"
+  },
+  {
+    "id": "a1-146",
+    "level": "A1",
+    "category": "Nouns",
+    "es": "padre",
+    "en": "Father (a title for a Latin Catholic priest and also God the Father)"
+  },
+  {
+    "id": "a1-147",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "venir",
+    "en": "Senses relating to literal movement. [+de (from) or desde (from), along with a (to) or para (to, toward) or hacia (toward)]"
+  },
+  {
+    "id": "a1-148",
+    "level": "A1",
+    "category": "General",
+    "es": "nuestro",
+    "en": "ours"
+  },
+  {
+    "id": "a1-149",
+    "level": "A1",
+    "category": "Nouns",
+    "es": "gracias",
+    "en": "a colonial town in the Lempira department of Honduras"
+  },
+  {
+    "id": "a1-150",
+    "level": "A1",
+    "category": "Nouns",
+    "es": "cosa",
+    "en": "thing (object, concept)"
+  },
+  {
+    "id": "a1-151",
+    "level": "A1",
+    "category": "General",
+    "es": "dos",
+    "en": "two"
+  },
+  {
+    "id": "a1-152",
+    "level": "A1",
+    "category": "Prepositions",
+    "es": "sin",
+    "en": "without"
+  },
+  {
+    "id": "a1-153",
+    "level": "A1",
+    "category": "Prepositions",
+    "es": "sobre",
+    "en": "over, above, on, upon, atop"
+  },
+  {
+    "id": "a1-154",
+    "level": "A1",
+    "category": "General",
+    "es": "alguno",
+    "en": "some, any"
+  },
+  {
+    "id": "a1-155",
+    "level": "A1",
+    "category": "Nouns",
+    "es": "señor",
+    "en": "alternative case form of \"señor\" (used before a name); Mister"
+  },
+  {
+    "id": "a1-156",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "mirar",
+    "en": "to look at (to try to see, to pay attention to with one’s eyes)"
+  },
+  {
+    "id": "a1-157",
+    "level": "A1",
+    "category": "Nouns",
+    "es": "hombre",
+    "en": "man, (adult male human)"
+  },
+  {
+    "id": "a1-158",
+    "level": "A1",
+    "category": "Nouns",
+    "es": "tiempo",
+    "en": "time"
+  },
+  {
+    "id": "a1-159",
+    "level": "A1",
+    "category": "Adverbs",
+    "es": "también",
+    "en": "also, too, as well"
+  },
+  {
+    "id": "a1-160",
+    "level": "A1",
+    "category": "Adjectives",
+    "es": "mismo",
+    "en": "same; identical; one and the same; indicates that the two compared noun clauses both represent the one thing"
+  },
+  {
+    "id": "a1-161",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "necesitar",
+    "en": "to need"
+  },
+  {
+    "id": "a1-162",
+    "level": "A1",
+    "category": "Nouns",
+    "es": "casa",
+    "en": "house"
+  },
+  {
+    "id": "a1-163",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "llevar",
+    "en": "to take, to carry, to take away, to carry away, to carry around, to bring, to bear, to lug (implies to move something further from who speaks)"
+  },
+  {
+    "id": "a1-164",
+    "level": "A1",
+    "category": "Adverbs",
+    "es": "tan",
+    "en": "so, as"
+  },
+  {
+    "id": "a1-165",
+    "level": "A1",
+    "category": "Adverbs",
+    "es": "entonces",
+    "en": "then, next, thereupon, at that time, at that point"
+  },
+  {
+    "id": "a1-166",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "encontrar",
+    "en": "to meet"
+  },
+  {
+    "id": "a1-167",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "volver",
+    "en": "to return, to revert, to get back"
+  },
+  {
+    "id": "a1-168",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "llamar",
+    "en": "to summon, to call"
+  },
+  {
+    "id": "a1-169",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "parecer",
+    "en": "to seem, to see fit"
+  },
+  {
+    "id": "a1-170",
+    "level": "A1",
+    "category": "Adjectives",
+    "es": "nuevo",
+    "en": "surname"
+  },
+  {
+    "id": "a1-171",
+    "level": "A1",
+    "category": "Adjectives",
+    "es": "mejor",
+    "en": "better"
+  },
+  {
+    "id": "a1-172",
+    "level": "A1",
+    "category": "Adjectives",
+    "es": "primero",
+    "en": "former (in contrast to the latter), first, first one"
+  },
+  {
+    "id": "a1-173",
+    "level": "A1",
+    "category": "Nouns",
+    "es": "verdad",
+    "en": "truth"
+  },
+  {
+    "id": "a1-174",
+    "level": "A1",
+    "category": "Prepositions",
+    "es": "hasta",
+    "en": "even"
+  },
+  {
+    "id": "a1-175",
+    "level": "A1",
+    "category": "Pronouns",
+    "es": "quién",
+    "en": "who?, whom?; (with “de”) whose?"
+  },
+  {
+    "id": "a1-176",
+    "level": "A1",
+    "category": "Nouns",
+    "es": "vida",
+    "en": "life"
+  },
+  {
+    "id": "a1-177",
+    "level": "A1",
+    "category": "Adverbs",
+    "es": "nunca",
+    "en": "never"
+  },
+  {
+    "id": "a1-178",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "tomar",
+    "en": "to take"
+  },
+  {
+    "id": "a1-179",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "quedar",
+    "en": "to be (as a result of something), to end up"
+  },
+  {
+    "id": "a1-180",
+    "level": "A1",
+    "category": "Adjectives",
+    "es": "grande",
+    "en": "surname"
+  },
+  {
+    "id": "a1-181",
+    "level": "A1",
+    "category": "Nouns",
+    "es": "chico",
+    "en": "Cámara Hondureña de la Industria de la Construcción"
+  },
+  {
+    "id": "a1-182",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "poner",
+    "en": "to put, to put up, to place, to lay"
+  },
+  {
+    "id": "a1-183",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "oír",
+    "en": "to hear"
+  },
+  {
+    "id": "a1-184",
+    "level": "A1",
+    "category": "Nouns",
+    "es": "noche",
+    "en": "night (the period between sunset and sunrise)"
+  },
+  {
+    "id": "a1-185",
+    "level": "A1",
+    "category": "Pronouns",
+    "es": "mí",
+    "en": "me; (declined form of yo used as the object of a preposition)"
+  },
+  {
+    "id": "a1-186",
+    "level": "A1",
+    "category": "Nouns",
+    "es": "hijo",
+    "en": "son"
+  },
+  {
+    "id": "a1-187",
+    "level": "A1",
+    "category": "Adverbs",
+    "es": "dónde",
+    "en": "where?; in what place?"
+  },
+  {
+    "id": "a1-188",
+    "level": "A1",
+    "category": "Connectors",
+    "es": "ni",
+    "en": "Used when negating two or more elements, and not, not A or B, not A nor B, neither A nor B"
+  },
+  {
+    "id": "a1-189",
+    "level": "A1",
+    "category": "Nouns",
+    "es": "favor",
+    "en": "favor/favour"
+  },
+  {
+    "id": "a1-190",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "gustar",
+    "en": "translated as \"to like\", analyzable in structure as \"to please\" [+dative (someone)] (the thing being liked is the subject, while the \"liker\" is in the dative case (\"indirect object\")). See the usage notes for more. Compare similar structures in Italian \"piacere\", Romanian \"plăcea\", German \"gefallen\" and Russian \"нравиться\""
+  },
+  {
+    "id": "a1-191",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "seguir",
+    "en": "to follow"
+  },
+  {
+    "id": "a1-192",
+    "level": "A1",
+    "category": "Nouns",
+    "es": "amigo",
+    "en": "surname"
+  },
+  {
+    "id": "a1-193",
+    "level": "A1",
+    "category": "General",
+    "es": "oh",
+    "en": "oh (expression of awe, surprise, pain or realization)"
+  },
+  {
+    "id": "a1-194",
+    "level": "A1",
+    "category": "Adverbs",
+    "es": "siempre",
+    "en": "always"
+  },
+  {
+    "id": "a1-195",
+    "level": "A1",
+    "category": "Nouns",
+    "es": "hecho",
+    "en": "done, completed"
+  },
+  {
+    "id": "a1-196",
+    "level": "A1",
+    "category": "Nouns",
+    "es": "papá",
+    "en": "dad"
+  },
+  {
+    "id": "a1-197",
+    "level": "A1",
+    "category": "General",
+    "es": "dios",
+    "en": "God"
+  },
+  {
+    "id": "a1-198",
+    "level": "A1",
+    "category": "Adverbs",
+    "es": "antes",
+    "en": "earlier; before; sooner; previously; formerly; beforehand (at an earlier time)"
+  },
+  {
+    "id": "a1-199",
+    "level": "A1",
+    "category": "Prepositions",
+    "es": "desde",
+    "en": "since (from a specified time in the past)"
+  },
+  {
+    "id": "a1-200",
+    "level": "A1",
+    "category": "Verbs",
+    "es": "conocer",
+    "en": "to know (a person or a place), to be familiar with, to be acquainted with"
+  }
+]

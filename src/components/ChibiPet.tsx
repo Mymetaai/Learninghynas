@@ -96,9 +96,9 @@ const ChibiPet: FC = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [bubbleText, setBubbleText] = useState<string | null>("Let's study! 🇪🇸");
   
-  // Roaming states
-  const [position, setPosition] = useState(80);
-  const [direction, setDirection] = useState<'left' | 'right'>('left');
+  // Stable position on the right side
+  const [position] = useState(85);
+  const [direction] = useState<'left' | 'right'>('left');
 
   const chatEndRef = useRef<HTMLDivElement>(null);
 
@@ -108,31 +108,6 @@ const ChibiPet: FC = () => {
       chatEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [messages, isTyping]);
-
-  // Roaming Loop (fox walks left and right across the screen)
-  useEffect(() => {
-    if (isOpen) return;
-
-    const interval = setInterval(() => {
-      setPosition((prev) => {
-        if (direction === 'right') {
-          if (prev >= 90) {
-            setDirection('left');
-            return prev - 0.25;
-          }
-          return prev + 0.25;
-        } else {
-          if (prev <= 10) {
-            setDirection('right');
-            return prev + 0.25;
-          }
-          return prev - 0.25;
-        }
-      });
-    }, 40);
-
-    return () => clearInterval(interval);
-  }, [direction, isOpen]);
 
   // Periodic random speech bubble texts
   useEffect(() => {
@@ -316,7 +291,7 @@ const ChibiPet: FC = () => {
             onClick={() => setIsOpen(!isOpen)}
             className="h-28 w-28 cursor-pointer drop-shadow-[0_8px_20px_rgba(74,151,242,0.3)] hover:drop-shadow-[0_12px_32px_rgba(74,151,242,0.5)] transition-all duration-300 relative select-none shrink-0"
           >
-            <Kitsune3D direction={direction} mode={isOpen ? 'wag' : 'walk'} />
+            <Kitsune3D direction={direction} mode={isOpen ? 'wag' : 'idle'} />
             {/* Notification bubble if there is a pending tip - positioned lower relative to the fox geometry */}
             {!isOpen && (
               <span className="absolute top-12 right-2 flex h-3.5 w-3.5">

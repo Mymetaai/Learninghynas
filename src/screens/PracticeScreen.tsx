@@ -21,10 +21,12 @@ import { BOOK_LEVELS } from '../content';
 import { COMPANION_DICTIONARY } from '../content/dictionary';
 import type { Exercise } from '../content/types';
 import ExerciseEngine from '../components/exercises/ExerciseEngine';
+import UnifiedVocabTrainer from '../components/UnifiedVocabTrainer';
+import AutoFlashcardsPlayer from '../components/AutoFlashcardsPlayer';
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
-type DrillMode = 'weak-spots' | 'vocab-drill' | 'listening-reps' | 'speaking-reps' | 'quest';
+type DrillMode = 'weak-spots' | 'vocab-drill' | 'listening-reps' | 'speaking-reps' | 'quest' | 'flashcards';
 type ScreenView = 'hub' | 'session';
 
 interface SessionResult {
@@ -239,6 +241,16 @@ const PracticeScreen: FC = () => {
   // ── Session View ─────────────────────────────────────────────────────────
 
   if (view === 'session' && activeMode) {
+    if (activeMode === 'flashcards') {
+      return (
+        <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base px-4 py-6">
+          <div className="mx-auto max-w-4xl">
+            <AutoFlashcardsPlayer onBack={handleBackToHub} />
+          </div>
+        </div>
+      );
+    }
+
     // Session completion overlay
     if (sessionResult) {
       return (
@@ -358,7 +370,7 @@ const PracticeScreen: FC = () => {
 
   return (
     <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary p-4 sm:p-6 lg:p-8">
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-5xl">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-1">
@@ -375,10 +387,28 @@ const PracticeScreen: FC = () => {
           </p>
         </div>
 
+        {/* Interactive Training Area: Unified Flashcard & Fill-in-the-Blanks Trainer */}
+        <div className="mb-12">
+          <UnifiedVocabTrainer />
+        </div>
+
         {/* Drill Tiles Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <AnimatePresence>
-            {/* 1. Weak Spots */}
+            {/* 1. Auto Flashcards */}
+            <DrillTile
+              mode="flashcards"
+              icon={<Sparkles className="h-6 w-6" />}
+              iconColor="text-teal-deep"
+              iconBg="bg-teal-deep/10 border-teal-deep/20"
+              title="Auto Flashcards"
+              subtitle="Hands-free auto-play vocabulary card deck player"
+              ctaLabel="Start Flashcards"
+              onStart={() => handleStartSession('flashcards')}
+              index={0}
+            />
+
+            {/* 2. Weak Spots */}
             <DrillTile
               mode="weak-spots"
               icon={<Target className="h-6 w-6" />}
@@ -394,10 +424,10 @@ const PracticeScreen: FC = () => {
               ctaLabel="Start Review"
               disabled={mistakeCount === 0}
               onStart={() => handleStartSession('weak-spots')}
-              index={0}
+              index={1}
             />
 
-            {/* 2. Vocab Drill */}
+            {/* 3. Vocab Drill */}
             <DrillTile
               mode="vocab-drill"
               icon={<BookOpen className="h-6 w-6" />}
@@ -413,10 +443,10 @@ const PracticeScreen: FC = () => {
               ctaLabel="Drill Vocab"
               disabled={vocabCount === 0}
               onStart={() => handleStartSession('vocab-drill')}
-              index={1}
+              index={2}
             />
 
-            {/* 3. Listening Reps */}
+            {/* 4. Listening Reps */}
             <DrillTile
               mode="listening-reps"
               icon={<Headphones className="h-6 w-6" />}
@@ -432,10 +462,10 @@ const PracticeScreen: FC = () => {
               ctaLabel="Start Listening"
               disabled={listeningCount === 0}
               onStart={() => handleStartSession('listening-reps')}
-              index={2}
+              index={3}
             />
 
-            {/* 4. Speaking Reps — Coming Soon */}
+            {/* 5. Speaking Reps — Coming Soon */}
             <DrillTile
               mode="speaking-reps"
               icon={<Mic className="h-6 w-6" />}
@@ -447,7 +477,7 @@ const PracticeScreen: FC = () => {
               disabled
               comingSoon
               onStart={() => {}}
-              index={3}
+              index={4}
             />
           </AnimatePresence>
         </div>
@@ -477,6 +507,7 @@ const TILE_CONFIG: Record<DrillMode, { title: string }> = {
   'listening-reps': { title: 'Listening Reps' },
   'speaking-reps': { title: 'Speaking Reps' },
   'quest': { title: 'Quest Quiz' },
+  'flashcards': { title: 'Auto Flashcards' },
 };
 
 // ── DrillTile Component ──────────────────────────────────────────────────────

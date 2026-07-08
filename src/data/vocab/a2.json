@@ -1,0 +1,1402 @@
+[
+  {
+    "id": "a2-001",
+    "level": "A2",
+    "category": "Pasado",
+    "es": "comí",
+    "en": "I ate (preterite)"
+  },
+  {
+    "id": "a2-002",
+    "level": "A2",
+    "category": "Pasado",
+    "es": "comía",
+    "en": "I used to eat (imperfect)"
+  },
+  {
+    "id": "a2-003",
+    "level": "A2",
+    "category": "Pasado",
+    "es": "fui",
+    "en": "I went / I was (preterite)"
+  },
+  {
+    "id": "a2-004",
+    "level": "A2",
+    "category": "Pasado",
+    "es": "era",
+    "en": "I was (imperfect)"
+  },
+  {
+    "id": "a2-005",
+    "level": "A2",
+    "category": "Pasado",
+    "es": "hice",
+    "en": "I did / made (preterite)"
+  },
+  {
+    "id": "a2-006",
+    "level": "A2",
+    "category": "Pasado",
+    "es": "hacía",
+    "en": "I used to do (imperfect)"
+  },
+  {
+    "id": "a2-007",
+    "level": "A2",
+    "category": "Pasado",
+    "es": "dije",
+    "en": "I said (preterite)"
+  },
+  {
+    "id": "a2-008",
+    "level": "A2",
+    "category": "Pasado",
+    "es": "tuve",
+    "en": "I had (preterite, event)"
+  },
+  {
+    "id": "a2-009",
+    "level": "A2",
+    "category": "Pasado",
+    "es": "tenía",
+    "en": "I had / used to have (imperfect)"
+  },
+  {
+    "id": "a2-010",
+    "level": "A2",
+    "category": "Pasado",
+    "es": "viví",
+    "en": "I lived (preterite)"
+  },
+  {
+    "id": "a2-011",
+    "level": "A2",
+    "category": "Compras",
+    "es": "la tienda",
+    "en": "the store"
+  },
+  {
+    "id": "a2-012",
+    "level": "A2",
+    "category": "Compras",
+    "es": "el precio",
+    "en": "the price"
+  },
+  {
+    "id": "a2-013",
+    "level": "A2",
+    "category": "Compras",
+    "es": "¿Cuánto cuesta?",
+    "en": "How much does it cost?"
+  },
+  {
+    "id": "a2-014",
+    "level": "A2",
+    "category": "Compras",
+    "es": "barato",
+    "en": "cheap"
+  },
+  {
+    "id": "a2-015",
+    "level": "A2",
+    "category": "Compras",
+    "es": "caro",
+    "en": "expensive"
+  },
+  {
+    "id": "a2-016",
+    "level": "A2",
+    "category": "Compras",
+    "es": "la talla",
+    "en": "the size"
+  },
+  {
+    "id": "a2-017",
+    "level": "A2",
+    "category": "Compras",
+    "es": "probarse",
+    "en": "to try on"
+  },
+  {
+    "id": "a2-018",
+    "level": "A2",
+    "category": "Compras",
+    "es": "pagar",
+    "en": "to pay"
+  },
+  {
+    "id": "a2-019",
+    "level": "A2",
+    "category": "Compras",
+    "es": "el recibo",
+    "en": "the receipt"
+  },
+  {
+    "id": "a2-020",
+    "level": "A2",
+    "category": "Compras",
+    "es": "la tarjeta de crédito",
+    "en": "the credit card"
+  },
+  {
+    "id": "a2-021",
+    "level": "A2",
+    "category": "Direcciones",
+    "es": "a la derecha",
+    "en": "to the right"
+  },
+  {
+    "id": "a2-022",
+    "level": "A2",
+    "category": "Direcciones",
+    "es": "a la izquierda",
+    "en": "to the left"
+  },
+  {
+    "id": "a2-023",
+    "level": "A2",
+    "category": "Direcciones",
+    "es": "todo recto",
+    "en": "straight ahead"
+  },
+  {
+    "id": "a2-024",
+    "level": "A2",
+    "category": "Direcciones",
+    "es": "la esquina",
+    "en": "the corner"
+  },
+  {
+    "id": "a2-025",
+    "level": "A2",
+    "category": "Direcciones",
+    "es": "el semáforo",
+    "en": "the traffic light"
+  },
+  {
+    "id": "a2-026",
+    "level": "A2",
+    "category": "Direcciones",
+    "es": "cerca de",
+    "en": "near"
+  },
+  {
+    "id": "a2-027",
+    "level": "A2",
+    "category": "Direcciones",
+    "es": "lejos de",
+    "en": "far from"
+  },
+  {
+    "id": "a2-028",
+    "level": "A2",
+    "category": "Direcciones",
+    "es": "cruzar",
+    "en": "to cross"
+  },
+  {
+    "id": "a2-029",
+    "level": "A2",
+    "category": "Adverbs",
+    "es": "poco",
+    "en": "little, not much"
+  },
+  {
+    "id": "a2-030",
+    "level": "A2",
+    "category": "Adverbs",
+    "es": "ahí",
+    "en": "there: used to designate a place near the listener"
+  },
+  {
+    "id": "a2-031",
+    "level": "A2",
+    "category": "Pronouns",
+    "es": "alguien",
+    "en": "someone, somebody"
+  },
+  {
+    "id": "a2-032",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "trabajo",
+    "en": "work, job"
+  },
+  {
+    "id": "a2-033",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "mujer",
+    "en": "woman"
+  },
+  {
+    "id": "a2-034",
+    "level": "A2",
+    "category": "Prepositions",
+    "es": "entre",
+    "en": "between"
+  },
+  {
+    "id": "a2-035",
+    "level": "A2",
+    "category": "Adverbs",
+    "es": "después",
+    "en": "later, afterwards, afterward, post"
+  },
+  {
+    "id": "a2-036",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "parte",
+    "en": "part; section; portion; share; piece; bit; cut; proportion"
+  },
+  {
+    "id": "a2-037",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "mi",
+    "en": "apocopic form of \"mío\", my"
+  },
+  {
+    "id": "a2-038",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "acuerdo",
+    "en": "agreement"
+  },
+  {
+    "id": "a2-039",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "escuchar",
+    "en": "to listen to, to hear out"
+  },
+  {
+    "id": "a2-040",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "momento",
+    "en": "moment, instant"
+  },
+  {
+    "id": "a2-041",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "matar",
+    "en": "to kill, slay"
+  },
+  {
+    "id": "a2-042",
+    "level": "A2",
+    "category": "Pronouns",
+    "es": "donde",
+    "en": "where, in what place"
+  },
+  {
+    "id": "a2-043",
+    "level": "A2",
+    "category": "Adjectives",
+    "es": "seguro",
+    "en": "secure; safe (free from danger)"
+  },
+  {
+    "id": "a2-044",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "mundo",
+    "en": "world, earth (human collective existence)"
+  },
+  {
+    "id": "a2-045",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "gente",
+    "en": "people"
+  },
+  {
+    "id": "a2-046",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "niño",
+    "en": "child, boy"
+  },
+  {
+    "id": "a2-047",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "hora",
+    "en": "hour (a time period of sixty minutes)"
+  },
+  {
+    "id": "a2-048",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "buscar",
+    "en": "to seek, search for, look for, try to find, to scour"
+  },
+  {
+    "id": "a2-049",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "problema",
+    "en": "problem, issue, challenge (a difficulty or obstacle that has to be dealt with)"
+  },
+  {
+    "id": "a2-050",
+    "level": "A2",
+    "category": "General",
+    "es": "estado",
+    "en": "state (any sovereign polity)"
+  },
+  {
+    "id": "a2-051",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "lugar",
+    "en": "place"
+  },
+  {
+    "id": "a2-052",
+    "level": "A2",
+    "category": "Pronouns",
+    "es": "nadie",
+    "en": "no one; nobody (anyone or anybody)"
+  },
+  {
+    "id": "a2-053",
+    "level": "A2",
+    "category": "Pronouns",
+    "es": "tal",
+    "en": "such"
+  },
+  {
+    "id": "a2-054",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "ayudar",
+    "en": "to help"
+  },
+  {
+    "id": "a2-055",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "perder",
+    "en": "to lose"
+  },
+  {
+    "id": "a2-056",
+    "level": "A2",
+    "category": "Pronouns",
+    "es": "ustedes",
+    "en": "you (plural), you guys, y'all, yous, yinz, ye"
+  },
+  {
+    "id": "a2-057",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "persona",
+    "en": "person (an individual; usually a human being)"
+  },
+  {
+    "id": "a2-058",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "tipo",
+    "en": "kind, type, sort, manner"
+  },
+  {
+    "id": "a2-059",
+    "level": "A2",
+    "category": "Adjectives",
+    "es": "claro",
+    "en": "given name"
+  },
+  {
+    "id": "a2-060",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "entender",
+    "en": "to understand, to fathom"
+  },
+  {
+    "id": "a2-061",
+    "level": "A2",
+    "category": "Adverbs",
+    "es": "menos",
+    "en": "less"
+  },
+  {
+    "id": "a2-062",
+    "level": "A2",
+    "category": "Adverbs",
+    "es": "fuera",
+    "en": "outside"
+  },
+  {
+    "id": "a2-063",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "acabar",
+    "en": "to finish; to end"
+  },
+  {
+    "id": "a2-064",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "tratar",
+    "en": "to treat (to handle, behave toward in a specific way)"
+  },
+  {
+    "id": "a2-065",
+    "level": "A2",
+    "category": "General",
+    "es": "tres",
+    "en": "three"
+  },
+  {
+    "id": "a2-066",
+    "level": "A2",
+    "category": "Adjectives",
+    "es": "último",
+    "en": "final; last"
+  },
+  {
+    "id": "a2-067",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "trabajar",
+    "en": "to work"
+  },
+  {
+    "id": "a2-068",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "morir",
+    "en": "to die"
+  },
+  {
+    "id": "a2-069",
+    "level": "A2",
+    "category": "General",
+    "es": "cada",
+    "en": "each; every"
+  },
+  {
+    "id": "a2-070",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "dinero",
+    "en": "money"
+  },
+  {
+    "id": "a2-071",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "mañana",
+    "en": "tomorrow"
+  },
+  {
+    "id": "a2-072",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "hermano",
+    "en": "brother"
+  },
+  {
+    "id": "a2-073",
+    "level": "A2",
+    "category": "Pronouns",
+    "es": "quien",
+    "en": "who"
+  },
+  {
+    "id": "a2-074",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "vivir",
+    "en": "to live; to be alive"
+  },
+  {
+    "id": "a2-075",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "valer",
+    "en": "to be worth"
+  },
+  {
+    "id": "a2-076",
+    "level": "A2",
+    "category": "General",
+    "es": "sr.",
+    "en": "abbreviation of \"Señor\" (“Mister”); Mr"
+  },
+  {
+    "id": "a2-077",
+    "level": "A2",
+    "category": "Adverbs",
+    "es": "allí",
+    "en": "there (away from the speaker and the listener)"
+  },
+  {
+    "id": "a2-078",
+    "level": "A2",
+    "category": "Adverbs",
+    "es": "hoy",
+    "en": "today"
+  },
+  {
+    "id": "a2-079",
+    "level": "A2",
+    "category": "Adverbs",
+    "es": "luego",
+    "en": "then (afterward)"
+  },
+  {
+    "id": "a2-080",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "mano",
+    "en": "hand"
+  },
+  {
+    "id": "a2-081",
+    "level": "A2",
+    "category": "Adverbs",
+    "es": "tanto",
+    "en": "so much; as much; that much"
+  },
+  {
+    "id": "a2-082",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "caso",
+    "en": "case (situation or fact)"
+  },
+  {
+    "id": "a2-083",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "nombre",
+    "en": "name"
+  },
+  {
+    "id": "a2-084",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "entrar",
+    "en": "to enter; to come in; to get in; to go in; to get inside; to come on in"
+  },
+  {
+    "id": "a2-085",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "forma",
+    "en": "shape; form; figure"
+  },
+  {
+    "id": "a2-086",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "empezar",
+    "en": "to start, begin, to get started"
+  },
+  {
+    "id": "a2-087",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "conseguir",
+    "en": "to achieve, succeed in, reach, accomplish, attain"
+  },
+  {
+    "id": "a2-088",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "pedir",
+    "en": "to ask for something"
+  },
+  {
+    "id": "a2-089",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "intentar",
+    "en": "to try, to attempt; especially: to strain or put forth effort in so doing"
+  },
+  {
+    "id": "a2-090",
+    "level": "A2",
+    "category": "General",
+    "es": "ninguno",
+    "en": "no; none"
+  },
+  {
+    "id": "a2-091",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "traer",
+    "en": "to bring, to fetch"
+  },
+  {
+    "id": "a2-092",
+    "level": "A2",
+    "category": "Adjectives",
+    "es": "pequeño",
+    "en": "small; little"
+  },
+  {
+    "id": "a2-093",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "importar",
+    "en": "to matter, to be important [+a (someone)] (often translated idiomatically with care or mind, with subject and object reversed)"
+  },
+  {
+    "id": "a2-094",
+    "level": "A2",
+    "category": "Adverbs",
+    "es": "aún",
+    "en": "still, yet"
+  },
+  {
+    "id": "a2-095",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "cuenta",
+    "en": "count, tally"
+  },
+  {
+    "id": "a2-096",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "razón",
+    "en": "reason"
+  },
+  {
+    "id": "a2-097",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "preguntar",
+    "en": "to ask"
+  },
+  {
+    "id": "a2-098",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "terminar",
+    "en": "to (cause to) finish, to (cause to) end, to (cause to) terminate, to (cause to) conclude"
+  },
+  {
+    "id": "a2-099",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "idea",
+    "en": "idea"
+  },
+  {
+    "id": "a2-100",
+    "level": "A2",
+    "category": "Adjectives",
+    "es": "único",
+    "en": "only; single; sole"
+  },
+  {
+    "id": "a2-101",
+    "level": "A2",
+    "category": "Adverbs",
+    "es": "mal",
+    "en": "abbreviation of \"Málaga\""
+  },
+  {
+    "id": "a2-102",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "suponer",
+    "en": "to suppose, to surmise, to assume, to guess, to imagine, to figure, to say, to take it"
+  },
+  {
+    "id": "a2-103",
+    "level": "A2",
+    "category": "Adjectives",
+    "es": "muerto",
+    "en": "dead"
+  },
+  {
+    "id": "a2-104",
+    "level": "A2",
+    "category": "Prepositions",
+    "es": "durante",
+    "en": "during, in, over"
+  },
+  {
+    "id": "a2-105",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "pasado",
+    "en": "past"
+  },
+  {
+    "id": "a2-106",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "recordar",
+    "en": "to remember, to recollect"
+  },
+  {
+    "id": "a2-107",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "semana",
+    "en": "week (7 days)"
+  },
+  {
+    "id": "a2-108",
+    "level": "A2",
+    "category": "Adjectives",
+    "es": "cierto",
+    "en": "true"
+  },
+  {
+    "id": "a2-109",
+    "level": "A2",
+    "category": "Prepositions",
+    "es": "contra",
+    "en": "against, versus"
+  },
+  {
+    "id": "a2-110",
+    "level": "A2",
+    "category": "Adverbs",
+    "es": "tarde",
+    "en": "late"
+  },
+  {
+    "id": "a2-111",
+    "level": "A2",
+    "category": "Adjectives",
+    "es": "segundo",
+    "en": "given name"
+  },
+  {
+    "id": "a2-112",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "cambiar",
+    "en": "to change, to shift, to switch, to alter"
+  },
+  {
+    "id": "a2-113",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "familia",
+    "en": "family (group of people related to each other)"
+  },
+  {
+    "id": "a2-114",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "usar",
+    "en": "to use"
+  },
+  {
+    "id": "a2-115",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "policía",
+    "en": "Civility, polity, public order, police, fineness, neatness, urbanity"
+  },
+  {
+    "id": "a2-116",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "comer",
+    "en": "to eat"
+  },
+  {
+    "id": "a2-117",
+    "level": "A2",
+    "category": "Adverbs",
+    "es": "conmigo",
+    "en": "with me"
+  },
+  {
+    "id": "a2-118",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "sacar",
+    "en": "to put out, to get out (e.g. a public statement, an APB, a release of media or entertainment)"
+  },
+  {
+    "id": "a2-119",
+    "level": "A2",
+    "category": "Connectors",
+    "es": "mientras",
+    "en": "meanwhile"
+  },
+  {
+    "id": "a2-120",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "mantener",
+    "en": "to keep"
+  },
+  {
+    "id": "a2-121",
+    "level": "A2",
+    "category": "Adverbs",
+    "es": "realmente",
+    "en": "really, actually, genuinely"
+  },
+  {
+    "id": "a2-122",
+    "level": "A2",
+    "category": "Adjectives",
+    "es": "serio",
+    "en": "serious, earnest, sober, solemn (without humor)"
+  },
+  {
+    "id": "a2-123",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "país",
+    "en": "country (the territory of a nation)"
+  },
+  {
+    "id": "a2-124",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "contar",
+    "en": "to count; to tally"
+  },
+  {
+    "id": "a2-125",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "minuto",
+    "en": "minute (a unit of time equal to 60 seconds or 1/60 hour)"
+  },
+  {
+    "id": "a2-126",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "mierda",
+    "en": "shit (solid excretory product evacuated from the bowels; feces.)"
+  },
+  {
+    "id": "a2-127",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "olvidar",
+    "en": "to forget [+de (of something)]"
+  },
+  {
+    "id": "a2-128",
+    "level": "A2",
+    "category": "Adjectives",
+    "es": "propio",
+    "en": "own (belonging to)"
+  },
+  {
+    "id": "a2-129",
+    "level": "A2",
+    "category": "Connectors",
+    "es": "pues",
+    "en": "so, then; in that case"
+  },
+  {
+    "id": "a2-130",
+    "level": "A2",
+    "category": "Connectors",
+    "es": "aunque",
+    "en": "though, although, even though, albeit"
+  },
+  {
+    "id": "a2-131",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "historia",
+    "en": "history (the aggregate of past events)"
+  },
+  {
+    "id": "a2-132",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "amor",
+    "en": "surname"
+  },
+  {
+    "id": "a2-133",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "lado",
+    "en": "side"
+  },
+  {
+    "id": "a2-134",
+    "level": "A2",
+    "category": "Adjectives",
+    "es": "junto",
+    "en": "together"
+  },
+  {
+    "id": "a2-135",
+    "level": "A2",
+    "category": "Prepositions",
+    "es": "hacia",
+    "en": "toward, towards"
+  },
+  {
+    "id": "a2-136",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "manera",
+    "en": "way; manner; method; style"
+  },
+  {
+    "id": "a2-137",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "cabeza",
+    "en": "surname"
+  },
+  {
+    "id": "a2-138",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "punto",
+    "en": "point (specific spot, location, or place)"
+  },
+  {
+    "id": "a2-139",
+    "level": "A2",
+    "category": "Adjectives",
+    "es": "mayor",
+    "en": "comparative of \"grande\": bigger"
+  },
+  {
+    "id": "a2-140",
+    "level": "A2",
+    "category": "Adverbs",
+    "es": "todavía",
+    "en": "still, yet"
+  },
+  {
+    "id": "a2-141",
+    "level": "A2",
+    "category": "General",
+    "es": "cualquiera",
+    "en": "anyone, whoever, whomever"
+  },
+  {
+    "id": "a2-142",
+    "level": "A2",
+    "category": "Adverbs",
+    "es": "casi",
+    "en": "almost"
+  },
+  {
+    "id": "a2-143",
+    "level": "A2",
+    "category": "Adverbs",
+    "es": "contigo",
+    "en": "with you (singular)"
+  },
+  {
+    "id": "a2-144",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "mes",
+    "en": "month"
+  },
+  {
+    "id": "a2-145",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "ciudad",
+    "en": "city"
+  },
+  {
+    "id": "a2-146",
+    "level": "A2",
+    "category": "Adjectives",
+    "es": "importante",
+    "en": "important, that cares, that matters"
+  },
+  {
+    "id": "a2-147",
+    "level": "A2",
+    "category": "Adverbs",
+    "es": "demasiado",
+    "en": "too much, too many, excessive"
+  },
+  {
+    "id": "a2-148",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "preocupar",
+    "en": "to worry, to concern, to trouble, to be worrisome to, to preoccupy"
+  },
+  {
+    "id": "a2-149",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "poder",
+    "en": "to be able to, can"
+  },
+  {
+    "id": "a2-150",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "ganar",
+    "en": "to gain"
+  },
+  {
+    "id": "a2-151",
+    "level": "A2",
+    "category": "General",
+    "es": "cuánto",
+    "en": "how much; how many"
+  },
+  {
+    "id": "a2-152",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "tío",
+    "en": "uncle (the brother, brother-in-law, or male cousin or cousin-in-law of either parent)"
+  },
+  {
+    "id": "a2-153",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "puerta",
+    "en": "surname"
+  },
+  {
+    "id": "a2-154",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "palabra",
+    "en": "word"
+  },
+  {
+    "id": "a2-155",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "ojo",
+    "en": "eye"
+  },
+  {
+    "id": "a2-156",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "agua",
+    "en": "water"
+  },
+  {
+    "id": "a2-157",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "medio",
+    "en": "half (of or related to one of two equal divisions of a whole)"
+  },
+  {
+    "id": "a2-158",
+    "level": "A2",
+    "category": "Adverbs",
+    "es": "dentro",
+    "en": "inside (for space)"
+  },
+  {
+    "id": "a2-159",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "abrir",
+    "en": "to open, open up"
+  },
+  {
+    "id": "a2-160",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "jugar",
+    "en": "to play"
+  },
+  {
+    "id": "a2-161",
+    "level": "A2",
+    "category": "Adjectives",
+    "es": "llamado",
+    "en": "call"
+  },
+  {
+    "id": "a2-162",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "loco",
+    "en": "crazy, insane, mad, nuts (asserting that something is out of place in the head)"
+  },
+  {
+    "id": "a2-163",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "ocurrir",
+    "en": "to happen, to occur"
+  },
+  {
+    "id": "a2-164",
+    "level": "A2",
+    "category": "Adjectives",
+    "es": "alto",
+    "en": "tall"
+  },
+  {
+    "id": "a2-165",
+    "level": "A2",
+    "category": "General",
+    "es": "aquel",
+    "en": "that (over there; implying some distance)"
+  },
+  {
+    "id": "a2-166",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "fin",
+    "en": "end"
+  },
+  {
+    "id": "a2-167",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "camino",
+    "en": "way, route"
+  },
+  {
+    "id": "a2-168",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "esposo",
+    "en": "husband"
+  },
+  {
+    "id": "a2-169",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "permitir",
+    "en": "to allow, permit"
+  },
+  {
+    "id": "a2-170",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "recibir",
+    "en": "to receive, get"
+  },
+  {
+    "id": "a2-171",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "pregunta",
+    "en": "question (sentence that asks for information)"
+  },
+  {
+    "id": "a2-172",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "leer",
+    "en": "to read"
+  },
+  {
+    "id": "a2-173",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "significar",
+    "en": "to signify"
+  },
+  {
+    "id": "a2-174",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "suceder",
+    "en": "to happen, to befall, to occur"
+  },
+  {
+    "id": "a2-175",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "muerte",
+    "en": "death (the cessation of life)"
+  },
+  {
+    "id": "a2-176",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "millón",
+    "en": "million (10^6)"
+  },
+  {
+    "id": "a2-177",
+    "level": "A2",
+    "category": "Adjectives",
+    "es": "general",
+    "en": "general, overall"
+  },
+  {
+    "id": "a2-178",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "dormir",
+    "en": "to sleep"
+  },
+  {
+    "id": "a2-179",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "realidad",
+    "en": "reality"
+  },
+  {
+    "id": "a2-180",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "caer",
+    "en": "to fall (to move to a lower position due to gravity)"
+  },
+  {
+    "id": "a2-181",
+    "level": "A2",
+    "category": "Adjectives",
+    "es": "rápido",
+    "en": "rapid, quick, fast"
+  },
+  {
+    "id": "a2-182",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "enviar",
+    "en": "to send"
+  },
+  {
+    "id": "a2-183",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "acercar",
+    "en": "to bring close"
+  },
+  {
+    "id": "a2-184",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "equipo",
+    "en": "team"
+  },
+  {
+    "id": "a2-185",
+    "level": "A2",
+    "category": "Pronouns",
+    "es": "cuál",
+    "en": "what; which"
+  },
+  {
+    "id": "a2-186",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "ayuda",
+    "en": "help, aid"
+  },
+  {
+    "id": "a2-187",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "cuerpo",
+    "en": "body (the physical structure of a human or animal)"
+  },
+  {
+    "id": "a2-188",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "jefe",
+    "en": "chief; president; head; leader of a business, political party, or other organization"
+  },
+  {
+    "id": "a2-189",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "presidente",
+    "en": "president"
+  },
+  {
+    "id": "a2-190",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "mover",
+    "en": "to move (to cause to change place or posture)"
+  },
+  {
+    "id": "a2-191",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "comprar",
+    "en": "to buy (to obtain in exchange of money or goods)"
+  },
+  {
+    "id": "a2-192",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "supuesto",
+    "en": "supposed, self-styled, alleged"
+  },
+  {
+    "id": "a2-193",
+    "level": "A2",
+    "category": "Prepositions",
+    "es": "bajo",
+    "en": "short (of little height)"
+  },
+  {
+    "id": "a2-194",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "gobierno",
+    "en": "government"
+  },
+  {
+    "id": "a2-195",
+    "level": "A2",
+    "category": "Adverbs",
+    "es": "quizá",
+    "en": "perhaps, maybe"
+  },
+  {
+    "id": "a2-196",
+    "level": "A2",
+    "category": "Verbs",
+    "es": "comenzar",
+    "en": "to begin, to commence"
+  },
+  {
+    "id": "a2-197",
+    "level": "A2",
+    "category": "Adjectives",
+    "es": "joven",
+    "en": "surname"
+  },
+  {
+    "id": "a2-198",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "viejo",
+    "en": "(of an object) old (having existed for a long time)"
+  },
+  {
+    "id": "a2-199",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "tierra",
+    "en": "alternative case form of \"tierra\" (“Earth”)"
+  },
+  {
+    "id": "a2-200",
+    "level": "A2",
+    "category": "Nouns",
+    "es": "número",
+    "en": "number (counting)"
+  }
+]

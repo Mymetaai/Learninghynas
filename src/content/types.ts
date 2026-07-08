@@ -40,6 +40,18 @@ export interface VocabWord {
   topic: TopicTag;
 }
 
+export interface VocabItem {
+  id: string;                    // stable slug, e.g. "a1-042"
+  level: 'A1' | 'A2' | 'B1' | 'B2' | 'C1';
+  category: string;               // e.g. "Saludos", "Subjuntivo"
+  es: string;                     // Spanish term or phrase
+  en: string;                     // English translation
+  example?: string;               // Spanish example sentence
+  exampleTranslation?: string;    // English translation of the example
+  tags?: string[];                // e.g. ["verb", "irregular", "regional:Spain"]
+}
+
+
 /** Supported exercise types (rendered by the Step 8 engine). */
 export type ExerciseType =
   | 'match'

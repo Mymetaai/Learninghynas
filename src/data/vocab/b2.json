@@ -1,0 +1,1402 @@
+[
+  {
+    "id": "b2-001",
+    "level": "B2",
+    "category": "Temas abstractos",
+    "es": "el desempleo",
+    "en": "unemployment"
+  },
+  {
+    "id": "b2-002",
+    "level": "B2",
+    "category": "Temas abstractos",
+    "es": "la desigualdad",
+    "en": "inequality"
+  },
+  {
+    "id": "b2-003",
+    "level": "B2",
+    "category": "Temas abstractos",
+    "es": "el medio ambiente",
+    "en": "the environment"
+  },
+  {
+    "id": "b2-004",
+    "level": "B2",
+    "category": "Temas abstractos",
+    "es": "la sostenibilidad",
+    "en": "sustainability"
+  },
+  {
+    "id": "b2-005",
+    "level": "B2",
+    "category": "Temas abstractos",
+    "es": "el envejecimiento",
+    "en": "aging (of a population)"
+  },
+  {
+    "id": "b2-006",
+    "level": "B2",
+    "category": "Temas abstractos",
+    "es": "la globalización",
+    "en": "globalization"
+  },
+  {
+    "id": "b2-007",
+    "level": "B2",
+    "category": "Temas abstractos",
+    "es": "el reto",
+    "en": "the challenge"
+  },
+  {
+    "id": "b2-008",
+    "level": "B2",
+    "category": "Estilo indirecto",
+    "es": "Dijo que...",
+    "en": "He/she said that..."
+  },
+  {
+    "id": "b2-009",
+    "level": "B2",
+    "category": "Estilo indirecto",
+    "es": "Me preguntó si...",
+    "en": "He/she asked me if..."
+  },
+  {
+    "id": "b2-010",
+    "level": "B2",
+    "category": "Estilo indirecto",
+    "es": "Afirmó que...",
+    "en": "He/she stated that..."
+  },
+  {
+    "id": "b2-011",
+    "level": "B2",
+    "category": "Condicional",
+    "es": "Si tuviera tiempo...",
+    "en": "If I had time... (+ conditional)"
+  },
+  {
+    "id": "b2-012",
+    "level": "B2",
+    "category": "Condicional",
+    "es": "Me gustaría...",
+    "en": "I would like..."
+  },
+  {
+    "id": "b2-013",
+    "level": "B2",
+    "category": "Condicional",
+    "es": "Habría hecho...",
+    "en": "I would have done..."
+  },
+  {
+    "id": "b2-014",
+    "level": "B2",
+    "category": "Conectores avanzados",
+    "es": "no obstante",
+    "en": "nevertheless"
+  },
+  {
+    "id": "b2-015",
+    "level": "B2",
+    "category": "Conectores avanzados",
+    "es": "en cuanto a",
+    "en": "regarding"
+  },
+  {
+    "id": "b2-016",
+    "level": "B2",
+    "category": "Conectores avanzados",
+    "es": "de hecho",
+    "en": "in fact"
+  },
+  {
+    "id": "b2-017",
+    "level": "B2",
+    "category": "Conectores avanzados",
+    "es": "cabe destacar que",
+    "en": "it's worth noting that"
+  },
+  {
+    "id": "b2-018",
+    "level": "B2",
+    "category": "Conectores avanzados",
+    "es": "teniendo en cuenta que",
+    "en": "taking into account that"
+  },
+  {
+    "id": "b2-019",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "música",
+    "en": "music"
+  },
+  {
+    "id": "b2-020",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "diablo",
+    "en": "Satan; the Devil"
+  },
+  {
+    "id": "b2-021",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "resto",
+    "en": "rest, remainder"
+  },
+  {
+    "id": "b2-022",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "siguiente",
+    "en": "following"
+  },
+  {
+    "id": "b2-023",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "cuidar",
+    "en": "to look after, take care of (e.g. a house, a person) [[[Appendix:Glossary#transitive_verb|transitive]] or +de (of)]"
+  },
+  {
+    "id": "b2-024",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "médico",
+    "en": "doctor"
+  },
+  {
+    "id": "b2-025",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "carta",
+    "en": "letter (document)"
+  },
+  {
+    "id": "b2-026",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "preparar",
+    "en": "to prepare"
+  },
+  {
+    "id": "b2-027",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "don",
+    "en": "title of respect for a man: sir"
+  },
+  {
+    "id": "b2-028",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "correcto",
+    "en": "correct, right"
+  },
+  {
+    "id": "b2-029",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "programa",
+    "en": "programme, program"
+  },
+  {
+    "id": "b2-030",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "malo",
+    "en": "bad (of bad quality)"
+  },
+  {
+    "id": "b2-031",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "sitio",
+    "en": "site, place"
+  },
+  {
+    "id": "b2-032",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "campo",
+    "en": "surname"
+  },
+  {
+    "id": "b2-033",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "elegir",
+    "en": "to choose"
+  },
+  {
+    "id": "b2-034",
+    "level": "B2",
+    "category": "Adverbs",
+    "es": "exactamente",
+    "en": "exactly"
+  },
+  {
+    "id": "b2-035",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "parar",
+    "en": "to stop, halt"
+  },
+  {
+    "id": "b2-036",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "unido",
+    "en": "united"
+  },
+  {
+    "id": "b2-037",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "desaparecer",
+    "en": "to disappear, to go missing, to vanish, to be gone"
+  },
+  {
+    "id": "b2-038",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "hermoso",
+    "en": "gorgeous, beautiful, handsome, lovely"
+  },
+  {
+    "id": "b2-039",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "mentir",
+    "en": "to lie (say something untrue)"
+  },
+  {
+    "id": "b2-040",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "romper",
+    "en": "to break"
+  },
+  {
+    "id": "b2-041",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "invitar",
+    "en": "to invite"
+  },
+  {
+    "id": "b2-042",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "bonito",
+    "en": "pretty, cute"
+  },
+  {
+    "id": "b2-043",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "peor",
+    "en": "comparative of \"malo\": worse"
+  },
+  {
+    "id": "b2-044",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "obtener",
+    "en": "to obtain"
+  },
+  {
+    "id": "b2-045",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "molestar",
+    "en": "to bother, to disturb, to trouble, to impose, to inconvenience, to burden"
+  },
+  {
+    "id": "b2-046",
+    "level": "B2",
+    "category": "Adverbs",
+    "es": "lejos",
+    "en": "far"
+  },
+  {
+    "id": "b2-047",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "necesario",
+    "en": "necessary, requisite"
+  },
+  {
+    "id": "b2-048",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "cama",
+    "en": "bed"
+  },
+  {
+    "id": "b2-049",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "utilizar",
+    "en": "to use; to make use of; to utilize"
+  },
+  {
+    "id": "b2-050",
+    "level": "B2",
+    "category": "General",
+    "es": "varios",
+    "en": "various, several"
+  },
+  {
+    "id": "b2-051",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "abuelo",
+    "en": "grandfather"
+  },
+  {
+    "id": "b2-052",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "viaje",
+    "en": "voyage"
+  },
+  {
+    "id": "b2-053",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "demonio",
+    "en": "demon, devil"
+  },
+  {
+    "id": "b2-054",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "perfecto",
+    "en": "given name"
+  },
+  {
+    "id": "b2-055",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "raro",
+    "en": "rare"
+  },
+  {
+    "id": "b2-056",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "tirar",
+    "en": "to drop intentionally"
+  },
+  {
+    "id": "b2-057",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "despertar",
+    "en": "to wake"
+  },
+  {
+    "id": "b2-058",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "resultar",
+    "en": "to result, to turn out, to end up, to prove"
+  },
+  {
+    "id": "b2-059",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "oficial",
+    "en": "official"
+  },
+  {
+    "id": "b2-060",
+    "level": "B2",
+    "category": "Adverbs",
+    "es": "probablemente",
+    "en": "probably, likely"
+  },
+  {
+    "id": "b2-061",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "oficina",
+    "en": "office (a room used for non-manual work)"
+  },
+  {
+    "id": "b2-062",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "continuar",
+    "en": "to continue, to carry on"
+  },
+  {
+    "id": "b2-063",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "responder",
+    "en": "to answer, to reply"
+  },
+  {
+    "id": "b2-064",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "acción",
+    "en": "action, act, deed (something done)"
+  },
+  {
+    "id": "b2-065",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "línea",
+    "en": "line (a straight path through two or more points)"
+  },
+  {
+    "id": "b2-066",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "agente",
+    "en": "agent"
+  },
+  {
+    "id": "b2-067",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "personal",
+    "en": "personal"
+  },
+  {
+    "id": "b2-068",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "papel",
+    "en": "paper"
+  },
+  {
+    "id": "b2-069",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "ok",
+    "en": "OK"
+  },
+  {
+    "id": "b2-070",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "aire",
+    "en": "air (the substance constituting earth's atmosphere)"
+  },
+  {
+    "id": "b2-071",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "arreglar",
+    "en": "to fix, to repair, to mend"
+  },
+  {
+    "id": "b2-072",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "puta",
+    "en": "whore, slut, prostitute"
+  },
+  {
+    "id": "b2-073",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "principio",
+    "en": "principle"
+  },
+  {
+    "id": "b2-074",
+    "level": "B2",
+    "category": "Adverbs",
+    "es": "simplemente",
+    "en": "simply"
+  },
+  {
+    "id": "b2-075",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "empresa",
+    "en": "company"
+  },
+  {
+    "id": "b2-076",
+    "level": "B2",
+    "category": "General",
+    "es": "diez",
+    "en": "surname"
+  },
+  {
+    "id": "b2-077",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "director",
+    "en": "director"
+  },
+  {
+    "id": "b2-078",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "través",
+    "en": "bend, turn"
+  },
+  {
+    "id": "b2-079",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "producir",
+    "en": "to produce"
+  },
+  {
+    "id": "b2-080",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "ejemplo",
+    "en": "example"
+  },
+  {
+    "id": "b2-081",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "amo",
+    "en": "master (man who owns a slave)"
+  },
+  {
+    "id": "b2-082",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "rey",
+    "en": "surname"
+  },
+  {
+    "id": "b2-083",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "cuarto",
+    "en": "fourth"
+  },
+  {
+    "id": "b2-084",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "idiota",
+    "en": "idiotic"
+  },
+  {
+    "id": "b2-085",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "verdadero",
+    "en": "true, real"
+  },
+  {
+    "id": "b2-086",
+    "level": "B2",
+    "category": "General",
+    "es": "tanto",
+    "en": "so much; as much; that much"
+  },
+  {
+    "id": "b2-087",
+    "level": "B2",
+    "category": "General",
+    "es": "españa",
+    "en": "Spain (A country in Southern Europe, including most of the Iberian peninsula.)"
+  },
+  {
+    "id": "b2-088",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "pesar",
+    "en": "to weigh (to determine the weight of an object)"
+  },
+  {
+    "id": "b2-089",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "probar",
+    "en": "to prove"
+  },
+  {
+    "id": "b2-090",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "bastar",
+    "en": "to be enough; to suffice"
+  },
+  {
+    "id": "b2-091",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "decisión",
+    "en": "decision"
+  },
+  {
+    "id": "b2-092",
+    "level": "B2",
+    "category": "Pronouns",
+    "es": "demás",
+    "en": "other, remaining"
+  },
+  {
+    "id": "b2-093",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "control",
+    "en": "control, or running of a business"
+  },
+  {
+    "id": "b2-094",
+    "level": "B2",
+    "category": "General",
+    "es": "sra.",
+    "en": "abbreviation of \"señora\""
+  },
+  {
+    "id": "b2-095",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "hospital",
+    "en": "hospital"
+  },
+  {
+    "id": "b2-096",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "marido",
+    "en": "husband"
+  },
+  {
+    "id": "b2-097",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "fuego",
+    "en": "fire"
+  },
+  {
+    "id": "b2-098",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "tema",
+    "en": "theme; plot (of a book, film or other media)"
+  },
+  {
+    "id": "b2-099",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "respuesta",
+    "en": "reply, response, answer"
+  },
+  {
+    "id": "b2-100",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "nivel",
+    "en": "level, tier, height (distance relative to a given reference elevation)"
+  },
+  {
+    "id": "b2-101",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "evitar",
+    "en": "to avoid, to bypass, to evade, to circumvent, to dodge, to shun, to eschew (to steer clear of)"
+  },
+  {
+    "id": "b2-102",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "estudio",
+    "en": "study"
+  },
+  {
+    "id": "b2-103",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "secreto",
+    "en": "secret"
+  },
+  {
+    "id": "b2-104",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "mensaje",
+    "en": "message"
+  },
+  {
+    "id": "b2-105",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "resultado",
+    "en": "result, outcome, finding, upshot"
+  },
+  {
+    "id": "b2-106",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "error",
+    "en": "error"
+  },
+  {
+    "id": "b2-107",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "futuro",
+    "en": "future (occurring in the future)"
+  },
+  {
+    "id": "b2-108",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "lleno",
+    "en": "full"
+  },
+  {
+    "id": "b2-109",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "maldito",
+    "en": "cursed"
+  },
+  {
+    "id": "b2-110",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "compañero",
+    "en": "companion (someone with whom one spends time or keeps company)"
+  },
+  {
+    "id": "b2-111",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "soler",
+    "en": "to be accustomed to doing something, to do something on a regular basis, to do something usually or often"
+  },
+  {
+    "id": "b2-112",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "reconocer",
+    "en": "to recognize"
+  },
+  {
+    "id": "b2-113",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "pobre",
+    "en": "poor (pitiable, pitiful)"
+  },
+  {
+    "id": "b2-114",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "atención",
+    "en": "attention"
+  },
+  {
+    "id": "b2-115",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "zona",
+    "en": "zone, district, area"
+  },
+  {
+    "id": "b2-116",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "vista",
+    "en": "sight, vision, eyesight (the ability to see)"
+  },
+  {
+    "id": "b2-117",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "escapar",
+    "en": "to escape, get out"
+  },
+  {
+    "id": "b2-118",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "cumplir",
+    "en": "to fulfil, to fulfill, to meet, to deliver (e.g., requirements, prerequisites, promise, vow)"
+  },
+  {
+    "id": "b2-119",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "edad",
+    "en": "age"
+  },
+  {
+    "id": "b2-120",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "comprender",
+    "en": "to understand, to comprehend"
+  },
+  {
+    "id": "b2-121",
+    "level": "B2",
+    "category": "Pronouns",
+    "es": "suyo",
+    "en": "his, hers, its"
+  },
+  {
+    "id": "b2-122",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "mandar",
+    "en": "to send"
+  },
+  {
+    "id": "b2-123",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "abogado",
+    "en": "lawyer, solicitor, counsel"
+  },
+  {
+    "id": "b2-124",
+    "level": "B2",
+    "category": "General",
+    "es": "madrid",
+    "en": "Madrid (a capital city of Spain)"
+  },
+  {
+    "id": "b2-125",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "dirección",
+    "en": "direction"
+  },
+  {
+    "id": "b2-126",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "partir",
+    "en": "to divide, split"
+  },
+  {
+    "id": "b2-127",
+    "level": "B2",
+    "category": "General",
+    "es": "dr.",
+    "en": "abbreviation of \"doctor\""
+  },
+  {
+    "id": "b2-128",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "temer",
+    "en": "to fear"
+  },
+  {
+    "id": "b2-129",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "alegrar",
+    "en": "to make happy"
+  },
+  {
+    "id": "b2-130",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "estúpido",
+    "en": "stupid"
+  },
+  {
+    "id": "b2-131",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "fondo",
+    "en": "bottom"
+  },
+  {
+    "id": "b2-132",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "llorar",
+    "en": "to cry, to weep"
+  },
+  {
+    "id": "b2-133",
+    "level": "B2",
+    "category": "General",
+    "es": "poco",
+    "en": "little, not much"
+  },
+  {
+    "id": "b2-134",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "señorito",
+    "en": "A son of an important or respectable person"
+  },
+  {
+    "id": "b2-135",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "lindo",
+    "en": "pretty"
+  },
+  {
+    "id": "b2-136",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "medio",
+    "en": "half (of or related to one of two equal divisions of a whole)"
+  },
+  {
+    "id": "b2-137",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "compañía",
+    "en": "company"
+  },
+  {
+    "id": "b2-138",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "tranquilar",
+    "en": "to mark with two lines each of the debit and date items of a commercial book, up to where the account equals"
+  },
+  {
+    "id": "b2-139",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "actuar",
+    "en": "to act, to behave"
+  },
+  {
+    "id": "b2-140",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "proceso",
+    "en": "process"
+  },
+  {
+    "id": "b2-141",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "investigación",
+    "en": "investigation"
+  },
+  {
+    "id": "b2-142",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "tonto",
+    "en": "stupid"
+  },
+  {
+    "id": "b2-143",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "café",
+    "en": "brown"
+  },
+  {
+    "id": "b2-144",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "duda",
+    "en": "doubt"
+  },
+  {
+    "id": "b2-145",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "preferir",
+    "en": "to prefer"
+  },
+  {
+    "id": "b2-146",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "conducir",
+    "en": "to drive; to conduct"
+  },
+  {
+    "id": "b2-147",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "estado",
+    "en": "state (any sovereign polity)"
+  },
+  {
+    "id": "b2-148",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "mía",
+    "en": "a regiment of 100 soldiers in the Spanish protectorate of Morocco"
+  },
+  {
+    "id": "b2-149",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "ropa",
+    "en": "garment, clothing, clothes, robes"
+  },
+  {
+    "id": "b2-150",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "valor",
+    "en": "value (all senses)"
+  },
+  {
+    "id": "b2-151",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "profesor",
+    "en": "professor (a faculty member)"
+  },
+  {
+    "id": "b2-152",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "reunión",
+    "en": "Réunion (An island in overseas department and adr in France, located in the Indian Ocean to the west of Mauritius and to the east of Madagascar.)"
+  },
+  {
+    "id": "b2-153",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "boca",
+    "en": "mouth, oral cavity"
+  },
+  {
+    "id": "b2-154",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "cámara",
+    "en": "room"
+  },
+  {
+    "id": "b2-155",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "conocido",
+    "en": "known"
+  },
+  {
+    "id": "b2-156",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "espacio",
+    "en": "space (distance between things)"
+  },
+  {
+    "id": "b2-157",
+    "level": "B2",
+    "category": "Adverbs",
+    "es": "encima",
+    "en": "on top of something"
+  },
+  {
+    "id": "b2-158",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "imagen",
+    "en": "image"
+  },
+  {
+    "id": "b2-159",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "abierto",
+    "en": "open, unlocked (not closed, accessible)"
+  },
+  {
+    "id": "b2-160",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "bajo",
+    "en": "short (of little height)"
+  },
+  {
+    "id": "b2-161",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "cargo",
+    "en": "charge, burden"
+  },
+  {
+    "id": "b2-162",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "caballero",
+    "en": "surname"
+  },
+  {
+    "id": "b2-163",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "cantar",
+    "en": "to sing"
+  },
+  {
+    "id": "b2-164",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "posibilidad",
+    "en": "possibility"
+  },
+  {
+    "id": "b2-165",
+    "level": "B2",
+    "category": "Adverbs",
+    "es": "detrás",
+    "en": "behind, at the rear"
+  },
+  {
+    "id": "b2-166",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "proteger",
+    "en": "to protect, to defend"
+  },
+  {
+    "id": "b2-167",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "universidad",
+    "en": "university, (US) college"
+  },
+  {
+    "id": "b2-168",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "sufrir",
+    "en": "to suffer (be confronted with something undesired)"
+  },
+  {
+    "id": "b2-169",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "golpear",
+    "en": "to hit, to knock, to tap"
+  },
+  {
+    "id": "b2-170",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "abandonar",
+    "en": "to abandon, to leave"
+  },
+  {
+    "id": "b2-171",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "consejo",
+    "en": "advice, counsel, piece of advice"
+  },
+  {
+    "id": "b2-172",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "asesino",
+    "en": "murderous, homicidal (intending, or likely to commit murder)"
+  },
+  {
+    "id": "b2-173",
+    "level": "B2",
+    "category": "General",
+    "es": "cuyo",
+    "en": "Cuyo (a former province of Argentina)"
+  },
+  {
+    "id": "b2-174",
+    "level": "B2",
+    "category": "General",
+    "es": "vuestro",
+    "en": "yours"
+  },
+  {
+    "id": "b2-175",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "caminar",
+    "en": "to walk"
+  },
+  {
+    "id": "b2-176",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "daño",
+    "en": "damage"
+  },
+  {
+    "id": "b2-177",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "sociedad",
+    "en": "(a town in Morazán department of El Salvador)"
+  },
+  {
+    "id": "b2-178",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "base",
+    "en": "base"
+  },
+  {
+    "id": "b2-179",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "proyecto",
+    "en": "project, plan"
+  },
+  {
+    "id": "b2-180",
+    "level": "B2",
+    "category": "Adverbs",
+    "es": "anoche",
+    "en": "last night"
+  },
+  {
+    "id": "b2-181",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "mesa",
+    "en": "table"
+  },
+  {
+    "id": "b2-182",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "paciente",
+    "en": "patient"
+  },
+  {
+    "id": "b2-183",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "tercero",
+    "en": "third"
+  },
+  {
+    "id": "b2-184",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "crear",
+    "en": "to create"
+  },
+  {
+    "id": "b2-185",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "dirigir",
+    "en": "to direct"
+  },
+  {
+    "id": "b2-186",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "capaz",
+    "en": "able, capable"
+  },
+  {
+    "id": "b2-187",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "movimiento",
+    "en": "movement (physical motion between points in space)"
+  },
+  {
+    "id": "b2-188",
+    "level": "B2",
+    "category": "General",
+    "es": "ud.",
+    "en": "abbreviation of \"usted\""
+  },
+  {
+    "id": "b2-189",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "increíble",
+    "en": "incredible, unbelievable"
+  },
+  {
+    "id": "b2-190",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "divertido",
+    "en": "entertaining, amusing, funny"
+  },
+  {
+    "id": "b2-191",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "principal",
+    "en": "main, most important"
+  },
+  {
+    "id": "b2-192",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "maestro",
+    "en": "master"
+  },
+  {
+    "id": "b2-193",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "recoger",
+    "en": "to collect, to gather, to pick up, to fetch, to retrieve (something previously left behind)"
+  },
+  {
+    "id": "b2-194",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "carrera",
+    "en": "a Spanish surname"
+  },
+  {
+    "id": "b2-195",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "caballo",
+    "en": "horse"
+  },
+  {
+    "id": "b2-196",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "siglo",
+    "en": "century"
+  },
+  {
+    "id": "b2-197",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "perdón",
+    "en": "sorry, pardon me (excuse me)"
+  },
+  {
+    "id": "b2-198",
+    "level": "B2",
+    "category": "Nouns",
+    "es": "pena",
+    "en": "punishment"
+  },
+  {
+    "id": "b2-199",
+    "level": "B2",
+    "category": "Adjectives",
+    "es": "antiguo",
+    "en": "old, former, erstwhile, quondam, one-time, onetime"
+  },
+  {
+    "id": "b2-200",
+    "level": "B2",
+    "category": "Verbs",
+    "es": "ocupar",
+    "en": "to occupy (to take or use space)"
+  }
+]
