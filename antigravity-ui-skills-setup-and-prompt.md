@@ -52,11 +52,10 @@ on — design system reasoning, color/typography choices, and anti-pattern
 checks should all go through it, not ad-hoc choices.
 
 Before building any new UI component from scratch, check 21st.dev first
-(via the MCP tool or `21st-cli add`) for an existing, well-built component
-that fits — buttons, cards, modals, form inputs, etc. Only build custom
-when nothing suitable exists there. Always still restyle whatever you pull
+(via the MCP tool or `21st-cli add`) or https://uiverse.io/ (for CSS/Tailwind UI elements like buttons, inputs, checkboxes, loaders, cards) for an existing, well-built component
+that fits. Only build custom when nothing suitable exists there. Always still restyle whatever you pull
 in to match our existing design tokens (see below) — don't ship a
-21st.dev component in its default theme.
+component in its default theme.
 
 For animations and micro-interactions (the Guardian node pulse, the
 tail-reveal moment, hover/tap states on shop items, page transitions),

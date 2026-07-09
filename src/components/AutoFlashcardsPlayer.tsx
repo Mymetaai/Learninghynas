@@ -1,4 +1,11 @@
-import { useState, useMemo, useEffect, type FC } from 'react';
+// AutoFlashcardsPlayer.tsx — Stacked card-deck flashcard player.
+// Merged A1–C1 vocabulary, auto-shuffle every 2–3s, pause/resume,
+// manual prev/next/reshuffle with level filtering.
+//
+// Visual: single active card centered with 3 stacked silhouettes behind it.
+// Inspired by Uiverse.io/ElSombrero2/tricky-robin-67.
+
+import { useState, useMemo, useEffect, useCallback, type FC } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Shuffle, ArrowLeft, Play, Pause, ChevronLeft, ChevronRight } from 'lucide-react';
 import VocabCard from './VocabCard';
@@ -21,9 +28,29 @@ const LEVEL_DATA: Record<string, VocabItem[]> = {
 
 const ALL_LEVELS = ['All', 'A1', 'A2', 'B1', 'B2', 'C1'];
 
-const ROTATIONS = [-10, -5, 0, 5, 10];
-const Z_INDICES = [10, 20, 30, 20, 10];
-const X_OFFSETS = [-70, -35, 0, 35, 70];
+// ── Level accent colors for header dot + progress bar ───────────────────────
+
+const LEVEL_ACCENTS: Record<string, { bar: string; dot: string }> = {
+  All: { bar: 'bg-accent-action', dot: 'bg-accent-action' },
+  A1:  { bar: 'bg-emerald-500',   dot: 'bg-emerald-500'   },
+  A2:  { bar: 'bg-sky-500',       dot: 'bg-sky-500'       },
+  B1:  { bar: 'bg-amber-500',     dot: 'bg-amber-500'     },
+  B2:  { bar: 'bg-orange-500',    dot: 'bg-orange-500'    },
+  C1:  { bar: 'bg-purple-500',    dot: 'bg-purple-500'    },
+};
+
+// ── Fisher-Yates shuffle ────────────────────────────────────────────────────
+
+function fisherYatesShuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// ── Component ───────────────────────────────────────────────────────────────
 
 interface AutoFlashcardsPlayerProps {
   onBack: () => void;
@@ -37,8 +64,9 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
   const [isPaused, setIsPaused] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
-  // Load and shuffle deck based on level selection
-  const initializeDeck = (level: string) => {
+  // ── Deck initialization ─────────────────────────────────────────────────
+
+  const initializeDeck = useCallback((level: string) => {
     let sourceItems: VocabItem[] = [];
     if (level === 'All') {
       sourceItems = [
@@ -51,34 +79,30 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
     } else {
       sourceItems = LEVEL_DATA[level] || [];
     }
-
-    // Shuffle Fisher-Yates
-    const shuffled = [...sourceItems].sort(() => Math.random() - 0.5);
+    const shuffled = fisherYatesShuffle(sourceItems);
     setDeck(shuffled);
     setIndex(0);
     setIsFlipped(false);
-  };
+  }, []);
 
-  // Initialize deck on mount or level change
   useEffect(() => {
     initializeDeck(selectedLevel);
-  }, [selectedLevel]);
+  }, [selectedLevel, initializeDeck]);
 
-  // Hands-free auto-advance / flip loop:
-  // Shows front for 1.5s -> Flips and shows back for 2.5s -> Advances to next card
+  // ── Auto-advance / flip loop ────────────────────────────────────────────
+  // Shows front 1.5s → flips → shows back 2.5s → advances
+
   useEffect(() => {
     if (isPaused || deck.length === 0) return;
 
-    let timer: any;
+    let timer: ReturnType<typeof setTimeout>;
 
     if (isFlipped) {
-      // Show translation, then advance and flip back (Hold for 2.5 seconds)
       timer = setTimeout(() => {
         setIsFlipped(false);
         setIndex((prev) => (prev + 1) % deck.length);
       }, 2500);
     } else {
-      // Show Spanish word for 1.5 seconds, then reveal translation
       timer = setTimeout(() => {
         setIsFlipped(true);
       }, 1500);
@@ -87,64 +111,55 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
     return () => clearTimeout(timer);
   }, [isFlipped, isPaused, index, deck.length]);
 
-  // Get the 5 visible cards in the fan centered around the current index
-  const visibleCards = useMemo(() => {
-    if (deck.length === 0) return [];
-    const cards: VocabItem[] = [];
-    for (let offset = -2; offset <= 2; offset++) {
-      const idx = (index + offset + deck.length) % deck.length;
-      cards.push(deck[idx]);
+  // ── Get 3 nearby cards for the stack silhouettes ────────────────────────
+
+  const stackItems = useMemo(() => {
+    if (deck.length < 2) return [];
+    const items: VocabItem[] = [];
+    for (let offset = 1; offset <= 3; offset++) {
+      const idx = (index + offset) % deck.length;
+      items.push(deck[idx]);
     }
-    return cards;
+    return items;
   }, [deck, index]);
 
-  const handleCardClick = (fanPos: number) => {
-    // Resume auto-play when user interacts, restarting loop
+  // ── Handlers ────────────────────────────────────────────────────────────
+
+  const handleCardClick = useCallback(() => {
     setIsPaused(false);
+    setIsFlipped((prev) => !prev);
+  }, []);
 
-    if (fanPos === 2) {
-      setIsFlipped((prev) => !prev);
-    } else {
-      const diff = fanPos - 2;
-      const targetIndex = (index + diff + deck.length) % deck.length;
-      setIndex(targetIndex);
-      setIsFlipped(false);
-    }
-  };
-
-  const handleManualNext = () => {
+  const handleManualNext = useCallback(() => {
     setIsPaused(true);
     setIsFlipped(false);
     setIndex((prev) => (prev + 1) % deck.length);
-  };
+  }, [deck.length]);
 
-  const handleManualPrev = () => {
+  const handleManualPrev = useCallback(() => {
     setIsPaused(true);
     setIsFlipped(false);
     setIndex((prev) => (prev - 1 + deck.length) % deck.length);
-  };
+  }, [deck.length]);
+
+  // ── Derived values ──────────────────────────────────────────────────────
 
   const progressPercent = deck.length > 0 ? Math.round(((index + 1) / deck.length) * 100) : 0;
+  const accent = LEVEL_ACCENTS[selectedLevel] || LEVEL_ACCENTS.All;
+  const levelLabel = selectedLevel === 'All' ? 'ALL LEVELS' : `${selectedLevel} LEVEL`;
+  const currentItem = deck[index];
 
-  const LEVEL_ACCENTS: Record<string, string> = {
-    All: 'bg-accent-action',
-    A1: 'bg-emerald-500',
-    A2: 'bg-sky-500',
-    B1: 'bg-amber-500',
-    B2: 'bg-orange-500',
-    C1: 'bg-purple-500',
-  };
-
-  const activeAccent = LEVEL_ACCENTS[selectedLevel] || LEVEL_ACCENTS.All;
+  // ── Render ──────────────────────────────────────────────────────────────
 
   return (
-    <div className="w-full flex flex-col gap-6">
-      {/* Level selector header */}
+    <div className="w-full flex flex-col gap-5">
+      {/* ── Level selector header ── */}
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-structural/45 pb-3">
         <div className="flex items-center gap-2">
           <button
             onClick={onBack}
             className="p-1.5 rounded-lg hover:bg-paper/10 text-text-secondary hover:text-text-primary transition-colors cursor-pointer"
+            aria-label="Go back"
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -163,6 +178,8 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
                       ? 'bg-accent-action text-white shadow-sm font-semibold'
                       : 'bg-paper/5 border border-structural hover:bg-paper/10 text-text-secondary'
                   }`}
+                  aria-label={`Filter by ${lvl} level`}
+                  aria-pressed={isSel}
                 >
                   {lvl}
                 </button>
@@ -174,19 +191,23 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
         <button
           onClick={() => initializeDeck(selectedLevel)}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-structural bg-paper/5 font-hud text-[10px] uppercase tracking-wider text-text-secondary hover:text-text-primary transition-all cursor-pointer"
+          aria-label="Reshuffle deck"
         >
           <Shuffle className="h-3.5 w-3.5" />
           Reshuffle
         </button>
       </div>
 
-      {/* Progress tracker */}
-      <div className="w-full p-4 rounded-xl border border-structural/40 bg-paper/5">
-        <div className="flex justify-between items-center mb-1.5">
-          <span className="font-hud text-[10px] text-text-secondary uppercase tracking-wider">
-            Reviewing Shuffled Deck ({selectedLevel === 'All' ? 'All Levels' : `${selectedLevel} Level`})
-          </span>
-          <span className="font-hud text-[11px] text-text-primary font-bold tabular-nums">
+      {/* ── Header bar with progress ── */}
+      <div className="w-full px-4 py-3 rounded-xl border border-structural/40 bg-paper/5">
+        <div className="flex justify-between items-center mb-2">
+          <div className="flex flex-col gap-1">
+            <span className="font-hud text-[10px] text-text-secondary uppercase tracking-[0.15em] leading-none">
+              REVIEWING SHUFFLED DECK ({levelLabel})
+            </span>
+            <span className={`w-2 h-2 rounded-full ${accent.dot}`} />
+          </div>
+          <span className="font-hud text-[12px] text-text-primary font-bold tabular-nums">
             {index + 1} / {deck.length} words
           </span>
         </div>
@@ -195,51 +216,48 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
             initial={{ width: 0 }}
             animate={{ width: `${progressPercent}%` }}
             transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.35 }}
-            className={`h-full ${activeAccent}`}
+            className={`h-full rounded-full ${accent.bar}`}
           />
         </div>
       </div>
 
-      {/* Fanned stack view */}
-      <div className="relative w-full h-[23rem] sm:h-[27rem] flex items-center justify-center overflow-visible mt-2">
-        {deck.length === 0 ? (
+      {/* ── Stacked deck view ── */}
+      <div className="relative w-full flex items-center justify-center mt-2 mb-2" style={{ minHeight: '460px' }}>
+        {deck.length === 0 || !currentItem ? (
           <p className="text-sm font-body text-text-secondary">Loading words...</p>
         ) : (
-          visibleCards.map((item, idx) => {
-            const fanPos = idx;
-            const isFront = fanPos === 2;
-            const isItemFlipped = isFront && isFlipped;
-
-            return (
-              <VocabCard
-                key={`${item.id}-${index}-${fanPos}`}
-                item={item}
-                flipped={isItemFlipped}
-                onFlip={() => handleCardClick(fanPos)}
-                status="idle"
-                rotation={ROTATIONS[fanPos]}
-                zIndex={Z_INDICES[fanPos]}
-                xOffset={X_OFFSETS[fanPos]}
-                isFront={isFront}
-              />
-            );
-          })
+          <motion.div
+            key={`card-${currentItem.id}-${index}`}
+            initial={shouldReduceMotion ? {} : { opacity: 0, y: 16, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -12, scale: 0.96 }}
+            transition={shouldReduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 280, damping: 26 }}
+            className="w-full flex items-center justify-center"
+          >
+            <VocabCard
+              item={currentItem}
+              flipped={isFlipped}
+              onFlip={handleCardClick}
+              status="idle"
+              stackItems={stackItems}
+            />
+          </motion.div>
         )}
       </div>
 
-      {/* Player Controller UI */}
-      <div className="mx-auto max-w-sm w-full flex flex-col items-center gap-3 mt-4">
-        {/* Play/Pause state message */}
+      {/* ── Player controls ── */}
+      <div className="mx-auto max-w-sm w-full flex flex-col items-center gap-3">
+        {/* State message */}
         <p className="font-hud text-[9px] uppercase tracking-widest text-text-tertiary">
           {isPaused ? 'Auto-play paused · Interact manually' : 'Auto-playing hands-free...'}
         </p>
 
-        {/* Buttons Row */}
+        {/* Buttons */}
         <div className="flex items-center justify-center gap-4">
           <button
             onClick={handleManualPrev}
             className="p-3 rounded-full border border-structural bg-paper/5 text-text-secondary hover:text-text-primary hover:border-text-primary transition-all cursor-pointer shadow-sm active:scale-95"
-            title="Previous Card"
+            aria-label="Previous card"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
@@ -249,7 +267,7 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
             className={`p-4 rounded-full text-white shadow-md transition-all cursor-pointer active:scale-95 flex items-center justify-center ${
               isPaused ? 'bg-accent-action hover:bg-accent-action-hover' : 'bg-success hover:bg-success/90'
             }`}
-            title={isPaused ? 'Resume Auto-Play' : 'Pause Auto-Play'}
+            aria-label={isPaused ? 'Resume auto-play' : 'Pause auto-play'}
           >
             {isPaused ? <Play className="h-6 w-6 fill-white" /> : <Pause className="h-6 w-6 fill-white" />}
           </button>
@@ -257,7 +275,7 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
           <button
             onClick={handleManualNext}
             className="p-3 rounded-full border border-structural bg-paper/5 text-text-secondary hover:text-text-primary hover:border-text-primary transition-all cursor-pointer shadow-sm active:scale-95"
-            title="Next Card"
+            aria-label="Next card"
           >
             <ChevronRight className="h-5 w-5" />
           </button>

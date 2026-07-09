@@ -170,1233 +170,6833 @@
   {
     "id": "b1-025",
     "level": "B1",
-    "category": "General",
-    "es": "cuatro",
-    "en": "four"
+    "category": "Verbs",
+    "es": "garantizar",
+    "en": "to guarantee"
   },
   {
     "id": "b1-026",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "feliz",
-    "en": "happy, merry (trait)"
+    "category": "Nouns",
+    "es": "cabrón",
+    "en": "billy goat"
   },
   {
     "id": "b1-027",
     "level": "B1",
     "category": "Nouns",
-    "es": "final",
-    "en": "final (last, ultimate)"
+    "es": "combate",
+    "en": "combat"
   },
   {
     "id": "b1-028",
     "level": "B1",
-    "category": "Verbs",
-    "es": "regresar",
-    "en": "to return, go back, come back"
+    "category": "Adjectives",
+    "es": "amarillo",
+    "en": "Amarillo (a city in the northwest plains of Texas, United States of America)"
   },
   {
     "id": "b1-029",
     "level": "B1",
     "category": "Nouns",
-    "es": "grupo",
-    "en": "group"
+    "es": "tesoro",
+    "en": "treasure, trove, treasure trove"
   },
   {
     "id": "b1-030",
     "level": "B1",
     "category": "Nouns",
-    "es": "guerra",
+    "es": "patrón",
     "en": "surname"
   },
   {
     "id": "b1-031",
     "level": "B1",
-    "category": "Nouns",
-    "es": "cariño",
-    "en": "A municipality of A Coruña, Spain"
+    "category": "Adjectives",
+    "es": "específico",
+    "en": "specific"
   },
   {
     "id": "b1-032",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "posible",
-    "en": "possible"
+    "category": "Verbs",
+    "es": "hundir",
+    "en": "to sink, engulf"
   },
   {
     "id": "b1-033",
     "level": "B1",
-    "category": "Verbs",
-    "es": "echar",
-    "en": "to throw, toss, cast, jettison (to release an object from one's grasp so that it moves through the air)"
+    "category": "Adjectives",
+    "es": "dirigido",
+    "en": "directed"
   },
   {
     "id": "b1-034",
     "level": "B1",
-    "category": "Nouns",
-    "es": "clase",
-    "en": "lecture"
+    "category": "Adjectives",
+    "es": "femenino",
+    "en": "feminine (of or relating to women)"
   },
   {
     "id": "b1-035",
     "level": "B1",
-    "category": "Pronouns",
-    "es": "cual",
-    "en": "like, as, in the manner of"
+    "category": "Nouns",
+    "es": "libra",
+    "en": "Libra (constellation)"
   },
   {
     "id": "b1-036",
     "level": "B1",
     "category": "Nouns",
-    "es": "arma",
-    "en": "weapon, arm"
+    "es": "charles",
+    "en": "hi-hat"
   },
   {
     "id": "b1-037",
     "level": "B1",
-    "category": "General",
-    "es": "cinco",
-    "en": "five"
+    "category": "Nouns",
+    "es": "evento",
+    "en": "event"
   },
   {
     "id": "b1-038",
     "level": "B1",
-    "category": "Adverbs",
-    "es": "pronto",
-    "en": "prompt, on time"
+    "category": "Nouns",
+    "es": "presupuesto",
+    "en": "estimated"
   },
   {
     "id": "b1-039",
     "level": "B1",
-    "category": "Verbs",
-    "es": "convertir",
-    "en": "to convert"
+    "category": "Nouns",
+    "es": "fábrica",
+    "en": "factory"
   },
   {
     "id": "b1-040",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "difícil",
-    "en": "difficult, hard, tough, challenging, rough, tricky, trying, arduous, testing"
+    "category": "General",
+    "es": "fernando",
+    "en": "given name"
   },
   {
     "id": "b1-041",
     "level": "B1",
     "category": "Nouns",
-    "es": "cara",
-    "en": "face (the front part of the head)"
+    "es": "cifra",
+    "en": "digit"
   },
   {
     "id": "b1-042",
     "level": "B1",
-    "category": "Connectors",
-    "es": "sino",
-    "en": "destiny, fate, lot"
+    "category": "General",
+    "es": "leo",
+    "en": "Leo (constellation)"
   },
   {
     "id": "b1-043",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "genial",
-    "en": "ingenious, genius"
+    "category": "Nouns",
+    "es": "despacho",
+    "en": "dispatch"
   },
   {
     "id": "b1-044",
     "level": "B1",
-    "category": "Verbs",
-    "es": "tocar",
-    "en": "to touch"
+    "category": "Nouns",
+    "es": "división",
+    "en": "division, divide"
   },
   {
     "id": "b1-045",
     "level": "B1",
     "category": "Adjectives",
-    "es": "largo",
-    "en": "surname"
+    "es": "breve",
+    "en": "brief, short"
   },
   {
     "id": "b1-046",
     "level": "B1",
     "category": "Nouns",
-    "es": "juego",
-    "en": "play"
+    "es": "azúcar",
+    "en": "sugar"
   },
   {
     "id": "b1-047",
     "level": "B1",
-    "category": "Verbs",
-    "es": "escribir",
-    "en": "to write (to form letters, words or symbols on a surface in order to communicate)"
+    "category": "Nouns",
+    "es": "cola",
+    "en": "tail"
   },
   {
     "id": "b1-048",
     "level": "B1",
-    "category": "Verbs",
-    "es": "meter",
-    "en": "to put in, insert"
+    "category": "Nouns",
+    "es": "uniforme",
+    "en": "uniform, even"
   },
   {
     "id": "b1-049",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "igual",
-    "en": "equal, same"
+    "category": "Nouns",
+    "es": "asistente",
+    "en": "attendee"
   },
   {
     "id": "b1-050",
     "level": "B1",
-    "category": "Adverbs",
-    "es": "incluso",
-    "en": "enclosed, included"
+    "category": "Nouns",
+    "es": "adn",
+    "en": "initialism of \"ácido desoxirribonucleico\" DNA (deoxyribonucleic acid)"
   },
   {
     "id": "b1-051",
     "level": "B1",
     "category": "Nouns",
-    "es": "doctor",
-    "en": "doctor (Ph.D.)"
+    "es": "raíz",
+    "en": "root; root vegetable"
   },
   {
     "id": "b1-052",
     "level": "B1",
     "category": "Nouns",
-    "es": "corazón",
-    "en": "heart (organ of the body)"
+    "es": "comentario",
+    "en": "comment"
   },
   {
     "id": "b1-053",
     "level": "B1",
-    "category": "Verbs",
-    "es": "detener",
-    "en": "to detain"
+    "category": "General",
+    "es": "italia",
+    "en": "Italy (A country in Southern Europe.)"
   },
   {
     "id": "b1-054",
     "level": "B1",
     "category": "Nouns",
-    "es": "adiós",
-    "en": "goodbye, farewell"
+    "es": "conductor",
+    "en": "driver"
   },
   {
     "id": "b1-055",
     "level": "B1",
-    "category": "Adverbs",
-    "es": "siquiera",
-    "en": "at least, at the least"
+    "category": "Nouns",
+    "es": "extremo",
+    "en": "extreme, dire"
   },
   {
     "id": "b1-056",
     "level": "B1",
-    "category": "Pronouns",
-    "es": "ello",
-    "en": "it, neuter third-person subject and disjunctive pronoun"
+    "category": "Adjectives",
+    "es": "separado",
+    "en": "separated, apart"
   },
   {
     "id": "b1-057",
     "level": "B1",
-    "category": "Verbs",
-    "es": "decidir",
-    "en": "to decide, to make up one's mind, to determine, to choose to"
+    "category": "General",
+    "es": "uds.",
+    "en": "abbreviation of \"ustedes\", plural of \"Ud.\""
   },
   {
     "id": "b1-058",
     "level": "B1",
-    "category": "Nouns",
-    "es": "suerte",
-    "en": "luck, fortune"
+    "category": "Adjectives",
+    "es": "ilegal",
+    "en": "illegal, unlawful"
   },
   {
     "id": "b1-059",
     "level": "B1",
-    "category": "Adverbs",
-    "es": "ayer",
-    "en": "yesterday"
+    "category": "General",
+    "es": "castillo",
+    "en": "surname"
   },
   {
     "id": "b1-060",
     "level": "B1",
-    "category": "Nouns",
-    "es": "libro",
-    "en": "book"
+    "category": "Verbs",
+    "es": "amenazar",
+    "en": "to threaten (to make threats)"
   },
   {
     "id": "b1-061",
     "level": "B1",
-    "category": "Verbs",
-    "es": "correr",
-    "en": "to run, to jog"
+    "category": "Nouns",
+    "es": "desayuno",
+    "en": "breakfast"
   },
   {
     "id": "b1-062",
     "level": "B1",
-    "category": "Prepositions",
-    "es": "según",
-    "en": "according to"
+    "category": "Nouns",
+    "es": "incendio",
+    "en": "fire (especially burning buildings or forests)"
   },
   {
     "id": "b1-063",
     "level": "B1",
     "category": "Verbs",
-    "es": "funcionar",
-    "en": "to work, to function"
+    "es": "morder",
+    "en": "to bite, nip"
   },
   {
     "id": "b1-064",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "vivo",
-    "en": "alive, living (having life)"
+    "category": "Nouns",
+    "es": "martes",
+    "en": "Tuesday (The third day of the week in many religious traditions, and the second day of the week in systems that use the ISO 8601 norm; it follows Monday and precedes Wednesday.)"
   },
   {
     "id": "b1-065",
     "level": "B1",
     "category": "Nouns",
-    "es": "luz",
-    "en": "given name"
+    "es": "bote",
+    "en": "boat, dinghy"
   },
   {
     "id": "b1-066",
     "level": "B1",
-    "category": "Adverbs",
-    "es": "quizás",
-    "en": "maybe, perhaps"
+    "category": "General",
+    "es": "treinta",
+    "en": "thirty"
   },
   {
     "id": "b1-067",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "justo",
-    "en": "given name"
+    "category": "Nouns",
+    "es": "gira",
+    "en": "tour (a journey through a list of places)"
   },
   {
     "id": "b1-068",
     "level": "B1",
-    "category": "Nouns",
-    "es": "miedo",
-    "en": "fear"
+    "category": "Verbs",
+    "es": "experimentar",
+    "en": "to experiment"
   },
   {
     "id": "b1-069",
     "level": "B1",
-    "category": "Nouns",
-    "es": "modo",
-    "en": "way, manner"
+    "category": "General",
+    "es": "marina",
+    "en": "given name"
   },
   {
     "id": "b1-070",
     "level": "B1",
     "category": "Nouns",
-    "es": "relación",
-    "en": "relation"
+    "es": "esclavo",
+    "en": "slave"
   },
   {
     "id": "b1-071",
     "level": "B1",
-    "category": "Nouns",
-    "es": "cambio",
-    "en": "change, shift"
+    "category": "Adjectives",
+    "es": "musical",
+    "en": "musical"
   },
   {
     "id": "b1-072",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "público",
-    "en": "public"
+    "category": "Nouns",
+    "es": "pasión",
+    "en": "Passion"
   },
   {
     "id": "b1-073",
     "level": "B1",
-    "category": "Nouns",
-    "es": "derecho",
-    "en": "straight (not crooked or bent; having a constant direction throughout its length)"
+    "category": "Verbs",
+    "es": "integrar",
+    "en": "to integrate, to embed, to incorporate, to include"
   },
   {
     "id": "b1-074",
     "level": "B1",
-    "category": "Verbs",
-    "es": "presentar",
-    "en": "to present, to submit"
+    "category": "Adjectives",
+    "es": "democrático",
+    "en": "democratic (pertaining to democracy)"
   },
   {
     "id": "b1-075",
     "level": "B1",
-    "category": "Adverbs",
-    "es": "cerca",
-    "en": "close, near, around, about, nearly, nigh (referring to quantity or time-related)"
+    "category": "Nouns",
+    "es": "conducta",
+    "en": "behaviour, conduct"
   },
   {
     "id": "b1-076",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "suficiente",
-    "en": "sufficient, enough"
+    "category": "Nouns",
+    "es": "rumor",
+    "en": "rumor"
   },
   {
     "id": "b1-077",
     "level": "B1",
     "category": "Nouns",
-    "es": "prueba",
-    "en": "proof; evidence (usually , in the plural)"
+    "es": "ruta",
+    "en": "highway"
   },
   {
     "id": "b1-078",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "próximo",
-    "en": "near"
+    "category": "Nouns",
+    "es": "aplicación",
+    "en": "application, use (the act of applying as a means; the employment of means to accomplish an end; specific use)"
   },
   {
     "id": "b1-079",
     "level": "B1",
     "category": "Adjectives",
-    "es": "fuerte",
-    "en": "strong"
+    "es": "municipal",
+    "en": "municipal"
   },
   {
     "id": "b1-080",
     "level": "B1",
-    "category": "Verbs",
-    "es": "existir",
-    "en": "to exist"
+    "category": "Nouns",
+    "es": "jueves",
+    "en": "Thursday"
   },
   {
     "id": "b1-081",
     "level": "B1",
-    "category": "Nouns",
-    "es": "sentido",
-    "en": "deeply felt, heartfelt"
+    "category": "Adjectives",
+    "es": "mentiroso",
+    "en": "having the qualities of a liar"
   },
   {
     "id": "b1-082",
     "level": "B1",
     "category": "Nouns",
-    "es": "orden",
-    "en": "order (command)"
+    "es": "rica",
+    "en": "fenugreek (Trigonella foenum-graecum)"
   },
   {
     "id": "b1-083",
     "level": "B1",
-    "category": "Nouns",
-    "es": "perro",
-    "en": "dog (# The species Canis familiaris (sometimes designated Canis lupus familiaris), domesticated for thousands of years and of highly variable appearance because of human breeding.)"
+    "category": "Adjectives",
+    "es": "consciente",
+    "en": "aware, cognizant"
   },
   {
     "id": "b1-084",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "humano",
-    "en": "human"
+    "category": "Nouns",
+    "es": "lástima",
+    "en": "pity"
   },
   {
     "id": "b1-085",
     "level": "B1",
-    "category": "Nouns",
-    "es": "vuelta",
-    "en": "the Vuelta a España"
+    "category": "Adjectives",
+    "es": "japonés",
+    "en": "of Japan; Japanese"
   },
   {
     "id": "b1-086",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "listo",
-    "en": "clever, smart (with ser)"
+    "category": "Nouns",
+    "es": "carro",
+    "en": "the Big Dipper (constellation)"
   },
   {
     "id": "b1-087",
     "level": "B1",
-    "category": "Verbs",
-    "es": "mostrar",
-    "en": "to show (have somebody see something)"
+    "category": "Adjectives",
+    "es": "tradicional",
+    "en": "traditional"
   },
   {
     "id": "b1-088",
     "level": "B1",
     "category": "Verbs",
-    "es": "subir",
-    "en": "to go up or come up"
+    "es": "ahorrar",
+    "en": "to save (to store for future use)"
   },
   {
     "id": "b1-089",
     "level": "B1",
     "category": "Nouns",
-    "es": "coche",
-    "en": "car, automobile"
+    "es": "fila",
+    "en": "line, row, rank, file"
   },
   {
     "id": "b1-090",
     "level": "B1",
-    "category": "Verbs",
-    "es": "servir",
-    "en": "to serve (to be a servant or worker; to render service)"
+    "category": "General",
+    "es": "pablo",
+    "en": "Paul (biblical character)"
   },
   {
     "id": "b1-091",
     "level": "B1",
-    "category": "General",
-    "es": "ox",
-    "en": "shoo"
+    "category": "Nouns",
+    "es": "toro",
+    "en": "the river in Costa Rica and Panama"
   },
   {
     "id": "b1-092",
     "level": "B1",
     "category": "Verbs",
-    "es": "sentar",
-    "en": "to seat"
+    "es": "curar",
+    "en": "to care, heed, study, strive, seek, work"
   },
   {
     "id": "b1-093",
     "level": "B1",
     "category": "Verbs",
-    "es": "salvar",
-    "en": "to save"
+    "es": "apurar",
+    "en": "to drain, use up completely"
   },
   {
     "id": "b1-094",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "blanco",
-    "en": "surname"
+    "category": "Verbs",
+    "es": "conformar",
+    "en": "to form, constitute"
   },
   {
     "id": "b1-095",
     "level": "B1",
-    "category": "Nouns",
-    "es": "fuerza",
-    "en": "force"
+    "category": "Adjectives",
+    "es": "definitivo",
+    "en": "definitive"
   },
   {
     "id": "b1-096",
     "level": "B1",
     "category": "Nouns",
-    "es": "sistema",
-    "en": "system"
+    "es": "cristal",
+    "en": "crystal"
   },
   {
     "id": "b1-097",
     "level": "B1",
-    "category": "Verbs",
-    "es": "explicar",
-    "en": "to explain"
+    "category": "Nouns",
+    "es": "pescado",
+    "en": "dead fish intended for consumption; food fish"
   },
   {
     "id": "b1-098",
     "level": "B1",
-    "category": "Adverbs",
-    "es": "bastante",
-    "en": "enough; sufficient"
+    "category": "Verbs",
+    "es": "capturar",
+    "en": "to catch, trap, capture"
   },
   {
     "id": "b1-099",
     "level": "B1",
-    "category": "Verbs",
-    "es": "levantar",
-    "en": "to lift"
+    "category": "Adjectives",
+    "es": "sano",
+    "en": "healthy, sound"
   },
   {
     "id": "b1-100",
     "level": "B1",
-    "category": "Adverbs",
-    "es": "adelante",
-    "en": "forward (toward the front)"
+    "category": "Adjectives",
+    "es": "gratis",
+    "en": "free, without charge"
   },
   {
     "id": "b1-101",
     "level": "B1",
     "category": "General",
-    "es": "mil",
-    "en": "initialism of \"w:es:Movimiento Ibérico de Liberación\" (“Iberian Liberation Movement”)"
+    "es": "ei",
+    "en": "initialism of \"w:es:Estado Islámico\""
   },
   {
     "id": "b1-102",
     "level": "B1",
-    "category": "Verbs",
-    "es": "considerar",
-    "en": "to consider, to regard, to see, to look, to view"
+    "category": "Nouns",
+    "es": "tropa",
+    "en": "troop, crowd"
   },
   {
     "id": "b1-103",
     "level": "B1",
     "category": "Nouns",
-    "es": "paso",
-    "en": "acronym of \"(elecciones) primarias, abiertas, simultáneas y obligatorias\" (“primary, open, simultaneous, and mandatory (elections)”)"
+    "es": "dirigente",
+    "en": "leading, ruling"
   },
   {
     "id": "b1-104",
     "level": "B1",
-    "category": "Verbs",
-    "es": "asegurar",
-    "en": "to secure (to make fast; to close or confine effectually)"
+    "category": "Adjectives",
+    "es": "previsto",
+    "en": "expected, predicted, planned"
   },
   {
     "id": "b1-105",
     "level": "B1",
-    "category": "Verbs",
-    "es": "aceptar",
-    "en": "to accept, to take up, to take up on"
+    "category": "Nouns",
+    "es": "presentación",
+    "en": "presentation"
   },
   {
     "id": "b1-106",
     "level": "B1",
     "category": "Verbs",
-    "es": "quitar",
-    "en": "to remove, to take away, to take down, to take off, to pull off, to pull out, to clear, to clear away, to strip, to strip away"
+    "es": "transmitir",
+    "en": "to transmit, to broadcast"
   },
   {
     "id": "b1-107",
     "level": "B1",
     "category": "Nouns",
-    "es": "plan",
-    "en": "plan"
+    "es": "ciento",
+    "en": "one hundred (100) (only in compounds followed by lower numerals)"
   },
   {
     "id": "b1-108",
     "level": "B1",
-    "category": "Nouns",
-    "es": "calle",
-    "en": "surname"
+    "category": "Adjectives",
+    "es": "presentado",
+    "en": "presented"
   },
   {
     "id": "b1-109",
     "level": "B1",
-    "category": "Nouns",
-    "es": "pueblo",
-    "en": "town, village"
+    "category": "Adjectives",
+    "es": "grandioso",
+    "en": "great, grandiose"
   },
   {
     "id": "b1-110",
     "level": "B1",
     "category": "Nouns",
-    "es": "cuidado",
-    "en": "watch out!"
+    "es": "mina",
+    "en": "mine (excavation from which ore is taken)"
   },
   {
     "id": "b1-111",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "negro",
-    "en": "black (the color perceived in the absence of light)"
+    "category": "Nouns",
+    "es": "homicidio",
+    "en": "homicide; manslaughter"
   },
   {
     "id": "b1-112",
     "level": "B1",
-    "category": "Adverbs",
-    "es": "allá",
-    "en": "there, over there, thither, yonder (in a direction away from the speaker and the listener)"
+    "category": "Adjectives",
+    "es": "obvio",
+    "en": "obvious"
   },
   {
     "id": "b1-113",
     "level": "B1",
     "category": "Nouns",
-    "es": "partido",
-    "en": "broken"
+    "es": "instalación",
+    "en": "installation (process)"
   },
   {
     "id": "b1-114",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "diferente",
-    "en": "different [+a or de (from, to, than)]"
+    "category": "Nouns",
+    "es": "pesadilla",
+    "en": "nightmare"
   },
   {
     "id": "b1-115",
     "level": "B1",
-    "category": "Prepositions",
-    "es": "ante",
-    "en": "in front of, before"
+    "category": "Nouns",
+    "es": "círculo",
+    "en": "circle"
   },
   {
     "id": "b1-116",
     "level": "B1",
-    "category": "Nouns",
-    "es": "fiesta",
-    "en": "party"
+    "category": "Adjectives",
+    "es": "basado",
+    "en": "based (admirable, praiseworthy)"
   },
   {
     "id": "b1-117",
     "level": "B1",
-    "category": "Verbs",
-    "es": "amar",
-    "en": "to love, have great affection for, care about"
+    "category": "Nouns",
+    "es": "humanidad",
+    "en": "humanity"
   },
   {
     "id": "b1-118",
     "level": "B1",
     "category": "Verbs",
-    "es": "coger",
-    "en": "to take, catch, hold, to get, to seize"
+    "es": "borrar",
+    "en": "to erase, to delete"
   },
   {
     "id": "b1-119",
     "level": "B1",
-    "category": "Verbs",
-    "es": "disparar",
-    "en": "to shoot, to fire (e.g. a weapon, a rocket)"
+    "category": "Nouns",
+    "es": "marzo",
+    "en": "surname"
   },
   {
     "id": "b1-120",
     "level": "B1",
-    "category": "Verbs",
-    "es": "disculpar",
-    "en": "to excuse, forgive, pardon"
+    "category": "Adjectives",
+    "es": "aéreo",
+    "en": "aerial"
   },
   {
     "id": "b1-121",
     "level": "B1",
-    "category": "Nouns",
-    "es": "pie",
-    "en": "foot (a part of the body)"
+    "category": "Adjectives",
+    "es": "bienvenido",
+    "en": "given name"
   },
   {
     "id": "b1-122",
     "level": "B1",
-    "category": "Verbs",
-    "es": "beber",
-    "en": "to drink"
+    "category": "General",
+    "es": "liga",
+    "en": "La Liga (the highest division of Spanish football)"
   },
   {
     "id": "b1-123",
     "level": "B1",
     "category": "Nouns",
-    "es": "frente",
-    "en": "forehead, brow"
+    "es": "chocolate",
+    "en": "chocolate (food made from cocoa beans)"
   },
   {
     "id": "b1-124",
     "level": "B1",
     "category": "Nouns",
-    "es": "escuela",
-    "en": "school (an institution dedicated to teaching and learning)"
+    "es": "ala",
+    "en": "wing (of a bird or insect)"
   },
   {
     "id": "b1-125",
     "level": "B1",
     "category": "Nouns",
-    "es": "sangre",
-    "en": "blood"
+    "es": "adolescente",
+    "en": "adolescent"
   },
   {
     "id": "b1-126",
     "level": "B1",
-    "category": "Nouns",
-    "es": "oportunidad",
-    "en": "opportunity, chance, shot, break, occasion, time (in both senses: “chance for advancement, progress or profit” and “favorable circumstance or occasion”)"
+    "category": "Verbs",
+    "es": "ahogar",
+    "en": "to drown (kill by immersion in water)"
   },
   {
     "id": "b1-127",
     "level": "B1",
     "category": "Nouns",
-    "es": "muchacho",
-    "en": "boy"
+    "es": "virgen",
+    "en": "virgin"
   },
   {
     "id": "b1-128",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "real",
-    "en": "real"
+    "category": "Verbs",
+    "es": "contemplar",
+    "en": "to contemplate"
   },
   {
     "id": "b1-129",
     "level": "B1",
-    "category": "Nouns",
-    "es": "situación",
-    "en": "situation, scenario, picture"
+    "category": "Adverbs",
+    "es": "prácticamente",
+    "en": "practically"
   },
   {
     "id": "b1-130",
     "level": "B1",
-    "category": "Nouns",
-    "es": "política",
-    "en": "politics (activities associated with running a government or organisation)"
+    "category": "Verbs",
+    "es": "regalar",
+    "en": "to give as a present, to gift"
   },
   {
     "id": "b1-131",
     "level": "B1",
-    "category": "Nouns",
-    "es": "ley",
-    "en": "law (a well-established characteristic of nature)"
+    "category": "Verbs",
+    "es": "componer",
+    "en": "to compose (write music)"
   },
   {
     "id": "b1-132",
     "level": "B1",
-    "category": "Verbs",
-    "es": "vender",
-    "en": "to sell"
+    "category": "Nouns",
+    "es": "oso",
+    "en": "bear (in general)"
   },
   {
     "id": "b1-133",
     "level": "B1",
-    "category": "Nouns",
-    "es": "teléfono",
-    "en": "telephone (a telecommunication device used for two-way talking with another person)"
+    "category": "Adjectives",
+    "es": "sincero",
+    "en": "sincere"
   },
   {
     "id": "b1-134",
     "level": "B1",
     "category": "Nouns",
-    "es": "malo",
-    "en": "bad (of bad quality)"
+    "es": "oreja",
+    "en": "outer ear; auricle; ear (used for references to the external or tangible aspects of the ear)"
   },
   {
     "id": "b1-135",
     "level": "B1",
     "category": "Adjectives",
-    "es": "extraño",
-    "en": "strange, unusual, odd, weird, bizarre, uncanny, rare, peculiar, freaky, freakish, freak, curious"
+    "es": "gigante",
+    "en": "A town in Huila department of Colombia"
   },
   {
     "id": "b1-136",
     "level": "B1",
     "category": "Verbs",
-    "es": "perdonar",
-    "en": "to pardon, excuse, forgive"
+    "es": "quejarse",
+    "en": "to complain, to whine, to gripe, to grouse, to fuss, to bitch, to beef"
   },
   {
     "id": "b1-137",
     "level": "B1",
-    "category": "Adverbs",
-    "es": "arriba",
-    "en": "above, over"
+    "category": "Adjectives",
+    "es": "condenado",
+    "en": "convicted"
   },
   {
     "id": "b1-138",
     "level": "B1",
-    "category": "Verbs",
-    "es": "aparecer",
-    "en": "to appear, to turn up, to pop up, to come up"
+    "category": "Adjectives",
+    "es": "barato",
+    "en": "cheap; inexpensive; sold at a low price"
   },
   {
     "id": "b1-139",
     "level": "B1",
     "category": "Nouns",
-    "es": "servicio",
-    "en": "service"
+    "es": "tensión",
+    "en": "tension, tenseness"
   },
   {
     "id": "b1-140",
     "level": "B1",
-    "category": "Nouns",
-    "es": "novio",
-    "en": "boyfriend (romantic partner)"
+    "category": "Adjectives",
+    "es": "romántico",
+    "en": "romantic"
   },
   {
     "id": "b1-141",
     "level": "B1",
-    "category": "Adverbs",
-    "es": "tampoco",
-    "en": "neither; nor; also not"
+    "category": "Verbs",
+    "es": "contactar",
+    "en": "to contact, to reach out to [+con (someone)]"
   },
   {
     "id": "b1-142",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "especial",
-    "en": "special (distinguished by a unique quality)"
+    "category": "Nouns",
+    "es": "maleta",
+    "en": "suitcase (large piece of luggage)"
   },
   {
     "id": "b1-143",
     "level": "B1",
-    "category": "Verbs",
-    "es": "casar",
-    "en": "to marry, wed someone to (unite two others in wedlock)"
+    "category": "Nouns",
+    "es": "negociación",
+    "en": "negotiation"
   },
   {
     "id": "b1-144",
     "level": "B1",
-    "category": "Nouns",
-    "es": "puesto",
-    "en": "position, employment, job"
+    "category": "Adjectives",
+    "es": "amado",
+    "en": "surname"
   },
   {
     "id": "b1-145",
     "level": "B1",
-    "category": "Nouns",
-    "es": "dólar",
-    "en": "dollar (designation for specific currency)"
+    "category": "Adjectives",
+    "es": "harto",
+    "en": "tired, fed up [+de]"
   },
   {
     "id": "b1-146",
     "level": "B1",
-    "category": "Adverbs",
-    "es": "cuándo",
-    "en": "when"
+    "category": "General",
+    "es": "dra.",
+    "en": "abbreviation of \"doctora\""
   },
   {
     "id": "b1-147",
     "level": "B1",
     "category": "Adjectives",
-    "es": "duro",
-    "en": "hard (not soft)"
+    "es": "violento",
+    "en": "violent"
   },
   {
     "id": "b1-148",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "nacional",
-    "en": "national, nationwide (of or relating to a nation)"
+    "category": "General",
+    "es": "india",
+    "en": "India (A country in South Asia.)"
   },
   {
     "id": "b1-149",
     "level": "B1",
     "category": "Nouns",
-    "es": "recuerdo",
-    "en": "memory"
+    "es": "pata",
+    "en": "paw, foot, leg (of an animal)"
   },
   {
     "id": "b1-150",
     "level": "B1",
     "category": "Verbs",
-    "es": "lograr",
-    "en": "to get, to obtain"
+    "es": "denunciar",
+    "en": "to denounce"
   },
   {
     "id": "b1-151",
     "level": "B1",
-    "category": "Verbs",
-    "es": "robar",
-    "en": "to rob"
+    "category": "Adjectives",
+    "es": "celular",
+    "en": "cellular"
   },
   {
     "id": "b1-152",
     "level": "B1",
     "category": "Nouns",
-    "es": "seguridad",
-    "en": "safety, security"
+    "es": "punta",
+    "en": "tip, point, end"
   },
   {
     "id": "b1-153",
     "level": "B1",
-    "category": "Verbs",
-    "es": "prometer",
-    "en": "to promise"
+    "category": "Nouns",
+    "es": "noviembre",
+    "en": "November"
   },
   {
     "id": "b1-154",
     "level": "B1",
-    "category": "Verbs",
-    "es": "enseñar",
-    "en": "to teach"
+    "category": "Nouns",
+    "es": "explosión",
+    "en": "explosion, blast, bang, burst, boom"
   },
   {
     "id": "b1-155",
     "level": "B1",
     "category": "Nouns",
-    "es": "obra",
-    "en": "work (usually literary or artistic)"
+    "es": "invierno",
+    "en": "winter"
   },
   {
     "id": "b1-156",
     "level": "B1",
-    "category": "Verbs",
-    "es": "descubrir",
-    "en": "to discover"
+    "category": "Nouns",
+    "es": "diseño",
+    "en": "design"
   },
   {
     "id": "b1-157",
     "level": "B1",
-    "category": "Verbs",
-    "es": "andar",
-    "en": "to walk, to go"
+    "category": "Adjectives",
+    "es": "mágico",
+    "en": "magic, magical"
   },
   {
     "id": "b1-158",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "fácil",
-    "en": "easy, facile, simple (requiring little effort)"
+    "category": "Verbs",
+    "es": "emitir",
+    "en": "to issue"
   },
   {
     "id": "b1-159",
     "level": "B1",
     "category": "Nouns",
-    "es": "película",
-    "en": "film (layer)"
+    "es": "poeta",
+    "en": "poet (person who writes poems)"
   },
   {
     "id": "b1-160",
     "level": "B1",
-    "category": "Adverbs",
-    "es": "cuanto",
-    "en": "whatever quantity, as much, however much"
+    "category": "Nouns",
+    "es": "discusión",
+    "en": "discussion"
   },
   {
     "id": "b1-161",
     "level": "B1",
-    "category": "Nouns",
-    "es": "lista",
-    "en": "list, roll"
+    "category": "Adjectives",
+    "es": "judicial",
+    "en": "judicial"
   },
   {
     "id": "b1-162",
     "level": "B1",
-    "category": "Prepositions",
-    "es": "tras",
-    "en": "after, following, in the wake of; upon"
+    "category": "Adverbs",
+    "es": "actualmente",
+    "en": "at present, currently, now, nowadays"
   },
   {
     "id": "b1-163",
     "level": "B1",
-    "category": "Pronouns",
-    "es": "ambos",
-    "en": "both"
+    "category": "Nouns",
+    "es": "excusa",
+    "en": "excuse, cop-out"
   },
   {
     "id": "b1-164",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "español",
-    "en": "surname"
+    "category": "Verbs",
+    "es": "consistir",
+    "en": "to consist of"
   },
   {
     "id": "b1-165",
     "level": "B1",
-    "category": "Verbs",
-    "es": "sonar",
-    "en": "to sound, to ring"
+    "category": "Nouns",
+    "es": "célula",
+    "en": "cell (the basic unit of a living organism)"
   },
   {
     "id": "b1-166",
     "level": "B1",
-    "category": "Verbs",
-    "es": "referir",
-    "en": "to report"
+    "category": "Nouns",
+    "es": "conclusión",
+    "en": "conclusion, end"
   },
   {
     "id": "b1-167",
     "level": "B1",
     "category": "Nouns",
-    "es": "vino",
-    "en": "wine (An alcoholic beverage made by fermenting grape juice, with an ABV ranging from 5.5-16%.)"
+    "es": "productor",
+    "en": "producing"
   },
   {
     "id": "b1-168",
     "level": "B1",
-    "category": "Nouns",
-    "es": "centro",
-    "en": "center"
+    "category": "Verbs",
+    "es": "pillar",
+    "en": "to catch, get, to grab (e.g. grab a cab, get lunch, grab a drink, catch a movie)"
   },
   {
     "id": "b1-169",
     "level": "B1",
-    "category": "Nouns",
-    "es": "asunto",
-    "en": "matter, issue, business"
+    "category": "General",
+    "es": "adam",
+    "en": "archaic form of \"Adán\" (“biblical figure”)"
   },
   {
     "id": "b1-170",
     "level": "B1",
     "category": "Verbs",
-    "es": "encantar",
-    "en": "to charm, to enchant"
+    "es": "enterrar",
+    "en": "to bury; to entomb"
   },
   {
     "id": "b1-171",
     "level": "B1",
     "category": "Nouns",
-    "es": "embargo",
-    "en": "embargo"
+    "es": "rata",
+    "en": "rat (medium-sized rodent belonging to the Rattus genus)"
   },
   {
     "id": "b1-172",
     "level": "B1",
-    "category": "Verbs",
-    "es": "imaginar",
-    "en": "to imagine"
+    "category": "Nouns",
+    "es": "pasillo",
+    "en": "hallway, corridor"
   },
   {
     "id": "b1-173",
     "level": "B1",
     "category": "Nouns",
-    "es": "información",
-    "en": "information, data"
+    "es": "tenia",
+    "en": "tapeworm"
   },
   {
     "id": "b1-174",
     "level": "B1",
-    "category": "Nouns",
-    "es": "habitación",
-    "en": "room (separate part of a building)"
+    "category": "Adjectives",
+    "es": "comunista",
+    "en": "communist, Communist"
   },
   {
     "id": "b1-175",
     "level": "B1",
-    "category": "Verbs",
-    "es": "aprender",
-    "en": "to learn (to acquire, or attempt to acquire knowledge or an ability to do something)"
+    "category": "Nouns",
+    "es": "lectura",
+    "en": "reading"
   },
   {
     "id": "b1-176",
     "level": "B1",
-    "category": "Nouns",
-    "es": "falta",
-    "en": "lack, shortage"
+    "category": "Verbs",
+    "es": "intervenir",
+    "en": "to intervene"
   },
   {
     "id": "b1-177",
     "level": "B1",
     "category": "Nouns",
-    "es": "cielo",
-    "en": "sky"
+    "es": "desgracia",
+    "en": "disgrace"
   },
   {
     "id": "b1-178",
     "level": "B1",
-    "category": "General",
-    "es": "seis",
-    "en": "six"
+    "category": "Nouns",
+    "es": "oposición",
+    "en": "opposition"
   },
   {
     "id": "b1-179",
     "level": "B1",
-    "category": "Verbs",
-    "es": "realizar",
-    "en": "to carry out; to perform; to conduct; to implement (e.g. a change, a task, project, plan, inspection, experiment, procedures)"
+    "category": "Adjectives",
+    "es": "telefónico",
+    "en": "telephonic; pertaining to telephones"
   },
   {
     "id": "b1-180",
     "level": "B1",
     "category": "Nouns",
-    "es": "negocio",
-    "en": "business, enterprise (commercial enterprise or establishment)"
+    "es": "caída",
+    "en": "fall (act of falling)"
   },
   {
     "id": "b1-181",
     "level": "B1",
     "category": "Nouns",
-    "es": "sueño",
-    "en": "sleep, slumber"
+    "es": "partida",
+    "en": "departure"
   },
   {
     "id": "b1-182",
     "level": "B1",
-    "category": "Adverbs",
-    "es": "atrás",
-    "en": "behind"
+    "category": "Nouns",
+    "es": "ensayo",
+    "en": "essay; paper; nonfiction (in genre-labeling contexts)"
   },
   {
     "id": "b1-183",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "social",
-    "en": "social"
+    "category": "Verbs",
+    "es": "medir",
+    "en": "to measure"
   },
   {
     "id": "b1-184",
     "level": "B1",
-    "category": "Nouns",
-    "es": "capitán",
-    "en": "captain (leader)"
+    "category": "Adjectives",
+    "es": "perdido",
+    "en": "lost"
   },
   {
     "id": "b1-185",
     "level": "B1",
     "category": "Nouns",
-    "es": "comida",
-    "en": "food"
+    "es": "puesta",
+    "en": "clutch (of eggs)"
   },
   {
     "id": "b1-186",
     "level": "B1",
-    "category": "Nouns",
-    "es": "bebé",
-    "en": "baby"
+    "category": "General",
+    "es": "kevin",
+    "en": "given name"
   },
   {
     "id": "b1-187",
     "level": "B1",
-    "category": "Adjectives",
-    "es": "libre",
-    "en": "Liberalismo Renovador"
+    "category": "General",
+    "es": "chile",
+    "en": "Chile (A country in South America.)"
   },
   {
     "id": "b1-188",
     "level": "B1",
-    "category": "Nouns",
-    "es": "voz",
-    "en": "voice"
+    "category": "Verbs",
+    "es": "sospechar",
+    "en": "to suspect"
   },
   {
     "id": "b1-189",
     "level": "B1",
-    "category": "Nouns",
-    "es": "foto",
-    "en": "photo, photograph"
+    "category": "Verbs",
+    "es": "conectar",
+    "en": "to connect, connect up, link"
   },
   {
     "id": "b1-190",
     "level": "B1",
-    "category": "Adverbs",
-    "es": "abajo",
-    "en": "down, downwards"
+    "category": "Nouns",
+    "es": "muñeca",
+    "en": "wrist"
   },
   {
     "id": "b1-191",
     "level": "B1",
     "category": "Nouns",
-    "es": "par",
-    "en": "even (divisible by two)"
+    "es": "gallo",
+    "en": "surname"
   },
   {
     "id": "b1-192",
     "level": "B1",
     "category": "Nouns",
-    "es": "paz",
-    "en": "given name"
+    "es": "venganza",
+    "en": "vengeance"
   },
   {
     "id": "b1-193",
     "level": "B1",
     "category": "Verbs",
-    "es": "confiar",
-    "en": "to reassure"
+    "es": "negociar",
+    "en": "to negotiate"
   },
   {
     "id": "b1-194",
     "level": "B1",
     "category": "Verbs",
-    "es": "callar",
-    "en": "to calm"
+    "es": "detectar",
+    "en": "to detect"
   },
   {
     "id": "b1-195",
     "level": "B1",
     "category": "Nouns",
-    "es": "culpa",
-    "en": "fault"
+    "es": "episodio",
+    "en": "episode (installment of a drama told in parts)"
   },
   {
     "id": "b1-196",
     "level": "B1",
-    "category": "Verbs",
-    "es": "cerrar",
-    "en": "to close, to shut"
+    "category": "Nouns",
+    "es": "entrenamiento",
+    "en": "training, workout"
   },
   {
     "id": "b1-197",
     "level": "B1",
-    "category": "Verbs",
-    "es": "ofrecer",
-    "en": "to offer, to offer up, to provide"
+    "category": "Adjectives",
+    "es": "solitario",
+    "en": "lonely"
   },
   {
     "id": "b1-198",
     "level": "B1",
-    "category": "Nouns",
-    "es": "noticia",
-    "en": "notice"
+    "category": "General",
+    "es": "león",
+    "en": "León (a province, en:Castile and León, Spain)"
   },
   {
     "id": "b1-199",
     "level": "B1",
     "category": "Verbs",
-    "es": "bajar",
-    "en": "to go down, come down"
+    "es": "proporcionar",
+    "en": "to provide, supply"
   },
   {
     "id": "b1-200",
     "level": "B1",
+    "category": "Adjectives",
+    "es": "ideal",
+    "en": "ideal"
+  },
+  {
+    "id": "b1-201",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "consumo",
+    "en": "consumption (the act of eating, drinking or using)"
+  },
+  {
+    "id": "b1-202",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "sagrado",
+    "en": "holy, sacred"
+  },
+  {
+    "id": "b1-203",
+    "level": "B1",
     "category": "Verbs",
-    "es": "desear",
-    "en": "to wish"
+    "es": "secuestrar",
+    "en": "to kidnap, to abduct"
+  },
+  {
+    "id": "b1-204",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "examinar",
+    "en": "to examine"
+  },
+  {
+    "id": "b1-205",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "misterio",
+    "en": "mystery, mysteriousness"
+  },
+  {
+    "id": "b1-206",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "pantalla",
+    "en": "screen"
+  },
+  {
+    "id": "b1-207",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "clínica",
+    "en": "clinic (small medical facility)"
+  },
+  {
+    "id": "b1-208",
+    "level": "B1",
+    "category": "General",
+    "es": "brian",
+    "en": "given name"
+  },
+  {
+    "id": "b1-209",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "magnífico",
+    "en": "magnificent"
+  },
+  {
+    "id": "b1-210",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "animar",
+    "en": "to inspire"
+  },
+  {
+    "id": "b1-211",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "habitual",
+    "en": "habitual"
+  },
+  {
+    "id": "b1-212",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "dicho",
+    "en": "mentioned, said, aforementioned"
+  },
+  {
+    "id": "b1-213",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "instrucción",
+    "en": "instruction"
+  },
+  {
+    "id": "b1-214",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "llegada",
+    "en": "arrival"
+  },
+  {
+    "id": "b1-215",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "encargado",
+    "en": "in charge, responsible"
+  },
+  {
+    "id": "b1-216",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "billete",
+    "en": "banknote, bill (paper currency)"
+  },
+  {
+    "id": "b1-217",
+    "level": "B1",
+    "category": "General",
+    "es": "cero",
+    "en": "zero"
+  },
+  {
+    "id": "b1-218",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "agosto",
+    "en": "August"
+  },
+  {
+    "id": "b1-219",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "afectado",
+    "en": "affected"
+  },
+  {
+    "id": "b1-220",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "estómago",
+    "en": "stomach (An organ in animals that stores food in the process of digestion.)"
+  },
+  {
+    "id": "b1-221",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "disposición",
+    "en": "disposal"
+  },
+  {
+    "id": "b1-222",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "involucrado",
+    "en": "involved"
+  },
+  {
+    "id": "b1-223",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "parado",
+    "en": "stopped, halted, immobile, idle"
+  },
+  {
+    "id": "b1-224",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "provincia",
+    "en": "province"
+  },
+  {
+    "id": "b1-225",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "asqueroso",
+    "en": "disgusting, repulsive, gross, distasteful"
+  },
+  {
+    "id": "b1-226",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "afortunado",
+    "en": "lucky, fortunate"
+  },
+  {
+    "id": "b1-227",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "solucionar",
+    "en": "to solve; to implement a solution"
+  },
+  {
+    "id": "b1-228",
+    "level": "B1",
+    "category": "Adverbs",
+    "es": "aparentemente",
+    "en": "apparently"
+  },
+  {
+    "id": "b1-229",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "alianza",
+    "en": "alliance"
+  },
+  {
+    "id": "b1-230",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "destinado",
+    "en": "destined; predestined"
+  },
+  {
+    "id": "b1-231",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "kilo",
+    "en": "kilo (kilogram)"
+  },
+  {
+    "id": "b1-232",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "acceder",
+    "en": "to accede, to agree, to concur"
+  },
+  {
+    "id": "b1-233",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "constante",
+    "en": "constant"
+  },
+  {
+    "id": "b1-234",
+    "level": "B1",
+    "category": "Adverbs",
+    "es": "igualmente",
+    "en": "equally"
+  },
+  {
+    "id": "b1-235",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "comisario",
+    "en": "inspector"
+  },
+  {
+    "id": "b1-236",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "manzana",
+    "en": "surname"
+  },
+  {
+    "id": "b1-237",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "aparato",
+    "en": "apparatus, device, tool, instrument, appliance"
+  },
+  {
+    "id": "b1-238",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "nieve",
+    "en": "snow"
+  },
+  {
+    "id": "b1-239",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "deportivo",
+    "en": "Deportivo de La Coruña, a football team from La Coruña, Spain"
+  },
+  {
+    "id": "b1-240",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "disponible",
+    "en": "available"
+  },
+  {
+    "id": "b1-241",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "pasear",
+    "en": "to stroll, to saunter, to promenade"
+  },
+  {
+    "id": "b1-242",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "criterio",
+    "en": "criterion"
+  },
+  {
+    "id": "b1-243",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "cheque",
+    "en": "cheque, blank cheque"
+  },
+  {
+    "id": "b1-244",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "nube",
+    "en": "cloud"
+  },
+  {
+    "id": "b1-245",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "rastro",
+    "en": "sign, trace, vestige, scent"
+  },
+  {
+    "id": "b1-246",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "numeroso",
+    "en": "numerous"
+  },
+  {
+    "id": "b1-247",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "debate",
+    "en": "debate"
+  },
+  {
+    "id": "b1-248",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "intervención",
+    "en": "intervention"
+  },
+  {
+    "id": "b1-249",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "delicioso",
+    "en": "delicious, delectable, luscious"
+  },
+  {
+    "id": "b1-250",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "cable",
+    "en": "cable, cord"
+  },
+  {
+    "id": "b1-251",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "independiente",
+    "en": "independent (not contingent or depending on something else)"
+  },
+  {
+    "id": "b1-252",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "distrito",
+    "en": "district"
+  },
+  {
+    "id": "b1-253",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "acostumbrar",
+    "en": "accustom, inure, familiarize"
+  },
+  {
+    "id": "b1-254",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "vaca",
+    "en": "surname"
+  },
+  {
+    "id": "b1-255",
+    "level": "B1",
+    "category": "General",
+    "es": "gutierre",
+    "en": "given name, cognate with English \"Walter\""
+  },
+  {
+    "id": "b1-256",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "empresario",
+    "en": "businessman"
+  },
+  {
+    "id": "b1-257",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "hierba",
+    "en": "grass (plant of the family Poaceae or plant that resembles grasses)"
+  },
+  {
+    "id": "b1-258",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "tendencia",
+    "en": "tendency"
+  },
+  {
+    "id": "b1-259",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "sobrino",
+    "en": "nephew"
+  },
+  {
+    "id": "b1-260",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "arena",
+    "en": "sand, gravel"
+  },
+  {
+    "id": "b1-261",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "traducir",
+    "en": "to translate (from one language into another)"
+  },
+  {
+    "id": "b1-262",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "intenso",
+    "en": "intense, strong"
+  },
+  {
+    "id": "b1-263",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "celoso",
+    "en": "jealous"
+  },
+  {
+    "id": "b1-264",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "virus",
+    "en": "virus"
+  },
+  {
+    "id": "b1-265",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "mama",
+    "en": "mamma, breast"
+  },
+  {
+    "id": "b1-266",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "cobarde",
+    "en": "cowardly, craven, gutless, spineless, dastardly"
+  },
+  {
+    "id": "b1-267",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "cirugía",
+    "en": "surgery"
+  },
+  {
+    "id": "b1-268",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "guarda",
+    "en": "guard, ward, keeper"
+  },
+  {
+    "id": "b1-269",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "ira",
+    "en": "initialism of \"insuficiencia renal aguda\" (“acute renal failure”): ARF"
+  },
+  {
+    "id": "b1-270",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "implicar",
+    "en": "to imply, to implicate"
+  },
+  {
+    "id": "b1-271",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "muro",
+    "en": "wall"
+  },
+  {
+    "id": "b1-272",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "perspectiva",
+    "en": "perspective"
+  },
+  {
+    "id": "b1-273",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "edición",
+    "en": "edition"
+  },
+  {
+    "id": "b1-274",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "sindicato",
+    "en": "trade union"
+  },
+  {
+    "id": "b1-275",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "sacerdote",
+    "en": "priest"
+  },
+  {
+    "id": "b1-276",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "lío",
+    "en": "bundle"
+  },
+  {
+    "id": "b1-277",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "órgano",
+    "en": "organ (a larger part of an organism)"
+  },
+  {
+    "id": "b1-278",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "resistencia",
+    "en": "Resistencia (a capital in Chaco, Argentina)"
+  },
+  {
+    "id": "b1-279",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "dibujo",
+    "en": "drawing"
+  },
+  {
+    "id": "b1-280",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "cubierta",
+    "en": "cover, covering, casing, lid, shroud"
+  },
+  {
+    "id": "b1-281",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "incorporar",
+    "en": "to incorporate"
+  },
+  {
+    "id": "b1-282",
+    "level": "B1",
+    "category": "General",
+    "es": "laura",
+    "en": "given name"
+  },
+  {
+    "id": "b1-283",
+    "level": "B1",
+    "category": "General",
+    "es": "william",
+    "en": "given name"
+  },
+  {
+    "id": "b1-284",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "confundir",
+    "en": "to confuse, to throw off, to baffle, to perplex"
+  },
+  {
+    "id": "b1-285",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "alcance",
+    "en": "reach, range, scope (maximum distance something can reach)"
+  },
+  {
+    "id": "b1-286",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "nieto",
+    "en": "surname"
+  },
+  {
+    "id": "b1-287",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "convencido",
+    "en": "convinced"
+  },
+  {
+    "id": "b1-288",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "nuclear",
+    "en": "nuclear"
+  },
+  {
+    "id": "b1-289",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "funeral",
+    "en": "funerary, funeral"
+  },
+  {
+    "id": "b1-290",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "whisky",
+    "en": "whisky (alcoholic liquor)"
+  },
+  {
+    "id": "b1-291",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "ocupada",
+    "en": "pregnant"
+  },
+  {
+    "id": "b1-292",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "sorprendido",
+    "en": "surprised"
+  },
+  {
+    "id": "b1-293",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "bandera",
+    "en": "flag, banner"
+  },
+  {
+    "id": "b1-294",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "judío",
+    "en": "Jewish"
+  },
+  {
+    "id": "b1-295",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "mami",
+    "en": "mommy"
+  },
+  {
+    "id": "b1-296",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "diversión",
+    "en": "fun, entertainment, amusement, levity"
+  },
+  {
+    "id": "b1-297",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "convenir",
+    "en": "to agree, agree on, agree upon"
+  },
+  {
+    "id": "b1-298",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "molesto",
+    "en": "annoyed, vexed"
+  },
+  {
+    "id": "b1-299",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "patio",
+    "en": "yard, patio"
+  },
+  {
+    "id": "b1-300",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "investigador",
+    "en": "researching, investigating"
+  },
+  {
+    "id": "b1-301",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "ejercer",
+    "en": "to exercise (enforce)"
+  },
+  {
+    "id": "b1-302",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "dedicado",
+    "en": "dedicated"
+  },
+  {
+    "id": "b1-303",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "expulsar",
+    "en": "to expel; to expulse"
+  },
+  {
+    "id": "b1-304",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "entrenar",
+    "en": "to train"
+  },
+  {
+    "id": "b1-305",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "selección",
+    "en": "selection"
+  },
+  {
+    "id": "b1-306",
+    "level": "B1",
+    "category": "Adverbs",
+    "es": "deprisa",
+    "en": "quickly, hurriedly"
+  },
+  {
+    "id": "b1-307",
+    "level": "B1",
+    "category": "Adverbs",
+    "es": "recientemente",
+    "en": "recently"
+  },
+  {
+    "id": "b1-308",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "apestar",
+    "en": "to stink"
+  },
+  {
+    "id": "b1-309",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "milla",
+    "en": "English or American mile (a unit of distance equivalent to about 1.6 km)"
+  },
+  {
+    "id": "b1-310",
+    "level": "B1",
+    "category": "Adverbs",
+    "es": "nuevamente",
+    "en": "newly"
+  },
+  {
+    "id": "b1-311",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "nadar",
+    "en": "to swim (move through water)"
+  },
+  {
+    "id": "b1-312",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "charla",
+    "en": "talk, chat"
+  },
+  {
+    "id": "b1-313",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "cierre",
+    "en": "shutting, closing"
+  },
+  {
+    "id": "b1-314",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "concurso",
+    "en": "concourse"
+  },
+  {
+    "id": "b1-315",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "ayuntamiento",
+    "en": "city council, town council, council (a corporation or body of magistrates in cities and towns, corresponding to mayor and aldermen)"
+  },
+  {
+    "id": "b1-316",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "entidad",
+    "en": "entity"
+  },
+  {
+    "id": "b1-317",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "exponer",
+    "en": "to exhibit"
+  },
+  {
+    "id": "b1-318",
+    "level": "B1",
+    "category": "Adverbs",
+    "es": "anteriormente",
+    "en": "previously"
+  },
+  {
+    "id": "b1-319",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "botón",
+    "en": "button (clothing, mechanical)"
+  },
+  {
+    "id": "b1-320",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "universitario",
+    "en": "university"
+  },
+  {
+    "id": "b1-321",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "recorrer",
+    "en": "to tour"
+  },
+  {
+    "id": "b1-322",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "colectivo",
+    "en": "collective"
+  },
+  {
+    "id": "b1-323",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "interrogar",
+    "en": "to interrogate"
+  },
+  {
+    "id": "b1-324",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "miércoles",
+    "en": "Wednesday"
+  },
+  {
+    "id": "b1-325",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "biblioteca",
+    "en": "library"
+  },
+  {
+    "id": "b1-326",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "religión",
+    "en": "religion"
+  },
+  {
+    "id": "b1-327",
+    "level": "B1",
+    "category": "Adverbs",
+    "es": "personalmente",
+    "en": "personally"
+  },
+  {
+    "id": "b1-328",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "contribuir",
+    "en": "to contribute"
+  },
+  {
+    "id": "b1-329",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "ordenador",
+    "en": "computer"
+  },
+  {
+    "id": "b1-330",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "centavo",
+    "en": "hundredth"
+  },
+  {
+    "id": "b1-331",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "pendiente",
+    "en": "pending, outstanding, unfinished"
+  },
+  {
+    "id": "b1-332",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "permanente",
+    "en": "permanent"
+  },
+  {
+    "id": "b1-333",
+    "level": "B1",
+    "category": "General",
+    "es": "psoe",
+    "en": "acronym of \"w:es:Partido Socialista Obrero Español\" (“Spanish Socialist Workers' Party”)"
+  },
+  {
+    "id": "b1-334",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "lágrima",
+    "en": "tear, teardrop"
+  },
+  {
+    "id": "b1-335",
+    "level": "B1",
+    "category": "General",
+    "es": "constitución",
+    "en": "Constitución (a neighbourhood of in central Buenos Aires in Argentina)"
+  },
+  {
+    "id": "b1-336",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "evidente",
+    "en": "obvious, evident, apparent, clear"
+  },
+  {
+    "id": "b1-337",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "granja",
+    "en": "farm, grange"
+  },
+  {
+    "id": "b1-338",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "librar",
+    "en": "to save, to rescue, to deliver, to preserve"
+  },
+  {
+    "id": "b1-339",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "incidente",
+    "en": "incident"
+  },
+  {
+    "id": "b1-340",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "jornada",
+    "en": "day"
+  },
+  {
+    "id": "b1-341",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "apretar",
+    "en": "to squeeze"
+  },
+  {
+    "id": "b1-342",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "encerrado",
+    "en": "pent, shut-in, cooped up, locked up, locked down confined, holed up, shut away"
+  },
+  {
+    "id": "b1-343",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "bordo",
+    "en": "side, board"
+  },
+  {
+    "id": "b1-344",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "licencia",
+    "en": "license"
+  },
+  {
+    "id": "b1-345",
+    "level": "B1",
+    "category": "General",
+    "es": "quince",
+    "en": "fifteen"
+  },
+  {
+    "id": "b1-346",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "abrigo",
+    "en": "surname"
+  },
+  {
+    "id": "b1-347",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "síntoma",
+    "en": "symptom (indicators and characteristics of the presence of something else)"
+  },
+  {
+    "id": "b1-348",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "desesperado",
+    "en": "desperate (filled with despair)"
+  },
+  {
+    "id": "b1-349",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "parada",
+    "en": "surname"
+  },
+  {
+    "id": "b1-350",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "bolso",
+    "en": "purse"
+  },
+  {
+    "id": "b1-351",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "placa",
+    "en": "plate"
+  },
+  {
+    "id": "b1-352",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "fijo",
+    "en": "fixed"
+  },
+  {
+    "id": "b1-353",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "nacimiento",
+    "en": "Nacimiento (a municipality of in Almería, Andalusia, Spain)"
+  },
+  {
+    "id": "b1-354",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "salsa",
+    "en": "sauce, gravy (liquid condiment)"
+  },
+  {
+    "id": "b1-355",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "cubano",
+    "en": "Cuban"
+  },
+  {
+    "id": "b1-356",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "inicial",
+    "en": "initial"
+  },
+  {
+    "id": "b1-357",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "cagar",
+    "en": "to shit"
+  },
+  {
+    "id": "b1-358",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "herir",
+    "en": "to wound, injure (to cause physical injury and pain)"
+  },
+  {
+    "id": "b1-359",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "previo",
+    "en": "previous"
+  },
+  {
+    "id": "b1-360",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "evolución",
+    "en": "evolution"
+  },
+  {
+    "id": "b1-361",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "ánimo",
+    "en": "soul, spirit, mood"
+  },
+  {
+    "id": "b1-362",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "reflejar",
+    "en": "to reflect"
+  },
+  {
+    "id": "b1-363",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "templo",
+    "en": "temple (a house of worship)"
+  },
+  {
+    "id": "b1-364",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "propietario",
+    "en": "proprietary"
+  },
+  {
+    "id": "b1-365",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "acusación",
+    "en": "accusation"
+  },
+  {
+    "id": "b1-366",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "camioneta",
+    "en": "pick-up truck"
+  },
+  {
+    "id": "b1-367",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "vela",
+    "en": "Vela (constellation)"
+  },
+  {
+    "id": "b1-368",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "obstante",
+    "en": "hindering"
+  },
+  {
+    "id": "b1-369",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "emperador",
+    "en": "emperor"
+  },
+  {
+    "id": "b1-370",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "facilitar",
+    "en": "to facilitate (to make easier)"
+  },
+  {
+    "id": "b1-371",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "curiosidad",
+    "en": "curiosity"
+  },
+  {
+    "id": "b1-372",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "caza",
+    "en": "hunting, hunt (act of finding and killing a wild animal; art of hunting)"
+  },
+  {
+    "id": "b1-373",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "representación",
+    "en": "representation"
+  },
+  {
+    "id": "b1-374",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "complejo",
+    "en": "complex, sophisticated, intricate (made of multiple parts)"
+  },
+  {
+    "id": "b1-375",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "intelectual",
+    "en": "intellectual"
+  },
+  {
+    "id": "b1-376",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "identificación",
+    "en": "identification"
+  },
+  {
+    "id": "b1-377",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "infantil",
+    "en": "childish; childlike"
+  },
+  {
+    "id": "b1-378",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "petición",
+    "en": "request"
+  },
+  {
+    "id": "b1-379",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "juventud",
+    "en": "youth"
+  },
+  {
+    "id": "b1-380",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "coincidencia",
+    "en": "coincidence"
+  },
+  {
+    "id": "b1-381",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "filme",
+    "en": "film, motion picture"
+  },
+  {
+    "id": "b1-382",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "vigilancia",
+    "en": "vigilance, watchfulness (the state or quality of being watchful; alertness, vigilance or wakefulness)"
+  },
+  {
+    "id": "b1-383",
+    "level": "B1",
+    "category": "General",
+    "es": "lópez",
+    "en": "surname"
+  },
+  {
+    "id": "b1-384",
+    "level": "B1",
+    "category": "Adverbs",
+    "es": "básicamente",
+    "en": "basically"
+  },
+  {
+    "id": "b1-385",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "romano",
+    "en": "Roman (of, from or relating to the city of Rome, capital of Italy)"
+  },
+  {
+    "id": "b1-386",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "bloquear",
+    "en": "to block"
+  },
+  {
+    "id": "b1-387",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "desierto",
+    "en": "desert"
+  },
+  {
+    "id": "b1-388",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "estatal",
+    "en": "state (country)"
+  },
+  {
+    "id": "b1-389",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "retroceder",
+    "en": "to back up, to go back, to step back, to move backward, to shrink back"
+  },
+  {
+    "id": "b1-390",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "médico",
+    "en": "doctor"
+  },
+  {
+    "id": "b1-391",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "torre",
+    "en": "tower"
+  },
+  {
+    "id": "b1-392",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "publicidad",
+    "en": "advertisement"
+  },
+  {
+    "id": "b1-393",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "admirar",
+    "en": "to admire"
+  },
+  {
+    "id": "b1-394",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "arrepentirse",
+    "en": "to regret"
+  },
+  {
+    "id": "b1-395",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "cazar",
+    "en": "to hunt"
+  },
+  {
+    "id": "b1-396",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "saco",
+    "en": "bag, sack (a loose container)"
+  },
+  {
+    "id": "b1-397",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "gestión",
+    "en": "process"
+  },
+  {
+    "id": "b1-398",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "volumen",
+    "en": "volume (a three-dimensional measure of space)"
+  },
+  {
+    "id": "b1-399",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "mortal",
+    "en": "deadly"
+  },
+  {
+    "id": "b1-400",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "bestia",
+    "en": "Beast (a figure in the Book of Revelation)"
+  },
+  {
+    "id": "b1-401",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "guía",
+    "en": "guide"
+  },
+  {
+    "id": "b1-402",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "inferior",
+    "en": "inferior (of lower quality)"
+  },
+  {
+    "id": "b1-403",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "tabla",
+    "en": "board, plank"
+  },
+  {
+    "id": "b1-404",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "humo",
+    "en": "smoke"
+  },
+  {
+    "id": "b1-405",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "labor",
+    "en": "labor"
+  },
+  {
+    "id": "b1-406",
+    "level": "B1",
+    "category": "General",
+    "es": "fué",
+    "en": "{{es-superseded spelling of|fue|1952}}"
+  },
+  {
+    "id": "b1-407",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "efectuar",
+    "en": "to carry out; realise"
+  },
+  {
+    "id": "b1-408",
+    "level": "B1",
+    "category": "General",
+    "es": "bravo",
+    "en": "surname"
+  },
+  {
+    "id": "b1-409",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "negativo",
+    "en": "negative"
+  },
+  {
+    "id": "b1-410",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "suicidar",
+    "en": "to commit suicide"
+  },
+  {
+    "id": "b1-411",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "obedecer",
+    "en": "to obey"
+  },
+  {
+    "id": "b1-412",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "celda",
+    "en": "prison cell"
+  },
+  {
+    "id": "b1-413",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "derrotar",
+    "en": "to defeat"
+  },
+  {
+    "id": "b1-414",
+    "level": "B1",
+    "category": "Adverbs",
+    "es": "fácilmente",
+    "en": "easily"
+  },
+  {
+    "id": "b1-415",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "alarma",
+    "en": "alarm (a summons to arms)"
+  },
+  {
+    "id": "b1-416",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "espacial",
+    "en": "spatial (pertaining to the dimension of space)"
+  },
+  {
+    "id": "b1-417",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "agradar",
+    "en": "to please, to agree with"
+  },
+  {
+    "id": "b1-418",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "rico",
+    "en": "given name"
+  },
+  {
+    "id": "b1-419",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "continuación",
+    "en": "continuation"
+  },
+  {
+    "id": "b1-420",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "lamentar",
+    "en": "to lament, to regret"
+  },
+  {
+    "id": "b1-421",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "aviso",
+    "en": "warning"
+  },
+  {
+    "id": "b1-422",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "policial",
+    "en": "Related to the police, police force"
+  },
+  {
+    "id": "b1-423",
+    "level": "B1",
+    "category": "General",
+    "es": "larry",
+    "en": "given name"
+  },
+  {
+    "id": "b1-424",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "ceremonia",
+    "en": "ceremony"
+  },
+  {
+    "id": "b1-425",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "significado",
+    "en": "significant"
+  },
+  {
+    "id": "b1-426",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "basar",
+    "en": "to base on"
+  },
+  {
+    "id": "b1-427",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "ausencia",
+    "en": "absence"
+  },
+  {
+    "id": "b1-428",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "chaqueta",
+    "en": "jacket, piece of clothing worn on the upper body outside a shirt or blouse, often waist length to thigh length"
+  },
+  {
+    "id": "b1-429",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "noble",
+    "en": "noble"
+  },
+  {
+    "id": "b1-430",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "pagado",
+    "en": "paid"
+  },
+  {
+    "id": "b1-431",
+    "level": "B1",
+    "category": "General",
+    "es": "franco",
+    "en": "given name"
+  },
+  {
+    "id": "b1-432",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "iniciativa",
+    "en": "initiative"
+  },
+  {
+    "id": "b1-433",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "ave",
+    "en": "high-speed rail, high-speed train"
+  },
+  {
+    "id": "b1-434",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "consumir",
+    "en": "to consume"
+  },
+  {
+    "id": "b1-435",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "reclamar",
+    "en": "to reclaim, to recover possession of"
+  },
+  {
+    "id": "b1-436",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "traducción",
+    "en": "translation"
+  },
+  {
+    "id": "b1-437",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "bendecir",
+    "en": "to bless"
+  },
+  {
+    "id": "b1-438",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "torno",
+    "en": "lathe"
+  },
+  {
+    "id": "b1-439",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "obligación",
+    "en": "obligation"
+  },
+  {
+    "id": "b1-440",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "temor",
+    "en": "fear; dread"
+  },
+  {
+    "id": "b1-441",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "desgraciado",
+    "en": "unfortunate"
+  },
+  {
+    "id": "b1-442",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "llover",
+    "en": "to rain"
+  },
+  {
+    "id": "b1-443",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "pete",
+    "en": "blowjob"
+  },
+  {
+    "id": "b1-444",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "de",
+    "en": "letter: d"
+  },
+  {
+    "id": "b1-445",
+    "level": "B1",
+    "category": "General",
+    "es": "cristo",
+    "en": "Christ"
+  },
+  {
+    "id": "b1-446",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "progreso",
+    "en": "progress, headway, advancement"
+  },
+  {
+    "id": "b1-447",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "castigo",
+    "en": "punishment"
+  },
+  {
+    "id": "b1-448",
+    "level": "B1",
+    "category": "General",
+    "es": "rodríguez",
+    "en": "surname"
+  },
+  {
+    "id": "b1-449",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "continuo",
+    "en": "continual, constant (done or extending without interruption)"
+  },
+  {
+    "id": "b1-450",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "contentar",
+    "en": "to please"
+  },
+  {
+    "id": "b1-451",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "ligero",
+    "en": "light, not heavy"
+  },
+  {
+    "id": "b1-452",
+    "level": "B1",
+    "category": "General",
+    "es": "chicago",
+    "en": "Chicago (A county seat Cook County, in northeastern Illinois, USA, located on Lake Michigan.)"
+  },
+  {
+    "id": "b1-453",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "clima",
+    "en": "climate, weather"
+  },
+  {
+    "id": "b1-454",
+    "level": "B1",
+    "category": "General",
+    "es": "wow",
+    "en": "wow (an indication of excitement or surprise)"
+  },
+  {
+    "id": "b1-455",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "triunfo",
+    "en": "triumph"
+  },
+  {
+    "id": "b1-456",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "maravilla",
+    "en": "surname"
+  },
+  {
+    "id": "b1-457",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "caro",
+    "en": "given name"
+  },
+  {
+    "id": "b1-458",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "borde",
+    "en": "edge, border, brink, verge, rim, margin"
+  },
+  {
+    "id": "b1-459",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "febrero",
+    "en": "February"
+  },
+  {
+    "id": "b1-460",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "suicidio",
+    "en": "suicide (the act of killing oneself)"
+  },
+  {
+    "id": "b1-461",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "tragar",
+    "en": "to swallow (to cause to pass from the mouth into the stomach)"
+  },
+  {
+    "id": "b1-462",
+    "level": "B1",
+    "category": "Adverbs",
+    "es": "ciertamente",
+    "en": "certainly"
+  },
+  {
+    "id": "b1-463",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "elegante",
+    "en": "elegant, graceful"
+  },
+  {
+    "id": "b1-464",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "establecido",
+    "en": "established"
+  },
+  {
+    "id": "b1-465",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "escala",
+    "en": "ladder (a frame, usually portable, of wood, metal, or rope, used for ascent and descent)"
+  },
+  {
+    "id": "b1-466",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "juntar",
+    "en": "to combine, unite"
+  },
+  {
+    "id": "b1-467",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "ingresar",
+    "en": "to join"
+  },
+  {
+    "id": "b1-468",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "cruel",
+    "en": "cruel"
+  },
+  {
+    "id": "b1-469",
+    "level": "B1",
+    "category": "General",
+    "es": "cincuenta",
+    "en": "fifty"
+  },
+  {
+    "id": "b1-470",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "símbolo",
+    "en": "symbol"
+  },
+  {
+    "id": "b1-471",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "vacío",
+    "en": "empty, vacant"
+  },
+  {
+    "id": "b1-472",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "brindar",
+    "en": "to toast, drink (a toast) to (to engage in a salutation and/or accompanying raising of glasses while drinking alcohol in honor of someone or something)"
+  },
+  {
+    "id": "b1-473",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "rescatar",
+    "en": "to rescue"
+  },
+  {
+    "id": "b1-474",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "semejante",
+    "en": "similar"
+  },
+  {
+    "id": "b1-475",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "primavera",
+    "en": "spring (season)"
+  },
+  {
+    "id": "b1-476",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "palo",
+    "en": "Palo (Afro-Cuban syncretic religion)"
+  },
+  {
+    "id": "b1-477",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "fruta",
+    "en": "fruit (the seed-bearing part of a plant)"
+  },
+  {
+    "id": "b1-478",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "poquito",
+    "en": "diminutive of \"poco\", tiny, very small"
+  },
+  {
+    "id": "b1-479",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "mecanismo",
+    "en": "mechanism"
+  },
+  {
+    "id": "b1-480",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "tranquilizar",
+    "en": "to calm, calm down"
+  },
+  {
+    "id": "b1-481",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "alerta",
+    "en": "alert, vigilant"
+  },
+  {
+    "id": "b1-482",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "suma",
+    "en": "sum"
+  },
+  {
+    "id": "b1-483",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "impacto",
+    "en": "impact, brunt"
+  },
+  {
+    "id": "b1-484",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "ronda",
+    "en": "Ronda (a town in the province of Málaga, Andalusia, Spain)"
+  },
+  {
+    "id": "b1-485",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "filmar",
+    "en": "to film, record"
+  },
+  {
+    "id": "b1-486",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "organizado",
+    "en": "organized"
+  },
+  {
+    "id": "b1-487",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "asombroso",
+    "en": "amazing, wondrous, breathtaking, awesome (inspiring awe, wonder or admiration)"
+  },
+  {
+    "id": "b1-488",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "prohibido",
+    "en": "forbidden; prohibited"
+  },
+  {
+    "id": "b1-489",
+    "level": "B1",
+    "category": "General",
+    "es": "alberto",
+    "en": "given name"
+  },
+  {
+    "id": "b1-490",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "vivienda",
+    "en": "housing, dwelling"
+  },
+  {
+    "id": "b1-491",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "ceder",
+    "en": "to cede, to hand over, to convey"
+  },
+  {
+    "id": "b1-492",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "felicitación",
+    "en": "congratulation"
+  },
+  {
+    "id": "b1-493",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "mate",
+    "en": "matte (not reflective of light)"
+  },
+  {
+    "id": "b1-494",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "sabor",
+    "en": "flavor; taste"
+  },
+  {
+    "id": "b1-495",
+    "level": "B1",
+    "category": "General",
+    "es": "reyes",
+    "en": "surname"
+  },
+  {
+    "id": "b1-496",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "argumento",
+    "en": "argument"
+  },
+  {
+    "id": "b1-497",
+    "level": "B1",
+    "category": "General",
+    "es": "rafael",
+    "en": "Raphael"
+  },
+  {
+    "id": "b1-498",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "tribu",
+    "en": "tribe"
+  },
+  {
+    "id": "b1-499",
+    "level": "B1",
+    "category": "Adverbs",
+    "es": "muchísimo",
+    "en": "superlative of \"mucho\": much, a great deal, a lot"
+  },
+  {
+    "id": "b1-500",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "barra",
+    "en": "bar, rod (a solid, more or less rigid object of metal or other material with a uniform cross-section smaller than its length)"
+  },
+  {
+    "id": "b1-501",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "retener",
+    "en": "to retain, to remember"
+  },
+  {
+    "id": "b1-502",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "escaso",
+    "en": "scarce, limited, scant, meager, meagre, skimpy, rare, insufficient, slight, slim"
+  },
+  {
+    "id": "b1-503",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "categoría",
+    "en": "category"
+  },
+  {
+    "id": "b1-504",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "mancha",
+    "en": "Manche (A department of Normandy of France.)"
+  },
+  {
+    "id": "b1-505",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "camarero",
+    "en": "waiter"
+  },
+  {
+    "id": "b1-506",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "dimensión",
+    "en": "dimension (a single aspect of a given thing)"
+  },
+  {
+    "id": "b1-507",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "saludo",
+    "en": "greeting, greetings"
+  },
+  {
+    "id": "b1-508",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "percibir",
+    "en": "to perceive"
+  },
+  {
+    "id": "b1-509",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "capa",
+    "en": "cloak, cape (a sleeveless garment hanging from the neck)"
+  },
+  {
+    "id": "b1-510",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "avance",
+    "en": "advance"
+  },
+  {
+    "id": "b1-511",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "digno",
+    "en": "worthy"
+  },
+  {
+    "id": "b1-512",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "orgullo",
+    "en": "Pride (a festival primarily for LGBT people, usually organized annually within a city)"
+  },
+  {
+    "id": "b1-513",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "coma",
+    "en": "comma (punctuation mark)"
+  },
+  {
+    "id": "b1-514",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "excepción",
+    "en": "exception"
+  },
+  {
+    "id": "b1-515",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "margen",
+    "en": "margin, edge"
+  },
+  {
+    "id": "b1-516",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "encargo",
+    "en": "order (a product that is ordered)"
+  },
+  {
+    "id": "b1-517",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "salto",
+    "en": "A department of Uruguay"
+  },
+  {
+    "id": "b1-518",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "típico",
+    "en": "typical (characteristically representing something by form, group, idea or type)"
+  },
+  {
+    "id": "b1-519",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "urbano",
+    "en": "given name"
+  },
+  {
+    "id": "b1-520",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "cartel",
+    "en": "poster, placard, bill, banner"
+  },
+  {
+    "id": "b1-521",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "metal",
+    "en": "metal"
+  },
+  {
+    "id": "b1-522",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "absurdo",
+    "en": "absurd, preposterous, ludicrous, ridiculous"
+  },
+  {
+    "id": "b1-523",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "urgente",
+    "en": "urgent"
+  },
+  {
+    "id": "b1-524",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "electrónico",
+    "en": "electronic"
+  },
+  {
+    "id": "b1-525",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "huelga",
+    "en": "strike, protest (work stoppage)"
+  },
+  {
+    "id": "b1-526",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "ofender",
+    "en": "to offend"
+  },
+  {
+    "id": "b1-527",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "temporal",
+    "en": "temporal (of or relating to time)"
+  },
+  {
+    "id": "b1-528",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "sentencia",
+    "en": "sentence"
+  },
+  {
+    "id": "b1-529",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "rastrear",
+    "en": "to track, pursue"
+  },
+  {
+    "id": "b1-530",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "hierro",
+    "en": "surname"
+  },
+  {
+    "id": "b1-531",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "inclinar",
+    "en": "to tilt"
+  },
+  {
+    "id": "b1-532",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "brillar",
+    "en": "to shine"
+  },
+  {
+    "id": "b1-533",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "acostumbrado",
+    "en": "customary"
+  },
+  {
+    "id": "b1-534",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "solar",
+    "en": "ground, land"
+  },
+  {
+    "id": "b1-535",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "tasa",
+    "en": "rate"
+  },
+  {
+    "id": "b1-536",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "atar",
+    "en": "to tie, tie up, tie down, to tether (secure (something) by rope or the like)"
+  },
+  {
+    "id": "b1-537",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "completar",
+    "en": "to complete"
+  },
+  {
+    "id": "b1-538",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "convocar",
+    "en": "to call, convene, convoke"
+  },
+  {
+    "id": "b1-539",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "desafío",
+    "en": "challenge"
+  },
+  {
+    "id": "b1-540",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "armario",
+    "en": "cupboard, storage cabinet, wardrobe"
+  },
+  {
+    "id": "b1-541",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "trozo",
+    "en": "piece"
+  },
+  {
+    "id": "b1-542",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "experimento",
+    "en": "experiment"
+  },
+  {
+    "id": "b1-543",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "serpiente",
+    "en": "snake, serpent (legless reptile of the sub-order Serpentes)"
+  },
+  {
+    "id": "b1-544",
+    "level": "B1",
+    "category": "General",
+    "es": "javier",
+    "en": "given name"
+  },
+  {
+    "id": "b1-545",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "disminuir",
+    "en": "to diminish"
+  },
+  {
+    "id": "b1-546",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "arder",
+    "en": "to burn, blaze (to be consumed by fire or in flames)"
+  },
+  {
+    "id": "b1-547",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "festival",
+    "en": "festival"
+  },
+  {
+    "id": "b1-548",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "miel",
+    "en": "honey"
+  },
+  {
+    "id": "b1-549",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "sustituir",
+    "en": "to replace, to take the place of"
+  },
+  {
+    "id": "b1-550",
+    "level": "B1",
+    "category": "General",
+    "es": "valle",
+    "en": "surname"
+  },
+  {
+    "id": "b1-551",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "imaginación",
+    "en": "imagination"
+  },
+  {
+    "id": "b1-552",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "paciencia",
+    "en": "patience, forbearance (the quality of being patient)"
+  },
+  {
+    "id": "b1-553",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "raza",
+    "en": "race, ethnicity"
+  },
+  {
+    "id": "b1-554",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "consultar",
+    "en": "to consult"
+  },
+  {
+    "id": "b1-555",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "regional",
+    "en": "regional"
+  },
+  {
+    "id": "b1-556",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "calcular",
+    "en": "to calculate"
+  },
+  {
+    "id": "b1-557",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "limitar",
+    "en": "to limit"
+  },
+  {
+    "id": "b1-558",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "poema",
+    "en": "poem (literary piece written in verse)"
+  },
+  {
+    "id": "b1-559",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "piscina",
+    "en": "swimming pool"
+  },
+  {
+    "id": "b1-560",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "artístico",
+    "en": "artistic"
+  },
+  {
+    "id": "b1-561",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "manifestación",
+    "en": "demonstration, protest"
+  },
+  {
+    "id": "b1-562",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "elevado",
+    "en": "high, elevated"
+  },
+  {
+    "id": "b1-563",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "chiste",
+    "en": "joke (told joke)"
+  },
+  {
+    "id": "b1-564",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "depósito",
+    "en": "deposit"
+  },
+  {
+    "id": "b1-565",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "reemplazar",
+    "en": "to replace"
+  },
+  {
+    "id": "b1-566",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "patear",
+    "en": "to kick"
+  },
+  {
+    "id": "b1-567",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "modificar",
+    "en": "to modify"
+  },
+  {
+    "id": "b1-568",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "ilusión",
+    "en": "illusion"
+  },
+  {
+    "id": "b1-569",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "nocturno",
+    "en": "night"
+  },
+  {
+    "id": "b1-570",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "elevar",
+    "en": "to elevate"
+  },
+  {
+    "id": "b1-571",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "literatura",
+    "en": "literature"
+  },
+  {
+    "id": "b1-572",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "cubierto",
+    "en": "covered"
+  },
+  {
+    "id": "b1-573",
+    "level": "B1",
+    "category": "General",
+    "es": "pp",
+    "en": "initialism of \"Partido Popular\" (“People's Party”)"
+  },
+  {
+    "id": "b1-574",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "eterno",
+    "en": "eternal"
+  },
+  {
+    "id": "b1-575",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "diálogo",
+    "en": "dialogue (form of discourse)"
+  },
+  {
+    "id": "b1-576",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "agradecido",
+    "en": "grateful, thankful, appreciative, obliged, indebted"
+  },
+  {
+    "id": "b1-577",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "mezcla",
+    "en": "mixture, mix, mixing, combination, admixture, medley"
+  },
+  {
+    "id": "b1-578",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "comparar",
+    "en": "to compare"
+  },
+  {
+    "id": "b1-579",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "externo",
+    "en": "external"
+  },
+  {
+    "id": "b1-580",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "primo",
+    "en": "cousin (of male or unspecified gender)"
+  },
+  {
+    "id": "b1-581",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "embajador",
+    "en": "ambassador"
+  },
+  {
+    "id": "b1-582",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "apropiado",
+    "en": "appropriate, suitable"
+  },
+  {
+    "id": "b1-583",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "enojar",
+    "en": "to anger"
+  },
+  {
+    "id": "b1-584",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "fracaso",
+    "en": "downfall, ruin, calamity, disaster"
+  },
+  {
+    "id": "b1-585",
+    "level": "B1",
+    "category": "General",
+    "es": "japón",
+    "en": "Japan (A country in East Asia.)"
+  },
+  {
+    "id": "b1-586",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "herramienta",
+    "en": "a tool, an implement"
+  },
+  {
+    "id": "b1-587",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "espía",
+    "en": "spy"
+  },
+  {
+    "id": "b1-588",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "expediente",
+    "en": "case, file"
+  },
+  {
+    "id": "b1-589",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "reaccionar",
+    "en": "to react"
+  },
+  {
+    "id": "b1-590",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "reconocimiento",
+    "en": "recognition"
+  },
+  {
+    "id": "b1-591",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "rodar",
+    "en": "to roll, rotate"
+  },
+  {
+    "id": "b1-592",
+    "level": "B1",
+    "category": "Adverbs",
+    "es": "asimismo",
+    "en": "likewise (expressing continuity or similarity)"
+  },
+  {
+    "id": "b1-593",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "fundar",
+    "en": "to found"
+  },
+  {
+    "id": "b1-594",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "soviético",
+    "en": "soviet"
+  },
+  {
+    "id": "b1-595",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "sensible",
+    "en": "sensitive"
+  },
+  {
+    "id": "b1-596",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "aportar",
+    "en": "to contribute"
+  },
+  {
+    "id": "b1-597",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "fino",
+    "en": "fine (particularly slender)"
+  },
+  {
+    "id": "b1-598",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "imperio",
+    "en": "empire"
+  },
+  {
+    "id": "b1-599",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "laboral",
+    "en": "labor"
+  },
+  {
+    "id": "b1-600",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "denuncia",
+    "en": "report, complaint"
+  },
+  {
+    "id": "b1-601",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "gol",
+    "en": "goal"
+  },
+  {
+    "id": "b1-602",
+    "level": "B1",
+    "category": "General",
+    "es": "corona",
+    "en": "surname"
+  },
+  {
+    "id": "b1-603",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "voluntario",
+    "en": "voluntary"
+  },
+  {
+    "id": "b1-604",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "colección",
+    "en": "collection"
+  },
+  {
+    "id": "b1-605",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "crítico",
+    "en": "critical (inclined to criticize), judgmental"
+  },
+  {
+    "id": "b1-606",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "divorcio",
+    "en": "divorce (the legal dissolution of a marriage)"
+  },
+  {
+    "id": "b1-607",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "sopa",
+    "en": "soup (Any of various dishes commonly made by combining liquids, such as water or stock, with other ingredients, such as meat and vegetables, that contribute the food value, flavor and texture.)"
+  },
+  {
+    "id": "b1-608",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "violación",
+    "en": "violation"
+  },
+  {
+    "id": "b1-609",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "encajar",
+    "en": "to insert, put into"
+  },
+  {
+    "id": "b1-610",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "costo",
+    "en": "cost"
+  },
+  {
+    "id": "b1-611",
+    "level": "B1",
+    "category": "General",
+    "es": "mario",
+    "en": "given name"
+  },
+  {
+    "id": "b1-612",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "localizar",
+    "en": "to find"
+  },
+  {
+    "id": "b1-613",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "juguete",
+    "en": "toy (something to play with)"
+  },
+  {
+    "id": "b1-614",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "parlamento",
+    "en": "parliament"
+  },
+  {
+    "id": "b1-615",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "fantasía",
+    "en": "fantasy"
+  },
+  {
+    "id": "b1-616",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "misterioso",
+    "en": "mysterious"
+  },
+  {
+    "id": "b1-617",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "enfadar",
+    "en": "to anger, to make angry"
+  },
+  {
+    "id": "b1-618",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "fiel",
+    "en": "faithful, true"
+  },
+  {
+    "id": "b1-619",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "anotar",
+    "en": "to annotate"
+  },
+  {
+    "id": "b1-620",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "sustancia",
+    "en": "substance"
+  },
+  {
+    "id": "b1-621",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "castigar",
+    "en": "to punish, to castigate (to cause to suffer for crime or misconduct)"
+  },
+  {
+    "id": "b1-622",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "facultad",
+    "en": "school, college, department"
+  },
+  {
+    "id": "b1-623",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "potencial",
+    "en": "potential"
+  },
+  {
+    "id": "b1-624",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "burlar",
+    "en": "to outwit, to outsmart, to circumvent, to trick, to deceive"
+  },
+  {
+    "id": "b1-625",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "occidental",
+    "en": "western"
+  },
+  {
+    "id": "b1-626",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "leyenda",
+    "en": "legend, saga, traditional story"
+  },
+  {
+    "id": "b1-627",
+    "level": "B1",
+    "category": "Adverbs",
+    "es": "naturalmente",
+    "en": "naturally, of course"
+  },
+  {
+    "id": "b1-628",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "sospecha",
+    "en": "suspicion"
+  },
+  {
+    "id": "b1-629",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "escolar",
+    "en": "scholar; school"
+  },
+  {
+    "id": "b1-630",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "queja",
+    "en": "complaint, grievance, gripe, grumble"
+  },
+  {
+    "id": "b1-631",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "perfil",
+    "en": "profile"
+  },
+  {
+    "id": "b1-632",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "escándalo",
+    "en": "scandal"
+  },
+  {
+    "id": "b1-633",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "habitante",
+    "en": "inhabiting; said of something that inhabits"
+  },
+  {
+    "id": "b1-634",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "columna",
+    "en": "a column; a circular support"
+  },
+  {
+    "id": "b1-635",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "arresto",
+    "en": "arrest"
+  },
+  {
+    "id": "b1-636",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "poesía",
+    "en": "poetry"
+  },
+  {
+    "id": "b1-637",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "sacrificio",
+    "en": "sacrifice"
+  },
+  {
+    "id": "b1-638",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "bienes",
+    "en": "goods (that which is produced, traded, bought or sold)"
+  },
+  {
+    "id": "b1-639",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "avergonzar",
+    "en": "to shame"
+  },
+  {
+    "id": "b1-640",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "ingeniero",
+    "en": "engineer"
+  },
+  {
+    "id": "b1-641",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "fórmula",
+    "en": "formula"
+  },
+  {
+    "id": "b1-642",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "oponer",
+    "en": "to pit (one thing against another); to set in opposition"
+  },
+  {
+    "id": "b1-643",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "vomitar",
+    "en": "to vomit, to be sick"
+  },
+  {
+    "id": "b1-644",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "alquilar",
+    "en": "to rent"
+  },
+  {
+    "id": "b1-645",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "situar",
+    "en": "to situate, to place, to put, to position"
+  },
+  {
+    "id": "b1-646",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "cortado",
+    "en": "choppy, disconnected"
+  },
+  {
+    "id": "b1-647",
+    "level": "B1",
+    "category": "General",
+    "es": "emma",
+    "en": "given name"
+  },
+  {
+    "id": "b1-648",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "dibujar",
+    "en": "to draw, to sketch"
+  },
+  {
+    "id": "b1-649",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "consejero",
+    "en": "adviser"
+  },
+  {
+    "id": "b1-650",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "cazador",
+    "en": "hunting"
+  },
+  {
+    "id": "b1-651",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "alejado",
+    "en": "far, faraway, distant"
+  },
+  {
+    "id": "b1-652",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "fabricar",
+    "en": "to manufacture"
+  },
+  {
+    "id": "b1-653",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "onda",
+    "en": "wave (on the surface of a liquid)"
+  },
+  {
+    "id": "b1-654",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "testimonio",
+    "en": "testimony"
+  },
+  {
+    "id": "b1-655",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "comprometer",
+    "en": "to promise, to engage to be married"
+  },
+  {
+    "id": "b1-656",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "monte",
+    "en": "surname"
+  },
+  {
+    "id": "b1-657",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "joya",
+    "en": "jewellery, jewelry"
+  },
+  {
+    "id": "b1-658",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "repartir",
+    "en": "to share, give out"
+  },
+  {
+    "id": "b1-659",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "titular",
+    "en": "titular"
+  },
+  {
+    "id": "b1-660",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "ambulancia",
+    "en": "ambulance (an emergency vehicle designed for transporting seriously ill or injured people to a hospital)"
+  },
+  {
+    "id": "b1-661",
+    "level": "B1",
+    "category": "General",
+    "es": "pérez",
+    "en": "surname"
+  },
+  {
+    "id": "b1-662",
+    "level": "B1",
+    "category": "General",
+    "es": "brasil",
+    "en": "Brazil (A large Portuguese-speaking country in South America.)"
+  },
+  {
+    "id": "b1-663",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "secreto",
+    "en": "secret"
+  },
+  {
+    "id": "b1-664",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "otorgar",
+    "en": "to grant (bestow or confer)"
+  },
+  {
+    "id": "b1-665",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "inicio",
+    "en": "start, initiation"
+  },
+  {
+    "id": "b1-666",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "traidor",
+    "en": "traitorous (characteristic of a traitor)"
+  },
+  {
+    "id": "b1-667",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "emocionado",
+    "en": "excited, enthused, moved"
+  },
+  {
+    "id": "b1-668",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "cantante",
+    "en": "who sings, singing"
+  },
+  {
+    "id": "b1-669",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "sumar",
+    "en": "to add"
+  },
+  {
+    "id": "b1-670",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "despierto",
+    "en": "awake"
+  },
+  {
+    "id": "b1-671",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "residencia",
+    "en": "residence (time spent living)"
+  },
+  {
+    "id": "b1-672",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "múltiple",
+    "en": "multiple"
+  },
+  {
+    "id": "b1-673",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "lord",
+    "en": "lord (British title)"
+  },
+  {
+    "id": "b1-674",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "monje",
+    "en": "surname"
+  },
+  {
+    "id": "b1-675",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "pasta",
+    "en": "pasta"
+  },
+  {
+    "id": "b1-676",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "mezclar",
+    "en": "to mix"
+  },
+  {
+    "id": "b1-677",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "océano",
+    "en": "ocean"
+  },
+  {
+    "id": "b1-678",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "justificar",
+    "en": "to justify"
+  },
+  {
+    "id": "b1-679",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "vital",
+    "en": "vital"
+  },
+  {
+    "id": "b1-680",
+    "level": "B1",
+    "category": "General",
+    "es": "rusia",
+    "en": "Russia (A transcontinental country in Eastern Europe,North Asia. It borders the Pacific and Arctic Oceans and the Baltic, Black, and Caspian Seas. Part of the Soviet Union from 1917 through 1991.)"
+  },
+  {
+    "id": "b1-681",
+    "level": "B1",
+    "category": "General",
+    "es": "julia",
+    "en": "given name"
+  },
+  {
+    "id": "b1-682",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "involucrar",
+    "en": "to involve"
+  },
+  {
+    "id": "b1-683",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "posterior",
+    "en": "posterior, later"
+  },
+  {
+    "id": "b1-684",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "delicado",
+    "en": "delicate"
+  },
+  {
+    "id": "b1-685",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "pene",
+    "en": "penis"
+  },
+  {
+    "id": "b1-686",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "juzgado",
+    "en": "a court of law with a judge"
+  },
+  {
+    "id": "b1-687",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "distinguir",
+    "en": "to distinguish, discern"
+  },
+  {
+    "id": "b1-688",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "garganta",
+    "en": "throat"
+  },
+  {
+    "id": "b1-689",
+    "level": "B1",
+    "category": "Adverbs",
+    "es": "aproximadamente",
+    "en": "approximately"
+  },
+  {
+    "id": "b1-690",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "dorado",
+    "en": "Dorado (a particular constellation)"
+  },
+  {
+    "id": "b1-691",
+    "level": "B1",
+    "category": "General",
+    "es": "once",
+    "en": "eleven"
+  },
+  {
+    "id": "b1-692",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "fracasar",
+    "en": "to fail, flop, lose"
+  },
+  {
+    "id": "b1-693",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "terapia",
+    "en": "therapy"
+  },
+  {
+    "id": "b1-694",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "aterrizar",
+    "en": "to land (e.g. an airplane)"
+  },
+  {
+    "id": "b1-695",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "portar",
+    "en": "to bear, to carry"
+  },
+  {
+    "id": "b1-696",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "reportar",
+    "en": "to report"
+  },
+  {
+    "id": "b1-697",
+    "level": "B1",
+    "category": "General",
+    "es": "sara",
+    "en": "Sarah"
+  },
+  {
+    "id": "b1-698",
+    "level": "B1",
+    "category": "General",
+    "es": "ja",
+    "en": "representation of laughter, ha"
+  },
+  {
+    "id": "b1-699",
+    "level": "B1",
+    "category": "General",
+    "es": "cuarenta",
+    "en": "forty"
+  },
+  {
+    "id": "b1-700",
+    "level": "B1",
+    "category": "General",
+    "es": "miami",
+    "en": "Miami (a city in Florida)"
+  },
+  {
+    "id": "b1-701",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "medicamento",
+    "en": "medicine, medicament"
+  },
+  {
+    "id": "b1-702",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "comprometido",
+    "en": "committed"
+  },
+  {
+    "id": "b1-703",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "esencial",
+    "en": "essential"
+  },
+  {
+    "id": "b1-704",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "avanzado",
+    "en": "advanced"
+  },
+  {
+    "id": "b1-705",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "vampiro",
+    "en": "vampire"
+  },
+  {
+    "id": "b1-706",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "vasco",
+    "en": "Basque"
+  },
+  {
+    "id": "b1-707",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "grano",
+    "en": "grain (the seed of various grass food crops)"
+  },
+  {
+    "id": "b1-708",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "docena",
+    "en": "dozen"
+  },
+  {
+    "id": "b1-709",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "pasajero",
+    "en": "transient, passing"
+  },
+  {
+    "id": "b1-710",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "sacrificar",
+    "en": "to sacrifice"
+  },
+  {
+    "id": "b1-711",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "potencia",
+    "en": "power, potency"
+  },
+  {
+    "id": "b1-712",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "nombrar",
+    "en": "to name"
+  },
+  {
+    "id": "b1-713",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "galleta",
+    "en": "cookie / biscuit"
+  },
+  {
+    "id": "b1-714",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "construido",
+    "en": "constructed"
+  },
+  {
+    "id": "b1-715",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "adelantar",
+    "en": "to bring forward, advance, to move forward (in space or time)"
+  },
+  {
+    "id": "b1-716",
+    "level": "B1",
+    "category": "General",
+    "es": "villa",
+    "en": "surname"
+  },
+  {
+    "id": "b1-717",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "revolucionario",
+    "en": "revolutionary"
+  },
+  {
+    "id": "b1-718",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "casualidad",
+    "en": "chance, coincidence, happenstance, fluke, accident"
+  },
+  {
+    "id": "b1-719",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "género",
+    "en": "kind"
+  },
+  {
+    "id": "b1-720",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "reparar",
+    "en": "to notice; to realize; to become aware"
+  },
+  {
+    "id": "b1-721",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "horno",
+    "en": "oven"
+  },
+  {
+    "id": "b1-722",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "valioso",
+    "en": "valuable"
+  },
+  {
+    "id": "b1-723",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "individual",
+    "en": "individual"
+  },
+  {
+    "id": "b1-724",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "lector",
+    "en": "reading"
+  },
+  {
+    "id": "b1-725",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "piano",
+    "en": "piano"
+  },
+  {
+    "id": "b1-726",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "ducha",
+    "en": "shower (device)"
+  },
+  {
+    "id": "b1-727",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "sabio",
+    "en": "learned"
+  },
+  {
+    "id": "b1-728",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "fiebre",
+    "en": "fever"
+  },
+  {
+    "id": "b1-729",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "alegre",
+    "en": "surname"
+  },
+  {
+    "id": "b1-730",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "ámbito",
+    "en": "scope, field"
+  },
+  {
+    "id": "b1-731",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "tirado",
+    "en": "surname"
+  },
+  {
+    "id": "b1-732",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "criticar",
+    "en": "to criticize"
+  },
+  {
+    "id": "b1-733",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "global",
+    "en": "global (concerning all parts of the world)"
+  },
+  {
+    "id": "b1-734",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "correspondiente",
+    "en": "respective"
+  },
+  {
+    "id": "b1-735",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "incómodo",
+    "en": "uncomfortable"
+  },
+  {
+    "id": "b1-736",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "emplear",
+    "en": "to hire, to employ (to give someone a job)"
+  },
+  {
+    "id": "b1-737",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "desagradable",
+    "en": "unpleasant, disagreeable, distasteful, off-putting, displeasing, unpleasing, bad, rude, unsavory, uncomfortable, unlikable, objectionable, painful, uncongenial, crappy, gnarly (US slang)"
+  },
+  {
+    "id": "b1-738",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "idioma",
+    "en": "language"
+  },
+  {
+    "id": "b1-739",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "ciclo",
+    "en": "cycle"
+  },
+  {
+    "id": "b1-740",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "mecánico",
+    "en": "mechanical"
+  },
+  {
+    "id": "b1-741",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "escritorio",
+    "en": "writing desk"
+  },
+  {
+    "id": "b1-742",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "rama",
+    "en": "branch (woody part of a tree arising from the trunk and usually dividing)"
+  },
+  {
+    "id": "b1-743",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "refugio",
+    "en": "refuge"
+  },
+  {
+    "id": "b1-744",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "firmado",
+    "en": "signed (having a signature)"
+  },
+  {
+    "id": "b1-745",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "remedio",
+    "en": "remedy, solution"
+  },
+  {
+    "id": "b1-746",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "dormitorio",
+    "en": "bedroom (A room in a house, apartment, hotel or other dwelling where a bed is kept for sleeping.)"
+  },
+  {
+    "id": "b1-747",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "jurídico",
+    "en": "juridical"
+  },
+  {
+    "id": "b1-748",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "ejecutar",
+    "en": "to execute, to run (enact or carry out)"
+  },
+  {
+    "id": "b1-749",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "recompensa",
+    "en": "reward, recompense"
+  },
+  {
+    "id": "b1-750",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "especialista",
+    "en": "specialist"
+  },
+  {
+    "id": "b1-751",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "gris",
+    "en": "grey / gray"
+  },
+  {
+    "id": "b1-752",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "rumbo",
+    "en": "surname"
+  },
+  {
+    "id": "b1-753",
+    "level": "B1",
+    "category": "General",
+    "es": "fernández",
+    "en": "surname"
+  },
+  {
+    "id": "b1-754",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "satisfecho",
+    "en": "satisfied"
+  },
+  {
+    "id": "b1-755",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "sótano",
+    "en": "cellar"
+  },
+  {
+    "id": "b1-756",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "arroz",
+    "en": "rice (cereal plants, Oryza sativa of the grass family whose seeds are used as food)"
+  },
+  {
+    "id": "b1-757",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "pintor",
+    "en": "painter"
+  },
+  {
+    "id": "b1-758",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "antecedente",
+    "en": "precedent"
+  },
+  {
+    "id": "b1-759",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "video",
+    "en": "video"
+  },
+  {
+    "id": "b1-760",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "gobernar",
+    "en": "to govern"
+  },
+  {
+    "id": "b1-761",
+    "level": "B1",
+    "category": "Adverbs",
+    "es": "lentamente",
+    "en": "slowly"
+  },
+  {
+    "id": "b1-762",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "tanque",
+    "en": "tank (military vehicle)"
+  },
+  {
+    "id": "b1-763",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "prostituto",
+    "en": "prostitute"
+  },
+  {
+    "id": "b1-764",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "crema",
+    "en": "cream (cosmetic product)"
+  },
+  {
+    "id": "b1-765",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "taller",
+    "en": "workshop"
+  },
+  {
+    "id": "b1-766",
+    "level": "B1",
+    "category": "Adverbs",
+    "es": "posiblemente",
+    "en": "possibly"
+  },
+  {
+    "id": "b1-767",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "acontecimiento",
+    "en": "event, development, occurrence, happening"
+  },
+  {
+    "id": "b1-768",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "guiar",
+    "en": "to guide"
+  },
+  {
+    "id": "b1-769",
+    "level": "B1",
+    "category": "Adverbs",
+    "es": "generalmente",
+    "en": "generally, normally"
+  },
+  {
+    "id": "b1-770",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "competir",
+    "en": "to compete"
+  },
+  {
+    "id": "b1-771",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "bota",
+    "en": "boot"
+  },
+  {
+    "id": "b1-772",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "duque",
+    "en": "surname"
+  },
+  {
+    "id": "b1-773",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "ola",
+    "en": "wave (on the surface of a liquid)"
+  },
+  {
+    "id": "b1-774",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "sofá",
+    "en": "sofa, couch"
+  },
+  {
+    "id": "b1-775",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "concentración",
+    "en": "concentration (all senses)"
+  },
+  {
+    "id": "b1-776",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "pastilla",
+    "en": "pill"
+  },
+  {
+    "id": "b1-777",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "salario",
+    "en": "wage, wages, salary"
+  },
+  {
+    "id": "b1-778",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "verificar",
+    "en": "to verify, check"
+  },
+  {
+    "id": "b1-779",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "arreglo",
+    "en": "adjustment, arrangement"
+  },
+  {
+    "id": "b1-780",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "corredor",
+    "en": "corridor, hall"
+  },
+  {
+    "id": "b1-781",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "asamblea",
+    "en": "assembly, meeting"
+  },
+  {
+    "id": "b1-782",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "colonia",
+    "en": "Cologne (a largest city in North Rhine-Westphalia, in northwestern Germany)"
+  },
+  {
+    "id": "b1-783",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "rescate",
+    "en": "rescue"
+  },
+  {
+    "id": "b1-784",
+    "level": "B1",
+    "category": "General",
+    "es": "sánchez",
+    "en": "surname"
+  },
+  {
+    "id": "b1-785",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "marcado",
+    "en": "marked, pronounced"
+  },
+  {
+    "id": "b1-786",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "despedida",
+    "en": "farewell"
+  },
+  {
+    "id": "b1-787",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "malvado",
+    "en": "evil, wicked, mean, bad"
+  },
+  {
+    "id": "b1-788",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "asalto",
+    "en": "assault (violent onset or attack with physical means)"
+  },
+  {
+    "id": "b1-789",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "estimar",
+    "en": "to esteem"
+  },
+  {
+    "id": "b1-790",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "lesión",
+    "en": "lesion; injury"
+  },
+  {
+    "id": "b1-791",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "calentar",
+    "en": "to heat, to warm up (cause an increase in temperature)"
+  },
+  {
+    "id": "b1-792",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "cargado",
+    "en": "loaded"
+  },
+  {
+    "id": "b1-793",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "filosofía",
+    "en": "philosophy"
+  },
+  {
+    "id": "b1-794",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "temblar",
+    "en": "to tremble, to quiver, to quake, to shudder, to cringe, to quail"
+  },
+  {
+    "id": "b1-795",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "urgencia",
+    "en": "urgency"
+  },
+  {
+    "id": "b1-796",
+    "level": "B1",
+    "category": "General",
+    "es": "colombia",
+    "en": "Colombia (A country in South America.)"
+  },
+  {
+    "id": "b1-797",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "aparición",
+    "en": "appearance (act of appearing)"
+  },
+  {
+    "id": "b1-798",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "estallar",
+    "en": "to explode, to blow up, to burst"
+  },
+  {
+    "id": "b1-799",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "anual",
+    "en": "yearly, annual"
+  },
+  {
+    "id": "b1-800",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "bicicleta",
+    "en": "bicycle, pushbike, cycle"
+  },
+  {
+    "id": "b1-801",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "invitación",
+    "en": "invitation"
+  },
+  {
+    "id": "b1-802",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "ayudante",
+    "en": "auxiliary"
+  },
+  {
+    "id": "b1-803",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "observación",
+    "en": "observation"
+  },
+  {
+    "id": "b1-804",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "cansar",
+    "en": "to tire"
+  },
+  {
+    "id": "b1-805",
+    "level": "B1",
+    "category": "General",
+    "es": "salvador",
+    "en": "given name"
+  },
+  {
+    "id": "b1-806",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "informado",
+    "en": "informed, aware of"
+  },
+  {
+    "id": "b1-807",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "combustible",
+    "en": "combustible"
+  },
+  {
+    "id": "b1-808",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "almacén",
+    "en": "warehouse"
+  },
+  {
+    "id": "b1-809",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "abordar",
+    "en": "to address, to broach, to approach, to discuss, to touch on (e.g. a subject, issue, topic, point)"
+  },
+  {
+    "id": "b1-810",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "túnel",
+    "en": "tunnel"
+  },
+  {
+    "id": "b1-811",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "viudo",
+    "en": "widowed"
+  },
+  {
+    "id": "b1-812",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "fruto",
+    "en": "any fruit from a plant, whether sweet or not (like avocado or tomato), edible or not"
+  },
+  {
+    "id": "b1-813",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "lógica",
+    "en": "logic"
+  },
+  {
+    "id": "b1-814",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "sólido",
+    "en": "solid"
+  },
+  {
+    "id": "b1-815",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "academia",
+    "en": "academy"
+  },
+  {
+    "id": "b1-816",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "citado",
+    "en": "cited, mentioned, aforementioned"
+  },
+  {
+    "id": "b1-817",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "impulso",
+    "en": "drive, urge"
+  },
+  {
+    "id": "b1-818",
+    "level": "B1",
+    "category": "General",
+    "es": "isabel",
+    "en": "given name"
+  },
+  {
+    "id": "b1-819",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "actualidad",
+    "en": "present (the current moment)"
+  },
+  {
+    "id": "b1-820",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "máscara",
+    "en": "mask"
+  },
+  {
+    "id": "b1-821",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "protesta",
+    "en": "protest"
+  },
+  {
+    "id": "b1-822",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "veneno",
+    "en": "poison (substance that is harmful or lethal to a living organism)"
+  },
+  {
+    "id": "b1-823",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "cartera",
+    "en": "wallet, billfold"
+  },
+  {
+    "id": "b1-824",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "lejano",
+    "en": "far, faraway"
+  },
+  {
+    "id": "b1-825",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "derivar",
+    "en": "to derive"
+  },
+  {
+    "id": "b1-826",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "encendido",
+    "en": "on, activated"
+  },
+  {
+    "id": "b1-827",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "canto",
+    "en": "singing"
+  },
+  {
+    "id": "b1-828",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "situado",
+    "en": "located, situated, sited"
+  },
+  {
+    "id": "b1-829",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "tejido",
+    "en": "texture (of a cloth)"
+  },
+  {
+    "id": "b1-830",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "enseñanza",
+    "en": "teaching"
+  },
+  {
+    "id": "b1-831",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "vendedor",
+    "en": "salesman"
+  },
+  {
+    "id": "b1-832",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "fundación",
+    "en": "foundation (act of founding)"
+  },
+  {
+    "id": "b1-833",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "nervio",
+    "en": "nerve"
+  },
+  {
+    "id": "b1-834",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "ascender",
+    "en": "to ascend, to mount, to climb"
+  },
+  {
+    "id": "b1-835",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "helicóptero",
+    "en": "helicopter (an aircraft that is borne along by one or more sets of long rotating blades which allow it to hover)"
+  },
+  {
+    "id": "b1-836",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "significativo",
+    "en": "significant; meaningful"
+  },
+  {
+    "id": "b1-837",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "centrar",
+    "en": "to focus, to center"
+  },
+  {
+    "id": "b1-838",
+    "level": "B1",
+    "category": "General",
+    "es": "eduardo",
+    "en": "given name"
+  },
+  {
+    "id": "b1-839",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "católico",
+    "en": "Catholic"
+  },
+  {
+    "id": "b1-840",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "equilibrio",
+    "en": "equilibrium, balance (state of being balanced)"
+  },
+  {
+    "id": "b1-841",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "horario",
+    "en": "hourly"
+  },
+  {
+    "id": "b1-842",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "garantía",
+    "en": "guarantee"
+  },
+  {
+    "id": "b1-843",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "camarada",
+    "en": "comrade (mate, companion)"
+  },
+  {
+    "id": "b1-844",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "invertir",
+    "en": "to invest (to spend money, time, or energy on something)"
+  },
+  {
+    "id": "b1-845",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "generoso",
+    "en": "given name"
+  },
+  {
+    "id": "b1-846",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "zorra",
+    "en": "slut, prostitute"
+  },
+  {
+    "id": "b1-847",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "moto",
+    "en": "clipping of \"motocicleta\"; motorcycle"
+  },
+  {
+    "id": "b1-848",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "soledad",
+    "en": "given name"
+  },
+  {
+    "id": "b1-849",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "plantar",
+    "en": "to plant (put a plant or seeds into the ground)"
+  },
+  {
+    "id": "b1-850",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "aconsejar",
+    "en": "to advise"
+  },
+  {
+    "id": "b1-851",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "vicepresidente",
+    "en": "vice president"
+  },
+  {
+    "id": "b1-852",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "guión",
+    "en": "{{es-superseded spelling of|guion|2010}}"
+  },
+  {
+    "id": "b1-853",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "primario",
+    "en": "first"
+  },
+  {
+    "id": "b1-854",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "lujo",
+    "en": "luxury, extravagance (wealthy and comfortable surroundings)"
+  },
+  {
+    "id": "b1-855",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "concreto",
+    "en": "concrete"
+  },
+  {
+    "id": "b1-856",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "esperado",
+    "en": "expected"
+  },
+  {
+    "id": "b1-857",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "sede",
+    "en": "seat, headquarters"
+  },
+  {
+    "id": "b1-858",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "sujetar",
+    "en": "to steady, hold, secure, attach, fasten"
+  },
+  {
+    "id": "b1-859",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "dosis",
+    "en": "dose"
+  },
+  {
+    "id": "b1-860",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "grabación",
+    "en": "recording (an activity or result)"
+  },
+  {
+    "id": "b1-861",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "petróleo",
+    "en": "petroleum, oil"
+  },
+  {
+    "id": "b1-862",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "bailarín",
+    "en": "Dancer (reindeer)"
+  },
+  {
+    "id": "b1-863",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "recuperación",
+    "en": "retrieval"
+  },
+  {
+    "id": "b1-864",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "conectado",
+    "en": "connected"
+  },
+  {
+    "id": "b1-865",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "consulta",
+    "en": "consultation"
+  },
+  {
+    "id": "b1-866",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "apellido",
+    "en": "surname, last name"
+  },
+  {
+    "id": "b1-867",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "batir",
+    "en": "to beat, to pound repeatedly"
+  },
+  {
+    "id": "b1-868",
+    "level": "B1",
+    "category": "General",
+    "es": "ok",
+    "en": "OK"
+  },
+  {
+    "id": "b1-869",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "colina",
+    "en": "hill"
+  },
+  {
+    "id": "b1-870",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "adorable",
+    "en": "adorable"
+  },
+  {
+    "id": "b1-871",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "presidencia",
+    "en": "presidency"
+  },
+  {
+    "id": "b1-872",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "pacto",
+    "en": "pact"
+  },
+  {
+    "id": "b1-873",
+    "level": "B1",
+    "category": "General",
+    "es": "martínez",
+    "en": "surname"
+  },
+  {
+    "id": "b1-874",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "descartar",
+    "en": "to rule out, to discard, to discount, to dismiss, to reject"
+  },
+  {
+    "id": "b1-875",
+    "level": "B1",
+    "category": "General",
+    "es": "lucas",
+    "en": "Luke (biblical character)"
+  },
+  {
+    "id": "b1-876",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "derribar",
+    "en": "to bring down, to shoot down"
+  },
+  {
+    "id": "b1-877",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "valorar",
+    "en": "to value, appreciate"
+  },
+  {
+    "id": "b1-878",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "sorprendente",
+    "en": "surprising"
+  },
+  {
+    "id": "b1-879",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "perdedor",
+    "en": "losing"
+  },
+  {
+    "id": "b1-880",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "músico",
+    "en": "musical"
+  },
+  {
+    "id": "b1-881",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "virtud",
+    "en": "virtue"
+  },
+  {
+    "id": "b1-882",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "casco",
+    "en": "helmet"
+  },
+  {
+    "id": "b1-883",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "interpretación",
+    "en": "interpretation"
+  },
+  {
+    "id": "b1-884",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "secuestro",
+    "en": "kidnapping"
+  },
+  {
+    "id": "b1-885",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "solicitud",
+    "en": "request, solicitation"
+  },
+  {
+    "id": "b1-886",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "pescar",
+    "en": "to fish"
+  },
+  {
+    "id": "b1-887",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "reto",
+    "en": "challenge (a difficult task)"
+  },
+  {
+    "id": "b1-888",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "aguardar",
+    "en": "to wait"
+  },
+  {
+    "id": "b1-889",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "estropear",
+    "en": "to ruin, spoil"
+  },
+  {
+    "id": "b1-890",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "pariente",
+    "en": "relative, relation (member of one's family)"
+  },
+  {
+    "id": "b1-891",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "citar",
+    "en": "to cite"
+  },
+  {
+    "id": "b1-892",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "rebelde",
+    "en": "rebellious; rebel"
+  },
+  {
+    "id": "b1-893",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "campesino",
+    "en": "rural"
+  },
+  {
+    "id": "b1-894",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "confundido",
+    "en": "confused, addled"
+  },
+  {
+    "id": "b1-895",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "novedad",
+    "en": "novelty (the state of being new)"
+  },
+  {
+    "id": "b1-896",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "federación",
+    "en": "federation"
+  },
+  {
+    "id": "b1-897",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "gerente",
+    "en": "manager"
+  },
+  {
+    "id": "b1-898",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "frecuente",
+    "en": "frequent (done or occurring often)"
+  },
+  {
+    "id": "b1-899",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "asociado",
+    "en": "associated"
+  },
+  {
+    "id": "b1-900",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "rival",
+    "en": "rival"
+  },
+  {
+    "id": "b1-901",
+    "level": "B1",
+    "category": "General",
+    "es": "eva",
+    "en": "acronym of \"etilvinilacetato\" (ethylene-vinyl acetate)"
+  },
+  {
+    "id": "b1-902",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "cerebral",
+    "en": "cerebral"
+  },
+  {
+    "id": "b1-903",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "tragedia",
+    "en": "tragedy, catastrophe"
+  },
+  {
+    "id": "b1-904",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "distribución",
+    "en": "distribution"
+  },
+  {
+    "id": "b1-905",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "pánico",
+    "en": "pertaining to the god Pan"
+  },
+  {
+    "id": "b1-906",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "dispositivo",
+    "en": "dispositive, regulatory"
+  },
+  {
+    "id": "b1-907",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "infancia",
+    "en": "childhood (period of human development from birth until puberty)"
+  },
+  {
+    "id": "b1-908",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "tubo",
+    "en": "tube"
+  },
+  {
+    "id": "b1-909",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "divino",
+    "en": "divine"
+  },
+  {
+    "id": "b1-910",
+    "level": "B1",
+    "category": "General",
+    "es": "elena",
+    "en": "given name"
+  },
+  {
+    "id": "b1-911",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "riqueza",
+    "en": "wealth, affluence, richness"
+  },
+  {
+    "id": "b1-912",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "protagonista",
+    "en": "protagonist, star"
+  },
+  {
+    "id": "b1-913",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "falla",
+    "en": "flaw"
+  },
+  {
+    "id": "b1-914",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "genético",
+    "en": "genetic"
+  },
+  {
+    "id": "b1-915",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "ejecución",
+    "en": "execution (the act, manner, or style of executing actions)"
+  },
+  {
+    "id": "b1-916",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "razonable",
+    "en": "reasonable"
+  },
+  {
+    "id": "b1-917",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "naranja",
+    "en": "orange (having orange color)"
+  },
+  {
+    "id": "b1-918",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "poli",
+    "en": "cop"
+  },
+  {
+    "id": "b1-919",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "apariencia",
+    "en": "appearance (semblance, or apparent likeness)"
+  },
+  {
+    "id": "b1-920",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "medianoche",
+    "en": "midnight"
+  },
+  {
+    "id": "b1-921",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "almorzar",
+    "en": "to eat lunch"
+  },
+  {
+    "id": "b1-922",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "encanto",
+    "en": "charm, captivation"
+  },
+  {
+    "id": "b1-923",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "pluma",
+    "en": "feather"
+  },
+  {
+    "id": "b1-924",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "izquierdo",
+    "en": "surname"
+  },
+  {
+    "id": "b1-925",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "enterrado",
+    "en": "buried"
+  },
+  {
+    "id": "b1-926",
+    "level": "B1",
+    "category": "Adverbs",
+    "es": "principalmente",
+    "en": "mainly"
+  },
+  {
+    "id": "b1-927",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "dragón",
+    "en": "dragon (legendary serpentine creature)"
+  },
+  {
+    "id": "b1-928",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "teta",
+    "en": "boob (colloquial), tit (slightly vulgar), breast"
+  },
+  {
+    "id": "b1-929",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "limpieza",
+    "en": "cleanliness"
+  },
+  {
+    "id": "b1-930",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "amanecer",
+    "en": "to dawn"
+  },
+  {
+    "id": "b1-931",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "penal",
+    "en": "penal"
+  },
+  {
+    "id": "b1-932",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "timar",
+    "en": "to hustle, to con, to hoodwink, to swindle, to scam, to grift, to trick, to diddle"
+  },
+  {
+    "id": "b1-933",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "tele",
+    "en": "television"
+  },
+  {
+    "id": "b1-934",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "combatir",
+    "en": "to combat or fight"
+  },
+  {
+    "id": "b1-935",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "grasa",
+    "en": "fat or grease used in cooking"
+  },
+  {
+    "id": "b1-936",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "liberal",
+    "en": "liberal"
+  },
+  {
+    "id": "b1-937",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "multitud",
+    "en": "multitude"
+  },
+  {
+    "id": "b1-938",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "cinturón",
+    "en": "belt"
+  },
+  {
+    "id": "b1-939",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "frito",
+    "en": "fried"
+  },
+  {
+    "id": "b1-940",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "protegido",
+    "en": "protected"
+  },
+  {
+    "id": "b1-941",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "gota",
+    "en": "a drop or small amount of"
+  },
+  {
+    "id": "b1-942",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "logro",
+    "en": "attainment, achievement, accomplishment, success"
+  },
+  {
+    "id": "b1-943",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "préstamo",
+    "en": "loan"
+  },
+  {
+    "id": "b1-944",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "cañón",
+    "en": "canyon"
+  },
+  {
+    "id": "b1-945",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "excelencia",
+    "en": "excellency, brilliance"
+  },
+  {
+    "id": "b1-946",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "forense",
+    "en": "forensic (relating to the scientific investigation of evidence for a court of law)"
+  },
+  {
+    "id": "b1-947",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "rehén",
+    "en": "hostage"
+  },
+  {
+    "id": "b1-948",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "debilidad",
+    "en": "debility"
+  },
+  {
+    "id": "b1-949",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "pozo",
+    "en": "surname"
+  },
+  {
+    "id": "b1-950",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "depresión",
+    "en": "depression"
+  },
+  {
+    "id": "b1-951",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "independencia",
+    "en": "independence"
+  },
+  {
+    "id": "b1-952",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "instinto",
+    "en": "instinct"
+  },
+  {
+    "id": "b1-953",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "patria",
+    "en": "homeland, fatherland, motherland"
+  },
+  {
+    "id": "b1-954",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "conejo",
+    "en": "rabbit, cony, coney (male or unspecified sex)"
+  },
+  {
+    "id": "b1-955",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "automóvil",
+    "en": "automobile"
+  },
+  {
+    "id": "b1-956",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "incrementar",
+    "en": "to increment, to increase, to rise"
+  },
+  {
+    "id": "b1-957",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "abrazo",
+    "en": "hug, embrace"
+  },
+  {
+    "id": "b1-958",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "forzar",
+    "en": "to force, break through"
+  },
+  {
+    "id": "b1-959",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "sueldo",
+    "en": "salary"
+  },
+  {
+    "id": "b1-960",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "pavo",
+    "en": "turkey"
+  },
+  {
+    "id": "b1-961",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "hacienda",
+    "en": "treasury, tax office (governmental organization administrating finances)"
+  },
+  {
+    "id": "b1-962",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "parlamentario",
+    "en": "parliamentary"
+  },
+  {
+    "id": "b1-963",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "pastor",
+    "en": "surname"
+  },
+  {
+    "id": "b1-964",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "feria",
+    "en": "fair (celebration)"
+  },
+  {
+    "id": "b1-965",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "sobrar",
+    "en": "to be superfluous; to be left over or extra"
+  },
+  {
+    "id": "b1-966",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "arco",
+    "en": "bow (weapon)"
+  },
+  {
+    "id": "b1-967",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "sangrar",
+    "en": "to bleed"
+  },
+  {
+    "id": "b1-968",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "argentino",
+    "en": "Argentinian, Argentine"
+  },
+  {
+    "id": "b1-969",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "apetecer",
+    "en": "to feel like; to fancy; would like; to be down for"
+  },
+  {
+    "id": "b1-970",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "emocionante",
+    "en": "touching"
+  },
+  {
+    "id": "b1-971",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "espectador",
+    "en": "spectator, viewer"
+  },
+  {
+    "id": "b1-972",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "aliento",
+    "en": "breath"
+  },
+  {
+    "id": "b1-973",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "flota",
+    "en": "fleet"
+  },
+  {
+    "id": "b1-974",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "músculo",
+    "en": "muscle tissue"
+  },
+  {
+    "id": "b1-975",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "postura",
+    "en": "position"
+  },
+  {
+    "id": "b1-976",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "mejora",
+    "en": "improvement, improving, amelioration, betterment, refinement"
+  },
+  {
+    "id": "b1-977",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "recurrir",
+    "en": "to resort to"
+  },
+  {
+    "id": "b1-978",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "paro",
+    "en": "stop, stagnation (action of stopping)"
+  },
+  {
+    "id": "b1-979",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "camiseta",
+    "en": "T-shirt"
+  },
+  {
+    "id": "b1-980",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "infección",
+    "en": "infection"
+  },
+  {
+    "id": "b1-981",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "retrato",
+    "en": "portrait"
+  },
+  {
+    "id": "b1-982",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "chupar",
+    "en": "to suck"
+  },
+  {
+    "id": "b1-983",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "paisaje",
+    "en": "landscape (the view of an area of land)"
+  },
+  {
+    "id": "b1-984",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "descender",
+    "en": "to descend"
+  },
+  {
+    "id": "b1-985",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "lanza",
+    "en": "lance, spear, glaive"
+  },
+  {
+    "id": "b1-986",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "aniversario",
+    "en": "annual; yearly"
+  },
+  {
+    "id": "b1-987",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "estadio",
+    "en": "stadium"
+  },
+  {
+    "id": "b1-988",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "ampliar",
+    "en": "to extend, expand, enlarge"
+  },
+  {
+    "id": "b1-989",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "destrozar",
+    "en": "to destroy, to break"
+  },
+  {
+    "id": "b1-990",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "transportar",
+    "en": "to transport"
+  },
+  {
+    "id": "b1-991",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "descubrimiento",
+    "en": "discovery (something discovered)"
+  },
+  {
+    "id": "b1-992",
+    "level": "B1",
+    "category": "General",
+    "es": "hollywood",
+    "en": "Hollywood (A neighbourhood of Los Angeles in California, known as the center of the American motion picture industry.)"
+  },
+  {
+    "id": "b1-993",
+    "level": "B1",
+    "category": "Verbs",
+    "es": "pronunciar",
+    "en": "to pronounce"
+  },
+  {
+    "id": "b1-994",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "destrucción",
+    "en": "destruction"
+  },
+  {
+    "id": "b1-995",
+    "level": "B1",
+    "category": "Adjectives",
+    "es": "rubio",
+    "en": "surname"
+  },
+  {
+    "id": "b1-996",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "gasolina",
+    "en": "petrol, gasoline"
+  },
+  {
+    "id": "b1-997",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "payaso",
+    "en": "clownish; buffoonlike"
+  },
+  {
+    "id": "b1-998",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "resolución",
+    "en": "resolution"
+  },
+  {
+    "id": "b1-999",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "descripción",
+    "en": "description"
+  },
+  {
+    "id": "b1-1000",
+    "level": "B1",
+    "category": "Nouns",
+    "es": "diagnóstico",
+    "en": "diagnostic"
   }
 ]

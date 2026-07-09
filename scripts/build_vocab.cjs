@@ -296,8 +296,8 @@ const originalC1 = [
   {"level":"C1","category":"Falsos amigos","es":"sensible","en":"sensitive (NOT 'sensible' as in reasonable)"}
 ];
 
-// Target 200 items per level for exactly 1000 items total
-const LEVEL_TARGET = 200;
+// Target 1000 items per level for exactly 5000 items total
+const LEVEL_TARGET = 1000;
 
 const levelWords = {
   A1: [...originalA1],
@@ -324,14 +324,15 @@ while (candidateIndex < candidates.length) {
   if (!dictEntry) continue;
   
   // Decide which level has room and match frequency rank ranges
+  // Wider buckets for 1000-per-level target
   let targetLevel = 'A1';
-  if (candidateIndex < 2500) {
+  if (candidateIndex < 5000) {
     targetLevel = 'A1';
-  } else if (candidateIndex < 6000) {
+  } else if (candidateIndex < 12000) {
     targetLevel = 'A2';
-  } else if (candidateIndex < 11000) {
+  } else if (candidateIndex < 22000) {
     targetLevel = 'B1';
-  } else if (candidateIndex < 18000) {
+  } else if (candidateIndex < 35000) {
     targetLevel = 'B2';
   } else {
     targetLevel = 'C1';
@@ -388,4 +389,4 @@ fs.writeFileSync('src/data/vocab/b1.json', JSON.stringify(finalB1, null, 2));
 fs.writeFileSync('src/data/vocab/b2.json', JSON.stringify(finalB2, null, 2));
 fs.writeFileSync('src/data/vocab/c1.json', JSON.stringify(finalC1, null, 2));
 
-console.log('Database successfully scaled to exactly 1000 items!');
+console.log('Database successfully scaled to ~5000 items!');
