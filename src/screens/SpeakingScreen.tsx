@@ -3,12 +3,10 @@ import { useStatsStore } from '../state/statsStore';
 import { useSettingsStore } from '../state/settingsStore';
 import { translateToHinglish } from '../utils/hinglish';
 import {
-  SPEAKING_CHALLENGES,
   CEFR_LEVEL_META,
   CEFR_LEVELS,
   getChallengesByLevel,
   type CEFRLevel,
-  type SpeakingChallenge,
 } from '../data/speakingChallenges';
 import {
   Mic,

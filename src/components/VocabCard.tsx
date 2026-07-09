@@ -57,10 +57,6 @@ const STACK_OFFSETS = [
   { rotate: -2,  x: -3,  y:  4, opacity: 0.50, scale: 0.98 },
 ];
 
-// ── Spring configs ──────────────────────────────────────────────────────────
-
-const FLIP_SPRING = { type: 'spring' as const, stiffness: 300, damping: 30 };
-
 // ── Component Props ─────────────────────────────────────────────────────────
 
 interface VocabCardProps {
@@ -122,16 +118,8 @@ const VocabCard: FC<VocabCardProps> = ({
   const shouldReduceMotion = useReducedMotion();
   const colors = LEVEL_COLORS[item.level] || LEVEL_COLORS.A1;
 
-  const springTransition = shouldReduceMotion
-    ? { duration: 0 }
-    : FLIP_SPRING;
-
-  const fadeTransition = shouldReduceMotion
-    ? { duration: 0 }
-    : { duration: 0.15 };
-
-  // Status-specific border override
-  let borderClass = colors.edgeTint;
+  // Status-specific border or shadow override
+  let borderClass = 'border-[var(--structural)]';
   if (status === 'correct') {
     borderClass = 'border-success shadow-[0_0_12px_rgba(46,125,50,0.25)]';
   } else if (status === 'incorrect') {
@@ -140,7 +128,7 @@ const VocabCard: FC<VocabCardProps> = ({
 
   return (
     <div
-      className="relative w-full max-w-[300px] sm:max-w-[340px] h-[400px] sm:h-[440px] mx-auto"
+      className="relative w-full max-w-[320px] h-[430px] mx-auto"
       style={{ perspective: 1200 }}
     >
       {/* ── Stacked silhouette cards behind ── */}
@@ -155,166 +143,141 @@ const VocabCard: FC<VocabCardProps> = ({
         ))}
       </AnimatePresence>
 
-      {/* ── Active card (front) ── */}
-      <motion.div
+      {/* ── Active Card Container ── */}
+      <div
         onClick={onFlip}
-        className="absolute inset-0 cursor-pointer select-none"
+        className="uiverse-card-container select-none cursor-pointer absolute inset-0"
         style={{ zIndex: 10 }}
         role="button"
         aria-label={flipped ? `English: ${item.en}` : `Spanish: ${item.es}. Tap to reveal answer.`}
         tabIndex={0}
         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onFlip(); }}
       >
-        <motion.div
-          animate={{ rotateY: flipped ? 180 : 0 }}
-          transition={springTransition}
-          className="w-full h-full relative"
-          style={{ transformStyle: 'preserve-3d' }}
+        <div
+          className="uiverse-card-content hover-flip h-full w-full"
+          style={{
+            transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+            transition: shouldReduceMotion ? 'none' : undefined,
+          }}
         >
           {/* ═══ FRONT FACE (Spanish Word) ═══ */}
-          <motion.div
-            animate={{ opacity: flipped ? 0 : 1 }}
-            transition={fadeTransition}
-            className={`absolute inset-0 rounded-[1.25rem] border bg-[var(--bg-elevated)] ${borderClass}
-              flex flex-col items-center justify-center p-6`}
-            style={{
-              backfaceVisibility: 'hidden',
-              WebkitBackfaceVisibility: 'hidden',
-              boxShadow: `0 2px 8px rgba(0,0,0,0.04), 0 12px 40px rgba(0,0,0,0.08), ${colors.glowShadow}`,
-            }}
-          >
-            {/* Decorative sparkle corners */}
-            <span className="absolute top-4 left-4 text-accent-action opacity-25 text-base" aria-hidden="true">✦</span>
-            <span className="absolute bottom-4 right-4 text-accent-action opacity-25 text-base" aria-hidden="true">✦</span>
+          <div className="uiverse-card-front flex flex-col justify-between p-6">
+            {/* Blurry floating decorative circles */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+              <div className="uiverse-circle"></div>
+              <div className="uiverse-circle bottom"></div>
+              <div className="uiverse-circle right"></div>
+            </div>
 
-            {/* Level badge pill */}
-            <span
-              className={`absolute top-4 right-4 font-hud text-[10px] font-semibold px-2.5 py-0.5 rounded-full ${colors.badgeBg} ${colors.badgeText}`}
-            >
-              {item.level}
-            </span>
+            {/* Content overlay */}
+            <div className="relative z-10 flex flex-col justify-between h-full w-full">
+              {/* Top Row: Category Badge & CEFR Level */}
+              <div className="flex justify-between items-center w-full">
+                <span className="badge bg-black/25 backdrop-blur-[2px] text-white text-[9px] px-3 py-1 rounded-full font-hud font-semibold uppercase tracking-wider">
+                  {item.category}
+                </span>
+                <span className={`font-hud text-[10px] font-bold px-2.5 py-0.5 rounded-full ${colors.badgeBg} ${colors.badgeText}`}>
+                  {item.level}
+                </span>
+              </div>
 
-            {/* Spanish word — large, centered */}
-            <p className="font-display text-3xl sm:text-4xl font-bold text-text-primary text-center leading-tight px-4">
-              {item.es}
-            </p>
+              {/* Center: Spanish Word */}
+              <div className="flex flex-col items-center justify-center my-auto text-center px-4">
+                <p className="font-display text-3xl sm:text-4xl font-bold text-text-primary leading-tight">
+                  {item.es}
+                </p>
+                <p className="mt-2.5 font-hud text-[10px] uppercase tracking-[0.2em] text-text-secondary font-semibold">
+                  SPANISH
+                </p>
+              </div>
 
-            {/* SPANISH label */}
-            <p className="mt-3 font-hud text-[10px] uppercase tracking-[0.2em] text-text-tertiary">
-              SPANISH
-            </p>
-
-            {/* Footer hint */}
-            <p className="absolute bottom-5 font-body text-[10px] text-text-tertiary opacity-60">
-              tap to reveal answer
-            </p>
-          </motion.div>
+              {/* Bottom Row: Design Details & Tap Hint */}
+              <div className="flex justify-between items-center w-full border-t border-structural/30 pt-3">
+                <span className="text-text-tertiary text-xs">✦</span>
+                <p className="font-body text-[10px] text-text-secondary opacity-75 animate-pulse">
+                  tap to flip card
+                </p>
+                <span className="text-text-tertiary text-xs">✦</span>
+              </div>
+            </div>
+          </div>
 
           {/* ═══ BACK FACE (English Translation) ═══ */}
-          <motion.div
-            animate={{ opacity: flipped ? 1 : 0 }}
-            transition={fadeTransition}
-            className={`absolute inset-0 rounded-[1.25rem] border card-glow-border ${borderClass}`}
-            style={{
-              position: 'absolute',
-              backfaceVisibility: 'hidden',
-              WebkitBackfaceVisibility: 'hidden',
-              transform: 'rotateY(180deg)',
-              boxShadow: `0 2px 8px rgba(0,0,0,0.04), 0 12px 40px rgba(0,0,0,0.1), ${colors.glowShadow}`,
-            }}
-          >
-            <div className="card-inner-content flex flex-col items-center justify-center p-6 text-center h-full">
-              <AnimatePresence>
-                {flipped && (
-                  <div className="flex flex-col items-center gap-3 w-full">
-                    {/* English meaning */}
-                    <motion.p
-                      initial={shouldReduceMotion ? {} : { opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.25 }}
-                      className="font-display text-2xl sm:text-3xl font-bold text-accent-action px-2"
-                    >
-                      {item.en}
-                    </motion.p>
+          <div className="uiverse-card-back h-full w-full">
+            {/* Glowing card border wrapper */}
+            <div className={`uiverse-card-back-content ${borderClass}`}>
+              {/* Top Row: Info label & CEFR Level */}
+              <div className="flex justify-between items-center w-full absolute top-5 left-0 px-6 z-10">
+                <span className="text-[9px] font-hud font-semibold uppercase tracking-widest text-text-secondary">
+                  Meaning
+                </span>
+                <span className={`font-hud text-[10px] font-bold px-2.5 py-0.5 rounded-full ${colors.badgeBg} ${colors.badgeText}`}>
+                  {item.level}
+                </span>
+              </div>
 
-                    {/* Divider */}
-                    <motion.div
-                      initial={shouldReduceMotion ? {} : { scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.1, duration: 0.2 }}
-                      className="w-16 h-[2px] bg-structural"
-                    />
+              {/* Center Content: English Translation & Example */}
+              <div className="flex flex-col items-center justify-center gap-4 text-center w-full my-auto px-2">
+                <p className="font-display text-2xl sm:text-3xl font-bold text-accent-action leading-tight">
+                  {item.en}
+                </p>
+                <div className="w-12 h-[2px] bg-structural" />
 
-                    {/* Example sentence & translation */}
-                    {(item.example || item.exampleTranslation) ? (
-                      <motion.div
-                        initial={shouldReduceMotion ? {} : { opacity: 0, y: 6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.15, duration: 0.25 }}
-                        className="space-y-1.5 px-4"
-                      >
-                        {item.example && (
-                          <p className="font-target text-base text-text-primary italic leading-relaxed">
-                            &ldquo;{item.example}&rdquo;
-                          </p>
-                        )}
-                        {item.exampleTranslation && (
-                          <p className="font-body text-xs text-text-secondary">
-                            {item.exampleTranslation}
-                          </p>
-                        )}
-                      </motion.div>
-                    ) : (
-                      <motion.div
-                        initial={shouldReduceMotion ? {} : { opacity: 0, y: 6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.15, duration: 0.25 }}
-                        className="flex items-center gap-1.5 justify-center text-text-tertiary"
-                      >
-                        <Sparkles className="h-3.5 w-3.5 text-marigold shrink-0" />
-                        <span className="font-hud text-[9px] uppercase tracking-wider">
-                          {item.category} Category
-                        </span>
-                      </motion.div>
-                    )}
-
-                    {/* Tags */}
-                    {item.tags && item.tags.length > 0 && (
-                      <motion.div
-                        initial={shouldReduceMotion ? {} : { opacity: 0 }}
-                        animate={{ opacity: 0.8 }}
-                        transition={{ delay: 0.25 }}
-                        className="flex flex-wrap gap-1 justify-center mt-2"
-                      >
-                        {item.tags.map((tag) => (
-                          <span key={tag} className="text-[9px] font-hud bg-paper/5 px-2 py-0.5 rounded border border-structural/40 text-text-secondary">
-                            {tag}
-                          </span>
-                        ))}
-                      </motion.div>
+                {item.example ? (
+                  <div className="space-y-2 px-2">
+                    <p className="font-target text-base text-text-primary italic leading-relaxed font-medium">
+                      &ldquo;{item.example}&rdquo;
+                    </p>
+                    {item.exampleTranslation && (
+                      <p className="font-body text-xs text-text-secondary leading-normal">
+                        {item.exampleTranslation}
+                      </p>
                     )}
                   </div>
+                ) : (
+                  <div className="flex items-center gap-1.5 justify-center text-text-tertiary">
+                    <Sparkles className="h-3.5 w-3.5 text-accent-action shrink-0" />
+                    <span className="font-hud text-[9px] uppercase tracking-wider">
+                      {item.category} Category
+                    </span>
+                  </div>
                 )}
-              </AnimatePresence>
+              </div>
+
+              {/* Tags block */}
+              {item.tags && item.tags.length > 0 && (
+                <div className="flex flex-wrap gap-1 justify-center absolute bottom-16 left-0 px-6 w-full">
+                  {item.tags.slice(0, 3).map((tag) => (
+                    <span key={tag} className="text-[8px] font-hud bg-white/80 px-2 py-0.5 rounded border border-structural text-text-secondary font-medium">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
 
               {/* Validation overlay for correct/incorrect */}
               {status !== 'idle' && status !== 'revealed' && (
-                <motion.div
-                  initial={shouldReduceMotion ? {} : { opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className={`absolute top-4 left-4 flex items-center justify-center h-7 w-7 rounded-full border ${
-                    status === 'correct'
-                      ? 'border-success/30 bg-success/10 text-success'
-                      : 'border-error/30 bg-error/10 text-error'
-                  }`}
-                >
+                <div className={`absolute top-4 left-4 flex items-center justify-center h-7 w-7 rounded-full border ${
+                  status === 'correct'
+                    ? 'border-success/30 bg-success/10 text-success'
+                    : 'border-error/30 bg-error/10 text-error'
+                }`}>
                   {status === 'correct' ? <Check className="h-4 w-4" /> : <X className="h-4 w-4" />}
-                </motion.div>
+                </div>
               )}
+
+              {/* Bottom Row */}
+              <div className="flex justify-between items-center w-full absolute bottom-5 left-0 px-6 border-t border-structural/30 pt-3">
+                <span className="text-text-tertiary text-xs">✦</span>
+                <p className="font-hud text-[9px] uppercase tracking-wider text-text-secondary font-semibold">
+                  Kitsune's Path
+                </p>
+                <span className="text-text-tertiary text-xs">✦</span>
+              </div>
             </div>
-          </motion.div>
-        </motion.div>
-      </motion.div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

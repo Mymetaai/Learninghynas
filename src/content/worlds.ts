@@ -31,7 +31,12 @@ import { preA1Quest22 } from './preA1/quest22-gen';
 import { preA1Quest23 } from './preA1/quest23-gen';
 import { preA1Quest24 } from './preA1/quest24-gen';
 import { preA1Quest25 } from './preA1/quest25-gen';
-import { BOOK_LEVELS } from './bookLevels';
+
+import { a1Quests } from './a1/quests';
+import { a2Quests } from './a2/quests';
+import { b1Quests } from './b1/quests';
+import { b2Quests } from './b2/quests';
+import { c1Quests } from './c1/quests';
 
 const preA1Quests = [
   preA1Quest1, preA1Quest2, preA1Quest3, preA1Quest4,
@@ -98,21 +103,49 @@ export const worldPreA1: World = {
   tailsAwarded: 1,
 };
 
-// ── Structural stubs (A1–C1) populated from BOOK_LEVELS ─────────────────────────────────────────────
+// ── Expanded CEFR Levels (A1–C1) structured like Pre-A1 ─────────────────────────────────────────────
 
 export const worldA1: World = {
   id: 'world-a1',
   name: 'Bosque de Verbos',
   description: 'A forest where verbs conjugate as you walk — daily life, food, and friends.',
   level: 'A1',
-  quests: BOOK_LEVELS.slice(0, 5),
+  quests: a1Quests,
   chapters: [
     {
       id: 'a1-ch1',
       chapterNumber: 1,
       name: 'Verbal Paths',
       description: 'A forest where verbs conjugate as you walk.',
-      quests: BOOK_LEVELS.slice(0, 5),
+      quests: a1Quests.slice(0, 10),
+      endBoss: {
+        type: 'sentinel',
+        id: 'a1-ch1-boss',
+        name: 'Forest Sentinel',
+        hp: 5,
+        coinReward: 50
+      }
+    },
+    {
+      id: 'a1-ch2',
+      chapterNumber: 2,
+      name: 'The Whispering Trees',
+      description: 'Narration, nouns, and vocabulary relating to your surroundings.',
+      quests: a1Quests.slice(10, 20),
+      endBoss: {
+        type: 'sentinel',
+        id: 'a1-ch2-boss',
+        name: 'Path Warden',
+        hp: 5,
+        coinReward: 50
+      }
+    },
+    {
+      id: 'a1-ch3',
+      chapterNumber: 3,
+      name: 'Conjugation Clearing',
+      description: 'Deepen your knowledge of verbs and challenge the Guardian of the Forest.',
+      quests: a1Quests.slice(20, 25),
       endBoss: {
         type: 'guardian',
         id: 'world-a1-boss',
@@ -133,14 +166,42 @@ export const worldA2: World = {
   name: 'Ciudad Fluida',
   description: 'A bustling city of conversation — travel, markets, and small mysteries.',
   level: 'A2',
-  quests: BOOK_LEVELS.slice(5, 10),
+  quests: a2Quests,
   chapters: [
     {
       id: 'a2-ch1',
       chapterNumber: 1,
       name: 'Conversational Boulevards',
       description: 'A bustling city of conversation.',
-      quests: BOOK_LEVELS.slice(5, 10),
+      quests: a2Quests.slice(0, 10),
+      endBoss: {
+        type: 'sentinel',
+        id: 'a2-ch1-boss',
+        name: 'City Watch',
+        hp: 5,
+        coinReward: 50
+      }
+    },
+    {
+      id: 'a2-ch2',
+      chapterNumber: 2,
+      name: 'The Market Square',
+      description: 'Explore active city life, shops, and transport.',
+      quests: a2Quests.slice(10, 20),
+      endBoss: {
+        type: 'sentinel',
+        id: 'a2-ch2-boss',
+        name: 'Market Warden',
+        hp: 5,
+        coinReward: 50
+      }
+    },
+    {
+      id: 'a2-ch3',
+      chapterNumber: 3,
+      name: 'Oni District',
+      description: 'Solve local mysteries before confronting the main guardian.',
+      quests: a2Quests.slice(20, 25),
       endBoss: {
         type: 'guardian',
         id: 'world-a2-boss',
@@ -161,14 +222,42 @@ export const worldB1: World = {
   name: 'Montaña Avanzada',
   description: 'A steep mountain of subjunctive and idiom — opinions, feelings, and challenges.',
   level: 'B1',
-  quests: BOOK_LEVELS.slice(10, 15),
+  quests: b1Quests,
   chapters: [
     {
       id: 'b1-ch1',
       chapterNumber: 1,
       name: 'Subjunctive Heights',
       description: 'A steep mountain of subjunctive and idiom.',
-      quests: BOOK_LEVELS.slice(10, 15),
+      quests: b1Quests.slice(0, 10),
+      endBoss: {
+        type: 'sentinel',
+        id: 'b1-ch1-boss',
+        name: 'Peak Sentinel',
+        hp: 5,
+        coinReward: 50
+      }
+    },
+    {
+      id: 'b1-ch2',
+      chapterNumber: 2,
+      name: 'Mist Valleys',
+      description: 'Express emotions, doubts, and opinions clearly.',
+      quests: b1Quests.slice(10, 20),
+      endBoss: {
+        type: 'sentinel',
+        id: 'b1-ch2-boss',
+        name: 'Valley Keeper',
+        hp: 5,
+        coinReward: 50
+      }
+    },
+    {
+      id: 'b1-ch3',
+      chapterNumber: 3,
+      name: 'Sage Sanctuary',
+      description: 'Reach the summit and meet the mountain guardian.',
+      quests: b1Quests.slice(20, 25),
       endBoss: {
         type: 'guardian',
         id: 'world-b1-boss',
@@ -189,14 +278,42 @@ export const worldB2: World = {
   name: 'Templo del Fluir',
   description: 'A temple of flowing speech — work, debate, and social dynamics.',
   level: 'B2',
-  quests: BOOK_LEVELS.slice(15, 20),
+  quests: b2Quests,
   chapters: [
     {
       id: 'b2-ch1',
       chapterNumber: 1,
       name: 'Social Streams',
       description: 'A temple of flowing speech.',
-      quests: BOOK_LEVELS.slice(15, 20),
+      quests: b2Quests.slice(0, 10),
+      endBoss: {
+        type: 'sentinel',
+        id: 'b2-ch1-boss',
+        name: 'Stream Guard',
+        hp: 5,
+        coinReward: 50
+      }
+    },
+    {
+      id: 'b2-ch2',
+      chapterNumber: 2,
+      name: 'Hall of Debates',
+      description: 'Conduct abstract discussions, conditional logic, and formal debates.',
+      quests: b2Quests.slice(10, 20),
+      endBoss: {
+        type: 'sentinel',
+        id: 'b2-ch2-boss',
+        name: 'Hall Warden',
+        hp: 5,
+        coinReward: 50
+      }
+    },
+    {
+      id: 'b2-ch3',
+      chapterNumber: 3,
+      name: 'Inner Sanctum',
+      description: 'Demonstrate natural flowing speech before challenging the elder.',
+      quests: b2Quests.slice(20, 25),
       endBoss: {
         type: 'guardian',
         id: 'world-b2-boss',
@@ -217,14 +334,42 @@ export const worldC1: World = {
   name: 'Templo Maestro',
   description: 'The grand temple of fluency and nuance — literature, rhetoric, and mastery.',
   level: 'C1',
-  quests: BOOK_LEVELS.slice(20, 24),
+  quests: c1Quests,
   chapters: [
     {
       id: 'c1-ch1',
       chapterNumber: 1,
       name: 'Mastery Halls',
       description: 'The grand temple of fluency and nuance.',
-      quests: BOOK_LEVELS.slice(20, 24),
+      quests: c1Quests.slice(0, 10),
+      endBoss: {
+        type: 'sentinel',
+        id: 'c1-ch1-boss',
+        name: 'Hall Sentinel',
+        hp: 5,
+        coinReward: 50
+      }
+    },
+    {
+      id: 'c1-ch2',
+      chapterNumber: 2,
+      name: 'Chamber of Scrolls',
+      description: 'Explore literary styles, idioms, and subtle nuance registers.',
+      quests: c1Quests.slice(10, 20),
+      endBoss: {
+        type: 'sentinel',
+        id: 'c1-ch2-boss',
+        name: 'Scroll Warden',
+        hp: 5,
+        coinReward: 50
+      }
+    },
+    {
+      id: 'c1-ch3',
+      name: 'Ancestral Throne',
+      chapterNumber: 3,
+      description: 'Display absolute mastery of rhetoric to claim the final fox tails.',
+      quests: c1Quests.slice(20, 25),
       endBoss: {
         type: 'guardian',
         id: 'world-c1-boss',
@@ -248,3 +393,4 @@ export const ALL_WORLDS: World[] = [
   worldB2,
   worldC1,
 ];
+

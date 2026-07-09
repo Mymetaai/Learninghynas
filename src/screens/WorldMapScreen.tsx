@@ -266,7 +266,6 @@ const RegionCard = ({
                 defeatedSentinels={defeatedSentinels}
                 defeatedGuardians={defeatedGuardians}
                 onPinTap={onPinTap}
-                isWorldUnlocked={unlocked}
               />
             ))}
           </div>
@@ -285,7 +284,6 @@ interface ChapterSegmentProps {
   defeatedSentinels: string[];
   defeatedGuardians: string[];
   onPinTap: (id: string) => void;
-  isWorldUnlocked: boolean;
 }
 
 const ChapterSegment = ({
@@ -296,7 +294,6 @@ const ChapterSegment = ({
   defeatedSentinels,
   defeatedGuardians,
   onPinTap,
-  isWorldUnlocked,
 }: ChapterSegmentProps) => {
   const navigate = useNavigate();
 
@@ -315,19 +312,7 @@ const ChapterSegment = ({
 
   const isCompleted = allQuestsDone && isBossDefeated;
 
-  const isUnlocked = useMemo(() => {
-    if (!isWorldUnlocked) return false;
-    if (chapter.chapterNumber === 1) return true;
-    
-    // Previous chapter must be fully completed (quests + boss)
-    const prevCh = world.chapters?.find((c) => c.chapterNumber === chapter.chapterNumber - 1);
-    if (!prevCh) return false;
-    const prevQuestsDone = prevCh.quests.every((q) => completed.includes(q.id));
-    const prevBossDefeated = prevCh.endBoss.type === 'sentinel'
-      ? defeatedSentinels.includes(prevCh.endBoss.id)
-      : defeatedGuardians.includes(world.id);
-    return prevQuestsDone && prevBossDefeated;
-  }, [world, chapter, completed, defeatedSentinels, defeatedGuardians, isWorldUnlocked]);
+  const isUnlocked = true;
 
   // Construct pins state
   const pins = useMemo(() => {
@@ -389,12 +374,11 @@ const ChapterSegment = ({
   // Click handler for boss node
   const handleBossClick = () => {
     setSelectedPinIdx(pins.length);
-    if (allQuestsDone) {
-      if (chapter.endBoss.type === 'sentinel') {
-        navigate(`/boss?region=${world.id}&sentinel=${chapter.endBoss.id}`);
-      } else {
-        navigate(`/boss?region=${world.id}`);
-      }
+    // Allow boss navigation always (unlock all)
+    if (chapter.endBoss.type === 'sentinel') {
+      navigate(`/boss?region=${world.id}&sentinel=${chapter.endBoss.id}`);
+    } else {
+      navigate(`/boss?region=${world.id}`);
     }
   };
 
