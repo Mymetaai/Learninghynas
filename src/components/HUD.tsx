@@ -8,12 +8,16 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { NAV_TABS } from '../app/routes';
 import { useStatsStore } from '../state/statsStore';
 import { useSettingsStore } from '../state/settingsStore';
+import { useAuthStore } from '../state/authStore';
+import { Lock } from 'lucide-react';
+
 
 const HUD: FC = () => {
   const xp = useStatsStore((s) => s.xp);
   const coins = useStatsStore((s) => s.coins);
   const streak = useStatsStore((s) => s.streak);
   const { language, setLanguage } = useSettingsStore();
+  const logout = useAuthStore((s) => s.logout);
   const location = useLocation();
 
   // ── Sliding indicator state ──────────────────────────────────────────
@@ -174,6 +178,14 @@ const HUD: FC = () => {
               <option value="en">EN</option>
               <option value="hinglish">Hinglish</option>
             </select>
+            <button
+              onClick={() => logout()}
+              className="flex h-8 w-8 items-center justify-center rounded-md border border-structural text-text-primary transition-colors hover:border-error hover:text-error hover:bg-bg-elevated-2"
+              aria-label="Lock / Sign Out"
+              title="Lock / Sign Out"
+            >
+              <Lock className="h-3.5 w-3.5" />
+            </button>
           </div>
         </div>
 

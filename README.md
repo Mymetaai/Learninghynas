@@ -1,73 +1,42 @@
-# React + TypeScript + Vite
+# Kitsune's Path — Spanish Vocabulary Learning Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Kitsune's Path (also known as TheLearningHyena's Notebook) is a gamified, interactive Spanish language learning application built with React, TypeScript, Vite, and Tailwind CSS. The app features 3D assets, Framer Motion animations, progress tracking, and interactive exercises.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Interactive Adventure Map**: Winding SVG paths representing quest nodes leading up to a Guardian Boss Battle.
+- **3D Kitsune Companion**: An interactive, animated 3D pet rendered with Three.js.
+- **Yuki Boss Battle (HP Duel)**: A high-stakes playable screen featuring HP tracking, live questions, combo systems, and custom victory/defeat screens.
+- **Unified Vocab Trainer**: Flashcard fan rendering, auto-playing modes, and matching pairs shuffle systems.
+- **Design Language**: A beautiful cream, navy, and terracotta light theme with smooth animations.
 
-## React Compiler
+## 🛠️ Technology Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework**: React 19 + TypeScript + Vite
+- **Styling**: Tailwind CSS + Custom CSS tokens (Cream/Navy/Terracotta light theme)
+- **Animations**: Framer Motion
+- **3D Graphics**: Three.js
+- **State Management**: Zustand
+- **Routing**: React Router DOM
 
-## Expanding the ESLint configuration
+## 📂 Project Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- `src/components/`: Reusable components (e.g., exercises, 3D Kitsune, Confetti, Flashcards).
+- `src/screens/`: Main page layouts (e.g., Boss Battle, Shop, World Map, Profile).
+- `src/state/`: Zustand stores for player progress, statistics, companion modes, etc.
+- `src/content/`: Quest metadata, worlds, stories, and vocabulary JSON structures.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 💻 Getting Started
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+3. Build for production:
+   ```bash
+   npm run build
+   ```

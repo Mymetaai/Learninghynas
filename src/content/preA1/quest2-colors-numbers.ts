@@ -142,7 +142,7 @@ export const preA1Quest2: Quest = {
     {
       id: 'q2-reorder-1',
       type: 'reorder',
-      prompt: 'Put the numbers in order: ten, five, one, twenty',
+      prompt: 'Arrange the numbers from smallest to largest: ten, five, one, twenty',
       answer: 'uno|cinco|diez|veinte',
       options: ['diez', 'cinco', 'uno', 'veinte'],
     },

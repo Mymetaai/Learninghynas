@@ -1,4 +1,8 @@
-// Step 0 — folder placeholder.
-// Zustand stores (XP/coins/streak, progress, spaced repetition) will
-// live here from Step 10 onward.
-export {};
+export * from './authStore';
+export * from './companionStore';
+export * from './dailyQuestStore';
+export * from './progressStore';
+export * from './settingsStore';
+export * from './statsStore';
+export * from './trainingStore';
+

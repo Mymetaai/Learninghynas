@@ -1,0 +1,259 @@
+:root {
+  --bg-dark: #111113;
+  --bg-light: #FBE9D0; /* Soft warm cream from main app */
+  --lamp-color: #2d2d30;
+  --glow-color: rgba(255, 230, 130, 0.24); /* Warm yellow glow */
+}
+
+.lamp-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.light-off {
+  background-color: var(--bg-dark);
+}
+
+.light-on {
+  background-color: var(--bg-light);
+}
+
+/* Static Hardware Parts */
+.lamp-wire {
+  position: absolute;
+  top: 0;
+  width: 4px;
+  height: 120px;
+  background: var(--lamp-color);
+  z-index: 2;
+  box-shadow: 1px 0 2px rgba(0, 0, 0, 0.3);
+}
+
+.lamp-base {
+  position: absolute;
+  top: 120px;
+  width: 84px;
+  height: 42px;
+  background: var(--lamp-color);
+  border-radius: 40px 40px 0 0;
+  z-index: 2;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3),
+              inset 0 2px 3px rgba(255, 255, 255, 0.1);
+  transition: all 0.5s ease;
+}
+
+/* Add a glowing bottom rim reflection on the lamp shade when turned ON */
+.light-on .lamp-base {
+  box-shadow: 0 4px 10px rgba(253, 224, 71, 0.2), 
+              0 0 15px rgba(253, 224, 71, 0.1),
+              inset 0 -2px 8px rgba(253, 224, 71, 0.4),
+              inset 0 2px 3px rgba(255, 255, 255, 0.1);
+}
+
+/* Mechanical Pull Cord Setup */
+.pull-string {
+  position: absolute;
+  top: 158px;
+  left: calc(50% + 24px);
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.string-line {
+  width: 2px;
+  height: 95px;
+  background: #6b7280;
+  box-shadow: 1px 0 1px rgba(0, 0, 0, 0.2);
+}
+
+.string-bead {
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle at 4px 4px, #ff8b3d, #ea580c 70%, #9a3412);
+  border-radius: 50%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3),
+              0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+/* Pulse hint on string when off */
+.string-hint {
+  position: absolute;
+  top: 280px;
+  left: calc(50% + 38px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.6);
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-family: 'Inter', sans-serif;
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  z-index: 12;
+}
+
+/* Volumetric Light Cone Projection Geometry */
+.light-cone {
+  position: absolute;
+  top: 162px;
+  width: 0;
+  height: 0;
+  border-left: 260px solid transparent;
+  border-right: 260px solid transparent;
+  border-bottom: 680px solid var(--glow-color);
+  pointer-events: none;
+  z-index: 1;
+  transform-origin: top center;
+  filter: blur(1px);
+}
+
+/* Card Visual Design - Frosted Glassmorphism */
+.login-card {
+  position: absolute;
+  top: 310px;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 32px;
+  border-radius: 24px;
+  border: 1px solid rgba(225, 211, 192, 0.6); /* blends with main app structural token */
+  box-shadow: 0 25px 50px -12px rgba(36, 72, 85, 0.18),
+              0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  width: 350px;
+  z-index: 5;
+  box-sizing: border-box;
+}
+
+.login-card h2 {
+  margin-bottom: 4px;
+  color: #244855; /* --text-primary */
+  text-align: center;
+  font-family: 'Fraunces', serif;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.login-card-subtitle {
+  text-align: center;
+  font-size: 11px;
+  color: #4d6470; /* --text-secondary */
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 24px;
+}
+
+/* Input Fields and Layout States */
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #244855;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: 'Inter', sans-serif;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #e1d3c0; /* --structural */
+  border-radius: 12px;
+  box-sizing: border-box;
+  background-color: #fff3e3; /* --bg-elevated-2 */
+  color: #244855;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.25s ease;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #e64833; /* --accent-action */
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(230, 72, 51, 0.15);
+}
+
+/* Toggle Link styling */
+.login-toggle-mode {
+  text-align: center;
+  margin-top: 14px;
+}
+.login-toggle-mode button {
+  background: none;
+  border: none;
+  color: #e64833;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: opacity 0.2s;
+}
+.login-toggle-mode button:hover {
+  opacity: 0.8;
+}
+
+/* Interactive Trigger Button */
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  background: #244855; /* --text-primary */
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  margin-top: 10px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(36, 72, 85, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.login-btn:hover {
+  background: #19333c;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px -2px rgba(36, 72, 85, 0.25);
+}
+
+.login-btn:active {
+  transform: translateY(0);
+}
+
+.login-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #ffffff;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
