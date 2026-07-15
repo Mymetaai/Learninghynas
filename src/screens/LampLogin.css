@@ -1,20 +1,35 @@
+/* ===== PROFESSIONAL LAMP LOGIN ===== */
+
 :root {
-  --bg-dark: #111113;
-  --bg-light: #FBE9D0; /* Soft warm cream from main app */
-  --lamp-color: #2d2d30;
-  --glow-color: rgba(255, 230, 130, 0.24); /* Warm yellow glow */
+  --bg-dark: #0a0a0c;
+  --bg-light: #1a1814;
+  --lamp-metal: #2a2a2e;
+  --lamp-metal-light: #3a3a40;
+  --lamp-accent: #1f1f23;
+  --glow-warm: #ffd966;
+  --glow-soft: rgba(255, 217, 102, 0.15);
+  --glow-mid: rgba(255, 200, 80, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.06);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --text-primary: #f0f0f0;
+  --text-secondary: #a0a0a0;
+  --accent: #e8b84a;
+  --accent-hover: #f0c96a;
+  --success: #10b981;
 }
 
-.lamp-container {
+/* ===== SCENE SETUP ===== */
+.lamp-scene {
   position: relative;
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   overflow: hidden;
-  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .light-off {
@@ -25,235 +40,676 @@
   background-color: var(--bg-light);
 }
 
-/* Static Hardware Parts */
-.lamp-wire {
+/* ===== AMBIENT GLOW ===== */
+.ambient-glow {
   position: absolute;
   top: 0;
-  width: 4px;
-  height: 120px;
-  background: var(--lamp-color);
-  z-index: 2;
-  box-shadow: 1px 0 2px rgba(0, 0, 0, 0.3);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 217, 102, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.8s ease;
 }
 
-.lamp-base {
+.light-on .ambient-glow {
+  opacity: 1;
+}
+
+/* ===== FLOOR REFLECTION ===== */
+.floor-reflection {
   position: absolute;
-  top: 120px;
-  width: 84px;
-  height: 42px;
-  background: var(--lamp-color);
-  border-radius: 40px 40px 0 0;
-  z-index: 2;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3),
-              inset 0 2px 3px rgba(255, 255, 255, 0.1);
-  transition: all 0.5s ease;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 200px;
+  background: radial-gradient(ellipse at center, rgba(255, 217, 102, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.8s ease;
 }
 
-/* Add a glowing bottom rim reflection on the lamp shade when turned ON */
-.light-on .lamp-base {
-  box-shadow: 0 4px 10px rgba(253, 224, 71, 0.2), 
-              0 0 15px rgba(253, 224, 71, 0.1),
-              inset 0 -2px 8px rgba(253, 224, 71, 0.4),
-              inset 0 2px 3px rgba(255, 255, 255, 0.1);
+.light-on .floor-reflection {
+  opacity: 1;
 }
 
-/* Mechanical Pull Cord Setup */
-.pull-string {
-  position: absolute;
-  top: 158px;
-  left: calc(50% + 24px);
-  cursor: pointer;
-  z-index: 10;
+/* ===== LAMP ASSEMBLY ===== */
+.lamp-assembly {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 10;
+  margin-top: 0;
 }
 
-.string-line {
+/* Ceiling mount */
+.ceiling-mount {
+  width: 80px;
+  height: 8px;
+  background: linear-gradient(180deg, #1a1a1e 0%, #2a2a2e 100%);
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+/* Lamp pole */
+.lamp-pole {
+  width: 6px;
+  height: 180px;
+  background: linear-gradient(90deg, #1a1a1e 0%, #3a3a40 50%, #1a1a1e 100%);
+  box-shadow: 2px 0 4px rgba(0,0,0,0.3);
+}
+
+/* Lamp shade - cylindrical */
+.lamp-shade {
+  position: relative;
+  width: 120px;
+  height: 50px;
+  background: linear-gradient(180deg, #2a2a2e 0%, #1f1f23 100%);
+  border-radius: 8px 8px 20px 20px;
+  margin-top: -2px;
+  box-shadow: 
+    0 4px 12px rgba(0,0,0,0.4),
+    inset 0 1px 2px rgba(255,255,255,0.05);
+  z-index: 5;
+}
+
+.shade-inner {
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 60%;
+  background: linear-gradient(180deg, rgba(255, 230, 150, 0.3) 0%, rgba(255, 200, 80, 0.1) 100%);
+  border-radius: 0 0 16px 16px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.light-on .shade-inner {
+  opacity: 1;
+}
+
+.shade-glow {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 20px;
+  background: radial-gradient(ellipse, rgba(255, 220, 100, 0.4) 0%, transparent 70%);
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.light-on .shade-glow {
+  opacity: 1;
+}
+
+/* Bulb glow */
+.bulb-glow {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 30px;
+  background: radial-gradient(ellipse, rgba(255, 230, 150, 0.8) 0%, rgba(255, 200, 80, 0.2) 50%, transparent 100%);
+  filter: blur(6px);
+  border-radius: 50%;
+  z-index: 4;
+}
+
+/* Lamp stand base */
+.lamp-stand-base {
+  width: 100px;
+  height: 12px;
+  background: linear-gradient(180deg, #2a2a2e 0%, #1a1a1e 100%);
+  border-radius: 50%;
+  margin-top: 180px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+/* ===== PULL STRING ===== */
+.pull-string-container {
+  position: absolute;
+  left: calc(50% + 20px);
+  top: 232px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  z-index: 15;
+}
+
+.string-chain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.chain-link {
   width: 2px;
-  height: 95px;
-  background: #6b7280;
-  box-shadow: 1px 0 1px rgba(0, 0, 0, 0.2);
+  height: 8px;
+  background: linear-gradient(90deg, #555 0%, #888 50%, #555 100%);
+  border-radius: 1px;
 }
 
 .string-bead {
-  width: 12px;
-  height: 12px;
-  background: radial-gradient(circle at 4px 4px, #ff8b3d, #ea580c 70%, #9a3412);
-  border-radius: 50%;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3),
-              0 0 2px rgba(255, 255, 255, 0.2);
+  width: 14px;
+  height: 18px;
+  background: linear-gradient(180deg, #c9a84c 0%, #a08030 50%, #8b6914 100%);
+  border-radius: 4px 4px 8px 8px;
+  box-shadow: 
+    0 2px 6px rgba(0,0,0,0.4),
+    inset 0 1px 2px rgba(255,255,255,0.3);
+  margin-top: 2px;
+  cursor: pointer;
+  transition: transform 0.1s ease;
 }
 
-/* Pulse hint on string when off */
-.string-hint {
+.string-bead:hover {
+  filter: brightness(1.2);
+}
+
+.string-bead:active {
+  transform: translateY(4px);
+}
+
+/* ===== HINT ===== */
+.pull-hint {
   position: absolute;
-  top: 280px;
-  left: calc(50% + 38px);
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.6);
-  padding: 5px 10px;
-  border-radius: 12px;
-  font-size: 10px;
-  font-family: 'Inter', sans-serif;
+  top: 320px;
+  left: calc(50% + 50px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
   pointer-events: none;
   white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  z-index: 12;
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-/* Volumetric Light Cone Projection Geometry */
-.light-cone {
+.hint-icon {
+  color: var(--accent);
+  font-size: 10px;
+}
+
+/* ===== VOLUMETRIC LIGHT CONES ===== */
+.light-cone-outer,
+.light-cone-mid,
+.light-cone-inner,
+.light-cone-core {
   position: absolute;
-  top: 162px;
+  top: 235px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  transform-origin: top center;
+}
+
+.light-cone-outer {
   width: 0;
   height: 0;
-  border-left: 260px solid transparent;
-  border-right: 260px solid transparent;
-  border-bottom: 680px solid var(--glow-color);
-  pointer-events: none;
+  border-left: 350px solid transparent;
+  border-right: 350px solid transparent;
+  border-bottom: 700px solid rgba(255, 217, 102, 0.04);
+  filter: blur(40px);
   z-index: 1;
-  transform-origin: top center;
-  filter: blur(1px);
 }
 
-/* Card Visual Design - Frosted Glassmorphism */
-.login-card {
+.light-cone-mid {
+  width: 0;
+  height: 0;
+  border-left: 280px solid transparent;
+  border-right: 280px solid transparent;
+  border-bottom: 650px solid rgba(255, 210, 90, 0.06);
+  filter: blur(25px);
+  z-index: 2;
+}
+
+.light-cone-inner {
+  width: 0;
+  height: 0;
+  border-left: 200px solid transparent;
+  border-right: 200px solid transparent;
+  border-bottom: 600px solid rgba(255, 200, 70, 0.08);
+  filter: blur(15px);
+  z-index: 3;
+}
+
+.light-cone-core {
+  width: 0;
+  height: 0;
+  border-left: 120px solid transparent;
+  border-right: 120px solid transparent;
+  border-bottom: 550px solid rgba(255, 190, 60, 0.1);
+  filter: blur(8px);
+  z-index: 4;
+}
+
+/* ===== LOGIN CARD ===== */
+.login-card-wrapper {
   position: absolute;
-  top: 310px;
-  background: rgba(255, 255, 255, 0.85);
-  padding: 32px;
+  top: 320px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+}
+
+.login-card {
+  width: 360px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 24px;
-  border: 1px solid rgba(225, 211, 192, 0.6); /* blends with main app structural token */
-  box-shadow: 0 25px 50px -12px rgba(36, 72, 85, 0.18),
-              0 0 0 1px rgba(255, 255, 255, 0.6) inset;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  width: 350px;
-  z-index: 5;
+  padding: 36px;
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+    0 0 100px rgba(255, 217, 102, 0.05);
   box-sizing: border-box;
 }
 
-.login-card h2 {
-  margin-bottom: 4px;
-  color: #244855; /* --text-primary */
+.card-header {
   text-align: center;
-  font-family: 'Fraunces', serif;
-  font-size: 24px;
-  font-weight: 700;
+  margin-bottom: 28px;
 }
 
-.login-card-subtitle {
-  text-align: center;
-  font-size: 11px;
-  color: #4d6470; /* --text-secondary */
-  font-family: 'Inter', sans-serif;
-  margin-bottom: 24px;
+.card-header h2 {
+  color: var(--text-primary);
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.01em;
 }
 
-/* Input Fields and Layout States */
-.input-group {
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 13px;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* ===== INPUT FIELDS ===== */
+.input-field {
+  margin-bottom: 18px;
+}
+
+.input-field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrap input {
+  width: 100%;
+  padding: 12px 14px;
+  padding-right: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.input-wrap input::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.input-wrap input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0 3px rgba(232, 184, 74, 0.1);
+}
+
+.input-wrap input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.eye-btn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.eye-btn:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ===== FORGOT PASSWORD ===== */
+.forgot-row {
+  text-align: right;
   margin-bottom: 20px;
 }
 
-.input-group label {
-  display: block;
-  font-size: 11px;
-  font-weight: 600;
-  color: #244855;
-  margin-bottom: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-family: 'Inter', sans-serif;
-}
-
-.input-group input {
-  width: 100%;
-  padding: 12px 14px;
-  border: 1px solid #e1d3c0; /* --structural */
-  border-radius: 12px;
-  box-sizing: border-box;
-  background-color: #fff3e3; /* --bg-elevated-2 */
-  color: #244855;
-  font-size: 13px;
-  font-family: 'Inter', sans-serif;
-  transition: all 0.25s ease;
-}
-
-.input-group input:focus {
-  outline: none;
-  border-color: #e64833; /* --accent-action */
-  background-color: #ffffff;
-  box-shadow: 0 0 0 3px rgba(230, 72, 51, 0.15);
-}
-
-/* Toggle Link styling */
-.login-toggle-mode {
-  text-align: center;
-  margin-top: 14px;
-}
-.login-toggle-mode button {
-  background: none;
-  border: none;
-  color: #e64833;
-  font-size: 11px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: 'Inter', sans-serif;
+.forgot-link {
+  color: var(--accent);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 500;
   transition: opacity 0.2s;
 }
-.login-toggle-mode button:hover {
+
+.forgot-link:hover {
   opacity: 0.8;
 }
 
-/* Interactive Trigger Button */
-.login-btn {
+/* ===== SUBMIT BUTTON ===== */
+.submit-btn {
   width: 100%;
   padding: 14px;
-  background: #244855; /* --text-primary */
-  color: #ffffff;
+  background: linear-gradient(135deg, var(--accent) 0%, #d4a030 100%);
+  color: #1a1500;
   border: none;
   border-radius: 12px;
   cursor: pointer;
   font-weight: 600;
-  font-size: 13px;
-  font-family: 'Inter', sans-serif;
-  margin-top: 10px;
+  font-size: 14px;
+  font-family: inherit;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 6px -1px rgba(36, 72, 85, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  box-shadow: 0 4px 12px rgba(232, 184, 74, 0.2);
 }
 
-.login-btn:hover {
-  background: #19333c;
+.submit-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 12px -2px rgba(36, 72, 85, 0.25);
+  box-shadow: 0 6px 20px rgba(232, 184, 74, 0.3);
+  filter: brightness(1.05);
 }
 
-.login-btn:active {
+.submit-btn:active {
   transform: translateY(0);
 }
 
-.login-btn:disabled {
+.submit-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  transform: none;
 }
 
-.login-loading-spinner {
+.submit-btn.passkey-btn {
+  background: linear-gradient(135deg, #3a3a40 0%, #2a2a2e 100%);
+  color: var(--text-primary);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.submit-btn.passkey-btn:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+/* ===== SPINNER ===== */
+.spinner {
   width: 16px;
   height: 16px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(26, 21, 0, 0.3);
+  border-top-color: #1a1500;
   border-radius: 50%;
-  border-top-color: #ffffff;
   animation: spin 0.8s linear infinite;
 }
 
+.spinner-sm {
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
+  to { transform: rotate(360deg); }
+}
+
+/* ===== DIVIDER ===== */
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 12px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.divider span {
+  padding: 0 12px;
+}
+
+/* ===== TOGGLE METHOD ===== */
+.toggle-method {
+  width: 100%;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.toggle-method:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+}
+
+.toggle-method:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ===== PASSKEY SECTION ===== */
+.passkey-section {
+  padding: 8px 0;
+}
+
+.passkey-ready {
+  text-align: center;
+}
+
+.passkey-icon-wrap {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 20px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(232, 184, 74, 0.1) 0%, rgba(232, 184, 74, 0.05) 100%);
+  border: 1px solid rgba(232, 184, 74, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+}
+
+.passkey-desc {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  padding: 0 10px;
+}
+
+/* Scanning state */
+.scanning-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.scanner-ring {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scanner-beam {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: var(--accent);
+  border-right-color: rgba(232, 184, 74, 0.3);
+}
+
+.scan-icon {
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+.scan-text {
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ===== SUCCESS STATE ===== */
+.success-state {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.success-ring {
+  margin: 0 auto 20px;
+  width: 48px;
+  height: 48px;
+}
+
+.success-state h2 {
+  color: var(--text-primary);
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.success-state .subtitle {
+  margin-bottom: 20px;
+}
+
+.loading-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.loading-dots span {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: dotPulse 1.4s ease-in-out infinite;
+}
+
+.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dotPulse {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* ===== DUST PARTICLES ===== */
+.dust-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(255, 230, 150, 0.4);
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(255, 230, 150, 0.3);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .login-card {
+    width: 90vw;
+    padding: 28px 24px;
+  }
+
+  .light-cone-outer {
+    border-left-width: 250px;
+    border-right-width: 250px;
+  }
+
+  .light-cone-mid {
+    border-left-width: 200px;
+    border-right-width: 200px;
+  }
+
+  .light-cone-inner {
+    border-left-width: 140px;
+    border-right-width: 140px;
+  }
+
+  .light-cone-core {
+    border-left-width: 80px;
+    border-right-width: 80px;
   }
 }
