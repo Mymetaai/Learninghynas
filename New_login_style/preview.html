@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lamp Login — Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg-dark: #0b0b0e;
+    --bg-light: #FBE9D0;
+    --lamp-metal: #2c2c31;
+    --lamp-metal-hi: #48484f;
+    --cord-thread: #97979f;
+    --text-primary: #244855;
+    --text-secondary: #4d6470;
+    --structural: #e1d3c0;
+    --bg-elevated-2: #fff3e3;
+    --accent-action: #e64833;
+    --success: #2f9e44;
+    --shadow-tint: 36, 72, 85;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #000;
+  }
+
+  .lamp-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: clamp(28px, 6vh, 72px) clamp(20px, 6vw, 48px);
+    background: var(--bg-dark);
+  }
+
+  .ambient-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 120% 85% at 50% 30%,
+      rgba(120, 92, 52, 0.55) 0%,
+      rgba(54, 40, 26, 0.4) 42%,
+      rgba(11, 11, 14, 0) 78%);
+    opacity: 0;
+    transition: opacity 0.9s ease;
+    pointer-events: none;
+  }
+  .light-on .ambient-glow { opacity: 1; }
+
+  .scene {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(4px, 2.5vh, 20px);
+    width: 100%;
+    max-width: 960px;
+  }
+  @media (min-width: 760px) {
+    .scene { flex-direction: row; align-items: center; gap: clamp(48px, 9vw, 112px); }
+  }
+
+  .lamp-visual {
+    position: relative;
+    width: clamp(150px, 30vw, 210px);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .lamp-fixture-hit {
+    width: 100%;
+    cursor: pointer;
+    border-radius: 14px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .lamp-fixture-hit:focus-visible {
+    outline: 2px solid var(--accent-action);
+    outline-offset: 8px;
+    border-radius: 18px;
+  }
+
+  .lamp-fixture-svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .fixture-shape { fill: var(--lamp-metal); transition: fill 0.6s ease; }
+  .light-on .fixture-shape { fill: var(--lamp-metal-hi); }
+  .lamp-contact-shadow { fill: rgba(0,0,0,0.5); }
+
+  .cord-svg { position: absolute; top: 0; left: 0; width: 100%; height: auto; overflow: visible; pointer-events: none; }
+  .cord-line { fill: none; stroke: var(--cord-thread); stroke-width: 2.25; stroke-linecap: round; }
+  .cord-bead { pointer-events: auto; cursor: grab; touch-action: none; transition: transform 0.15s ease; transform-box: fill-box; transform-origin: center; }
+  .cord-bead:hover { transform: scale(1.1); }
+  .cord-bead.dragging { cursor: grabbing; transform: scale(1.18); }
+
+  .light-cone-svg {
+    position: absolute;
+    top: 7%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(260px, 62vw, 460px);
+    height: clamp(220px, 46vh, 420px);
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+  }
+  .light-on .light-cone-svg { opacity: 1; }
+
+  .pull-hint {
+    margin-top: clamp(10px, 2.2vh, 18px);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14);
+    color: rgba(255,255,255,0.65);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 11px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.4s ease 1s, transform 0.4s ease 1s;
+  }
+  .pull-hint.visible { opacity: 1; transform: scale(1); }
+  .pull-hint.hidden-hint { opacity: 0 !important; transform: scale(0.8) !important; transition-delay: 0s; }
+
+  .login-card {
+    width: min(392px, 100%);
+    background: rgba(255, 253, 247, 0.92);
+    padding: clamp(26px, 4.5vw, 36px);
+    border-radius: 22px;
+    border: 1px solid rgba(225, 211, 192, 0.55);
+    box-shadow:
+      0 30px 60px -20px rgba(var(--shadow-tint), 0.3),
+      0 10px 26px -14px rgba(var(--shadow-tint), 0.2),
+      0 0 0 1px rgba(255,255,255,0.55) inset;
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    opacity: 0;
+    transform: translateY(-22px) scale(0.96);
+    pointer-events: none;
+    transition: opacity 0.45s cubic-bezier(0.34,1.2,0.4,1), transform 0.45s cubic-bezier(0.34,1.2,0.4,1);
+    position: relative;
+  }
+  .light-on .login-card { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+
+  .login-card h2 {
+    margin: 0 0 4px; color: var(--text-primary); text-align: center;
+    font-family: 'Fraunces', ui-serif, Georgia, serif;
+    font-size: clamp(21px, 4vw, 26px); font-weight: 600; letter-spacing: -0.01em;
+  }
+  .login-card-subtitle {
+    text-align: center; font-size: 12.5px; line-height: 1.5; color: var(--text-secondary); margin: 0 0 24px;
+  }
+
+  .input-group { margin-bottom: 16px; }
+  .input-group label {
+    display: block; font-size: 11px; font-weight: 600; color: var(--text-primary);
+    margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .input-shell { position: relative; display: flex; align-items: center; }
+  .input-shell .input-icon { position: absolute; left: 13px; width: 15px; height: 15px; color: var(--text-secondary); opacity: 0.65; pointer-events: none; }
+  .input-group input {
+    width: 100%; padding: 12px 14px 12px 39px; border: 1px solid var(--structural); border-radius: 12px;
+    background-color: var(--bg-elevated-2); color: var(--text-primary); font-size: 13.5px; font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .input-group input::placeholder { color: #a89482; }
+  .input-group input:focus { outline: none; border-color: var(--accent-action); background-color: #fff; box-shadow: 0 0 0 3px rgba(230,72,51,0.15); }
+  .input-group input:disabled { opacity: 0.65; }
+
+  .password-toggle {
+    position: absolute; right: 8px; background: none; border: none; padding: 6px; display: flex;
+    color: var(--text-secondary); opacity: 0.7; cursor: pointer; transition: opacity 0.2s ease;
+  }
+  .password-toggle:hover { opacity: 1; }
+  .password-toggle:focus-visible { outline: 2px solid var(--accent-action); outline-offset: 2px; border-radius: 6px; }
+  .password-toggle svg { width: 16px; height: 16px; }
+
+  .login-toggle-mode { text-align: center; margin-top: 14px; }
+  .login-toggle-mode button {
+    background: none; border: none; color: var(--accent-action); font-size: 11.5px; font-weight: 600;
+    cursor: pointer; transition: opacity 0.2s; padding: 4px; display: inline-flex; align-items: center; gap: 5px;
+  }
+  .login-toggle-mode button:hover { opacity: 0.8; }
+  .login-toggle-mode button svg { width: 13px; height: 13px; }
+
+  .login-btn {
+    width: 100%; padding: 13px; background: linear-gradient(135deg, #2a5464 0%, #1c3841 100%);
+    color: #fff; border: none; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 13.5px;
+    margin-top: 8px; transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    box-shadow: 0 10px 22px -10px rgba(var(--shadow-tint), 0.45);
+    display: flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Inter', sans-serif;
+  }
+  .login-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 28px -10px rgba(var(--shadow-tint), 0.5); }
+  .login-btn:active { transform: translateY(0); }
+  .login-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .login-btn:focus-visible { outline: 2px solid var(--accent-action); outline-offset: 3px; }
+
+  .spinner {
+    width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%;
+    border-top-color: #fff; animation: spin 0.8s linear infinite; flex-shrink: 0;
+  }
+  .spinner.dark { border: 2px solid rgba(230,72,51,0.25); border-top-color: var(--accent-action); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .form-view, .passkey-view, .success-view { display: none; }
+  .form-view.active, .passkey-view.active, .success-view.active { display: block; }
+  .passkey-view.active { display: flex; flex-direction: column; align-items: center; padding: 16px 0; }
+
+  .success-view { text-align: center; padding: 24px 0; display: flex; flex-direction: column; align-items: center; }
+  .success-icon-wrap {
+    margin-bottom: 16px; width: 56px; height: 56px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(47,158,68,0.15); color: var(--success); border: 1px solid rgba(47,158,68,0.3);
+  }
+  .success-icon-wrap svg { width: 30px; height: 30px; }
+
+  .passkey-idle { text-align: center; width: 100%; }
+  .passkey-icon-circle {
+    margin: 0 auto 24px; width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    background: rgba(230,72,51,0.05); border: 1px solid rgba(230,72,51,0.1); color: rgba(230,72,51,0.6);
+  }
+  .passkey-icon-circle svg { width: 38px; height: 38px; }
+  .passkey-scan-box {
+    position: relative; width: 96px; height: 96px; border-radius: 16px; display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--structural); background: var(--bg-elevated-2); overflow: hidden;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.08); margin-bottom: 16px;
+  }
+  .passkey-scan-box svg { width: 46px; height: 46px; color: rgba(230,72,51,0.7); }
+  .scan-laser { position: absolute; left: 0; right: 0; height: 2px; background: var(--accent-action); box-shadow: 0 0 8px #e64833; animation: scanY 1.6s ease-in-out infinite; }
+  @keyframes scanY { 0%,100% { top: -4px; } 50% { top: 92px; } }
+  .passkey-status { font-size: 12px; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 6px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="lamp-container light-off" id="stage">
+  <div class="ambient-glow" aria-hidden="true"></div>
+
+  <div class="scene">
+    <div class="lamp-visual">
+      <svg class="light-cone-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <radialGradient id="coneGrad" cx="50%" cy="0%" r="85%">
+            <stop offset="0%" stop-color="#ffedbb" stop-opacity="0.85" />
+            <stop offset="40%" stop-color="#d9a25a" stop-opacity="0.5" />
+            <stop offset="100%" stop-color="#d9a25a" stop-opacity="0" />
+          </radialGradient>
+          <filter id="coneSoft" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="2.2" />
+          </filter>
+        </defs>
+        <polygon points="50,0 88,100 12,100" fill="url(#coneGrad)" filter="url(#coneSoft)" />
+      </svg>
+
+      <div class="lamp-fixture-hit" id="fixtureHit" role="switch" aria-checked="false" aria-label="Turn on the lamp to sign in" tabindex="0">
+        <svg class="lamp-fixture-svg" viewBox="0 0 220 300" aria-hidden="true">
+          <defs>
+            <linearGradient id="metalGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#18181b" />
+              <stop offset="45%" stop-color="#2c2c31" />
+              <stop offset="55%" stop-color="#48484f" />
+              <stop offset="100%" stop-color="#18181b" />
+            </linearGradient>
+          </defs>
+          <ellipse class="lamp-contact-shadow" cx="110" cy="270" rx="58" ry="7" />
+          <rect class="fixture-shape" x="106" y="24" width="8" height="216" rx="4" fill="url(#metalGrad)" />
+          <rect class="fixture-shape" x="63" y="240" width="94" height="15" rx="7.5" fill="url(#metalGrad)" />
+          <rect class="fixture-shape" x="52" y="7" width="116" height="17" rx="8.5" fill="url(#metalGrad)" />
+        </svg>
+      </div>
+
+      <svg class="cord-svg" viewBox="0 0 220 300" aria-hidden="true">
+        <defs>
+          <radialGradient id="beadGrad" cx="35%" cy="30%" r="75%">
+            <stop offset="0%" stop-color="#f3d089" />
+            <stop offset="55%" stop-color="#d9a83f" />
+            <stop offset="100%" stop-color="#8f691c" />
+          </radialGradient>
+        </defs>
+        <path class="cord-line" id="cordPath" d="M 144 24 Q 158 62 152 100" />
+        <circle class="cord-bead" id="cordBead" cx="152" cy="100" r="9" fill="url(#beadGrad)" />
+      </svg>
+
+      <div class="pull-hint visible" id="pullHint">💡 Pull the cord to sign in</div>
+    </div>
+
+    <div class="login-card" id="loginCard">
+
+      <div class="success-view" id="successView">
+        <div class="success-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <h2>Welcome Back!</h2>
+        <p class="login-card-subtitle">Preparing your notebook profile...</p>
+        <div class="spinner dark"></div>
+      </div>
+
+      <div id="formWrap">
+        <h2 id="cardTitle">Welcome Back</h2>
+        <p class="login-card-subtitle" id="cardSubtitle">Enter your credentials to continue</p>
+
+        <form class="form-view active" id="formView">
+          <div class="input-group">
+            <label for="pv-email">Email Address</label>
+            <div class="input-shell">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+              <input id="pv-email" name="email" type="email" autocomplete="email" required placeholder="name@example.com" />
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="pv-password">Password</label>
+            <div class="input-shell">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+              <input id="pv-password" name="password" type="password" autocomplete="current-password" required placeholder="••••••••" />
+              <button type="button" class="password-toggle" id="pwToggle" aria-label="Show password">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+          <button type="submit" class="login-btn" id="submitBtn">Sign In</button>
+        </form>
+
+        <div class="passkey-view" id="passkeyView">
+          <div class="passkey-idle" id="passkeyIdle">
+            <div class="passkey-icon-circle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12C2 6.5 6.5 2 12 2s10 4.5 10 10-4.5 10-10 10"/><path d="M12 8a4 4 0 0 0-4 4c0 2 1 3 1 5"/><path d="M12 8a4 4 0 0 1 4 4c0 1-.2 2-.5 3"/><path d="M9 16c-.5-1-1-2-1-4a4 4 0 0 1 8 0c0 3-1 4-1 6"/></svg>
+            </div>
+            <button type="button" class="login-btn" id="passkeyBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M2 12C2 6.5 6.5 2 12 2s10 4.5 10 10-4.5 10-10 10"/><path d="M12 8a4 4 0 0 0-4 4c0 2 1 3 1 5"/><path d="M12 8a4 4 0 0 1 4 4c0 1-.2 2-.5 3"/><path d="M9 16c-.5-1-1-2-1-4a4 4 0 0 1 8 0c0 3-1 4-1 6"/></svg>
+              Authenticate via Passkey
+            </button>
+          </div>
+          <div class="passkey-scanning" id="passkeyScanning" style="display:none; flex-direction:column; align-items:center;">
+            <div class="passkey-scan-box">
+              <div class="scan-laser"></div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12C2 6.5 6.5 2 12 2s10 4.5 10 10-4.5 10-10 10"/><path d="M12 8a4 4 0 0 0-4 4c0 2 1 3 1 5"/><path d="M12 8a4 4 0 0 1 4 4c0 1-.2 2-.5 3"/><path d="M9 16c-.5-1-1-2-1-4a4 4 0 0 1 8 0c0 3-1 4-1 6"/></svg>
+            </div>
+            <p class="passkey-status"><span class="spinner dark" style="width:12px;height:12px;"></span> Authenticating Passkey...</p>
+          </div>
+        </div>
+
+        <div class="login-toggle-mode">
+          <button type="button" id="modeToggleBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12C2 6.5 6.5 2 12 2s10 4.5 10 10-4.5 10-10 10"/><path d="M12 8a4 4 0 0 0-4 4c0 2 1 3 1 5"/><path d="M12 8a4 4 0 0 1 4 4c0 1-.2 2-.5 3"/><path d="M9 16c-.5-1-1-2-1-4a4 4 0 0 1 8 0c0 3-1 4-1 6"/></svg>
+            <span id="modeToggleLabel">Sign in without password</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var ATTACH = { x: 144, y: 24 };
+  var REST = { x: 152, y: 100 };
+  var PULL_THRESHOLD = 34;
+  var CONSTRAINTS = { top: -6, bottom: 66, left: -34, right: 34 };
+  var STIFFNESS = 170, DAMPING = 9, MASS = 0.7;
+  var reduceMotion = false;
+  try {
+    reduceMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  } catch (e) { /* matchMedia unavailable — default to full motion */ }
+
+  var stage = document.getElementById('stage');
+  var fixtureHit = document.getElementById('fixtureHit');
+  var cordSvg = document.querySelector('.cord-svg');
+  var cordPath = document.getElementById('cordPath');
+  var cordBead = document.getElementById('cordBead');
+  var pullHint = document.getElementById('pullHint');
+  var loginCard = document.getElementById('loginCard');
+
+  var isOn = false, hasToggled = false;
+  var dx = 0, dy = 0, vx = 0, vy = 0, tx = 0, ty = 0;
+  var rafId = null, dragging = false, dragOrigin = null;
+
+  function updatePath() {
+    var bx = REST.x + dx, by = REST.y + dy;
+    var midX = (ATTACH.x + bx) / 2, midY = (ATTACH.y + by) / 2;
+    var bow = (bx - ATTACH.x) * 0.5 + 10;
+    cordPath.setAttribute('d', 'M ' + ATTACH.x + ' ' + ATTACH.y + ' Q ' + (midX + bow).toFixed(1) + ' ' + midY.toFixed(1) + ' ' + bx.toFixed(1) + ' ' + by.toFixed(1));
+    cordBead.setAttribute('cx', bx.toFixed(1));
+    cordBead.setAttribute('cy', by.toFixed(1));
+  }
+
+  function stepSpring() {
+    var dt = 1 / 120;
+    var fx = -STIFFNESS * (dx - tx) - DAMPING * vx;
+    var fy = -STIFFNESS * (dy - ty) - DAMPING * vy;
+    vx += (fx / MASS) * dt; vy += (fy / MASS) * dt;
+    dx += vx * dt; dy += vy * dt;
+    updatePath();
+    if (Math.abs(vx) + Math.abs(vy) + Math.abs(dx - tx) + Math.abs(dy - ty) > 0.06) {
+      rafId = requestAnimationFrame(stepSpring);
+    } else {
+      dx = tx; dy = ty; vx = 0; vy = 0;
+      updatePath();
+      rafId = null;
+    }
+  }
+  function startSpring() {
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(stepSpring);
+  }
+
+  function playSwitchSound() {
+    try {
+      var Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return;
+      var ctx = new Ctx();
+      var osc = ctx.createOscillator(), gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.frequency.setValueAtTime(1400, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(150, ctx.currentTime + 0.04);
+      gain.gain.setValueAtTime(0.12, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
+      osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.04);
+
+      var osc2 = ctx.createOscillator(), gain2 = ctx.createGain();
+      osc2.connect(gain2); gain2.connect(ctx.destination);
+      osc2.frequency.setValueAtTime(450, ctx.currentTime + 0.035);
+      osc2.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 0.08);
+      gain2.gain.setValueAtTime(0.08, ctx.currentTime + 0.035);
+      gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+      osc2.start(ctx.currentTime + 0.035); osc2.stop(ctx.currentTime + 0.08);
+    } catch (e) { /* audio unsupported / blocked, ignore */ }
+  }
+
+  function setToggled(next) {
+    isOn = next;
+    hasToggled = true;
+    stage.classList.toggle('light-on', isOn);
+    stage.classList.toggle('light-off', !isOn);
+    fixtureHit.setAttribute('aria-checked', String(isOn));
+    fixtureHit.setAttribute('aria-label', isOn ? 'Turn off the lamp' : 'Turn on the lamp to sign in');
+    pullHint.classList.add('hidden-hint');
+    playSwitchSound();
+    if (isOn) resetCardToForm();
+  }
+
+  function kick() {
+    if (reduceMotion) return;
+    dx = 8; dy = 46; vx = 0; vy = 0; tx = 0; ty = 0;
+    startSpring();
+  }
+
+  function activateFixture() {
+    setToggled(!isOn);
+    kick();
+  }
+
+  fixtureHit.addEventListener('click', activateFixture);
+  fixtureHit.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activateFixture(); }
+  });
+
+  cordBead.addEventListener('pointerdown', function (e) {
+    dragging = true;
+    cordBead.classList.add('dragging');
+    if (rafId) cancelAnimationFrame(rafId);
+    try { cordBead.setPointerCapture(e.pointerId); } catch (err) {}
+    dragOrigin = { x: e.clientX, y: e.clientY, dx: dx, dy: dy };
+    e.preventDefault();
+  });
+  window.addEventListener('pointermove', function (e) {
+    if (!dragging || !dragOrigin) return;
+    var rect = cordSvg.getBoundingClientRect();
+    var scale = 220 / rect.width;
+    var nx = dragOrigin.dx + (e.clientX - dragOrigin.x) * scale;
+    var ny = dragOrigin.dy + (e.clientY - dragOrigin.y) * scale;
+    dx = Math.max(CONSTRAINTS.left, Math.min(CONSTRAINTS.right, nx));
+    dy = Math.max(CONSTRAINTS.top, Math.min(CONSTRAINTS.bottom, ny));
+    updatePath();
+  });
+  window.addEventListener('pointerup', function () {
+    if (!dragging) return;
+    dragging = false;
+    cordBead.classList.remove('dragging');
+    var pulled = Math.hypot(dx, dy);
+    if (pulled > PULL_THRESHOLD) setToggled(!isOn);
+    tx = 0; ty = 0;
+    startSpring();
+  });
+
+  updatePath();
+
+  // ---- card state machine -------------------------------------------------
+  var successView = document.getElementById('successView');
+  var formWrap = document.getElementById('formWrap');
+  var formView = document.getElementById('formView');
+  var passkeyView = document.getElementById('passkeyView');
+  var passkeyIdle = document.getElementById('passkeyIdle');
+  var passkeyScanning = document.getElementById('passkeyScanning');
+  var cardTitle = document.getElementById('cardTitle');
+  var cardSubtitle = document.getElementById('cardSubtitle');
+  var submitBtn = document.getElementById('submitBtn');
+  var passkeyBtn = document.getElementById('passkeyBtn');
+  var modeToggleBtn = document.getElementById('modeToggleBtn');
+  var modeToggleLabel = document.getElementById('modeToggleLabel');
+  var pwToggle = document.getElementById('pwToggle');
+  var pwInput = document.getElementById('pv-password');
+
+  var mode = 'password';
+
+  function resetCardToForm() {
+    successView.classList.remove('active');
+    formWrap.style.display = '';
+    mode = 'password';
+    formView.classList.add('active');
+    passkeyView.classList.remove('active');
+    cardTitle.textContent = 'Welcome Back';
+    cardSubtitle.textContent = 'Enter your credentials to continue';
+    modeToggleLabel.textContent = 'Sign in without password';
+    passkeyIdle.style.display = '';
+    passkeyScanning.style.display = 'none';
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = 'Sign In';
+  }
+
+  modeToggleBtn.addEventListener('click', function () {
+    mode = mode === 'password' ? 'passkey' : 'password';
+    if (mode === 'passkey') {
+      formView.classList.remove('active');
+      passkeyView.classList.add('active');
+      cardSubtitle.textContent = 'Sign in instantly using your device biometrics';
+      modeToggleLabel.textContent = 'Use traditional password';
+    } else {
+      passkeyView.classList.remove('active');
+      formView.classList.add('active');
+      cardSubtitle.textContent = 'Enter your credentials to continue';
+      modeToggleLabel.textContent = 'Sign in without password';
+    }
+  });
+
+  pwToggle.addEventListener('click', function () {
+    var showing = pwInput.type === 'text';
+    pwInput.type = showing ? 'password' : 'text';
+    pwToggle.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
+    pwToggle.innerHTML = showing
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c6.5 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.53 13.53 0 0 0 2 11s3.5 7 10 7a9.1 9.1 0 0 0 5-1.5"/><path d="M2 2l20 20"/><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/></svg>';
+  });
+
+  function showSuccess(subtitle) {
+    formWrap.style.display = 'none';
+    successView.classList.add('active');
+  }
+
+  formView.addEventListener('submit', function (e) {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner"></span> Signing In...';
+    setTimeout(function () {
+      showSuccess();
+      setTimeout(function () {
+        // In the real app this calls useAuthStore().login(email, 'Traditional Password')
+        console.log('login() called with', document.getElementById('pv-email').value || 'wayfarer@learninghyena.org');
+        setTimeout(function () { setToggled(false); }, 900);
+      }, 1500);
+    }, 1800);
+  });
+
+  passkeyBtn.addEventListener('click', function () {
+    passkeyIdle.style.display = 'none';
+    passkeyScanning.style.display = 'flex';
+    setTimeout(function () {
+      showSuccess();
+      setTimeout(function () {
+        console.log('login() called with biometric.user@domain.local');
+        setTimeout(function () { setToggled(false); }, 900);
+      }, 1500);
+    }, 2500);
+  });
+})();
+</script>
+
+</body>
+</html>
