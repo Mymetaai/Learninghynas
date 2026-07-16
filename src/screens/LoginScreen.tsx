@@ -18,8 +18,7 @@ import './LampLogin.css';
 // SVG and the cord SVG always line up, at any rendered size.
 // ---------------------------------------------------------------------------
 const ATTACH = { x: 144, y: 24 }; // where the cord leaves the underside of the shade
-const REST_BEAD = { x: 152, y: 100 }; // resting bead position — already off-axis, so the
-// cord reads as a hanging, slightly slack line rather than a rigid straight rod
+const REST_BEAD = { x: 144, y: 100 }; // resting bead position — aligned straight under ATTACH
 const BEAD_RADIUS = 9;
 const PULL_THRESHOLD = 34; // drag distance (SVG units) needed to actually toggle
 const DRAG_CONSTRAINTS = { top: -6, bottom: 66, left: -34, right: 34 };
@@ -80,9 +79,8 @@ const LoginScreen: React.FC = () => {
     const by = REST_BEAD.y + dy;
     const midX = (ATTACH.x + bx) / 2;
     const midY = (ATTACH.y + by) / 2;
-    // Bow the control point outward so the line reads as slack rope, and
-    // bow it further the more the bead is pulled sideways.
-    const bow = (bx - ATTACH.x) * 0.5 + 10;
+    // Bow the control point based on side-to-side drag so it curves naturally when pulled
+    const bow = (bx - ATTACH.x) * 0.5;
     return `M ${ATTACH.x} ${ATTACH.y} Q ${(midX + bow).toFixed(1)} ${midY.toFixed(1)} ${bx.toFixed(1)} ${by.toFixed(1)}`;
   });
 
