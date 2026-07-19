@@ -129,6 +129,7 @@ const ShopScreen: FC = () => {
   const coins = useStatsStore((s) => s.coins);
   const spendCoins = useStatsStore((s) => s.spendCoins);
   const collectCard = useStatsStore((s) => s.collectCard);
+  const collectAllCards = useStatsStore((s) => s.collectAllCards);
   const collectedCardIds = useStatsStore((s) => s.collectedCardIds);
   
   // Add direct reward cheat button for testing
@@ -450,6 +451,12 @@ const ShopScreen: FC = () => {
     addRewards(0, 100); // Add 100 cheat coins for convenience
   };
 
+  const handleUnlockAll = () => {
+    const opIds = ONE_PIECE_CARDS.map(c => c.id);
+    const dsIds = DEMON_SLAYER_CARDS.map(c => c.id);
+    collectAllCards([...opIds, ...dsIds]);
+  };
+
   return (
     <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary p-4 sm:p-6 lg:p-8 font-body pb-20">
       <div className="mx-auto max-w-5xl">
@@ -487,6 +494,13 @@ const ShopScreen: FC = () => {
               title="Get free coins for quick testing"
             >
               +100 Coins (Test)
+            </button>
+            <button
+              onClick={handleUnlockAll}
+              className="bg-accent-action/10 hover:bg-accent-action/20 border border-accent-action/30 text-accent-action font-hud text-[9px] uppercase px-3 py-2.5 rounded-xl transition-colors cursor-pointer"
+              title="Unlock all collectible cards"
+            >
+              Unlock All (Test)
             </button>
           </div>
         </div>
@@ -940,7 +954,7 @@ const ShopScreen: FC = () => {
                                 src={drawnCard.imageUrl}
                                 alt={drawnCard.name}
                                 onError={() => setImageErrors((prev) => ({ ...prev, [drawnCard.id]: true }))}
-                                className="h-full w-full object-cover relative z-5"
+                                className="h-full w-full object-cover object-top relative z-5"
                               />
                             )}
                           </div>
@@ -951,9 +965,15 @@ const ShopScreen: FC = () => {
                             <p className="font-body text-[10px] text-pencil/90 truncate italic">"{drawnCard.description}"</p>
                           </div>
 
-                          <div className="w-full border-t border-white/10 pt-2 flex items-center justify-between font-hud text-[9px] text-[#ff7a3c] font-semibold">
-                            <span>Power: {drawnCard.bounty}</span>
-                            <span>{drawnCard.specialMove}</span>
+                          <div className="w-full border-t border-white/10 pt-2 grid grid-cols-2 gap-2 font-hud text-[9px] text-[#ff7a3c] font-semibold">
+                            <div className="flex flex-col text-left">
+                              <span className="text-white/40 text-[7px] uppercase tracking-wider">Power</span>
+                              <span className="truncate">{drawnCard.bounty}</span>
+                            </div>
+                            <div className="flex flex-col text-right">
+                              <span className="text-white/40 text-[7px] uppercase tracking-wider">Special Move</span>
+                              <span className="truncate" title={drawnCard.specialMove}>{drawnCard.specialMove}</span>
+                            </div>
                           </div>
                         </div>
                       )}
@@ -1002,10 +1022,10 @@ const ShopScreen: FC = () => {
                     <button
                       key={r}
                       onClick={() => setFilterRarity(r)}
-                      className={`px-3 py-1.5 rounded-xl font-hud text-[10px] uppercase font-bold border transition-all cursor-pointer ${
+                      className={`px-3 py-1.5 rounded-xl font-hud text-[10px] uppercase font-bold transition-all cursor-pointer ${
                         filterRarity === r
-                          ? 'bg-accent-action border-accent-action text-white shadow-sm'
-                          : 'bg-transparent border-structural text-text-secondary hover:border-text-secondary hover:text-text-primary'
+                          ? 'ios-glass-button-active'
+                          : 'ios-glass-button text-text-secondary hover:text-text-primary'
                       }`}
                     >
                       {r}
@@ -1024,9 +1044,9 @@ const ShopScreen: FC = () => {
                       <div
                         key={card.id}
                         onClick={() => isCollected && setSelectedCard(card)}
-                        className={`relative rounded-xl border p-3 flex flex-col items-center justify-between text-center transition-all ${
+                        className={`relative rounded-xl border p-3 flex flex-col items-center justify-between text-center binder-card ${
                           isCollected
-                            ? 'bg-bg-base/20 border-structural cursor-pointer hover:-translate-y-1 hover:shadow-md'
+                            ? `ios-glass-card cursor-pointer glow-${card.rarity}`
                             : 'bg-bg-base/5 border-structural/35 opacity-40 select-none'
                         }`}
                       >
@@ -1040,7 +1060,7 @@ const ShopScreen: FC = () => {
                                 src={card.imageUrl}
                                 alt={card.name}
                                 onError={() => setImageErrors((prev) => ({ ...prev, [card.id]: true }))}
-                                className="h-full w-full object-cover"
+                                className="h-full w-full object-cover object-top"
                               />
                             )
                           )}
@@ -1069,13 +1089,13 @@ const ShopScreen: FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-bg-base/80 backdrop-blur-md z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/25 backdrop-blur-xl z-50 flex items-center justify-center p-4"
           >
             <motion.div
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="bg-bg-elevated border-2 border-structural rounded-3xl max-w-2xl w-full p-5 shadow-2xl relative flex flex-col md:flex-row gap-6"
+              className="ios-glass-panel rounded-3xl max-w-2xl w-full p-5 shadow-2xl relative flex flex-col md:flex-row gap-6"
             >
               <button
                 onClick={() => {
@@ -1089,14 +1109,13 @@ const ShopScreen: FC = () => {
 
               <div className="flex-1 flex flex-col items-center">
                 <div
-                  className="w-[200px] h-[300px] rounded-2xl border-2 p-4 text-center flex flex-col justify-between relative shadow-xl overflow-hidden animate-glow"
+                  className={`w-[200px] h-[300px] rounded-2xl border-2 p-4 text-center flex flex-col justify-between relative overflow-hidden glow-${selectedCard.rarity} pulse-glow-${selectedCard.rarity}`}
                   style={{
-                    borderColor: selectedCard.rarity === 'legendary' ? '#f3c969' :
-                                 selectedCard.rarity === 'epic' ? '#b388ff' :
-                                 selectedCard.rarity === 'rare' ? '#5fb6ff' : '#cbd5e1',
-                    background: selectedCard.rarity === 'legendary' ? 'linear-gradient(160deg, #3a2a08, #1f1505)' :
-                                selectedCard.rarity === 'epic' ? 'linear-gradient(160deg, #241338, #150b22)' :
-                                selectedCard.rarity === 'rare' ? 'linear-gradient(160deg, #0c2438, #06151f)' : 'linear-gradient(160deg, #211d18, #15120e)',
+                    background: selectedCard.rarity === 'legendary' ? 'linear-gradient(135deg, rgba(58, 42, 8, 0.8) 0%, rgba(31, 21, 5, 0.9) 100%)' :
+                                selectedCard.rarity === 'epic' ? 'linear-gradient(135deg, rgba(36, 19, 56, 0.8) 0%, rgba(21, 11, 34, 0.9) 100%)' :
+                                selectedCard.rarity === 'rare' ? 'linear-gradient(135deg, rgba(12, 36, 56, 0.8) 0%, rgba(6, 21, 31, 0.9) 100%)' : 'linear-gradient(135deg, rgba(33, 29, 24, 0.8) 0%, rgba(21, 18, 14, 0.9) 100%)',
+                    backdropFilter: 'blur(30px)',
+                    WebkitBackdropFilter: 'blur(30px)',
                   }}
                 >
                   <div className="w-full flex items-center justify-between border-b border-white/10 pb-1.5 text-[8px] font-hud font-semibold text-text-secondary/80">
@@ -1117,19 +1136,25 @@ const ShopScreen: FC = () => {
                         src={selectedCard.imageUrl}
                         alt={selectedCard.name}
                         onError={() => setImageErrors((prev) => ({ ...prev, [selectedCard.id]: true }))}
-                        className="h-full w-full object-cover"
+                        className="h-full w-full object-cover object-top"
                       />
                     )}
                   </div>
 
                   <div className="text-left space-y-1">
                     <h3 className="font-display text-sm font-bold text-white truncate">{selectedCard.name}</h3>
-                    <p className="font-body text-[10px] text-text-secondary italic line-clamp-2">"\\${selectedCard.description}"</p>
+                    <p className="font-body text-[10px] text-text-secondary italic line-clamp-2">"{selectedCard.description}"</p>
                   </div>
 
-                  <div className="w-full border-t border-white/10 pt-1.5 flex items-center justify-between font-hud text-[8px] text-[#ff7a3c] font-semibold">
-                    <span>Power: {selectedCard.bounty}</span>
-                    <span>{selectedCard.specialMove}</span>
+                  <div className="w-full border-t border-white/10 pt-1.5 grid grid-cols-2 gap-2 font-hud text-[8px] text-[#ff7a3c] font-semibold">
+                    <div className="flex flex-col text-left">
+                      <span className="text-white/40 text-[7px] uppercase tracking-wider">Power</span>
+                      <span className="truncate">{selectedCard.bounty}</span>
+                    </div>
+                    <div className="flex flex-col text-right">
+                      <span className="text-white/40 text-[7px] uppercase tracking-wider">Special Move</span>
+                      <span className="truncate" title={selectedCard.specialMove}>{selectedCard.specialMove}</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1144,10 +1169,10 @@ const ShopScreen: FC = () => {
                       <button
                         key={key}
                         onClick={() => setSelectedHotspot(key as any)}
-                        className={`text-left p-2.5 rounded-xl border text-[11px] font-semibold transition-all cursor-pointer ${
+                        className={`text-left p-2.5 rounded-xl text-[11px] font-semibold transition-all cursor-pointer ${
                           selectedHotspot === key
-                            ? 'bg-accent-action border-accent-action text-white shadow-sm'
-                            : 'bg-bg-base/15 border-structural text-text-secondary hover:border-text-secondary hover:text-text-primary'
+                            ? 'ios-glass-button-active'
+                            : 'ios-glass-button text-text-secondary hover:text-text-primary'
                         }`}
                       >
                         {value.title}
@@ -1156,7 +1181,7 @@ const ShopScreen: FC = () => {
                   </div>
 
                   {selectedHotspot && (
-                    <div className="mt-4 p-3 bg-bg-base/35 border border-structural rounded-2xl">
+                    <div className="mt-4 p-3 ios-glass-inner-panel rounded-2xl">
                       <h4 className="font-display text-xs font-bold text-text-primary flex items-center gap-1.5">
                         <Info size={13} className="text-accent-action" />
                         {activeHotspots[selectedHotspot].title}
@@ -1195,13 +1220,13 @@ const ShopScreen: FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-bg-base/80 backdrop-blur-md z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/25 backdrop-blur-xl z-50 flex items-center justify-center p-4"
           >
             <motion.div
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="bg-bg-elevated border-2 border-accent-action rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl relative space-y-4"
+              className="ios-glass-panel rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl relative space-y-4"
             >
               <span className="text-5xl block animate-bounce" role="img" aria-label="Gift">🎁</span>
               <div>
@@ -1209,7 +1234,7 @@ const ShopScreen: FC = () => {
                 <p className="font-body text-xs text-text-secondary mt-1">Here is the random reward you pulled:</p>
               </div>
 
-              <div className="bg-bg-base/40 border border-structural rounded-2xl p-4">
+              <div className="ios-glass-inner-panel rounded-2xl p-4">
                 <h4 className="font-display text-base font-extrabold text-accent-action">{chestReward.title}</h4>
                 <p className="font-body text-xs text-text-secondary mt-1.5 leading-relaxed">{chestReward.detail}</p>
               </div>
@@ -1232,13 +1257,13 @@ const ShopScreen: FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-bg-base/80 backdrop-blur-md z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/25 backdrop-blur-xl z-50 flex items-center justify-center p-4"
           >
             <motion.div
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="bg-bg-elevated border-2 border-success rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl space-y-4"
+              className="ios-glass-panel rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl space-y-4"
             >
               <span className="text-5xl block animate-pulse" role="img" aria-label="Celebration">🎉</span>
               <div>
@@ -1246,7 +1271,7 @@ const ShopScreen: FC = () => {
                 <p className="font-body text-xs text-text-secondary mt-1">Thank you for your purchase!</p>
               </div>
 
-              <div className="bg-bg-base/40 border border-structural rounded-2xl p-4">
+              <div className="ios-glass-inner-panel rounded-2xl p-4">
                 <h4 className="font-display text-sm font-extrabold text-success">{purchaseCelebration.name}</h4>
                 <p className="font-body text-[11px] text-text-secondary mt-1">Cost: {purchaseCelebration.cost} KC</p>
                 {purchaseCelebration.desc && (
@@ -1272,13 +1297,13 @@ const ShopScreen: FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-bg-base/80 backdrop-blur-md z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/25 backdrop-blur-xl z-50 flex items-center justify-center p-4"
           >
             <motion.div
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="bg-bg-elevated border-2 border-structural rounded-3xl max-w-md w-full p-6 shadow-2xl relative space-y-4"
+              className="ios-glass-panel rounded-3xl max-w-md w-full p-6 shadow-2xl relative space-y-4"
             >
               <button
                 onClick={() => setShowCoinTips(false)}
@@ -1287,7 +1312,7 @@ const ShopScreen: FC = () => {
                 <X size={18} />
               </button>
 
-              <h3 className="font-display text-lg font-bold text-text-primary border-b border-structural pb-2">
+              <h3 className="font-display text-lg font-bold text-text-primary border-b border-white/20 pb-2">
                 💰 How to Earn Kitsune Coins Faster
               </h3>
 
@@ -1334,6 +1359,55 @@ const ShopScreen: FC = () => {
       </AnimatePresence>
 
       <style>{`
+        /* iOS 27 Glassmorphism Styles */
+        .ios-glass-panel {
+          background: rgba(255, 255, 255, 0.45) !important;
+          backdrop-filter: blur(40px) saturate(210%) !important;
+          -webkit-backdrop-filter: blur(40px) saturate(210%) !important;
+          border: 1px solid rgba(255, 255, 255, 0.45) !important;
+          box-shadow: 
+            0 12px 40px rgba(31, 38, 135, 0.08),
+            0 1px 0 rgba(255, 255, 255, 0.5) inset,
+            0 -1px 0 rgba(0, 0, 0, 0.05) inset !important;
+        }
+
+        .ios-glass-card {
+          background: rgba(255, 255, 255, 0.35) !important;
+          backdrop-filter: blur(20px) saturate(180%) !important;
+          -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+          border: 1px solid rgba(255, 255, 255, 0.4) !important;
+          box-shadow: 
+            0 8px 32px 0 rgba(31, 38, 135, 0.06),
+            0 1px 0 rgba(255, 255, 255, 0.4) inset !important;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .ios-glass-button {
+          background: rgba(255, 255, 255, 0.3) !important;
+          border: 1px solid rgba(255, 255, 255, 0.35) !important;
+          backdrop-filter: blur(10px) !important;
+          -webkit-backdrop-filter: blur(10px) !important;
+          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .ios-glass-button:hover {
+          background: rgba(255, 255, 255, 0.55) !important;
+          border-color: rgba(255, 255, 255, 0.5) !important;
+          transform: translateY(-1px);
+        }
+        .ios-glass-button-active {
+          background: var(--accent-action, #ff7a3c) !important;
+          border-color: var(--accent-action, #ff7a3c) !important;
+          color: white !important;
+          box-shadow: 0 4px 12px rgba(255, 122, 60, 0.25) !important;
+        }
+
+        .ios-glass-inner-panel {
+          background: rgba(255, 255, 255, 0.25) !important;
+          backdrop-filter: blur(10px) !important;
+          -webkit-backdrop-filter: blur(10px) !important;
+          border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        }
+
         /* ── CSS STYLES FOR GACHA COMPONENT ─────────────────────────── */
         .gacha-stage-panel {
           min-height: 440px;
@@ -1546,31 +1620,106 @@ const ShopScreen: FC = () => {
           text-align: center;
         }
         .card-face-custom.back {
-          background: linear-gradient(160deg, #1c1426, #110a18 55%, #07050b);
-          border: 2px solid #4a1d96;
-          box-shadow: 0 0 0 1px rgba(139, 63, 251, 0.25), 0 0 50px rgba(139, 63, 251, 0.25);
+          transform: rotateY(180deg);
+          background: linear-gradient(135deg, rgba(20, 10, 35, 0.75) 0%, rgba(10, 5, 20, 0.85) 100%);
+          border: 2px solid #8b3ffb;
+          box-shadow: 0 10px 30px rgba(139, 63, 251, 0.2), 0 0 50px rgba(139, 63, 251, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(25px);
+          -webkit-backdrop-filter: blur(25px);
           justify-content: center;
         }
         .card-face-custom.front {
-          transform: rotateY(180deg);
-          background: linear-gradient(160deg, var(--bg1, #2c1608), var(--bg2, #1a0d05) 55%, #0d0703);
+          transform: rotateY(0deg);
+          background: linear-gradient(135deg, color-mix(in srgb, var(--bg1) 75%, transparent) 0%, color-mix(in srgb, var(--bg2) 85%, transparent) 100%);
           border: 2px solid var(--rarity-color);
-          box-shadow: 0 0 0 1px color-mix(in srgb, var(--rarity-color) 40%, transparent), 0 0 60px color-mix(in srgb, var(--rarity-color) 45%, transparent);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 45px color-mix(in srgb, var(--rarity-color) 40%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(30px);
+          -webkit-backdrop-filter: blur(30px);
+          animation: pulse-reveal 2.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse-reveal {
+          0%, 100% {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 45px color-mix(in srgb, var(--rarity-color) 40%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+          }
+          50% {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 65px color-mix(in srgb, var(--rarity-color) 70%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+          }
+        }
+
+        /* Unified Rarity Glow styles */
+        .glow-legendary {
+          border: 2px solid #f3c969 !important;
+          box-shadow: 0 0 15px rgba(243, 201, 105, 0.25), 0 0 5px rgba(243, 201, 105, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+        }
+        .glow-epic {
+          border: 2px solid #b388ff !important;
+          box-shadow: 0 0 15px rgba(179, 136, 255, 0.25), 0 0 5px rgba(179, 136, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+        }
+        .glow-rare {
+          border: 2px solid #5fb6ff !important;
+          box-shadow: 0 0 15px rgba(95, 182, 255, 0.25), 0 0 5px rgba(95, 182, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+        }
+        .glow-common {
+          border: 2px solid #cbd5e1 !important;
+          box-shadow: 0 0 10px rgba(203, 213, 225, 0.15), 0 0 3px rgba(203, 213, 225, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+        }
+
+        /* Pulsing animation for the spotlight and reveal cards */
+        @keyframes pulse-legendary {
+          0%, 100% { box-shadow: 0 0 15px rgba(243, 201, 105, 0.25), 0 0 5px rgba(243, 201, 105, 0.15); }
+          50% { box-shadow: 0 0 25px rgba(243, 201, 105, 0.5), 0 0 12px rgba(243, 201, 105, 0.35); }
+        }
+        @keyframes pulse-epic {
+          0%, 100% { box-shadow: 0 0 15px rgba(179, 136, 255, 0.25), 0 0 5px rgba(179, 136, 255, 0.15); }
+          50% { box-shadow: 0 0 25px rgba(179, 136, 255, 0.5), 0 0 12px rgba(179, 136, 255, 0.35); }
+        }
+        @keyframes pulse-rare {
+          0%, 100% { box-shadow: 0 0 15px rgba(95, 182, 255, 0.25), 0 0 5px rgba(95, 182, 255, 0.15); }
+          50% { box-shadow: 0 0 25px rgba(95, 182, 255, 0.5), 0 0 12px rgba(95, 182, 255, 0.35); }
+        }
+        @keyframes pulse-common {
+          0%, 100% { box-shadow: 0 0 10px rgba(203, 213, 225, 0.15), 0 0 3px rgba(203, 213, 225, 0.1); }
+          50% { box-shadow: 0 0 18px rgba(203, 213, 225, 0.3), 0 0 8px rgba(203, 213, 225, 0.2); }
+        }
+
+        .pulse-glow-legendary { animation: pulse-legendary 2.5s infinite ease-in-out; }
+        .pulse-glow-epic { animation: pulse-epic 2.5s infinite ease-in-out; }
+        .pulse-glow-rare { animation: pulse-rare 2.5s infinite ease-in-out; }
+        .pulse-glow-common { animation: pulse-common 2.5s infinite ease-in-out; }
+
+        /* Binder card hover effects */
+        .binder-card {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .binder-card.glow-legendary:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 8px 24px rgba(243, 201, 105, 0.4), 0 0 16px rgba(243, 201, 105, 0.3) !important;
+        }
+        .binder-card.glow-epic:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 8px 24px rgba(179, 136, 255, 0.4), 0 0 16px rgba(179, 136, 255, 0.3) !important;
+        }
+        .binder-card.glow-rare:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 8px 24px rgba(95, 182, 255, 0.4), 0 0 16px rgba(95, 182, 255, 0.3) !important;
+        }
+        .binder-card.glow-common:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 8px 20px rgba(203, 213, 225, 0.25), 0 0 12px rgba(203, 213, 225, 0.18) !important;
         }
 
         /* Reveal panel at step 5 */
         .reveal-panel-custom {
-          position: absolute;
-          bottom: 3%;
-          left: 50%;
-          transform: translateX(-50%);
+          position: relative;
           z-index: 15;
           text-align: center;
+          margin-top: 24px;
           animation: revealPanelFadeIn 0.6s ease-out forwards;
         }
         @keyframes revealPanelFadeIn {
-          from { opacity: 0; transform: translate(-50%, 15px); }
-          to { opacity: 1; transform: translate(-50%, 0); }
+          from { opacity: 0; transform: translateY(15px); }
+          to { opacity: 1; transform: translateY(0); }
         }
 
         .again-btn-custom {

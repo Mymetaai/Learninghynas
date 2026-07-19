@@ -168,6 +168,14 @@ const HUD: FC = () => {
             >
               📜
             </Link>
+            <Link
+              to="/profile"
+              className="flex h-8 w-8 items-center justify-center rounded-md border border-structural text-text-primary transition-colors hover:border-text-secondary hover:bg-bg-elevated-2"
+              aria-label="Profile Settings"
+              title="Profile Settings"
+            >
+              👤
+            </Link>
             <select
               value={language}
               onChange={(e) => setLanguage(e.target.value as any)}

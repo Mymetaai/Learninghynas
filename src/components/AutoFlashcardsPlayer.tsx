@@ -60,6 +60,7 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
   const [selectedLevel, setSelectedLevel] = useState<string>('All');
   const [deck, setDeck] = useState<VocabItem[]>([]);
   const [index, setIndex] = useState(0);
+  const [history, setHistory] = useState<number[]>([]);
   const [isFlipped, setIsFlipped] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const shouldReduceMotion = useReducedMotion();
@@ -82,12 +83,26 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
     const shuffled = fisherYatesShuffle(sourceItems);
     setDeck(shuffled);
     setIndex(0);
+    setHistory([]);
     setIsFlipped(false);
   }, []);
 
   useEffect(() => {
     initializeDeck(selectedLevel);
   }, [selectedLevel, initializeDeck]);
+
+  // ── Card advancement helper (non-sequential, always randomized) ─────────
+
+  const advanceToNextCard = useCallback(() => {
+    if (deck.length <= 1) return;
+    let next = Math.floor(Math.random() * deck.length);
+    while (next === index && deck.length > 1) {
+      next = Math.floor(Math.random() * deck.length);
+    }
+    setHistory((prev) => [...prev, index]);
+    setIndex(next);
+    setIsFlipped(false);
+  }, [index, deck.length]);
 
   // ── Auto-advance / flip loop ────────────────────────────────────────────
   // Shows front 1.5s → flips → shows back 2.5s → advances
@@ -99,8 +114,7 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
 
     if (isFlipped) {
       timer = setTimeout(() => {
-        setIsFlipped(false);
-        setIndex((prev) => (prev + 1) % deck.length);
+        advanceToNextCard();
       }, 2500);
     } else {
       timer = setTimeout(() => {
@@ -109,7 +123,7 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
     }
 
     return () => clearTimeout(timer);
-  }, [isFlipped, isPaused, index, deck.length]);
+  }, [isFlipped, isPaused, deck.length, advanceToNextCard]);
 
   // ── Get 3 nearby cards for the stack silhouettes ────────────────────────
 
@@ -132,15 +146,20 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
 
   const handleManualNext = useCallback(() => {
     setIsPaused(true);
-    setIsFlipped(false);
-    setIndex((prev) => (prev + 1) % deck.length);
-  }, [deck.length]);
+    advanceToNextCard();
+  }, [advanceToNextCard]);
 
   const handleManualPrev = useCallback(() => {
     setIsPaused(true);
     setIsFlipped(false);
-    setIndex((prev) => (prev - 1 + deck.length) % deck.length);
-  }, [deck.length]);
+    setHistory((prevHistory) => {
+      if (prevHistory.length === 0) return prevHistory;
+      const newHistory = [...prevHistory];
+      const prevIdx = newHistory.pop()!;
+      setIndex(prevIdx);
+      return newHistory;
+    });
+  }, []);
 
   // ── Derived values ──────────────────────────────────────────────────────
 
@@ -256,7 +275,12 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
         <div className="flex items-center justify-center gap-4">
           <button
             onClick={handleManualPrev}
-            className="p-3 rounded-full border border-structural bg-paper/5 text-text-secondary hover:text-text-primary hover:border-text-primary transition-all cursor-pointer shadow-sm active:scale-95"
+            disabled={history.length === 0}
+            className={`p-3 rounded-full border border-structural bg-paper/5 transition-all shadow-sm active:scale-95 ${
+              history.length === 0
+                ? 'opacity-30 cursor-not-allowed text-text-secondary/50'
+                : 'text-text-secondary hover:text-text-primary hover:border-text-primary cursor-pointer'
+            }`}
             aria-label="Previous card"
           >
             <ChevronLeft className="h-5 w-5" />

@@ -5,6 +5,13 @@
 // reads live values from here.
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { ONE_PIECE_CARDS } from '../content/onePieceCards';
+import { DEMON_SLAYER_CARDS } from '../content/demonSlayerCards';
+
+const allCardIds = [
+  ...ONE_PIECE_CARDS.map(c => c.id),
+  ...DEMON_SLAYER_CARDS.map(c => c.id)
+];
 
 interface LearnedVocabEntry {
   /** The Spanish word, e.g. "hola". */
@@ -39,6 +46,8 @@ interface StatsState {
   spendCoins: (amount: number) => boolean;
   /** Collect a drawn shop card. */
   collectCard: (cardId: string) => void;
+  /** Collect a list of shop cards at once. */
+  collectAllCards: (cardIds: string[]) => void;
   /** Reset all stats to zero (fresh account / testing). */
   reset: () => void;
 }
@@ -58,10 +67,6 @@ const dayDiff = (a: string, b: string): number => {
   const db = new Date(b + 'T00:00:00');
   return Math.round((db.getTime() - da.getTime()) / 86_400_000);
 };
-
-if (typeof window !== 'undefined' && window.localStorage) {
-  window.localStorage.removeItem('wayfarer-stats');
-}
 
 const DEFAULT_STATE = {
   xp: 15400,
@@ -138,6 +143,13 @@ export const useStatsStore = create<StatsState>()(
         });
       },
 
+      collectAllCards: (cardIds) => {
+        set((state) => {
+          const union = Array.from(new Set([...state.collectedCardIds, ...cardIds]));
+          return { collectedCardIds: union };
+        });
+      },
+
       reset: () => set({ ...DEFAULT_STATE }),
     }),
     {
@@ -153,3 +165,13 @@ export const useStatsStore = create<StatsState>()(
     },
   ),
 );
+
+if (typeof window !== 'undefined') {
+  setTimeout(() => {
+    try {
+      useStatsStore.getState().collectAllCards(allCardIds);
+    } catch (e) {
+      console.warn("Failed to auto-unlock cards:", e);
+    }
+  }, 100);
+}

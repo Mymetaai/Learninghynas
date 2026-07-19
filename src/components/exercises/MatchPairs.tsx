@@ -46,27 +46,49 @@ const MatchPairs: FC<MatchPairsProps> = ({
     });
   }, [answer]);
 
-  // Split options into left and right columns and shuffle them independently
+  // Split options into left and right columns.
+  // IMPORTANT: Use array-based filtering (NOT Set) to preserve duplicate values
+  // e.g. if two left words both mean "you", both "you" entries must appear separately.
   const optionsKey = options.join('\u0000');
   const { leftItems, rightItems } = useMemo(() => {
     const leftSet = new Set(correctPairs.map((p) => p.left));
-    const rightSet = new Set(correctPairs.map((p) => p.right));
+    const rightValues = correctPairs.map((p) => p.right); // ordered, preserves dupes
+
     const optionsArray = optionsKey.split('\u0000');
     const leftFiltered = optionsArray.filter((o) => leftSet.has(o));
-    const rightFiltered = optionsArray.filter((o) => rightSet.has(o));
+
+    // Build right column: for each expected right value (in order), find and
+    // consume one matching item from the options array so duplicates are preserved.
+    const remaining = [...optionsArray];
+    const rightFiltered: string[] = [];
+    for (const rv of rightValues) {
+      const idx = remaining.indexOf(rv);
+      if (idx !== -1) {
+        rightFiltered.push(rv);
+        remaining.splice(idx, 1);
+      }
+    }
+
     return {
       leftItems: fisherYatesShuffle(leftFiltered),
       rightItems: fisherYatesShuffle(rightFiltered),
     };
   }, [optionsKey, correctPairs]);
 
+  // matchedPairs stores "left↔right" keys for confirmed pairs
   const [selectedLeft, setSelectedLeft] = useState<string | null>(null);
   const [matchedPairs, setMatchedPairs] = useState<Set<string>>(new Set());
   const [wrongRight, setWrongRight] = useState<string | null>(null);
   const [completed, setCompleted] = useState(false);
 
-  const handleRightTap = (rightItem: string) => {
-    if (!selectedLeft || matchedPairs.has(selectedLeft)) return;
+  // For right-column deduplication: track which right-column *indices* are matched.
+  // This is needed when the same display string appears more than once in rightItems.
+  const [matchedRightIndices, setMatchedRightIndices] = useState<Set<number>>(new Set());
+
+  const handleRightTap = (rightItem: string, rightIndex: number) => {
+    if (!selectedLeft || matchedPairs.has(`${selectedLeft}↔${rightItem}`)) return;
+    // Also skip if this specific right slot is already consumed
+    if (matchedRightIndices.has(rightIndex)) return;
 
     const isCorrect = correctPairs.some(
       (p) => p.left === selectedLeft && p.right === rightItem,
@@ -77,6 +99,11 @@ const MatchPairs: FC<MatchPairsProps> = ({
       const newMatched = new Set(matchedPairs);
       newMatched.add(pairKey);
       setMatchedPairs(newMatched);
+
+      const newMatchedRight = new Set(matchedRightIndices);
+      newMatchedRight.add(rightIndex);
+      setMatchedRightIndices(newMatchedRight);
+
       setSelectedLeft(null);
 
       // Check if all pairs matched
@@ -88,7 +115,6 @@ const MatchPairs: FC<MatchPairsProps> = ({
       setWrongRight(rightItem);
       setTimeout(() => {
         setWrongRight(null);
-        // If all pairs must be matched, don't mark wrong yet
       }, 600);
     }
   };
@@ -98,10 +124,10 @@ const MatchPairs: FC<MatchPairsProps> = ({
       (p) => p.left === left && matchedPairs.has(`${p.left}↔${p.right}`),
     );
 
-  const isRightMatched = (right: string) =>
-    correctPairs.some(
-      (p) => p.right === right && matchedPairs.has(`${p.left}↔${p.right}`),
-    );
+  // isRightMatched now checks the specific slot by index, not just the string value.
+  // This prevents the cross-contamination bug where two left items share the same
+  // right translation and the first match "consumes" the only right slot visually.
+  const isRightMatchedByIndex = (index: number) => matchedRightIndices.has(index);
 
   return (
     <div>
@@ -138,17 +164,17 @@ const MatchPairs: FC<MatchPairsProps> = ({
 
         {/* Right column */}
         <div className="flex-1 space-y-2">
-          {rightItems.map((item) => {
-            const matched = isRightMatched(item);
-            const isWrong = wrongRight === item;
+          {rightItems.map((item, index) => {
+            const matched = isRightMatchedByIndex(index);
+            const isWrong = wrongRight === item && !matched;
             return (
               <motion.button
-                key={item}
+                key={`${item}-${index}`}
                 type="button"
                 animate={isWrong ? { x: [-4, 4, -4, 4, 0] } : {}}
                 transition={{ duration: 0.4 }}
                 whileTap={!matched && selectedLeft ? { scale: 0.97 } : undefined}
-                onClick={() => !matched && selectedLeft && handleRightTap(item)}
+                onClick={() => !matched && selectedLeft && handleRightTap(item, index)}
                 className={`w-full rounded-xl border px-3 py-2.5 font-body text-sm text-left transition-colors border-none cursor-pointer ${
                   matched
                     ? 'border border-success/60 bg-success/10 text-success font-bold'

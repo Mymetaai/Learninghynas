@@ -765,15 +765,15 @@ export const BOOK_LEVELS: Quest[] = [
             "id": "book-2-match1",
             "type": "match",
             "prompt": "Match each Spanish word to its English meaning",
-            "answer": "yo↔I|tú↔you|usted↔you|nosotros↔we",
+            "answer": "yo↔I|tú↔you (informal)|usted↔you (formal)|nosotros↔we",
             "options": [
                 "yo",
                 "tú",
                 "usted",
                 "nosotros",
                 "I",
-                "you",
-                "you",
+                "you (informal)",
+                "you (formal)",
                 "we"
             ]
         },

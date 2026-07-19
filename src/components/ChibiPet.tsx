@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, type FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, X } from 'lucide-react';
 import Kitsune3D from './Kitsune3D';
+import { isGeminiAvailable, getYukiGeminiResponse } from '../utils/geminiService';
 
 interface Message {
   sender: 'user' | 'pet';
@@ -13,63 +14,73 @@ interface Message {
 const getYukiResponse = (input: string): string => {
   const query = input.toLowerCase().trim();
 
+  // Helper to match whole words/phrases using boundaries
+  const matchWords = (words: string[]): boolean => {
+    return words.some(word => {
+      // Escape word for regex
+      const escaped = word.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+      const regex = new RegExp(`\\b${escaped}\\b`, 'i');
+      return regex.test(query);
+    });
+  };
+
   // 1. GREETINGS & WHO IS YUKI
-  if (query.includes('hola') || query.includes('hello') || query.includes('hi') || query.includes('greet')) {
+  if (matchWords(['hola', 'hello', 'hi', 'greet', 'greetings'])) {
     return "¡Hola, amigo! I'm Yuki, your 3D Nine-Tailed Kitsune spirit guide! 🦊✨ I'm here to help you master Spanish and navigate this academy. How can I help you train today? Dattebayo!";
   }
-  if (query.includes('who are you') || query.includes('what are you') || query.includes('yuki') || query.includes('kitsune') || query.includes('fox')) {
+  if (matchWords(['who are you', 'what are you', 'yuki', 'kitsune', 'fox'])) {
     return "I am Yuki, a legendary Nine-Tailed Kitsune! I'm your loyal study companion. When we chat, I wag my tails because I'm excited about your progress! Ask me anything about Spanish or how to use this app! 🦊💙";
   }
 
   // 2. REWARDS: COINS & XP
-  if (query.includes('coin') || query.includes('gold') || query.includes('xp') || query.includes('earn') || query.includes('reward')) {
+  if (matchWords(['coin', 'coins', 'gold', 'xp', 'earn', 'earning', 'reward', 'rewards'])) {
     return "You can earn Gold Coins and XP by: \n1. Completing interactive drills in 'Basic Español'.\n2. Passing the Course Exam (rewards up to 50 coins!).\n3. Finishing quests in the 'Daily Quests' menu (click the calendar icon in the top right!). 🪙✨";
   }
-  if (query.includes('daily') || query.includes('quest') || query.includes('calendar') || query.includes('task')) {
+  if (matchWords(['daily', 'quest', 'quests', 'calendar', 'task', 'tasks'])) {
     return "Daily Quests reset every day! Click the checklist icon in the top right header to see your active tasks (e.g. practicing pronunciation, completing a lesson, or maintaining your streak) and claim your rewards! 📅🎯";
   }
 
   // 3. SHOP & CARDS
-  if (query.includes('shop') || query.includes('card') || query.includes('collectible') || query.includes('buy') || query.includes('unlock') || query.includes('one piece') || query.includes('demon slayer')) {
+  if (matchWords(['shop', 'card', 'cards', 'collectible', 'collectibles', 'buy', 'unlock', 'one piece', 'demon slayer'])) {
     return "In the Shop, you can spend your earned gold coins to unlock legendary cards from One Piece and Demon Slayer! Complete quests to earn coins, then expand your deck! ⚔️🏴‍☠️";
   }
 
   // 4. SPANISH LESSONS (Workbook-Aligned Data!)
-  if (query.includes('lesson 1') || query.includes('alphabet') || query.includes('pronunciation') || query.includes('greeting')) {
+  if (matchWords(['lesson 1', 'alphabet', 'pronunciation'])) {
     return "Lesson 1 covers Spanish Pronunciation & Greetings. Key tips: \n• 'H' is always silent (like in 'hola'). \n• 'Ñ' sounds like 'ny' in canyon. \n• 'Buenos días' = Good morning. \n• '¿Cómo estás?' = How are you? 🗣️";
   }
-  if (query.includes('lesson 2') || query.includes('pronoun') || query.includes('subject')) {
+  if (matchWords(['lesson 2', 'pronoun', 'pronouns', 'subject'])) {
     return "Lesson 2 covers Subject Pronouns: Yo (I), Tú (you, informal), Él/Ella (he/she), Nosotros (we), Vosotros (you all, Spain), and Ellos/Ellas (they). Master these to start forming sentences! 👥";
   }
-  if (query.includes('ser') || query.includes('estar') || query.includes('to be')) {
+  if (matchWords(['ser', 'estar', 'to be'])) {
     return "Ah, the golden rule of Spanish! Both mean 'To Be', but:\n• SER: Used for permanent qualities (D.O.C.T.O.R: Description, Occupation, Characteristics, Time, Origin, Relation).\n• ESTAR: Used for temporary states/locations (P.L.A.C.E: Position, Location, Action, Condition, Emotion). ⚖️";
   }
-  if (query.includes('lesson 3') || query.includes('noun') || query.includes('article') || query.includes('gender')) {
+  if (matchWords(['lesson 3', 'noun', 'nouns', 'article', 'articles', 'gender'])) {
     return "Lesson 3 covers Nouns & Articles. All nouns are Masculine (use 'el' / 'un') or Feminine (use 'la' / 'una'). Usually, nouns ending in -o are masculine (el libro) and -a are feminine (la mesa). 📚";
   }
-  if (query.includes('lesson 4') || query.includes('phrase') || query.includes('simple sentence') || query.includes('sentence')) {
+  if (matchWords(['lesson 4', 'phrase', 'phrases', 'simple sentence', 'sentence', 'sentences'])) {
     return "Lesson 4 teaches you to build Everyday Sentences! For example: 'Yo hablo español' (I speak Spanish) or '¿Dónde está el baño?' (Where is the bathroom?). Keep it subject-verb-object! 💬";
   }
-  if (query.includes('exam') || query.includes('test') || query.includes('quiz')) {
+  if (matchWords(['exam', 'test', 'quiz', 'exams', 'tests', 'quizzes'])) {
     return "The Workbook Exam is at the bottom of the 'Basic Español' screen. It contains 8 interactive questions summarizing the entire workbook. Scoring 100% awards you 50 coins and a legendary achievement badge! 🏆📝";
   }
 
   // 5. APP NAVIGATION & TABS
-  if (query.includes('dashboard') || query.includes('home') || query.includes('stats')) {
+  if (matchWords(['dashboard', 'home', 'stats'])) {
     return "The Dashboard (1st tab) is your command center! Here you can check your weekly study hours, current streak, active quests, and see your overall academy rank. Keep an eye on it to track your progress! 📊";
   }
-  if (query.includes('basic espanol') || query.includes('espanol') || query.includes('course') || query.includes('workbook')) {
+  if (matchWords(['basic espanol', 'espanol', 'course', 'workbook'])) {
     return "The 'Basic Español' tab contains 4 complete lessons based on the course workbook: alphabet/greetings, pronouns, articles, and phrases. Complete drills there to earn coins! 📖✨";
   }
-  if (query.includes('adventure') || query.includes('map') || query.includes('world')) {
+  if (matchWords(['adventure', 'map', 'world', 'worlds'])) {
     return "The 'Adventure Map' lets you embark on learning quests across different worlds! Complete lessons to unlock nodes, defeat bosses, and advance your Spanish journey! 🗺️⚔️";
   }
-  if (query.includes('why us') || query.includes('pitch') || query.includes('about')) {
+  if (matchWords(['why us', 'pitch', 'about'])) {
     return "The 'Why Us' tab showcases what makes our academy unique: our beautiful Glassmorphic interface, interactive 3D elements (like me!), gamified rewards, and workbook-aligned materials! 🌟💎";
   }
 
   // 6. NARRATIVE STUDY TIPS
-  if (query.includes('tip') || query.includes('advice') || query.includes('help') || query.includes('study')) {
+  if (matchWords(['tip', 'tips', 'advice', 'help', 'study'])) {
     const tips = [
       "Kitsune Tip: Try speaking Spanish words out loud! Pronouncing them helps cement the neural pathways in your brain. 🗣️",
       "Kitsune Tip: Don't rush! Spend 10 minutes a day on the 'Basic Español' drills rather than 1 hour all at once. Consistency is key! 📅",
@@ -138,17 +149,47 @@ const ChibiPet: FC = () => {
       ...prev,
       { sender: 'user', text: userMsg, timestamp: new Date() }
     ]);
+
+    // Build context history for Gemini
+    const history = messages.map((m) => ({
+      role: m.sender === 'user' ? ('user' as const) : ('yuki' as const),
+      text: m.text,
+    }));
+
     setInputValue('');
     setIsTyping(true);
 
-    setTimeout(() => {
-      const reply = getYukiResponse(userMsg);
-      setMessages((prev) => [
-        ...prev,
-        { sender: 'pet', text: reply, timestamp: new Date() }
-      ]);
-      setIsTyping(false);
-    }, 1000);
+    const useStaticFallback = () => {
+      setTimeout(() => {
+        const reply = getYukiResponse(userMsg);
+        setMessages((prev) => [
+          ...prev,
+          { sender: 'pet', text: reply, timestamp: new Date() }
+        ]);
+        setIsTyping(false);
+      }, 1000);
+    };
+
+    if (isGeminiAvailable()) {
+      getYukiGeminiResponse(userMsg, history)
+        .then((reply) => {
+          if (reply) {
+            setMessages((prev) => [
+              ...prev,
+              { sender: 'pet', text: reply, timestamp: new Date() }
+            ]);
+            setIsTyping(false);
+          } else {
+            useStaticFallback();
+          }
+        })
+        .catch((err) => {
+          console.error('[Yuki Gemini] Error:', err);
+          useStaticFallback();
+        });
+    } else {
+      useStaticFallback();
+    }
   };
 
   return (
@@ -178,7 +219,14 @@ const ChibiPet: FC = () => {
                     🦊
                   </div>
                   <div>
-                    <h3 className="font-body text-xs font-semibold text-text-primary">Yuki</h3>
+                    <div className="flex items-center gap-1.5">
+                      <h3 className="font-body text-xs font-semibold text-text-primary">Yuki</h3>
+                      {isGeminiAvailable() && (
+                        <span className="text-[7px] font-hud bg-accent-action/25 text-accent-action px-1 rounded border border-accent-action/30 animate-pulse font-bold">
+                          AI
+                        </span>
+                      )}
+                    </div>
                     <span className="font-body text-[8px] text-text-secondary font-semibold tracking-wider uppercase block leading-none mt-0.5">Nine-Tailed Guide</span>
                   </div>
                 </div>
