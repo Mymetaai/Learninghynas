@@ -166,16 +166,16 @@ const ChibiPet: FC = () => {
                     <div className="flex items-center gap-1.5">
                       <h3 className="font-body text-xs font-semibold text-text-primary shrink-0">Yuki</h3>
                       {apiError ? (
-                        <span className="text-[8px] font-mono bg-red-500/20 text-red-300 border border-red-500/40 px-1.5 py-0.5 rounded truncate font-bold" title={`AI Disconnected: ${apiError}`}>
-                          AI Disconnected: {apiError}
+                        <span className="text-[8px] font-mono bg-red-500/20 text-red-300 border border-red-500/40 px-1.5 py-0.5 rounded truncate font-bold" title={apiError}>
+                          Offline ({apiError})
                         </span>
                       ) : isGeminiAvailable() ? (
                         <span className="text-[7px] font-hud bg-accent-action/25 text-accent-action px-1 rounded border border-accent-action/30 animate-pulse font-bold shrink-0">
                           AI
                         </span>
                       ) : (
-                        <span className="text-[8px] font-mono bg-red-500/20 text-red-300 border border-red-500/40 px-1.5 py-0.5 rounded truncate font-bold" title="AI Disconnected: Missing API Key">
-                          AI Disconnected: Missing API Key
+                        <span className="text-[8px] font-mono bg-red-500/20 text-red-300 border border-red-500/40 px-1.5 py-0.5 rounded truncate font-bold" title="Missing API Key">
+                          Offline (No Key)
                         </span>
                       )}
                     </div>
@@ -193,7 +193,7 @@ const ChibiPet: FC = () => {
               {/* Error Badge Banner */}
               {apiError && (
                 <div className="bg-red-500/15 border-b border-red-500/30 px-3 py-1.5 text-[10px] text-red-300 flex items-center justify-between font-mono shrink-0">
-                  <span className="truncate">AI Disconnected: {apiError}</span>
+                  <span className="truncate" title={apiError}>⚠️ {apiError}</span>
                   <button onClick={() => setApiError(null)} className="text-xs hover:text-white font-bold cursor-pointer ml-2 shrink-0">&times;</button>
                 </div>
               )}

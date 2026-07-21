@@ -16,6 +16,7 @@ export type GeminiErrorCode =
   | 'INVALID_API_KEY'
   | 'MODEL_NOT_FOUND'
   | 'RATE_LIMIT'
+  | 'SERVICE_UNAVAILABLE'
   | 'NETWORK_ERROR'
   | 'PARSE_ERROR'
   | 'UNKNOWN';
@@ -32,7 +33,8 @@ export type GeminiResult<T> =
   | { success: false; error: GeminiErrorDetails };
 
 export const PRIMARY_MODEL = 'gemini-3.5-flash';
-export const FALLBACK_MODEL = 'gemini-3.5-flash';
+export const FALLBACK_MODELS = ['gemini-3.6-flash', 'gemini-3.5-flash-lite', 'gemini-2.5-flash'];
+export const FALLBACK_MODEL = 'gemini-3.6-flash';
 
 // ---------------------------------------------------------------------------
 // API Key Sanitization & Client Initialization
@@ -85,47 +87,73 @@ export const isGeminiAvailable = (): boolean => getApiKeyError() === null;
 // ---------------------------------------------------------------------------
 
 function parseApiError(err: any): GeminiErrorDetails {
-  const message = err?.message || String(err);
-  const status = err?.status || err?.statusCode || err?.response?.status;
-  const rawError = typeof err === 'object' ? (err.stack || JSON.stringify(err)) : String(err);
+  let rawMessage = err?.message || String(err);
+  let status = err?.status || err?.statusCode || err?.response?.status;
+
+  // Extract clean message if rawMessage is a stringified JSON error object from API
+  try {
+    if (typeof rawMessage === 'string' && rawMessage.trim().startsWith('{')) {
+      const parsedObj = JSON.parse(rawMessage);
+      if (parsedObj?.error) {
+        if (parsedObj.error.code && !status) status = parsedObj.error.code;
+        if (parsedObj.error.message) rawMessage = parsedObj.error.message;
+      }
+    }
+  } catch (_) {}
 
   let code: GeminiErrorCode = 'UNKNOWN';
+  let userFriendlyMessage = rawMessage;
+
+  const msgLower = rawMessage.toLowerCase();
 
   if (
-    message.includes('API_KEY') ||
-    message.includes('API key') ||
-    message.includes('UNAUTHENTICATED') ||
-    status === 401
+    status === 503 ||
+    msgLower.includes('503') ||
+    msgLower.includes('high demand') ||
+    msgLower.includes('unavailable') ||
+    msgLower.includes('overloaded')
   ) {
-    code = 'INVALID_API_KEY';
+    code = 'SERVICE_UNAVAILABLE';
+    userFriendlyMessage = 'Gemini AI servers are experiencing high demand (503).';
   } else if (
-    message.includes('404') ||
-    message.includes('not found') ||
-    message.includes('NOT_FOUND') ||
-    message.includes('model')
-  ) {
-    code = 'MODEL_NOT_FOUND';
-  } else if (
-    message.includes('429') ||
-    message.includes('quota') ||
-    message.includes('RESOURCE_EXHAUSTED') ||
-    message.includes('rate limit') ||
-    status === 429
+    status === 429 ||
+    msgLower.includes('429') ||
+    msgLower.includes('quota') ||
+    msgLower.includes('resource_exhausted') ||
+    msgLower.includes('rate limit')
   ) {
     code = 'RATE_LIMIT';
+    userFriendlyMessage = 'API rate limit reached (429). Please wait a moment.';
   } else if (
-    message.includes('fetch') ||
-    message.includes('network') ||
-    message.includes('ENOTFOUND') ||
-    message.includes('offline')
+    status === 401 ||
+    msgLower.includes('api_key') ||
+    msgLower.includes('api key') ||
+    msgLower.includes('unauthenticated')
+  ) {
+    code = 'INVALID_API_KEY';
+    userFriendlyMessage = 'Invalid or unauthenticated API key.';
+  } else if (
+    status === 404 ||
+    msgLower.includes('404') ||
+    msgLower.includes('not_found') ||
+    msgLower.includes('not found')
+  ) {
+    code = 'MODEL_NOT_FOUND';
+    userFriendlyMessage = 'Requested Gemini AI model not found.';
+  } else if (
+    msgLower.includes('fetch') ||
+    msgLower.includes('network') ||
+    msgLower.includes('enotfound') ||
+    msgLower.includes('offline')
   ) {
     code = 'NETWORK_ERROR';
+    userFriendlyMessage = 'Network connection issue. Please check your connection.';
   }
 
   return {
     code,
-    message,
-    rawError,
+    message: userFriendlyMessage,
+    rawError: typeof err === 'object' ? (err.stack || JSON.stringify(err)) : String(err),
     status: typeof status === 'number' ? status : undefined,
   };
 }
@@ -152,44 +180,65 @@ async function callGeminiApi(
     return { success: false, error };
   }
 
-  const modelsToTry = [PRIMARY_MODEL, FALLBACK_MODEL];
+  const modelsToTry = [PRIMARY_MODEL, ...FALLBACK_MODELS];
   let lastErrorDetails: GeminiErrorDetails | null = null;
 
   for (let i = 0; i < modelsToTry.length; i++) {
     const model = modelsToTry[i];
-    try {
-      const response = await ai.models.generateContent({
-        model,
-        contents: prompt,
-        config: {
-          systemInstruction,
-          temperature,
-          maxOutputTokens: maxTokens,
-        },
-      });
+    const maxAttempts = 3;
 
-      const rawText = response.text?.trim();
-      if (!rawText) {
-        const errorDetails: GeminiErrorDetails = {
-          code: 'PARSE_ERROR',
-          message: 'Gemini returned an empty response string.',
-        };
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+      try {
+        const response = await ai.models.generateContent({
+          model,
+          contents: prompt,
+          config: {
+            systemInstruction,
+            temperature,
+            maxOutputTokens: maxTokens,
+          },
+        });
+
+        const rawText = response.text?.trim();
+        if (!rawText) {
+          const errorDetails: GeminiErrorDetails = {
+            code: 'PARSE_ERROR',
+            message: 'Gemini returned an empty response string.',
+          };
+          console.error(`[Gemini Error] ${errorDetails.code}: ${errorDetails.message}`);
+          return { success: false, error: errorDetails };
+        }
+
+        return { success: true, data: rawText };
+      } catch (err: any) {
+        const errorDetails = parseApiError(err);
+        lastErrorDetails = errorDetails;
+
+        const isRetryable =
+          errorDetails.code === 'SERVICE_UNAVAILABLE' ||
+          errorDetails.code === 'RATE_LIMIT' ||
+          errorDetails.code === 'NETWORK_ERROR' ||
+          errorDetails.code === 'UNKNOWN';
+
+        if (isRetryable && attempt < maxAttempts) {
+          const delayMs = 600 * attempt;
+          console.warn(
+            `[Gemini Warning] Model ${model} failed (Attempt ${attempt}/${maxAttempts}: ${errorDetails.code}). Retrying in ${delayMs}ms...`
+          );
+          await new Promise((r) => setTimeout(r, delayMs));
+          continue;
+        }
+
+        if (i < modelsToTry.length - 1) {
+          console.warn(
+            `[Gemini Warning] Model ${model} failed after attempts (${errorDetails.code}). Trying fallback model ${modelsToTry[i + 1]}...`
+          );
+          break;
+        }
+
         console.error(`[Gemini Error] ${errorDetails.code}: ${errorDetails.message}`);
         return { success: false, error: errorDetails };
       }
-
-      return { success: true, data: rawText };
-    } catch (err: any) {
-      const errorDetails = parseApiError(err);
-      lastErrorDetails = errorDetails;
-
-      if (errorDetails.code === 'MODEL_NOT_FOUND' && i < modelsToTry.length - 1) {
-        console.warn(`[Gemini Warning] Model ${model} failed with MODEL_NOT_FOUND. Retrying with ${modelsToTry[i + 1]}...`);
-        continue;
-      }
-
-      console.error(`[Gemini Error] ${errorDetails.code}: ${errorDetails.message}`);
-      return { success: false, error: errorDetails };
     }
   }
 
