@@ -55,12 +55,14 @@ export function setCustomApiKey(key: string): void {
     } else {
       localStorage.removeItem(STORAGE_KEY_GEMINI_API);
     }
+    window.dispatchEvent(new Event('wayfarer_key_updated'));
   }
 }
 
 export function clearCustomApiKey(): void {
   if (typeof window !== 'undefined') {
     localStorage.removeItem(STORAGE_KEY_GEMINI_API);
+    window.dispatchEvent(new Event('wayfarer_key_updated'));
   }
 }
 

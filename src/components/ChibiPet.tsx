@@ -41,6 +41,15 @@ const ChibiPet: FC = () => {
     }
   }, [messages, isTyping]);
 
+  // Auto-clear error on key update
+  useEffect(() => {
+    const handleKeyUpdate = () => {
+      setApiError(null);
+    };
+    window.addEventListener('wayfarer_key_updated', handleKeyUpdate);
+    return () => window.removeEventListener('wayfarer_key_updated', handleKeyUpdate);
+  }, []);
+
   // Periodic random speech bubble texts
   useEffect(() => {
     const speechOptions = [
