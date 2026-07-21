@@ -1,0 +1,19 @@
+{
+  "academy": {
+    "name": "TheLearningHyena Spanish Academy",
+    "mascot": "Yuki (3D Nine-Tailed Kitsune Spirit Guide)",
+    "description": "Gamified Spanish learning platform combining 3D interactive spirit companions, structured workbook lessons, daily quests, card collectibles, and active immersion."
+  },
+  "features": {
+    "basicEspanol": "Core curriculum with 4 lessons: Lesson 1 (Alphabet & Greetings), Lesson 2 (Subject Pronouns), Lesson 3 (Nouns & Articles), Lesson 4 (Everyday Sentences), and a 50-coin Final Exam.",
+    "dailyQuests": "Daily tasks (e.g. practicing speaking, completing lessons, maintaining streak) that grant Gold Coins and XP.",
+    "shop": "Unlock legendary collectible cards from One Piece and Demon Slayer series using earned Gold Coins.",
+    "adventureMap": "Explore world nodes, fight boss guardians, and advance through Spanish regions.",
+    "activeImmersion": "Practice real-world roleplay scenarios, daily plans, and interactive conversation practice."
+  },
+  "grammarTips": {
+    "serVsEstar": "SER is for permanent traits (DOCTOR: Description, Occupation, Characteristic, Time, Origin, Relation). ESTAR is for temporary states/locations (PLACE: Position, Location, Action, Condition, Emotion).",
+    "greetings": "Buenos días (Good morning), Buenas tardes (Good afternoon), Buenas noches (Good evening), ¿Cómo estás? (How are you?).",
+    "pronouns": "Yo (I), Tú (you informal), Él/Ella (he/she), Nosotros (we), Vosotros (you all Spain), Ellos/Ellas (they)."
+  }
+}

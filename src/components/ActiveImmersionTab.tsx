@@ -16,6 +16,7 @@ import {
   BookCheck,
   MapPin,
   ChevronRight,
+  AlertTriangle,
 } from 'lucide-react';
 
 /* ─── Mode Definitions ─────────────────────────────────────────────────────── */
@@ -84,13 +85,16 @@ const ActiveImmersionTab: FC = () => {
     activeMode,
     selectedTopic,
     selectedAccent,
+    selectedLevel,
     sessions,
     isTyping,
     setMode,
     setTopic,
     setAccent,
+    setSelectedLevel,
     startSession,
     sendMessage,
+    retryLastMessage,
     resetSession,
     addLearnedWord,
   } = useActiveImmersionStore();
@@ -110,7 +114,7 @@ const ActiveImmersionTab: FC = () => {
     if (feedRef.current) {
       feedRef.current.scrollTo({ top: feedRef.current.scrollHeight, behavior: 'smooth' });
     }
-  }, [currentSession?.messages, isTyping]);
+  }, [currentSession?.messages, isTyping, currentSession?.error]);
 
   const toggleTranslation = (msgId: string) => {
     setRevealedTranslations((prev) => {
@@ -206,11 +210,12 @@ const ActiveImmersionTab: FC = () => {
   }
 
   /* ═══════════════════════════════════════════════════════════════════════════
-   * VIEW 2 — Topic Selection (+ accent for conversation mode)
+   * VIEW 2 — Topic Selection (+ Level Selection & Accent Picker)
    * ═══════════════════════════════════════════════════════════════════════════ */
   if (!selectedTopic || !currentSession) {
     const presets = TOPIC_PRESETS[activeMode] || [];
     const showAccentPicker = activeMode === 'conversation';
+    const showLevelToggle = activeMode === 'conversation' || activeMode === 'roleplay';
 
     return (
       <div className="space-y-6">
@@ -232,6 +237,40 @@ const ActiveImmersionTab: FC = () => {
             </div>
           </div>
         </div>
+
+        {/* Level Selection Toggle */}
+        {showLevelToggle && (
+          <div className="bg-bg-elevated border border-structural rounded-2xl p-5 shadow-md">
+            <div className="flex items-center gap-2 mb-3">
+              <Sparkles className="h-4 w-4 text-accent-action" />
+              <h3 className="font-display text-sm font-bold text-text-primary">Select Practice Level</h3>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() => setSelectedLevel('beginner')}
+                className={`cursor-pointer flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-xs font-bold border transition-all ${
+                  selectedLevel === 'beginner'
+                    ? 'bg-accent-action text-bg-base border-accent-action shadow-md scale-[1.02]'
+                    : 'bg-bg-elevated-2 text-text-secondary border-structural hover:border-accent-action/50 hover:text-text-primary'
+                }`}
+              >
+                <span>🌱</span> Beginner (A1-A2)
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedLevel('intermediate')}
+                className={`cursor-pointer flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-xs font-bold border transition-all ${
+                  selectedLevel === 'intermediate'
+                    ? 'bg-accent-action text-bg-base border-accent-action shadow-md scale-[1.02]'
+                    : 'bg-bg-elevated-2 text-text-secondary border-structural hover:border-accent-action/50 hover:text-text-primary'
+                }`}
+              >
+                <span>⚡</span> Intermediate (B1-B2)
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Accent Picker (conversation mode only) */}
         {showAccentPicker && (
@@ -328,6 +367,9 @@ const ActiveImmersionTab: FC = () => {
               <h2 className="font-display text-lg font-bold text-text-primary leading-tight">
                 {currentModeConfig?.label}
               </h2>
+              <span className="text-[10px] font-hud font-bold px-2 py-0.5 rounded-full bg-accent-action/10 text-accent-action border border-accent-action/20">
+                {selectedLevel === 'intermediate' ? '⚡ Intermediate' : '🌱 Beginner'}
+              </span>
               {selectedAccent && (
                 <span className="text-[10px] font-hud font-bold px-2 py-0.5 rounded-full bg-info/10 text-info border border-info/20">
                   {ACCENT_OPTIONS.find((a) => a.id === selectedAccent)?.flag} {selectedAccent}
@@ -372,6 +414,34 @@ const ActiveImmersionTab: FC = () => {
           +10 XP • +5 Coins per message
         </span>
       </div>
+
+      {/* ── Visible Error Banner UI ────────────────────────────────────── */}
+      {currentSession.error && (
+        <div className="m-4 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-800 flex items-center justify-between gap-3 shadow-md animate-fadeIn shrink-0">
+          <div className="flex items-center gap-2 text-xs">
+            <AlertTriangle className="h-4 w-4 text-rose-600 shrink-0" />
+            <div>
+              <strong className="font-bold">Gemini API Error:</strong>{' '}
+              <span>
+                {typeof currentSession.error === 'string'
+                  ? currentSession.error
+                  : currentSession.error.message || 'An error occurred during Gemini API call.'}
+              </span>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              if (activeMode && selectedTopic) {
+                retryLastMessage(activeMode, selectedTopic, selectedAccent);
+              }
+            }}
+            className="px-3.5 py-1.5 rounded-lg bg-rose-600 text-white font-bold text-xs hover:bg-rose-700 transition-colors shadow cursor-pointer border-none shrink-0 flex items-center gap-1.5"
+          >
+            <RefreshCw className="h-3.5 w-3.5" /> Retry
+          </button>
+        </div>
+      )}
 
       {/* ── Message Feed ───────────────────────────────────────────────── */}
       <div

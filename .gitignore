@@ -32,4 +32,6 @@ API/
 
 # Raw data and scratch directories
 spanish_data/
+.agents/
+.MD/
 

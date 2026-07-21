@@ -3,8 +3,10 @@ import { persist } from 'zustand/middleware';
 import {
   getActiveImmersionResponse,
   isGeminiAvailable,
+  getApiKeyError,
   type ImmersionMode,
   type ActiveImmersionResponse,
+  type GeminiErrorDetails,
 } from '../utils/geminiService';
 import { useStatsStore } from './statsStore';
 
@@ -27,22 +29,29 @@ export interface ImmersionChatMessage {
 export interface ImmersionSessionState {
   messages: ImmersionChatMessage[];
   learnedWords: { word: string; meaning: string }[];
+  error?: GeminiErrorDetails | string | null;
 }
+
+export type ActiveImmersionLevel = 'beginner' | 'intermediate';
 
 interface ActiveImmersionStore {
   activeMode: ImmersionMode | null;
   selectedTopic: string | null;
   selectedAccent: string | null; // 'Madrid' | 'Mexico City' | 'Buenos Aires' | null
+  selectedLevel: ActiveImmersionLevel;
   sessions: Record<string, ImmersionSessionState>; // keyed by `${mode}-${topic}`
   isTyping: boolean;
 
   setMode: (mode: ImmersionMode | null) => void;
   setTopic: (topic: string | null) => void;
   setAccent: (accent: string | null) => void;
-  startSession: (mode: ImmersionMode, topic: string, accent?: string | null) => void;
+  setSelectedLevel: (level: ActiveImmersionLevel) => void;
+  startSession: (mode: ImmersionMode, topic: string, accent?: string | null) => Promise<void>;
   sendMessage: (mode: ImmersionMode, topic: string, userText: string, accent?: string | null) => Promise<void>;
+  retryLastMessage: (mode: ImmersionMode, topic: string, accent?: string | null) => Promise<void>;
   resetSession: (mode: ImmersionMode, topic: string) => void;
   addLearnedWord: (sessionKey: string, word: string, meaning: string) => void;
+  clearSessionError: (mode: ImmersionMode, topic: string) => void;
 }
 
 const WELCOME_MESSAGES: Record<ImmersionMode, (topic: string) => { text: string; translation: string }> = {
@@ -72,6 +81,7 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
       activeMode: null,
       selectedTopic: null,
       selectedAccent: null,
+      selectedLevel: 'beginner',
       sessions: {},
       isTyping: false,
 
@@ -87,12 +97,17 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
         set({ selectedAccent: accent });
       },
 
-      startSession: (mode: ImmersionMode, topic: string, accent?: string | null) => {
+      setSelectedLevel: (level: ActiveImmersionLevel) => {
+        set({ selectedLevel: level });
+      },
+
+      startSession: async (mode: ImmersionMode, topic: string, accent?: string | null) => {
         const sessionKey = buildSessionKey(mode, topic);
         const currentSessions = get().sessions;
+        const level = get().selectedLevel;
 
         if (currentSessions[sessionKey]) {
-          // Session already exists — just activate it
+          // Session already exists — activate it
           set({ activeMode: mode, selectedTopic: topic, selectedAccent: accent ?? null });
           return;
         }
@@ -111,14 +126,68 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
           activeMode: mode,
           selectedTopic: topic,
           selectedAccent: accent ?? null,
+          isTyping: true,
           sessions: {
             ...currentSessions,
             [sessionKey]: {
               messages: [initialMessage],
               learnedWords: [],
+              error: null,
             },
           },
         });
+
+        if (isGeminiAvailable()) {
+          const history = [{ role: 'assistant' as const, text: welcome.text }];
+          const geminiRes = await getActiveImmersionResponse(
+            mode,
+            topic,
+            `¡Hola! Empecemos la sesión sobre ${topic}.`,
+            history,
+            accent ?? undefined,
+            level,
+          );
+
+          if (geminiRes.success) {
+            const assistantMsg: ImmersionChatMessage = {
+              id: `assistant-${Date.now()}`,
+              sender: 'assistant',
+              text: geminiRes.data.text,
+              translation: geminiRes.data.translation,
+              timestamp: new Date().toISOString(),
+              quickReplies: geminiRes.data.quickReplies || [],
+              newVocabWords: geminiRes.data.newVocabWords || [],
+              structuredContent: geminiRes.data.structuredContent,
+            };
+
+            const session = get().sessions[sessionKey] || { messages: [], learnedWords: [] };
+            set((s) => ({
+              isTyping: false,
+              sessions: {
+                ...s.sessions,
+                [sessionKey]: {
+                  ...session,
+                  messages: [...session.messages, assistantMsg],
+                  error: null,
+                },
+              },
+            }));
+          } else {
+            const session = get().sessions[sessionKey] || { messages: [], learnedWords: [] };
+            set((s) => ({
+              isTyping: false,
+              sessions: {
+                ...s.sessions,
+                [sessionKey]: {
+                  ...session,
+                  error: geminiRes.error,
+                },
+              },
+            }));
+          }
+        } else {
+          set({ isTyping: false });
+        }
       },
 
       sendMessage: async (mode: ImmersionMode, topic: string, userText: string, accent?: string | null) => {
@@ -128,6 +197,7 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
           messages: [],
           learnedWords: [],
         };
+        const level = state.selectedLevel;
 
         const userMsg: ImmersionChatMessage = {
           id: `user-${Date.now()}`,
@@ -145,6 +215,7 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
             [sessionKey]: {
               ...currentSession,
               messages: updatedMessages,
+              error: null,
             },
           },
         });
@@ -152,17 +223,11 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
         // Award rewards (+10 XP, +5 Coins)
         useStatsStore.getState().addRewards(10, 5);
 
-        // Convert messages format for Gemini
-        const history = updatedMessages.map((m) => ({
+        // Maintain full message history (up to 20 turns)
+        const history = updatedMessages.slice(-20).map((m) => ({
           role: m.sender === 'user' ? ('user' as const) : ('assistant' as const),
           text: m.text,
         }));
-
-        let aiReplyText = '';
-        let aiTranslation = '';
-        let aiQuickReplies: { text: string; translation: string }[] = [];
-        let aiNewVocab: { word: string; meaning: string }[] = [];
-        let aiStructuredContent: ActiveImmersionResponse['structuredContent'] | undefined;
 
         if (isGeminiAvailable()) {
           const geminiRes = await getActiveImmersionResponse(
@@ -171,61 +236,174 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
             userText,
             history,
             accent ?? undefined,
+            level,
           );
 
-          if (geminiRes) {
-            aiReplyText = geminiRes.text;
-            aiTranslation = geminiRes.translation;
-            aiQuickReplies = geminiRes.quickReplies || [];
-            aiNewVocab = geminiRes.newVocabWords || [];
-            aiStructuredContent = geminiRes.structuredContent;
+          if (geminiRes.success) {
+            const assistantMsg: ImmersionChatMessage = {
+              id: `assistant-${Date.now()}`,
+              sender: 'assistant',
+              text: geminiRes.data.text,
+              translation: geminiRes.data.translation,
+              timestamp: new Date().toISOString(),
+              quickReplies: geminiRes.data.quickReplies || [],
+              newVocabWords: geminiRes.data.newVocabWords || [],
+              structuredContent: geminiRes.data.structuredContent,
+            };
+
+            const updatedLearned = [...currentSession.learnedWords];
+            (geminiRes.data.newVocabWords || []).forEach((item) => {
+              if (!updatedLearned.some((w) => w.word.toLowerCase() === item.word.toLowerCase())) {
+                updatedLearned.push(item);
+                useStatsStore.getState().learnVocab([item.word.toLowerCase()], sessionKey);
+              }
+            });
+
+            const finalSessionMessages = [...updatedMessages, assistantMsg];
+
+            set((s) => ({
+              isTyping: false,
+              sessions: {
+                ...s.sessions,
+                [sessionKey]: {
+                  ...currentSession,
+                  messages: finalSessionMessages,
+                  learnedWords: updatedLearned,
+                  error: null,
+                },
+              },
+            }));
+          } else {
+            // Check geminiRes.success; if false, set explicit error state on active session/store
+            set((s) => ({
+              isTyping: false,
+              sessions: {
+                ...s.sessions,
+                [sessionKey]: {
+                  ...currentSession,
+                  messages: updatedMessages,
+                  error: geminiRes.error,
+                },
+              },
+            }));
           }
+        } else {
+          const keyError = getApiKeyError() || {
+            code: 'MISSING_API_KEY',
+            message: 'Gemini API key is not configured.',
+          };
+          set((s) => ({
+            isTyping: false,
+            sessions: {
+              ...s.sessions,
+              [sessionKey]: {
+                ...currentSession,
+                messages: updatedMessages,
+                error: keyError,
+              },
+            },
+          }));
         }
+      },
 
-        // Fallback response if Gemini unavailable or failed
-        if (!aiReplyText) {
-          aiReplyText = `¡Comprendo! Sigamos practicando sobre '${topic}'. ¿Qué te gustaría explorar ahora?`;
-          aiTranslation = `I understand! Let's keep practicing about '${topic}'. What would you like to explore now?`;
-          aiQuickReplies = [
-            { text: '¡Sí, continuemos!', translation: 'Yes, let\'s continue!' },
-            { text: '¿Puedes repetir eso?', translation: 'Can you repeat that?' },
-          ];
-        }
+      retryLastMessage: async (mode: ImmersionMode, topic: string, accent?: string | null) => {
+        const state = get();
+        const sessionKey = buildSessionKey(mode, topic);
+        const currentSession = state.sessions[sessionKey];
+        if (!currentSession) return;
 
-        const assistantMsg: ImmersionChatMessage = {
-          id: `assistant-${Date.now()}`,
-          sender: 'assistant',
-          text: aiReplyText,
-          translation: aiTranslation,
-          timestamp: new Date().toISOString(),
-          quickReplies: aiQuickReplies,
-          newVocabWords: aiNewVocab,
-          structuredContent: aiStructuredContent,
-        };
-
-        // Automatically sync new vocabulary to learned words list
-        const updatedLearned = [...currentSession.learnedWords];
-        aiNewVocab.forEach((item) => {
-          if (!updatedLearned.some((w) => w.word.toLowerCase() === item.word.toLowerCase())) {
-            updatedLearned.push(item);
-            // Also sync to global stats store
-            useStatsStore.getState().learnVocab([item.word.toLowerCase()], sessionKey);
-          }
-        });
-
-        const finalSessionMessages = [...updatedMessages, assistantMsg];
+        const level = state.selectedLevel;
+        const messages = currentSession.messages;
 
         set((s) => ({
-          isTyping: false,
+          isTyping: true,
           sessions: {
             ...s.sessions,
             [sessionKey]: {
               ...currentSession,
-              messages: finalSessionMessages,
-              learnedWords: updatedLearned,
+              error: null,
             },
           },
         }));
+
+        const lastUserMsg = [...messages].reverse().find((m) => m.sender === 'user');
+        const userText = lastUserMsg ? lastUserMsg.text : `¡Hola! Empecemos la sesión sobre ${topic}.`;
+
+        const history = messages.slice(-20).map((m) => ({
+          role: m.sender === 'user' ? ('user' as const) : ('assistant' as const),
+          text: m.text,
+        }));
+
+        if (isGeminiAvailable()) {
+          const geminiRes = await getActiveImmersionResponse(
+            mode,
+            topic,
+            userText,
+            history,
+            accent ?? undefined,
+            level,
+          );
+
+          if (geminiRes.success) {
+            const assistantMsg: ImmersionChatMessage = {
+              id: `assistant-${Date.now()}`,
+              sender: 'assistant',
+              text: geminiRes.data.text,
+              translation: geminiRes.data.translation,
+              timestamp: new Date().toISOString(),
+              quickReplies: geminiRes.data.quickReplies || [],
+              newVocabWords: geminiRes.data.newVocabWords || [],
+              structuredContent: geminiRes.data.structuredContent,
+            };
+
+            const updatedLearned = [...currentSession.learnedWords];
+            (geminiRes.data.newVocabWords || []).forEach((item) => {
+              if (!updatedLearned.some((w) => w.word.toLowerCase() === item.word.toLowerCase())) {
+                updatedLearned.push(item);
+                useStatsStore.getState().learnVocab([item.word.toLowerCase()], sessionKey);
+              }
+            });
+
+            set((s) => ({
+              isTyping: false,
+              sessions: {
+                ...s.sessions,
+                [sessionKey]: {
+                  ...currentSession,
+                  messages: [...messages, assistantMsg],
+                  learnedWords: updatedLearned,
+                  error: null,
+                },
+              },
+            }));
+          } else {
+            set((s) => ({
+              isTyping: false,
+              sessions: {
+                ...s.sessions,
+                [sessionKey]: {
+                  ...currentSession,
+                  error: geminiRes.error,
+                },
+              },
+            }));
+          }
+        } else {
+          const keyError = getApiKeyError() || {
+            code: 'MISSING_API_KEY',
+            message: 'Gemini API key is not configured.',
+          };
+          set((s) => ({
+            isTyping: false,
+            sessions: {
+              ...s.sessions,
+              [sessionKey]: {
+                ...currentSession,
+                error: keyError,
+              },
+            },
+          }));
+        }
       },
 
       resetSession: (mode: ImmersionMode, topic: string) => {
@@ -246,6 +424,7 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
             [sessionKey]: {
               messages: [initialMessage],
               learnedWords: [],
+              error: null,
             },
           },
         }));
@@ -270,6 +449,23 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
           useStatsStore.getState().learnVocab([word.toLowerCase()], sessionKey);
         }
       },
+
+      clearSessionError: (mode: ImmersionMode, topic: string) => {
+        const sessionKey = buildSessionKey(mode, topic);
+        const state = get();
+        const currentSession = state.sessions[sessionKey];
+        if (currentSession) {
+          set({
+            sessions: {
+              ...state.sessions,
+              [sessionKey]: {
+                ...currentSession,
+                error: null,
+              },
+            },
+          });
+        }
+      },
     }),
     {
       name: 'wayfarer-active-immersion',
@@ -278,6 +474,7 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
         activeMode: state.activeMode,
         selectedTopic: state.selectedTopic,
         selectedAccent: state.selectedAccent,
+        selectedLevel: state.selectedLevel,
       }),
     }
   )

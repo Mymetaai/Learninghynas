@@ -120,12 +120,12 @@ export const useScenarioStore = create<ScenarioStore>()(
         if (isGeminiAvailable()) {
           const geminiRes = await getScenarioGeminiResponse(scenario, userText, history);
 
-          if (geminiRes) {
-            aiReplyText = geminiRes.text;
-            aiTranslation = geminiRes.translation;
-            aiSignOff = geminiRes.signOff;
-            aiQuickReplies = geminiRes.quickReplies || [];
-            aiNewVocab = geminiRes.newVocabWords || [];
+          if (geminiRes.success) {
+            aiReplyText = geminiRes.data.text;
+            aiTranslation = geminiRes.data.translation;
+            aiSignOff = geminiRes.data.signOff;
+            aiQuickReplies = geminiRes.data.quickReplies || [];
+            aiNewVocab = geminiRes.data.newVocabWords || [];
           }
         }
 

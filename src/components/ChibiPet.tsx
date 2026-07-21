@@ -2,97 +2,14 @@ import { useState, useEffect, useRef, type FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, X } from 'lucide-react';
 import Kitsune3D from './Kitsune3D';
-import { isGeminiAvailable, getYukiGeminiResponse } from '../utils/geminiService';
-
+import { isGeminiAvailable, getYukiGeminiResponse, type YukiHistoryTurn } from '../utils/geminiService';
+import { useStatsStore } from '../state/statsStore';
+import { useProgressStore } from '../state/progressStore';
 interface Message {
   sender: 'user' | 'pet';
   text: string;
   timestamp: Date;
 }
-
-// Comprehensive response matcher covering academy features, workbook data, and Spanish grammar tips
-const getYukiResponse = (input: string): string => {
-  const query = input.toLowerCase().trim();
-
-  // Helper to match whole words/phrases using boundaries
-  const matchWords = (words: string[]): boolean => {
-    return words.some(word => {
-      // Escape word for regex
-      const escaped = word.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-      const regex = new RegExp(`\\b${escaped}\\b`, 'i');
-      return regex.test(query);
-    });
-  };
-
-  // 1. GREETINGS & WHO IS YUKI
-  if (matchWords(['hola', 'hello', 'hi', 'greet', 'greetings'])) {
-    return "¡Hola, amigo! I'm Yuki, your 3D Nine-Tailed Kitsune spirit guide! 🦊✨ I'm here to help you master Spanish and navigate this academy. How can I help you train today? Dattebayo!";
-  }
-  if (matchWords(['who are you', 'what are you', 'yuki', 'kitsune', 'fox'])) {
-    return "I am Yuki, a legendary Nine-Tailed Kitsune! I'm your loyal study companion. When we chat, I wag my tails because I'm excited about your progress! Ask me anything about Spanish or how to use this app! 🦊💙";
-  }
-
-  // 2. REWARDS: COINS & XP
-  if (matchWords(['coin', 'coins', 'gold', 'xp', 'earn', 'earning', 'reward', 'rewards'])) {
-    return "You can earn Gold Coins and XP by: \n1. Completing interactive drills in 'Basic Español'.\n2. Passing the Course Exam (rewards up to 50 coins!).\n3. Finishing quests in the 'Daily Quests' menu (click the calendar icon in the top right!). 🪙✨";
-  }
-  if (matchWords(['daily', 'quest', 'quests', 'calendar', 'task', 'tasks'])) {
-    return "Daily Quests reset every day! Click the checklist icon in the top right header to see your active tasks (e.g. practicing pronunciation, completing a lesson, or maintaining your streak) and claim your rewards! 📅🎯";
-  }
-
-  // 3. SHOP & CARDS
-  if (matchWords(['shop', 'card', 'cards', 'collectible', 'collectibles', 'buy', 'unlock', 'one piece', 'demon slayer'])) {
-    return "In the Shop, you can spend your earned gold coins to unlock legendary cards from One Piece and Demon Slayer! Complete quests to earn coins, then expand your deck! ⚔️🏴‍☠️";
-  }
-
-  // 4. SPANISH LESSONS (Workbook-Aligned Data!)
-  if (matchWords(['lesson 1', 'alphabet', 'pronunciation'])) {
-    return "Lesson 1 covers Spanish Pronunciation & Greetings. Key tips: \n• 'H' is always silent (like in 'hola'). \n• 'Ñ' sounds like 'ny' in canyon. \n• 'Buenos días' = Good morning. \n• '¿Cómo estás?' = How are you? 🗣️";
-  }
-  if (matchWords(['lesson 2', 'pronoun', 'pronouns', 'subject'])) {
-    return "Lesson 2 covers Subject Pronouns: Yo (I), Tú (you, informal), Él/Ella (he/she), Nosotros (we), Vosotros (you all, Spain), and Ellos/Ellas (they). Master these to start forming sentences! 👥";
-  }
-  if (matchWords(['ser', 'estar', 'to be'])) {
-    return "Ah, the golden rule of Spanish! Both mean 'To Be', but:\n• SER: Used for permanent qualities (D.O.C.T.O.R: Description, Occupation, Characteristics, Time, Origin, Relation).\n• ESTAR: Used for temporary states/locations (P.L.A.C.E: Position, Location, Action, Condition, Emotion). ⚖️";
-  }
-  if (matchWords(['lesson 3', 'noun', 'nouns', 'article', 'articles', 'gender'])) {
-    return "Lesson 3 covers Nouns & Articles. All nouns are Masculine (use 'el' / 'un') or Feminine (use 'la' / 'una'). Usually, nouns ending in -o are masculine (el libro) and -a are feminine (la mesa). 📚";
-  }
-  if (matchWords(['lesson 4', 'phrase', 'phrases', 'simple sentence', 'sentence', 'sentences'])) {
-    return "Lesson 4 teaches you to build Everyday Sentences! For example: 'Yo hablo español' (I speak Spanish) or '¿Dónde está el baño?' (Where is the bathroom?). Keep it subject-verb-object! 💬";
-  }
-  if (matchWords(['exam', 'test', 'quiz', 'exams', 'tests', 'quizzes'])) {
-    return "The Workbook Exam is at the bottom of the 'Basic Español' screen. It contains 8 interactive questions summarizing the entire workbook. Scoring 100% awards you 50 coins and a legendary achievement badge! 🏆📝";
-  }
-
-  // 5. APP NAVIGATION & TABS
-  if (matchWords(['dashboard', 'home', 'stats'])) {
-    return "The Dashboard (1st tab) is your command center! Here you can check your weekly study hours, current streak, active quests, and see your overall academy rank. Keep an eye on it to track your progress! 📊";
-  }
-  if (matchWords(['basic espanol', 'espanol', 'course', 'workbook'])) {
-    return "The 'Basic Español' tab contains 4 complete lessons based on the course workbook: alphabet/greetings, pronouns, articles, and phrases. Complete drills there to earn coins! 📖✨";
-  }
-  if (matchWords(['adventure', 'map', 'world', 'worlds'])) {
-    return "The 'Adventure Map' lets you embark on learning quests across different worlds! Complete lessons to unlock nodes, defeat bosses, and advance your Spanish journey! 🗺️⚔️";
-  }
-  if (matchWords(['why us', 'pitch', 'about'])) {
-    return "The 'Why Us' tab showcases what makes our academy unique: our beautiful Glassmorphic interface, interactive 3D elements (like me!), gamified rewards, and workbook-aligned materials! 🌟💎";
-  }
-
-  // 6. NARRATIVE STUDY TIPS
-  if (matchWords(['tip', 'tips', 'advice', 'help', 'study'])) {
-    const tips = [
-      "Kitsune Tip: Try speaking Spanish words out loud! Pronouncing them helps cement the neural pathways in your brain. 🗣️",
-      "Kitsune Tip: Don't rush! Spend 10 minutes a day on the 'Basic Español' drills rather than 1 hour all at once. Consistency is key! 📅",
-      "Kitsune Tip: Use the Shop cards as motivation. Tell yourself: 'If I finish this lesson, I'll buy a One Piece card!' 🏴‍☠️",
-      "Kitsune Tip: Review Lesson 2's Ser vs Estar differences—it's the most common mistake for beginners! ⚖️"
-    ];
-    return tips[Math.floor(Math.random() * tips.length)];
-  }
-
-  // DEFAULT FALLBACK
-  return "Dattebayo! I'm not fully sure about that spell. You can ask me about 'Lesson 1', 'Ser vs Estar', 'how to earn coins', 'how the Shop works', or for a 'study tip'! I'm here to help you guide your learning chakra! 🦊🌀";
-};
 
 const ChibiPet: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -103,6 +20,8 @@ const ChibiPet: FC = () => {
       timestamp: new Date()
     }
   ]);
+  const [history, setHistory] = useState<YukiHistoryTurn[]>([]);
+  const [apiError, setApiError] = useState<string | null>(null);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [bubbleText, setBubbleText] = useState<string | null>("Let's study! 🇪🇸");
@@ -141,54 +60,79 @@ const ChibiPet: FC = () => {
     return () => clearInterval(interval);
   }, [isOpen]);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!inputValue.trim()) return;
 
     const userMsg = inputValue.trim();
+    setInputValue('');
+    setApiError(null);
+
     setMessages((prev) => [
       ...prev,
       { sender: 'user', text: userMsg, timestamp: new Date() }
     ]);
 
-    // Build context history for Gemini
-    const history = messages.map((m) => ({
-      role: m.sender === 'user' ? ('user' as const) : ('yuki' as const),
-      text: m.text,
-    }));
+    const updatedHistory: YukiHistoryTurn[] = [
+      ...history,
+      { role: 'user', text: userMsg }
+    ];
 
-    setInputValue('');
     setIsTyping(true);
 
-    const useStaticFallback = () => {
-      setTimeout(() => {
-        const reply = getYukiResponse(userMsg);
-        setMessages((prev) => [
-          ...prev,
-          { sender: 'pet', text: reply, timestamp: new Date() }
-        ]);
-        setIsTyping(false);
-      }, 1000);
+    const stats = useStatsStore.getState();
+    const progress = useProgressStore.getState();
+
+    const userState = {
+      level: Math.floor((stats.xp || 0) / 1000) + 1,
+      streak: stats.streak || 0,
+      coins: stats.coins || 0,
+      xp: stats.xp || 0,
+      region: progress.completedQuestIds?.length > 0 ? `Region ${progress.completedQuestIds.length}` : 'Starting Region',
+      tailsCollected: stats.collectedCardIds?.length || 0,
     };
 
-    if (isGeminiAvailable()) {
-      getYukiGeminiResponse(userMsg, history)
-        .then((reply) => {
-          if (reply) {
-            setMessages((prev) => [
-              ...prev,
-              { sender: 'pet', text: reply, timestamp: new Date() }
-            ]);
-            setIsTyping(false);
-          } else {
-            useStaticFallback();
-          }
-        })
-        .catch((err) => {
-          console.error('[Yuki Gemini] Error:', err);
-          useStaticFallback();
-        });
-    } else {
-      useStaticFallback();
+    try {
+      const res = await getYukiGeminiResponse(userMsg, history, userState);
+      setIsTyping(false);
+
+      if (res.success) {
+        const responseText = res.data.text;
+        setMessages((prev) => [
+          ...prev,
+          { sender: 'pet', text: responseText, timestamp: new Date() }
+        ]);
+        setHistory([
+          ...updatedHistory,
+          { role: 'model', text: responseText }
+        ]);
+      } else {
+        const errMessage = res.error.message || res.error.code || 'Connection Error';
+        setApiError(errMessage);
+
+        const fallbackText = "Hmm, my fox senses are a little foggy right now — try asking again in a moment.";
+        setMessages((prev) => [
+          ...prev,
+          { sender: 'pet', text: fallbackText, timestamp: new Date() }
+        ]);
+        setHistory([
+          ...updatedHistory,
+          { role: 'model', text: fallbackText }
+        ]);
+      }
+    } catch (err: any) {
+      setIsTyping(false);
+      const errMessage = err?.message || 'Connection Error';
+      setApiError(errMessage);
+
+      const fallbackText = "Hmm, my fox senses are a little foggy right now — try asking again in a moment.";
+      setMessages((prev) => [
+        ...prev,
+        { sender: 'pet', text: fallbackText, timestamp: new Date() }
+      ]);
+      setHistory([
+        ...updatedHistory,
+        { role: 'model', text: fallbackText }
+      ]);
     }
   };
 
@@ -214,16 +158,24 @@ const ChibiPet: FC = () => {
             >
               {/* Header */}
               <div className="bg-gradient-to-r from-accent-action/10 via-info/10 to-success/10 px-4 py-3 border-b border-structural flex items-center justify-between">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 overflow-hidden">
                   <div className="h-6 w-6 rounded-full bg-bg-elevated-2 flex items-center justify-center text-xs shrink-0 select-none">
                     🦊
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <div className="flex items-center gap-1.5">
-                      <h3 className="font-body text-xs font-semibold text-text-primary">Yuki</h3>
-                      {isGeminiAvailable() && (
-                        <span className="text-[7px] font-hud bg-accent-action/25 text-accent-action px-1 rounded border border-accent-action/30 animate-pulse font-bold">
+                      <h3 className="font-body text-xs font-semibold text-text-primary shrink-0">Yuki</h3>
+                      {apiError ? (
+                        <span className="text-[8px] font-mono bg-red-500/20 text-red-300 border border-red-500/40 px-1.5 py-0.5 rounded truncate font-bold" title={`AI Disconnected: ${apiError}`}>
+                          AI Disconnected: {apiError}
+                        </span>
+                      ) : isGeminiAvailable() ? (
+                        <span className="text-[7px] font-hud bg-accent-action/25 text-accent-action px-1 rounded border border-accent-action/30 animate-pulse font-bold shrink-0">
                           AI
+                        </span>
+                      ) : (
+                        <span className="text-[8px] font-mono bg-red-500/20 text-red-300 border border-red-500/40 px-1.5 py-0.5 rounded truncate font-bold" title="AI Disconnected: Missing API Key">
+                          AI Disconnected: Missing API Key
                         </span>
                       )}
                     </div>
@@ -232,11 +184,19 @@ const ChibiPet: FC = () => {
                 </div>
                 <button 
                   onClick={() => setIsOpen(false)}
-                  className="text-text-secondary hover:text-text-primary transition-colors cursor-pointer"
+                  className="text-text-secondary hover:text-text-primary transition-colors cursor-pointer ml-2 shrink-0"
                 >
                   <X className="h-4 w-4" />
                 </button>
               </div>
+
+              {/* Error Badge Banner */}
+              {apiError && (
+                <div className="bg-red-500/15 border-b border-red-500/30 px-3 py-1.5 text-[10px] text-red-300 flex items-center justify-between font-mono shrink-0">
+                  <span className="truncate">AI Disconnected: {apiError}</span>
+                  <button onClick={() => setApiError(null)} className="text-xs hover:text-white font-bold cursor-pointer ml-2 shrink-0">&times;</button>
+                </div>
+              )}
 
               {/* Chat Messages Area */}
               <div className="flex-1 overflow-y-auto p-4 space-y-3 [scrollbar-width:thin] scrollbar-thin scrollbar-thumb-text-tertiary/20 scrollbar-track-transparent">

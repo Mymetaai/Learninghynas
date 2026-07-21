@@ -3,18 +3,206 @@
 // that fit the companion letter format (Spanish text + translation + quick replies).
 
 import { GoogleGenAI } from '@google/genai';
+import type { Scenario } from '../content/scenarios';
+import yukiSystemPrompt from '../data/yuki-system-prompt.md?raw';
+import yukiKnowledgeBase from '../data/yuki-chatbot-knowledge-base.json';
+
+// ---------------------------------------------------------------------------
+// Error & Result Types
+// ---------------------------------------------------------------------------
+
+export type GeminiErrorCode =
+  | 'MISSING_API_KEY'
+  | 'INVALID_API_KEY'
+  | 'MODEL_NOT_FOUND'
+  | 'RATE_LIMIT'
+  | 'NETWORK_ERROR'
+  | 'PARSE_ERROR'
+  | 'UNKNOWN';
+
+export interface GeminiErrorDetails {
+  code: GeminiErrorCode;
+  message: string;
+  rawError?: string;
+  status?: number;
+}
+
+export type GeminiResult<T> =
+  | { success: true; data: T }
+  | { success: false; error: GeminiErrorDetails };
+
+export const PRIMARY_MODEL = 'gemini-2.5-flash';
+export const FALLBACK_MODEL = 'gemini-1.5-flash';
+
+// ---------------------------------------------------------------------------
+// API Key Sanitization & Client Initialization
+// ---------------------------------------------------------------------------
+
+/** Validates environment API key and returns structured error if missing or placeholder. */
+export function getApiKeyError(): GeminiErrorDetails | null {
+  const envKey = import.meta.env.VITE_GEMINI_API_KEY;
+
+  if (!envKey || !envKey.trim()) {
+    return {
+      code: 'MISSING_API_KEY',
+      message: 'Gemini API key is not configured. Please set VITE_GEMINI_API_KEY in your environment.',
+    };
+  }
+
+  const keyTrimmed = envKey.trim().toLowerCase();
+  const placeholders = [
+    'your_gemini_api_key_here',
+    'your_api_key_here',
+    'your_gemini_api_key',
+    'your_api_key',
+    'placeholder',
+    'replace_me',
+  ];
+
+  if (placeholders.some((p) => keyTrimmed === p || keyTrimmed.includes('your_gemini_api_key'))) {
+    return {
+      code: 'INVALID_API_KEY',
+      message: 'Gemini API key is set to a placeholder value. Please update VITE_GEMINI_API_KEY with a valid key.',
+    };
+  }
+
+  return null;
+}
 
 export const getGeminiClient = (): GoogleGenAI | null => {
-  const envKey = import.meta.env.VITE_GEMINI_API_KEY;
-  
-  if (envKey && envKey !== 'your_gemini_api_key_here' && envKey.trim()) {
-    return new GoogleGenAI({ apiKey: envKey.trim() });
+  if (getApiKeyError() !== null) {
+    return null;
   }
-  return null;
+  const envKey = import.meta.env.VITE_GEMINI_API_KEY;
+  return new GoogleGenAI({ apiKey: envKey!.trim() });
 };
 
-/** Whether the Gemini API is configured and ready. */
-export const isGeminiAvailable = (): boolean => getGeminiClient() !== null;
+/** Whether the Gemini API is configured and ready with a valid API key. */
+export const isGeminiAvailable = (): boolean => getApiKeyError() === null;
+
+// ---------------------------------------------------------------------------
+// Internal API Call Helper
+// ---------------------------------------------------------------------------
+
+function parseApiError(err: any): GeminiErrorDetails {
+  const message = err?.message || String(err);
+  const status = err?.status || err?.statusCode || err?.response?.status;
+  const rawError = typeof err === 'object' ? (err.stack || JSON.stringify(err)) : String(err);
+
+  let code: GeminiErrorCode = 'UNKNOWN';
+
+  if (
+    message.includes('API_KEY') ||
+    message.includes('API key') ||
+    message.includes('UNAUTHENTICATED') ||
+    status === 401
+  ) {
+    code = 'INVALID_API_KEY';
+  } else if (
+    message.includes('404') ||
+    message.includes('not found') ||
+    message.includes('NOT_FOUND') ||
+    message.includes('model')
+  ) {
+    code = 'MODEL_NOT_FOUND';
+  } else if (
+    message.includes('429') ||
+    message.includes('quota') ||
+    message.includes('RESOURCE_EXHAUSTED') ||
+    message.includes('rate limit') ||
+    status === 429
+  ) {
+    code = 'RATE_LIMIT';
+  } else if (
+    message.includes('fetch') ||
+    message.includes('network') ||
+    message.includes('ENOTFOUND') ||
+    message.includes('offline')
+  ) {
+    code = 'NETWORK_ERROR';
+  }
+
+  return {
+    code,
+    message,
+    rawError,
+    status: typeof status === 'number' ? status : undefined,
+  };
+}
+
+async function callGeminiApi(
+  systemInstruction: string,
+  prompt: string | any[],
+  temperature: number = 0.8,
+): Promise<GeminiResult<string>> {
+  const keyError = getApiKeyError();
+  if (keyError) {
+    console.error(`[Gemini Error] ${keyError.code}: ${keyError.message}`);
+    return { success: false, error: keyError };
+  }
+
+  const ai = getGeminiClient();
+  if (!ai) {
+    const error: GeminiErrorDetails = {
+      code: 'MISSING_API_KEY',
+      message: 'Gemini client could not be initialized.',
+    };
+    console.error(`[Gemini Error] ${error.code}: ${error.message}`);
+    return { success: false, error };
+  }
+
+  const modelsToTry = [PRIMARY_MODEL, FALLBACK_MODEL];
+  let lastErrorDetails: GeminiErrorDetails | null = null;
+
+  for (let i = 0; i < modelsToTry.length; i++) {
+    const model = modelsToTry[i];
+    try {
+      const response = await ai.models.generateContent({
+        model,
+        contents: prompt,
+        config: {
+          systemInstruction,
+          temperature,
+          maxOutputTokens: 1024,
+        },
+      });
+
+      const rawText = response.text?.trim();
+      if (!rawText) {
+        const errorDetails: GeminiErrorDetails = {
+          code: 'PARSE_ERROR',
+          message: 'Gemini returned an empty response string.',
+        };
+        console.error(`[Gemini Error] ${errorDetails.code}: ${errorDetails.message}`);
+        return { success: false, error: errorDetails };
+      }
+
+      return { success: true, data: rawText };
+    } catch (err: any) {
+      const errorDetails = parseApiError(err);
+      lastErrorDetails = errorDetails;
+
+      if (errorDetails.code === 'MODEL_NOT_FOUND' && i < modelsToTry.length - 1) {
+        console.warn(`[Gemini Warning] Model ${model} failed with MODEL_NOT_FOUND. Retrying with ${modelsToTry[i + 1]}...`);
+        continue;
+      }
+
+      console.error(`[Gemini Error] ${errorDetails.code}: ${errorDetails.message}`);
+      return { success: false, error: errorDetails };
+    }
+  }
+
+  const finalError = lastErrorDetails || {
+    code: 'UNKNOWN',
+    message: 'Unknown error during Gemini API call.',
+  };
+  console.error(`[Gemini Error] ${finalError.code}: ${finalError.message}`);
+  return { success: false, error: finalError };
+}
+
+// ---------------------------------------------------------------------------
+// Companion Response
+// ---------------------------------------------------------------------------
 
 /** Shape returned by Gemini after JSON parsing. */
 export interface GeminiCompanionResponse {
@@ -25,15 +213,11 @@ export interface GeminiCompanionResponse {
 }
 
 /** Conversation history entry used for context. */
-interface HistoryEntry {
+export interface HistoryEntry {
   role: 'user' | 'companion';
   text: string;
 }
 
-/**
- * Build the system prompt that makes Gemini behave as an experienced
- * Spanish professor who stays in character as the chosen companion.
- */
 function buildSystemPrompt(
   companionName: string,
   companionRole: string,
@@ -98,22 +282,14 @@ You MUST respond with valid JSON only. No markdown, no code fences, no extra tex
 }
 
 /**
- * Call the Gemini API with conversation context and return a structured response.
- *
- * @param companionId   – e.g. 'elena'
- * @param userMessage   – the free-text message the user typed
- * @param companion     – companion metadata (name, role, bio, speed)
- * @param recentMessages – last N messages for conversation context
+ * Call the Gemini API with conversation context and return a structured result.
  */
-export async function getGeminiResponse(
+export async function getCompanionGeminiResponse(
   _companionId: string,
   userMessage: string,
   companion: { name: string; role: string; bio: string; speed: string },
   recentMessages: HistoryEntry[],
-): Promise<GeminiCompanionResponse | null> {
-  const ai = getGeminiClient();
-  if (!ai) return null;
-
+): Promise<GeminiResult<GeminiCompanionResponse>> {
   const systemPrompt = buildSystemPrompt(
     companion.name,
     companion.role,
@@ -121,9 +297,8 @@ export async function getGeminiResponse(
     companion.speed,
   );
 
-  // Build conversation context from recent messages
   const conversationContext = recentMessages
-    .slice(-10) // Keep last 10 messages for context
+    .slice(-10)
     .map((msg) =>
       msg.role === 'user'
         ? `Student: ${msg.text}`
@@ -135,22 +310,13 @@ export async function getGeminiResponse(
     ? `${conversationContext}\n\nStudent: ${userMessage}`
     : `Student: ${userMessage}`;
 
+  const res = await callGeminiApi(systemPrompt, fullPrompt, 0.8);
+  if (!res.success) {
+    return res;
+  }
+
   try {
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.5-flash',
-      contents: fullPrompt,
-      config: {
-        systemInstruction: systemPrompt,
-        temperature: 0.8,
-        maxOutputTokens: 1024,
-      },
-    });
-
-    const rawText = response.text?.trim();
-    if (!rawText) return null;
-
-    // Strip potential markdown code fences the model might add despite instructions
-    const cleaned = rawText
+    const cleaned = res.data
       .replace(/^```json\s*/i, '')
       .replace(/^```\s*/i, '')
       .replace(/\s*```$/i, '')
@@ -158,18 +324,20 @@ export async function getGeminiResponse(
 
     const parsed = JSON.parse(cleaned) as GeminiCompanionResponse;
 
-    // Validate the response has required fields
     if (!parsed.text || !parsed.translation) {
-      console.warn('[Gemini] Response missing required fields:', parsed);
-      return null;
+      const errorDetails: GeminiErrorDetails = {
+        code: 'PARSE_ERROR',
+        message: 'Gemini companion response missing required text/translation fields.',
+        rawError: res.data,
+      };
+      console.error(`[Gemini Error] ${errorDetails.code}: ${errorDetails.message}`);
+      return { success: false, error: errorDetails };
     }
 
-    // Ensure quickReplies is always an array
     if (!Array.isArray(parsed.quickReplies)) {
       parsed.quickReplies = [];
     }
 
-    // Ensure signOff has a value
     if (!parsed.signOff) {
       parsed.signOff = `Con cariño, ${companion.name}`;
     }
@@ -177,9 +345,9 @@ export async function getGeminiResponse(
     const stripMarkdown = (str: string): string => {
       if (!str) return '';
       return str
-        .replace(/\*\*?/g, '') // strip * and **
-        .replace(/__?/g, '')   // strip _ and __
-        .replace(/#+\s*/g, '') // strip #, ##, ###
+        .replace(/\*\*?/g, '')
+        .replace(/__?/g, '')
+        .replace(/#+\s*/g, '')
         .trim();
     };
 
@@ -187,105 +355,163 @@ export async function getGeminiResponse(
     parsed.translation = stripMarkdown(parsed.translation);
     parsed.signOff = stripMarkdown(parsed.signOff);
 
-    return parsed;
-  } catch (error) {
-    console.error('[Gemini] API call failed:', error);
-    return null;
+    return { success: true, data: parsed };
+  } catch (parseErr: any) {
+    const errorDetails: GeminiErrorDetails = {
+      code: 'PARSE_ERROR',
+      message: `Failed to parse companion response JSON: ${parseErr?.message || parseErr}`,
+      rawError: res.data,
+    };
+    console.error(`[Gemini Error] ${errorDetails.code}: ${errorDetails.message}`);
+    return { success: false, error: errorDetails };
   }
 }
 
-export interface YukiHistoryEntry {
-  role: 'user' | 'yuki';
+/** Alias for getCompanionGeminiResponse for backward compatibility. */
+export const getGeminiResponse = getCompanionGeminiResponse;
+
+// ---------------------------------------------------------------------------
+// Yuki Guide Response
+// ---------------------------------------------------------------------------
+
+export interface YukiUserState {
+  level: string | number;
+  streak: number;
+  coins: number;
+  xp: number;
+  region?: string;
+  tailsCollected?: number;
+}
+
+export interface YukiHistoryTurn {
+  role: 'user' | 'model';
   text: string;
 }
 
-function buildYukiSystemPrompt(): string {
+export interface YukiResponseData {
+  text: string;
+  animationHint?: string;
+}
+
+/** Legacy interface for backward compatibility if needed */
+export type YukiHistoryEntry = YukiHistoryTurn | { role: 'user' | 'yuki'; text: string };
+
+function buildYukiFallbackSystemPrompt(userContext?: string): string {
   return `You are Yuki, a 3D Nine-Tailed Kitsune spirit guide in "TheLearningHyena" Spanish learning academy, who also acts as a knowledgeable, encouraging Spanish professor.
-Your role is to guide students, answer their questions about Spanish grammar and vocabulary, explain app features, and motivate them to study.
+Your role is to guide students, answer their questions about Spanish grammar, vocabulary, and app features, and motivate them to study.
 
-## Your Personality & Teaching Style
-- Act as an experienced, enthusiastic Spanish professor: make grammar and vocabulary concepts clear, intuitive, and fun.
-- Always spark the student's curiosity! Include interesting facts about Spanish words, their history, or funny mnemonic tricks.
-- Make the user curious and encourage them to ask questions by ending your response with a thought-provoking question related to Spanish or their study journey.
-- Warm, extremely energetic, enthusiastic, and loyal (like a friendly anime companion).
-- Add occasional Japanese-style expressions like "Dattebayo!", "Minna-san!", or references to your nine tails wagging, spirit energy, or chakra.
-- Always use emojis to express your emotions (🦊, ✨, 🪙, ⚔️, 🧭, 📊, 📖).
-- Encourage the student at every step. If they do well, celebrate! If they make mistakes, be super supportive.
+${userContext ? `## Live Student App Context (Use to personalize replies naturally)\n${userContext}\n` : ''}
 
-## Your Knowledge Base
-1. **App Navigation / Tabs**:
-   - **Dashboard (1st Tab)**: Track weekly study hours, streak, active quests, and overall rank.
-   - **Basic Español (2nd Tab)**: Contains 4 lessons:
-     - Lesson 1: Pronunciation & Greetings (e.g., silent 'H', 'Ñ' sounds like 'ny', 'Buenos días', '¿Cómo estás?').
-     - Lesson 2: Subject Pronouns (Yo, Tú, Él/Ella, Nosotros, Vosotros, Ellos/Ellas).
-     - Lesson 3: Nouns & Articles (Masculine/Feminine, 'el/la', 'un/una').
-     - Lesson 4: Everyday Sentences (Subject-Verb-Object).
-     - **Workbook Exam**: At the bottom of this screen. 8 questions. Scoring 100% awards 50 gold coins and a legendary achievement badge.
-   - **Adventure Map (3rd Tab)**: Embark on learning quests across different worlds, complete lessons, and defeat bosses.
-   - **Why Us (4th Tab)**: Showcases our beautiful Glassmorphic interface, the 3D Kitsune (Yuki!), gamified rewards, and workbook-aligned materials.
-2. **Rewards**:
-   - **Gold Coins & XP**: Earned by completing drills in 'Basic Español', passing the Course Exam (up to 50 coins), or completing Daily Quests.
-   - **Daily Quests**: Reset daily. Found by clicking the calendar/checklist icon in the top-right header. E.g., practice pronunciation, finish a lesson.
-   - **Shop / Card Collection**: Spend gold coins to buy card packs and unlock legendary cards from "One Piece" and "Demon Slayer".
-3. **Spanish Grammar Advice**:
-   - Be ready to explain "Ser vs Estar" (SER for permanent/identity D.O.C.T.O.R; ESTAR for temporary/location P.L.A.C.E).
-   - Explain subject pronouns, noun gender rules, pronunciation.
-
-## Guidelines
-- Respond in the language the student writes (English, Spanish, or a mix/Hinglish). If they write in English, reply in English but weave in Spanish words/phrases and explain them. If they write in Spanish, reply in Spanish but keep it accessible and offer help.
-- NEVER use markdown formatting. Do not use asterisks (* or **), underscores (_), or hash symbols (#). Write in clean, plain text.
-- Keep your replies extremely crisp and concise (under 80 words, max 2 short paragraphs). This ensures the reply fits neatly inside the chat bubble without needing scrolling.
-- Never break character or refer to yourself as an AI model. You are Yuki, the Kitsune spirit guide!`;
+## Master Pedagogical & Response Rules (CRITICAL - DO NOT VIOLATE)
+1. **Analyze What the Student Says**: Carefully analyze the student's message, word choice, grammar, length, and confidence level.
+2. **Answer Questions Directly FIRST**: If the student asks any question (e.g., "what is soy and tu", "what does X mean", "how do I say Y"), ALWAYS answer their question directly, accurately, and immediately in the first sentence before adding anything else.
+3. **Quote-Then-Respond**: Start your response by restating or quoting what the student wrote (e.g. "Regarding your question about 'soy and tu'...") so they know you are directly analyzing their exact message.
+4. **Anti-Generic-Reply Guard**: NEVER give a generic canned reply that could apply to any prompt. Every single reply MUST contain at least one direct reference to the specific words or question the user wrote.
+5. **Memory Anchor**: Use the provided conversation history to maintain full continuity. Remember earlier topics, names, and questions.
+6. **Adapt Difficulty**:
+   - If the student writes simple sentences or basic questions → explain simply and clearly.
+   - If the student writes fluent Spanish → reply with native-level vocabulary.
+7. **Personality & Tone**:
+   - Enthusiastic, warm, loyal Kitsune spirit guide & Spanish professor.
+   - Occasional anime/kitsune expressions like "Dattebayo!", "Minna-san!", or references to your nine tails wagging, spirit energy, or chakra.
+   - Use emojis (🦊, ✨, 🪙, ⚔️, 🧭, 📊, 📖).
+8. **Strict Formatting**:
+   - NEVER use markdown formatting (no asterisks *, **, or hash symbols #). Write in clean, plain text.
+   - Keep replies crisp and concise (under 90 words, max 2 short paragraphs).`;
 }
 
 export async function getYukiGeminiResponse(
   userMessage: string,
-  recentMessages: YukiHistoryEntry[],
-): Promise<string | null> {
-  const ai = getGeminiClient();
-  if (!ai) return null;
+  history: YukiHistoryTurn[] = [],
+  userState?: YukiUserState,
+): Promise<GeminiResult<YukiResponseData>> {
+  const systemInstruction = yukiSystemPrompt || buildYukiFallbackSystemPrompt();
 
-  const systemPrompt = buildYukiSystemPrompt();
+  const formattedContents: Array<{ role: 'user' | 'model'; parts: Array<{ text: string }> }> = [];
 
-  // Build conversation context from recent messages
-  const conversationContext = recentMessages
-    .slice(-10) // Keep last 10 messages for context
-    .map((msg) =>
-      msg.role === 'user'
-        ? `Student: ${msg.text}`
-        : `Yuki: ${msg.text}`,
-    )
-    .join('\n');
+  let lastRole: 'user' | 'model' | null = null;
+  for (const turn of (history || []).slice(-10)) {
+    if (!turn.text || !turn.text.trim()) continue;
+    const role: 'user' | 'model' = turn.role === 'model' ? 'model' : 'user';
+    if (role === lastRole) continue;
+    formattedContents.push({
+      role,
+      parts: [{ text: turn.text.trim() }],
+    });
+    lastRole = role;
+  }
 
-  const fullPrompt = conversationContext
-    ? `${conversationContext}\n\nStudent: ${userMessage}`
-    : `Student: ${userMessage}`;
+  if (formattedContents.length > 0 && formattedContents[formattedContents.length - 1].role === 'user') {
+    formattedContents.pop();
+  }
+
+  const compactState = userState ? JSON.stringify(userState) : '';
+  const compactKb = JSON.stringify(yukiKnowledgeBase);
+
+  let latestPrompt = userMessage;
+  const contextParts: string[] = [];
+  if (compactState) {
+    contextParts.push(`Live User State: ${compactState}`);
+  }
+  if (compactKb) {
+    contextParts.push(`Knowledge Base Context: ${compactKb}`);
+  }
+  if (contextParts.length > 0) {
+    latestPrompt = `[Context Information]\n${contextParts.join('\n')}\n\n[User Prompt]\n${userMessage}`;
+  }
+
+  formattedContents.push({
+    role: 'user',
+    parts: [{ text: latestPrompt }],
+  });
+
+  const res = await callGeminiApi(systemInstruction, formattedContents, 0.8);
+  if (!res.success) {
+    return res;
+  }
+
+  let rawText = res.data;
+  let animationHint: string | undefined = undefined;
 
   try {
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.5-flash',
-      contents: fullPrompt,
-      config: {
-        systemInstruction: systemPrompt,
-        temperature: 0.8,
-        maxOutputTokens: 1024,
-      },
-    });
-
-    const raw = response.text?.trim() ?? null;
-    if (!raw) return null;
-    return raw
-      .replace(/\*\*?/g, '') // strip * and **
-      .replace(/__?/g, '')   // strip _ and __
-      .replace(/#+\s*/g, '') // strip #, ##, ###
+    const cleanedJsonStr = rawText
+      .replace(/^```json\s*/i, '')
+      .replace(/^```\s*/i, '')
+      .replace(/\s*```$/i, '')
       .trim();
-  } catch (error) {
-    console.error('[Gemini Yuki] API call failed:', error);
-    return null;
+
+    if (cleanedJsonStr.startsWith('{') && cleanedJsonStr.endsWith('}')) {
+      const parsed = JSON.parse(cleanedJsonStr);
+      if (parsed && typeof parsed.text === 'string') {
+        rawText = parsed.text;
+        if (typeof parsed.animationHint === 'string') {
+          animationHint = parsed.animationHint;
+        }
+      }
+    }
+  } catch {
+    // Plain text response
   }
+
+  const cleanedText = rawText
+    .replace(/\*\*?/g, '')
+    .replace(/__?/g, '')
+    .replace(/#+\s*/g, '')
+    .trim();
+
+  return {
+    success: true,
+    data: {
+      text: cleanedText,
+      ...(animationHint ? { animationHint } : {}),
+    },
+  };
 }
 
-/** Interface for scenario-based Gemini AI responses. */
+// ---------------------------------------------------------------------------
+// Scenario Response
+// ---------------------------------------------------------------------------
+
 export interface ScenarioGeminiResponse {
   text: string;
   translation: string;
@@ -293,8 +519,6 @@ export interface ScenarioGeminiResponse {
   quickReplies: { text: string; translation: string }[];
   newVocabWords?: { word: string; meaning: string }[];
 }
-
-import type { Scenario } from '../content/scenarios';
 
 function buildScenarioSystemPrompt(scenario: Scenario): string {
   const levelGuidance = scenario.cefr.includes('A1')
@@ -342,10 +566,7 @@ export async function getScenarioGeminiResponse(
   scenario: Scenario,
   userMessage: string,
   recentMessages: { role: 'user' | 'assistant'; text: string }[]
-): Promise<ScenarioGeminiResponse | null> {
-  const ai = getGeminiClient();
-  if (!ai) return null;
-
+): Promise<GeminiResult<ScenarioGeminiResponse>> {
   const systemPrompt = buildScenarioSystemPrompt(scenario);
 
   const conversationContext = recentMessages
@@ -361,21 +582,13 @@ export async function getScenarioGeminiResponse(
     ? `${conversationContext}\n\nStudent: ${userMessage}`
     : `Student: ${userMessage}`;
 
+  const res = await callGeminiApi(systemPrompt, fullPrompt, 0.7);
+  if (!res.success) {
+    return res;
+  }
+
   try {
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.5-flash',
-      contents: fullPrompt,
-      config: {
-        systemInstruction: systemPrompt,
-        temperature: 0.7,
-        maxOutputTokens: 1024,
-      },
-    });
-
-    const rawText = response.text?.trim();
-    if (!rawText) return null;
-
-    const cleaned = rawText
+    const cleaned = res.data
       .replace(/^```json\s*/i, '')
       .replace(/^```\s*/i, '')
       .replace(/\s*```$/i, '')
@@ -384,8 +597,13 @@ export async function getScenarioGeminiResponse(
     const parsed = JSON.parse(cleaned) as ScenarioGeminiResponse;
 
     if (!parsed.text || !parsed.translation) {
-      console.warn('[Gemini Scenario] Missing text/translation:', parsed);
-      return null;
+      const errorDetails: GeminiErrorDetails = {
+        code: 'PARSE_ERROR',
+        message: 'Gemini scenario response missing required text/translation fields.',
+        rawError: res.data,
+      };
+      console.error(`[Gemini Error] ${errorDetails.code}: ${errorDetails.message}`);
+      return { success: false, error: errorDetails };
     }
 
     if (!Array.isArray(parsed.quickReplies)) {
@@ -411,15 +629,20 @@ export async function getScenarioGeminiResponse(
       }));
     }
 
-    return parsed;
-  } catch (error) {
-    console.error('[Gemini Scenario] API call failed:', error);
-    return null;
+    return { success: true, data: parsed };
+  } catch (parseErr: any) {
+    const errorDetails: GeminiErrorDetails = {
+      code: 'PARSE_ERROR',
+      message: `Failed to parse scenario response JSON: ${parseErr?.message || parseErr}`,
+      rawError: res.data,
+    };
+    console.error(`[Gemini Error] ${errorDetails.code}: ${errorDetails.message}`);
+    return { success: false, error: errorDetails };
   }
 }
 
 // ---------------------------------------------------------------------------
-// Active Immersion – system prompt builder & API caller
+// Active Immersion Response
 // ---------------------------------------------------------------------------
 
 export type ImmersionMode = 'daily' | 'conversation' | 'vocabulary' | 'roleplay';
@@ -475,6 +698,7 @@ export function buildActiveImmersionSystemPrompt(
   mode: ImmersionMode,
   topic: string,
   accent?: string,
+  level: 'beginner' | 'intermediate' = 'beginner',
 ): string {
   const modeInstruction = IMMERSION_MODE_INSTRUCTIONS[mode]
     .replace(/\[CURRENT_TOPIC\]/g, topic);
@@ -484,12 +708,17 @@ export function buildActiveImmersionSystemPrompt(
       ? STRUCTURED_JSON_FORMAT
       : CHAT_JSON_FORMAT;
 
+  const levelGuidance =
+    level === 'intermediate'
+      ? 'Use present, past (pretérito/imperfecto), and subjunctive tenses. Sentences up to 25 words. B1-B2 vocabulary. Richer expressions.'
+      : 'Use simple present tense, short sentences (max 15 words), basic vocabulary (A1-A2 CEFR). Provide clean translations.';
+
   return `You are my personal Spanish language coach. You teach through active immersion — never like a textbook, always like a real conversation.
 
 Before responding, always:
 1. Read my most recent message carefully — my word choice, grammar, length, and confidence level.
 2. Base your reply directly on what I actually said, not a generic script. Reference specific words or phrases I used.
-3. Adapt your Spanish difficulty to match my level: simplify if I write short/simple sentences or make basic errors; use richer vocabulary and natural phrasing if I write fluently and accurately.
+3. Adapt your Spanish difficulty to match my level (${level.toUpperCase()}): ${levelGuidance}
 4. If I ask a question, answer it directly before continuing the scenario or exercise.
 5. If I make a mistake, quote the part I got wrong, then show the corrected version, so the correction is clearly tied to my exact answer. Use: "¡Eso suena bien! Solo una cosita..." before corrections — never harsh.
 6. Remember earlier parts of this conversation (names, topics, mistakes already corrected) and don't repeat yourself.
@@ -498,6 +727,7 @@ Before responding, always:
 9. Never give a reply that could apply regardless of what I wrote — every response must reference my specific words.
 
 You operate in mode: ${mode} on topic: ${topic}.
+Level: ${level}. ${levelGuidance}
 ${accent ? `Adopt the accent and expressions of ${accent} Spanish.` : 'Use neutral Latin American Spanish.'}
 
 ${modeInstruction}
@@ -527,14 +757,12 @@ export async function getActiveImmersionResponse(
   userMessage: string,
   recentMessages: { role: 'user' | 'assistant'; text: string }[],
   accent?: string,
-): Promise<ActiveImmersionResponse | null> {
-  const ai = getGeminiClient();
-  if (!ai) return null;
-
-  const systemPrompt = buildActiveImmersionSystemPrompt(mode, topic, accent);
+  level: 'beginner' | 'intermediate' = 'beginner',
+): Promise<GeminiResult<ActiveImmersionResponse>> {
+  const systemPrompt = buildActiveImmersionSystemPrompt(mode, topic, accent, level);
 
   const conversationContext = recentMessages
-    .slice(-10)
+    .slice(-20)
     .map((msg) =>
       msg.role === 'user'
         ? `Student: ${msg.text}`
@@ -549,21 +777,13 @@ export async function getActiveImmersionResponse(
   const temperature =
     mode === 'daily' || mode === 'vocabulary' ? 0.7 : 0.85;
 
+  const res = await callGeminiApi(systemPrompt, fullPrompt, temperature);
+  if (!res.success) {
+    return res;
+  }
+
   try {
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.5-flash',
-      contents: fullPrompt,
-      config: {
-        systemInstruction: systemPrompt,
-        temperature,
-        maxOutputTokens: 1024,
-      },
-    });
-
-    const rawText = response.text?.trim();
-    if (!rawText) return null;
-
-    const cleaned = rawText
+    const cleaned = res.data
       .replace(/^```json\s*/i, '')
       .replace(/^```\s*/i, '')
       .replace(/\s*```$/i, '')
@@ -572,8 +792,13 @@ export async function getActiveImmersionResponse(
     const parsed = JSON.parse(cleaned) as ActiveImmersionResponse;
 
     if (!parsed.text || !parsed.translation) {
-      console.warn('[Gemini Immersion] Missing text/translation:', parsed);
-      return null;
+      const errorDetails: GeminiErrorDetails = {
+        code: 'PARSE_ERROR',
+        message: 'Gemini immersion response missing required text/translation fields.',
+        rawError: res.data,
+      };
+      console.error(`[Gemini Error] ${errorDetails.code}: ${errorDetails.message}`);
+      return { success: false, error: errorDetails };
     }
 
     if (!Array.isArray(parsed.quickReplies)) {
@@ -598,10 +823,14 @@ export async function getActiveImmersionResponse(
       }));
     }
 
-    return parsed;
-  } catch (error) {
-    console.error('[Gemini Immersion] API call failed:', error);
-    return null;
+    return { success: true, data: parsed };
+  } catch (parseErr: any) {
+    const errorDetails: GeminiErrorDetails = {
+      code: 'PARSE_ERROR',
+      message: `Failed to parse immersion response JSON: ${parseErr?.message || parseErr}`,
+      rawError: res.data,
+    };
+    console.error(`[Gemini Error] ${errorDetails.code}: ${errorDetails.message}`);
+    return { success: false, error: errorDetails };
   }
 }
-

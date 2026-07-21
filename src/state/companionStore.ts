@@ -144,7 +144,7 @@ async function getAiReply(
     text: msg.text,
   }));
 
-  const geminiResponse = await getGeminiResponse(
+  const res = await getGeminiResponse(
     companionId,
     userText,
     {
@@ -156,7 +156,8 @@ async function getAiReply(
     recentMessages,
   );
 
-  if (!geminiResponse) return null;
+  if (!res.success) return null;
+  const geminiResponse = res.data;
 
   // Convert Gemini quick replies to the QuickReply format
   // AI-generated quick replies don't have a nextNodeId, so we use a special
