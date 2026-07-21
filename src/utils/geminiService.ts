@@ -38,14 +38,40 @@ export const FALLBACK_MODEL = 'gemini-1.5-flash';
 // API Key Sanitization & Client Initialization
 // ---------------------------------------------------------------------------
 
-/** Validates environment API key and returns structured error if missing or placeholder. */
+export const STORAGE_KEY_GEMINI_API = 'wayfarer_gemini_api_key';
+
+export function getEffectiveApiKey(): string {
+  const customKey = typeof window !== 'undefined' ? localStorage.getItem(STORAGE_KEY_GEMINI_API) : null;
+  if (customKey && customKey.trim()) {
+    return customKey.trim();
+  }
+  return (import.meta.env.VITE_GEMINI_API_KEY || '').trim();
+}
+
+export function setCustomApiKey(key: string): void {
+  if (typeof window !== 'undefined') {
+    if (key.trim()) {
+      localStorage.setItem(STORAGE_KEY_GEMINI_API, key.trim());
+    } else {
+      localStorage.removeItem(STORAGE_KEY_GEMINI_API);
+    }
+  }
+}
+
+export function clearCustomApiKey(): void {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem(STORAGE_KEY_GEMINI_API);
+  }
+}
+
+/** Validates API key and returns structured error if missing or placeholder. */
 export function getApiKeyError(): GeminiErrorDetails | null {
-  const envKey = import.meta.env.VITE_GEMINI_API_KEY;
+  const envKey = getEffectiveApiKey();
 
   if (!envKey || !envKey.trim()) {
     return {
       code: 'MISSING_API_KEY',
-      message: 'Gemini API key is not configured. Please set VITE_GEMINI_API_KEY in your environment.',
+      message: 'Gemini API key is not configured. Please set VITE_GEMINI_API_KEY in .env or enter your key in the settings below.',
     };
   }
 
@@ -62,7 +88,7 @@ export function getApiKeyError(): GeminiErrorDetails | null {
   if (placeholders.some((p) => keyTrimmed === p || keyTrimmed.includes('your_gemini_api_key'))) {
     return {
       code: 'INVALID_API_KEY',
-      message: 'Gemini API key is set to a placeholder value. Please update VITE_GEMINI_API_KEY with a valid key.',
+      message: 'Gemini API key is set to a placeholder value. Please enter your valid key below or update VITE_GEMINI_API_KEY in .env.',
     };
   }
 
@@ -73,8 +99,8 @@ export const getGeminiClient = (): GoogleGenAI | null => {
   if (getApiKeyError() !== null) {
     return null;
   }
-  const envKey = import.meta.env.VITE_GEMINI_API_KEY;
-  return new GoogleGenAI({ apiKey: envKey!.trim() });
+  const envKey = getEffectiveApiKey();
+  return new GoogleGenAI({ apiKey: envKey });
 };
 
 /** Whether the Gemini API is configured and ready with a valid API key. */

@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef, type FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, X } from 'lucide-react';
+import { Send, X, Key } from 'lucide-react';
 import Kitsune3D from './Kitsune3D';
-import { isGeminiAvailable, getYukiGeminiResponse, type YukiHistoryTurn } from '../utils/geminiService';
+import { isGeminiAvailable, getYukiGeminiResponse, getApiKeyError, setCustomApiKey, type YukiHistoryTurn } from '../utils/geminiService';
 import { useStatsStore } from '../state/statsStore';
 import { useProgressStore } from '../state/progressStore';
 interface Message {
@@ -26,6 +26,8 @@ const ChibiPet: FC = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [bubbleText, setBubbleText] = useState<string | null>("Let's study! 🇪🇸");
   
+  const [apiKeyInput, setApiKeyInput] = useState('');
+
   // Stable position on the right side
   const [position] = useState(85);
   const [direction] = useState<'left' | 'right'>('left');
@@ -191,10 +193,42 @@ const ChibiPet: FC = () => {
               </div>
 
               {/* Error Badge Banner */}
-              {apiError && (
-                <div className="bg-red-500/15 border-b border-red-500/30 px-3 py-1.5 text-[10px] text-red-300 flex items-center justify-between font-mono shrink-0">
-                  <span className="truncate">AI Disconnected: {apiError}</span>
-                  <button onClick={() => setApiError(null)} className="text-xs hover:text-white font-bold cursor-pointer ml-2 shrink-0">&times;</button>
+              {(apiError || !isGeminiAvailable()) && (
+                <div className="bg-red-500/15 border-b border-red-500/30 p-2.5 text-[10px] text-red-300 flex flex-col gap-2 font-mono shrink-0">
+                  <div className="flex items-center justify-between">
+                    <span className="truncate font-bold">
+                      {apiError ? `AI Disconnected: ${apiError}` : (getApiKeyError()?.message || 'Missing API Key')}
+                    </span>
+                    {apiError && (
+                      <button onClick={() => setApiError(null)} className="text-xs hover:text-white font-bold cursor-pointer ml-2 shrink-0">&times;</button>
+                    )}
+                  </div>
+                  <div className="flex gap-1.5 items-center">
+                    <div className="relative flex-1">
+                      <Key className="absolute left-2 top-2 h-3 w-3 text-red-400/70 pointer-events-none" />
+                      <input
+                        type="password"
+                        value={apiKeyInput}
+                        onChange={(e) => setApiKeyInput(e.target.value)}
+                        placeholder="Paste Gemini API Key (AIzaSy...)"
+                        className="w-full bg-black/40 border border-red-500/40 text-text-primary text-[10px] rounded px-2 pl-6 py-1 focus:outline-none focus:border-accent-action"
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (apiKeyInput.trim()) {
+                          setCustomApiKey(apiKeyInput.trim());
+                          setApiKeyInput('');
+                          setApiError(null);
+                        }
+                      }}
+                      disabled={!apiKeyInput.trim()}
+                      className="bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white font-bold text-[9px] px-2.5 py-1 rounded transition-colors cursor-pointer border-none shrink-0"
+                    >
+                      Save Key 🚀
+                    </button>
+                  </div>
                 </div>
               )}
 
