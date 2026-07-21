@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, type FC } from 'react';
 import { useActiveImmersionStore } from '../state/activeImmersionStore';
 import type { ImmersionMode } from '../utils/geminiService';
-import { isGeminiAvailable, getApiKeyError, setCustomApiKey } from '../utils/geminiService';
+import { isGeminiAvailable } from '../utils/geminiService';
 import {
   Send,
   Languages,
@@ -17,7 +17,6 @@ import {
   MapPin,
   ChevronRight,
   AlertTriangle,
-  Key,
 } from 'lucide-react';
 
 /* ─── Mode Definitions ─────────────────────────────────────────────────────── */
@@ -101,7 +100,6 @@ const ActiveImmersionTab: FC = () => {
   } = useActiveImmersionStore();
 
   const [inputText, setInputText] = useState('');
-  const [apiKeyInput, setApiKeyInput] = useState('');
   const [customTopic, setCustomTopic] = useState('');
   const [revealedTranslations, setRevealedTranslations] = useState<Set<string>>(new Set());
   const [showLearnedWordsModal, setShowLearnedWordsModal] = useState(false);
@@ -418,66 +416,30 @@ const ActiveImmersionTab: FC = () => {
       </div>
 
       {/* ── Visible Error Banner UI ────────────────────────────────────── */}
-      {(currentSession.error || !isGeminiAvailable()) && (
-        <div className="m-4 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-800 space-y-3 shadow-md animate-fadeIn shrink-0">
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex items-center gap-2 text-xs">
-              <AlertTriangle className="h-4 w-4 text-rose-600 shrink-0" />
-              <div>
-                <strong className="font-bold">Gemini API Error:</strong>{' '}
-                <span>
-                  {currentSession.error
-                    ? (typeof currentSession.error === 'string'
-                        ? currentSession.error
-                        : currentSession.error.message || 'An error occurred during Gemini API call.')
-                    : (getApiKeyError()?.message || 'Gemini API key is required.')}
-                </span>
-              </div>
+      {currentSession.error && (
+        <div className="m-4 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-800 flex items-center justify-between gap-3 shadow-md animate-fadeIn shrink-0">
+          <div className="flex items-center gap-2 text-xs">
+            <AlertTriangle className="h-4 w-4 text-rose-600 shrink-0" />
+            <div>
+              <strong className="font-bold">Gemini API Error:</strong>{' '}
+              <span>
+                {typeof currentSession.error === 'string'
+                  ? currentSession.error
+                  : currentSession.error.message || 'An error occurred during Gemini API call.'}
+              </span>
             </div>
-            {currentSession.error && (
-              <button
-                type="button"
-                onClick={() => {
-                  if (activeMode && selectedTopic) {
-                    retryLastMessage(activeMode, selectedTopic, selectedAccent);
-                  }
-                }}
-                className="px-3.5 py-1.5 rounded-lg bg-rose-600 text-white font-bold text-xs hover:bg-rose-700 transition-colors shadow cursor-pointer border-none shrink-0 flex items-center gap-1.5"
-              >
-                <RefreshCw className="h-3.5 w-3.5" /> Retry
-              </button>
-            )}
           </div>
-
-          {/* Quick Key Entry Input */}
-          <div className="pt-2 border-t border-rose-500/20 flex flex-col sm:flex-row gap-2 items-center">
-            <div className="relative flex-1 w-full">
-              <Key className="absolute left-3 top-2.5 h-3.5 w-3.5 text-rose-600/70 pointer-events-none" />
-              <input
-                type="password"
-                value={apiKeyInput}
-                onChange={(e) => setApiKeyInput(e.target.value)}
-                placeholder="Paste your Gemini API key here (AIzaSy...)"
-                className="w-full bg-bg-elevated border border-rose-500/40 text-text-primary text-xs rounded-lg pl-9 pr-3 py-2 focus:outline-none focus:ring-1 focus:ring-rose-500"
-              />
-            </div>
-            <button
-              type="button"
-              onClick={() => {
-                if (apiKeyInput.trim()) {
-                  setCustomApiKey(apiKeyInput.trim());
-                  setApiKeyInput('');
-                  if (activeMode && selectedTopic) {
-                    retryLastMessage(activeMode, selectedTopic, selectedAccent);
-                  }
-                }
-              }}
-              disabled={!apiKeyInput.trim()}
-              className="bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white font-bold text-xs px-4 py-2 rounded-lg transition-colors cursor-pointer border-none shadow w-full sm:w-auto shrink-0 flex items-center justify-center gap-1"
-            >
-              Save Key & Connect 🚀
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => {
+              if (activeMode && selectedTopic) {
+                retryLastMessage(activeMode, selectedTopic, selectedAccent);
+              }
+            }}
+            className="px-3.5 py-1.5 rounded-lg bg-rose-600 text-white font-bold text-xs hover:bg-rose-700 transition-colors shadow cursor-pointer border-none shrink-0 flex items-center gap-1.5"
+          >
+            <RefreshCw className="h-3.5 w-3.5" /> Retry
+          </button>
         </div>
       )}
 
