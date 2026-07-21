@@ -8,6 +8,7 @@ import { lookupCompanionWord } from '../content/dictionary';
 import { useSettingsStore } from '../state/settingsStore';
 import { translateToHinglish, translateWordToHinglish } from '../utils/hinglish';
 import { isGeminiAvailable } from '../utils/geminiService';
+import ActiveImmersionTab from '../components/ActiveImmersionTab';
 import { 
   Send, 
   Languages, 
@@ -21,12 +22,13 @@ import {
   ArrowLeft,
   CheckCircle2,
   BookCheck,
-  Target
+  Target,
+  Flame
 } from 'lucide-react';
 
 const ConversationScreen: FC = () => {
-  // Mode selection: 'scenarios' | 'classic'
-  const [tabMode, setTabMode] = useState<'scenarios' | 'classic'>('scenarios');
+  // Mode selection: 'scenarios' | 'classic' | 'immersion'
+  const [tabMode, setTabMode] = useState<'scenarios' | 'classic' | 'immersion'>('scenarios');
 
   // Scenario Store
   const {
@@ -224,6 +226,16 @@ const ConversationScreen: FC = () => {
               }`}
             >
               <BookOpen className="h-4 w-4" /> Amigos por Carta
+            </button>
+            <button
+              onClick={() => setTabMode('immersion')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                tabMode === 'immersion'
+                  ? 'bg-accent-action text-bg-base shadow'
+                  : 'text-text-secondary hover:text-text-primary'
+              }`}
+            >
+              <Flame className="h-4 w-4" /> Active Immersion
             </button>
           </div>
         </div>
@@ -786,6 +798,11 @@ const ConversationScreen: FC = () => {
 
             </section>
           </div>
+        )}
+
+        {/* ----------------- MODE 3: ACTIVE IMMERSION ----------------- */}
+        {tabMode === 'immersion' && (
+          <ActiveImmersionTab />
         )}
 
       </div>

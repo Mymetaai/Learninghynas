@@ -418,3 +418,190 @@ export async function getScenarioGeminiResponse(
   }
 }
 
+// ---------------------------------------------------------------------------
+// Active Immersion – system prompt builder & API caller
+// ---------------------------------------------------------------------------
+
+export type ImmersionMode = 'daily' | 'conversation' | 'vocabulary' | 'roleplay';
+
+const IMMERSION_MODE_INSTRUCTIONS: Record<ImmersionMode, string> = {
+  daily:
+    "Create a 7-day plan on the topic [CURRENT_TOPIC] covering: 20 essential phrases, 15 vocabulary words grouped by theme (work/social/travel), 5 grammar points with 3 example sentences each, a 3-minute speaking exercise with full script, and a quiz at the end. Feel like a conversation, not a lesson.",
+  conversation:
+    "Act as my Spanish-speaking partner discussing [CURRENT_TOPIC]. Keep it natural, at least 10 minutes of back-and-forth. Correct gently, suggest richer vocabulary, always ask a follow-up question.",
+  vocabulary:
+    "Teach 20 Spanish words on [CURRENT_TOPIC] in groups of 5. For each word: simple definition, 2 real example sentences, 1 memory trick, then quiz immediately after each group of 5. Don't advance until I score 100% on the current group.",
+  roleplay:
+    "Role-play [CURRENT_TOPIC] naturally, with real slang and idioms. Correct in character: respond naturally first, then '¡Buen intento! Un hispanohablante nativo diría [better phrase] porque [reason].' Continue until I handle the scenario smoothly.",
+};
+
+const STRUCTURED_JSON_FORMAT = `
+## Required JSON Response Format
+You MUST respond with valid JSON ONLY (no markdown code blocks, no backticks, no asterisks, no hashes):
+
+{
+  "text": "Main Spanish content (plain text, NO markdown)",
+  "translation": "English translation",
+  "structuredContent": {
+    "type": "plan | quiz | vocab-group | exercise",
+    "items": [
+      { "label": "Item label", "detail": "Item detail", "example": "Optional example" }
+    ]
+  },
+  "quickReplies": [
+    { "text": "Suggested reply in Spanish", "translation": "English translation" }
+  ],
+  "newVocabWords": [
+    { "word": "SpanishWord", "meaning": "English meaning" }
+  ]
+}`;
+
+const CHAT_JSON_FORMAT = `
+## Required JSON Response Format
+You MUST respond with valid JSON ONLY (no markdown code blocks, no backticks, no asterisks, no hashes):
+
+{
+  "text": "Spanish response (plain text, NO markdown)",
+  "translation": "English translation",
+  "quickReplies": [
+    { "text": "Suggested reply in Spanish", "translation": "English translation" }
+  ],
+  "newVocabWords": [
+    { "word": "SpanishWord", "meaning": "English meaning" }
+  ]
+}`;
+
+export function buildActiveImmersionSystemPrompt(
+  mode: ImmersionMode,
+  topic: string,
+  accent?: string,
+): string {
+  const modeInstruction = IMMERSION_MODE_INSTRUCTIONS[mode]
+    .replace(/\[CURRENT_TOPIC\]/g, topic);
+
+  const jsonFormat =
+    mode === 'daily' || mode === 'vocabulary'
+      ? STRUCTURED_JSON_FORMAT
+      : CHAT_JSON_FORMAT;
+
+  return `You are my personal Spanish language coach. You teach through active immersion — never like a textbook, always like a real conversation.
+
+Before responding, always:
+1. Read my most recent message carefully — my word choice, grammar, length, and confidence level.
+2. Base your reply directly on what I actually said, not a generic script. Reference specific words or phrases I used.
+3. Adapt your Spanish difficulty to match my level: simplify if I write short/simple sentences or make basic errors; use richer vocabulary and natural phrasing if I write fluently and accurately.
+4. If I ask a question, answer it directly before continuing the scenario or exercise.
+5. If I make a mistake, quote the part I got wrong, then show the corrected version, so the correction is clearly tied to my exact answer. Use: "¡Eso suena bien! Solo una cosita..." before corrections — never harsh.
+6. Remember earlier parts of this conversation (names, topics, mistakes already corrected) and don't repeat yourself.
+7. Never ignore my input to push your own script — follow me naturally if I go off-topic within a scenario.
+8. Use the full conversation history provided to you, not just my latest message, to keep continuity.
+9. Never give a reply that could apply regardless of what I wrote — every response must reference my specific words.
+
+You operate in mode: ${mode} on topic: ${topic}.
+${accent ? `Adopt the accent and expressions of ${accent} Spanish.` : 'Use neutral Latin American Spanish.'}
+
+${modeInstruction}
+
+Across all modes: track new vocabulary I encounter, keep encouragement warm and specific, never break immersion to lecture.
+
+${jsonFormat}
+
+## Strict Formatting Rule:
+Do NOT use markdown symbols (no asterisks *, no bold **, no headings #) in any text fields. Write in clean plain text.`;
+}
+
+export interface ActiveImmersionResponse {
+  text: string;
+  translation: string;
+  structuredContent?: {
+    type: 'plan' | 'quiz' | 'vocab-group' | 'exercise';
+    items: { label: string; detail: string; example?: string }[];
+  };
+  quickReplies: { text: string; translation: string }[];
+  newVocabWords?: { word: string; meaning: string }[];
+}
+
+export async function getActiveImmersionResponse(
+  mode: ImmersionMode,
+  topic: string,
+  userMessage: string,
+  recentMessages: { role: 'user' | 'assistant'; text: string }[],
+  accent?: string,
+): Promise<ActiveImmersionResponse | null> {
+  const ai = getGeminiClient();
+  if (!ai) return null;
+
+  const systemPrompt = buildActiveImmersionSystemPrompt(mode, topic, accent);
+
+  const conversationContext = recentMessages
+    .slice(-10)
+    .map((msg) =>
+      msg.role === 'user'
+        ? `Student: ${msg.text}`
+        : `Coach: ${msg.text}`,
+    )
+    .join('\n');
+
+  const fullPrompt = conversationContext
+    ? `${conversationContext}\n\nStudent: ${userMessage}`
+    : `Student: ${userMessage}`;
+
+  const temperature =
+    mode === 'daily' || mode === 'vocabulary' ? 0.7 : 0.85;
+
+  try {
+    const response = await ai.models.generateContent({
+      model: 'gemini-3.5-flash',
+      contents: fullPrompt,
+      config: {
+        systemInstruction: systemPrompt,
+        temperature,
+        maxOutputTokens: 1024,
+      },
+    });
+
+    const rawText = response.text?.trim();
+    if (!rawText) return null;
+
+    const cleaned = rawText
+      .replace(/^```json\s*/i, '')
+      .replace(/^```\s*/i, '')
+      .replace(/\s*```$/i, '')
+      .trim();
+
+    const parsed = JSON.parse(cleaned) as ActiveImmersionResponse;
+
+    if (!parsed.text || !parsed.translation) {
+      console.warn('[Gemini Immersion] Missing text/translation:', parsed);
+      return null;
+    }
+
+    if (!Array.isArray(parsed.quickReplies)) {
+      parsed.quickReplies = [];
+    }
+
+    const stripMarkdown = (str: string): string => {
+      if (!str) return '';
+      return str
+        .replace(/\*\*?/g, '')
+        .replace(/__?/g, '')
+        .replace(/#+\s*/g, '')
+        .trim();
+    };
+
+    parsed.text = stripMarkdown(parsed.text);
+    parsed.translation = stripMarkdown(parsed.translation);
+    if (parsed.quickReplies) {
+      parsed.quickReplies = parsed.quickReplies.map((qr) => ({
+        text: stripMarkdown(qr.text),
+        translation: stripMarkdown(qr.translation),
+      }));
+    }
+
+    return parsed;
+  } catch (error) {
+    console.error('[Gemini Immersion] API call failed:', error);
+    return null;
+  }
+}
+
