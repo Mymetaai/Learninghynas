@@ -501,7 +501,7 @@ const BasicEspanolScreen: FC = () => {
                     : 'text-text-secondary hover:text-text-primary bg-transparent'
                 }`}
               >
-                Part 1 (L1-L4)
+                Part 1
               </button>
               <button
                 onClick={() => {
@@ -514,7 +514,7 @@ const BasicEspanolScreen: FC = () => {
                     : 'text-text-secondary hover:text-text-primary bg-transparent'
                 }`}
               >
-                Part 2 (L5-L8)
+                Part 2
               </button>
             </div>
 
@@ -632,6 +632,36 @@ const BasicEspanolScreen: FC = () => {
                       className="p-1.5 rounded-lg bg-paper/5 border border-pencil/10 text-pencil hover:text-text-primary"
                     >
                       <X className="h-5 w-5" />
+                    </button>
+                  </div>
+
+                  {/* Course Part Selector (Mobile) */}
+                  <div className="flex rounded-xl bg-bg-elevated p-1 border border-structural gap-1">
+                    <button
+                      onClick={() => {
+                        setCoursePart('part1');
+                        setActiveSection('overview');
+                      }}
+                      className={`flex-1 py-1.5 px-2 rounded-lg text-[10px] font-hud uppercase tracking-wider font-bold transition-all cursor-pointer border-none ${
+                        coursePart === 'part1'
+                          ? 'bg-accent-action text-bg-base shadow-sm'
+                          : 'text-text-secondary hover:text-text-primary bg-transparent'
+                      }`}
+                    >
+                      Part 1
+                    </button>
+                    <button
+                      onClick={() => {
+                        setCoursePart('part2');
+                        setActiveSection('lesson5');
+                      }}
+                      className={`flex-1 py-1.5 px-2 rounded-lg text-[10px] font-hud uppercase tracking-wider font-bold transition-all cursor-pointer border-none ${
+                        coursePart === 'part2'
+                          ? 'bg-accent-action text-bg-base shadow-sm'
+                          : 'text-text-secondary hover:text-text-primary bg-transparent'
+                      }`}
+                    >
+                      Part 2
                     </button>
                   </div>
 
