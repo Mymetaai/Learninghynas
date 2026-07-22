@@ -5,14 +5,19 @@
     "description": "Gamified Spanish learning platform combining 3D interactive spirit companions, structured workbook lessons, daily quests, card collectibles, and active immersion."
   },
   "features": {
-    "basicEspanol": "Core curriculum with 4 lessons: Lesson 1 (Alphabet & Greetings), Lesson 2 (Subject Pronouns), Lesson 3 (Nouns & Articles), Lesson 4 (Everyday Sentences), and a 50-coin Final Exam.",
+    "basicEspanolPart1": "Core curriculum Part 1: Lesson 1 (Pronunciation & Greetings), Lesson 2 (Subject Pronouns), Lesson 3 (Nouns & Definite Articles), Lesson 4 (Everyday Sentences), and Part 1 Workbook Exam (50 coins).",
+    "basicEspanolPart2": "Core curriculum Part 2: Lesson 5 (Indefinite Articles & Numbers 0-100), Lesson 6 (Verb Estar & Numbers >100), Lesson 7 (Regular -er/-ir Verbs in Present), Lesson 8 (Verb Ir & Question Words), and Part 2 Master Exam (50 coins + badge).",
     "dailyQuests": "Daily tasks (e.g. practicing speaking, completing lessons, maintaining streak) that grant Gold Coins and XP.",
     "shop": "Unlock legendary collectible cards from One Piece and Demon Slayer series using earned Gold Coins.",
     "adventureMap": "Explore world nodes, fight boss guardians, and advance through Spanish regions.",
     "activeImmersion": "Practice real-world roleplay scenarios, daily plans, and interactive conversation practice."
   },
   "grammarTips": {
-    "serVsEstar": "SER is for permanent traits (DOCTOR: Description, Occupation, Characteristic, Time, Origin, Relation). ESTAR is for temporary states/locations (PLACE: Position, Location, Action, Condition, Emotion).",
+    "serVsEstar": "SER is for permanent traits (DOCTOR: Description, Occupation, Characteristic, Time, Origin, Relation). ESTAR is for temporary states/locations (PLACE: Position, Location, Action, Condition, Emotion, Health). Conjugations of ESTAR: estoy, estás, está, estamos, estáis, están.",
+    "verbIr": "IR means 'to go' (voy, vas, va, vamos, vais, van). Near future formula: IR + A + INFINITIVE (e.g. 'voy a estudiar' = I am going to study).",
+    "erAndIrVerbs": "Present tense endings for -ER verbs (-o, -es, -e, -emos, -éis, -en) and -IR verbs (-o, -es, -e, -imos, -ís, -en). Common verbs: comer (to eat), beber (to drink), vivir (to live), escribir (to write), aprender (to learn).",
+    "numbers": "Numbers 0-100 (uno, diez, veinte, treinta, cuarenta...) and 100+ (cien, ciento, doscientos, quinientos, mil, un millón).",
+    "questionWords": "Interrogativos: ¿Qué? (What), ¿Quién? (Who), ¿Dónde? (Where), ¿Adónde? (Where to), ¿Cuándo? (When), ¿Por qué? (Why), ¿Cómo? (How), ¿Cuánto/a/os/as? (How much/many).",
     "greetings": "Buenos días (Good morning), Buenas tardes (Good afternoon), Buenas noches (Good evening), ¿Cómo estás? (How are you?).",
     "pronouns": "Yo (I), Tú (you informal), Él/Ella (he/she), Nosotros (we), Vosotros (you all Spain), Ellos/Ellas (they)."
   }

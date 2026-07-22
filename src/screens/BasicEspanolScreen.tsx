@@ -25,7 +25,10 @@ import { useStatsStore } from '../state/statsStore';
 
 // ── Types & Data ────────────────────────────────────────────────────────────
 
-type ActiveSection = 'overview' | 'lesson1' | 'lesson2' | 'lesson3' | 'lesson4' | 'exam';
+type ActiveSection =
+  | 'overview'
+  | 'lesson1' | 'lesson2' | 'lesson3' | 'lesson4' | 'exam'
+  | 'lesson5' | 'lesson6' | 'lesson7' | 'lesson8' | 'exam2';
 
 interface VocabularyWord {
   word: string;
@@ -200,6 +203,89 @@ const EXAM_QUESTIONS: ExamQuestion[] = [
   }
 ];
 
+const EXAM_QUESTIONS_PART2: ExamQuestion[] = [
+  {
+    id: 1,
+    lessonId: 5,
+    question: 'Which is the correct indefinite article for "chicas" (girls)?',
+    options: ['un', 'una', 'unos', 'unas'],
+    correctAnswer: 'unas',
+    explanation: '"Chicas" is feminine and plural, so it requires the feminine plural indefinite article "unas" (some girls).',
+  },
+  {
+    id: 2,
+    lessonId: 5,
+    question: 'What is the Spanish word for the number 35?',
+    options: ['treinta cinco', 'treinta y cinco', 'veinticinco', 'cuarenta y cinco'],
+    correctAnswer: 'treinta y cinco',
+    explanation: 'Numbers 31-99 use the pattern "tens + y + units". Thus 35 is "treinta y cinco".',
+  },
+  {
+    id: 3,
+    lessonId: 6,
+    question: 'What is the correct conjugation of the verb "estar" for "nosotros" (we)?',
+    options: ['estoy', 'estás', 'está', 'estamos'],
+    correctAnswer: 'estamos',
+    explanation: 'The present tense conjugation of "estar" for "nosotros" is "estamos".',
+  },
+  {
+    id: 4,
+    lessonId: 6,
+    question: 'Which acronym summarizes the situations where you MUST use the verb ESTAR instead of SER?',
+    options: ['DOCTOR', 'PLACE', 'SNACKS', 'MARCH'],
+    correctAnswer: 'PLACE',
+    explanation: 'PLACE stands for Position, Location, Action, Condition, and Emotion — all temporary or spatial states requiring "estar".',
+  },
+  {
+    id: 5,
+    lessonId: 6,
+    question: 'What is the Spanish word for 500?',
+    options: ['cincocientos', 'quinientos', 'doscientos', 'cincuenta'],
+    correctAnswer: 'quinientos',
+    explanation: '500 is an irregular form in Spanish: "quinientos" (masculine) or "quinientas" (feminine).',
+  },
+  {
+    id: 6,
+    lessonId: 7,
+    question: 'How do you conjugate the regular "-er" verb "comer" (to eat) for "nosotros"?',
+    options: ['comemos', 'comimos', 'comen', 'como'],
+    correctAnswer: 'comemos',
+    explanation: 'Regular "-er" verbs take the ending "-emos" for "nosotros" in the present tense: "comemos" (we eat).',
+  },
+  {
+    id: 7,
+    lessonId: 7,
+    question: 'What is the "tú" conjugation for the regular "-ir" verb "escribir" (to write)?',
+    options: ['escribo', 'escribes', 'escribe', 'escribimos'],
+    correctAnswer: 'escribes',
+    explanation: 'Regular "-ir" verbs take the ending "-es" for "tú" in the present tense: "escribes" (you write).',
+  },
+  {
+    id: 8,
+    lessonId: 8,
+    question: 'What is the "yo" conjugation for the irregular verb "ir" (to go)?',
+    options: ['ir', 'va', 'voy', 'vamos'],
+    correctAnswer: 'voy',
+    explanation: 'The verb "ir" is highly irregular in the present tense: "yo voy" means "I go / I am going".',
+  },
+  {
+    id: 9,
+    lessonId: 8,
+    question: 'How do you form the near-future ("going to do something") in Spanish?',
+    options: ['ir + infinitive', 'ir + a + infinitive', 'estar + a + infinitive', 'ser + infinitive'],
+    correctAnswer: 'ir + a + infinitive',
+    explanation: 'The near future is formed with a conjugated form of "ir" + the preposition "a" + an infinitive verb (e.g., "vamos a estudiar").',
+  },
+  {
+    id: 10,
+    lessonId: 8,
+    question: 'Which Spanish question word means "Where to"?',
+    options: ['¿Dónde?', '¿Adónde?', '¿Cuándo?', '¿Por qué?'],
+    correctAnswer: '¿Adónde?',
+    explanation: '"¿Dónde?" means "where" (location), while "¿Adónde?" includes the preposition "a" and means "where to" (destination/motion).',
+  }
+];
+
 const BasicEspanolScreen: FC = () => {
   // Navigation states
   const [activeSection, setActiveSection] = useState<ActiveSection>('overview');
@@ -311,13 +397,17 @@ const BasicEspanolScreen: FC = () => {
     };
   };
 
+  const [coursePart, setCoursePart] = useState<'part1' | 'part2'>('part1');
+
   // Quiz Handlers
+  const activeQuestions = activeSection === 'exam2' ? EXAM_QUESTIONS_PART2 : EXAM_QUESTIONS;
+
   const handleAnswerClick = (option: string) => {
     if (selectedAnswer !== null) return;
     setSelectedAnswer(option);
     setShowExplanation(true);
-    setAnswersHistory(prev => ({ ...prev, [EXAM_QUESTIONS[currentQuestionIndex].id]: option }));
-    if (option === EXAM_QUESTIONS[currentQuestionIndex].correctAnswer) {
+    setAnswersHistory(prev => ({ ...prev, [activeQuestions[currentQuestionIndex].id]: option }));
+    if (option === activeQuestions[currentQuestionIndex].correctAnswer) {
       setScore((prev) => prev + 1);
     }
   };
@@ -325,7 +415,7 @@ const BasicEspanolScreen: FC = () => {
   const handleNextQuestion = () => {
     setSelectedAnswer(null);
     setShowExplanation(false);
-    if (currentQuestionIndex < EXAM_QUESTIONS.length - 1) {
+    if (currentQuestionIndex < activeQuestions.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
     } else {
       setQuizFinished(true);
@@ -344,21 +434,31 @@ const BasicEspanolScreen: FC = () => {
 
   const claimQuizRewards = () => {
     if (rewardClaimed) return;
-    const finalXP = score * 5; // 5 XP per correct answer (max 40 XP)
-    const finalCoins = score >= 6 ? 15 : score >= 4 ? 8 : 3; // 15 coins for passing, 8 for average, 3 for effort
+    const finalXP = score * 10;
+    const finalCoins = score >= 8 ? 20 : score >= 5 ? 10 : 5;
     addRewards(finalXP, finalCoins);
     setRewardClaimed(true);
   };
 
-  // Nav Items List
-  const sectionsList = [
+  // Nav Items Lists
+  const part1SectionsList = [
     { id: 'overview', title: 'Course Overview', icon: BookOpen },
     { id: 'lesson1', title: 'Lesson 1: Greetings & Vowels', icon: Volume2, sub: 'Greetings, Vowels & Dialogue' },
     { id: 'lesson2', title: 'Lesson 2: Articles & Nouns', icon: Layers, sub: 'Gender, Plurals & Exceptions' },
     { id: 'lesson3', title: 'Lesson 3: Pronouns & Ser', icon: Users, sub: 'Pronoun Matrix & Verb Ser' },
     { id: 'lesson4', title: 'Lesson 4: Regular -ar Verbs', icon: Sparkles, sub: 'AR Conjugation & Adjectives' },
-    { id: 'exam', title: 'Consolidated Exam', icon: Award, sub: '8-Question Knowledge Test' },
+    { id: 'exam', title: 'Part 1 Final Exam', icon: Award, sub: '8-Question Knowledge Test' },
   ];
+
+  const part2SectionsList = [
+    { id: 'lesson5', title: 'Lesson 5: Indefinite Articles & Numbers', icon: Layers, sub: 'Un/Una & Numbers 0–100' },
+    { id: 'lesson6', title: 'Lesson 6: Verb Estar & Numbers >100', icon: Compass, sub: 'Conjugation, PLACE & Numbers >100' },
+    { id: 'lesson7', title: 'Lesson 7: Regular -er/-ir Verbs', icon: Sparkles, sub: 'Conjugations & Key Verbs' },
+    { id: 'lesson8', title: 'Lesson 8: Verb Ir & Question Words', icon: GraduationCap, sub: 'Ir + A, Near Future & Interrogativos' },
+    { id: 'exam2', title: 'Part 2 Master Exam', icon: Trophy, sub: '10-Question Comprehensive Test' },
+  ];
+
+  const sectionsList = coursePart === 'part1' ? part1SectionsList : part2SectionsList;
 
   return (
     <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary relative overflow-x-hidden font-body">
@@ -379,13 +479,43 @@ const BasicEspanolScreen: FC = () => {
               <div className="flex items-center gap-2 mb-1.5">
                 <Compass className="h-5 w-5 text-marigold" />
                 <span className="font-hud text-[9px] tracking-[0.25em] uppercase text-pencil">
-                  Spanish Part 1
+                  {coursePart === 'part1' ? 'Spanish Part 1' : 'Spanish Part 2'}
                 </span>
               </div>
               <h2 className="font-display text-2xl font-bold tracking-tight text-text-primary">
                 Básico Español 🇪🇸
               </h2>
               <p className="text-[11px] text-pencil mt-1">Workbook Study Guide & Exam</p>
+            </div>
+
+            {/* Course Part Selector (Part 1 vs Part 2) */}
+            <div className="flex rounded-xl bg-bg-elevated p-1 border border-structural gap-1">
+              <button
+                onClick={() => {
+                  setCoursePart('part1');
+                  setActiveSection('overview');
+                }}
+                className={`flex-1 py-1.5 px-2 rounded-lg text-[10px] font-hud uppercase tracking-wider font-bold transition-all cursor-pointer border-none ${
+                  coursePart === 'part1'
+                    ? 'bg-accent-action text-bg-base shadow-sm'
+                    : 'text-text-secondary hover:text-text-primary bg-transparent'
+                }`}
+              >
+                Part 1 (L1-L4)
+              </button>
+              <button
+                onClick={() => {
+                  setCoursePart('part2');
+                  setActiveSection('lesson5');
+                }}
+                className={`flex-1 py-1.5 px-2 rounded-lg text-[10px] font-hud uppercase tracking-wider font-bold transition-all cursor-pointer border-none ${
+                  coursePart === 'part2'
+                    ? 'bg-accent-action text-bg-base shadow-sm'
+                    : 'text-text-secondary hover:text-text-primary bg-transparent'
+                }`}
+              >
+                Part 2 (L5-L8)
+              </button>
             </div>
 
             {/* Navigation Options */}
@@ -1631,9 +1761,531 @@ const BasicEspanolScreen: FC = () => {
               )}
 
               {/* ────────────────────────────────────────────────────────────
-                  SECTION: CONSOLIDATED COURSE EXAM
+                  SECTION: LESSON 5 — INDEFINITE ARTICLES & NUMBERS 0-100
                   ──────────────────────────────────────────────────────────── */}
-              {activeSection === 'exam' && (
+              {activeSection === 'lesson5' && (
+                <div className="space-y-8">
+                  {/* Lesson Header */}
+                  <div className="border-b border-pencil/15 pb-6">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="bg-marigold/15 text-marigold font-hud text-[10px] uppercase px-2.5 py-1 rounded-md border border-marigold/30 font-bold">
+                        Lesson 5
+                      </span>
+                      <span className="text-xs text-pencil">Indefinite Articles & Numbers 0–100</span>
+                    </div>
+                    <h2 className="font-display text-2xl font-bold text-text-primary">
+                      Un, Una, Unos, Unas & Counting to 100 🔢
+                    </h2>
+                    <p className="text-xs text-pencil leading-relaxed mt-1">
+                      Learn how to express "a / an" and "some" in Spanish, and master counting from 0 to 100.
+                    </p>
+                  </div>
+
+                  {/* Section 1: Indefinite Articles Matrix */}
+                  <div className="space-y-4">
+                    <h3 className="font-display text-lg font-bold text-text-primary flex items-center gap-2">
+                      <Layers className="h-5 w-5 text-terracotta" />
+                      1. Indefinite Articles (Un, Una, Unos, Unas)
+                    </h3>
+                    <p className="text-xs text-pencil leading-relaxed">
+                      While definite articles mean "the" (el, la, los, las), indefinite articles mean <strong>"a / an"</strong> in the singular and <strong>"some / a few"</strong> in the plural. They must match the noun in gender and number.
+                    </p>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="bg-bg-elevated border border-structural rounded-2xl p-4 space-y-2">
+                        <div className="flex items-center justify-between">
+                          <span className="font-display text-sm font-bold text-marigold">Un (Masculine Singular)</span>
+                          <span className="text-[10px] font-mono text-pencil">"a / an"</span>
+                        </div>
+                        <p className="text-xs text-text-primary">Used before masculine singular nouns.</p>
+                        <div className="bg-bg-base/60 p-2.5 rounded-xl border border-structural text-xs text-text-primary space-y-1">
+                          <div><strong className="text-accent-action">un libro</strong> (a book)</div>
+                          <div><strong className="text-accent-action">un chico</strong> (a boy)</div>
+                          <div><strong className="text-accent-action">un mapa</strong> (a map - exception!)</div>
+                        </div>
+                      </div>
+
+                      <div className="bg-bg-elevated border border-structural rounded-2xl p-4 space-y-2">
+                        <div className="flex items-center justify-between">
+                          <span className="font-display text-sm font-bold text-terracotta">Una (Feminine Singular)</span>
+                          <span className="text-[10px] font-mono text-pencil">"a / an"</span>
+                        </div>
+                        <p className="text-xs text-text-primary">Used before feminine singular nouns.</p>
+                        <div className="bg-bg-base/60 p-2.5 rounded-xl border border-structural text-xs text-text-primary space-y-1">
+                          <div><strong className="text-accent-action">una mesa</strong> (a table)</div>
+                          <div><strong className="text-accent-action">una chica</strong> (a girl)</div>
+                          <div><strong className="text-accent-action">una mano</strong> (a hand - exception!)</div>
+                        </div>
+                      </div>
+
+                      <div className="bg-bg-elevated border border-structural rounded-2xl p-4 space-y-2">
+                        <div className="flex items-center justify-between">
+                          <span className="font-display text-sm font-bold text-marigold">Unos (Masculine Plural)</span>
+                          <span className="text-[10px] font-mono text-pencil">"some / a few"</span>
+                        </div>
+                        <p className="text-xs text-text-primary">Used before masculine plural nouns.</p>
+                        <div className="bg-bg-base/60 p-2.5 rounded-xl border border-structural text-xs text-text-primary space-y-1">
+                          <div><strong className="text-accent-action">unos libros</strong> (some books)</div>
+                          <div><strong className="text-accent-action">unos chicos</strong> (some boys)</div>
+                        </div>
+                      </div>
+
+                      <div className="bg-bg-elevated border border-structural rounded-2xl p-4 space-y-2">
+                        <div className="flex items-center justify-between">
+                          <span className="font-display text-sm font-bold text-terracotta">Unas (Feminine Plural)</span>
+                          <span className="text-[10px] font-mono text-pencil">"some / a few"</span>
+                        </div>
+                        <p className="text-xs text-text-primary">Used before feminine plural nouns.</p>
+                        <div className="bg-bg-base/60 p-2.5 rounded-xl border border-structural text-xs text-text-primary space-y-1">
+                          <div><strong className="text-accent-action">unas mesas</strong> (some tables)</div>
+                          <div><strong className="text-accent-action">unas chicas</strong> (some girls)</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Section 2: Numbers 0 to 100 Guide */}
+                  <div className="space-y-4 pt-4 border-t border-pencil/15">
+                    <h3 className="font-display text-lg font-bold text-text-primary flex items-center gap-2">
+                      <Sparkles className="h-5 w-5 text-marigold" />
+                      2. Numbers 0 to 100 (Los Números)
+                    </h3>
+                    <p className="text-xs text-pencil leading-relaxed">
+                      Notice the patterns: 0-15 are unique words; 16-29 combine into single words (dieciséis, veintiuno); 31-99 use the <strong>"tens + y + units"</strong> formula (e.g. 35 = <em>treinta y cinco</em>).
+                    </p>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
+                      {[
+                        { num: 0, es: 'cero', ph: 'THEH-roh' },
+                        { num: 1, es: 'uno', ph: 'OO-noh' },
+                        { num: 2, es: 'dos', ph: 'dohs' },
+                        { num: 3, es: 'tres', ph: 'trehs' },
+                        { num: 4, es: 'cuatro', ph: 'KWAH-troh' },
+                        { num: 5, es: 'cinco', ph: 'THEEN-koh' },
+                        { num: 6, es: 'seis', ph: 'says' },
+                        { num: 7, es: 'siete', ph: 'SYEH-teh' },
+                        { num: 8, es: 'ocho', ph: 'OH-choh' },
+                        { num: 9, es: 'nueve', ph: 'NWAY-beh' },
+                        { num: 10, es: 'diez', ph: 'dyehth' },
+                        { num: 15, es: 'quince', ph: 'KEEN-theh' },
+                        { num: 20, es: 'veinte', ph: 'BAYN-teh' },
+                        { num: 30, es: 'treinta', ph: 'TRAYN-tah' },
+                        { num: 40, es: 'cuarenta', ph: 'kwah-REHN-tah' },
+                        { num: 50, es: 'cincuenta', ph: 'theen-KWEHN-tah' },
+                        { num: 60, es: 'sesenta', ph: 'seh-SEHN-tah' },
+                        { num: 70, es: 'setenta', ph: 'seh-TEHN-tah' },
+                        { num: 80, es: 'ochenta', ph: 'oh-CHEHN-tah' },
+                        { num: 90, es: 'noventa', ph: 'noh-BEHN-tah' },
+                        { num: 100, es: 'cien', ph: 'thyehn' },
+                      ].map((item) => (
+                        <div key={item.num} className="bg-bg-elevated border border-structural rounded-xl p-3 flex flex-col justify-between">
+                          <div className="flex items-center justify-between">
+                            <span className="font-hud font-bold text-accent-action">{item.num}</span>
+                            <span className="text-[9px] font-mono text-pencil/70">{item.ph}</span>
+                          </div>
+                          <div className="font-display font-bold text-text-primary mt-1">{item.es}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Completion Action */}
+                  <div className="pt-6 border-t border-pencil/15 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <p className="text-xs text-pencil font-body">
+                      Finished reviewing Lesson 5 Indefinite Articles & Numbers?
+                    </p>
+                    <button
+                      onClick={() => handleLessonComplete('lesson5')}
+                      className={`flex items-center gap-2 px-5 py-3 rounded-xl border text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                        completedLessons.lesson5
+                          ? 'bg-teal-deep/15 border-teal-deep/30 text-teal-deep'
+                          : 'bg-terracotta text-text-primary border-transparent hover:bg-rose-600'
+                      }`}
+                    >
+                      {completedLessons.lesson5 ? 'Completed ✓ (Click to Undo)' : 'Mark Lesson as Completed'}
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* ────────────────────────────────────────────────────────────
+                  SECTION: LESSON 6 — THE VERB ESTAR & NUMBERS OVER 100
+                  ──────────────────────────────────────────────────────────── */}
+              {activeSection === 'lesson6' && (
+                <div className="space-y-8">
+                  {/* Lesson Header */}
+                  <div className="border-b border-pencil/15 pb-6">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="bg-terracotta/15 text-terracotta font-hud text-[10px] uppercase px-2.5 py-1 rounded-md border border-terracotta/30 font-bold">
+                        Lesson 6
+                      </span>
+                      <span className="text-xs text-pencil">Verb Estar & Numbers &gt;100</span>
+                    </div>
+                    <h2 className="font-display text-2xl font-bold text-text-primary">
+                      The Verb Estar & Big Numbers 📍
+                    </h2>
+                    <p className="text-xs text-pencil leading-relaxed mt-1">
+                      Master the temporary "to be" verb (ESTAR), the P.L.A.C.E. rule, and large numbers over 100.
+                    </p>
+                  </div>
+
+                  {/* Section 1: Estar Conjugation Board */}
+                  <div className="space-y-4">
+                    <h3 className="font-display text-lg font-bold text-text-primary flex items-center gap-2">
+                      <Compass className="h-5 w-5 text-accent-action" />
+                      1. Conjugations of ESTAR (Present Tense)
+                    </h3>
+                    <p className="text-xs text-pencil leading-relaxed">
+                      Notice that except for <em>yo estoy</em>, all forms carry an accent mark on the final letter <strong>-á</strong> or <strong>-á-</strong>!
+                    </p>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+                      {[
+                        { pronoun: 'Yo', form: 'estoy', eng: 'I am' },
+                        { pronoun: 'Tú', form: 'estás', eng: 'You are (informal)' },
+                        { pronoun: 'Él / Ella / Ud.', form: 'está', eng: 'He / She / You are' },
+                        { pronoun: 'Nosotros/as', form: 'estamos', eng: 'We are' },
+                        { pronoun: 'Vosotros/as', form: 'estáis', eng: 'You all are (Spain)' },
+                        { pronoun: 'Ellos / Ellas / Uds.', form: 'están', eng: 'They / You all are' },
+                      ].map((item) => (
+                        <div key={item.pronoun} className="bg-bg-elevated border border-structural rounded-2xl p-3.5 space-y-1">
+                          <span className="text-[10px] text-pencil font-mono uppercase">{item.pronoun}</span>
+                          <div className="font-display text-base font-bold text-terracotta">{item.form}</div>
+                          <span className="text-[11px] text-text-secondary">{item.eng}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Section 2: P.L.A.C.E. Rule vs SER */}
+                  <div className="space-y-4 pt-4 border-t border-pencil/15">
+                    <h3 className="font-display text-lg font-bold text-text-primary flex items-center gap-2">
+                      <BookOpen className="h-5 w-5 text-marigold" />
+                      2. When to Use ESTAR: The P.L.A.C.E. Acronym
+                    </h3>
+
+                    <div className="bg-bg-elevated border border-structural rounded-2xl p-5 space-y-3">
+                      <p className="text-xs text-pencil leading-relaxed">
+                        While <strong>SER</strong> is for permanent characteristics (DOCTOR), <strong>ESTAR</strong> is used for temporary states, locations, and health:
+                      </p>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 text-xs text-center font-body">
+                        <div className="bg-bg-base/60 border border-structural p-2.5 rounded-xl">
+                          <strong className="text-accent-action block text-sm">P</strong>
+                          <span className="text-[10px] text-pencil">Position</span>
+                        </div>
+                        <div className="bg-bg-base/60 border border-structural p-2.5 rounded-xl">
+                          <strong className="text-accent-action block text-sm">L</strong>
+                          <span className="text-[10px] text-pencil">Location</span>
+                        </div>
+                        <div className="bg-bg-base/60 border border-structural p-2.5 rounded-xl">
+                          <strong className="text-accent-action block text-sm">A</strong>
+                          <span className="text-[10px] text-pencil">Action</span>
+                        </div>
+                        <div className="bg-bg-base/60 border border-structural p-2.5 rounded-xl">
+                          <strong className="text-accent-action block text-sm">C</strong>
+                          <span className="text-[10px] text-pencil">Condition</span>
+                        </div>
+                        <div className="bg-bg-base/60 border border-structural p-2.5 rounded-xl">
+                          <strong className="text-accent-action block text-sm">E</strong>
+                          <span className="text-[10px] text-pencil">Emotion</span>
+                        </div>
+                      </div>
+
+                      <div className="bg-bg-base/80 p-3 rounded-xl border border-structural text-xs text-text-primary space-y-1">
+                        <div>📍 <em>Location:</em> <strong>El profesor está en la clase.</strong> (The professor is in the classroom.)</div>
+                        <div>😊 <em>Emotion:</em> <strong>Estoy muy contento hoy.</strong> (I am very happy today.)</div>
+                        <div>🤒 <em>Condition:</em> <strong>¿Cómo estás tú?</strong> (How are you feeling?)</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Section 3: Numbers > 100 */}
+                  <div className="space-y-4 pt-4 border-t border-pencil/15">
+                    <h3 className="font-display text-lg font-bold text-text-primary flex items-center gap-2">
+                      <Sparkles className="h-5 w-5 text-terracotta" />
+                      3. Numbers over 100 (Ciento, Mil, Millón)
+                    </h3>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                      <div className="bg-bg-elevated border border-structural rounded-2xl p-4 space-y-1">
+                        <span className="font-hud text-sm font-bold text-accent-action">100 - 199</span>
+                        <div className="font-display font-bold text-text-primary">100 = Cien</div>
+                        <div className="text-pencil">101 = Ciento uno</div>
+                        <div className="text-pencil">150 = Ciento cincuenta</div>
+                      </div>
+
+                      <div className="bg-bg-elevated border border-structural rounded-2xl p-4 space-y-1">
+                        <span className="font-hud text-sm font-bold text-accent-action">Hundreds</span>
+                        <div className="font-display font-bold text-text-primary">200 = Doscientos</div>
+                        <div className="text-pencil">500 = Quinientos (Irregular!)</div>
+                        <div className="text-pencil">700 = Setecientos</div>
+                      </div>
+
+                      <div className="bg-bg-elevated border border-structural rounded-2xl p-4 space-y-1">
+                        <span className="font-hud text-sm font-bold text-accent-action">Thousands & Millions</span>
+                        <div className="font-display font-bold text-text-primary">1,000 = Mil</div>
+                        <div className="text-pencil">2,000 = Dos mil</div>
+                        <div className="text-pencil">1,000,000 = Un millón</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Completion Action */}
+                  <div className="pt-6 border-t border-pencil/15 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <p className="text-xs text-pencil font-body">
+                      Finished reviewing Lesson 6 Verb Estar & Big Numbers?
+                    </p>
+                    <button
+                      onClick={() => handleLessonComplete('lesson6')}
+                      className={`flex items-center gap-2 px-5 py-3 rounded-xl border text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                        completedLessons.lesson6
+                          ? 'bg-teal-deep/15 border-teal-deep/30 text-teal-deep'
+                          : 'bg-terracotta text-text-primary border-transparent hover:bg-rose-600'
+                      }`}
+                    >
+                      {completedLessons.lesson6 ? 'Completed ✓ (Click to Undo)' : 'Mark Lesson as Completed'}
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* ────────────────────────────────────────────────────────────
+                  SECTION: LESSON 7 — REGULAR -ER AND -IR VERBS
+                  ──────────────────────────────────────────────────────────── */}
+              {activeSection === 'lesson7' && (
+                <div className="space-y-8">
+                  {/* Lesson Header */}
+                  <div className="border-b border-pencil/15 pb-6">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="bg-marigold/15 text-marigold font-hud text-[10px] uppercase px-2.5 py-1 rounded-md border border-marigold/30 font-bold">
+                        Lesson 7
+                      </span>
+                      <span className="text-xs text-pencil">Regular -ER & -IR Verbs</span>
+                    </div>
+                    <h2 className="font-display text-2xl font-bold text-text-primary">
+                      Conjugating -ER and -IR Verbs 🍽️
+                    </h2>
+                    <p className="text-xs text-pencil leading-relaxed mt-1">
+                      Learn how to conjugate regular present-tense verbs ending in -ER (comer, beber) and -IR (vivir, escribir).
+                    </p>
+                  </div>
+
+                  {/* Section 1: Endings Comparison Table */}
+                  <div className="space-y-4">
+                    <h3 className="font-display text-lg font-bold text-text-primary flex items-center gap-2">
+                      <Layers className="h-5 w-5 text-terracotta" />
+                      1. Present Tense Endings (-ER vs -IR)
+                    </h3>
+                    <p className="text-xs text-pencil leading-relaxed">
+                      Notice that -ER and -IR verb endings are identical for all pronouns <em>except</em> <strong>nosotros</strong> (-emos vs -imos) and <strong>vosotros</strong> (-éis vs -ís)!
+                    </p>
+
+                    <div className="bg-bg-elevated border border-structural rounded-2xl p-4 overflow-x-auto">
+                      <table className="w-full text-xs text-left font-body">
+                        <thead>
+                          <tr className="border-b border-structural text-pencil font-hud text-[10px] uppercase">
+                            <th className="pb-2">Pronoun</th>
+                            <th className="pb-2 text-terracotta font-bold">-ER Endings (e.g. Comer)</th>
+                            <th className="pb-2 text-marigold font-bold">-IR Endings (e.g. Vivir)</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-structural/50">
+                          <tr><td className="py-2 font-mono text-pencil">Yo</td><td className="py-2 text-text-primary font-bold">com<strong>-o</strong></td><td className="py-2 text-text-primary font-bold">viv<strong>-o</strong></td></tr>
+                          <tr><td className="py-2 font-mono text-pencil">Tú</td><td className="py-2 text-text-primary font-bold">com<strong>-es</strong></td><td className="py-2 text-text-primary font-bold">viv<strong>-es</strong></td></tr>
+                          <tr><td className="py-2 font-mono text-pencil">Él / Ella / Ud.</td><td className="py-2 text-text-primary font-bold">com<strong>-e</strong></td><td className="py-2 text-text-primary font-bold">viv<strong>-e</strong></td></tr>
+                          <tr className="bg-accent-action/10"><td className="py-2 font-mono text-accent-action font-bold">Nosotros/as</td><td className="py-2 text-terracotta font-bold">com<strong>-emos</strong> ⭐</td><td className="py-2 text-marigold font-bold">viv<strong>-imos</strong> ⭐</td></tr>
+                          <tr><td className="py-2 font-mono text-pencil">Vosotros/as</td><td className="py-2 text-text-primary font-bold">com<strong>-éis</strong></td><td className="py-2 text-text-primary font-bold">viv<strong>-ís</strong></td></tr>
+                          <tr><td className="py-2 font-mono text-pencil">Ellos / Ellas / Uds.</td><td className="py-2 text-text-primary font-bold">com<strong>-en</strong></td><td className="py-2 text-text-primary font-bold">viv<strong>-en</strong></td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  {/* Section 2: Core -ER and -IR Vocabulary */}
+                  <div className="space-y-4 pt-4 border-t border-pencil/15">
+                    <h3 className="font-display text-lg font-bold text-text-primary flex items-center gap-2">
+                      <Sparkles className="h-5 w-5 text-accent-action" />
+                      2. Essential -ER & -IR Verbs
+                    </h3>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                      <div className="bg-bg-elevated border border-structural rounded-2xl p-4 space-y-2">
+                        <span className="font-hud text-xs font-bold text-terracotta uppercase">Key -ER Verbs</span>
+                        <div className="space-y-1.5 text-text-primary">
+                          <div><strong>comer</strong> — to eat (Yo como pizza)</div>
+                          <div><strong>beber</strong> — to drink (Nosotros bebemos agua)</div>
+                          <div><strong>aprender</strong> — to learn (Tú aprendes español)</div>
+                          <div><strong>comprender</strong> — to understand (Él comprende)</div>
+                          <div><strong>leer</strong> — to read (Ellos leen un libro)</div>
+                        </div>
+                      </div>
+
+                      <div className="bg-bg-elevated border border-structural rounded-2xl p-4 space-y-2">
+                        <span className="font-hud text-xs font-bold text-marigold uppercase">Key -IR Verbs</span>
+                        <div className="space-y-1.5 text-text-primary">
+                          <div><strong>vivir</strong> — to live (Yo vivo en la ciudad)</div>
+                          <div><strong>escribir</strong> — to write (Ella escribe una carta)</div>
+                          <div><strong>abrir</strong> — to open (Nosotros abrimos la puerta)</div>
+                          <div><strong>recibir</strong> — to receive (Tú recibes un regalo)</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Completion Action */}
+                  <div className="pt-6 border-t border-pencil/15 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <p className="text-xs text-pencil font-body">
+                      Finished reviewing Lesson 7 Regular -ER and -IR Verbs?
+                    </p>
+                    <button
+                      onClick={() => handleLessonComplete('lesson7')}
+                      className={`flex items-center gap-2 px-5 py-3 rounded-xl border text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                        completedLessons.lesson7
+                          ? 'bg-teal-deep/15 border-teal-deep/30 text-teal-deep'
+                          : 'bg-terracotta text-text-primary border-transparent hover:bg-rose-600'
+                      }`}
+                    >
+                      {completedLessons.lesson7 ? 'Completed ✓ (Click to Undo)' : 'Mark Lesson as Completed'}
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* ────────────────────────────────────────────────────────────
+                  SECTION: LESSON 8 — VERB IR & QUESTION WORDS
+                  ──────────────────────────────────────────────────────────── */}
+              {activeSection === 'lesson8' && (
+                <div className="space-y-8">
+                  {/* Lesson Header */}
+                  <div className="border-b border-pencil/15 pb-6">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="bg-terracotta/15 text-terracotta font-hud text-[10px] uppercase px-2.5 py-1 rounded-md border border-terracotta/30 font-bold">
+                        Lesson 8
+                      </span>
+                      <span className="text-xs text-pencil">Verb Ir & Question Words</span>
+                    </div>
+                    <h2 className="font-display text-2xl font-bold text-text-primary">
+                      The Verb Ir & Asking Questions ❓
+                    </h2>
+                    <p className="text-xs text-pencil leading-relaxed mt-1">
+                      Learn the highly irregular verb IR (to go), express near-future actions with <em>ir + a + infinitive</em>, and master Spanish question words.
+                    </p>
+                  </div>
+
+                  {/* Section 1: Verb IR Conjugations */}
+                  <div className="space-y-4">
+                    <h3 className="font-display text-lg font-bold text-text-primary flex items-center gap-2">
+                      <Compass className="h-5 w-5 text-marigold" />
+                      1. Conjugations of IR (to go)
+                    </h3>
+                    <p className="text-xs text-pencil leading-relaxed">
+                      Notice that the present tense forms of <strong>IR</strong> begin with the letter <strong>v-</strong>!
+                    </p>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+                      {[
+                        { pronoun: 'Yo', form: 'voy', eng: 'I go / am going' },
+                        { pronoun: 'Tú', form: 'vas', eng: 'You go / are going' },
+                        { pronoun: 'Él / Ella / Ud.', form: 'va', eng: 'He / She / You go' },
+                        { pronoun: 'Nosotros/as', form: 'vamos', eng: 'We go / Let’s go' },
+                        { pronoun: 'Vosotros/as', form: 'vais', eng: 'You all go (Spain)' },
+                        { pronoun: 'Ellos / Ellas / Uds.', form: 'van', eng: 'They / You all go' },
+                      ].map((item) => (
+                        <div key={item.pronoun} className="bg-bg-elevated border border-structural rounded-2xl p-3.5 space-y-1">
+                          <span className="text-[10px] text-pencil font-mono uppercase">{item.pronoun}</span>
+                          <div className="font-display text-base font-bold text-marigold">{item.form}</div>
+                          <span className="text-[11px] text-text-secondary">{item.eng}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Section 2: Near Future Formula */}
+                  <div className="space-y-4 pt-4 border-t border-pencil/15">
+                    <h3 className="font-display text-lg font-bold text-text-primary flex items-center gap-2">
+                      <Sparkles className="h-5 w-5 text-terracotta" />
+                      2. Near Future Formula: IR + A + Infinitive
+                    </h3>
+
+                    <div className="bg-bg-elevated border border-structural rounded-2xl p-5 space-y-3">
+                      <p className="text-xs text-pencil leading-relaxed">
+                        To express what you or someone else is <strong>going to do</strong> in the future, use this simple 3-part formula:
+                      </p>
+
+                      <div className="bg-bg-base/80 p-4 rounded-xl border border-structural text-center font-display text-sm font-bold text-accent-action">
+                        [ Form of IR ] + a + [ Infinitive Verb ]
+                      </div>
+
+                      <div className="space-y-2 text-xs text-text-primary pt-1">
+                        <div className="bg-bg-base/60 p-2.5 rounded-lg border border-structural">
+                          <strong>Yo voy a estudiar</strong> (I am going to study)
+                        </div>
+                        <div className="bg-bg-base/60 p-2.5 rounded-lg border border-structural">
+                          <strong>Nosotros vamos a comer</strong> (We are going to eat)
+                        </div>
+                        <div className="bg-bg-base/60 p-2.5 rounded-lg border border-structural">
+                          <strong>¿Vas a viajar?</strong> (Are you going to travel?)
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Section 3: Question Words (Interrogativos) */}
+                  <div className="space-y-4 pt-4 border-t border-pencil/15">
+                    <h3 className="font-display text-lg font-bold text-text-primary flex items-center gap-2">
+                      <GraduationCap className="h-5 w-5 text-accent-action" />
+                      3. Question Words (Interrogativos)
+                    </h3>
+                    <p className="text-xs text-pencil leading-relaxed">
+                      All Spanish question words have an accent mark on the stressed vowel and are preceded by an inverted question mark <strong>¿</strong>!
+                    </p>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                      {[
+                        { word: '¿Qué?', meaning: 'What?', example: '¿Qué estudias?' },
+                        { word: '¿Quién / quiénes?', meaning: 'Who?', example: '¿Quién es ella?' },
+                        { word: '¿Dónde?', meaning: 'Where? (location)', example: '¿Dónde estás?' },
+                        { word: '¿Adónde?', meaning: 'Where to? (destination)', example: '¿Adónde vas?' },
+                        { word: '¿Cuándo?', meaning: 'When?', example: '¿Cuándo vamos a comer?' },
+                        { word: '¿Por qué?', meaning: 'Why?', example: '¿Por qué estudias español?' },
+                        { word: '¿Cómo?', meaning: 'How?', example: '¿Cómo estás?' },
+                        { word: '¿Cuánto / cuántos?', meaning: 'How much / many?', example: '¿Cuántos libros tienes?' },
+                      ].map((item) => (
+                        <div key={item.word} className="bg-bg-elevated border border-structural rounded-2xl p-3.5 flex justify-between items-center">
+                          <div>
+                            <div className="font-display text-sm font-bold text-accent-action">{item.word}</div>
+                            <div className="text-[11px] text-text-secondary">{item.meaning}</div>
+                          </div>
+                          <span className="text-[10px] font-mono bg-bg-base/80 px-2 py-1 rounded border border-structural text-pencil">{item.example}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Completion Action */}
+                  <div className="pt-6 border-t border-pencil/15 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <p className="text-xs text-pencil font-body">
+                      Finished reviewing Lesson 8 Verb Ir & Question Words?
+                    </p>
+                    <button
+                      onClick={() => handleLessonComplete('lesson8')}
+                      className={`flex items-center gap-2 px-5 py-3 rounded-xl border text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                        completedLessons.lesson8
+                          ? 'bg-teal-deep/15 border-teal-deep/30 text-teal-deep'
+                          : 'bg-terracotta text-text-primary border-transparent hover:bg-rose-600'
+                      }`}
+                    >
+                      {completedLessons.lesson8 ? 'Completed ✓ (Click to Undo)' : 'Mark Lesson as Completed'}
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* ────────────────────────────────────────────────────────────
+                  SECTION: CONSOLIDATED COURSE EXAMS (PART 1 & PART 2)
+                  ──────────────────────────────────────────────────────────── */}
+              {(activeSection === 'exam' || activeSection === 'exam2') && (
                 <div className="space-y-6">
                   {!quizFinished ? (
                     <div className="space-y-6">
@@ -1641,11 +2293,15 @@ const BasicEspanolScreen: FC = () => {
                       {/* Exam Header */}
                       <div className="flex flex-col sm:flex-row items-center justify-between gap-3 border-b border-pencil/15 pb-4">
                         <div>
-                          <span className="font-hud text-[10px] text-marigold uppercase tracking-wider">CONSOLIDATED FINAL EXAM</span>
-                          <h2 className="font-display text-xl font-bold text-text-primary">Spanish Part 1 Test</h2>
+                          <span className="font-hud text-[10px] text-marigold uppercase tracking-wider">
+                            {activeSection === 'exam2' ? 'PART 2 MASTER EXAM' : 'PART 1 FINAL EXAM'}
+                          </span>
+                          <h2 className="font-display text-xl font-bold text-text-primary">
+                            {activeSection === 'exam2' ? 'Spanish Part 2 Master Test' : 'Spanish Part 1 Test'}
+                          </h2>
                         </div>
                         <div className="font-hud text-[11px] text-pencil">
-                          QUESTION {currentQuestionIndex + 1} OF {EXAM_QUESTIONS.length}
+                          QUESTION {currentQuestionIndex + 1} OF {activeQuestions.length}
                         </div>
                       </div>
 
@@ -1653,21 +2309,21 @@ const BasicEspanolScreen: FC = () => {
                       <div className="w-full bg-paper/10 h-1.5 rounded-full overflow-hidden">
                         <div
                           className="bg-marigold h-full transition-all duration-300"
-                          style={{ width: `${((currentQuestionIndex) / EXAM_QUESTIONS.length) * 100}%` }}
+                          style={{ width: `${((currentQuestionIndex) / activeQuestions.length) * 100}%` }}
                         />
                       </div>
 
                       {/* Question Content */}
                       <div className="space-y-4 pt-2">
                         <h3 className="font-display text-lg font-bold text-text-primary leading-snug">
-                          {EXAM_QUESTIONS[currentQuestionIndex].question}
+                          {activeQuestions[currentQuestionIndex].question}
                         </h3>
 
                         {/* Options */}
                         <div className="grid grid-cols-1 gap-3">
-                          {EXAM_QUESTIONS[currentQuestionIndex].options.map((option) => {
+                          {activeQuestions[currentQuestionIndex].options.map((option) => {
                             const isSelected = selectedAnswer === option;
-                            const isCorrect = option === EXAM_QUESTIONS[currentQuestionIndex].correctAnswer;
+                            const isCorrect = option === activeQuestions[currentQuestionIndex].correctAnswer;
                             const hasSelected = selectedAnswer !== null;
 
                             let btnStyle = 'bg-bg-elevated-2 border-structural text-text-primary hover:bg-bg-elevated hover:border-text-secondary';
@@ -1712,21 +2368,21 @@ const BasicEspanolScreen: FC = () => {
                             className="bg-bg-elevated border border-structural rounded-2xl p-5 space-y-3"
                           >
                             <div className="flex items-center gap-2 font-display text-sm font-bold">
-                              {selectedAnswer === EXAM_QUESTIONS[currentQuestionIndex].correctAnswer ? (
+                              {selectedAnswer === activeQuestions[currentQuestionIndex].correctAnswer ? (
                                 <span className="text-success flex items-center gap-1.5">🎉 Correct!</span>
                               ) : (
                                 <span className="text-error flex items-center gap-1.5">❌ Incorrect</span>
                               )}
                             </div>
                             <p className="text-xs text-text-secondary leading-relaxed">
-                              {EXAM_QUESTIONS[currentQuestionIndex].explanation}
+                              {activeQuestions[currentQuestionIndex].explanation}
                             </p>
                             
                             <button
                               onClick={handleNextQuestion}
                               className="bg-accent-action hover:bg-accent-action-hover text-bg-base font-body text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl transition-all ml-auto flex items-center gap-1.5 cursor-pointer font-bold border-none shadow-md"
                             >
-                              {currentQuestionIndex < EXAM_QUESTIONS.length - 1 ? 'Next Question' : 'Finish Exam'}
+                              {currentQuestionIndex < activeQuestions.length - 1 ? 'Next Question' : 'Finish Exam'}
                               <ArrowRight className="h-3 w-3" />
                             </button>
                           </motion.div>
@@ -1749,7 +2405,7 @@ const BasicEspanolScreen: FC = () => {
                       <div className="space-y-2">
                         <h3 className="font-display text-2xl font-bold text-text-primary">Exam Completed!</h3>
                         <p className="text-xs text-text-secondary max-w-sm mx-auto">
-                          You answered <strong className="text-text-primary">{score}</strong> out of <strong className="text-text-primary">{EXAM_QUESTIONS.length}</strong> questions correctly.
+                          You answered <strong className="text-text-primary">{score}</strong> out of <strong className="text-text-primary">{activeQuestions.length}</strong> questions correctly.
                         </p>
                       </div>
 
@@ -1759,11 +2415,11 @@ const BasicEspanolScreen: FC = () => {
                         
                         <div className="flex justify-around font-body text-sm">
                           <div className="flex flex-col items-center">
-                            <span className="text-text-primary font-bold">+{score * 5} XP</span>
+                            <span className="text-text-primary font-bold">+{score * 10} XP</span>
                             <span className="text-[9px] text-text-secondary/80">Experience</span>
                           </div>
                           <div className="flex flex-col items-center">
-                            <span className="text-text-primary font-bold">+{score >= 6 ? 15 : score >= 4 ? 8 : 3} Coins</span>
+                            <span className="text-text-primary font-bold">+{score >= 8 ? 20 : score >= 5 ? 10 : 5} Coins</span>
                             <span className="text-[9px] text-text-secondary/80">Gold Coins</span>
                           </div>
                         </div>
@@ -1784,7 +2440,7 @@ const BasicEspanolScreen: FC = () => {
                       {/* Detailed Questions Review */}
                       <div className="space-y-3 text-left max-w-xl mx-auto pt-4 border-t border-structural">
                         <h4 className="font-display font-bold text-sm text-text-primary mb-2">Review Questions:</h4>
-                        {EXAM_QUESTIONS.map((q) => {
+                        {activeQuestions.map((q) => {
                           const userAns = answersHistory[q.id];
                           const isCorrect = userAns === q.correctAnswer;
 
