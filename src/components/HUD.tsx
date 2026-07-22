@@ -9,7 +9,8 @@ import { NAV_TABS } from '../app/routes';
 import { useStatsStore } from '../state/statsStore';
 import { useSettingsStore } from '../state/settingsStore';
 import { useAuthStore } from '../state/authStore';
-import { Lock } from 'lucide-react';
+import { Lock, Sparkles } from 'lucide-react';
+import { AccountUpgradeModal } from './AccountUpgradeModal';
 
 
 const HUD: FC = () => {
@@ -17,8 +18,11 @@ const HUD: FC = () => {
   const coins = useStatsStore((s) => s.coins);
   const streak = useStatsStore((s) => s.streak);
   const { language, setLanguage } = useSettingsStore();
-  const logout = useAuthStore((s) => s.logout);
+  const { isAnonymous, userEmail, logout } = useAuthStore();
+  const isUnregistered = isAnonymous || !userEmail;
+  const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
   const location = useLocation();
+
 
   // ── Sliding indicator state ──────────────────────────────────────────
   const navScrollRef = useRef<HTMLDivElement>(null);
@@ -168,6 +172,17 @@ const HUD: FC = () => {
             >
               📜
             </Link>
+            {isUnregistered && (
+              <button
+                onClick={() => setIsUpgradeModalOpen(true)}
+                className="flex h-8 items-center gap-1 rounded-md bg-accent-action/10 px-2 font-body text-[11px] font-semibold text-accent-action border border-accent-action/30 hover:bg-accent-action hover:text-white transition-all shadow-sm cursor-pointer"
+                aria-label="Save Progress / Create Account"
+                title="Save Your Progress / Create Account"
+              >
+                <Sparkles className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">Save</span>
+              </button>
+            )}
             <Link
               to="/profile"
               className="flex h-8 w-8 items-center justify-center rounded-md border border-structural text-text-primary transition-colors hover:border-text-secondary hover:bg-bg-elevated-2"
@@ -238,6 +253,11 @@ const HUD: FC = () => {
           </div>
         </nav>
       </div>
+
+      <AccountUpgradeModal
+        isOpen={isUpgradeModalOpen}
+        onClose={() => setIsUpgradeModalOpen(false)}
+      />
     </header>
   );
 };

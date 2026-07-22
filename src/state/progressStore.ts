@@ -26,9 +26,6 @@ interface ProgressState {
   reset: () => void;
 }
 
-if (typeof window !== 'undefined' && window.localStorage) {
-  window.localStorage.removeItem('wayfarer-progress');
-}
 
 export const useProgressStore = create<ProgressState>()(
   persist(

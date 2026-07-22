@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   LogOut,
@@ -9,15 +9,20 @@ import {
   Sparkles,
   Flame,
   Trophy,
+  UserPlus,
 } from 'lucide-react';
 import { useAuthStore } from '../state/authStore';
 import { useStatsStore } from '../state/statsStore';
+import { AccountUpgradeModal } from '../components/AccountUpgradeModal';
 
 const ProfileScreen: React.FC = () => {
-  const { userEmail, loginMethod, logout } = useAuthStore();
+  const { userEmail, loginMethod, isAnonymous, logout } = useAuthStore();
   const xp = useStatsStore((s) => s.xp);
   const coins = useStatsStore((s) => s.coins);
   const streak = useStatsStore((s) => s.streak);
+
+  const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
+  const isUnregistered = isAnonymous || !userEmail;
 
   // Mock achievements list
   const achievements = [
@@ -30,6 +35,38 @@ const ProfileScreen: React.FC = () => {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
+      {/* Account Upgrade Banner for Anonymous Users */}
+      {isUnregistered && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-8 rounded-3xl border border-accent-action/30 bg-accent-action/10 p-5 shadow-sm"
+        >
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-accent-action text-white shadow-md shrink-0">
+                <Sparkles className="h-5 w-5" />
+              </div>
+              <div>
+                <h3 className="font-display text-sm font-bold text-text-primary">
+                  Save Your Progress / Create Account
+                </h3>
+                <p className="font-body text-xs text-text-secondary mt-0.5">
+                  You are currently using an anonymous session. Link an email to save your stats & progress!
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => setIsUpgradeModalOpen(true)}
+              className="w-full sm:w-auto shrink-0 flex items-center justify-center gap-2 rounded-xl bg-accent-action px-4 py-2.5 font-body text-xs font-bold text-white shadow-md hover:bg-accent-action/90 transition-all"
+            >
+              <UserPlus className="h-4 w-4" />
+              <span>Save Progress</span>
+            </button>
+          </div>
+        </motion.div>
+      )}
+
       {/* Profile Header Card */}
       <motion.div
         initial={{ opacity: 0, y: 15 }}
@@ -49,16 +86,28 @@ const ProfileScreen: React.FC = () => {
 
           {/* User info */}
           <div className="flex-1 text-center sm:text-left">
-            <h2 className="font-display text-xl font-bold text-text-primary">Wayfarer Rohit</h2>
+            <h2 className="font-display text-xl font-bold text-text-primary">
+              Wayfarer {userEmail ? userEmail.split('@')[0] : 'Guest'}
+            </h2>
             <p className="font-body text-xs text-text-secondary mt-0.5 flex items-center justify-center sm:justify-start gap-1">
-              <Mail className="h-3 w-3" /> {userEmail || 'rohit.gupta@domain.local'}
+              <Mail className="h-3 w-3" /> {userEmail || 'Anonymous Guest Session'}
             </p>
             <p className="font-body text-xs text-text-secondary mt-1 flex items-center justify-center sm:justify-start gap-1">
-              <KeyRound className="h-3 w-3" /> Method: {loginMethod || 'Passwordless Link'}
+              <KeyRound className="h-3 w-3" /> Method: {isUnregistered ? 'Anonymous Local Session' : loginMethod || 'Email & Password'}
             </p>
-            <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-success/10 px-3 py-1 font-body text-[10px] font-semibold text-success border border-success/20">
-              <ShieldCheck className="h-3.5 w-3.5" /> Secure Session Verified
-            </div>
+
+            {isUnregistered ? (
+              <button
+                onClick={() => setIsUpgradeModalOpen(true)}
+                className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-accent-action/10 px-3 py-1 font-body text-[10px] font-semibold text-accent-action border border-accent-action/20 hover:bg-accent-action hover:text-white transition-all cursor-pointer"
+              >
+                <Sparkles className="h-3.5 w-3.5" /> Save Progress / Create Account
+              </button>
+            ) : (
+              <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-success/10 px-3 py-1 font-body text-[10px] font-semibold text-success border border-success/20">
+                <ShieldCheck className="h-3.5 w-3.5" /> Account Saved & Verified
+              </div>
+            )}
           </div>
 
           {/* Action button */}
@@ -140,8 +189,15 @@ const ProfileScreen: React.FC = () => {
           ))}
         </div>
       </motion.div>
+
+      {/* Account Upgrade Modal */}
+      <AccountUpgradeModal
+        isOpen={isUpgradeModalOpen}
+        onClose={() => setIsUpgradeModalOpen(false)}
+      />
     </div>
   );
 };
 
 export default ProfileScreen;
+

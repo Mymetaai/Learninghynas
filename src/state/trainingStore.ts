@@ -4,6 +4,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { useStatsStore } from './statsStore';
+import { getCurrentUserId, syncUserStats } from '../lib/supabaseClient';
 
 export interface MistakeEntry {
   /** The word or prompt the student got wrong. */
@@ -95,6 +96,8 @@ export const useTrainingStore = create<TrainingState>()(
         const coins = Math.round(3 + percentage * 7);
         useStatsStore.getState().addRewards(xp, coins);
         get().completeTrainingSession();
+        const uid = getCurrentUserId();
+        if (uid) syncUserStats(uid, useStatsStore.getState()).catch(() => {});
         return { xp, coins };
       },
     }),

@@ -7,6 +7,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { ONE_PIECE_CARDS } from '../content/onePieceCards';
 import { DEMON_SLAYER_CARDS } from '../content/demonSlayerCards';
+import { getCurrentUserId, syncUserStats, syncLearnedVocab } from '../lib/supabaseClient';
 
 const allCardIds = [
   ...ONE_PIECE_CARDS.map(c => c.id),
@@ -101,6 +102,8 @@ export const useStatsStore = create<StatsState>()(
           streak: newStreak,
           lastActiveDate: today,
         }));
+        const uid = getCurrentUserId();
+        if (uid) syncUserStats(uid, get()).catch(() => {});
       },
       
       addRewards: (xp, coins) => {
@@ -117,6 +120,8 @@ export const useStatsStore = create<StatsState>()(
           streak: newStreak,
           lastActiveDate: today,
         }));
+        const uid = getCurrentUserId();
+        if (uid) syncUserStats(uid, get()).catch(() => {});
       },
 
       learnVocab: (words, questId) => {
@@ -128,11 +133,18 @@ export const useStatsStore = create<StatsState>()(
             .map((word) => ({ word, questId, date }));
           return { learnedVocab: [...state.learnedVocab, ...newEntries] };
         });
+        const uid = getCurrentUserId();
+        if (uid) {
+          syncLearnedVocab(uid, get().learnedVocab).catch(() => {});
+          syncUserStats(uid, get()).catch(() => {});
+        }
       },
 
       spendCoins: (amount) => {
         if (get().coins < amount) return false;
         set((state) => ({ coins: state.coins - amount }));
+        const uid = getCurrentUserId();
+        if (uid) syncUserStats(uid, get()).catch(() => {});
         return true;
       },
 
@@ -141,6 +153,8 @@ export const useStatsStore = create<StatsState>()(
           if (state.collectedCardIds.includes(cardId)) return state;
           return { collectedCardIds: [...state.collectedCardIds, cardId] };
         });
+        const uid = getCurrentUserId();
+        if (uid) syncUserStats(uid, get()).catch(() => {});
       },
 
       collectAllCards: (cardIds) => {
@@ -148,9 +162,18 @@ export const useStatsStore = create<StatsState>()(
           const union = Array.from(new Set([...state.collectedCardIds, ...cardIds]));
           return { collectedCardIds: union };
         });
+        const uid = getCurrentUserId();
+        if (uid) syncUserStats(uid, get()).catch(() => {});
       },
 
-      reset: () => set({ ...DEFAULT_STATE }),
+      reset: () => {
+        set({ ...DEFAULT_STATE });
+        const uid = getCurrentUserId();
+        if (uid) {
+          syncUserStats(uid, get()).catch(() => {});
+          syncLearnedVocab(uid, get().learnedVocab).catch(() => {});
+        }
+      },
     }),
     {
       name: 'wayfarer-stats',
@@ -174,4 +197,14 @@ if (typeof window !== 'undefined') {
       console.warn("Failed to auto-unlock cards:", e);
     }
   }, 100);
+
+  useStatsStore.subscribe((state) => {
+    const uid = getCurrentUserId();
+    if (uid) {
+      syncUserStats(uid, state).catch(() => {});
+      if (state.learnedVocab && state.learnedVocab.length > 0) {
+        syncLearnedVocab(uid, state.learnedVocab).catch(() => {});
+      }
+    }
+  });
 }

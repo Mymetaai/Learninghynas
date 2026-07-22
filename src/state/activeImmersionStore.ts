@@ -9,6 +9,7 @@ import {
   type GeminiErrorDetails,
 } from '../utils/geminiService';
 import { useStatsStore } from './statsStore';
+import { getCurrentUserId, syncImmersionMessages, syncLearnedVocab } from '../lib/supabaseClient';
 
 export type { ImmersionMode, ActiveImmersionResponse };
 
@@ -107,7 +108,6 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
         const level = get().selectedLevel;
 
         if (currentSessions[sessionKey]) {
-          // Session already exists — activate it
           set({ activeMode: mode, selectedTopic: topic, selectedAccent: accent ?? null });
           return;
         }
@@ -136,6 +136,7 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
             },
           },
         });
+        syncImmersionMessages().catch(() => {});
 
         if (isGeminiAvailable()) {
           const history = [{ role: 'assistant' as const, text: welcome.text }];
@@ -172,6 +173,7 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
                 },
               },
             }));
+            syncImmersionMessages().catch(() => {});
           } else {
             const session = get().sessions[sessionKey] || { messages: [], learnedWords: [] };
             set((s) => ({
@@ -219,6 +221,7 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
             },
           },
         });
+        syncImmersionMessages().catch(() => {});
 
         // Award rewards (+10 XP, +5 Coins)
         useStatsStore.getState().addRewards(10, 5);
@@ -273,8 +276,11 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
                 },
               },
             }));
+            syncImmersionMessages().catch(() => {});
+            if (geminiRes.data.newVocabWords && geminiRes.data.newVocabWords.length > 0) {
+              syncLearnedVocab().catch(() => {});
+            }
           } else {
-            // Check geminiRes.success; if false, set explicit error state on active session/store
             set((s) => ({
               isTyping: false,
               sessions: {
@@ -376,6 +382,10 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
                 },
               },
             }));
+            syncImmersionMessages().catch(() => {});
+            if (geminiRes.data.newVocabWords && geminiRes.data.newVocabWords.length > 0) {
+              syncLearnedVocab().catch(() => {});
+            }
           } else {
             set((s) => ({
               isTyping: false,
@@ -428,6 +438,7 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
             },
           },
         }));
+        syncImmersionMessages().catch(() => {});
       },
 
       addLearnedWord: (sessionKey: string, word: string, meaning: string) => {
@@ -447,6 +458,8 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
             },
           });
           useStatsStore.getState().learnVocab([word.toLowerCase()], sessionKey);
+          const uid = getCurrentUserId();
+          if (uid) syncLearnedVocab(uid, [{ word: word.toLowerCase(), questId: sessionKey, date: new Date().toISOString().split('T')[0] }]).catch(() => {});
         }
       },
 
@@ -479,3 +492,19 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
     }
   )
 );
+
+if (typeof window !== 'undefined') {
+  useActiveImmersionStore.subscribe((state) => {
+    const userId = getCurrentUserId();
+    if (userId && state.sessions) {
+      for (const [key, session] of Object.entries(state.sessions)) {
+        if (session.messages && session.messages.length > 0) {
+          const parts = key.split('-');
+          const mode = parts[0] || 'daily';
+          const topic = parts.slice(1).join('-') || 'general';
+          syncImmersionMessages(userId, key, mode, topic, session.messages).catch(() => {});
+        }
+      }
+    }
+  });
+}
