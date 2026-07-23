@@ -23,7 +23,14 @@ export const curriculum: Curriculum = { worlds: ALL_WORLDS };
 // ── Lookup helpers ───────────────────────────────────────────────────────
 
 export const getWorld = (id: string): World | undefined =>
-  ALL_WORLDS.find((w) => w.id === id);
+  ALL_WORLDS.find(
+    (w) =>
+      w.id === id ||
+      w.id === id.replace('world-', 'world-part-') ||
+      w.id === id.replace('world-part', 'world-part-') ||
+      (id === 'world-pre-a1' && w.id === 'world-part-1') ||
+      (id === 'world-a1' && w.id === 'world-part-2')
+  );
 
 export const getWorldByLevel = (level: Level): World | undefined =>
   ALL_WORLDS.find((w) => w.level === level);

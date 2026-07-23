@@ -2,10 +2,39 @@
 // Generic across all six CEFR levels so another language could be added
 // later without touching these types. All real content is Spanish for now.
 
-/** CEFR level, lowest to highest. */
-export type Level = 'Pre-A1' | 'A1' | 'A2' | 'B1' | 'B2' | 'C1';
+/** CEFR & Course Part levels. */
+export type Level =
+  | 'Pre-A1'
+  | 'A1'
+  | 'A2'
+  | 'B1'
+  | 'B2'
+  | 'C1'
+  | 'C2'
+  | 'Part 1'
+  | 'Part 2'
+  | 'Part 3'
+  | 'Part 4'
+  | 'Part 5'
+  | 'Part 6'
+  | 'Part 7';
 
-export const LEVEL_ORDER: Level[] = ['Pre-A1', 'A1', 'A2', 'B1', 'B2', 'C1'];
+export const LEVEL_ORDER: Level[] = [
+  'Pre-A1',
+  'A1',
+  'A2',
+  'B1',
+  'B2',
+  'C1',
+  'C2',
+  'Part 1',
+  'Part 2',
+  'Part 3',
+  'Part 4',
+  'Part 5',
+  'Part 6',
+  'Part 7',
+];
 
 /** Topic tag groups vocabulary into the curriculum's topic clusters. */
 export type TopicTag =

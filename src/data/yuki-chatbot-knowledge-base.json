@@ -7,9 +7,14 @@
   "features": {
     "basicEspanolPart1": "Core curriculum Part 1: Lesson 1 (Pronunciation & Greetings), Lesson 2 (Subject Pronouns), Lesson 3 (Nouns & Definite Articles), Lesson 4 (Everyday Sentences), and Part 1 Workbook Exam (50 coins).",
     "basicEspanolPart2": "Core curriculum Part 2: Lesson 5 (Indefinite Articles & Numbers 0-100), Lesson 6 (Verb Estar & Numbers >100), Lesson 7 (Regular -er/-ir Verbs in Present), Lesson 8 (Verb Ir & Question Words), and Part 2 Master Exam (50 coins + badge).",
+    "basicEspanolPart3": "Core curriculum Part 3: Lesson 9 (Expressing Time & Calendar), Lesson 10 (Expressions Using Tener), Lesson 11 (Verbs like Hacer & Weather), Lesson 12 (Saber vs Conocer), and Part 3 Workbook Exam.",
+    "basicEspanolPart4": "Core curriculum Part 4: Lesson 13 (Stem-Changing Verbs e->ie/o->ue/e->i), Lesson 14 (Ver, Dar & Yo-Go Verbs), Lesson 15 (Present Progressive), Lesson 16 (Direct Object Pronouns & Adverbs), and Part 4 Master Exam.",
+    "basicEspanolPart5": "Core curriculum Part 5: Lesson 17 (Affirmatives, Negatives & Demonstratives), Lesson 18 (More Affirmative & Negative Expressions), Lesson 19 (Indirect Object Pronouns & Gustar), Lesson 20 (Double Object Pronouns me lo / se lo), and Part 5 Master Exam.",
+    "basicEspanolPart6": "Core curriculum Part 6: Lesson 21 (Reflexive Verbs & Daily Routine), Lesson 22 (Talking about Past: Acabar & Hace), Lesson 23 (Present Duration: ¿Desde Cuándo...?), Lesson 24 (Formal Commands & Unequal Comparisons), Lesson 25 (Informal Commands Tú haz/ten/pon/sal/ve/di/ven/sé), and Part 6 Master Exam.",
+    "basicEspanolPart7": "Core curriculum Part 7: Lesson 26 (Superlatives & Equal Comparisons), Lesson 27 (Regular -ar Verbs in Preterite), Lesson 28 (Regular -er/-ir Verbs in Preterite), Lesson 29 (Irregular Verbs in Preterite), Lesson 30 (Preterite vs Imperfect & Next Steps in Spanish Mastery), and Part 7 Grand Master Exam.",
     "dailyQuests": "Daily tasks (e.g. practicing speaking, completing lessons, maintaining streak) that grant Gold Coins and XP.",
     "shop": "Unlock legendary collectible cards from One Piece and Demon Slayer series using earned Gold Coins.",
-    "adventureMap": "Explore world nodes, fight boss guardians, and advance through Spanish regions.",
+    "adventureMap": "Explore 7 world nodes (Pueblo Inicial, Bosque de Verbos, El Reloj del Tiempo, El Mercado del Progreso, La Ciudad del Pronombre, La Rutina Diaria y Comandos, El Templo del Pasado), fight 21 boss encounters, and claim all 9 Kitsune Tails.",
     "activeImmersion": "Practice real-world roleplay scenarios, daily plans, and interactive conversation practice."
   },
   "grammarTips": {
@@ -19,6 +24,24 @@
     "numbers": "Numbers 0-100 (uno, diez, veinte, treinta, cuarenta...) and 100+ (cien, ciento, doscientos, quinientos, mil, un millón).",
     "questionWords": "Interrogativos: ¿Qué? (What), ¿Quién? (Who), ¿Dónde? (Where), ¿Adónde? (Where to), ¿Cuándo? (When), ¿Por qué? (Why), ¿Cómo? (How), ¿Cuánto/a/os/as? (How much/many).",
     "greetings": "Buenos días (Good morning), Buenas tardes (Good afternoon), Buenas noches (Good evening), ¿Cómo estás? (How are you?).",
-    "pronouns": "Yo (I), Tú (you informal), Él/Ella (he/she), Nosotros (we), Vosotros (you all Spain), Ellos/Ellas (they)."
+    "pronouns": "Yo (I), Tú (you informal), Él/Ella (he/she), Nosotros (we), Vosotros (you all Spain), Ellos/Ellas (they).",
+    "datesAndTime": "Time uses SER: 'Es la una' (1:00) / 'Son las dos' (2:00). Days of the week (lunes, martes...) use 'el'. Months (enero, febrero...) and seasons (primavera, verano, otoño, invierno).",
+    "tenerExpressions": "Idiomatic expressions using TENER: tener hambre (to be hungry), tener sed (to be thirsty), tener frío (to be cold), tener calor (to be hot), tener prisa (to be in a hurry), tener miedo (to be afraid), tener años (to be X years old).",
+    "hacerAndWeather": "Weather expressions use HACER: hace frío (it is cold), hace calor (it is hot), hace sol (it is sunny), hace buen tiempo (good weather). Also used for tasks: hacer la tarea (do homework), hacer la cama (make bed).",
+    "saberVsConocer": "SABER: facts, information, learned skills (sé, sabes, sabe...; saber + infinitive). CONOCER: people, places, familiarity (conozco, conoces, conoce...; conocer + a + persona).",
+    "stemChangingVerbs": "Boot verbs change vowel in present (yo, tú, él, ellos): e->ie (querer -> quiero, pensar -> pienso), o->ue (poder -> puedo, dormir -> duermo), e->i (pedir -> pido, servir -> sirvo). Nosotros and vosotros do NOT change stem.",
+    "yoGoVerbs": "Verbs with irregular 'yo' form ending in -go: pongo (poner), salgo (salir), traigo (traer), hago (hacer), tengo (tener), vengo (venir).",
+    "presentProgressive": "Formed with ESTAR + Gerund (-ando for -AR, -iendo for -ER/-IR). Example: estoy hablando (I am talking), están comiendo (they are eating), estamos viviendo (we are living).",
+    "directObjectPronouns": "Replaces the direct object receiver: me, te, lo (him/it), la (her/it), nos, os, los (them m.), las (them f.). Position: before conjugated verb or attached to infinitive/gerund.",
+    "demonstratives": "Demonstrative adjectives and pronouns by distance: Este/esta/estos/estas (this/these - close), Ese/esa/esos/esas (that/those - medium), Aquel/aquella/aquellos/aquellas (that/those over there - far).",
+    "affirmativesAndNegatives": "Pairs: algo (something) / nada (nothing), alguien (someone) / nadie (nobody), siempre (always) / nunca or jamás (never), también (also) / tampoco (neither), alguno (some) / ninguno (none). Spanish allows double negatives: 'No tengo nada'.",
+    "indirectObjectPronounsAndGustar": "Indirect pronouns: me, te, le, nos, os, les. Used with GUSTAR-type verbs (gustar, encantar, interesar, faltar, molestar). Structure: [Indirect Pronoun] + [Gusta/Gustan] + [Subject]. Example: 'Me gustan las flores'.",
+    "doubleObjectPronouns": "Using Indirect + Direct together: Indirect comes FIRST (People before Things). When 'le/les' precedes 'lo/la/los/las', change 'le/les' to SE. Formula: me lo, te lo, se lo, nos lo, os lo, se lo. Example: 'Se lo doy' (I give it to him).",
+    "reflexiveVerbs": "Action done to oneself: me, te, se, nos, os, se. Daily routines: lavarse (me lavo), levantarse (me levanto), vestirse (me visto e->i), acostarse (me acuesto o->ue), dormirse (me duermo).",
+    "acabarAndHace": "Acabar de + Infinitive = recent past ('Acabo de comer' = I have just eaten). Hace + time + que = duration of past action ('Hace dos años que estudio').",
+    "formalAndInformalCommands": "Formal Commands (Usted/Ustedes): swap vowel endings (-AR -> -e/-en, -ER/-IR -> -a/-an; e.g. Hable, Coma). Informal Commands (Tú affirmative): use 3rd person singular present (Habla, Come). Irregular Tú commands: Haz (hacer), Ten (tener), Pon (poner), Sal (salir), Ve (ir), Di (decir), Ven (venir), Sé (ser).",
+    "comparisonsAndSuperlatives": "Unequal: más... que (more... than), menos... que (less... than). Equal: tan + adj + como (as... as), tanto/a/os/as + noun + como (as much/many... as). Superlative: el/la más... or suffix -ísimo/a (altísimo = extremely tall). Irregulars: mejor (better), peor (worse).",
+    "preteriteTense": "Completed past action at a specific time. Regular -AR: -é, -aste, -ó, -amos, -asteis, -aron (hablé, habló). Regular -ER/-IR: -í, -iste, -ió, -imos, -isteis, -ieron (comí, comió, viví, vivió). Irregulars: Fui (ser/ir), Hice (hacer), Tuve (tener), Estuve (estar), Pude (poder), Dije (decir).",
+    "preteriteVsImperfect": "PRETERITE: completed past event, specific start/end, interrupting action (What happened: 'Ayer hablé'). IMPERFECT: background description, ongoing past state, habitual action, age, time in past (What was happening / used to happen: 'Era niño', 'Llovía')."
   }
 }
