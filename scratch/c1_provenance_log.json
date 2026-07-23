@@ -1,0 +1,1008 @@
+{
+  "newlyAdded": [
+    {
+      "lesson": "Lesson 31: Advanced Idiomatic Expressions",
+      "item": {
+        "id": "sys-c1-2001",
+        "level": "C1",
+        "category": "Modismos",
+        "es": "hacer borrón y cuenta nueva",
+        "en": "to turn over a new leaf / make a fresh start",
+        "example": "Tras la discusión, decidieron hacer borrón y cuenta nueva.",
+        "exampleTranslation": "After the argument, they decided to make a fresh start."
+      }
+    },
+    {
+      "lesson": "Lesson 31: Advanced Idiomatic Expressions",
+      "item": {
+        "id": "sys-c1-2002",
+        "level": "C1",
+        "category": "Modismos",
+        "es": "dar la lata",
+        "en": "to pester / to annoy / to be a nuisance",
+        "example": "No me des la lata mientras estoy estudiando para el examen.",
+        "exampleTranslation": "Don't pester me while I am studying for the exam."
+      }
+    },
+    {
+      "lesson": "Lesson 31: Advanced Idiomatic Expressions",
+      "item": {
+        "id": "sys-c1-2003",
+        "level": "C1",
+        "category": "Modismos",
+        "es": "estar entre la espada y la pared",
+        "en": "to be between a rock and a hard place",
+        "example": "Se sintió entre la espada y la pared al elegir entre ambas ofertas.",
+        "exampleTranslation": "He felt between a rock and a hard place choosing between both offers."
+      }
+    },
+    {
+      "lesson": "Lesson 31: Advanced Idiomatic Expressions",
+      "item": {
+        "id": "sys-c1-2004",
+        "level": "C1",
+        "category": "Modismos",
+        "es": "quedarse en blanco",
+        "en": "to go blank / draw a blank",
+        "example": "Al empezar la presentación me quedé en blanco por un momento.",
+        "exampleTranslation": "When starting the presentation I went blank for a moment."
+      }
+    },
+    {
+      "lesson": "Lesson 31: Advanced Idiomatic Expressions",
+      "item": {
+        "id": "sys-c1-2005",
+        "level": "C1",
+        "category": "Modismos",
+        "es": "dorar la píldora",
+        "en": "to sugarcoat something",
+        "example": "El director no intentó dorar la píldora al dar las noticias.",
+        "exampleTranslation": "The director did not try to sugarcoat the news when giving it."
+      }
+    },
+    {
+      "lesson": "Lesson 31: Advanced Idiomatic Expressions",
+      "item": {
+        "id": "sys-c1-2006",
+        "level": "C1",
+        "category": "Modismos",
+        "es": "estar en el quinto pino",
+        "en": "to be in the middle of nowhere / far away",
+        "example": "Su casa nueva está en el quinto pino y cuesta llegar.",
+        "exampleTranslation": "Her new house is in the middle of nowhere and hard to reach.",
+        "tags": [
+          "regional:Spain"
+        ]
+      }
+    },
+    {
+      "lesson": "Lesson 32: Formal & Diplomatic Register",
+      "item": {
+        "id": "sys-c1-2007",
+        "level": "C1",
+        "category": "Registro",
+        "es": "poner de manifiesto",
+        "en": "to highlight / to bring to light / to make clear",
+        "example": "El informe puso de manifiesto la necesidad de reformas estructurales.",
+        "exampleTranslation": "The report highlighted the need for structural reforms."
+      }
+    },
+    {
+      "lesson": "Lesson 32: Formal & Diplomatic Register",
+      "item": {
+        "id": "sys-c1-2008",
+        "level": "C1",
+        "category": "Registro",
+        "es": "hacer hincapié",
+        "en": "to emphasize / to stress",
+        "example": "La ponente hizo hincapié en la importancia de la sostenibilidad.",
+        "exampleTranslation": "The speaker stressed the importance of sustainability."
+      }
+    },
+    {
+      "lesson": "Lesson 32: Formal & Diplomatic Register",
+      "item": {
+        "id": "sys-c1-2009",
+        "level": "C1",
+        "category": "Registro",
+        "es": "llevar a cabo",
+        "en": "to carry out / to execute",
+        "example": "El equipo llevó a cabo una investigación rigurosa.",
+        "exampleTranslation": "The team carried out a rigorous investigation."
+      }
+    },
+    {
+      "lesson": "Lesson 32: Formal & Diplomatic Register",
+      "item": {
+        "id": "sys-c1-2010",
+        "level": "C1",
+        "category": "Registro",
+        "es": "a tenor de lo dispuesto",
+        "en": "in accordance with / pursuant to",
+        "example": "A tenor de lo dispuesto en el artículo tres, se suspende la sesión.",
+        "exampleTranslation": "Pursuant to article three, the session is suspended."
+      }
+    },
+    {
+      "lesson": "Lesson 32: Formal & Diplomatic Register",
+      "item": {
+        "id": "sys-c1-2011",
+        "level": "C1",
+        "category": "Registro",
+        "es": "suscitar debate",
+        "en": "to spark / provoke debate",
+        "example": "La nueva ley ha suscitado un intenso debate público.",
+        "exampleTranslation": "The new law has sparked intense public debate."
+      }
+    },
+    {
+      "lesson": "Lesson 32: Formal & Diplomatic Register",
+      "item": {
+        "id": "sys-c1-2012",
+        "level": "C1",
+        "category": "Registro",
+        "es": "surtir efecto",
+        "en": "to take effect / be effective",
+        "example": "Las medidas económicas comenzaron a surtir efecto positivo.",
+        "exampleTranslation": "The economic measures began to take positive effect."
+      }
+    },
+    {
+      "lesson": "Lesson 33: Nuanced Discourse Markers",
+      "item": {
+        "id": "sys-c1-2013",
+        "level": "C1",
+        "category": "Marcadores",
+        "es": "no obstante",
+        "en": "nevertheless / nonetheless",
+        "example": "Había pocas probabilidades; no obstante, el equipo logró vencer.",
+        "exampleTranslation": "Odds were low; nevertheless, the team managed to win."
+      }
+    },
+    {
+      "lesson": "Lesson 33: Nuanced Discourse Markers",
+      "item": {
+        "id": "sys-c1-2014",
+        "level": "C1",
+        "category": "Marcadores",
+        "es": "por consiguiente",
+        "en": "consequently / therefore",
+        "example": "Aumentaron los costos; por consiguiente, debió ajustarse el presupuesto.",
+        "exampleTranslation": "Costs increased; consequently, the budget had to be adjusted."
+      }
+    },
+    {
+      "lesson": "Lesson 33: Nuanced Discourse Markers",
+      "item": {
+        "id": "sys-c1-2015",
+        "level": "C1",
+        "category": "Marcadores",
+        "es": "de ahí que + subjuntivo",
+        "en": "hence why / that is why (+ subjunctive)",
+        "example": "Llovió torrencialmente; de ahí que se cancelara el concierto.",
+        "exampleTranslation": "It rained heavily; hence why the concert was cancelled."
+      }
+    },
+    {
+      "lesson": "Lesson 33: Nuanced Discourse Markers",
+      "item": {
+        "id": "sys-c1-2016",
+        "level": "C1",
+        "category": "Marcadores",
+        "es": "en resumidas cuentas",
+        "en": "in short / in a nutshell",
+        "example": "En resumidas cuentas, la estrategia fue un éxito total.",
+        "exampleTranslation": "In a nutshell, the strategy was a total success."
+      }
+    },
+    {
+      "lesson": "Lesson 33: Nuanced Discourse Markers",
+      "item": {
+        "id": "sys-c1-2017",
+        "level": "C1",
+        "category": "Marcadores",
+        "es": "a saber",
+        "en": "namely / to wit",
+        "example": "Se trataron tres temas principales, a saber: economía, educación y salud.",
+        "exampleTranslation": "Three main topics were addressed, namely: economy, education and health."
+      }
+    },
+    {
+      "lesson": "Lesson 33: Nuanced Discourse Markers",
+      "item": {
+        "id": "sys-c1-2018",
+        "level": "C1",
+        "category": "Marcadores",
+        "es": "en vista de que",
+        "en": "in view of the fact that / given that",
+        "example": "En vista de que no hay quórum, posponemos la votación.",
+        "exampleTranslation": "In view of the fact that there is no quorum, we postpone the vote."
+      }
+    },
+    {
+      "lesson": "Lesson 34: Academic Argumentation",
+      "item": {
+        "id": "sys-c1-2019",
+        "level": "C1",
+        "category": "Vocabulario Académico",
+        "es": "corroborar",
+        "en": "to corroborate / to confirm",
+        "example": "Los resultados experimentales sirvieron para corroborar la hipótesis inicial.",
+        "exampleTranslation": "Experimental results served to corroborate the initial hypothesis."
+      }
+    },
+    {
+      "lesson": "Lesson 34: Academic Argumentation",
+      "item": {
+        "id": "sys-c1-2020",
+        "level": "C1",
+        "category": "Vocabulario Académico",
+        "es": "refutar",
+        "en": "to refute / to disprove",
+        "example": "El investigador presentó pruebas sólidas para refutar la teoría.",
+        "exampleTranslation": "The researcher presented solid evidence to refute the theory."
+      }
+    },
+    {
+      "lesson": "Lesson 34: Academic Argumentation",
+      "item": {
+        "id": "sys-c1-2021",
+        "level": "C1",
+        "category": "Vocabulario Académico",
+        "es": "la hipótesis",
+        "en": "the hypothesis",
+        "example": "Formularon una hipótesis basada en datos estadísticos.",
+        "exampleTranslation": "They formulated a hypothesis based on statistical data."
+      }
+    },
+    {
+      "lesson": "Lesson 34: Academic Argumentation",
+      "item": {
+        "id": "sys-c1-2022",
+        "level": "C1",
+        "category": "Vocabulario Académico",
+        "es": "el paradigma",
+        "en": "the paradigm",
+        "example": "Este descubrimiento representa un cambio de paradigma en la física.",
+        "exampleTranslation": "This discovery represents a paradigm shift in physics."
+      }
+    },
+    {
+      "lesson": "Lesson 34: Academic Argumentation",
+      "item": {
+        "id": "sys-c1-2023",
+        "level": "C1",
+        "category": "Vocabulario Académico",
+        "es": "la discrepancia",
+        "en": "the discrepancy / disagreement",
+        "example": "Existe una gran discrepancia entre ambos informes financieros.",
+        "exampleTranslation": "There is a major discrepancy between both financial reports."
+      }
+    },
+    {
+      "lesson": "Lesson 34: Academic Argumentation",
+      "item": {
+        "id": "sys-c1-2024",
+        "level": "C1",
+        "category": "Vocabulario Académico",
+        "es": "extrapolar",
+        "en": "to extrapolate",
+        "example": "No es riguroso extrapolar estos resultados a toda la población.",
+        "exampleTranslation": "It is not rigorous to extrapolate these results to the entire population."
+      }
+    },
+    {
+      "lesson": "Lesson 35: Regional Lexical Variations",
+      "item": {
+        "id": "sys-c1-2025",
+        "level": "C1",
+        "category": "Variación Regional",
+        "es": "el ordenador",
+        "en": "the computer (Spain)",
+        "example": "Compré un ordenador portátil para trabajar desde casa.",
+        "exampleTranslation": "I bought a laptop computer to work from home.",
+        "tags": [
+          "regional:Spain"
+        ]
+      }
+    },
+    {
+      "lesson": "Lesson 35: Regional Lexical Variations",
+      "item": {
+        "id": "sys-c1-2026",
+        "level": "C1",
+        "category": "Variación Regional",
+        "es": "la computadora",
+        "en": "the computer (Latin America)",
+        "example": "Mi computadora se actualizó anoche.",
+        "exampleTranslation": "My computer updated last night.",
+        "tags": [
+          "regional:LatAm"
+        ]
+      }
+    },
+    {
+      "lesson": "Lesson 35: Regional Lexical Variations",
+      "item": {
+        "id": "sys-c1-2027",
+        "level": "C1",
+        "category": "Variación Regional",
+        "es": "el coche",
+        "en": "the car (Spain)",
+        "example": "Aparqué el coche en el garaje.",
+        "exampleTranslation": "I parked the car in the garage.",
+        "tags": [
+          "regional:Spain"
+        ]
+      }
+    },
+    {
+      "lesson": "Lesson 35: Regional Lexical Variations",
+      "item": {
+        "id": "sys-c1-2028",
+        "level": "C1",
+        "category": "Variación Regional",
+        "es": "el carro",
+        "en": "the car (Latin America)",
+        "example": "Manejé el carro por la autopista.",
+        "exampleTranslation": "I drove the car on the highway.",
+        "tags": [
+          "regional:LatAm"
+        ]
+      }
+    },
+    {
+      "lesson": "Lesson 35: Regional Lexical Variations",
+      "item": {
+        "id": "sys-c1-2029",
+        "level": "C1",
+        "category": "Variación Regional",
+        "es": "coger",
+        "en": "to grab / take / catch (Spain)",
+        "example": "Voy a coger el autobús de las ocho.",
+        "exampleTranslation": "I am going to catch the eight o'clock bus.",
+        "tags": [
+          "regional:Spain"
+        ]
+      }
+    },
+    {
+      "lesson": "Lesson 35: Regional Lexical Variations",
+      "item": {
+        "id": "sys-c1-2030",
+        "level": "C1",
+        "category": "Variación Regional",
+        "es": "tomar",
+        "en": "to take / drink / catch (Latin America)",
+        "example": "Vamos a tomar el metro en la estación central.",
+        "exampleTranslation": "We are going to take the subway at the central station.",
+        "tags": [
+          "regional:LatAm"
+        ]
+      }
+    },
+    {
+      "lesson": "Lesson 36: Complex Subjunctive Clauses",
+      "item": {
+        "id": "sys-c1-2031",
+        "level": "C1",
+        "category": "Subjuntivo Avanzado",
+        "es": "por mucho que + subjuntivo",
+        "en": "no matter how much / however much (+ subjunctive)",
+        "example": "Por mucho que intente convencerme, no cambiaré de opinión.",
+        "exampleTranslation": "No matter how much he tries to convince me, I won't change my mind."
+      }
+    },
+    {
+      "lesson": "Lesson 36: Complex Subjunctive Clauses",
+      "item": {
+        "id": "sys-c1-2032",
+        "level": "C1",
+        "category": "Subjuntivo Avanzado",
+        "es": "a condición de que",
+        "en": "on condition that / provided that",
+        "example": "Te prestaré el libro a condición de que me lo devuelvas mañana.",
+        "exampleTranslation": "I will lend you the book on condition that you return it to me tomorrow."
+      }
+    },
+    {
+      "lesson": "Lesson 36: Complex Subjunctive Clauses",
+      "item": {
+        "id": "sys-c1-2033",
+        "level": "C1",
+        "category": "Subjuntivo Avanzado",
+        "es": "salvo que",
+        "en": "unless / except if",
+        "example": "Iremos al parque salvo que empiece a llover.",
+        "exampleTranslation": "We will go to the park unless it starts raining."
+      }
+    },
+    {
+      "lesson": "Lesson 36: Complex Subjunctive Clauses",
+      "item": {
+        "id": "sys-c1-2034",
+        "level": "C1",
+        "category": "Subjuntivo Avanzado",
+        "es": "como si + imperfecto de subjuntivo",
+        "en": "as if / as though (+ imperfect subjunctive)",
+        "example": "Hablaba sobre el tema como si fuera un experto mundial.",
+        "exampleTranslation": "He was talking about the topic as if he were a world expert."
+      }
+    },
+    {
+      "lesson": "Lesson 36: Complex Subjunctive Clauses",
+      "item": {
+        "id": "sys-c1-2035",
+        "level": "C1",
+        "category": "Subjuntivo Avanzado",
+        "es": "en el supuesto de que",
+        "en": "in the event that / assuming that",
+        "example": "En el supuesto de que aprueben el crédito, iniciaremos la obra.",
+        "exampleTranslation": "Assuming that they approve the credit, we will start the construction."
+      }
+    },
+    {
+      "lesson": "Lesson 36: Complex Subjunctive Clauses",
+      "item": {
+        "id": "sys-c1-2036",
+        "level": "C1",
+        "category": "Subjuntivo Avanzado",
+        "es": "quiera que no",
+        "en": "whether one likes it or not",
+        "example": "Quiera que no, tendrá que asumir la responsabilidad.",
+        "exampleTranslation": "Whether he likes it or not, he will have to assume responsibility."
+      }
+    },
+    {
+      "lesson": "Lesson 37: Advanced Deceptive Cognates",
+      "item": {
+        "id": "sys-c1-2037",
+        "level": "C1",
+        "category": "Falsos amigos",
+        "es": "pretender",
+        "en": "to intend / to claim / to aspire to (NOT to pretend)",
+        "example": "No pretendo ofender a nadie con mis palabras.",
+        "exampleTranslation": "I do not intend to offend anyone with my words."
+      }
+    },
+    {
+      "lesson": "Lesson 37: Advanced Deceptive Cognates",
+      "item": {
+        "id": "sys-c1-2038",
+        "level": "C1",
+        "category": "Falsos amigos",
+        "es": "constipado",
+        "en": "having a cold / stuffed up (NOT constipated)",
+        "example": "Tengo dolor de garganta porque estoy constipado.",
+        "exampleTranslation": "I have a sore throat because I have a cold."
+      }
+    },
+    {
+      "lesson": "Lesson 37: Advanced Deceptive Cognates",
+      "item": {
+        "id": "sys-c1-2039",
+        "level": "C1",
+        "category": "Falsos amigos",
+        "es": "desgracia",
+        "en": "misfortune / tragedy (NOT disgrace)",
+        "example": "El accidente fue una gran desgracia para la familia.",
+        "exampleTranslation": "The accident was a major misfortune for the family."
+      }
+    },
+    {
+      "lesson": "Lesson 37: Advanced Deceptive Cognates",
+      "item": {
+        "id": "sys-c1-2040",
+        "level": "C1",
+        "category": "Falsos amigos",
+        "es": "remover",
+        "en": "to stir / to mix / to agitate (NOT to remove)",
+        "example": "Debes remover la salsa constantemente mientras se cocina.",
+        "exampleTranslation": "You must stir the sauce constantly while it cooks."
+      }
+    },
+    {
+      "lesson": "Lesson 37: Advanced Deceptive Cognates",
+      "item": {
+        "id": "sys-c1-2041",
+        "level": "C1",
+        "category": "Falsos amigos",
+        "es": "compromiso",
+        "en": "commitment / obligation / engagement (NOT compromise)",
+        "example": "Asumió el compromiso de entregar el informe el viernes.",
+        "exampleTranslation": "She assumed the commitment to deliver the report on Friday."
+      }
+    },
+    {
+      "lesson": "Lesson 37: Advanced Deceptive Cognates",
+      "item": {
+        "id": "sys-c1-2042",
+        "level": "C1",
+        "category": "Falsos amigos",
+        "es": "carpetas",
+        "en": "binders / file folders (NOT carpets)",
+        "example": "Guardo los documentos importantes en tres carpetas rojas.",
+        "exampleTranslation": "I keep important documents in three red file folders."
+      }
+    }
+  ],
+  "skipped": [],
+  "provenanceLog": [
+    {
+      "id": "sys-c1-2001",
+      "es": "hacer borrón y cuenta nueva",
+      "en": "to turn over a new leaf / make a fresh start",
+      "category": "Modismos",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2002",
+      "es": "dar la lata",
+      "en": "to pester / to annoy / to be a nuisance",
+      "category": "Modismos",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "Instituto Cervantes (cvc.cervantes.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2003",
+      "es": "estar entre la espada y la pared",
+      "en": "to be between a rock and a hard place",
+      "category": "Modismos",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2004",
+      "es": "quedarse en blanco",
+      "en": "to go blank / draw a blank",
+      "category": "Modismos",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "Instituto Cervantes (cvc.cervantes.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2005",
+      "es": "dorar la píldora",
+      "en": "to sugarcoat something",
+      "category": "Modismos",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2006",
+      "es": "estar en el quinto pino",
+      "en": "to be in the middle of nowhere / far away",
+      "category": "Modismos",
+      "tags": [
+        "regional:Spain"
+      ],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "Instituto Cervantes (cvc.cervantes.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2007",
+      "es": "poner de manifiesto",
+      "en": "to highlight / to bring to light / to make clear",
+      "category": "Registro",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2008",
+      "es": "hacer hincapié",
+      "en": "to emphasize / to stress",
+      "category": "Registro",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2009",
+      "es": "llevar a cabo",
+      "en": "to carry out / to execute",
+      "category": "Registro",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "Instituto Cervantes (cvc.cervantes.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2010",
+      "es": "a tenor de lo dispuesto",
+      "en": "in accordance with / pursuant to",
+      "category": "Registro",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2011",
+      "es": "suscitar debate",
+      "en": "to spark / provoke debate",
+      "category": "Registro",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2012",
+      "es": "surtir efecto",
+      "en": "to take effect / be effective",
+      "category": "Registro",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "Instituto Cervantes (cvc.cervantes.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2013",
+      "es": "no obstante",
+      "en": "nevertheless / nonetheless",
+      "category": "Marcadores",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2014",
+      "es": "por consiguiente",
+      "en": "consequently / therefore",
+      "category": "Marcadores",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "Instituto Cervantes (cvc.cervantes.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2015",
+      "es": "de ahí que + subjuntivo",
+      "en": "hence why / that is why (+ subjunctive)",
+      "category": "Marcadores",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2016",
+      "es": "en resumidas cuentas",
+      "en": "in short / in a nutshell",
+      "category": "Marcadores",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "Instituto Cervantes (cvc.cervantes.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2017",
+      "es": "a saber",
+      "en": "namely / to wit",
+      "category": "Marcadores",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2018",
+      "es": "en vista de que",
+      "en": "in view of the fact that / given that",
+      "category": "Marcadores",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2019",
+      "es": "corroborar",
+      "en": "to corroborate / to confirm",
+      "category": "Vocabulario Académico",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2020",
+      "es": "refutar",
+      "en": "to refute / to disprove",
+      "category": "Vocabulario Académico",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2021",
+      "es": "la hipótesis",
+      "en": "the hypothesis",
+      "category": "Vocabulario Académico",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "Instituto Cervantes (cvc.cervantes.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2022",
+      "es": "el paradigma",
+      "en": "the paradigm",
+      "category": "Vocabulario Académico",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2023",
+      "es": "la discrepancia",
+      "en": "the discrepancy / disagreement",
+      "category": "Vocabulario Académico",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2024",
+      "es": "extrapolar",
+      "en": "to extrapolate",
+      "category": "Vocabulario Académico",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "Instituto Cervantes (cvc.cervantes.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2025",
+      "es": "el ordenador",
+      "en": "the computer (Spain)",
+      "category": "Variación Regional",
+      "tags": [
+        "regional:Spain"
+      ],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2026",
+      "es": "la computadora",
+      "en": "the computer (Latin America)",
+      "category": "Variación Regional",
+      "tags": [
+        "regional:LatAm"
+      ],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "Asociación de Academias de la Lengua Española (asale.org)"
+      ]
+    },
+    {
+      "id": "sys-c1-2027",
+      "es": "el coche",
+      "en": "the car (Spain)",
+      "category": "Variación Regional",
+      "tags": [
+        "regional:Spain"
+      ],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2028",
+      "es": "el carro",
+      "en": "the car (Latin America)",
+      "category": "Variación Regional",
+      "tags": [
+        "regional:LatAm"
+      ],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "ASALE (asale.org)"
+      ]
+    },
+    {
+      "id": "sys-c1-2029",
+      "es": "coger",
+      "en": "to grab / take / catch (Spain)",
+      "category": "Variación Regional",
+      "tags": [
+        "regional:Spain"
+      ],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2030",
+      "es": "tomar",
+      "en": "to take / drink / catch (Latin America)",
+      "category": "Variación Regional",
+      "tags": [
+        "regional:LatAm"
+      ],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "ASALE (asale.org)"
+      ]
+    },
+    {
+      "id": "sys-c1-2031",
+      "es": "por mucho que + subjuntivo",
+      "en": "no matter how much / however much (+ subjunctive)",
+      "category": "Subjuntivo Avanzado",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "Instituto Cervantes (cvc.cervantes.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2032",
+      "es": "a condición de que",
+      "en": "on condition that / provided that",
+      "category": "Subjuntivo Avanzado",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2033",
+      "es": "salvo que",
+      "en": "unless / except if",
+      "category": "Subjuntivo Avanzado",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2034",
+      "es": "como si + imperfecto de subjuntivo",
+      "en": "as if / as though (+ imperfect subjunctive)",
+      "category": "Subjuntivo Avanzado",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "Instituto Cervantes (cvc.cervantes.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2035",
+      "es": "en el supuesto de que",
+      "en": "in the event that / assuming that",
+      "category": "Subjuntivo Avanzado",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2036",
+      "es": "quiera que no",
+      "en": "whether one likes it or not",
+      "category": "Subjuntivo Avanzado",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "Instituto Cervantes (cvc.cervantes.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2037",
+      "es": "pretender",
+      "en": "to intend / to claim / to aspire to (NOT to pretend)",
+      "category": "Falsos amigos",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2038",
+      "es": "constipado",
+      "en": "having a cold / stuffed up (NOT constipated)",
+      "category": "Falsos amigos",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "Instituto Cervantes (cvc.cervantes.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2039",
+      "es": "desgracia",
+      "en": "misfortune / tragedy (NOT disgrace)",
+      "category": "Falsos amigos",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2040",
+      "es": "remover",
+      "en": "to stir / to mix / to agitate (NOT to remove)",
+      "category": "Falsos amigos",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2041",
+      "es": "compromiso",
+      "en": "commitment / obligation / engagement (NOT compromise)",
+      "category": "Falsos amigos",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "Instituto Cervantes (cvc.cervantes.es)"
+      ]
+    },
+    {
+      "id": "sys-c1-2042",
+      "es": "carpetas",
+      "en": "binders / file folders (NOT carpets)",
+      "category": "Falsos amigos",
+      "tags": [],
+      "sources": [
+        "RAE DLE (dle.rae.es)",
+        "FundéuRAE (fundeu.es)"
+      ]
+    }
+  ]
+}
