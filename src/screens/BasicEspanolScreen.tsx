@@ -9,7 +9,6 @@ import {
   Compass,
   Menu,
   X,
-  Volume2,
   Check,
   Trophy,
   GraduationCap,
@@ -19,15 +18,14 @@ import {
   Zap,
   Shield,
   Star,
-  Crown
+  Crown,
+  ChevronDown
 } from 'lucide-react';
 import { useStatsStore } from '../state/statsStore';
 
-// ── Types & Data ────────────────────────────────────────────────────────────
-
-type CoursePart = 'part1' | 'part2' | 'part3' | 'part4' | 'part5' | 'part6' | 'part7';
-
-type ActiveSection =
+// Types
+export type CoursePart = 'part1' | 'part2' | 'part3' | 'part4' | 'part5' | 'part6' | 'part7';
+export type ActiveSection =
   | 'overview'
   | 'lesson1' | 'lesson2' | 'lesson3' | 'lesson4' | 'exam'
   | 'lesson5' | 'lesson6' | 'lesson7' | 'lesson8' | 'exam2'
@@ -60,17 +58,20 @@ interface ExamQuestion {
   explanation: string;
 }
 
-interface PartBadgeInfo {
-  title: string;
-  badge: string;
-  xp: number;
-  coins: number;
-}
+const PART_OPTIONS: { id: CoursePart; label: string; desc: string }[] = [
+  { id: 'part1', label: 'Part 1: Greetings & -AR Verbs (Lessons 1-4)', desc: 'Pronunciation, Articles, SER & -AR Verbs' },
+  { id: 'part2', label: 'Part 2: Estar, Ir & Numbers (Lessons 5-8)', desc: 'Indefinite Articles, ESTAR, -ER/-IR Verbs & IR' },
+  { id: 'part3', label: 'Part 3: Dates, Time, Tener & Hacer (Lessons 9-12)', desc: 'Calendar, Telling Time, Tener Idioms & Weather' },
+  { id: 'part4', label: 'Part 4: Stem Changers & Progressive (Lessons 13-16)', desc: 'Boot Verbs, Yo-Go Verbs & Present Progressive' },
+  { id: 'part5', label: 'Part 5: Pronouns & Affirmatives (Lessons 17-21)', desc: 'Possessives, Demonstratives, DOPs, IOPs & Gustar' },
+  { id: 'part6', label: 'Part 6: Double Objects & Preterite (Lessons 22-26)', desc: 'Double Objects, Reflexives, Commands & Preterite' },
+  { id: 'part7', label: 'Part 7: Imperfect & Comparisons (Lessons 27-30)', desc: 'Imperfect Tense, Preterite vs Imperfect & Superlatives' },
+];
 
-const PART_BADGES: Record<CoursePart, PartBadgeInfo> = {
-  part1: { title: 'Part 1 Master', badge: 'Básico Principiante 🥇', xp: 100, coins: 50 },
-  part2: { title: 'Part 2 Master', badge: 'Explorador Elemental 🥈', xp: 120, coins: 60 },
-  part3: { title: 'Part 3 Master', badge: 'Cronista del Tiempo 🥉', xp: 150, coins: 70 },
+const PART_BADGES: Record<CoursePart, { title: string; badge: string; xp: number; coins: number }> = {
+  part1: { title: 'Part 1 Master', badge: 'Dominio de Fundamentos 🏅', xp: 100, coins: 50 },
+  part2: { title: 'Part 2 Master', badge: 'Explorador de Verbos 🏅', xp: 120, coins: 60 },
+  part3: { title: 'Part 3 Master', badge: 'Maestro del Tiempo 🏅', xp: 140, coins: 70 },
   part4: { title: 'Part 4 Master', badge: 'Maestro del Presente 🏅', xp: 180, coins: 80 },
   part5: { title: 'Part 5 Master', badge: 'Afirmativo y Objetos 🎖️', xp: 200, coins: 85 },
   part6: { title: 'Part 6 Master', badge: 'Comandante del Pasado 🎖️', xp: 220, coins: 90 },
@@ -102,9 +103,9 @@ export const GOODBYES_VOCAB: VocabularyWord[] = [
 const VOWELS_GUIDE: VowelGuide[] = [
   { letter: 'A', sound: 'ah', englishLike: 'like the "a" in father', examples: [{ spanish: 'casa', english: 'house' }, { spanish: 'cantar', english: 'to sing' }] },
   { letter: 'E', sound: 'eh', englishLike: 'like the "e" in met', examples: [{ spanish: 'mesa', english: 'table' }, { spanish: 'el', english: 'the (masculine)' }] },
-  { letter: 'I', sound: 'ee', englishLike: 'like the "ee" in machine', examples: [{ spanish: 'sí', english: 'yes' }, { spanish: 'libro', english: 'book' }] },
-  { letter: 'O', sound: 'oh', englishLike: 'like the "o" in boat', examples: [{ spanish: 'hola', english: 'hello' }, { spanish: 'perro', english: 'dog' }] },
-  { letter: 'U', sound: 'oo', englishLike: 'like the "oo" in boot', examples: [{ spanish: 'uno', english: 'one' }, { spanish: 'música', english: 'music' }] },
+  { letter: 'I', sound: 'ee', englishLike: 'like the "ee" in machine', examples: [{ spanish: 'isla', english: 'island' }, { spanish: 'libro', english: 'book' }] },
+  { letter: 'O', sound: 'oh', englishLike: 'like the "o" in door', examples: [{ spanish: 'sol', english: 'sun' }, { spanish: 'gato', english: 'cat' }] },
+  { letter: 'U', sound: 'oo', englishLike: 'like the "oo" in boot', examples: [{ spanish: 'uno', english: 'one' }, { spanish: 'luna', english: 'moon' }] },
 ];
 
 // Master Exams (Parts 1 - 7)
@@ -291,81 +292,74 @@ const BasicEspanolScreen: FC = () => {
     const badgeInfo = PART_BADGES[coursePart];
     const passRate = score / activeQuestions.length;
     
-    let earnedXP = Math.round(badgeInfo.xp * Math.max(0.5, passRate));
-    let earnedCoins = Math.round(badgeInfo.coins * Math.max(0.5, passRate));
-    
-    // Add XP and Coins via store
-    useStatsStore.getState().addRewards(earnedXP, earnedCoins);
-
-    // Award badge if passing (score >= 60%)
-    if (passRate >= 0.6) {
+    if (passRate >= 0.7) {
+      useStatsStore.getState().addRewards(badgeInfo.coins, badgeInfo.xp);
       setEarnedBadges(prev => {
         const next = { ...prev, [coursePart]: true };
         localStorage.setItem('wayfarer-basic-espanol-badges', JSON.stringify(next));
         return next;
       });
     }
-
     setRewardClaimed(true);
   };
 
-  // Nav Items Lists for Parts 1 to 7
+  // Part Section lists
   const part1SectionsList = [
-    { id: 'overview', title: 'Course Overview', icon: BookOpen },
-    { id: 'lesson1', title: 'Lesson 1: Greetings & Vowels', icon: Volume2, sub: 'Greetings, Vowels & Dialogue' },
-    { id: 'lesson2', title: 'Lesson 2: Articles & Nouns', icon: Layers, sub: 'Gender, Plurals & Exceptions' },
-    { id: 'lesson3', title: 'Lesson 3: Pronouns & Ser', icon: Users, sub: 'Pronoun Matrix & Verb Ser' },
-    { id: 'lesson4', title: 'Lesson 4: Regular -ar Verbs', icon: Sparkles, sub: 'AR Conjugation & Adjectives' },
-    { id: 'exam', title: 'Part 1 Master Exam', icon: Award, sub: '8-Question Knowledge Test' },
+    { id: 'overview', title: 'Course Overview', icon: BookOpen, sub: 'Parts 1-7 Curriculum' },
+    { id: 'lesson1', title: 'Lesson 1: Greetings & Vowels', icon: GraduationCap, sub: 'A, E, I, O, U & Greetings' },
+    { id: 'lesson2', title: 'Lesson 2: Nouns & Articles', icon: Layers, sub: 'Definite Articles & Gender Rules' },
+    { id: 'lesson3', title: 'Lesson 3: Pronouns & Verb Ser', icon: Users, sub: 'Subject Pronouns & DOCTOR rules' },
+    { id: 'lesson4', title: 'Lesson 4: Regular -AR Verbs', icon: Sparkles, sub: 'Hablar, Estudiar, Trabajar' },
+    { id: 'exam', title: 'Part 1 Master Exam', icon: Trophy, sub: '8-Question Master Test' },
   ];
 
   const part2SectionsList = [
-    { id: 'lesson5', title: 'Lesson 5: Indefinite Articles & Numbers', icon: Layers, sub: 'Un/Una & Numbers 0–100' },
+    { id: 'lesson5', title: 'Lesson 5: Indefinite Articles & Numbers 0-100', icon: Layers, sub: 'Un/Una & Numbers 0-100' },
     { id: 'lesson6', title: 'Lesson 6: Verb Estar & Numbers >100', icon: Compass, sub: 'Conjugation, PLACE & Numbers >100' },
-    { id: 'lesson7', title: 'Lesson 7: Regular -er/-ir Verbs', icon: Sparkles, sub: 'Conjugations & Key Verbs' },
-    { id: 'lesson8', title: 'Lesson 8: Verb Ir & Question Words', icon: GraduationCap, sub: 'Ir + A, Near Future & Interrogativos' },
+    { id: 'lesson7', title: 'Lesson 7: Regular -ER/-IR Verbs', icon: Sparkles, sub: 'Comer, Beber, Vivir, Escribir' },
+    { id: 'lesson8', title: 'Lesson 8: Verb Ir & Questions', icon: Zap, sub: 'Voy/Vas/Va, Ir + a + Inf, Question Words' },
     { id: 'exam2', title: 'Part 2 Master Exam', icon: Trophy, sub: '10-Question Master Test' },
   ];
 
   const part3SectionsList = [
-    { id: 'lesson9', title: 'Lesson 9: Days, Months & Dates', icon: Calendar, sub: 'Days of Week, Months, Formatting' },
-    { id: 'lesson10', title: 'Lesson 10: Telling Time', icon: Clock, sub: 'Es la una, Son las dos, Time of Day' },
-    { id: 'lesson11', title: 'Lesson 11: Verb Tener & Idioms', icon: Zap, sub: 'Tengo hambre/frío, Tener que + inf' },
-    { id: 'lesson12', title: 'Lesson 12: Hacer & Weather', icon: Compass, sub: 'Hace frío/calor, Saber vs Conocer' },
+    { id: 'lesson9', title: 'Lesson 9: Days, Months & Dates', icon: Calendar, sub: 'Days of week, Months, Seasons, Date format' },
+    { id: 'lesson10', title: 'Lesson 10: Telling Time', icon: Clock, sub: 'Es la una, Son las dos, y cuarto, menos diez' },
+    { id: 'lesson11', title: 'Lesson 11: Verb Tener & Idioms', icon: Shield, sub: 'Tener frío/hambre/miedo, tener que + inf' },
+    { id: 'lesson12', title: 'Lesson 12: Hacer, Weather & Saber/Conocer', icon: Sparkles, sub: 'Hace frío/sol, Saber vs Conocer' },
     { id: 'exam3', title: 'Part 3 Master Exam', icon: Trophy, sub: '10-Question Master Test' },
   ];
 
   const part4SectionsList = [
     { id: 'lesson13', title: 'Lesson 13: Stem-Changing Boot Verbs', icon: Zap, sub: 'e->ie, o->ue, e->i, u->ue' },
-    { id: 'lesson14', title: 'Lesson 14: Yo-Go Verbs & Irregulars', icon: Sparkles, sub: 'pongo, salgo, traigo, hago, sé' },
-    { id: 'lesson15', title: 'Lesson 15: Present Progressive', icon: Clock, sub: 'estar + -ando/-iendo' },
-    { id: 'lesson16', title: 'Lesson 16: Saber vs Conocer', icon: Shield, sub: 'Facts vs People, Personal A' },
+    { id: 'lesson14', title: 'Lesson 14: Yo-Go Verbs & Irregulars', icon: Crown, sub: 'Pongo, salgo, traigo, hago, conozco' },
+    { id: 'lesson15', title: 'Lesson 15: Present Progressive', icon: Clock, sub: 'Estar + gerundio (-ando, -iendo)' },
+    { id: 'lesson16', title: 'Lesson 16: Direct Object Pronouns & Adverbs', icon: Layers, sub: 'me, te, lo, la, los, las & -mente' },
     { id: 'exam4', title: 'Part 4 Master Exam', icon: Trophy, sub: '10-Question Master Test' },
   ];
 
   const part5SectionsList = [
-    { id: 'lesson17', title: 'Lesson 17: Possessives', icon: Users, sub: 'mi/tu/su/nuestro, mío/tuyo/suyo' },
-    { id: 'lesson18', title: 'Lesson 18: Demonstratives', icon: Compass, sub: 'este, ese, aquel distance rules' },
-    { id: 'lesson19', title: 'Lesson 19: Affirmative & Negative', icon: Shield, sub: 'algo/nada, alguien/nadie, siempre' },
-    { id: 'lesson20', title: 'Lesson 20: Direct Object Pronouns', icon: Layers, sub: 'me, te, lo, la, nos, los, las' },
-    { id: 'lesson21', title: 'Lesson 21: Indirect Objects & Gustar', icon: Star, sub: 'le/les, me gusta, te gusta' },
+    { id: 'lesson17', title: 'Lesson 17: Possessives & Demonstratives', icon: Compass, sub: 'este, ese, aquel, mío, tuyo' },
+    { id: 'lesson18', title: 'Lesson 18: Affirmatives & Negatives', icon: Shield, sub: 'algo/nada, alguien/nadie, siempre/nunca' },
+    { id: 'lesson19', title: 'Lesson 19: Indirect Objects & Gustar', icon: Star, sub: 'le/les, me gusta, te gusta, encantar' },
+    { id: 'lesson20', title: 'Lesson 20: Double Object Pronouns', icon: Layers, sub: 'Double object order & "se la" rule' },
+    { id: 'lesson21', title: 'Lesson 21: Reflexive Verbs & Routine', icon: Clock, sub: 'lavarse, levantarse, vestirse, me/te/se' },
     { id: 'exam5', title: 'Part 5 Master Exam', icon: Trophy, sub: '10-Question Master Test' },
   ];
 
   const part6SectionsList = [
-    { id: 'lesson22', title: 'Lesson 22: Double Object Pronouns', icon: Layers, sub: 'la "se la" rule (se lo digo)' },
-    { id: 'lesson23', title: 'Lesson 23: Reflexive Verbs & Routine', icon: Clock, sub: 'lavarse, vestirse, me/te/se' },
-    { id: 'lesson24', title: 'Lesson 24: Informal Commands', icon: Zap, sub: 'haz, ve, ten, pon, sal, di' },
-    { id: 'lesson25', title: 'Lesson 25: Preterite Regulars', icon: Calendar, sub: '-é, -aste, -ó, -í, -iste, -ió' },
-    { id: 'lesson26', title: 'Lesson 26: Preterite Irregulars', icon: Crown, sub: 'fui, tuve, estuve, hice, pude' },
+    { id: 'lesson22', title: 'Lesson 22: Recent Past & Duration', icon: Calendar, sub: 'Acabar de + inf & Hace + time + que' },
+    { id: 'lesson23', title: 'Lesson 23: Present Duration & Time Queries', icon: Clock, sub: '¿Desde cuándo...? & desde hace' },
+    { id: 'lesson24', title: 'Lesson 24: Formal Commands & Comparisons', icon: Shield, sub: 'Usted commands & más... que' },
+    { id: 'lesson25', title: 'Lesson 25: Informal Tú Commands', icon: Zap, sub: 'haz, ve, ten, pon, sal, di, ven, sé' },
+    { id: 'lesson26', title: 'Lesson 26: Preterite Past Regulars', icon: Crown, sub: '-é, -aste, -ó, -í, -iste, -ió' },
     { id: 'exam6', title: 'Part 6 Master Exam', icon: Trophy, sub: '10-Question Master Test' },
   ];
 
   const part7SectionsList = [
     { id: 'lesson27', title: 'Lesson 27: Imperfect Tense', icon: Calendar, sub: '-aba, -ía, era, iba, veía' },
-    { id: 'lesson28', title: 'Lesson 28: Preterite vs Imperfect', icon: Shield, sub: 'Completed events vs background' },
-    { id: 'lesson29', title: 'Lesson 29: Comparisons', icon: Sparkles, sub: 'más... que, tan... como, mejor/peor' },
-    { id: 'lesson30', title: 'Lesson 30: Superlatives & Review', icon: Crown, sub: 'el más..., -ísimo, Grand Synthesis' },
+    { id: 'lesson28', title: 'Lesson 28: Preterite Irregulars', icon: Crown, sub: 'fui, tuve, estuve, hice, pude, dije' },
+    { id: 'lesson29', title: 'Lesson 29: Preterite vs Imperfect', icon: Shield, sub: 'SIMBA vs WATERS / Completed vs Background' },
+    { id: 'lesson30', title: 'Lesson 30: Superlatives & Synthesis', icon: Trophy, sub: 'el más..., -ísimo, Grand Master Synthesis' },
     { id: 'exam7', title: 'Part 7 Master Exam', icon: Trophy, sub: '10-Question Master Test' },
   ];
 
@@ -396,7 +390,7 @@ const BasicEspanolScreen: FC = () => {
       <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-marigold/5 rounded-full filter blur-[100px] pointer-events-none" />
 
       {/* Main Responsive Grid Layout */}
-      <div className="max-w-[90rem] mx-auto grid grid-cols-1 lg:grid-cols-[20rem_1fr] min-h-[calc(100vh-3.5rem)]">
+      <div className="max-w-[90rem] mx-auto grid grid-cols-1 lg:grid-cols-[22rem_1fr] min-h-[calc(100vh-3.5rem)]">
         
         {/* DESKTOP SIDEBAR */}
         <aside className="hidden lg:flex flex-col justify-between border-r border-pencil/15 bg-bg-base/40 backdrop-blur-md p-5 sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto z-20">
@@ -416,28 +410,32 @@ const BasicEspanolScreen: FC = () => {
               <p className="text-[11px] text-pencil mt-0.5">Lessons 1–30 & Master Exams</p>
             </div>
 
-            {/* Course Part Selector Header (Parts 1 to 7) */}
-            <div className="space-y-1">
-              <span className="text-[10px] font-hud uppercase tracking-wider text-pencil font-bold block mb-1">Select Part:</span>
-              <div className="grid grid-cols-4 gap-1 bg-bg-elevated p-1 rounded-xl border border-structural">
-                {(['part1', 'part2', 'part3', 'part4', 'part5', 'part6', 'part7'] as CoursePart[]).map((p, idx) => (
-                  <button
-                    key={p}
-                    onClick={() => {
-                      setCoursePart(p);
-                      const list = p === 'part1' ? part1SectionsList : p === 'part2' ? part2SectionsList : p === 'part3' ? part3SectionsList : p === 'part4' ? part4SectionsList : p === 'part5' ? part5SectionsList : p === 'part6' ? part6SectionsList : part7SectionsList;
-                      setActiveSection(list[0].id as ActiveSection);
-                    }}
-                    className={`py-1.5 px-1 rounded-lg text-[10px] font-hud uppercase tracking-wider font-bold transition-all cursor-pointer border-none text-center ${
-                      coursePart === p
-                        ? 'bg-accent-action text-bg-base shadow-sm'
-                        : 'text-text-secondary hover:text-text-primary bg-transparent'
-                    }`}
-                  >
-                    P{idx + 1}
-                  </button>
+            {/* Course Part Selector Dropdown Menu */}
+            <div className="space-y-1.5 bg-paper/5 border border-pencil/15 p-3 rounded-2xl">
+              <label htmlFor="course-part-select-desktop" className="text-[10px] font-hud uppercase tracking-wider text-marigold font-bold flex items-center justify-between">
+                <span>Select Course Part:</span>
+                <ChevronDown className="h-3.5 w-3.5 text-marigold" />
+              </label>
+              <select
+                id="course-part-select-desktop"
+                value={coursePart}
+                onChange={(e) => {
+                  const p = e.target.value as CoursePart;
+                  setCoursePart(p);
+                  const list = p === 'part1' ? part1SectionsList : p === 'part2' ? part2SectionsList : p === 'part3' ? part3SectionsList : p === 'part4' ? part4SectionsList : p === 'part5' ? part5SectionsList : p === 'part6' ? part6SectionsList : part7SectionsList;
+                  setActiveSection(list[0].id as ActiveSection);
+                }}
+                className="w-full bg-bg-elevated text-text-primary text-xs font-bold py-2.5 px-3 rounded-xl border border-pencil/20 focus:outline-none focus:border-terracotta cursor-pointer transition-all shadow-sm"
+              >
+                {PART_OPTIONS.map((opt) => (
+                  <option key={opt.id} value={opt.id} className="bg-bg-elevated text-text-primary py-2 font-semibold">
+                    {opt.label}
+                  </option>
                 ))}
-              </div>
+              </select>
+              <p className="text-[10px] text-pencil/80 italic mt-1">
+                {PART_OPTIONS.find(o => o.id === coursePart)?.desc}
+              </p>
             </div>
 
             {/* Earned Badge Display */}
@@ -451,8 +449,11 @@ const BasicEspanolScreen: FC = () => {
               </div>
             )}
 
-            {/* Navigation Options */}
+            {/* Section List / Lessons */}
             <nav className="space-y-1">
+              <span className="text-[10px] font-hud uppercase tracking-wider text-pencil font-bold block mb-2 px-1">
+                Modules & Master Exam
+              </span>
               {sectionsList.map((sec) => {
                 const IconComponent = sec.icon;
                 const isActive = activeSection === sec.id;
@@ -463,26 +464,21 @@ const BasicEspanolScreen: FC = () => {
                   <button
                     key={sec.id}
                     onClick={() => setActiveSection(sec.id as ActiveSection)}
-                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl border text-left transition-all duration-200 cursor-pointer ${
+                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl border text-left cursor-pointer transition-all duration-200 ${
                       isActive
-                        ? 'bg-terracotta/15 border-terracotta/40 text-text-primary shadow-[0_0_15px_rgba(193,80,46,0.15)]'
+                        ? 'bg-terracotta/15 border-terracotta/40 text-text-primary shadow-sm'
                         : 'bg-transparent border-transparent text-pencil hover:text-text-primary hover:bg-paper/5'
                     }`}
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
-                      <div className={`p-1 rounded-lg shrink-0 ${isActive ? 'bg-terracotta/20 text-terracotta' : 'bg-paper/5 text-pencil'}`}>
-                        <IconComponent className="h-3.5 w-3.5" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-xs font-semibold truncate">{sec.title}</div>
-                        {sec.sub && <div className="text-[9px] text-pencil/80 font-normal truncate">{sec.sub}</div>}
+                      <IconComponent className={`h-4 w-4 shrink-0 ${isActive ? 'text-terracotta' : 'text-pencil'}`} />
+                      <div className="truncate">
+                        <span className="text-xs font-semibold block truncate">{sec.title}</span>
+                        <span className="text-[10px] text-pencil/70 block truncate">{sec.sub}</span>
                       </div>
                     </div>
-
                     {isCompleted && (
-                      <div className="bg-teal-deep/20 text-teal-deep p-0.5 rounded-full border border-teal-deep/30 shrink-0">
-                        <Check className="h-3 w-3" />
-                      </div>
+                      <Check className="h-3.5 w-3.5 text-teal-deep shrink-0 ml-2" />
                     )}
                   </button>
                 );
@@ -490,63 +486,53 @@ const BasicEspanolScreen: FC = () => {
             </nav>
           </div>
 
-          {/* Sidebar Footer & Syllabus Progress */}
+          {/* Part Progress Bar */}
           <div className="pt-4 border-t border-pencil/15 space-y-2">
             <div className="flex justify-between items-center text-xs text-pencil">
-              <span>Part Progress</span>
-              <span className="font-semibold text-text-primary">{progressPercent}%</span>
+              <span>{PART_OPTIONS.find(o => o.id === coursePart)?.label.split(':')[0]} Progress</span>
+              <span className="font-bold text-text-primary">{progressPercent}%</span>
             </div>
-            
-            {/* Progress Bar */}
             <div className="w-full bg-paper/10 h-2 rounded-full overflow-hidden">
-              <div
-                className="bg-gradient-to-r from-terracotta to-marigold h-full transition-all duration-500"
-                style={{ width: `${progressPercent}%` }}
-              />
+              <div className="bg-terracotta h-full transition-all duration-500" style={{ width: `${progressPercent}%` }} />
             </div>
           </div>
         </aside>
 
-        {/* MOBILE HEADER */}
-        <header className="lg:hidden flex items-center justify-between sticky top-14 bg-bg-base/90 backdrop-blur-md px-4 py-3 border-b border-pencil/15 z-30">
+        {/* MOBILE HEADER & DRAWER */}
+        <div className="lg:hidden p-4 border-b border-pencil/15 bg-bg-base/80 backdrop-blur-md sticky top-14 z-30 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <button
-              onClick={() => setMobileSidebarOpen(true)}
-              className="p-1.5 rounded-lg bg-paper/5 border border-pencil/10 text-text-primary"
-            >
-              <Menu className="h-5 w-5" />
-            </button>
+            <Compass className="h-5 w-5 text-terracotta" />
             <div>
-              <span className="font-hud text-[9px] tracking-[0.2em] uppercase text-pencil block">Básico Español</span>
-              <span className="font-display text-sm font-bold text-text-primary">
-                {sectionsList.find(s => s.id === activeSection)?.title}
-              </span>
+              <h2 className="font-display text-sm font-bold text-text-primary">Básico Español</h2>
+              <span className="text-[10px] text-pencil">{PART_OPTIONS.find(o => o.id === coursePart)?.label.split(':')[0]}</span>
             </div>
           </div>
-          <div className="flex items-center gap-1 bg-paper/5 border border-pencil/15 rounded-full px-2.5 py-1 text-xs text-marigold font-semibold">
-            <Trophy className="h-3.5 w-3.5" />
-            <span>{completedInPart}/{totalLessonsInPart}</span>
-          </div>
-        </header>
+          <button
+            onClick={() => setMobileSidebarOpen(true)}
+            className="p-2 rounded-xl bg-paper/10 border border-pencil/15 text-text-primary flex items-center gap-1 text-xs font-semibold"
+          >
+            <Menu className="h-4 w-4" />
+            <span>Menu</span>
+          </button>
+        </div>
 
-        {/* MOBILE SIDEBAR DRAWER OVERLAY */}
+        {/* MOBILE DRAWER OVERLAY */}
         <AnimatePresence>
           {mobileSidebarOpen && (
             <>
               <motion.div
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 0.6 }}
+                animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setMobileSidebarOpen(false)}
-                className="fixed inset-0 bg-black z-40 lg:hidden"
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
               />
-
               <motion.div
                 initial={{ x: '-100%' }}
                 animate={{ x: 0 }}
                 exit={{ x: '-100%' }}
-                transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-                className="fixed top-0 bottom-0 left-0 w-80 bg-bg-base border-r border-pencil/15 p-5 z-50 overflow-y-auto lg:hidden flex flex-col justify-between"
+                transition={{ type: 'spring', damping: 25, stiffness: 250 }}
+                className="fixed top-0 left-0 bottom-0 w-80 bg-bg-base border-r border-pencil/15 p-5 z-50 overflow-y-auto flex flex-col justify-between lg:hidden"
               >
                 <div className="space-y-5">
                   <div className="flex items-center justify-between">
@@ -562,26 +548,30 @@ const BasicEspanolScreen: FC = () => {
                     </button>
                   </div>
 
-                  {/* Course Part Selector (Mobile) */}
-                  <div className="grid grid-cols-4 gap-1 bg-bg-elevated p-1 rounded-xl border border-structural">
-                    {(['part1', 'part2', 'part3', 'part4', 'part5', 'part6', 'part7'] as CoursePart[]).map((p, idx) => (
-                      <button
-                        key={p}
-                        onClick={() => {
-                          setCoursePart(p);
-                          const list = p === 'part1' ? part1SectionsList : p === 'part2' ? part2SectionsList : p === 'part3' ? part3SectionsList : p === 'part4' ? part4SectionsList : p === 'part5' ? part5SectionsList : p === 'part6' ? part6SectionsList : part7SectionsList;
-                          setActiveSection(list[0].id as ActiveSection);
-                          setMobileSidebarOpen(false);
-                        }}
-                        className={`py-1.5 px-1 rounded-lg text-[10px] font-hud uppercase tracking-wider font-bold transition-all cursor-pointer border-none text-center ${
-                          coursePart === p
-                            ? 'bg-accent-action text-bg-base shadow-sm'
-                            : 'text-text-secondary hover:text-text-primary bg-transparent'
-                        }`}
-                      >
-                        P{idx + 1}
-                      </button>
-                    ))}
+                  {/* Course Part Selector Dropdown (Mobile) */}
+                  <div className="space-y-1.5 bg-paper/5 border border-pencil/15 p-3 rounded-2xl">
+                    <label htmlFor="course-part-select-mobile" className="text-[10px] font-hud uppercase tracking-wider text-marigold font-bold flex items-center justify-between">
+                      <span>Select Course Part:</span>
+                      <ChevronDown className="h-3.5 w-3.5 text-marigold" />
+                    </label>
+                    <select
+                      id="course-part-select-mobile"
+                      value={coursePart}
+                      onChange={(e) => {
+                        const p = e.target.value as CoursePart;
+                        setCoursePart(p);
+                        const list = p === 'part1' ? part1SectionsList : p === 'part2' ? part2SectionsList : p === 'part3' ? part3SectionsList : p === 'part4' ? part4SectionsList : p === 'part5' ? part5SectionsList : p === 'part6' ? part6SectionsList : part7SectionsList;
+                        setActiveSection(list[0].id as ActiveSection);
+                        setMobileSidebarOpen(false);
+                      }}
+                      className="w-full bg-bg-elevated text-text-primary text-xs font-bold py-2.5 px-3 rounded-xl border border-pencil/20 focus:outline-none focus:border-terracotta cursor-pointer"
+                    >
+                      {PART_OPTIONS.map((opt) => (
+                        <option key={opt.id} value={opt.id} className="bg-bg-elevated text-text-primary py-2 font-semibold">
+                          {opt.label}
+                        </option>
+                      ))}
+                    </select>
                   </div>
 
                   <nav className="space-y-1">
@@ -598,7 +588,7 @@ const BasicEspanolScreen: FC = () => {
                             setActiveSection(sec.id as ActiveSection);
                             setMobileSidebarOpen(false);
                           }}
-                          className={`w-full flex items-center justify-between px-3 py-2 rounded-xl border text-left cursor-pointer ${
+                          className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl border text-left cursor-pointer ${
                             isActive
                               ? 'bg-terracotta/15 border-terracotta/40 text-text-primary'
                               : 'bg-transparent border-transparent text-pencil hover:text-text-primary'
@@ -669,30 +659,22 @@ const BasicEspanolScreen: FC = () => {
                     </h3>
                     
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {([
-                        { part: 'part1', title: 'Part 1: Greetings & Basics (L1-4)', desc: 'Vowels, Greetings, Nouns, Pronouns & SER, -AR Verbs' },
-                        { part: 'part2', title: 'Part 2: Estar, Ir & Numbers (L5-8)', desc: 'Indefinite Articles, ESTAR, -ER/-IR Verbs, IR & Questions' },
-                        { part: 'part3', title: 'Part 3: Dates, Time & Tener (L9-12)', desc: 'Days, Months, Time, Tener Idioms, Weather & Saber/Conocer' },
-                        { part: 'part4', title: 'Part 4: Stem Changers & Yo-Go (L13-16)', desc: 'Boot Verbs, Yo-Go Verbs, Present Progressive, Prepositions' },
-                        { part: 'part5', title: 'Part 5: Pronouns & Gustar (L17-21)', desc: 'Possessives, Demonstratives, Negatives, DOPs, IOPs & Gustar' },
-                        { part: 'part6', title: 'Part 6: Double Objects & Preterite (L22-26)', desc: 'Double Objects, Reflexives, Commands, Preterite Regular & Irregular' },
-                        { part: 'part7', title: 'Part 7: Imperfect & Comparisons (L27-30)', desc: 'Imperfect Tense, Preterite vs Imperfect, Comparisons, Superlatives' },
-                      ] as { part: CoursePart; title: string; desc: string }[]).map((item) => (
+                      {PART_OPTIONS.map((item) => (
                         <div
-                          key={item.part}
+                          key={item.id}
                           onClick={() => {
-                            setCoursePart(item.part);
-                            const list = item.part === 'part1' ? part1SectionsList : item.part === 'part2' ? part2SectionsList : item.part === 'part3' ? part3SectionsList : item.part === 'part4' ? part4SectionsList : item.part === 'part5' ? part5SectionsList : item.part === 'part6' ? part6SectionsList : part7SectionsList;
+                            setCoursePart(item.id);
+                            const list = item.id === 'part1' ? part1SectionsList : item.id === 'part2' ? part2SectionsList : item.id === 'part3' ? part3SectionsList : item.id === 'part4' ? part4SectionsList : item.id === 'part5' ? part5SectionsList : item.id === 'part6' ? part6SectionsList : part7SectionsList;
                             setActiveSection(list[0].id as ActiveSection);
                           }}
                           className="bg-paper/5 border border-pencil/10 hover:border-pencil/35 rounded-2xl p-5 transition-all duration-300 cursor-pointer hover:translate-y-[-2px] space-y-2 group"
                         >
                           <div className="flex justify-between items-start">
-                            <span className="text-[10px] font-hud tracking-wider text-pencil uppercase font-bold">{item.title.split(':')[0]}</span>
-                            {earnedBadges[item.part] && <Trophy className="h-4 w-4 text-marigold" />}
+                            <span className="text-[10px] font-hud tracking-wider text-pencil uppercase font-bold">{item.label.split(':')[0]}</span>
+                            {earnedBadges[item.id] && <Trophy className="h-4 w-4 text-marigold" />}
                           </div>
                           <h4 className="font-display font-bold text-sm text-text-primary group-hover:text-terracotta transition-colors">
-                            {item.title}
+                            {item.label}
                           </h4>
                           <p className="text-xs text-pencil leading-normal">
                             {item.desc}
@@ -704,12 +686,12 @@ const BasicEspanolScreen: FC = () => {
                 </div>
               )}
 
-              {/* LESSON 1 - 4 (Part 1 Views) */}
+              {/* LESSON 1 */}
               {activeSection === 'lesson1' && (
                 <div className="space-y-6">
                   <div>
                     <span className="font-hud text-xs text-terracotta font-semibold tracking-wider block">LESSON 1</span>
-                    <h2 className="font-display text-2xl font-bold text-text-primary">Intro to Spanish & Greetings</h2>
+                    <h2 className="font-display text-2xl font-bold text-text-primary">Intro to Spanish & Vowels</h2>
                   </div>
                   <div className="space-y-4">
                     <h3 className="font-display text-base font-bold text-text-primary flex items-center gap-2">
@@ -724,6 +706,17 @@ const BasicEspanolScreen: FC = () => {
                       ))}
                     </div>
                   </div>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-5 space-y-3">
+                    <h4 className="font-bold text-sm text-text-primary">Greetings & Polite Phrases</h4>
+                    <div className="grid grid-cols-2 gap-3">
+                      {GREETINGS_VOCAB.map(g => (
+                        <div key={g.word} className="bg-bg-elevated p-3 rounded-xl border border-structural">
+                          <span className="font-bold text-sm text-terracotta block">{g.word}</span>
+                          <span className="text-[11px] text-pencil block">{g.phonetic} — {g.translation}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center">
                     <span className="text-xs text-pencil">Mark lesson completed when done.</span>
                     <button onClick={() => handleLessonComplete('lesson1')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson1 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson1 ? 'Completed ✓' : 'Mark Completed'}</button>
@@ -731,381 +724,657 @@ const BasicEspanolScreen: FC = () => {
                 </div>
               )}
 
+              {/* LESSON 2 */}
               {activeSection === 'lesson2' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 2</span><h2 className="font-display text-2xl font-bold text-text-primary">Definite Articles & Nouns</h2></div>
-                  <p className="text-xs text-pencil">Definite articles: el, la, los, las. Exceptions: el mapa, la mano, el agua.</p>
+                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 2</span><h2 className="font-display text-2xl font-bold text-text-primary">Definite Articles & Gender Rules</h2></div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-paper/5 p-4 rounded-2xl border border-pencil/15">
+                      <span className="text-xs font-bold text-marigold uppercase font-hud block mb-2">Masculine Nouns</span>
+                      <p className="text-xs text-pencil mb-2">Use article <strong>EL</strong> (plural <strong>LOS</strong>). Usually end in -o.</p>
+                      <ul className="text-xs space-y-1 font-mono text-text-primary">
+                        <li>• el libro (the book)</li>
+                        <li>• el chico (the boy)</li>
+                        <li>• el mapa (exception!)</li>
+                      </ul>
+                    </div>
+                    <div className="bg-paper/5 p-4 rounded-2xl border border-pencil/15">
+                      <span className="text-xs font-bold text-terracotta uppercase font-hud block mb-2">Feminine Nouns</span>
+                      <p className="text-xs text-pencil mb-2">Use article <strong>LA</strong> (plural <strong>LAS</strong>). Usually end in -a, -ción, -dad.</p>
+                      <ul className="text-xs space-y-1 font-mono text-text-primary">
+                        <li>• la casa (the house)</li>
+                        <li>• la chica (the girl)</li>
+                        <li>• la mano (exception!)</li>
+                      </ul>
+                    </div>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson2')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson2 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson2 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 3 */}
               {activeSection === 'lesson3' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 3</span><h2 className="font-display text-2xl font-bold text-text-primary">Subject Pronouns & Verb Ser</h2></div>
-                  <p className="text-xs text-pencil">Conjugations of Ser: yo soy, tú eres, él/ella/Ud. es, nosotros somos, vosotros sois, ellos son.</p>
+                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 3</span><h2 className="font-display text-2xl font-bold text-text-primary">Subject Pronouns & Verb SER</h2></div>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-4">
+                    <h4 className="font-bold text-sm text-text-primary mb-3">Conjugation Matrix of SER (Identity & Origin)</h4>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-pencil block">Yo</span><span className="font-bold text-terracotta">soy</span> (I am)</div>
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-pencil block">Tú</span><span className="font-bold text-terracotta">eres</span> (You are)</div>
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-pencil block">Él / Ella</span><span className="font-bold text-terracotta">es</span> (He/She is)</div>
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-pencil block">Nosotros</span><span className="font-bold text-terracotta">somos</span> (We are)</div>
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-pencil block">Vosotros</span><span className="font-bold text-terracotta">sois</span> (You all are)</div>
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-pencil block">Ellos / Ellas</span><span className="font-bold text-terracotta">son</span> (They are)</div>
+                    </div>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson3')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson3 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson3 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 4 */}
               {activeSection === 'lesson4' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 4</span><h2 className="font-display text-2xl font-bold text-text-primary">Regular -AR Verbs</h2></div>
-                  <p className="text-xs text-pencil">-AR Endings: -o, -as, -a, -amos, -áis, -an. Examples: hablar, estudiar, trabajar.</p>
+                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 4</span><h2 className="font-display text-2xl font-bold text-text-primary">Regular -AR Verbs in Present</h2></div>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-4 space-y-3">
+                    <h4 className="font-bold text-sm text-text-primary">-AR Verb Endings & Example: Hablar (to speak)</h4>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs font-mono">
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-pencil block">Yo (-o)</span><span className="font-bold text-marigold">hablo</span></div>
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-pencil block">Tú (-as)</span><span className="font-bold text-marigold">hablas</span></div>
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-pencil block">Él (-a)</span><span className="font-bold text-marigold">habla</span></div>
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-pencil block">Nosotros (-amos)</span><span className="font-bold text-marigold">hablamos</span></div>
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-pencil block">Vosotros (-áis)</span><span className="font-bold text-marigold">habláis</span></div>
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-pencil block">Ellos (-an)</span><span className="font-bold text-marigold">hablan</span></div>
+                    </div>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson4')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson4 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson4 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
-              {/* LESSON 5 - 8 (Part 2 Views) */}
+              {/* LESSON 5 */}
               {activeSection === 'lesson5' && (
                 <div className="space-y-6">
                   <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 5</span><h2 className="font-display text-2xl font-bold text-text-primary">Indefinite Articles & Numbers 0–100</h2></div>
-                  <p className="text-xs text-pencil">Indefinite articles: un, una, unos, unas. Numbers: cero, uno, diez, veinte, treinta, cien.</p>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-paper/5 p-4 rounded-2xl border border-pencil/15 space-y-2">
+                      <span className="text-xs font-bold text-terracotta uppercase font-hud block">Indefinite Articles</span>
+                      <ul className="text-xs space-y-1.5 text-pencil">
+                        <li><strong className="text-text-primary">un libro</strong> (a book - masc. sing.)</li>
+                        <li><strong className="text-text-primary">una casa</strong> (a house - fem. sing.)</li>
+                        <li><strong className="text-text-primary">unos libros</strong> (some books - masc. pl.)</li>
+                        <li><strong className="text-text-primary">unas casas</strong> (some houses - fem. pl.)</li>
+                      </ul>
+                    </div>
+                    <div className="bg-paper/5 p-4 rounded-2xl border border-pencil/15 space-y-2">
+                      <span className="text-xs font-bold text-marigold uppercase font-hud block">Numbers Key Terms</span>
+                      <div className="grid grid-cols-2 text-xs font-mono text-text-primary gap-1">
+                        <span>1: uno</span><span>10: diez</span>
+                        <span>20: veinte</span><span>30: treinta</span>
+                        <span>40: cuarenta</span><span>50: cincuenta</span>
+                        <span>100: cien</span><span>105: ciento cinco</span>
+                      </div>
+                    </div>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson5')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson5 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson5 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 6 */}
               {activeSection === 'lesson6' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 6</span><h2 className="font-display text-2xl font-bold text-text-primary">Verb Estar & Numbers &gt;100</h2></div>
-                  <p className="text-xs text-pencil">Estar for PLACE: estoy, estás, está, estamos, estáis, están. Numbers: ciento, quinientos, mil.</p>
+                  <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 6</span><h2 className="font-display text-2xl font-bold text-text-primary">Verb ESTAR & Numbers &gt;100</h2></div>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-4 space-y-3">
+                    <div className="flex justify-between items-center">
+                      <h4 className="font-bold text-sm text-text-primary">Verb ESTAR (Location & Temporary States)</h4>
+                      <span className="text-[10px] font-hud bg-terracotta/20 text-terracotta px-2 py-0.5 rounded-full font-bold">P.L.A.C.E. Rule</span>
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs font-mono">
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-pencil block">Yo</span><span className="font-bold text-terracotta">estoy</span></div>
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-pencil block">Tú</span><span className="font-bold text-terracotta">estás</span></div>
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-pencil block">Él / Ella</span><span className="font-bold text-terracotta">está</span></div>
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-pencil block">Nosotros</span><span className="font-bold text-terracotta">estamos</span></div>
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-pencil block">Vosotros</span><span className="font-bold text-terracotta">estáis</span></div>
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-pencil block">Ellos / Ellas</span><span className="font-bold text-terracotta">están</span></div>
+                    </div>
+                    <p className="text-xs text-pencil">PLACE = Position, Location, Action (progressive), Condition, Emotion. E.g. "Estoy en Madrid" / "Ella está feliz".</p>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson6')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson6 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson6 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 7 */}
               {activeSection === 'lesson7' && (
                 <div className="space-y-6">
                   <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 7</span><h2 className="font-display text-2xl font-bold text-text-primary">Regular -ER & -IR Verbs</h2></div>
-                  <p className="text-xs text-pencil">-ER: -o, -es, -e, -emos, -éis, -en. -IR: -o, -es, -e, -imos, -ís, -en. Key verbs: comer, beber, vivir.</p>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-paper/5 p-4 rounded-2xl border border-pencil/15 space-y-2">
+                      <span className="text-xs font-bold text-marigold font-hud block uppercase">-ER Verbs: Comer (to eat)</span>
+                      <div className="text-xs font-mono space-y-1 text-text-primary">
+                        <div>yo com<strong>o</strong></div>
+                        <div>tú com<strong>es</strong></div>
+                        <div>él com<strong>e</strong></div>
+                        <div>nosotros com<strong>emos</strong></div>
+                        <div>ellos com<strong>en</strong></div>
+                      </div>
+                    </div>
+                    <div className="bg-paper/5 p-4 rounded-2xl border border-pencil/15 space-y-2">
+                      <span className="text-xs font-bold text-terracotta font-hud block uppercase">-IR Verbs: Vivir (to live)</span>
+                      <div className="text-xs font-mono space-y-1 text-text-primary">
+                        <div>yo viv<strong>o</strong></div>
+                        <div>tú viv<strong>es</strong></div>
+                        <div>él viv<strong>e</strong></div>
+                        <div>nosotros viv<strong>imos</strong></div>
+                        <div>ellos viv<strong>en</strong></div>
+                      </div>
+                    </div>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson7')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson7 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson7 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 8 */}
               {activeSection === 'lesson8' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 8</span><h2 className="font-display text-2xl font-bold text-text-primary">Verb Ir & Question Words</h2></div>
-                  <p className="text-xs text-pencil">Ir: voy, vas, va, vamos, vais, van. Formula: ir + a + infinitive. Interrogativos: ¿Qué?, ¿Dónde?, ¿Adónde?</p>
+                  <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 8</span><h2 className="font-display text-2xl font-bold text-text-primary">Verb IR & Near Future</h2></div>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-4 space-y-3">
+                    <h4 className="font-bold text-sm text-text-primary">Irregular Verb IR (to go) & Near Future Formula</h4>
+                    <div className="grid grid-cols-3 gap-2 text-xs font-mono">
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural text-center"><span className="text-pencil block">Yo</span><span className="font-bold text-terracotta">voy</span></div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural text-center"><span className="text-pencil block">Tú</span><span className="font-bold text-terracotta">vas</span></div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural text-center"><span className="text-pencil block">Él</span><span className="font-bold text-terracotta">va</span></div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural text-center"><span className="text-pencil block">Nosotros</span><span className="font-bold text-terracotta">vamos</span></div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural text-center"><span className="text-pencil block">Vosotros</span><span className="font-bold text-terracotta">vais</span></div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural text-center"><span className="text-pencil block">Ellos</span><span className="font-bold text-terracotta">van</span></div>
+                    </div>
+                    <div className="bg-marigold/10 p-3 rounded-xl border border-marigold/30 text-xs text-text-primary font-bold">
+                      Near Future Formula: IR + A + INFINITIVE (e.g., "Voy a estudiar" = I am going to study).
+                    </div>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson8')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson8 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson8 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
-              {/* LESSON 9 - 12 (Part 3 Views) */}
+              {/* LESSON 9 */}
               {activeSection === 'lesson9' && (
                 <div className="space-y-6">
                   <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 9</span><h2 className="font-display text-2xl font-bold text-text-primary">Days, Months, Seasons & Dates</h2></div>
-                  <p className="text-xs text-pencil">lunes, martes, miércoles... enero, febrero... primavera, verano. Dates: el 5 de mayo.</p>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-paper/5 p-4 rounded-2xl border border-pencil/15 space-y-2">
+                      <span className="text-xs font-bold text-terracotta uppercase font-hud block">Days of the Week</span>
+                      <p className="text-xs text-pencil">lunes, martes, miércoles, jueves, viernes, sábado, domingo. (All masculine & lowercase).</p>
+                    </div>
+                    <div className="bg-paper/5 p-4 rounded-2xl border border-pencil/15 space-y-2">
+                      <span className="text-xs font-bold text-marigold uppercase font-hud block">Seasons (Estaciones)</span>
+                      <p className="text-xs text-pencil">la primavera (spring), el verano (summer), el otoño (autumn), el invierno (winter).</p>
+                    </div>
+                  </div>
+                  <div className="bg-paper/5 p-4 rounded-2xl border border-pencil/15 text-xs text-pencil">
+                    Date Formula: <strong className="text-text-primary">Es el [number] de [month]</strong> (e.g. "Es el 15 de mayo").
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson9')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson9 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson9 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 10 */}
               {activeSection === 'lesson10' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 10</span><h2 className="font-display text-2xl font-bold text-text-primary">Telling Time</h2></div>
-                  <p className="text-xs text-pencil">¿Qué hora es? Es la una (1:00). Son las dos (2:00+). Add minutes with "y", subtract with "menos".</p>
+                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 10</span><h2 className="font-display text-2xl font-bold text-text-primary">Telling Time with SER</h2></div>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-4 space-y-3">
+                    <h4 className="font-bold text-sm text-text-primary">¿Qué hora es? (What time is it?)</h4>
+                    <ul className="text-xs space-y-1.5 text-pencil">
+                      <li>• <strong className="text-text-primary">Es la una</strong> = It is 1:00 (singular).</li>
+                      <li>• <strong className="text-text-primary">Son las dos</strong> = It is 2:00 (plural for 2:00-12:00).</li>
+                      <li>• <strong className="text-text-primary">Son las tres y cuarto</strong> = It is 3:15 (quarter past).</li>
+                      <li>• <strong className="text-text-primary">Son las cuatro y media</strong> = It is 4:30 (half past).</li>
+                      <li>• <strong className="text-text-primary">Son las cinco menos diez</strong> = It is 4:50 (ten to five).</li>
+                    </ul>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson10')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson10 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson10 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 11 */}
               {activeSection === 'lesson11' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 11</span><h2 className="font-display text-2xl font-bold text-text-primary">Verb Tener & Idioms</h2></div>
-                  <p className="text-xs text-pencil">Tener: tengo, tienes, tiene, tenemos, tenéis, tienen. Idioms: tener hambre/frío/miedo/prisa, tener que + inf.</p>
+                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 11</span><h2 className="font-display text-2xl font-bold text-text-primary">Verb TENER & Idiomatic Expressions</h2></div>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-4 space-y-3">
+                    <h4 className="font-bold text-sm text-text-primary">Tener Idioms (States & Physical Sensations)</h4>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono text-text-primary">
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">tener frío (cold)</div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">tener calor (hot)</div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">tener hambre (hungry)</div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">tener sed (thirsty)</div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">tener prisa (hurry)</div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">tener miedo (afraid)</div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">tener razón (right)</div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">tener X años (age)</div>
+                    </div>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson11')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson11 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson11 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 12 */}
               {activeSection === 'lesson12' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 12</span><h2 className="font-display text-2xl font-bold text-text-primary">Hacer, Weather & Saber vs Conocer</h2></div>
-                  <p className="text-xs text-pencil">Hacer: hago, haces... Weather: Hace frío/calor/sol. Saber (facts/skills: sé) vs Conocer (people/places: conozco).</p>
+                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 12</span><h2 className="font-display text-2xl font-bold text-text-primary">Hacer Weather & Saber vs Conocer</h2></div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-paper/5 p-4 rounded-2xl border border-pencil/15 space-y-2">
+                      <span className="text-xs font-bold text-terracotta font-hud uppercase block">SABER (Facts & Skills)</span>
+                      <p className="text-xs text-pencil">Sé, sabes, sabe... Used for information, data, or how to do something (saber + inf).</p>
+                    </div>
+                    <div className="bg-paper/5 p-4 rounded-2xl border border-pencil/15 space-y-2">
+                      <span className="text-xs font-bold text-marigold font-hud uppercase block">CONOCER (People & Places)</span>
+                      <p className="text-xs text-pencil">Conozco, conoces, conoce... Used for being familiar with a person, city, or complex topic.</p>
+                    </div>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson12')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson12 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson12 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
-              {/* LESSON 13 - 16 (Part 4 Views) */}
+              {/* LESSON 13 */}
               {activeSection === 'lesson13' && (
                 <div className="space-y-6">
                   <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 13</span><h2 className="font-display text-2xl font-bold text-text-primary">Stem-Changing Boot Verbs</h2></div>
-                  <p className="text-xs text-pencil">Categories: e &rarr; ie (querer), o &rarr; ue (poder), e &rarr; i (pedir), u &rarr; ue (jugar). No change in nosotros/vosotros.</p>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-4 space-y-3">
+                    <h4 className="font-bold text-sm text-text-primary">Present Stem Changes (All forms EXCEPT nosotros/vosotros)</h4>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-marigold font-bold block">E &rarr; IE</span>querer &rarr; quiero</div>
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-marigold font-bold block">O &rarr; UE</span>poder &rarr; puedo</div>
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-marigold font-bold block">E &rarr; I</span>pedir &rarr; pido</div>
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural"><span className="text-marigold font-bold block">U &rarr; UE</span>jugar &rarr; juego</div>
+                    </div>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson13')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson13 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson13 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 14 */}
               {activeSection === 'lesson14' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 14</span><h2 className="font-display text-2xl font-bold text-text-primary">Yo-Go Verbs & Irregulars</h2></div>
-                  <p className="text-xs text-pencil">Yo-Go forms: pongo (poner), salgo (salir), traigo (traer), hago (hacer), digo (decir), sé (saber).</p>
+                  <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 14</span><h2 className="font-display text-2xl font-bold text-text-primary">Yo-Go Verbs & Irregular Yo Forms</h2></div>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-4 space-y-3">
+                    <h4 className="font-bold text-sm text-text-primary">Irregular -GO Yo Forms in Present Tense</h4>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs font-mono text-text-primary">
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">poner &rarr; <strong className="text-terracotta">pongo</strong></div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">salir &rarr; <strong className="text-terracotta">salgo</strong></div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">traer &rarr; <strong className="text-terracotta">traigo</strong></div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">hacer &rarr; <strong className="text-terracotta">hago</strong></div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">decir &rarr; <strong className="text-terracotta">digo</strong></div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">venir &rarr; <strong className="text-terracotta">vengo</strong></div>
+                    </div>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson14')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson14 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson14 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 15 */}
               {activeSection === 'lesson15' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 15</span><h2 className="font-display text-2xl font-bold text-text-primary">Present Progressive</h2></div>
-                  <p className="text-xs text-pencil">Formula: estar + gerundio (-ando / -iendo). Irregulars: leyendo, oyendo, trayendo.</p>
+                  <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 15</span><h2 className="font-display text-2xl font-bold text-text-primary">Present Progressive Tense</h2></div>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-4 space-y-3">
+                    <h4 className="font-bold text-sm text-text-primary">Formula: ESTAR + Gerundio (-ando / -iendo)</h4>
+                    <p className="text-xs text-pencil">Examples: estoy hablando (I am talking), están comiendo (they are eating), estamos viviendo (we are living).</p>
+                    <div className="bg-marigold/10 p-3 rounded-xl border border-marigold/30 text-xs text-text-primary font-mono">
+                      Vowel Root Irregulars: leer &rarr; leyendo, oír &rarr; oyendo, traer &rarr; trayendo.
+                    </div>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson15')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson15 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson15 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 16 */}
               {activeSection === 'lesson16' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 16</span><h2 className="font-display text-2xl font-bold text-text-primary">Saber vs Conocer & Prepositions</h2></div>
-                  <p className="text-xs text-pencil">Saber (sé) for facts/skills. Conocer (conozco) for familiarity. Prepositions: encima de, debajo de, detrás de.</p>
+                  <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 16</span><h2 className="font-display text-2xl font-bold text-text-primary">Direct Object Pronouns & Adverbs</h2></div>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-4 space-y-3">
+                    <h4 className="font-bold text-sm text-text-primary">Direct Object Pronouns (DOPs)</h4>
+                    <p className="text-xs font-mono text-terracotta font-bold">me, te, lo, la, nos, os, los, las</p>
+                    <p className="text-xs text-pencil">DOPs replace direct object nouns and sit BEFORE single conjugated verbs (e.g. "Lo tengo" = I have it).</p>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson16')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson16 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson16 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
-              {/* LESSON 17 - 21 (Part 5 Views) */}
+              {/* LESSON 17 */}
               {activeSection === 'lesson17' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 17</span><h2 className="font-display text-2xl font-bold text-text-primary">Possessives</h2></div>
-                  <p className="text-xs text-pencil">Adjectives: mi/mis, tu/tus, su/sus, nuestro/a/os/as. Long form: mío, tuyo, suyo, nuestro.</p>
+                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 17</span><h2 className="font-display text-2xl font-bold text-text-primary">Possessives & Demonstratives</h2></div>
+                  <div className="grid grid-cols-3 gap-3 text-xs">
+                    <div className="bg-paper/5 p-3 rounded-xl border border-pencil/15"><strong className="text-terracotta font-hud block mb-1">CLOSE (this/these)</strong>este, esta, estos, estas</div>
+                    <div className="bg-paper/5 p-3 rounded-xl border border-pencil/15"><strong className="text-marigold font-hud block mb-1">MEDIUM (that/those)</strong>ese, esa, esos, esas</div>
+                    <div className="bg-paper/5 p-3 rounded-xl border border-pencil/15"><strong className="text-teal-deep font-hud block mb-1">FAR (that over there)</strong>aquel, aquella, aquellos</div>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson17')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson17 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson17 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 18 */}
               {activeSection === 'lesson18' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 18</span><h2 className="font-display text-2xl font-bold text-text-primary">Demonstratives</h2></div>
-                  <p className="text-xs text-pencil">Distance rules: este/esta (here), ese/esa (there), aquel/aquella (far away over there).</p>
+                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 18</span><h2 className="font-display text-2xl font-bold text-text-primary">Affirmatives & Negatives</h2></div>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-4 space-y-3">
+                    <h4 className="font-bold text-sm text-text-primary">Affirmative vs Negative Word Pairs</h4>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono text-text-primary">
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">algo &harr; nada</div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">alguien &harr; nadie</div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">siempre &harr; nunca</div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">también &harr; tampoco</div>
+                    </div>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson18')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson18 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson18 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 19 */}
               {activeSection === 'lesson19' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 19</span><h2 className="font-display text-2xl font-bold text-text-primary">Affirmatives & Negatives</h2></div>
-                  <p className="text-xs text-pencil">Pairs: algo &harr; nada, alguien &harr; nadie, siempre &harr; nunca, también &harr; tampoco.</p>
+                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 19</span><h2 className="font-display text-2xl font-bold text-text-primary">Indirect Objects & Verb Gustar</h2></div>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-4 space-y-3">
+                    <h4 className="font-bold text-sm text-text-primary">Gustar Formula: [IOP] + gusta/gustan + [Subject]</h4>
+                    <p className="text-xs text-pencil font-mono text-terracotta">IOPs: me, te, le, nos, os, les</p>
+                    <p className="text-xs text-pencil">Use <strong>gusta</strong> for singular nouns/infinitives ("Me gusta cantar"). Use <strong>gustan</strong> for plural nouns ("Me gustan los libros").</p>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson19')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson19 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson19 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 20 */}
               {activeSection === 'lesson20' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 20</span><h2 className="font-display text-2xl font-bold text-text-primary">Direct Object Pronouns</h2></div>
-                  <p className="text-xs text-pencil">Pronouns: me, te, lo, la, nos, os, los, las. Placed BEFORE conjugated verbs (e.g. Lo veo).</p>
+                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 20</span><h2 className="font-display text-2xl font-bold text-text-primary">Double Object Pronouns</h2></div>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-4 space-y-3">
+                    <h4 className="font-bold text-sm text-text-primary">Order: Indirect before Direct (People before Things)</h4>
+                    <p className="text-xs text-pencil font-bold">The "Se La" Rule: When indirect pronoun "le/les" comes before "lo/la/los/las", change "le/les" to SE. (e.g., "Se lo doy" = I give it to him).</p>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson20')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson20 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson20 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 21 */}
               {activeSection === 'lesson21' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 21</span><h2 className="font-display text-2xl font-bold text-text-primary">Indirect Objects & Gustar</h2></div>
-                  <p className="text-xs text-pencil">IOPs: me, te, le, nos, os, les. Verb gustar: me gusta (sing.) / me gustan (plural).</p>
+                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 21</span><h2 className="font-display text-2xl font-bold text-text-primary">Reflexive Verbs & Daily Routine</h2></div>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-4 space-y-3">
+                    <h4 className="font-bold text-sm text-text-primary">Reflexive Pronouns (me, te, se, nos, os, se)</h4>
+                    <p className="text-xs text-pencil">Actions performed on oneself. E.g. lavarse las manos (wash hands), levantarse (get up), vestirse (dress oneself).</p>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson21')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson21 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson21 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
-              {/* LESSON 22 - 26 (Part 6 Views) */}
+              {/* LESSON 22 */}
               {activeSection === 'lesson22' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 22</span><h2 className="font-display text-2xl font-bold text-text-primary">Double Object Pronouns</h2></div>
-                  <p className="text-xs text-pencil">Order: Indirect before Direct (People before Things). "Se La" rule: le/les becomes SE before lo/la.</p>
+                  <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 22</span><h2 className="font-display text-2xl font-bold text-text-primary">Recent Past & Duration</h2></div>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-4 space-y-3">
+                    <h4 className="font-bold text-sm text-text-primary">Acabar de + Infinitive (Recent Past)</h4>
+                    <p className="text-xs text-pencil font-mono">"Acabo de comer" = I have just eaten.</p>
+                    <h4 className="font-bold text-sm text-text-primary pt-2">Hace + time + que + Present (Duration)</h4>
+                    <p className="text-xs text-pencil font-mono">"Hace dos años que estudio" = I have been studying for two years.</p>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson22')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson22 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson22 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 23 */}
               {activeSection === 'lesson23' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 23</span><h2 className="font-display text-2xl font-bold text-text-primary">Reflexive Verbs & Routine</h2></div>
-                  <p className="text-xs text-pencil">Reflexive pronouns: me, te, se, nos, os, se. Daily routine: lavarse, levantarse, vestirse, acostarse.</p>
+                  <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 23</span><h2 className="font-display text-2xl font-bold text-text-primary">Present Duration & Time Queries</h2></div>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-4 text-xs text-pencil space-y-2">
+                    <p><strong className="text-text-primary">¿Desde cuándo...?</strong> = Since when...?</p>
+                    <p><strong className="text-text-primary">desde hace 3 años</strong> = for 3 years.</p>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson23')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson23 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson23 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 24 */}
               {activeSection === 'lesson24' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 24</span><h2 className="font-display text-2xl font-bold text-text-primary">Informal Commands (Mandatos)</h2></div>
-                  <p className="text-xs text-pencil">Affirmative Tú commands: 8 irregulars — haz, ten, pon, sal, ve, di, ven, sé.</p>
+                  <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 24</span><h2 className="font-display text-2xl font-bold text-text-primary">Formal Commands & Comparisons</h2></div>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-4 space-y-3">
+                    <h4 className="font-bold text-sm text-text-primary">Formal Commands (Usted / Ustedes) Vowel Swap</h4>
+                    <p className="text-xs text-pencil">-AR verbs &rarr; -e / -en (hablar &rarr; hable). -ER/-IR verbs &rarr; -a / -an (comer &rarr; coma).</p>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson24')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson24 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson24 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 25 */}
               {activeSection === 'lesson25' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 25</span><h2 className="font-display text-2xl font-bold text-text-primary">Preterite Tense Regulars</h2></div>
-                  <p className="text-xs text-pencil">-AR endings: -é, -aste, -ó, -amos, -aron. -ER/-IR endings: -í, -iste, -ió, -imos, -ieron.</p>
+                  <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 25</span><h2 className="font-display text-2xl font-bold text-text-primary">Informal Tú Commands (Mandatos)</h2></div>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-4 space-y-3">
+                    <h4 className="font-bold text-sm text-text-primary">8 Irregular Affirmative Tú Commands</h4>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono text-terracotta font-bold">
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">Haz (hacer)</div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">Ten (tener)</div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">Pon (poner)</div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">Sal (salir)</div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">Ve (ir)</div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">Di (decir)</div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">Ven (venir)</div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">Sé (ser)</div>
+                    </div>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson25')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson25 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson25 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 26 */}
               {activeSection === 'lesson26' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 26</span><h2 className="font-display text-2xl font-bold text-text-primary">Preterite Tense Irregulars</h2></div>
-                  <p className="text-xs text-pencil">Irregulars: ir/ser = fui, tener = tuve, estar = estuve, hacer = hice, poder = pude, decir = dije.</p>
+                  <div><span className="font-hud text-xs text-marigold font-semibold block">LESSON 26</span><h2 className="font-display text-2xl font-bold text-text-primary">Preterite Tense Regulars</h2></div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-paper/5 p-4 rounded-2xl border border-pencil/15 space-y-2">
+                      <span className="text-xs font-bold text-terracotta font-hud uppercase block">-AR Preterite: Hablar</span>
+                      <div className="text-xs font-mono text-text-primary space-y-1">
+                        <div>habl<strong>é</strong>, habl<strong>aste</strong>, habl<strong>ó</strong></div>
+                        <div>habl<strong>amos</strong>, habl<strong>aron</strong></div>
+                      </div>
+                    </div>
+                    <div className="bg-paper/5 p-4 rounded-2xl border border-pencil/15 space-y-2">
+                      <span className="text-xs font-bold text-marigold font-hud uppercase block">-ER/-IR Preterite: Comer</span>
+                      <div className="text-xs font-mono text-text-primary space-y-1">
+                        <div>com<strong>í</strong>, com<strong>iste</strong>, com<strong>ió</strong></div>
+                        <div>com<strong>imos</strong>, com<strong>ieron</strong></div>
+                      </div>
+                    </div>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson26')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson26 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson26 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
-              {/* LESSON 27 - 30 (Part 7 Views) */}
+              {/* LESSON 27 */}
               {activeSection === 'lesson27' && (
                 <div className="space-y-6">
                   <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 27</span><h2 className="font-display text-2xl font-bold text-text-primary">Imperfect Tense</h2></div>
-                  <p className="text-xs text-pencil">-AR: -aba, -abas, -aba... -ER/-IR: -ía, -ías, -ía... Irregulars (only 3!): era (ser), iba (ir), veía (ver).</p>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-4 space-y-3">
+                    <h4 className="font-bold text-sm text-text-primary">Only 3 Irregular Verbs in Imperfect!</h4>
+                    <div className="grid grid-cols-3 gap-2 text-xs font-mono text-text-primary">
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural">ser &rarr; <strong className="text-marigold">era</strong></div>
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural">ir &rarr; <strong className="text-marigold">iba</strong></div>
+                      <div className="bg-bg-elevated p-2.5 rounded-xl border border-structural">ver &rarr; <strong className="text-marigold">veía</strong></div>
+                    </div>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson27')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson27 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson27 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 28 */}
               {activeSection === 'lesson28' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 28</span><h2 className="font-display text-2xl font-bold text-text-primary">Preterite vs Imperfect</h2></div>
-                  <p className="text-xs text-pencil">Imperfect = background, habit, ongoing. Preterite = completed event, specific point, interruption.</p>
+                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 28</span><h2 className="font-display text-2xl font-bold text-text-primary">Preterite Irregulars</h2></div>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-4 space-y-3">
+                    <h4 className="font-bold text-sm text-text-primary">Key Irregular Preterite Yo Forms</h4>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs font-mono text-text-primary">
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">ser / ir &rarr; <strong>fui</strong></div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">estar &rarr; <strong>estuve</strong></div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">tener &rarr; <strong>tuve</strong></div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">hacer &rarr; <strong>hice</strong></div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">poder &rarr; <strong>pude</strong></div>
+                      <div className="bg-bg-elevated p-2 rounded-xl border border-structural">decir &rarr; <strong>dije</strong></div>
+                    </div>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson28')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson28 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson28 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 29 */}
               {activeSection === 'lesson29' && (
                 <div className="space-y-6">
-                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 29</span><h2 className="font-display text-2xl font-bold text-text-primary">Comparisons of Equality & Inequality</h2></div>
-                  <p className="text-xs text-pencil">Equality: tan... como (adj), tanto... como (noun). Inequality: más... que, menos... que, mejor/peor.</p>
+                  <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 29</span><h2 className="font-display text-2xl font-bold text-text-primary">Preterite vs Imperfect Master Rules</h2></div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-paper/5 p-4 rounded-2xl border border-pencil/15 space-y-2">
+                      <span className="text-xs font-bold text-terracotta font-hud uppercase block">Preterite (Completed Event)</span>
+                      <p className="text-xs text-pencil">Specific start & end time, single action, interrupting event. (What happened!).</p>
+                    </div>
+                    <div className="bg-paper/5 p-4 rounded-2xl border border-pencil/15 space-y-2">
+                      <span className="text-xs font-bold text-marigold font-hud uppercase block">Imperfect (Ongoing Setting)</span>
+                      <p className="text-xs text-pencil">Background scene, ongoing habits, age, time, weather in past. (What was happening!).</p>
+                    </div>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson29')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson29 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson29 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
+              {/* LESSON 30 */}
               {activeSection === 'lesson30' && (
                 <div className="space-y-6">
                   <div><span className="font-hud text-xs text-terracotta font-semibold block">LESSON 30</span><h2 className="font-display text-2xl font-bold text-text-primary">Superlatives & Grand Synthesis</h2></div>
-                  <p className="text-xs text-pencil">Relative: el/la más... Absolute: -ísimo / -ísima. Grand Review of all 30 Spanish curriculum lessons!</p>
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-4 space-y-3">
+                    <h4 className="font-bold text-sm text-text-primary">Superlatives & Irregular Comparatives</h4>
+                    <p className="text-xs text-pencil">Formulas: el/la más... (the most), -ísimo/a (super/extremely). Irregulars: bueno &rarr; <strong>mejor</strong>, malo &rarr; <strong>peor</strong>.</p>
+                  </div>
                   <div className="pt-4 border-t border-pencil/15 flex justify-between items-center"><button onClick={() => handleLessonComplete('lesson30')} className={`px-4 py-2 rounded-xl text-xs font-bold ${completedLessons.lesson30 ? 'bg-teal-deep/15 text-teal-deep' : 'bg-terracotta text-white'}`}>{completedLessons.lesson30 ? 'Completed ✓' : 'Mark Completed'}</button></div>
                 </div>
               )}
 
-              {/* MASTER EXAMS VIEW (Exam 1 - 7) */}
-              {activeSection.startsWith('exam') && (
+              {/* MASTER EXAMS (Part 1 - 7) */}
+              {(activeSection === 'exam' || activeSection === 'exam2' || activeSection === 'exam3' || activeSection === 'exam4' || activeSection === 'exam5' || activeSection === 'exam6' || activeSection === 'exam7') && (
                 <div className="space-y-6">
-                  {!quizFinished ? (
-                    <div className="bg-bg-elevated border border-structural rounded-3xl p-6 sm:p-8 space-y-6 shadow-xl">
-                      <div className="flex justify-between items-center border-b border-structural pb-4">
-                        <div>
-                          <span className="font-hud text-[10px] uppercase tracking-wider text-accent-action font-bold">
-                            {PART_BADGES[coursePart].title}
-                          </span>
-                          <h3 className="font-display text-xl font-bold text-text-primary">
-                            Master Exam — Question {currentQuestionIndex + 1} of {activeQuestions.length}
+                  <div className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 relative overflow-hidden">
+                    <div className="flex justify-between items-start mb-4">
+                      <div>
+                        <span className="text-[10px] font-hud uppercase tracking-wider text-marigold font-bold block mb-1">
+                          {PART_BADGES[coursePart].title}
+                        </span>
+                        <h2 className="font-display text-2xl font-bold text-text-primary">
+                          {PART_OPTIONS.find(o => o.id === coursePart)?.label.split(':')[0]} Master Exam 🏆
+                        </h2>
+                      </div>
+                      <div className="flex items-center gap-1.5 bg-marigold/10 border border-marigold/30 text-marigold rounded-full px-3 py-1 text-xs font-bold font-hud">
+                        <Award className="h-4 w-4" />
+                        <span>+{PART_BADGES[coursePart].coins} Coins / +{PART_BADGES[coursePart].xp} XP</span>
+                      </div>
+                    </div>
+
+                    {!quizFinished ? (
+                      <div className="space-y-6">
+                        <div className="flex justify-between items-center text-xs text-pencil font-hud">
+                          <span>Question {currentQuestionIndex + 1} of {activeQuestions.length}</span>
+                          <span>Score: {score}</span>
+                        </div>
+
+                        <div className="bg-bg-elevated p-5 rounded-2xl border border-structural space-y-4">
+                          <h3 className="font-display text-base font-bold text-text-primary leading-relaxed">
+                            {activeQuestions[currentQuestionIndex].question}
                           </h3>
+
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                            {activeQuestions[currentQuestionIndex].options.map((option) => {
+                              const isSelected = selectedAnswer === option;
+                              const isCorrect = option === activeQuestions[currentQuestionIndex].correctAnswer;
+                              
+                              let btnStyle = 'bg-paper/5 border-pencil/15 text-text-primary hover:border-terracotta/40';
+                              if (selectedAnswer !== null) {
+                                if (isCorrect) {
+                                  btnStyle = 'bg-teal-deep/20 border-teal-deep text-teal-deep font-bold';
+                                } else if (isSelected) {
+                                  btnStyle = 'bg-terracotta/20 border-terracotta text-terracotta font-bold';
+                                }
+                              }
+
+                              return (
+                                <button
+                                  key={option}
+                                  onClick={() => handleAnswerClick(option)}
+                                  className={`p-3.5 rounded-xl border text-left text-xs font-semibold transition-all cursor-pointer ${btnStyle}`}
+                                >
+                                  {option}
+                                </button>
+                              );
+                            })}
+                          </div>
+
+                          {showExplanation && (
+                            <div className="p-3.5 rounded-xl bg-paper/10 border border-pencil/15 text-xs text-pencil space-y-1 animate-fadeIn">
+                              <span className="font-bold text-text-primary block">Explanation:</span>
+                              <p>{activeQuestions[currentQuestionIndex].explanation}</p>
+                            </div>
+                          )}
                         </div>
-                        <div className="bg-marigold/10 border border-marigold/30 text-marigold rounded-full px-3 py-1 text-xs font-bold font-hud">
-                          Score: {score}
-                        </div>
-                      </div>
 
-                      <div className="space-y-4">
-                        <p className="font-display text-base font-semibold text-text-primary">
-                          {activeQuestions[currentQuestionIndex].question}
-                        </p>
-
-                        <div className="grid grid-cols-1 gap-2.5">
-                          {activeQuestions[currentQuestionIndex].options.map((opt, idx) => {
-                            const isSelected = selectedAnswer === opt;
-                            const isCorrect = opt === activeQuestions[currentQuestionIndex].correctAnswer;
-                            
-                            let btnStyle = 'bg-bg-base/60 border-structural text-text-primary hover:border-accent-action';
-                            if (selectedAnswer !== null) {
-                              if (isCorrect) btnStyle = 'bg-success/20 border-success text-success font-bold';
-                              else if (isSelected) btnStyle = 'bg-error/20 border-error text-error font-bold';
-                            }
-
-                            return (
-                              <button
-                                key={idx}
-                                onClick={() => handleAnswerClick(opt)}
-                                disabled={selectedAnswer !== null}
-                                className={`w-full p-4 rounded-2xl border text-left text-xs transition-all duration-200 cursor-pointer ${btnStyle}`}
-                              >
-                                {opt}
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-
-                      {showExplanation && (
-                        <div className="p-4 rounded-2xl bg-bg-base/80 border border-structural space-y-3">
-                          <p className="text-xs text-text-secondary">
-                            {activeQuestions[currentQuestionIndex].explanation}
-                          </p>
+                        <div className="flex justify-end">
                           <button
                             onClick={handleNextQuestion}
-                            className="bg-accent-action text-bg-base font-bold text-xs uppercase px-4 py-2 rounded-xl border-none shadow cursor-pointer ml-auto block"
+                            disabled={selectedAnswer === null}
+                            className="px-5 py-2.5 rounded-xl bg-terracotta text-white font-bold text-xs shadow-md disabled:opacity-40 disabled:cursor-not-allowed hover:bg-terracotta/90 cursor-pointer"
                           >
-                            {currentQuestionIndex < activeQuestions.length - 1 ? 'Next Question →' : 'Finish Exam'}
+                            {currentQuestionIndex < activeQuestions.length - 1 ? 'Next Question &rarr;' : 'Finish Exam'}
                           </button>
                         </div>
-                      )}
-                    </div>
-                  ) : (
-                    /* Exam Finished Results View */
-                    <div className="bg-bg-elevated border border-structural rounded-3xl p-8 text-center space-y-6 shadow-2xl">
-                      <div className="text-5xl">🏆</div>
-                      <h3 className="font-display text-2xl font-bold text-text-primary">
-                        {PART_BADGES[coursePart].title} Completed!
-                      </h3>
-                      <p className="text-xs text-pencil">
-                        You scored <strong>{score}</strong> / <strong>{activeQuestions.length}</strong> ({Math.round((score / activeQuestions.length) * 100)}%).
-                      </p>
+                      </div>
+                    ) : (
+                      <div className="text-center py-8 space-y-4">
+                        <div className="inline-flex p-4 rounded-full bg-marigold/15 text-marigold mb-2">
+                          <Trophy className="h-12 w-12" />
+                        </div>
+                        <h3 className="font-display text-2xl font-bold text-text-primary">Exam Completed!</h3>
+                        <p className="text-sm text-pencil">
+                          You scored <strong className="text-text-primary font-bold">{score} / {activeQuestions.length}</strong> ({Math.round((score / activeQuestions.length) * 100)}%).
+                        </p>
 
-                      {/* Badge awarded card */}
-                      <div className="bg-gradient-to-r from-terracotta/15 to-marigold/15 border border-marigold/40 rounded-2xl p-5 max-w-md mx-auto space-y-3">
-                        <span className="text-xs font-hud uppercase tracking-wider text-marigold font-bold block">Part Badge Awarded</span>
-                        <div className="text-2xl font-bold text-text-primary">{PART_BADGES[coursePart].badge}</div>
-                        <div className="flex justify-around text-xs font-hud pt-2 border-t border-pencil/15">
-                          <span className="text-marigold font-bold">+{PART_BADGES[coursePart].xp} XP</span>
-                          <span className="text-marigold font-bold">+{PART_BADGES[coursePart].coins} Coins</span>
+                        {(score / activeQuestions.length) >= 0.7 ? (
+                          <div className="bg-teal-deep/10 border border-teal-deep/30 rounded-2xl p-4 max-w-md mx-auto space-y-2">
+                            <span className="font-hud text-xs text-teal-deep font-bold uppercase tracking-wider block">Passing Grade Reached!</span>
+                            <p className="text-xs text-text-primary">
+                              You unlocked the <strong className="text-marigold">{PART_BADGES[coursePart].badge}</strong>!
+                            </p>
+                          </div>
+                        ) : (
+                          <p className="text-xs text-terracotta font-semibold">
+                            You need at least 70% to claim rewards and unlock the badge. Try again!
+                          </p>
+                        )}
+
+                        <div className="flex justify-center gap-3 pt-2">
+                          <button
+                            onClick={resetQuiz}
+                            className="px-4 py-2 rounded-xl bg-paper/10 border border-pencil/20 text-xs font-bold text-pencil hover:text-text-primary cursor-pointer"
+                          >
+                            Retake Exam
+                          </button>
+                          {(score / activeQuestions.length) >= 0.7 && !rewardClaimed && (
+                            <button
+                              onClick={claimQuizRewards}
+                              className="px-5 py-2.5 rounded-xl bg-marigold text-bg-base font-bold text-xs shadow-md hover:bg-marigold/90 cursor-pointer"
+                            >
+                              Claim Rewards 🪙
+                            </button>
+                          )}
                         </div>
                       </div>
-
-                      <button
-                        onClick={claimQuizRewards}
-                        disabled={rewardClaimed}
-                        className={`px-8 py-3.5 rounded-xl font-hud text-xs uppercase tracking-wider font-bold border-none transition-all cursor-pointer shadow-lg ${
-                          rewardClaimed ? 'bg-pencil/20 text-pencil/50 cursor-not-allowed' : 'bg-accent-action text-bg-base hover:bg-accent-action-hover'
-                        }`}
-                      >
-                        {rewardClaimed ? 'Rewards & Badge Claimed ✓' : 'Claim XP, Coins & Badge'}
-                      </button>
-
-                      <div className="pt-4 border-t border-structural">
-                        <button onClick={resetQuiz} className="text-xs font-hud uppercase text-accent-action hover:underline cursor-pointer bg-transparent border-none">
-                          Retry Exam 🔄
-                        </button>
-                      </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               )}
 
             </motion.div>
           </AnimatePresence>
 
-          {/* Navigation Bottom Footer */}
-          <div className="mt-10 pt-4 border-t border-pencil/15 flex justify-between items-center text-xs">
-            <button
-              disabled={activeSection === 'overview'}
-              onClick={() => {
-                const idx = sectionsList.findIndex(s => s.id === activeSection);
-                if (idx > 0) setActiveSection(sectionsList[idx - 1].id as ActiveSection);
-              }}
-              className="px-3 py-1.5 border border-pencil/10 rounded-xl bg-paper/5 text-pencil hover:text-text-primary disabled:opacity-30 cursor-pointer"
-            >
-              &larr; Back
-            </button>
-            <span className="text-pencil font-hud text-[10px] uppercase">
-              Section {sectionsList.findIndex(s => s.id === activeSection) + 1} of {sectionsList.length}
-            </span>
-            <button
-              disabled={activeSection.startsWith('exam')}
-              onClick={() => {
-                const idx = sectionsList.findIndex(s => s.id === activeSection);
-                if (idx < sectionsList.length - 1) setActiveSection(sectionsList[idx + 1].id as ActiveSection);
-              }}
-              className="px-3 py-1.5 border border-pencil/10 rounded-xl bg-paper/5 text-pencil hover:text-text-primary disabled:opacity-30 cursor-pointer"
-            >
-              Next &rarr;
-            </button>
-          </div>
-
         </main>
       </div>
-
     </div>
   );
 };
