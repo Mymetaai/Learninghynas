@@ -108,21 +108,21 @@ const HUD: FC = () => {
 
   return (
     <header className="nav-glass sticky top-0 z-40">
-      <div className="relative z-10 mx-auto max-w-3xl">
+      <div className="relative z-10 mx-auto max-w-6xl w-full px-2 sm:px-4">
         {/* Row 1 — Brand + stats */}
-        <div className="flex h-14 items-center justify-between gap-3 px-4">
+        <div className="flex h-14 items-center justify-between gap-2 sm:gap-4 px-2 sm:px-4">
           {/* Brand / home link */}
           <Link
             to="/"
-            className="flex items-center gap-2 transition-opacity hover:opacity-80"
+            className="flex items-center gap-2 shrink-0 whitespace-nowrap transition-opacity hover:opacity-80"
             aria-label="Go to Home"
           >
             <img
               src="/hyena-logo-marigold.png"
               alt="TheLearningHyena Logo"
-              className="h-7 w-7 object-contain"
+              className="h-7 w-7 object-contain shrink-0"
             />
-            <span className="hidden font-display text-sm font-semibold text-text-primary sm:inline">
+            <span className="hidden font-display text-sm font-semibold text-text-primary md:inline">
               TheLearningHyena
             </span>
           </Link>

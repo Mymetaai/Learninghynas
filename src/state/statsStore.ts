@@ -70,9 +70,9 @@ const dayDiff = (a: string, b: string): number => {
 };
 
 const DEFAULT_STATE = {
-  xp: 15400,
-  coins: 2450,
-  streak: 15,
+  xp: 0,
+  coins: 0,
+  streak: 0,
   lastActiveDate: '',
   learnedVocab: [] as LearnedVocabEntry[],
   collectedCardIds: [] as string[],
@@ -190,6 +190,23 @@ export const useStatsStore = create<StatsState>()(
 );
 
 if (typeof window !== 'undefined') {
+  // Clear any old mock stats from localStorage and reset store immediately to 0
+  try {
+    const raw = localStorage.getItem('wayfarer-stats');
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed?.state && (parsed.state.xp > 10000 || parsed.state.coins > 1000 || parsed.state.streak > 10)) {
+        parsed.state.xp = 0;
+        parsed.state.coins = 0;
+        parsed.state.streak = 0;
+        localStorage.setItem('wayfarer-stats', JSON.stringify(parsed));
+        useStatsStore.getState().reset();
+      }
+    }
+  } catch (e) {
+    console.warn("Failed to reset stats:", e);
+  }
+
   setTimeout(() => {
     try {
       useStatsStore.getState().collectAllCards(allCardIds);
