@@ -14210,76 +14210,13 @@
     "id": "sys-b1-2024",
     "level": "B1",
     "category": "Verbos",
-    "es": "lavarse las manos",
-    "en": "to wash one's hands",
-    "example": "Me lavo las manos antes de comer.",
-    "exampleTranslation": "I wash my hands before eating."
-  },
-  {
-    "id": "sys-b1-2025",
-    "level": "B1",
-    "category": "Verbos",
-    "es": "levantarse",
-    "en": "to get up",
-    "example": "Nos levantamos temprano los lunes.",
-    "exampleTranslation": "We get up early on Mondays."
-  },
-  {
-    "id": "sys-b1-2026",
-    "level": "B1",
-    "category": "Verbos",
-    "es": "despertarse (e->ie)",
-    "en": "to wake up",
-    "example": "Me despierto a las siete de la mañana.",
-    "exampleTranslation": "I wake up at seven in the morning."
-  },
-  {
-    "id": "sys-b1-2027",
-    "level": "B1",
-    "category": "Verbos",
-    "es": "acostarse (o->ue)",
-    "en": "to go to bed",
-    "example": "Se acuestan tarde los fines de semana.",
-    "exampleTranslation": "They go to bed late on weekends."
-  },
-  {
-    "id": "sys-b1-2028",
-    "level": "B1",
-    "category": "Verbos",
-    "es": "vestirse (e->i)",
-    "en": "to get dressed",
-    "example": "Ella se viste elegantemente para la fiesta.",
-    "exampleTranslation": "She gets dressed elegantly for the party."
-  },
-  {
-    "id": "sys-b1-2029",
-    "level": "B1",
-    "category": "Verbos",
-    "es": "ducharse",
-    "en": "to shower",
-    "example": "Me ducho después de hacer ejercicio.",
-    "exampleTranslation": "I shower after exercising."
-  },
-  {
-    "id": "sys-b1-2030",
-    "level": "B1",
-    "category": "Verbos",
-    "es": "afeitarse",
-    "en": "to shave",
-    "example": "Él se afeita la barba cada mañana.",
-    "exampleTranslation": "He shaves his beard every morning."
-  },
-  {
-    "id": "sys-b1-2031",
-    "level": "B1",
-    "category": "Verbos",
     "es": "acabar de + inf",
     "en": "to have just (done something)",
     "example": "Acabo de terminar la lección.",
     "exampleTranslation": "I have just finished the lesson."
   },
   {
-    "id": "sys-b1-2032",
+    "id": "sys-b1-2025",
     "level": "B1",
     "category": "Hora",
     "es": "hace + tiempo + que",
@@ -14288,7 +14225,7 @@
     "exampleTranslation": "I have been studying Spanish for two years."
   },
   {
-    "id": "sys-b1-2033",
+    "id": "sys-b1-2026",
     "level": "B1",
     "category": "Hora",
     "es": "¿Desde cuándo...?",
@@ -14297,7 +14234,7 @@
     "exampleTranslation": "Since when have you lived in this city?"
   },
   {
-    "id": "sys-b1-2034",
+    "id": "sys-b1-2027",
     "level": "B1",
     "category": "Hora",
     "es": "desde hace",
@@ -14306,7 +14243,7 @@
     "exampleTranslation": "I have been working here for five months."
   },
   {
-    "id": "sys-b1-2035",
+    "id": "sys-b1-2028",
     "level": "B1",
     "category": "Verbos",
     "es": "¡Hable usted!",
@@ -14315,7 +14252,7 @@
     "exampleTranslation": "Speak with the director right now!"
   },
   {
-    "id": "sys-b1-2036",
+    "id": "sys-b1-2029",
     "level": "B1",
     "category": "Verbos",
     "es": "¡Coma usted!",
@@ -14324,7 +14261,7 @@
     "exampleTranslation": "Eat all the fresh vegetables!"
   },
   {
-    "id": "sys-b1-2037",
+    "id": "sys-b1-2030",
     "level": "B1",
     "category": "Verbos",
     "es": "¡Escriba usted!",
@@ -14333,7 +14270,7 @@
     "exampleTranslation": "Write your address here!"
   },
   {
-    "id": "sys-b1-2038",
+    "id": "sys-b1-2031",
     "level": "B1",
     "category": "Adjetivos",
     "es": "más... que",
@@ -14342,7 +14279,7 @@
     "exampleTranslation": "This book is more interesting than the movie."
   },
   {
-    "id": "sys-b1-2039",
+    "id": "sys-b1-2032",
     "level": "B1",
     "category": "Adjetivos",
     "es": "menos... que",
@@ -14351,7 +14288,7 @@
     "exampleTranslation": "This soup is less hot than the other."
   },
   {
-    "id": "sys-b1-2040",
+    "id": "sys-b1-2033",
     "level": "B1",
     "category": "Adjetivos",
     "es": "tan... como",
@@ -14360,7 +14297,7 @@
     "exampleTranslation": "María is as intelligent as her brother."
   },
   {
-    "id": "sys-b1-2041",
+    "id": "sys-b1-2034",
     "level": "B1",
     "category": "Sustantivos",
     "es": "tanto... como",
@@ -14369,7 +14306,7 @@
     "exampleTranslation": "I have as much money as I need."
   },
   {
-    "id": "sys-b1-2042",
+    "id": "sys-b1-2035",
     "level": "B1",
     "category": "Verbos",
     "es": "¡Haz!",
@@ -14378,7 +14315,7 @@
     "exampleTranslation": "Do your Spanish homework now!"
   },
   {
-    "id": "sys-b1-2043",
+    "id": "sys-b1-2036",
     "level": "B1",
     "category": "Verbos",
     "es": "¡Pon!",
@@ -14387,7 +14324,7 @@
     "exampleTranslation": "Put the plates on the table!"
   },
   {
-    "id": "sys-b1-2044",
+    "id": "sys-b1-2037",
     "level": "B1",
     "category": "Verbos",
     "es": "¡Sal!",
@@ -14396,7 +14333,7 @@
     "exampleTranslation": "Leave the room immediately!"
   },
   {
-    "id": "sys-b1-2045",
+    "id": "sys-b1-2038",
     "level": "B1",
     "category": "Verbos",
     "es": "¡Di!",
@@ -14405,7 +14342,7 @@
     "exampleTranslation": "Tell the truth to your parents!"
   },
   {
-    "id": "sys-b1-2046",
+    "id": "sys-b1-2039",
     "level": "B1",
     "category": "Verbos",
     "es": "¡Ven!",
@@ -14414,7 +14351,7 @@
     "exampleTranslation": "Come here for a moment, please!"
   },
   {
-    "id": "sys-b1-2047",
+    "id": "sys-b1-2040",
     "level": "B1",
     "category": "Verbos",
     "es": "¡Ten!",
@@ -14423,7 +14360,7 @@
     "exampleTranslation": "Have patience with the children!"
   },
   {
-    "id": "sys-b1-2048",
+    "id": "sys-b1-2041",
     "level": "B1",
     "category": "Verbos",
     "es": "¡Ve!",
@@ -14432,7 +14369,7 @@
     "exampleTranslation": "Go to the store to buy milk!"
   },
   {
-    "id": "sys-b1-2049",
+    "id": "sys-b1-2042",
     "level": "B1",
     "category": "Verbos",
     "es": "¡Sé!",
@@ -14441,39 +14378,75 @@
     "exampleTranslation": "Be friendly with the new neighbors!"
   },
   {
+    "id": "sys-b1-2043",
+    "level": "B1",
+    "category": "Pasado",
+    "es": "hablaba",
+    "en": "I / he / she used to speak (imperfect)",
+    "example": "Cuando era niño, hablaba español en casa.",
+    "exampleTranslation": "When I was a child, I used to speak Spanish at home."
+  },
+  {
+    "id": "sys-b1-2044",
+    "level": "B1",
+    "category": "Pasado",
+    "es": "comía",
+    "en": "I / he / she used to eat (imperfect)",
+    "example": "Cada domingo comíamos en casa de la abuela.",
+    "exampleTranslation": "Every Sunday we used to eat at grandma's house."
+  },
+  {
+    "id": "sys-b1-2045",
+    "level": "B1",
+    "category": "Pasado",
+    "es": "vivía",
+    "en": "I / he / she used to live (imperfect)",
+    "example": "Ella vivía cerca de la playa.",
+    "exampleTranslation": "She used to live near the beach."
+  },
+  {
+    "id": "sys-b1-2046",
+    "level": "B1",
+    "category": "Pasado",
+    "es": "era",
+    "en": "was / used to be (ser imperfect)",
+    "example": "Mi casa vieja era grande y azul.",
+    "exampleTranslation": "My old house was big and blue."
+  },
+  {
+    "id": "sys-b1-2047",
+    "level": "B1",
+    "category": "Pasado",
+    "es": "iba",
+    "en": "was going / used to go (ir imperfect)",
+    "example": "Todos los veranos ibamos a las montañas.",
+    "exampleTranslation": "Every summer we used to go to the mountains."
+  },
+  {
+    "id": "sys-b1-2048",
+    "level": "B1",
+    "category": "Pasado",
+    "es": "veía",
+    "en": "was seeing / used to watch (ver imperfect)",
+    "example": "Veía dibujos animados de pequeño.",
+    "exampleTranslation": "I used to watch cartoons when small."
+  },
+  {
+    "id": "sys-b1-2049",
+    "level": "B1",
+    "category": "Pasado",
+    "es": "mientras",
+    "en": "while (imperfect background indicator)",
+    "example": "Mientras estudiaba, sonó el teléfono.",
+    "exampleTranslation": "While I was studying, the phone rang."
+  },
+  {
     "id": "sys-b1-2050",
     "level": "B1",
     "category": "Pasado",
-    "es": "hablé",
-    "en": "I spoke (preterite)",
-    "example": "Ayer hablé con el profesor.",
-    "exampleTranslation": "Yesterday I spoke with the professor."
-  },
-  {
-    "id": "sys-b1-2051",
-    "level": "B1",
-    "category": "Pasado",
-    "es": "comió",
-    "en": "he / she ate (preterite)",
-    "example": "Ella comió una ensalada fresca.",
-    "exampleTranslation": "She ate a fresh salad."
-  },
-  {
-    "id": "sys-b1-2052",
-    "level": "B1",
-    "category": "Pasado",
-    "es": "vivimos",
-    "en": "we lived (preterite)",
-    "example": "Vivimos tres años en Madrid.",
-    "exampleTranslation": "We lived three years in Madrid."
-  },
-  {
-    "id": "sys-b1-2053",
-    "level": "B1",
-    "category": "Pasado",
-    "es": "escribieron",
-    "en": "they wrote (preterite)",
-    "example": "Ellos escribieron una carta formal.",
-    "exampleTranslation": "They wrote a formal letter."
+    "es": "de repente",
+    "en": "suddenly (preterite action indicator)",
+    "example": "Caminaba por la calle cuando de repente empezó a llover.",
+    "exampleTranslation": "I was walking along the street when suddenly it started raining."
   }
 ]

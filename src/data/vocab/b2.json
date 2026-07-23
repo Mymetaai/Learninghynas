@@ -14003,67 +14003,13 @@
     "id": "sys-b2-2001",
     "level": "B2",
     "category": "Pasado",
-    "es": "hablaba",
-    "en": "I / he / she used to speak (imperfect)",
-    "example": "Cuando era niño, hablaba español en casa.",
-    "exampleTranslation": "When I was a child, I used to speak Spanish at home."
-  },
-  {
-    "id": "sys-b2-2002",
-    "level": "B2",
-    "category": "Pasado",
-    "es": "comía",
-    "en": "I / he / she used to eat (imperfect)",
-    "example": "Cada domingo comíamos en casa de la abuela.",
-    "exampleTranslation": "Every Sunday we used to eat at grandma's house."
-  },
-  {
-    "id": "sys-b2-2003",
-    "level": "B2",
-    "category": "Pasado",
-    "es": "vivía",
-    "en": "I / he / she used to live (imperfect)",
-    "example": "Ella vivía cerca de la playa.",
-    "exampleTranslation": "She used to live near the beach."
-  },
-  {
-    "id": "sys-b2-2004",
-    "level": "B2",
-    "category": "Pasado",
-    "es": "era",
-    "en": "was / used to be (ser imperfect)",
-    "example": "Mi casa vieja era grande y azul.",
-    "exampleTranslation": "My old house was big and blue."
-  },
-  {
-    "id": "sys-b2-2005",
-    "level": "B2",
-    "category": "Pasado",
-    "es": "iba",
-    "en": "was going / used to go (ir imperfect)",
-    "example": "Todos los veranos ibamos a las montañas.",
-    "exampleTranslation": "Every summer we used to go to the mountains."
-  },
-  {
-    "id": "sys-b2-2006",
-    "level": "B2",
-    "category": "Pasado",
-    "es": "veía",
-    "en": "was seeing / used to watch (ver imperfect)",
-    "example": "Veía dibujos animados de pequeño.",
-    "exampleTranslation": "I used to watch cartoons when small."
-  },
-  {
-    "id": "sys-b2-2007",
-    "level": "B2",
-    "category": "Pasado",
     "es": "fui",
     "en": "I went / I was (ir/ser preterite)",
     "example": "Ayer fui al centro comercial.",
     "exampleTranslation": "Yesterday I went to the shopping mall."
   },
   {
-    "id": "sys-b2-2008",
+    "id": "sys-b2-2002",
     "level": "B2",
     "category": "Pasado",
     "es": "estuve",
@@ -14072,7 +14018,7 @@
     "exampleTranslation": "I was sick all weekend."
   },
   {
-    "id": "sys-b2-2009",
+    "id": "sys-b2-2003",
     "level": "B2",
     "category": "Pasado",
     "es": "tuve",
@@ -14081,7 +14027,7 @@
     "exampleTranslation": "I had an excellent idea during class."
   },
   {
-    "id": "sys-b2-2010",
+    "id": "sys-b2-2004",
     "level": "B2",
     "category": "Pasado",
     "es": "hice",
@@ -14090,7 +14036,7 @@
     "exampleTranslation": "I made dinner for the family."
   },
   {
-    "id": "sys-b2-2011",
+    "id": "sys-b2-2005",
     "level": "B2",
     "category": "Pasado",
     "es": "pude",
@@ -14099,7 +14045,7 @@
     "exampleTranslation": "I managed to finish the job on time."
   },
   {
-    "id": "sys-b2-2012",
+    "id": "sys-b2-2006",
     "level": "B2",
     "category": "Pasado",
     "es": "puse",
@@ -14108,7 +14054,7 @@
     "exampleTranslation": "I put the keys on the desk."
   },
   {
-    "id": "sys-b2-2013",
+    "id": "sys-b2-2007",
     "level": "B2",
     "category": "Pasado",
     "es": "supe",
@@ -14117,7 +14063,7 @@
     "exampleTranslation": "Yesterday I found out the truth of what happened."
   },
   {
-    "id": "sys-b2-2014",
+    "id": "sys-b2-2008",
     "level": "B2",
     "category": "Pasado",
     "es": "quise",
@@ -14126,7 +14072,7 @@
     "exampleTranslation": "I tried to buy the ticket but it sold out."
   },
   {
-    "id": "sys-b2-2015",
+    "id": "sys-b2-2009",
     "level": "B2",
     "category": "Pasado",
     "es": "dije",
@@ -14135,7 +14081,7 @@
     "exampleTranslation": "I told the truth to my friend."
   },
   {
-    "id": "sys-b2-2016",
+    "id": "sys-b2-2010",
     "level": "B2",
     "category": "Pasado",
     "es": "vine",
@@ -14144,25 +14090,7 @@
     "exampleTranslation": "I came as fast as possible."
   },
   {
-    "id": "sys-b2-2017",
-    "level": "B2",
-    "category": "Pasado",
-    "es": "mientras",
-    "en": "while (imperfect background indicator)",
-    "example": "Mientras estudiaba, sonó el teléfono.",
-    "exampleTranslation": "While I was studying, the phone rang."
-  },
-  {
-    "id": "sys-b2-2018",
-    "level": "B2",
-    "category": "Pasado",
-    "es": "de repente",
-    "en": "suddenly (preterite action indicator)",
-    "example": "Caminaba por la calle cuando de repente empezó a llover.",
-    "exampleTranslation": "I was walking along the street when suddenly it started raining."
-  },
-  {
-    "id": "sys-b2-2019",
+    "id": "sys-b2-2011",
     "level": "B2",
     "category": "Adjetivos",
     "es": "el más... de",
@@ -14171,7 +14099,7 @@
     "exampleTranslation": "It is the most beautiful city in the world."
   },
   {
-    "id": "sys-b2-2020",
+    "id": "sys-b2-2012",
     "level": "B2",
     "category": "Adjetivos",
     "es": "el menos... de",
@@ -14180,7 +14108,7 @@
     "exampleTranslation": "It is the least expensive car in the store."
   },
   {
-    "id": "sys-b2-2021",
+    "id": "sys-b2-2013",
     "level": "B2",
     "category": "Adjetivos",
     "es": "-ísimo / -ísima",
@@ -14189,7 +14117,7 @@
     "exampleTranslation": "The food was extremely delicious."
   },
   {
-    "id": "sys-b2-2022",
+    "id": "sys-b2-2014",
     "level": "B2",
     "category": "Adjetivos",
     "es": "altísimo",
@@ -14198,7 +14126,7 @@
     "exampleTranslation": "The skyscraper is extremely tall."
   },
   {
-    "id": "sys-b2-2023",
+    "id": "sys-b2-2015",
     "level": "B2",
     "category": "Adjetivos",
     "es": "buenísimo",

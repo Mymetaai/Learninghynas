@@ -14545,7 +14545,7 @@
     "category": "Adverbios",
     "es": "fácilmente",
     "en": "easily",
-    "example": "Resolvemos el problema fácilmente.",
+    "example": "Resolvemos el problem fácilmente.",
     "exampleTranslation": "We solve the problem easily."
   },
   {
@@ -14556,5 +14556,104 @@
     "en": "fortunately",
     "example": "Afortunadamente todos llegaron bien.",
     "exampleTranslation": "Fortunately everyone arrived safely."
+  },
+  {
+    "id": "sys-a2-2063",
+    "level": "A2",
+    "category": "Verbos",
+    "es": "lavarse las manos",
+    "en": "to wash one's hands",
+    "example": "Me lavo las manos antes de comer.",
+    "exampleTranslation": "I wash my hands before eating."
+  },
+  {
+    "id": "sys-a2-2064",
+    "level": "A2",
+    "category": "Verbos",
+    "es": "levantarse",
+    "en": "to get up",
+    "example": "Nos levantamos temprano los lunes.",
+    "exampleTranslation": "We get up early on Mondays."
+  },
+  {
+    "id": "sys-a2-2065",
+    "level": "A2",
+    "category": "Verbos",
+    "es": "despertarse (e->ie)",
+    "en": "to wake up",
+    "example": "Me despierto a las siete de la mañana.",
+    "exampleTranslation": "I wake up at seven in the morning."
+  },
+  {
+    "id": "sys-a2-2066",
+    "level": "A2",
+    "category": "Verbos",
+    "es": "acostarse (o->ue)",
+    "en": "to go to bed",
+    "example": "Se acuestan tarde los fines de semana.",
+    "exampleTranslation": "They go to bed late on weekends."
+  },
+  {
+    "id": "sys-a2-2067",
+    "level": "A2",
+    "category": "Verbos",
+    "es": "vestirse (e->i)",
+    "en": "to get dressed",
+    "example": "Ella se viste elegantemente para la fiesta.",
+    "exampleTranslation": "She gets dressed elegantly for the party."
+  },
+  {
+    "id": "sys-a2-2068",
+    "level": "A2",
+    "category": "Verbos",
+    "es": "ducharse",
+    "en": "to shower",
+    "example": "Me ducho después de hacer ejercicio.",
+    "exampleTranslation": "I shower after exercising."
+  },
+  {
+    "id": "sys-a2-2069",
+    "level": "A2",
+    "category": "Verbos",
+    "es": "afeitarse",
+    "en": "to shave",
+    "example": "Él se afeita la barba cada mañana.",
+    "exampleTranslation": "He shaves his beard every morning."
+  },
+  {
+    "id": "sys-a2-2070",
+    "level": "A2",
+    "category": "Pasado",
+    "es": "hablé",
+    "en": "I spoke (preterite)",
+    "example": "Ayer hablé con el profesor.",
+    "exampleTranslation": "Yesterday I spoke with the professor."
+  },
+  {
+    "id": "sys-a2-2071",
+    "level": "A2",
+    "category": "Pasado",
+    "es": "comió",
+    "en": "he / she ate (preterite)",
+    "example": "Ella comió una ensalada fresca.",
+    "exampleTranslation": "She ate a fresh salad."
+  },
+  {
+    "id": "sys-a2-2072",
+    "level": "A2",
+    "category": "Pasado",
+    "es": "vivimos",
+    "en": "we lived (preterite)",
+    "example": "Vivimos tres años en Madrid.",
+    "exampleTranslation": "We lived three years in Madrid."
+  },
+  {
+    "id": "sys-a2-2073",
+    "level": "A2",
+    "category": "Pasado",
+    "es": "escribieron",
+    "en": "they wrote (preterite)",
+    "example": "Ellos escribieron una carta formal.",
+    "exampleTranslation": "They wrote a formal letter."
   }
 ]
