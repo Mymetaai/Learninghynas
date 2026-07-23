@@ -32,7 +32,7 @@ import { useStatsStore } from '../state/statsStore';
 import { ALL_SYLLABUS_LESSONS, type SyllabusLessonData } from '../data/syllabusLessonsData';
 
 // Types
-export type CoursePart = 'part1' | 'part2' | 'part3' | 'part4' | 'part5' | 'part6' | 'part7';
+export type CoursePart = 'part1' | 'part2' | 'part3' | 'part4' | 'part5' | 'part6' | 'part7' | 'part8';
 export type ActiveSection =
   | 'overview'
   | 'lesson1' | 'lesson2' | 'lesson3' | 'lesson4' | 'exam'
@@ -41,7 +41,8 @@ export type ActiveSection =
   | 'lesson13' | 'lesson14' | 'lesson15' | 'lesson16' | 'exam4'
   | 'lesson17' | 'lesson18' | 'lesson19' | 'lesson20' | 'lesson21' | 'exam5'
   | 'lesson22' | 'lesson23' | 'lesson24' | 'lesson25' | 'lesson26' | 'exam6'
-  | 'lesson27' | 'lesson28' | 'lesson29' | 'lesson30' | 'exam7';
+  | 'lesson27' | 'lesson28' | 'lesson29' | 'lesson30' | 'exam7'
+  | 'lesson31' | 'lesson32' | 'lesson33' | 'lesson34' | 'lesson35' | 'lesson36' | 'lesson37' | 'exam8';
 
 interface ExamQuestion {
   id: number;
@@ -60,6 +61,7 @@ const PART_OPTIONS: { id: CoursePart; label: string; desc: string }[] = [
   { id: 'part5', label: 'Part 5: Pronouns & Affirmatives (Lessons 17-21)', desc: 'Possessives, Demonstratives, DOPs, IOPs & Gustar' },
   { id: 'part6', label: 'Part 6: Double Objects & Preterite (Lessons 22-26)', desc: 'Double Objects, Reflexives, Commands & Preterite' },
   { id: 'part7', label: 'Part 7: Imperfect & Comparisons (Lessons 27-30)', desc: 'Imperfect Tense, Preterite vs Imperfect & Superlatives' },
+  { id: 'part8', label: 'Part 8: C1 Advanced Mastery (Lessons 31-37)', desc: 'Idioms, Register Shifts, Academic Debate, Subjunctive & Regional Variants' },
 ];
 
 const PART_BADGES: Record<CoursePart, { title: string; badge: string; xp: number; coins: number }> = {
@@ -70,6 +72,7 @@ const PART_BADGES: Record<CoursePart, { title: string; badge: string; xp: number
   part5: { title: 'Part 5 Master', badge: 'Afirmativo y Objetos 🎖️', xp: 200, coins: 85 },
   part6: { title: 'Part 6 Master', badge: 'Comandante del Pasado 🎖️', xp: 220, coins: 90 },
   part7: { title: 'Part 7 Master', badge: 'Maestro Comparativo 🏆', xp: 250, coins: 100 },
+  part8: { title: 'Part 8 Master', badge: 'Gran Maestro C1 👑', xp: 300, coins: 150 },
 };
 
 // Master Exams (Parts 1 - 7)
@@ -207,6 +210,19 @@ const BasicEspanolScreen: FC = () => {
     });
   };
 
+const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
+  { id: 1, lessonId: 31, question: 'What is the figurative meaning of the C1 idiom "hacer borrón y cuenta nueva"?', options: ['To erase a whiteboard', 'To make a fresh start / turn over a new leaf', 'To count money twice', 'To cancel an account'], correctAnswer: 'To make a fresh start / turn over a new leaf', explanation: '"Hacer borrón y cuenta nueva" means making a fresh start after past difficulties.' },
+  { id: 2, lessonId: 31, question: 'Which idiom means "to sugarcoat" unpleasant news or facts?', options: ['dorar la píldora', 'dar la lata', 'tirar la toalla', 'quedarse en blanco'], correctAnswer: 'dorar la píldora', explanation: '"Dorar la píldora" is the C1 idiom for sugarcoating unpleasant news.' },
+  { id: 3, lessonId: 32, question: 'Which formal register verb phrase replaces "enfatizar la importancia"?', options: ['hacer hincapié en la importancia', 'poner de manifiesto', 'llevar a cabo', 'suscitar el debate'], correctAnswer: 'hacer hincapié en la importancia', explanation: '"Hacer hincapié en" means to emphasize or stress.' },
+  { id: 4, lessonId: 32, question: 'What does the official administrative connector "a tenor de lo dispuesto" mean?', options: ['Pursuant to / In accordance with', 'Instead of', 'Without regarding', 'Because of'], correctAnswer: 'Pursuant to / In accordance with', explanation: '"A tenor de lo dispuesto" means pursuant to or in accordance with official rules.' },
+  { id: 5, lessonId: 33, question: 'Which cause-effect connector forces the SUBJUNCTIVE mood?', options: ['de ahí que', 'por consiguiente', 'no obstante', 'en resumidas cuentas'], correctAnswer: 'de ahí que', explanation: '"De ahí que" always requires the subjunctive mood (e.g., de ahí que fuera).' },
+  { id: 6, lessonId: 34, question: 'Which academic verb means "to disprove a counter-claim using evidence"?', options: ['refutar', 'corroborar', 'extrapolar', 'suscitar'], correctAnswer: 'refutar', explanation: '"Refutar" means to refute or disprove.' },
+  { id: 7, lessonId: 35, question: 'Which regional tag is applied to Peninsular Spanish terms like "el ordenador" or "el coche"?', options: ['regional:Spain', 'regional:LatAm', 'regional:Mexico', 'universal'], correctAnswer: 'regional:Spain', explanation: 'Terms specific to Spain carry the tag regional:Spain.' },
+  { id: 8, lessonId: 36, question: 'Which grammatical mood must follow "como si" in hypothetical statements?', options: ['Imperfecto de Subjuntivo', 'Presente de Indicativo', 'Futuro', 'Gerundio'], correctAnswer: 'Imperfecto de Subjuntivo', explanation: '"Como si" requires the imperfect subjunctive (e.g. como si estuviera).' },
+  { id: 9, lessonId: 37, question: 'What is the true Spanish translation of the English false friend "pretender"?', options: ['To intend / claim / aspire to', 'To pretend / fake', 'To prevent', 'To protect'], correctAnswer: 'To intend / claim / aspire to', explanation: '"Pretender" means to intend or claim. "To pretend" is "fingir".' },
+  { id: 10, lessonId: 37, question: 'What does the Spanish false friend "constipado" mean?', options: ['Having a cold', 'Constipated', 'Constrained', 'Consecutive'], correctAnswer: 'Having a cold', explanation: '"Constipado" means having a cold. "Constipated" is "estreñido".' }
+];
+
   // Active Questions for current Master Exam
   const getActiveQuestions = (): ExamQuestion[] => {
     switch (activeSection) {
@@ -217,6 +233,7 @@ const BasicEspanolScreen: FC = () => {
       case 'exam5': return EXAM_QUESTIONS_PART5;
       case 'exam6': return EXAM_QUESTIONS_PART6;
       case 'exam7': return EXAM_QUESTIONS_PART7;
+      case 'exam8': return EXAM_QUESTIONS_PART8;
       default: return EXAM_QUESTIONS_PART1;
     }
   };
@@ -327,6 +344,17 @@ const BasicEspanolScreen: FC = () => {
     { id: 'exam7', title: 'Part 7 Master Exam', icon: Trophy, sub: '10-Question Master Test' },
   ];
 
+  const part8SectionsList = [
+    { id: 'lesson31', title: 'Lesson 31: Advanced Idiomatic Expressions', icon: Sparkles, sub: 'Cultured idioms & metaphorical nuance' },
+    { id: 'lesson32', title: 'Lesson 32: Formal & Diplomatic Register Shifts', icon: FileText, sub: 'Administrative & official prose' },
+    { id: 'lesson33', title: 'Lesson 33: Nuanced Discourse Markers', icon: Layers, sub: 'Advanced connectors & subjunctive cause-effect' },
+    { id: 'lesson34', title: 'Lesson 34: Academic Argumentation', icon: GraduationCap, sub: 'Research synthesis & debate vocabulary' },
+    { id: 'lesson35', title: 'Lesson 35: Regional Lexical Variations', icon: Compass, sub: 'Spain (regional:Spain) vs LatAm (regional:LatAm)' },
+    { id: 'lesson36', title: 'Lesson 36: Complex Subjunctive Clauses', icon: Shield, sub: 'Concessive & counterfactual triggers' },
+    { id: 'lesson37', title: 'Lesson 37: Advanced Deceptive Cognates', icon: Crown, sub: 'False friends precision & C1 Graduation' },
+    { id: 'exam8', title: 'Part 8 Master Exam (C1)', icon: Trophy, sub: '10-Question Grand Master C1 Test' },
+  ];
+
   const getSectionsList = () => {
     switch (coursePart) {
       case 'part1': return part1SectionsList;
@@ -336,6 +364,7 @@ const BasicEspanolScreen: FC = () => {
       case 'part5': return part5SectionsList;
       case 'part6': return part6SectionsList;
       case 'part7': return part7SectionsList;
+      case 'part8': return part8SectionsList;
     }
   };
 
@@ -389,7 +418,7 @@ const BasicEspanolScreen: FC = () => {
                 onChange={(e) => {
                   const p = e.target.value as CoursePart;
                   setCoursePart(p);
-                  const list = p === 'part1' ? part1SectionsList : p === 'part2' ? part2SectionsList : p === 'part3' ? part3SectionsList : p === 'part4' ? part4SectionsList : p === 'part5' ? part5SectionsList : p === 'part6' ? part6SectionsList : part7SectionsList;
+                  const list = p === 'part1' ? part1SectionsList : p === 'part2' ? part2SectionsList : p === 'part3' ? part3SectionsList : p === 'part4' ? part4SectionsList : p === 'part5' ? part5SectionsList : p === 'part6' ? part6SectionsList : p === 'part7' ? part7SectionsList : part8SectionsList;
                   setActiveSection(list[0].id as ActiveSection);
                 }}
                 className="w-full bg-bg-elevated text-text-primary text-xs font-bold py-2.5 px-3 rounded-xl border border-pencil/20 focus:outline-none focus:border-terracotta cursor-pointer transition-all shadow-sm"
@@ -527,7 +556,7 @@ const BasicEspanolScreen: FC = () => {
                       onChange={(e) => {
                         const p = e.target.value as CoursePart;
                         setCoursePart(p);
-                        const list = p === 'part1' ? part1SectionsList : p === 'part2' ? part2SectionsList : p === 'part3' ? part3SectionsList : p === 'part4' ? part4SectionsList : p === 'part5' ? part5SectionsList : p === 'part6' ? part6SectionsList : part7SectionsList;
+                        const list = p === 'part1' ? part1SectionsList : p === 'part2' ? part2SectionsList : p === 'part3' ? part3SectionsList : p === 'part4' ? part4SectionsList : p === 'part5' ? part5SectionsList : p === 'part6' ? part6SectionsList : p === 'part7' ? part7SectionsList : part8SectionsList;
                         setActiveSection(list[0].id as ActiveSection);
                         setMobileSidebarOpen(false);
                       }}

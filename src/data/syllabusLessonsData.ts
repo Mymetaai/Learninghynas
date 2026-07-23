@@ -1543,5 +1543,345 @@ export const ALL_SYLLABUS_LESSONS: Record<string, SyllabusLessonData> = {
       correctAnswer: 'altísimo',
       explanation: 'Adding suffix -ísimo forms absolute superlatives.'
     }
+  },
+
+  lesson31: {
+    lessonNumber: 31,
+    partNumber: 8,
+    title: 'Advanced Idiomatic Expressions',
+    subtitle: 'Cultured Idioms, Vivid Metaphors & Metaphorical Nuance',
+    professorNote: 'Welcome to C1 Advanced Mastery! In Lesson 31, we master high-level cultured idioms used in journalism, literature, and formal conversation.',
+    objectives: [
+      'Master high-frequency C1 idiomatic expressions',
+      'Understand figurative vs literal meaning in formal Spanish',
+      'Apply idioms naturally in writing and debate'
+    ],
+    grammarSections: [
+      {
+        title: 'C1 Idiomatic Expressions Breakdown',
+        explanation: 'Advanced Spanish relies heavily on idiomatic metaphors that cannot be translated word-for-word. Understanding their origins and exact contexts elevates your fluency to native level.',
+        table: {
+          headers: ['Expression', 'Literal Translation', 'Figurative Meaning', 'Context / Tag'],
+          rows: [
+            ['hacer borrón y cuenta nueva', 'make a smudge and new count', 'Turn over a new leaf / Fresh start', 'Universal C1'],
+            ['dar la lata', 'give the tin can', 'To pester / annoy someone', 'Universal C1'],
+            ['estar entre la espada y la pared', 'be between sword and wall', 'Between a rock and a hard place', 'Universal C1'],
+            ['quedarse en blanco', 'stay in white', 'To go blank / draw a blank', 'Universal C1'],
+            ['dorar la píldora', 'gild the pill', 'To sugarcoat something unpleasant', 'Universal C1'],
+            ['estar en el quinto pino', 'be in the fifth pine', 'In the middle of nowhere / very far', 'regional:Spain']
+          ]
+        }
+      }
+    ],
+    vocabularyTable: [
+      { spanish: 'hacer borrón y cuenta nueva', phonetic: 'ah-SEHR boh-RROHN ee KWEHN-tah NWEH-vah', english: 'to turn over a new leaf', usage: 'Idiomatic fresh start' },
+      { spanish: 'dar la lata', phonetic: 'dahr lah LAH-tah', english: 'to pester / annoy', usage: 'Informal/formal nuisance' },
+      { spanish: 'dorar la píldora', phonetic: 'doh-RAHR lah PEEL-doh-rah', english: 'to sugarcoat', usage: 'Diplomatic/managerial context' }
+    ],
+    exampleSentences: [
+      { spanish: 'Tras la discusión, decidieron hacer borrón y cuenta nueva.', english: 'After the argument, they decided to make a fresh start.', breakdown: 'Idiom indicating complete reconciliation.' },
+      { spanish: 'El director no intentó dorar la píldora al dar las noticias.', english: 'The director did not try to sugarcoat the news.', breakdown: 'Idiomatic usage in executive communication.' }
+    ],
+    dialogue: [
+      { speaker: 'Elena', spanish: '¿Cómo fue la reunión de presupuesto?', english: 'How did the budget meeting go?' },
+      { speaker: 'Carlos', spanish: 'Difícil. El gerente no quiso dorar la píldora y quedamos entre la espada y la pared.', english: 'Difficult. The manager didn\'t want to sugarcoat it and we were left between a rock and a hard place.' }
+    ],
+    quickPractice: {
+      question: 'What does "quedarse en blanco" mean during an exam or speech?',
+      options: ['To speak fluently', 'To go completely blank', 'To write in white ink', 'To argue fiercely'],
+      correctAnswer: 'To go completely blank',
+      explanation: '"Quedarse en blanco" means drawing a total memory blank.'
+    }
+  },
+
+  lesson32: {
+    lessonNumber: 32,
+    partNumber: 8,
+    title: 'Formal & Diplomatic Register Shifts',
+    subtitle: 'Elevating Everyday Language to Administrative & Academic Precision',
+    professorNote: 'At the C1 level, word choice determines tone. Shift from casual conversational verbs to diplomatic, administrative, and academic register.',
+    objectives: [
+      'Transform casual statements into formal written prose',
+      'Master administrative prepositions (a tenor de lo dispuesto)',
+      'Use formal verbs like poner de manifiesto and hacer hincapié'
+    ],
+    grammarSections: [
+      {
+        title: 'Register Shift Equivalence Matrix',
+        explanation: 'Contrast everyday Spanish phrasing with its formal/diplomatic counterpart used in official publications, speeches, and legal/academic documents.',
+        table: {
+          headers: ['Everyday Phrasing', 'Formal / Diplomatic Equivalent', 'English Meaning'],
+          rows: [
+            ['decir claramente', 'poner de manifiesto', 'to highlight / bring to light'],
+            ['enfatizar algo', 'hacer hincapié en', 'to stress / emphasize'],
+            ['hacer el proyecto', 'llevar a cabo el proyecto', 'to carry out / execute'],
+            ['según la regla', 'a tenor de lo dispuesto en', 'pursuant to / in accordance with'],
+            ['causar un debate', 'suscitar un debate', 'to spark / provoke debate'],
+            ['funcionar bien', 'surtir efecto positivo', 'to take positive effect']
+          ]
+        }
+      }
+    ],
+    vocabularyTable: [
+      { spanish: 'poner de manifiesto', phonetic: 'poh-NEHR deh mah-nee-FYEHS-toh', english: 'to highlight / expose', usage: 'Formal report writing' },
+      { spanish: 'hacer hincapié', phonetic: 'ah-SEHR een-kah-PYEH', english: 'to emphasize', usage: 'Speeches and debate' },
+      { spanish: 'llevar a cabo', phonetic: 'lyeh-VAHR ah KAH-boh', english: 'to carry out', usage: 'Project execution' }
+    ],
+    exampleSentences: [
+      { spanish: 'El informe puso de manifiesto la necesidad de reformas.', english: 'The report highlighted the need for reforms.', breakdown: 'Formal register for report finding.' },
+      { spanish: 'A tenor de lo dispuesto en el artículo tres, se suspende la sesión.', english: 'Pursuant to article three, the session is suspended.', breakdown: 'Official administrative legal phrasing.' }
+    ],
+    dialogue: [
+      { speaker: 'Ministro', spanish: 'A tenor de lo dispuesto, llevaremos a cabo una auditoría completa.', english: 'Pursuant to regulations, we will carry out a complete audit.' },
+      { speaker: 'Periodista', spanish: '¿Qué aspectos pondrá de manifiesto dicha investigación?', english: 'What aspects will said investigation highlight?' }
+    ],
+    quickPractice: {
+      question: 'Which formal phrase replaces "enfatizar la importancia"?',
+      options: ['hacer hincapié en la importancia', 'dar la lata', 'tirar la toalla', 'hacer borrón'],
+      correctAnswer: 'hacer hincapié en la importancia',
+      explanation: '"Hacer hincapié" is the formal C1 register shift for emphasizing.'
+    }
+  },
+
+  lesson33: {
+    lessonNumber: 33,
+    partNumber: 8,
+    title: 'Nuanced Discourse Markers & Connectors',
+    subtitle: 'Structuring Complex Arguments, Concessions & Syntheses',
+    professorNote: 'Discourse markers are the scaffolding of advanced argumentation. Master connectors that express concession, logical consequence, and summary.',
+    objectives: [
+      'Use high-level concession markers (no obstante, ahora bien)',
+      'Master consequence triggers requiring subjunctive (de ahí que + subjuntivo)',
+      'Synthesize multi-page arguments using en resumidas cuentas'
+    ],
+    grammarSections: [
+      {
+        title: 'Advanced Connectors & Grammatical Mood Requirements',
+        explanation: 'Pay close attention to mood requirements: some connectors take indicative (no obstante, por consiguiente) while consequence connectors require subjunctive (de ahí que).',
+        table: {
+          headers: ['Connector', 'Grammatical Mood', 'Function', 'English Equivalent'],
+          rows: [
+            ['no obstante', 'Indicativo', 'Concession / Opposition', 'nevertheless / nonetheless'],
+            ['por consiguiente', 'Indicativo', 'Logical Consequence', 'consequently / therefore'],
+            ['de ahí que', 'Subjuntivo', 'Cause-Effect Consequence', 'hence why / that is why'],
+            ['en resumidas cuentas', 'Indicativo', 'Synthesis / Summary', 'in short / in a nutshell'],
+            ['a saber', 'N/A (List introduction)', 'Specification', 'namely / to wit'],
+            ['en vista de que', 'Indicativo', 'Causal Justification', 'given that / in view of']
+          ]
+        }
+      }
+    ],
+    vocabularyTable: [
+      { spanish: 'no obstante', phonetic: 'noh ohbs-TAHN-teh', english: 'nevertheless', usage: 'Concessive connector' },
+      { spanish: 'por consiguiente', phonetic: 'pohr kohn-seh-GYEHN-teh', english: 'consequently', usage: 'Logical result' },
+      { spanish: 'de ahí que', phonetic: 'deh ah-EE keh', english: 'hence why (+ subj)', usage: 'Subjunctive cause-effect' }
+    ],
+    exampleSentences: [
+      { spanish: 'Llovió torrencialmente; de ahí que se cancelara el evento.', english: 'It rained heavily; hence why the event was cancelled.', breakdown: 'De ahí que forces subjunctive cancelara.' },
+      { spanish: 'En resumidas cuentas, la estrategia fue un éxito total.', english: 'In a nutshell, the strategy was a total success.', breakdown: 'Synthesis concluding marker.' }
+    ],
+    dialogue: [
+      { speaker: 'Dra. Ramos', spanish: 'Aumentaron los costos; por consiguiente, debió ajustarse el presupuesto.', english: 'Costs increased; consequently, the budget had to be adjusted.' },
+      { speaker: 'Dr. Vega', spanish: 'No obstante, logramos cumplir todos los objetivos fijados.', english: 'Nevertheless, we managed to fulfill all established goals.' }
+    ],
+    quickPractice: {
+      question: 'Which mood must follow the cause-effect connector "de ahí que"?',
+      options: ['Subjuntivo', 'Indicativo', 'Infinitive', 'Imperativo'],
+      correctAnswer: 'Subjuntivo',
+      explanation: '"De ahí que" always requires the subjunctive mood (e.g. de ahí que fuera).'
+    }
+  },
+
+  lesson34: {
+    lessonNumber: 34,
+    partNumber: 8,
+    title: 'Academic Argumentation & Debate Vocabulary',
+    subtitle: 'Research Synthesis, Hypothesis Evaluation & Critical Analysis',
+    professorNote: 'Lesson 34 introduces academic and research terminology essential for university-level essays, thesis defense, and professional debate.',
+    objectives: [
+      'Formulate and test scientific hypotheses (la hipótesis, el paradigma)',
+      'Debate claims using corroborar and refutar',
+      'Analyze statistical discrepancies (la discrepancia, extrapolar)'
+    ],
+    grammarSections: [
+      {
+        title: 'Academic Lexicon & Discourse Functions',
+        table: {
+          headers: ['Academic Term', 'Grammatical Category', 'Academic Function', 'English Translation'],
+          rows: [
+            ['corroborar', 'Verbo', 'Provide empirical proof', 'to corroborate / confirm'],
+            ['refutar', 'Verbo', 'Disprove a counter-claim', 'to refute / disprove'],
+            ['la hipótesis', 'Sustantivo (Fem)', 'Initial research proposition', 'the hypothesis'],
+            ['el paradigma', 'Sustantivo (Masc)', 'Overarching theoretical model', 'the paradigm'],
+            ['la discrepancia', 'Sustantivo (Fem)', 'Inconsistency in data', 'the discrepancy'],
+            ['extrapolar', 'Verbo', 'Extend conclusions to new scope', 'to extrapolate']
+          ]
+        }
+      }
+    ],
+    vocabularyTable: [
+      { spanish: 'corroborar', phonetic: 'koh-rroh-boh-RAHR', english: 'to corroborate', usage: 'Scientific validation' },
+      { spanish: 'refutar', phonetic: 'reh-foo-TAHR', english: 'to refute', usage: 'Debate counter-argument' },
+      { spanish: 'el paradigma', phonetic: 'ehl pah-rah-DEEG-mah', english: 'the paradigm', usage: 'Theoretical framework' }
+    ],
+    exampleSentences: [
+      { spanish: 'Los resultados sirvieron para corroborar la hipótesis inicial.', english: 'The results served to corroborate the initial hypothesis.', breakdown: 'Academic research validation.' },
+      { spanish: 'No es riguroso extrapolar estos resultados a toda la población.', english: 'It is not rigorous to extrapolate these results to the whole population.', breakdown: 'Methodological limitation clause.' }
+    ],
+    dialogue: [
+      { speaker: 'Investigador A', spanish: '¿Lograron los nuevos datos refutar la teoría previa?', english: 'Did the new data manage to refute the previous theory?' },
+      { speaker: 'Investigador B', spanish: 'Sí, y representan un cambio de paradigma total en nuestra disciplina.', english: 'Yes, and they represent a complete paradigm shift in our discipline.' }
+    ],
+    quickPractice: {
+      question: 'Which verb means to disprove a scientific claim using evidence?',
+      options: ['refutar', 'corroborar', 'extrapolar', 'suponer'],
+      correctAnswer: 'refutar',
+      explanation: '"Refutar" means to disprove or refute a claim with counter-arguments.'
+    }
+  },
+
+  lesson35: {
+    lessonNumber: 35,
+    partNumber: 8,
+    title: 'Regional Lexical Variations (Spain vs. Latin America)',
+    subtitle: 'Peninsular Spanish (España) & Latin American Equivalents',
+    professorNote: 'C1 speakers navigate global Spanish seamlessly. Learn equivalent pairs between Peninsular Spanish (regional:Spain) and Latin America (regional:LatAm).',
+    objectives: [
+      'Recognize regional vocabulary pairs across Spain and Hispanoamérica',
+      'Understand context etiquette for coger vs tomar',
+      'Master everyday technology and transport variations'
+    ],
+    grammarSections: [
+      {
+        title: 'Spain vs Latin America Comparative Table',
+        table: {
+          headers: ['Concept', 'Peninsular Spanish (España)', 'Latin American Spanish (LatAm)', 'Tag Marking'],
+          rows: [
+            ['Computer', 'el ordenador', 'la computadora', 'regional:Spain / regional:LatAm'],
+            ['Car', 'el coche', 'el carro / el auto', 'regional:Spain / regional:LatAm'],
+            ['To grab / take', 'coger', 'tomar / agarrar', 'regional:Spain / regional:LatAm'],
+            ['Juice', 'el zumo', 'el jugo', 'regional:Spain / regional:LatAm'],
+            ['Mobile phone', 'el móvil', 'el celular', 'regional:Spain / regional:LatAm'],
+            ['Pen', 'el bolígrafo / boli', 'la pluma / el lapicero', 'regional:Spain / regional:LatAm']
+          ]
+        }
+      }
+    ],
+    vocabularyTable: [
+      { spanish: 'el ordenador', phonetic: 'ehl ohr-deh-nah-DOHR', english: 'the computer (Spain)', usage: 'regional:Spain' },
+      { spanish: 'la computadora', phonetic: 'lah kohm-poo-tah-DOH-rah', english: 'the computer (LatAm)', usage: 'regional:LatAm' },
+      { spanish: 'el coche', phonetic: 'ehl KOH-cheh', english: 'the car (Spain)', usage: 'regional:Spain' },
+      { spanish: 'el carro', phonetic: 'ehl KAH-rroh', english: 'the car (LatAm)', usage: 'regional:LatAm' }
+    ],
+    exampleSentences: [
+      { spanish: 'En España dicen "coger el coche", mientras que en México dicen "tomar el carro".', english: 'In Spain they say "coger el coche", while in Mexico they say "tomar el carro".', breakdown: 'Regional pairing comparative sentence.' }
+    ],
+    dialogue: [
+      { speaker: 'Mateo (España)', spanish: 'Voy a encender el ordenador para enviar el correo.', english: 'I am going to turn on the computer to send the email.' },
+      { speaker: 'Lucía (Argentina)', spanish: 'Perfecto, yo abriré mi computadora también.', english: 'Perfect, I will open my computer as well.' }
+    ],
+    quickPractice: {
+      question: 'Which term for "computer" is used in Peninsular Spanish (Spain)?',
+      options: ['el ordenador', 'la computadora', 'el computador', 'el equipo'],
+      correctAnswer: 'el ordenador',
+      explanation: '"El ordenador" is the standard term in Spain (regional:Spain).'
+    }
+  },
+
+  lesson36: {
+    lessonNumber: 36,
+    partNumber: 8,
+    title: 'Complex Subjunctive Clauses & Counterfactuals',
+    subtitle: 'Advanced Hypothetical Triggers, Concession & Conditionals',
+    professorNote: 'Lesson 36 covers advanced subjunctive structures that express intense concession, hypothetical conditions, and counterfactual statements.',
+    objectives: [
+      'Master concessive subjunctive triggers (por mucho que + subjuntivo)',
+      'Use conditional clauses (a condición de que, salvo que)',
+      'Express counterfactual imagery (como si + imperfecto de subjuntivo)'
+    ],
+    grammarSections: [
+      {
+        title: 'Advanced Subjunctive Clause Triggers',
+        table: {
+          headers: ['Structure', 'Target Mood', 'Meaning', 'Example Sentence'],
+          rows: [
+            ['por mucho que', 'Subjuntivo', 'No matter how much', 'Por mucho que insista, no iré.'],
+            ['a condición de que', 'Subjuntivo', 'On condition that / provided', 'Te ayudo a condición de que estudies.'],
+            ['salvo que', 'Subjuntivo', 'Unless / except if', 'Saldremos salvo que llueva.'],
+            ['como si', 'Imperfecto de Subjuntivo', 'As if / as though', 'Habla como si supiera todo.'],
+            ['en el supuesto de que', 'Subjuntivo', 'Assuming / In the event that', 'En el supuesto de que vengan, avísame.'],
+            ['quiera que no', 'Fixed Subjunctive Idiom', 'Whether one likes it or not', 'Quiera que no, tendrá que pagar.']
+          ]
+        }
+      }
+    ],
+    vocabularyTable: [
+      { spanish: 'por mucho que', phonetic: 'pohr MOO-choh keh', english: 'no matter how much (+ subj)', usage: 'Concessive clause' },
+      { spanish: 'a condición de que', phonetic: 'ah kohn-dee-SYOHN deh keh', english: 'provided that (+ subj)', usage: 'Conditional clause' },
+      { spanish: 'como si', phonetic: 'KOH-moh see', english: 'as if (+ imp subj)', usage: 'Counterfactual trigger' }
+    ],
+    exampleSentences: [
+      { spanish: 'Por mucho que intente convencerme, no cambiaré de opinión.', english: 'No matter how much he tries to convince me, I won\'t change my mind.', breakdown: 'Por mucho que triggers subjunctive intente.' },
+      { spanish: 'Hablaba como si fuera un experto mundial.', english: 'He talked as if he were a world expert.', breakdown: 'Como si triggers imperfect subjunctive fuera.' }
+    ],
+    dialogue: [
+      { speaker: 'Sofi', spanish: '¿Aceptarán la propuesta de contrato?', english: 'Will they accept the contract proposal?' },
+      { speaker: 'Gabriel', spanish: 'Firmarán a condición de que incluyamos la cláusula de garantía.', english: 'They will sign provided that we include the warranty clause.' }
+    ],
+    quickPractice: {
+      question: 'Which form must follow "como si" when describing a hypothetical past condition?',
+      options: ['Imperfecto de Subjuntivo', 'Presente de Indicativo', 'Futuro', 'Gerundio'],
+      correctAnswer: 'Imperfecto de Subjuntivo',
+      explanation: '"Como si" always requires the imperfect subjunctive (e.g. como si fuera/tuviera).'
+    }
+  },
+
+  lesson37: {
+    lessonNumber: 37,
+    partNumber: 8,
+    title: 'Advanced Deceptive Cognates & Fine Nuances',
+    subtitle: 'Mastering Advanced False Friends & Semantic Precision',
+    professorNote: 'Congratulations on reaching Lesson 37! Conclude your C1 mastery by eliminating deceptive cognates (false friends) that mislead non-native speakers.',
+    objectives: [
+      'Distinguish pretender (intend) from pretend (fingir)',
+      'Understand constipado (having a cold) vs constipated',
+      'Master precision terms: desgracia, remover, compromiso, carpetas'
+    ],
+    grammarSections: [
+      {
+        title: 'False Friends Correction & Precision Matrix',
+        table: {
+          headers: ['Spanish Word', 'Real Meaning in English', 'What Non-Natives Mistake it For', 'Correct English Term for Mistake'],
+          rows: [
+            ['pretender', 'to intend / to claim / aspire', 'to pretend', 'fingir'],
+            ['constipado', 'having a cold', 'constipated', 'estreñido'],
+            ['desgracia', 'misfortune / tragedy', 'disgrace', 'deshonra / vergüenza'],
+            ['remover', 'to stir / mix / agitate', 'to remove', 'quitar / eliminar'],
+            ['compromiso', 'commitment / obligation', 'compromise', 'acuerdo / concesión'],
+            ['carpetas', 'binders / file folders', 'carpets', 'alfombras']
+          ]
+        }
+      }
+    ],
+    vocabularyTable: [
+      { spanish: 'pretender', phonetic: 'preh-tehn-DEHR', english: 'to intend / claim', usage: 'NOT to pretend (fingir)' },
+      { spanish: 'constipado', phonetic: 'kohn-stee-PAH-doh', english: 'having a cold', usage: 'NOT constipated (estreñido)' },
+      { spanish: 'carpetas', phonetic: 'kahr-PEH-tahs', english: 'file folders / binders', usage: 'NOT carpets (alfombras)' }
+    ],
+    exampleSentences: [
+      { spanish: 'No pretendo ofender a nadie; mi intención era colaborar.', english: 'I do not intend to offend anyone; my intention was to collaborate.', breakdown: 'Pretender = to intend.' },
+      { spanish: 'Guardo los documentos importantes en tres carpetas rojas.', english: 'I keep important documents in three red file folders.', breakdown: 'Carpetas = file folders.' }
+    ],
+    dialogue: [
+      { speaker: 'Profesor Worden', spanish: '¡Felicitaciones! Has completado todas las 37 lecciones del curso.', english: 'Congratulations! You have completed all 37 course lessons.' },
+      { speaker: 'Estudiante C1', spanish: '¡Muchas gracias! Ahora domino el español técnico, idiomático y formal con total precisión.', english: 'Thank you very much! Now I master technical, idiomatic, and formal Spanish with total precision.' }
+    ],
+    quickPractice: {
+      question: 'What is the true Spanish translation of the English verb "to pretend"?',
+      options: ['fingir', 'pretender', 'remover', 'recordar'],
+      correctAnswer: 'fingir',
+      explanation: '"To pretend" is "fingir". "Pretender" means to intend or claim.'
+    }
   }
 };
+
