@@ -1,0 +1,5629 @@
+Course Workbook
+Spanish, Part 2
+Numbers, Questions, and Verbs 	Estar
+and 	Ir
+Professor Bill WordenThe University of Alabama
+
+-- 1 of 97 --
+
+This workbook is an excerpt of
+Learning Spanish: How to Understand and Speak a New Language
+PUBLISHED BY:
+THE GREAT COURSES
+Corporate Headquarters
+4840 Westfields Boulevard, Suite 500
+Chantilly, Virginia 20151-2299
+Phone: 1-800-832-2412
+Fax: 703-378-3819
+www.thegreatcourses.com
+Copyright © The Teaching Company, 2015
+Printed in the United States of America
+This book is in copyright. All rights reserved.
+Without limiting the rights under copyright reserved above,
+no part of this publication may be reproduced, stored in
+or introduced into a retrieval system, or transmitted,
+in any form, or by any means
+(electronic, mechanical, photocopying, recording, or otherwise),
+without the prior written permission of
+The Teaching Company.
+Photographic Credits
+Morning: © Maxim Khytra/Shutterstock; Afternoon: © GaudiLab/Shutterstock; Night: © Kamira/Shutterstock; Family unpacking boxes:
+© Darren Baker/Shutterstock; Man labeling boxes: © stefanolunardi/Shutterstock; Biology classroom: © bikeriderlondon/Shutterstock;
+Tamale: © REDAV/Shutterstock; Ceviche: © Ismael Perez/Shutterstock; Patacones: © bonchan/Shutterstock; Messy room: © Jo Ann
+Snover/Shutterstock; Pollen allergy: © Alex Cofaru/Shutterstock; Dirty house: © Valzhina/Shutterstock; 3 generation family: © Goodluz/
+Shutterstock; Grandparents and grandkids: © Goodluz/Shutterstock; South America atlas: © TonelloPhotography/Shutterstock; Airplane
+family: © toranosuke/Shutterstock; Clock: © Divers Vector/Shutterstock; Mother and kids: © FamVeld/Shutterstock; Family dinner:
+© wavebreakmedia/Shutterstock; Sun: © Yulia Glam/Shutterstock; Partially sunny: © Yulia Glam/Shutterstock; Lightning and thunder:
+© Netfalls - Remy Musser/Shutterstock; Sun: © Studio Barcelona/Shutterstock; Man shivering: © Gazoukoo/Shutterstock; Girl in
+rain: © LWY Partnership/Shutterstock; Snow: © katarina_1/Shutterstock; South America political map: © mghstars/Shutterstock;
+Room: © mghstars/Shutterstock; © Nip/Shutterstock; © Elena Terletskaya/Shutterstock; © Allydesign/Shutterstock; © Spasiblo/
+Shutterstock; © Palau/Shutterstock; © Christopher Hall/Shutterstock; © Oxy_gen/Shutterstock; Family discussion: © Iakov Filimonov/
+Shutterstock; Giraffe in zoo: © Kairos69/Shutterstock; Elephant zoo: © Joseph M. Arseneau/Shutterstock; Tuk Tuk: © Sura Nualpradid/
+Shutterstock; Doctor and patient: © g-stockstudio/Shutterstock; Picnic basket: © Ekaterina Pokrovsky/Shutterstock; Clothing factory:
+© michaeljung/Shutterstock; Alpaca weaving: © Thomas Barrat/Shutterstock; Excited music fans: © wavebreakmedia/Shutterstock;
+Salt lake: © Vadim Petrakov/Shutterstock; Hotel of salt blocks: © Alberto Loyo/Shutterstock; Cocoa plant: © mchin/Shutterstock;
+
+-- 2 of 97 --
+
+i
+Bill Worden, Ph.D.
+Associate Professor of Spanish
+Director of Spanish Programs
+The University of Alabama
+Dr. Bill Worden is an Associate Professor of Spanish and the Director of
+Spanish Programs in the Department of Modern Languages and Classics
+at The University of Alabama. Dr. Worden received his A.B. in Mathematics
+from Dartmouth College in 1985 and subsequently taught high school Spanish
+for five years in Illinois and Massachusetts. After studying in both Vermont and
+Madrid, he received his M.A. in Spanish from Middlebury College in 1996.
+As a doctoral student at Brown University, Dr. Worden was awarded the David and Ruth Kossoff Prize for Leadership
+in Language Teaching by the Department of Hispanic Studies and the Presidential Award for Excellence in Teaching
+by the Graduate School. He also was chosen by fellow graduate students to give the address at the Graduate School
+commencement ceremony. In 2002, Dr. Worden received his Ph.D. in Hispanic Studies from Brown.
+Since 2002, Dr. Worden has taught a wide variety of courses at The University of Alabama, ranging from Introductory
+Spanish and Advanced Grammar and Composition to undergraduate and graduate courses in 16th- and 17th-century
+Spanish literature. He has directed doctoral dissertations on colonial Latin American literature, early modern Spanish
+literature, and 20th-century Latin American literature.
+Dr. Worden’s main area of research is the work of Miguel de Cervantes, especially his novel Don Quixote. Dr. Worden
+has published in the fields of early modern Spanish literature, colonial Cuban theater, and 19th-century Spanish
+literature. He also has published on pedagogical topics, including how to teach Spanish at the middle school and high
+school levels and how to help undergraduate students make connections to Don Quixote. In addition, Dr. Worden is an
+award-winning speaker who has lectured on such subjects as the prose of Cervantes, early modern Spanish poetry,
+and approaches for helping beginning language students become comfortable speaking Spanish.
+For a number of years, Dr. Worden served The University of Alabama’s Department of Modern Languages and
+Classics as the Director of the Spanish Language Program and was responsible for supervising all graduate teaching
+assistants and instructors of introductory- and intermediate-level Spanish courses. In 2013, the Alabama Association of
+Foreign Language Teachers selected Dr. Worden as the winner of the annual Outstanding Foreign Language Teacher
+Award for Postsecondary. ■
+Dr. Laura Rojas-Arce, author of the workbook and coauthor of the speaking activities, grew up in Costa Rica,
+where she studied psychology as an undergraduate student at the Universidad Hispanoamericana in Heredia. She
+completed her doctoral studies with a focus on contemporary Central American literature and received her Ph.D. from
+The University of Alabama in 2013. Dr. Rojas-Arce is an Instructor of Spanish at The University of Alabama, where
+she teaches courses ranging from Introductory Spanish and Advanced Grammar and Composition to courses on Latin
+American literature. ■
+
+-- 3 of 97 --
+
+ii
+Table of Contents
+Professor Biography ..................................................................................................................................... i
+Workbook Introduction..................................................................................................................................iii
+Workbook Families ...................................................................................................................................... iv
+Lesson Guides
+LESSON 5
+Indefinite Articles and Numbers to 100 ......................................................................................................... 1
+LESSON 6
+The Verb Estar and Numbers over 100 ........................................................................................................ 7
+LESSON 7
+Regular -er and -ir Verbs in the Present ..................................................................................................... 13
+LESSON 8
+The Verb Ir in the Present........................................................................................................................... 20
+Supplemental Material
+Grammar Reference ...................................................................................................................................26
+Los glosarios / The Glossaries .................................................................................................................. 32
+Glosario por tema / Glossary by Topic........................................................................................................ 34
+Glosario de cognados / Glossary of Cognates ........................................................................................... 50
+Glosario español-inglés / Spanish-English Glossary .................................................................................. 56
+Glosario inglés-español / English-Spanish Glossary .................................................................................. 73
+Resources for Further Study ...................................................................................................................... 90
+
+-- 4 of 97 --
+
+iii
+Workbook Introduction
+Welcome to the workbook for Learning Spanish: How to Understand and Speak a New Language. The
+exercises included here are designed to help develop your reading and writing skills in Spanish while you
+practice the vocabulary and grammar presented in the lessons. This introduction briefly explains how this
+workbook fits in with the other components that accompany this course so that you’ll know how best to make use of all
+of them to help develop your Spanish skills.
+When you finish watching one of the 30 lessons, you should next listen to the audio glossary, which will give you the
+pronunciation and definition of all the new vocabulary words. Then, it will be time to practice what you’ve learned. The
+speaking activities that follow the audio glossary are designed to help you improve your listening and speaking skills,
+and the exercises in this workbook will allow you to practice your reading and writing skills. You can decide if you
+want to do the speaking activities before or after you do the workbook exercises, but you should do both of these only
+after watching the lesson and listening to the audio glossary. In addition to the exercises accompanying each lesson,
+you will find the Grammar Reference, Glossary by Topic, Glossary of Cognates, Spanish-English Glossary, English-
+Spanish Glossary, and Resources for Further Study at the end of the workbook.
+Each section of this workbook begins with New Vocabulary, a listing of new words in the same order as they are
+presented in the audio glossary. Next, the General Review section summarizes the material covered in the lesson,
+allowing you to review grammatical, cultural, or vocabulary-related content. Then, you will find the Activities, which
+offer practice with the new grammar and vocabulary. At the end of every workbook section, you will find the Correct
+Answers, which will allow you to check your work. In addition to the Activities included after every lesson, this workbook
+also contains six Cultural Readings about different aspects of Latin American culture.
+The Activities in this workbook are contextualized in a series of short stories dealing with several families and their
+friends and neighbors. These families live in Villa Celeste [Celestial Town], a neighborhood somewhere in Latin
+America. The principal characters in the stories are the Cortés Ruiz family, the Quirós García family, and the González
+Fallas family. The Cortés Ruiz family has three sons, and the Quirós García family has two daughters and a son.
+Those two families also have two very young granddaughters. The González Fallas family, who just recently moved to
+the neighborhood, has a son and a daughter. You will find the family trees for these families following this introduction.
+Most of the words used in the Activities will be ones you will have already been introduced to in the course. When this
+is not the case, the workbook will give the English for the Spanish word. The six Cultural Readings do indeed include
+vocabulary and grammar you will have already seen in the course. But they also purposely include some material a
+bit beyond your current level of comprehension. This will force you to make some educated guesses while reading—a
+very useful skill for a language learner. You won’t need to recognize every word or expression in a reading to gain a
+good understanding of it. The English translation for the Cultural Readings can be found after the Correct Answers, so
+you will be able to see how well your understood what you read.
+And now, it’s time to get to work. Or, as we would say in Spanish: ¡A trabajar! [Let’s work!]. ■
+
+-- 5 of 97 --
+
+iv
+Workbook Families
+Luis Cortés Navarro
+Carlos González Pérez
+Esteban Quirós Sánchez
+Alberto
+Pablo
+Erica
+Mariana
+Diego 	Felipe	Javier
+Marisol
+Diana
+Elena
+Cecilia Ruiz Ramírez
+Alejandra Fallas Ureña
+Luisa García Vega
+
+-- 6 of 97 --
+
+1
+Indefinite Articles and Numbers to 100
+I. Vocabulario nuevo / New Vocabulary
+un – a, an [masculine, singlar] 	unos – some [masculine]
+una – a, an [feminine, singular] 	unas – some [feminine]
+el estudiante – male student 	el béisbol – baseball
+la estudiante – female student 	el examen – exam
+el águila – eagle [feminine] 	el kilómetro – kilometer
+el zapato – shoe 	el kilo – kilo
+el deporte – sport 	la cerveza – beer
+católico – Catholic 	extra – extra
+enseñar – to teach 	mirar – to look at
+caminar – to walk 	llevar – to wear, to carry
+buscar – to look for 	necesitar – to need
+¿cuánto?, ¿cuánta? – how much? 	para – for
+¿cuántos?, ¿cuántas? – how many? 	por favor – please
+cero – zero 	seis – six
+uno – one 	siete – seven
+dos – two 	ocho – eight
+tres – three 	nueve – nine
+cuatro – four 	diez – ten
+cinco – five
+once – eleven 	dieciséis – sixteen
+doce – twelve 	diecisiete – seventeen
+trece – thirteen 	dieciocho – eighteen
+catorce – fourteen 	diecinueve – nineteen
+quince – fifteen 	veinte – twenty
+treinta – thirty 	setenta – seventy
+cuarenta – forty 	ochenta – eighty
+cincuenta – fifty 	noventa – ninety
+sesenta – sixty 	cien – one hundred
+Lesson
+5
+
+-- 7 of 97 --
+
+2
+II. Repaso general / General Review
+A. Improving Your Ability to Communicate in Spanish
+Being proficient in Spanish really means performing it as needed. And proper performance of Spanish—when speaking
+or writing—happens only as the result of sufficient practice. That’s why the most effective way to improve your ability to
+communicate in Spanish is to practice it as much as possible, whether by engaging with the audio glossary, speaking
+activities, and workbook or by interacting with other Spanish speakers. Also, try to use Spanish even when you’re
+not studying the language by, for example, counting in Spanish in your daily life. The more contact you have with
+Spanish—the more you speak it, read it, write it, or hear it—the quicker and more fully you will acquire the language.
+B. Indefinite Articles
+While “a” and “an” (in the singular) and “some” (in the plural) are the indefinite articles in English, in Spanish there are
+four forms of the indefinite article: un (masculine singular), una (feminine singular), unos (masculine plural), unas
+(feminine plural). Examples of indefinite articles used with nouns include un zapato [a shoe], una cerveza [a beer],
+unos kilómetros [some kilometers], and unas águilas [some eagles].
+In general, the indefinite article in Spanish is used much as it is in English. For example, “Carlos is taking an exam” is
+Carlos toma un examen. Unlike English, indefinite articles are typically not used when talking about one’s profession,
+religion, or nationality (e.g., “María is a doctor” is María es doctora; “Pedro is a Catholic” is Pedro es católico;
+“Teresa is a Spaniard” is Teresa es española). When, however, the profession, religion, or nationality is modified by
+an adjective, then an indefinite article is used (e.g., María es una doctora excelente; Pedro es un buen católico;
+Teresa es una española famosa).
+Feminine nouns beginning with the sound a in a stressed syllable use un rather than una as their indefinite article. Un
+águila [an eagle], for example, is indeed a feminine noun, but it uses un rather than una as its indefinite article. [Note:
+If una were used as the definite article for águila, then the two a sounds would run together when pronounced and
+sound like unaaaáguila; using un instead of una avoids this problem.] Feminine nouns beginning with the sound a in
+a syllable that is not stressed keep the usual definite article of una (e.g., una actitud [an attitude]).
+C. Numbers 1 to 100
+Once you learn the numbers one to ten, you can use those numbers to help you learn ten to twenty and then the
+multiples of ten from ten to one hundred. Notice the similarities and differences in the following numbers.
+uno 	once 	diez
+dos 	doce 	veinte
+tres 	trece 	treinta
+cuatro 	catorce 	cuarenta
+cinco 	quince 	cincuenta
+seis 	dieciséis 	sesenta
+siete 	diecisiete 	setenta
+ocho 	dieciocho 	ochenta
+nueve 	diecinueve 	noventa
+diez 	veinte 	cien
+Usually, a number doesn’t change its form when modifying a noun. For example, siete stays the same in Hay siete
+chicos and Hay siete chicas. Numbers that do change are those ending in -un or -una. For example, “twenty-one men”
+uses the masculine form veintiún hombres, while “forty-one women” uses the feminine form cuarenta y una mujeres.
+D. Pronunciation
+The Spanish letters b and v are associated with the same sound: the sound made when a b is pronounced in English.
+Like the sound associated with the letter t, the sounds associated with the letters p, b, v, and k in Spanish are not
+aspirated, meaning that you produce no puff of air when you pronounce words with these letters in them. When you
+
+-- 8 of 97 --
+
+3
+say, for example, Bolivia or El taco es para Teresa, your mouth should produce no puffs of air. You can test this by
+putting your hand in front of your mouth when speaking; your hand should not feel any puffs of air when you pronounce
+the sounds associated with t, p, b, v, and k.
+The letters k and w are hardly used in Spanish because they only appear in words that come from other languages
+(e.g., el kilo, el whisky). The sound associated with the letter w in Spanish is the same as it is in English.
+The sounds made when pronouncing the letters c and g are as follows: The k sound is made when c appears before
+a, o, or u (e.g., la casa, el taco, Cuba); in Latin America, the s sound is made when c appears before e or i, while in
+Spain, the sound made is th, as in the English word “this.” So, Latin Americans would pronounce cero and cinco by
+saying these words with an s sound, while someone from Madrid would say these words with a th sound. The sound
+associated with z is always the same as the sound associated with ce and ci: Latin Americans would say zapato
+[shoe] by pronouncing an s sound, while someone from Madrid would pronounce the word with a th sound.
+The letter g is like c because the way it’s pronounced depends on the letter that follows it: The hard g sound is made
+when g is followed by a, o, or u (e.g., la galleta [cookie], Gonzalo, Gustavo); the Spanish j sound is made when the
+letter following g is e or i (e.g., Argentina, el gigante [giant]).
+The letter x in Spanish is usually associated with the same sound produced by the x in English (e.g., el taxi). With
+certain Mexican place names, the x is pronounced with the sound made by jota (e.g., México); at other times, the x is
+pronounced as an s, as in el xilófono [xylophone]. The letter ñ is associated with the sound made in the English word
+“onion” (e.g., España).
+III. Actividades / Activities
+a. Marisol asiste ahora a una nueva escuela secundaria: la escuela Miguel de Cervantes. Marisol habla con su
+madre Alejandra sobre las cosas que se encuentran en su aula de biología. / Marisol is now attending a new high
+school: Miguel de Cervantes High School. Marisol talks to her mother Alejandra about the things that can be found in
+her biology classroom.
+Agrega el artículo indefinido apropiado. / Add the correct indefinite article.
+En el aula [classroom] hay:
+1. _______ lápices 	9. _______ esqueleto [skeleton]
+2. _______ mesa 	10. _______ sillas
+3. _______ exámenes 	11. _______ televisor
+4. _______ reloj 	12. _______ mapas
+5. _______ libros 	13. _______ teléfono
+6. _______ computadoras [computers] 	14. _______ maestra [teacher]
+7. _______ cuadernos 	15. _______ chicos
+8. _______ diccionarios [dictionaries] 	16. _______ estudiantes altas
+
+-- 9 of 97 --
+
+4
+b. El padre de Marisol, Carlos González, quiere aprender a hacer algo nuevo en su tiempo libre. / Marisol’s father,
+Carlos González, wants to learn how to do something new in his free time.
+Completa las frases con el artículo indefinido correcto. / Complete the sentences with the correct indefinite article.
+Carlos quiere aprender a hacer algo nuevo. Él mira 1. ____________ sitios web [websites] interesantes.
+2. ___________ amigo le recomendó [recommended to him] tomar 3. ______________ curso en casa. Ahora él
+busca 4. ____________ curso de fotografía [photography] de The Great Courses. Él necesita 5. _____________
+cámara [camera], 6. ____________ ideas [ideas] y 7. ____________ buena actitud.
+c. La familia González Fallas está conociendo a los vecinos de Villa Celeste. Ellos hablan sobre las profesiones
+que todos tienen. / The González Fallas family is getting to know their neighbors in Villa Celeste. They talk about the
+professions that everyone has.
+Completa las frases con el artículo indefinido correcto. Si la frase no necesita un artículo, escribe “X”. / Complete the
+sentences with the correct indefinite article. If the sentence does not need an article, write an “X.”
+Luis Cortés es 1. __________ dueño [owner] de una agencia de viajes. Su [His] esposa [wife] Cecilia es
+2. _____________ secretaria ejecutiva. Cecilia es 3. _______________ secretaria excelente. Su hijo [son] Alberto
+es 4. _______________ dentista fantástico. Su hijo Diego es 5. _____________ estudiante. Su hijo Javier es
+6. _____________ ingeniero [engineer] muy responsable. El otro [other] vecino, Esteban Quirós, no solo es
+7. _____________ doctor, él es 8. ____________ doctor muy famoso en el hospital. Luisa, la esposa de Esteban,
+es 9. ________________ nutricionista [nutritionist]. Ella es 10. ______________ nutricionista muy trabajadora.
+d. Escribe los números correctos. / Write the correct numbers.
+1. ¿Cuántos estados [states] hay en los Estados Unidos? ________________.
+2. ¿Cuántos días hay en enero [January]? ____________________________.
+3. ¿Cuántos días hay en un febrero [February] normal? __________________.
+4. ¿Cuántas dedos [fingers] hay en dos manos? ________________________.
+5. ¿Cuántas semanas [weeks] hay en un año [year]? ___________________.
+6. En la canción [song] “The Twelve Days of Christmas” [Los doce días de la Navidad], ¿cuántas mujeres bailan?
+__________________.
+7. ¿En cuántas naciones de América Central se habla [is spoken] español como lengua oficial?
+___________________________.
+
+-- 10 of 97 --
+
+5
+IV. Lectura cultural / Cultural Reading
+Lee el texto siguiente sobre la comida latinoamericana y contesta las preguntas de forma cierto (“C”) o falso (“F”). /
+Read the following text about Latin American food and answer the questions as either true (“C”) or false (“F”).
+La comida latinoamericana es más que burritos, quesadillas y tacos. Aunque en los Estados Unidos una de las
+comidas más conocida es la comida mexicana, esta también está compuesta de una gran variedad de ingredientes,
+colores y sabores. En la comida latinoamericana hay una mezcla de cultura con influencia indígena y europea, por
+ejemplo, de España, Italia, e incluso de África.
+Es importante notar que la comida varía según la región geográfica y el
+país. Estas variaciones gastronómicas dependen de los productos de cada
+región, de la cercanía con el mar, de la geografía particular de cada zona y
+de las tradiciones y orígenes culturales de cada pueblo. Por ejemplo, en el
+norte de México los tamales se envuelven con las hojas de maíz y en el
+sur con las hojas del plátano. Pero en general, en todo México se utilizan
+distintos tipos de chiles para sazonar las comidas y por eso es común que
+la comida mexicana sea muy picante. Los elementos básicos en el país
+son las tortillas, el arroz, los frijoles, el ajo y los chiles picantes.
+En Centroamérica, las comidas son similares a México, pero cada país
+tiene sus propios platos típicos. También, en las costas se utilizan
+muchos mariscos que pueden prepararse en estofados, a la parrilla,
+crudos, o encurtidos como el ceviche. Aunque el ceviche se come en
+Centroamérica y América del Sur, es especialmente famoso el de Perú.
+El ceviche básico consiste en pescado crudo marinado en cítricos
+como el limón. Se le agregan condimentos como cebolla, chile,
+pimienta y sal.
+En el caso de la carne de res, los argentinos y uruguayos son los más
+conocidos en consumo y preparación de carnes, seguidos de los
+colombianos, venezolanos y brasileños. El plátano es muy común en
+platos de comida colombiana y centroamericana. Los patacones
+(plátanos verdes fritos) de Colombia son famosos e indispensables en la
+comida colombiana. Son tradicionales también en los platos venezolanos
+y puertorriqueños, pero estos últimos les llaman tostones.
+1. La comida latinoamericana consiste solo en burritos, tacos y quesadillas. ______________________________
+2. La comida latinoamericana tiene una influencia indígena y europea. __________________________________
+3. Los tamales en el norte y el sur de México son diferentes. __________________________________________
+4. Dos elementos básicos de la comida de México son los chiles picantes y los tostones. ____________________
+5. Los argentinos y uruguayos son famosos por la preparación de la carne de res. _________________________
+
+-- 11 of 97 --
+
+6
+V. Respuestas correctas / Correct Answers
+a. 	1. unos 	9. un
+2. una 	10. unas
+3. unos 	11. un
+4. un 	12. unos
+5. unos 	13. un
+6. unas 	14. una
+7. unos 	15. unos
+8. unos 	16 unas
+b. 	1. unos 	5. una
+2. Un 	6. unas
+3. un 	7. una
+4. un
+c. 	1. X 	6. un
+2. X 	7. X
+3. una 	8. un
+4. un 	9. X
+5. X 	10. una
+d. 	1. cincuenta 	5. cincuenta y dos
+2. treinta y uno 	6. nueve
+3. veintiocho 	7. seis
+4. diez
+Lectura cultural
+1. F 	2. C 	3. C 	4. F 	5. C
+Latin American food is more than burritos, quesadillas, and tacos. Even though in the United States Mexican food is
+one of the most well-known kinds, Mexican food is also composed of a great variety of ingredients, colors, and flavors.
+In Latin American food, there is a mixture of culture with indigenous and European influence from, for example, Spain,
+Italy, and even Africa.
+It’s important to note that food varies according to geographical region and country. These gastronomic variations
+depend on the products of each region, proximity to the sea, the particular geography of each zone, and the traditions
+and cultural origins of each nation. For example, in the north of Mexico tamales are wrapped in corn husks and in the
+south in banana leaves. But in general, in all of Mexico, different types of chili peppers are used to season food, and
+for that reason it’s common for Mexican food to be spicy. The basic elements in the country are tortillas, rice, beans,
+garlic, and hot chilis.
+In Central America, the food is similar to Mexican food, but each country has its own typical dishes. Also, on the coasts
+many shellfish are used that can be prepared in stews, on the grill, raw, or pickled as in ceviche. Although ceviche
+is eaten in Central America and South America, it is especially famous in Peru. Basic ceviche consists of raw fish
+marinated in citrus fruit like lemon. Condiments like onion, chili peppers, pepper, and salt are added to it.
+The Argentines and the Uruguayans are the most known for consuming and cooking beef, followed by the Colombians,
+Venezuelans, and Brazilians. Bananas are very common in dishes of Colombian and Central American food.
+Patacones (fried green bananas) from Colombia are famous and indispensable in Colombian food. They are also
+traditional in Venezuelan and Puerto Rican dishes, but people there call them tostones.
+
+-- 12 of 97 --
+
+7
+The Verb Estar and Numbers over 100
+I. Vocabulario nuevo / New Vocabulary
+caliente – hot 	aburrido – bored
+frío – cold 	cansado – tired
+nervioso – nervous 	enfermo – sick
+preocupado – worried 	ocupado – busy
+frustrado – frustrated 	preparado – prepared
+confundido – confused 	ordenado – organized, tidy
+tranquilo – calm 	desordenado – disorganized, messy
+triste – sad 	roto – broken
+alegre – happy 	abierto – open
+enojado – angry 	cerrado – closed
+feliz – happy
+estar – to be 	¡Repitan! – Repeat! [formal command]
+¡Empecemos! – Let’s get started!
+el parque – park 	la iglesia – church
+el hospital – hospital 	el aeropuerto – airport
+la biblioteca – library 	el mercado – market
+la tienda – store 	el carro – car
+la oficina – office 	el dólar – dollar
+antes de Cristo – B.C. 	después de Cristo – A.D.
+cien – one hundred 	setecientos – seven hundred
+doscientos – two hundred 	ochocientos – eight hundred
+trescientos – three hundred 	novecientos – nine hundred
+cuatrocientos – four hundred 	mil – thousand
+quinientos – five hundred 	millón – million
+seiscientos – six hundred
+Lesson
+6
+
+-- 13 of 97 --
+
+8
+II. Repaso general / General Review
+A. Approach to Learning New Verbs
+The three questions you should ask when learning any new verb are as follows.
+1. 	What does it mean?
+2. 	How do you use it?
+3. 	How do you conjugate it?
+B. The Verb estar
+Using these three questions with our new verb produces the following answers.
+1. 	The verb estar means “to be.”
+2. 	Estar has three main uses, and the two you’ll examine now are a) estar used to express the state or condition
+of someone or something (e.g., “I’m well” is Estoy bien; “The coffee is hot” is El café está caliente) and b)
+estar used to express location (e.g., ¿Estás en la tienda? is “Are you in the store?,” except when talking
+about origin, when ser is used: Soy de Sevilla is “I am from Sevilla”).
+3. 	The conjugation of estar is as follows.
+estar [to be]
+yo 	estoy 	nosotros, nosotras 	estamos
+tú 	estás 	vosotros, vosotras 	estáis
+él, ella, usted 	está 	ellos, ellas, ustedes 	están
+The yo form of estar has the same ‑oy ending as the yo form of ser. The other five endings for estar are almost the
+same as the regular -ar endings (except that the endings for estar have accents in the tú, usted, and ustedes forms).
+C. Communicating beyond Words
+When speaking, make sure to use tone of voice, facial expressions, and gestures to communicate in addition to the words
+you’re saying. Thinking about the words you want to say requires significant mental energy for a beginning language
+learner, but focusing only on the words you’re saying can produce a robotic speech, devoid of emotion. So, when speaking,
+do your best to remember to make use of your tone of voice, face, and body as tools to help you convey your message.
+D. Numbers over 100
+Use the numbers one to ten to help you learn the multiples of one hundred from one hundred to one thousand. Notice
+the similarities and differences in the following numbers.
+uno 	cien
+dos 	doscientos
+tres 	trescientos
+cuatro 	cuatrocientos
+cinco 	quinientos
+seis 	seiscientos
+siete 	setecientos
+ocho 	ochocientos
+nueve 	novecientos
+diez 	mil
+“One hundred cars” is cien carros and “one thousand churches” is mil iglesias, but “one million dollars” is un millón
+de dólares. Examples of years in Spanish are the following: 1578 is mil quinientos setenta y ocho and 2019 is dos
+mil diecienueve.
+In much of the Spanish-speaking world, the use of periods and commas with numbers is the opposite of what it is in
+the United States. So, what in the United States would be written as 23,400.50 would be written as 23.400,50.
+
+-- 14 of 97 --
+
+9
+E. Differences in Accents
+In all regions where Spanish is spoken, ce and ci are always pronounced the same as z. In Latin America, z makes the
+s sound, as seen in the pronunciation of the words cero, cinco, and zapato, which in Latin America are pronounced
+as “sero,” “sinco,” and “sapato.” This is called the seseo variety of Spanish. In northern and central Spain, where s
+is pronounced as an s and z is pronounced as th, these words are pronounced “thero,” “thinco,” and “thapato.” This
+accent, which shows a distinction between the pronunciation of s and th sounds, is called the distinción variety of
+Spanish, and it characterizes the Spanish spoken in northern and central Spain. Finally, there are just a few areas in
+very southern Spain where the letters s and z are pronounced the same, but the sound made for both letters sounds
+like th. This rare variety of Spanish is called the ceceo variety.
+In 1492, when Spaniards first went to the Americas, the Spanish spoken in Spain was the seseo variety. During the 16th
+century, distinción developed in Spain, but primarily in the northern and central parts of the country. So, by the late
+1500s, a Spaniard living in Madrid or in a more northern city would be pronouncing words in a way that distinguished
+between the z of zapato and the s of casa. Many of the Spaniards that emigrated from the Iberian Peninsula came from
+Andalusia in southern Spain or from the Canary Islands, areas that never developed the distinción that characterized
+more northern speech. That’s why speakers in Sevilla even today pronounce the z like Latin Americans instead of like
+people from Madrid. Because speakers in southern areas spoke the seseo variety of Spanish and because so many
+of them went to the Americas, the seseo variety of Spanish became the standard in Latin America.
+III. Actividades / Activities
+a. Juan Manuel Ríos, el amigo argentino de Luis Cortés, está de visita en Villa Celeste. Luis Cortés les está
+presentando a Juan Manuel a sus vecinos. / Juan Manuel Ríos, the Argentine friend of Luis Cortés, is visiting Villa
+Celeste. Luis Cortés is introducing Juan Manuel to his neighbors.
+Completa el diálogo siguiente con las palabras y las conjugaciones apropiadas del verbo estar. / Complete the
+following dialogue with the appropriate words and verb conjugations of estar.
+cansado 	igualmente 	es un placer 	argentino 	días 	feliz (2) 	estar (5)
+Alejandra: Buenos 1. ______________, Luis.
+Luis: Hola, Alejandra. ¿Cómo 2. ______________? Te presento a Juan Manuel. Él es mi amigo de
+Argentina.
+Alejandra: ¡Hola, Juan Manuel! 3. ______________.
+Juan Manuel: 4. ¡___________________!
+Luisa: ¿Eres 5. _________________? ¡Qué interesante!
+Juan Manuel: Sí, mi familia y yo vivimos en Buenos Aires.
+Luisa: ¿Y cómo estás?
+Juan Manuel: Bueno [Well], 6. ________________ muy 7. ________________. Mi vuelo [flight] tardó [took]
+muchas horas [hours]. Pero 8. ________________ 9._________________ porque [because] Luis
+es mi buen amigo y ahora [now] estoy con [with] él y su familia.
+Luis: Y Cecilia y yo 10._________________ muy 11. _______________ porque Juan Manuel 12.
+_____________ de visita.
+
+-- 15 of 97 --
+
+10
+b. De acuerdo a las siguientes situaciones, ¿cuál sería la emoción o la condición esperada para estas personas? /
+According to the following situations, what would be the expected emotion or condition for these people?
+Completa las frases con la conjugación apropiada de estar y el adjetivo correspondiente a la situación. / Complete the
+sentences with the appropriate conjugation of estar and the adjective corresponding to the situation.
+enamorado [in love] 	enojado 	nervioso 	aburrido
+frustrado 	feliz 	cansado
+1. Luis Cortés trabaja muchas horas en su trabajo. Él siempre [always] _____________ ________________.
+2. Cecilia tiene que [has to] preparar un informe financiero [financial report] en quince minutos [minutes].
+Ella ____________ muy ______________.
+3. Juana está divorciada [divorced]. Él y su ex-esposo [ex-husband] no ______________ _________________.
+4. Mariana es muy pequeña y siempre toma los juguetes [toys] de Diana cuando están en el parque. Diana
+_____________ ______________.
+5. Hay un examen en la clase a las 8:00. Los estudiantes ______________ __________________.
+6. Erica está embarazada [pregnant]. Ella y su esposo ______________ muy __________________.
+7. Alberto, un hombre de treinta y cinco años [years], vive en la casa de sus padres y tiene [has] pocos amigos.
+Él _____________ _______________.
+8. Alberto también es egoísta y no ayuda a sus padres a limpiar [to clean] la casa. Sus padres ___________
+____________ con él.
+9. Generalmente [Generally], ¿cómo estás en una fiesta [party]? _____________ ________________.
+c. Felipe tuvo una fiesta anoche y ahora está revisando su casa después de la fiesta. Toda la casa es un desastre. /
+Felipe had a party last night and is now looking over his house after the party. The whole house is a disaster.
+Completa las frases con la conjugación de estar y el adjetivo de condición apropiados. / Complete the sentences with
+the appropriate conjugation of estar and the appropriate adjective of condition.
+abierto 	roto 	ordenado 	cerrado 	desordenado
+
+-- 16 of 97 --
+
+11
+Felipe está muy preocupado y nervioso porque después de la fiesta toda la casa 1. ________________
+2. ____________. Todas las puertas [doors] 3. ___________ 4. ____________, y el televisor 5. _____________
+6. ____________. Las ventanas [windows] de la casa 7. _____________ 8. ____________, y hay mucho polen
+[pollen] en el aire. Solo el baño [bathroom] 9. ____________ 10. ______________.
+d. Escribe en qué lugares se pueden localizar las siguientes personas o cosas. / Write in which places the following
+people or things can be found.
+iglesia 	oficina 	biblioteca 	supermercado
+universidad 	hospital 	parque 	[supermarket]
+1. Las doctoras trabajan en los __________________.
+2. Los libros y las revistas [magazines] están en la ________________________.
+3. Una secretaria ejecutiva [executive secretary] generalmente trabaja en una _________________.
+4. Siempre compro mucha agua en el ______________________.
+5. Los profesores enseñan cursos en las ________________________________.
+6. Los domingos [On Sundays] hay muchas personas en las _________________________.
+7. Los chicos corren en los ______________________________.
+e. Escribe los siguientes años en español. / Write the following years in Spanish.
+1. 1886 _______________________
+2. 2019 _______________________
+3. 1605 _______________________
+4. 319 A.D. ___________________
+5. 711 B.C. ____________________
+6. 1942 _______________________
+7. 2034 _______________________
+
+-- 17 of 97 --
+
+12
+IV. Respuestas correctas / Correct Answers
+a. 1. días 	7. cansado
+2. estás 	8. estoy
+3. Es un placer 	9. feliz
+4. Igualmente 	10. estamos
+5. argentino 	11. felices
+6. Estoy 	12. está
+b. 1. está cansado 	6. están muy felices
+2. está muy nerviosa 	7. está aburrido / está frustrado
+3. están enamorados 	8. están enojados / están frustrados
+4. está frustrada / está enojada 	9. Estoy feliz
+5. están nerviosos
+c. 1. está 	6. roto
+2. desordenada 	7. están
+3. están 	8. abiertas
+4. abiertas / cerradas 	9. está
+5. está 	10. ordenado
+d. 1. hospitales 	5. universidades
+2. biblioteca 	6. iglesias
+3. oficina 	7. parques
+4. supermercado
+e. 1. mil ochocientos ochenta y seis 	5. setecientos once antes de Cristo
+2. dos mil diecienueve 	6. mil novecientos cuarenta y dos
+3. mil seiscientos cinco 	7. dos mil treinta y cuatro
+4. trescientos diecinueve después de Cristo
+
+-- 18 of 97 --
+
+13
+Regular -er and -ir Verbs in the Present
+I. Vocabulario nuevo / New Vocabulary
+comer – to eat 	vivir – to live
+leer – to read 	abrir – to open
+beber – to drink 	recibir – to receive
+creer – to believe, to think 	descubrir – to discover
+aprender – to learn 	subir – to go up
+correr – to run 	escribir – to write
+vender – to sell 	decidir – to decide
+deber – should 	asistir a – to attend
+mi / mis – my 	nuestro(s) / nuestra(s) – our
+tu / tus – your [informal, singular] 	vuestro(s) / vuestra(s) – your [informal, plural]
+su / sus – his, her, their, your [formal, singular, and
+plural]
+¿no? – Isn’t that so? 	¿cierto? – right?
+¿verdad? – right?
+los parientes – relatives 	el abuelo – grandfather
+los padres – parents 	la abuela – grandmother
+la madre – mother 	el tío – uncle
+la mamá – mom 	la tía – aunt
+mami – mommy 	el primo – male cousin
+el padre – father 	la prima – female cousin
+el papá – dad 	el sobrino – nephew
+papi – daddy 	la sobrina – niece
+el esposo – husband 	el nieto – grandson
+la esposa – wife 	la nieta – granddaughter
+el hijo – son 	el nombre – name
+la hija – daughter 	el apellido – last name
+el hermano – brother 	materno – maternal
+la hermana – sister 	paterno – paternal
+la computadora – computer 	el trabajo – work, job
+el diccionario – dictionary 	la pluma – pen
+Lesson
+7
+
+-- 19 of 97 --
+
+14
+II. Repaso general / General Review
+A. Conjugation of Regular Verbs
+In a previous lesson, you learned that -ar verbs have the following endings in the present.
+estudiar [to study]
+estudio 	estudiamos
+estudias 	estudiáis
+estudia 	estudian
+In this lesson, you learned that -er verb endings in the present can be formed by making just one change to the above
+-ar endings: Replace any a you see in an -ar ending with the letter e. Making that one change gives us the following
+-er endings in the present.
+beber [to drink]
+bebo 	bebemos
+bebes 	bebéis
+bebe 	beben
+Making the following two changes to -er endings gives us the -ir endings in the present: emos à imos, éis à ís.
+Those two changes give us the following -ir endings in the present.
+dedidir [to decide]
+decido 	decidimos
+decides 	decidís
+decide 	deciden
+When two verbs are used together, you conjugate the first and put the second in the infinitive form. This can be seen
+with a first verb like deber (should) or necesitar (to need). “We should run” is Debemos correr. “They need to open
+the book” is Necesitan abrir el libro. In both of these cases, the first verb (debemos, necesitan) is conjugated, while
+the second verb (correr, abrir) is in the infinitive form.
+B. Possessive Adjectives
+Possessive adjectives agree in number and gender with the thing possessed. They are as follows.
+mi / mis [my] 	nuestro / nuestra / nuestros / nuestras [our]
+tu / tus [your (informal)] 	vuestro / vuestra / vuestros / vuestras [your (informal)]
+su / sus [his, her, your (formal, singular)] 	su / sus [their, your (formal, plural)]
+C. Asking a Yes/No Question
+There are three ways to ask yes/no questions in Spanish.
+1. 	Raise the pitch of your voice at the end of the sentence.
+2. 	End the sentence with ¿no? [Isn’t that so?], ¿verdad? [right?], or ¿cierto? [right?].
+3. 	Put the verb before the subject.
+Here are the ways to make the following statement into a question: Pedro vende su casa. [Pablo is selling his house.]
+1. 	¿Pedro vende su casa? (Say it with a rising pitch at the end of the sentence.)
+2. 	Pedro vende su casa, ¿no?; Pedro vende su casa, ¿verdad?; Pedro vende su casa, ¿cierto?
+3. 	¿Vende Pedro su casa?
+
+-- 20 of 97 --
+
+15
+III. Actividades / Activities
+a. Marisol está hablando por Skype con sus amigas Pilar y Carolina sobre su nueva escuela. / Marisol is talking on
+Skype with her friends Pilar and Carolina about her new school.
+Completa el diálogo siguiente con los adjetivos posesivos apropiados. / Complete the following dialogue with the
+appropriate possessive adjectives.
+Marisol: 	¡Hola! ¿Cómo están?
+Pilar: 	¡Nosotras estamos muy bien! ¿Y tú?
+Marisol: 	Estoy un poco triste porque no estoy con ustedes, pero estoy bien.
+Carolina: 	¿Cómo es 1. ________________ nueva escuela?
+Marisol: 	Es muy grande y muy bonita. 2. ________________ clase de inglés es excelente y
+3. ______________ libros para la clase son muy interesantes.
+Carolina: 	Marisol, ¿Hay muchos estudiantes en 4. ______________ clase de inglés?
+Marisol: 	En 5. _______________ clase hay 35 estudiantes.
+Pilar: 	Carolina y yo estamos en una clase de historia fenomenal y en una clase de matemáticas terrible. En
+6. ________________ clase de historia también hay 35 estudiantes, pero en 7. _______________
+clase de matemáticas solo hay 15 estudiantes.
+Carolina: 	¿Qué tal son los maestros [teachers] en la nueva escuela?
+Marisol: 	8. Todos _____________ maestros son inteligentes, pero no todos son simpáticos.
+b. Felipe está limpiando su casa después de una fiesta. Hay muchos objetos, pero Felipe no sabe a quiénes
+pertenecen. Felipe está hablando con su hermana Elena sobre los objetos encontrados. / Felipe is cleaning his house
+after a party. There are many objects, but Felipe doesn’t know to whom they belong. Felipe is talking with his sister
+Elena about the found objects.
+Completa las frases con los adjetivos posesivos correctos. / Complete the sentences with the correct possessive
+adjectives.
+
+-- 21 of 97 --
+
+16
+1. Felipe: Elena, el teléfono celular es de Rogelio, ¿cierto?
+Elena: No, es _______________ teléfono celular.
+a) vuestros 	b) mi 	c) su
+2. Felipe: Elena, el libro de Isabel Allende es de mami, ¿cierto?
+Elena: No, es de ______________ amiga Maribel.
+a) su 	b) vuestras 	c) sus
+3. Felipe: Elena, los papeles son de Mariana, ¿verdad?
+Elena: No, son de ______________ tía.
+a) nuestros 	b) mis 	c) nuestra
+4. Felipe: Elena, las iPads son de Margarita y Lourdes, ¿no?
+Elena: No, son de _______________ amigos David y Miguel.
+a) mi 	b) tus 	c) nuestro
+5. Felipe: Elena, las plumas son de Sebastián, ¿no?
+Elena: No, son __________________ plumas.
+a) tu 	b) nuestros 	c) mis
+6. Felipe: Elena, los cuadernos son de Sandra y Valentina, ¿verdad?
+Elena: No, son de ________________ sobrinas Diana y Mariana.
+a) nuestras 	b) nuestra 	c) vuestra
+c. Contesta las siguientes preguntas. Conjuga el verbo en el presente. / Answer the following questions. Conjugate
+the verb in the present.
+1. Lees libros de ciencia ficción [science fiction], ¿no? _______________________________________________.
+2. Bebes mucha agua, ¿verdad? ________________________________________________________________.
+3. Tú y tu amigo vendéis carros en vuestro trabajo, ¿cierto? ___________________________________________.
+4. Trabajas 40 horas a la semana [hours per week], ¿verdad? _________________________________________.
+5. Tú y tu familia comen pizza en casa, ¿verdad? ___________________________________________________.
+6. Tú y tu familia viven en los Estados Unidos, ¿cierto? ______________________________________________.
+7. ¿Los estudiantes asisten a una buena escuela? _________________________________________________.
+8. ¿Deben estudiar música tus hermanos? _______________________________________________________.
+
+-- 22 of 97 --
+
+17
+d. Luis Cortés le está explicando a su amigo Juan Manuel Ríos el parentesco de sus amigos en el vecindario. / Luis
+Cortés is explaining to his friend Juan Manuel Ríos the kinship of his friends in the neighborhood.
+Completa las frases con la información apropiada. Nota: Necesitas consultar la información de las familias del
+vecindario al inicio del cuaderno. / Complete the sentences with the appropriate information. Note: You need to consult
+the information about the neighborhood families at the beginning of the workbook.
+1. Diana es la __________________ de Luis y Cecilia.
+a) hermana 	b) hija 	c) nieta
+2. Javier es el __________________ de Luis y Cecilia.
+a) abuelo 	b) hijo 	c) sobrino
+3. Mariana es la _________________ de Diana.
+a) nieta 	b) abuela 	c) hermana
+4. Carlos es el ______________________ de Pablo y Marisol.
+a) padre 	c) tío 	c) sobrino
+5. Erica, Felipe y Elena son los ____________ de Esteban y Luisa.
+a) nietos 	b) hijos 	c) primos
+6. Erica es la ___________________ de Javier.
+a) prima 	b) hermana 	c) esposa
+7. Carlos es el ___________________ de Alejandra.
+a) tío 	b) esposo 	c) nieto
+8. Mariana es la _________________ de Diego.
+a) hija 	b) hermana 	c) sobrina
+9. Luis y Cecilia son los ____________________ de Diana.
+a) tíos 	b) primos 	c) abuelos
+10. Alberto y Diego son los _______________ de Mariana.
+a) primos 	b) tíos 	c) hijos
+
+-- 23 of 97 --
+
+18
+e. ¡Ahora es tu turno! Contesta las siguientes preguntas. / Now it’s your turn! Answer the following questions.
+1. ¿Quiénes son tus padres? __________________________________________.
+2. ¿Quiénes son tus hermanos? ________________________________________.
+3. ¿Quiénes son tus abuelos? __________________________________________.
+4. El hijo de tu hija es tu _______________________________________________.
+5. Los padres de tu padre son tus _______________________________________.
+6. Las hijas de tu hermano son tus ______________________________________.
+7. La hija de tus tíos es tu _____________________________________________.
+8. Los hermanos de tu madre son tus ____________________________________.
+f. ¿Puedes adivinar los apellidos de las siguientes personas? / Can you guess the last names of the following people?
+1. Padres: Luis Cortés Navarro y Cecilia Ruiz Ramírez.
+Hijo: Alberto _______________________________.
+2. Padres: Esteban Quirós Sánchez y Luisa García Vega.
+Hija: Elena _________________________________.
+3. Padres: Carlos González Pérez y Alejandra Fallas Ureña.
+Hijo: Pablo ________________________________.
+IV. Respuestas correctas / Correct Answers
+a. 1. tu 	5. mi / nuestra
+2. Mi / Nuestra 	6. nuestra
+3. mis / nuestros 	7. nuestra
+4. tu 	8. mis / nuestros
+b. 1. b) mi 	4. b) tus
+2. a) su 	5. c) mis
+3. c) nuestra 	6. a) nuestras
+
+-- 24 of 97 --
+
+19
+c. 	1. Sí, leo libros de ciencia ficción. / No, no leo libros de ciencia ficción.
+2. Sí, bebo mucha agua. / No, no bebo mucha agua.
+3. Sí, vendemos carros en nuestro trabajo. / No, no vendemos carros en nuestro trabajo.
+4. Sí, trabajo 40 horas a la semana. / No, no trabajo 40 horas a la semana.
+5. Sí, comemos pizza en casa. / No, no comemos pizza en casa.
+6. Sí, vivimos en los Estados Unidos. / No, no vivimos en los Estados Unidos.
+7. Sí, los estudiantes asisten a una buena escuela. / No, los estudiantes asisten a una mala escuela.
+8. Sí, mis hermanos deben estudiar música. / No, mis hermanos no deben estudiar música.
+d. 1. c) nieta 	6. c) esposa
+2. b) hijo 	7. b) esposo
+3. c) hermana 	8. c) sobrina
+4. a) padre 	9. c) abuelos
+5. b) hijos 	10. b) tíos
+e. 1. Mis padres son…. 	5. abuelos
+2. Mis hermanos son…. / Soy hijo/hija único/única. 	6. sobrinas
+3. Mis abuelos son…. 	7. prima
+4. nieto 	8. tíos
+f. 	1. Alberto Cortés Ruiz
+2. Elena Quirós García
+3. Pablo González Fallas
+
+-- 25 of 97 --
+
+20
+The Verb Ir in the Present
+I. Vocabulario nuevo / New Vocabulary
+nuevo – new 	interrogativo – interrogative
+la manera – way 	el adjetivo – adjective
+la palabra – word 	el adverbio – adverb
+el vocabulario – vocabulary 	la preposición – preposition
+el verbo – verb 	la tarea – homework, chore
+el sustantivo – noun
+ir – to go 	terminar – to finish
+pasar – to happen
+¿cómo? – how? 	¿quién? – who? [singular]
+¿qué? – what? 	¿quiénes? – who? [plural]
+¿dónde? – where? 	¿por qué? – why?
+¿adónde? – to where? 	¿cuándo? – when?
+la escuela – school 	el cine – movie theater
+el restaurante – restaurant 	el club – club
+la plaza – city square, town square 	el café – café
+el museo – museum 	la estación de trenes – train station
+el banco – bank 	la estación de autobuses – bus station
+la farmacia – pharmacy 	los servicios sanitarios – restrooms
+el supermercado – supermarket 	el baño – bathroom
+el teatro – theater
+mañana – tomorrow 	porque – because
+a – to 	ahora mismo – right now
+más – more 	¿Qué pasa? – What’s happening?
+posiblemente – possibly
+Lesson
+8
+
+-- 26 of 97 --
+
+21
+II. Repaso general / General Review
+A. Spelling Changes for y and o
+In a previous lesson, you learned that y means “and” and o means “or.” In this lesson, you learned the following spelling
+changes: y becomes e before a word beginning with an i sound; o becomes u before a word beginning with an o sound.
+Examples of these changes include Roberto e Isabel [Robert and Isabel] and minuto u hora [minute or hour].
+B. Ir in the Present
+The verb ir, meaning “to go,” has the following conjugation in the present.
+ir [to go]
+voy 	vamos
+vas 	vais
+va 	van
+The yo form of voy is similar to the yo form of ser [to be], which is soy [I am]. The other five endings [-as, -a, -amos,
+-ais, -an] are the same as the endings for regular -ar verbs, with only one difference: There is no accent over the a in
+the vosotros form vais.
+The preposition a, meaning “to,” is often used after ir. For example, Elena va a la farmacia means “Elena goes / is
+going / does go to the pharmacy.” When used before the masculine definite article el [the], a + el contracts to al [to
+the], so “I am going to the bank” is Voy al banco. In a previous lesson, you learned that de + el contracts to del [to the]
+(e.g., Es el día del examen is “It’s the day of the exam”). The only two contractions in Spanish are al and del.
+C. Ir Used to Talk about a Future Event
+The construction ir + a + infinitivo [infinitive] is used to talk about a future event by expressing something that is going
+to occur, so Vamos a caminar al supermercado is “We are going to walk to the supermarket,” and Voy a comer is “I
+am going to eat.”
+D. Palabras interrogativas / Interrogative Words
+Interrogative words are used when asking questions. These words, which all have an accent mark, include ¿cuánto?
+[how much?], ¿cuántos? [how many?], ¿cómo? [how?], ¿qué? [what?], ¿dónde? [where?], ¿adónde? [to where?],
+¿cuándo? [when?], ¿quién? [who? (singular)], ¿quiénes? [who? (plural)], and ¿por qué? [why?].
+E. Uses of estar and ser
+In general, estar is used to talk about location (e.g., ¿Dónde están los estudiantes? is “Where are the students?”;
+Caracas está en Venezuela is “Caracas is in Venezuela”). Remember, though, that estar is not always used when
+talking about location, because ser is used to tell where someone is from (e.g., Leo y Sofía son de Panamá, pero
+Ana es de Chile is “Leo and Sofía are from Panama, but Ana is from Chile”). To identify someone or something, the
+verb ser is used (e.g., ¿Quién es? is “Who is it?”; ¿Quiénes son las mujeres en el teatro? is “Who are the women
+in the theater?”).
+F. Ways to Learn New Vocabulary
+Being able to acquire and use new vocabulary is one of the major challenges when learning a language. For that
+reason, you should try different techniques to learn new words in order to determine which approach works best for you.
+Some learners will find that listening to the audio glossary a number of times for each lesson will best help them
+remember new vocabulary. At first, you should simply repeat the Spanish word for the given English word. With time
+and practice, you should be able to say the Spanish word for the given English word before hearing it.
+Making and using flashcards is another approach to learning new vocabulary that works for many learners. The
+physical act of writing English on one side of the card and Spanish on the other can help you remember new words,
+and writing words in Spanish helps you remember proper spelling. Including a connector, or bridge word, on the
+Spanish side of the card can help make it easier to remember new words in Spanish. Consider the case of the verb
+
+-- 27 of 97 --
+
+22
+correr, which means “to run.” As you think about “to run,” you might imagine a student running down a corridor in
+school. So, on one side of the card you write, “to run,” and on the other you write correr in the middle of the card and
+“corridor” in the upper-left corner. As you practice with the word, you start with the English “to run,” which makes you
+think of “corridor,” which reminds you of correr. The connector can be a word, an image, or anything else that helps
+you make a connection between the English and Spanish words. One additional advantage of making flashcards is
+that they allow others to help you learn vocabulary. If you have friends or family members interested in helping you
+improve your Spanish, ask them to quiz you on your flashcards.
+III. Actividades / Activities
+a. Responde de manera afirmativa a las siguientes preguntas utilizando la construcción ir + a + infinitivo. / Answer
+the following questions affirmatively using the construction ir + a + infinitive.
+1. ¿Vas a leer los libros mañana? ___________________________________________________.
+2. ¿Vais a llamar por teléfono a vuestro hermano? ______________________________________.
+3. ¿Va a ir al cine Fernando con sus amigos? ___________________________________________.
+4. ¿Va a tomar café Elena a las tres de la tarde?_________________________________________.
+5. ¿Tus amigos y tú van a bailar en el club? ___________________________________________.
+6. ¿Tus vecinos van a ir al teatro mañana? _____________________________________________.
+b. Esteban y Luisa quieren ir de vacaciones con sus hijos Felipe y Elena, pero no saben adónde ir. / Esteban and
+Luisa want to go on vacation with their children Felipe and Elena, but they don’t know where to go.
+Lee el siguiente diálogo y contesta las preguntas. / Read the following dialogue and answer the questions.
+Esteban: 	¡Vamos de vacaciones a Puerto Rico!
+Luisa: 	No quiero [I don’t want] ir a Puerto Rico. ¿Por
+qué no vamos a Ecuador?
+Felipe: 	No, mami, Ecuador está muy lejos [far]. Vamos
+a México.
+Elena: 	Prefiero [I prefer] ir a la República Dominicana.
+Luisa: 	Yo creo que [that] México es una buena idea.
+Felipe: 	¡Sí, mami, México es una buena idea!
+Esteban: 	¡Está bien! Vamos a México.
+Elena: 	OK, en un año [year], vamos a la República
+Dominicana. ¿Está bien?
+Esteban: 	No, Elena, es mucho dinero [money].
+Solo vamos a ir a México para nuestras
+vacaciones. En dos años, vamos a la República
+Dominicana, ¿OK?
+Elena: 	Papi y mami, ¿pueden [can they] ir con nosotros mis amigas Rebeca y Alicia?
+Luisa: 	No, Elena, este es un viaje [trip] de familia, no de amigos.
+Esteban: 	¿Y cuándo debemos ir a México? ¿La próxima semana [next week] o en cuatro semanas?
+Felipe: 	Yo quiero ir la próxima semana.
+Elena: 	Yo quiero ir en cuatro semanas porque voy a tener [to have] las vacaciones de la universidad.
+Esteban: 	OK, ¡vamos a México en cuatro semanas!
+
+-- 28 of 97 --
+
+23
+1. ¿Adónde va de vacaciones la familia Quirós Sánchez?
+________________________________________________________________.
+2. ¿Qué cree Luisa de la posibilidad de ir a México?
+__________________________________________________________________________.
+3. ¿Por qué Esteban no quiere [doesn’t want] ir a la República Dominicana en un año?
+______________________________________________________________________________.
+4. ¿Cuándo va la familia a México?
+___________________________________________________________________________.
+5. ¿Van a ir de vacaciones las amigas de Elena con la familia Quirós Sánchez?
+______________________________________________________________________________.
+6. ¿Cuándo va la familia a la República Dominicana?
+_____________________________________________________________________________.
+c. ¡Ahora es tu turno! Completa las siguientes preguntas. / Now it’s your turn! Complete the following answers.
+1. ¿Cuándo van de vacaciones tú y tu familia?
+____________________________________ en cinco días.
+2. ¿Adónde van ustedes?
+__________________________________________ Chile.
+3. ¿Quién es tu futbolista favorito?
+____________________________ Lionel Messi de Argentina.
+4. ¿Dónde estudia español Ana?
+______________________________________ en su casa.
+5. ¿Con quiénes vas al cine y al teatro? _________________________________________________ mis amigos.
+6. ¿Por qué viaja Roberto mucho a Panamá? _____________________________ sus abuelos viven en Panamá.
+
+-- 29 of 97 --
+
+24
+d. De las siguientes frases, escoge la opción más apropiada. / From the following sentences, choose the most
+appropriate option.
+1. Javier y Erica _________________________ salsa y merengue en el club.
+a) bailar 	b) bailamos 	c) bailan
+2. La familia Quirós García va a ________________ México el próximo mes.
+a) visitar 	b) visitan 	c) visitáis
+3. Cecilia _______________ con su madre todos [every] los días.
+a) hablan 	b) habla 	c) hablar
+4. Alejandra ________________ el café todas las mañanas.
+a) preparan 	b) preparáis 	c) prepara
+5. Yo __________________ la radio en mi carro.
+a) escucho 	b) escuchas 	c) escuchamos
+6. Guillermo _________________ diez horas al día.
+a) trabajar 	b) trabaja 	c) trabajas
+7. Manuel, Sandra y yo ____________________ español a las cuatro de la tarde.
+a) estudiáis 	b) estudian 	c) estudiamos
+8. Leonor __________________ a casa a las seis de la tarde.
+a) llegas 	b) llega 	c) llegar
+9. Yo ________________ a ________________ al supermercado.
+a) voy…ir 	b) ir…voy 	c) ir…vas
+10. Vosotros _______________ a _______________ karaoke en el bar.
+a) van…cantar 	b) vais…cantar 	c) vamos…cantar
+
+-- 30 of 97 --
+
+25
+IV. Respuestas correctas / Correct Answers
+a. 	1. Sí, voy a leer los libros mañana.
+2. Sí, vamos a llamar por teléfono a nuestro hermano.
+3. Sí, Fernando va a ir al cine con sus amigos.
+4. Sí, Elena va a tomar café a las tres de la tarde.
+5. Sí, mis amigos y yo vamos a bailar en el club.
+6. Sí, mis vecinos van a ir al teatro mañana.
+b. 	1. La familia Quirós Sánchez va de vacaciones a México.
+2. Luisa cree que México es una buena idea.
+3. Esteban no quiere ir a la República Dominicana en un año porque es mucho dinero.
+4. La familia va a México en cuatro semanas.
+5. No, las amigas de Elena no van a ir de vacaciones con la familia Quirós Sánchez.
+6. La familia va a la República Dominicana en dos años.
+c. 	1. Vamos de vacaciones en cinco días.
+2. Vamos a Chile.
+3. Mi futbolista favorito es Lionel Messi de Argentina.
+4. Ana estudia español en su casa.
+5. Voy al cine y al teatro con mis amigos.
+6. Roberto viaja mucho a Panamá porque sus abuelos viven en Panamá.
+d. 	1. c) bailan 	6. b) trabaja
+2. a) visitar 	7. c) estudiamos
+3. b) habla 	8. b) llega
+4. c) prepara 	9. a) voy…ir
+5. a) escucho 	10. b) vais…cantar
+
+-- 31 of 97 --
+
+26
+Grammar Reference
+Articles
+Definite Articles 	Indefinite Articles
+masc. 	fem. 	masc. 	fem.
+sing. 	el 	la 	sing. 	un 	una
+pl. 	los 	las 	pl. 	unos 	unas
+The two contractions in Spanish are as follows.
+a + el = al 	de + el = del
+Feminine nouns beginning with the sound a in a stressed syllable use el rather than la as their definite article and un
+rather than una as their indefinite article (e.g., el águila rápida, un águila rápida).
+Nouns
+Words ending in -o are usually masculine; words ending in the letters -r and -l are also usually masculine (e.g., el
+maestro, el televisor, el papel). Words ending in -a are usually feminine; words ending in the suffixes -ión, -ad, and
+-tud are also almost always feminine (e.g., la mesa, la nación, la posibilidad, la virtud). Words ending in -ista can
+be either masculine or feminine (e.g., el dentista, la dentista).
+The rules for making a noun plural are as follows.
+1. 	If a noun ends in a vowel, add an -s: la silla à las sillas.
+2. 	If a noun ends in a consonant other than z, add -es: el papel à los papeles.
+3. 	If a noun ends in a z, change the z to c and add -es: el lápiz à los lápices.
+Adjectives
+Adjectives must agree in number and gender with the noun modified. Adjectives ending in -o and -dor and adjectives
+of nationality ending in a consonant have four forms.
+masc. 	fem. 	masc. 	fem. 	masc. 	fem.
+sing. 	guapo 	guapa 	hablador 	habladora 	inglés 	inglesa
+pl. 	guapos 	guapas 	habladores 	habladoras 	ingleses 	inglesas
+Almost all other adjective have two forms.
+masc. & fem. 	masc. & fem.
+sing. 	elegante 	fenomenal
+pl. 	elegantes 	fenomenales
+Adjectives in Spanish typically follow the noun modified (e.g., Queremos ver la casa grande y los parques bonitos).
+Possessive Adjectives
+mi / mis 	nuestro / nuestra / nuestros / nuestras
+tu / tus 	vuestro / vuestra / vuestros / vuestras
+su / sus 	su / sus
+Possessive adjectives precede the modified noun (e.g., Tengo mis libros y ella tiene sus papeles).
+
+-- 32 of 97 --
+
+27
+Demonstrative Adjectives
+masc. 	fem. 	masc. 	fem. 	masc. 	fem.
+sing. 	este 	esta 	ese 	esa 	aquel 	aquella
+pl. 	estos 	estas 	esos 	esas 	aquellos 	aquellas
+Demonstrative adjectives precede the modified noun (e.g., Me gusta esta computadora aquí).
+Demonstrative adjectives, which modify a noun, can also be used as demonstrative pronouns, which take the place of
+a noun (e.g., ¿Cuál de los restaurantes prefieres, ese o aquel?).
+Adverbs
+One way to form an adverb is to add the suffix -mente to the feminine singular form of an adjective (e.g., activa +
+mente à activamente; general + mente à generalmente). A common way to make an adverbial expression is to
+use the preposition con before a noun (e.g., con frecuencia, con cuidado).
+Pronouns
+Subject Pronouns 	Prepositional Pronouns
+yo 	nosotros, nosotras 	mí 	nosotros, nosotras
+tú 	vosotros, vosotras 	ti 	vosotros, vosotras
+usted 	ustedes 	usted 	ustedes
+él 	ellos 	él 	ellos
+ella 	ellas 	ella 	ellas
+Reflexive Pronouns 	Direct Object Pronouns 	Indirect Object Pronouns
+me 	nos 	me 	nos 	me 	nos
+te 	os 	te 	os 	te 	os
+se 	se 	lo 	los 	le 	les
+la 	las
+Direct object pronouns, indirect object pronouns, and reflexive pronouns go either before a conjugated verb or after
+and attached to an infinitive or a present participle. Examples include the following.
+Lo vamos a hacer mañana or Vamos a hacerlo mañana.
+Les quiero dar todo el dinero or Quiero darles todo el dinero.
+Me estoy poniendo los zapatos or Estoy poniéndome los zapatos.
+The indirect object pronoun always precedes the direct object pronoun when both are used in the same sentence
+(e.g., Si tengo los papeles, te los puedo mostrar).
+Both le and les become se before lo, la, los, and las (e.g., Cuando los estudiantes quieren más tiempo, sus
+maestros siempre se lo dan).
+Verbs
+Present Tense of Regular Verbs
+Once you learn the regular -ar endings in the present tense, you can learn the -er and -ir endings by knowing the following.
+1. 	The -er endings have just one difference from the -ar endings: Change a à e for every -ar ending, and that
+gives you the -er endings.
+2. 	There are only two differences between the -er endings and the -ir endings: emos à imos and éis à ís.
+
+-- 33 of 97 --
+
+28
+bailar 	comer 	vivir
+bailo 	bailamos 	como 	comemos 	vivo 	vivimos
+bailas 	bailáis 	comes 	coméis 	vives 	vivís
+baila 	bailan 	come 	comen 	vive 	viven
+Present Tense of Commonly Used Irregular Verbs
+ser 	estar 	ir
+soy 	somos 	estoy 	estamos 	voy 	vamos
+eres 	sois 	estás 	estáis 	vas 	vais
+es 	son 	está 	están 	va 	van
+tener 	venir 	dar
+tengo 	tenemos 	vengo 	venimos 	doy 	damos
+tienes 	tenéis 	vienes 	venís 	das 	dais
+tiene 	tienen 	viene 	vienen 	da 	dan
+The following verbs have irregular yo forms in the present tense: saber (yo sé); conocer (yo conozco); hacer (yo
+hago); poner (yo pongo); traer (yo traigo); salir (yo salgo); verbs ending in -ger, such as proteger (yo protejo);
+and verbs ending in -cer or -cir, such as ofrecer (yo ofrezco) and conducir (yo conduzco).
+Present Tense of Stem-Changing Verbs
+Verbs that change stem:
+1. 	Have one of four stem changes: e à ie, e à i, o à ue, u à ue.
+2. 	Have regular endings.
+3. 	Change stem in all singular forms and in the third-person plural (in the boot).
+querer 	pedir 	recordar 	jugar
+quiero 	queremos 	pido 	pedimos 	recuerdo 	recordamos 	juego 	jugamos
+quieres 	queréis 	pides 	pedís 	recuerdas 	recordáis 	juegas 	jugáis
+quiere 	quieren 	pide 	piden 	recuerda 	recuerdan 	juega 	juegan
+Talking about Something Happening Right Now
+The present progressive, used to talk about something happening right now, is formed as follows: estar in the present
++ present participle. To form the present participle, do the following: For an -ar verb, drop the -ar ending and add -ando;
+for an -er or -ir verb, drop the -er or -ir ending and add -iendo (e.g., bailar à bailando; aprender à aprendiendo;
+abrir à abriendo).
+Verbs ending in -er or -ir that have stems ending in a vowel have irregular present participles. Instead of ending
+in -iendo, the participle for these verbs ends in ‑yendo with a y (e.g., leer à leyendo; oír à oyendo; traer à
+trayendo).
+An example of the present progressive being used is Estamos comiendo ahora.
+Talking about the Future
+Two ways to talk about the future are as follows.
+1. 	Use the present tense (e.g., Mañana te doy la computadora).
+2. 	Use the construcion ir + a + infinitive (e.g., Esta noche vamos a trabajar mucho).
+
+-- 34 of 97 --
+
+29
+Talking about the Recent Past
+Acabar in the present + de + infinitive is used to express a recent past event (e.g., La profesora acaba de explicar
+la lección).
+Expressing How Long Something Has Been Going On
+A construction that expresses how long something has been going on is hace + time period + que + present tense of
+verb (e.g., Hace cuatro meses que estudiamos español).
+Another way to express how long something has been going on is with the question ¿Desde cuándo + subject +
+present tense of verb? (e.g., ¿Desde cuándo trabajas aquí?).
+There are three ways that a question like this could be answered. One way is with the construction Desde que +
+subject + present tense of verb (e.g., Desde que trabajo en la universidad). A second way to answer the question is
+with the construction Desde + specific point in time (e.g., Desde el mes pasado). A third way to answer the question
+is with the construction Desde hace + time period (e.g., Desde hace tres años).
+Usted and ustedes Commands
+To form an usted command:
+1. 	Drop the -o ending from the yo form of the verb in the present tense.
+2. 	For -ar verbs, add an e, and for -er and -ir verbs, add an a.
+Examples of usted commands include the following: caminar à camine; aprender à aprenda; abrir à abra.
+Stem-changing verbs follow this same rule to form the usted command (e.g., pensar à piense; dormir à duerma;
+servir à sirva). Many verbs that are irregular in the present tense have regular usted command forms, meaning that
+they follow the same rules as other verbs (e.g., conocer à conozca; oír à oiga; venir à venga).
+Verbs ending in -car, -gar, and -zar have the following spelling changes in the usted command form: For verbs ending
+in -car, the change is c à qu; for verbs ending in -gar, the change is g à gu; for verbs ending in -zar, the change is z
+à c (e.g., tocar à toque; buscar à busque; pagar à pague).
+The irregular usted command forms are as follows: dar à dé; estar à esté; ser à sea; saber à sepa; ir à vaya.
+Putting a no before an usted command makes it negative (e.g., No coma). Adding an -n to the usted command
+makes it an ustedes command (e.g., Amigos, vengan a nuestra casa). A no and an -n at the end of the command
+results in a negative ustedes command (e.g., Por favor, chicos, no vayan ahora).
+Affirmative tú Commands
+The affirmative tú command is the third-person singular form of the verb in the present tense (e.g., estudiar à
+estudia; comer à come; abrir à abre; jugar à juega; servir à sirve; oír à oye).
+There are eight irregular tú commands: venir à ven; salir à sal; poner à pon; tener à ten; hacer à haz; ser à
+sé; decir à di; ir à ve.
+Negative tú Commands
+The negative tú command is formed in the following way: no + usted command + -s (e.g., trabajar à no trabajes;
+tener à no tengas; vivir à no vivas; ser à no seas; hacer à no hagas).
+Affirmative vosotros Commands
+To make a vosotros command, drop the -r of the infinitive and replace it with a -d (e.g., hablar à hablad; tener à
+tened; dormir à dormid). The vosotros command is only used in Spain; a Latin American would use an ustedes
+command rather than a vosotros command.
+
+-- 35 of 97 --
+
+30
+Using Pronouns with Commands
+Three types of pronouns can be used with commands: direct object pronouns, indirect object pronouns, and reflexive
+pronouns. These pronouns go after affirmative commands and before negative commands, as shown below. Notice
+that the first three commands below are tú commands, and the final three commands are usted commands.
+Infinitive 	Pronoun(s) 	Affirmative Command 	Negative Command
+tú
+commands
+dar 	me + lo 	dámelo 	no me lo des
+despertarse 	se 	despiértate 	no te despiertes
+hacer 	lo 	hazlo 	no lo hagas
+usted
+commands
+acostarse 	se 	acuéstese 	no se acueste
+comer 	las 	cómalas 	no las coma
+escribir 	le + la 	escríbasela 	no se la escriba
+Preterite Tense
+Once you learn the regular -ar endings in the preterite tense, you can learn the -er/-ir endings and the endings for
+verbs like tener by knowing the following.
+1. 	The endings for -er and -ir verbs are the same, and they all start with the letter i. In fact, the -er and -ir
+endings for four subjects (yo, tú, nosotros, vosotros) can be formed by changing the first letter of the -ar
+ending to i (e.g., é à í; aste à iste; amos à imos; asteis à isteis).
+2. 	The differences in endings between -ar and -er/-ir verbs are as follows for the usted and ustedes forms: ó à
+ió; aron à ieron.
+3. 	The preterite endings for verbs like tener are the -ar endings without the accent for the yo and usted forms
+(e.g., -e of tuve; -o of tuvo). The other four endings are the same as the regular -er/-ir endings (e.g., -iste of
+tuviste; -imos of tuvimos; -isteis of tuvisteis; -ieron of tuvieron).
+Verbs Ending in -ar 	Verbs Ending in -er/-ir 	Verbs like tener
+repasar 	abrir 	poder
+repasé 	repasamos 	abrí 	abrimos 	pude 	pudimos
+repasaste 	repasasteis 	abriste 	abristeis 	pudiste 	pudisteis
+repasó 	repasaron 	abrió 	abrieron 	pudo 	pudieron
+Verbs ending in -car, -gar, and -zar have the following spelling change in the yo form of the preterite: c à qu; g à gu;
+z à c (e.g., yo saqué; yo pagué; yo comencé).
+Stem-changing verbs ending in -ir also change stem in the preterite, but not in the boot (as they do in the present
+tense). The preterite stem change for -ir verbs happens in the third-person singular and plural forms. The specific
+changes that happen are as follows.
+1. 	Verbs that change e à ie or e à i in the present change e à i in the preterite.
+2. 	Verbs that change o à ue in the present change o à u in the preterite.
+servir 	dormir
+serví 	servimos 	dormí 	dormimos
+serviste 	servisteis 	dormiste 	dormisteis
+sirvió 	sirvieron 	durmió 	durmieron
+
+-- 36 of 97 --
+
+31
+The verbs ser and ir have the same conjugation in the preterite.
+ser / ir
+fui 	fuimos
+fuiste 	fuisteis
+fue 	fueron
+Comparisons
+Comparisons of Inequality
+When making comparisons using an adjective, the construction used is as follows: más or menos + adjective + que
+(e.g., Estoy más nervioso que tú).
+The construction is the same when making comparisons using an adverb: más or menos + adverb + que (e.g., Ellos
+llegan más tarde que nosotros).
+When doing a comparison of inequality focused on the verb, the construction used is as follows: más que or menos
+que (e.g., Nuestros abuelos siempre cocinan más que nosotros).
+When talking about numbers, the construction used is as follows: más or menos + de + number (e.g., A veces ella
+tiene más de dos trabajos).
+When comparing more than two things and distinguishing which one exceeds the others, the construction used is as
+follows: definite article + más or menos + adjective + de (e.g., Brasil es el más grande de los países en América
+del Sur).
+Irregular comparative forms include mejor, peor, mayor, and menor. When using these four adjectives, no más or
+menos is needed (e.g., Anita es mayor que su hermana; Carlos y Juan son los mejores de la clase).
+Comparisons of Equality
+When using an adjective or adverb to compare two things that are equal, the construction used is as follows: tan
++ adjective or adverb + como (e.g., Las doctoras son tan simpáticas como las profesoras; Paco corre tan
+lentamente como yo).
+In a comparison of equality with nouns, the construction used is as follows: tanto/tanta/tantos/tantas + noun + como
+(e.g., Isabel practica tantos deportes como su amigo; Es cierto que tengo tanta hambre como tú).
+In a comparison of equality with verbs, the construction used is as follows: verb + tanto como (e.g., Leemos tanto
+como las muchachas).
+
+-- 37 of 97 --
+
+32
+Los glosarios / The Glossaries
+The glossaries included in this workbook are tools that will help you acquire Spanish vocabulary so that you can
+use it effectively when communicating in the language. Following these brief introductory notes, you will find
+four different glossaries.
+1. 	Glosario por tema / Glossary by Topic: This glossary groups words together by function so that you can
+study in one place, for example, the colors, months of the year, weather expressions, parts of the body, etc.
+2. 	Glosario de cognados / Glossary of Cognates: This glossary includes Spanish words that are cognates with
+English words. Reviewing these words will help you gain a sense of how many Spanish words are similar to
+English words, and learning these cognates will aid your listening and reading comprehension greatly. Roughly
+one-third of all the Spanish words presented in this course are cognates with English words. To get the most
+out of this glossary, you should understand that the following suffixes are equivalent in English and Spanish.
+English Suffix 	Spanish Suffix 	Example Cognates
+-tion 	-ción 	celebration 	la celebración
+-sion 	-sión 	expression 	la expresión
+-ity 	-idad 	activity 	la actividad
+-ive 	-ivo 	progressive 	progresivo
+-ity 	-idad 	possibility 	la posibilidad
+-ed 	-ado 	frustrated 	frustrado
+-ly 	-mente 	exactly 	exactamente
+-tude 	-tud 	attitude 	la actitud
+-logy 	-logía 	technology 	la tecnología
+1. 	Glosario español‑inglés / Spanish‑English Glossary: This glossary gives you the English for a Spanish
+word.
+2. 	Glosario inglés‑español / English‑Spanish Glossary: This glossary gives you the Spanish for an English
+word.
+The words you will find in these glossaries are the ones that are presented in the 30 lessons. Throughout the course,
+the focus has been on high-frequency words, meaning words that are used most often by native speakers of Spanish.
+Your ability to learn and use the vocabulary presented in these glossaries will go a long way toward determining how
+successful you are in communicating with other Spanish speakers.
+NB: Typically, Spanish nouns are presented in glossaries in the following way.
+pared – wall (f) 	[which means that pared is “wall” in English and is a feminine noun]
+It is important to know the gender of a noun because if you want to say, for example, “The wall is white,” you need to
+know that pared is feminine so you can correctly use the appropriate definite article (la) and the appropriate form of
+the adjective (blanca) to say La pared es blanca.
+The problem with glossaries using the above format is that they promote the following kind of mental processing by the
+learner of Spanish: pared means “wall” and is feminine, so the way to say “the wall” must be la pared. That’s too much
+thinking and takes too much time.
+In these glossaries, the Spanish word is presented with the definite article preceding it. So, pared is presented as
+follows.
+
+-- 38 of 97 --
+
+33
+la pared – wall 	[the audio glossary likewise presents the article before the noun]
+With this kind of glossary entry, you are encouraged to learn that la pared means “the wall” (even though the English
+is provided as “wall” rather than the technically correct “the wall”). The very fact that pared is preceded by la tells you
+that it’s a feminine noun.
+When you study vocabulary (and to be a successful language learner, you must study new words in order to understand
+and use them), you should learn nouns with their appropriate definite article (el or la) preceding them. That way, if you
+want to say in Spanish “The wall is white,” you automatically know that this would be La pared es blanca, because all
+along you have learned that the way to say “the wall” is la pared. Knowing that, blanca must be the appropriate form
+of the adjective to use, because pared is clearly a feminine noun.
+There will be a few cases in which the definite article used before the noun is not indicative of the noun’s gender. In
+those few cases, the glossary entry will appear as follows.
+el agua – water [fem.]
+The above entry means that to say “the water” you say el agua, but the “[fem.]” following the word means that it is
+feminine. So, to say, for example, “The water is cold,” you would say El agua está fría (using the feminine form fría
+because agua is feminine). Once again, there are very few words like this in Spanish. In almost all cases, the definite
+article (el or la) preceding the noun will tell you the noun’s gender; words preceded by el are masculine, while words
+preceded by la are feminine.
+When adjectives are presented, the masculine singular form of the adjective is included.
+When people and professions are presented, sometimes both the masculine and feminine forms (e.g., la
+dentista – female dentist; el dentista – male dentist) are included. At other times, only the masculine form (e.g., el
+arquitecto – architect) is included. As you learn in the course, the feminine form of this noun would be the following:
+la arquitecta.
+For stem-changing verbs, the stem change is noted. That mostrar, for example, is an o to ue stem-changing verb can
+be seen in mostrar (o à ue) — to show.
+The abbreviations used in the glossaries are as follows.
+masc. 	masculine 	sing. 	singular 	dir. 	direct 	inf. 	informal
+fem. 	feminine 	pl. 	plural 	ind. 	indirect 	form. 	formal
+adj. 	adjective 	obj. 	object
+pron. 	pronoun
+
+-- 39 of 97 --
+
+34
+Glosario por tema / Glossary by Topic
+Los saludos / Greetings
+saludar – to greet
+hola – hello
+¿Qué tal? – How’s it going?
+¿Cómo estás? – How are you? [inf., sing.]
+¿Cómo está usted? – How are you? [form., sing.]
+¿Cómo están ustedes? – How are you? [form., pl.]
+Bien, gracias. ¿Y tú? – Fine, thanks. And you? [inf.,
+sing.]
+Bien, gracias. ¿Y usted? – Fine, thanks. And you?
+[form., sing.]
+Bien, gracias. ¿Y ustedes? – Fine, thanks. And
+you? [form., pl.]
+bien – well
+Estoy bien. – I’m well.
+mal – not well
+Estoy mal. – I’m not well.
+regular – so-so
+más o menos – so-so
+no muy bien – not very well
+buenos días – good morning
+buen día – good morning
+buenas tardes – good afternoon
+buenas noches – good evening, good night
+Me llamo…. – My name is….
+Soy…. – I am….
+Mi nombre es…. – My name is….
+¿Cómo te llamas? – What’s your name? [inf., sing.]
+¿Cómo se llama usted? – What’s your name?
+[form., sing.]
+mucho gusto – nice to meet you
+encantado – pleased to meet you [speaker masc.]
+encantada – pleased to meet you [speaker fem.]
+Es un placer. – It’s a pleasure.
+igualmente – likewise
+gracias – thank you
+muy bien, gracias – very well, thank you
+bastante bien – just fine
+bienvenidos – welcome [pl.]
+Te presento a…. – Let me introduce you to….[inf.,
+sing.]
+Le presento a…. – Let me introduce you to…. [form.,
+sing.]
+Les presento a…. – Let me introduce you to….[pl.]
+adiós – good-bye
+chao – bye
+hasta luego – see you later
+hasta mañana – see you tomorrow
+hasta pronto – see you soon
+nos vemos – see you
+¿Qué pasa? – What’s happening?
+Perdóneme. – Pardon me. [usted command]
+Discúlpeme. – Excuse me. [usted command]
+enhorabuena – congratulations
+felicidades – congratulations
+¡Qué elegante! – How elegant!
+Palabras de comunicación /
+Communication Words
+comunicarse – to communicate
+la comunicación – communication
+No entiendo. – I don’t understand.
+¿Entiendes? – Do you understand? [inf., sing.]
+entender (e à ie) – to understand
+comprender – to understand
+¿Qué quiere decir? – What does it mean?
+¿Cómo está Carla? – How is Carla?
+¿Cómo es Carla? – What is Carla like?
+¿no? – Isn’t that so?
+¿verdad? – right?
+¿cierto? – right?
+
+-- 40 of 97 --
+
+35
+hablar – to speak, to talk
+hablador – talkative
+llamar – to call
+escuchar – to hear
+oír – to hear
+animar – to encourage
+decir – to say, to tell
+la expresión – expression
+corregir (e à i) – to correct
+la verdad – truth
+la conversación – conversation
+expresar – to express
+comentar – to comment on
+mencionar – to mention
+criticar – to criticize
+charlar – to chat
+afirmar – to declare
+el mandato – command
+Los días de la semana /
+Days of the week
+lunes – Monday
+martes – Tuesday
+miércoles – Wednesday
+jueves – Thursday
+viernes – Friday
+sábado – Saturday
+domingo – Sunday
+el viernes – on Friday
+los martes – on Tuesdays
+Los meses del año /
+Months of the Year
+enero – January
+febrero – February
+marzo – March
+abril – April
+mayo – May
+junio – June
+julio – July
+agosto – August
+septiembre – September
+octubre – October
+noviembre – November
+diciembre – December
+Las estaciones / Seasons
+la estación – season
+la primavera – spring
+el verano – summer
+el otoño – autumn
+el invierno – winter
+Los periodos de tiempo / Time Periods
+el momento – moment
+el segundo – second
+el minuto – minute
+la hora – hour, time
+el día – day
+la mañana – morning
+la tarde – afternoon
+la noche – night
+la semana – week
+el fin de semana – weekend
+el mes – month
+el año – year
+todo el día – all day
+toda la noche – all night
+por tres horas – for three hours
+durante una semana – during a week
+Otras palabras del tiempo /
+Other Time Words
+el tiempo – time, weather
+ahora – now
+ahora mismo – right now
+el presente – present
+hoy – today
+
+-- 41 of 97 --
+
+36
+mañana – tomorrow
+ayer – yesterday
+anoche – last night
+anteayer – the day before yesterday
+la semana pasada – last week
+el fin de semana pasado – last weekend
+el mes pasado – last month
+el año pasado – last year
+el lunes pasado – last Monday
+desde cuando – since when
+el sábado por la mañana – Saturday morning
+el martes por la noche – Tuesday night
+¿Qué hora es? – What time is it?
+el cuarto – quarter
+la media (hora) – half an hour
+en punto – on the dot, exactly
+Son las tres. – It’s three o’clock.
+a las cinco – at five o’clock
+el mediodía – noon
+la medianoche – midnight
+por la mañana – in the morning
+por la tarde – in the afternoon
+por la noche – at night
+la fecha – date
+¿Cuál es la fecha de hoy? – What is today’s date?
+el cumpleaños – birthday
+el Año Nuevo – New Year’s Day
+la Navidad – Christmas
+antes de – before
+después de – after
+antes de Cristo – B.C.
+después de Cristo – A.D.
+más tarde – later
+siempre – always
+a veces – at times
+de vez en cuando – from time to time
+a menudo – often
+frecuentemente – frequently
+todos los días – every day
+tarde – late
+temprano – early
+en este momento – at this moment
+en un momento – in a moment
+pasado – past, last
+entonces – then
+luego – later
+Las expresiones de tiempo /
+Weather expressions
+¿Qué tiempo hace? – What’s the weather like?
+Hace buen tiempo. – It’s good weather.
+Hace mal tiempo. – It’s bad weather.
+Hace sol. – It’s sunny.
+Hace viento. – It’s windy.
+Hace frío. – It’s cold.
+Hace calor. – It’s hot.
+Hace fresco. – It’s cool.
+Está a veinticinco grados. – It’s twenty-five degrees.
+Hay tormenta. – There’s a storm.
+Caen rayos. – It’s lightning.
+Truena. – It’s thundering.
+Está nublado. – It’s cloudy.
+Está despejado. – It’s clear (cloudless).
+Llueve. – It’s raining.
+Está lloviendo. – It’s raining.
+la lluvia – rain
+Hay niebla. – It’s foggy.
+Llovizna. – It’s drizzling.
+Nieva. – It’s snowing.
+Hay hielo. – It’s icy.
+la temperatura – temperature
+los grados – degrees
+el huracán – hurricane
+la precipitación – precipitation
+
+-- 42 of 97 --
+
+37
+Los números ordinales / Ordinal numbers
+el número – number
+primero – first
+segundo – second
+tercero – third
+cuarto – fourth
+quinto – fifth
+sexto – sixth
+séptimo – seventh
+octavo – eighth
+noveno – ninth
+décimo – tenth
+Los números hasta 33 / Numbers to 33
+cero – zero
+uno – one
+dos – two
+tres – three
+cuatro – four
+cinco – five
+seis – six
+siete – seven
+ocho – eight
+nueve – nine
+diez – ten
+once – eleven
+doce – twelve
+trece – thirteen
+catorce – fourteen
+quince – fifteen
+dieciséis – sixteen
+diecisiete – seventeen
+dieciocho – eighteen
+diecinueve – nineteen
+veinte – twenty
+veintiuno – twenty-one
+veintidós – twenty-two
+veintitrés – twenty-three
+veinticuatro – twenty-four
+veinticinco – twenty-five
+veintiséis – twenty-six
+veintisiete – twenty-seven
+veintiocho – twenty-eight
+veintinueve – twenty-nine
+treinta – thirty
+treinta y uno – thirty-one
+treinta y dos – thirty-two
+treinta y tres – thirty-three
+Múltiplos de 10 hasta 100 /
+Multiples of 10 to 100
+diez – ten
+veinte – twenty
+treinta – thirty
+cuarenta – forty
+cincuenta – fifty
+sesenta – sixty
+setenta – seventy
+ochenta – eighty
+noventa – ninety
+cien – one hundred
+100 y más de 100 / 100 and More Than 100
+cien – one hundred
+doscientos – two hundred
+trescientos – three hundred
+cuatrocientos – four hundred
+quinientos – five hundred
+seiscientos – six hundred
+setecientos – seven hundred
+ochocientos – eight hundred
+novecientos – nine hundred
+mil – thousand
+millón – million
+
+-- 43 of 97 --
+
+38
+Los colores / Colors
+el color – color
+rojo – red
+anaranjado – orange
+amarillo – yellow
+verde – green
+azul – blue
+morado – purple
+rosado – pink
+negro – black
+marrón – brown
+blanco – white
+gris – gray
+Las nacionalidades / Nationalities
+cubano – Cuban
+dominicano – Dominican
+puertorriqueño – Puerto Rican
+norteamericano – (North) American
+mexicano – Mexican
+guatemalteco – Guatemalan
+salvadoreño – Salvadoran
+hondureño – Honduran
+nicaragüense – Nicaraguan
+costarricense – Costa Rican
+panameño – Panamanian
+venezolano – Venezuelan
+colombiano – Colombian
+ecuatoriano – Ecuadorian
+peruano – Peruvian
+boliviano – Bolivian
+chileno – Chilean
+paraguayo – Paraguayan
+argentino – Argentine
+uruguayo – Uruguayan
+español – Spaniard
+ecuatoguineano – Equatorial Guinean
+Las personas / People
+la persona – person
+la gente – people
+el muchacho – boy
+la muchacha – girl
+el niño – boy
+la niña – girl
+el chico – boy
+la chica – girl
+el señor – Mr., man
+la señora – Mrs., woman
+la señorita – Miss, young woman
+el hombre – man
+la mujer – woman
+el vecino – male neighbor
+la vecina – female neighbor
+el amigo – male friend
+la amiga – female friend
+el novio – boyfriend
+la novia – girlfriend
+la pareja – partner, couple
+la media naranja – soul mate
+el alma gemela – soul mate [fem.]
+el trabajador – male worker
+la trabajadora – female worker
+el miembro – member
+La familia / Family
+la familia – family
+el pariente – relative
+los padres – parents
+la madre – mother
+la mamá – mom
+mami – mommy
+el padre – father
+el papá – dad
+papi – daddy
+
+-- 44 of 97 --
+
+39
+el esposo – husband
+la esposa – wife
+el hijo – son
+la hija – daughter
+el hermano – brother
+la hermana – sister
+el abuelo – grandfather
+la abuela – grandmother
+la abuelita – granny
+el tío – uncle
+la tía – aunt
+el primo – male cousin
+la prima – female cousin
+el sobrino – nephew
+la sobrina – niece
+el nieto – grandson
+la nieta – granddaughter
+el nombre – name
+el apellido – last name
+materno – maternal
+paterno – paternal
+la suegra – mother-in-law
+el suegro – father-in-law
+la cuñada – sister-in-law
+el cuñado – brother-in-law
+la nuera – daughter-in-law
+el yerno – son-in-law
+la madrastra – stepmother
+el padrastro – stepfather
+la hijastra – stepdaughter
+el hijastro – stepson
+la hermanastra – stepsister
+el hermanastro – stepbrother
+el medio hermano – half brother
+la media hermana – half sister
+el bisabuelo – great-grandfather
+la bisabuela – great-grandmother
+el bisnieto – great-grandson
+la bisnieta – great-granddaughter
+el gemelo – twin
+casado – married
+muerto – dead
+único – only, unique
+Las profesiones / Professions
+la profesión – profession
+el trabajo – work, job
+el pianista – male pianist
+la pianista – female pianist
+el dentista – male dentist
+la dentista – female dentist
+el futbolista – male soccer player
+la futbolista – female soccer player
+el profesor – male professor
+la profesora – female professor
+el doctor – male doctor
+la doctora – female doctor
+el maestro – teacher
+el abogado – lawyer
+el hombre de negocios – businessman
+la mujer de negocios – businesswoman
+el arquitecto – architect
+el enfermero – nurse
+el director de escuela – school principal
+el trabajador social – social worker
+el policía – police officer
+el cocinero – male cook
+la cocinera – female cook
+el mesero – waiter
+la mesera – waitress
+el asistente – assistant
+el contador – accountant
+el dueño – owner
+el gerente – manager
+
+-- 45 of 97 --
+
+40
+el secretario – secretary
+el supervisor – supervisor
+el empleado – employee
+la entrevista – interview
+la entrevista de trabajo – job interview
+entrevistar – to interview
+emplear – to employ
+contratar – to hire
+despedir (e à i) – to fire
+Las partes del cuerpo / Parts of the body
+el cuerpo – body
+la cabeza – head
+el pelo – hair
+la cara – face
+la frente – forehead
+el ojo – eye
+la nariz – nose
+la mejilla – cheek
+la boca – mouth
+el labio – lip
+el diente – tooth
+la lengua – tongue, language
+la oreja – ear
+el cuello – neck
+el hombro – shoulder
+el pecho – chest
+la espalda – back
+el estómago – stomach
+el brazo – arm
+el codo – elbow
+la muñeca – wrist
+la mano – hand
+el dedo – finger
+la cintura – waist
+la pierna – leg
+la rodilla – knee
+el tobillo – ankle
+el pie – foot
+el dedo del pie – toe
+los pulmones – lungs
+la garganta – throat
+el corazón – heart
+La ropa / Clothing
+la ropa – clothing
+llevar – to wear, to carry
+la camisa – shirt
+el saco – suit jacket
+la corbata – tie
+el cinturón – belt
+los pantalones – pants
+el traje – suit
+los calcetines – socks
+los zapatos – shoes
+el sombrero – hat
+la gorra – cap
+la camiseta – T-shirt
+el suéter – sweater
+la chaqueta – jacket
+el abrigo – coat
+la blusa – blouse
+la falda – skirt
+el vestido – dress
+la ropa interior – underwear
+las medias – stockings
+los zapatos de tenis – sneakers
+las botas – boots
+las sandalias – sandals
+la prenda – item of clothing
+los pantalones cortos – shorts
+el traje de baño – bathing suit
+el pijama – pajamas
+los jeans – jeans
+
+-- 46 of 97 --
+
+41
+el impermeable – raincoat
+la bufanda – scarf
+los guantes – gloves
+el pañuelo – handkerchief
+los zapatos de tacón alto – high-heel shoes
+la talla – size
+ir de compras – to go shopping
+caro – expensive
+barato – inexpensive
+chico – small
+mediano – medium
+grande – large
+Los accesorios y los materiales /
+Accessories and materials
+la cartera – wallet
+la bolsa – purse
+los lentes – glasses
+los lentes de sol – sunglasses
+el anillo – ring
+la pulsera – bracelet
+los aretes – earrings
+el collar – necklace
+la joyería – jewelry
+el algodón – cotton
+la seda – silk
+la lana – wool
+el cuero – leather
+el oro – gold
+la plata – silver
+la tela – fabric
+el material – material
+Los lugares públicos / Public Places
+la ciudad – city
+la comunidad – community
+la escuela – school
+el colegio – high school
+la universidad – university
+la residencia estudiantil – dormitory
+el hotel – hotel
+el restaurante – restaurant
+la cafetería – cafeteria
+la plaza – city square, town square
+el museo – museum
+el banco – bank
+la farmacia – pharmacy
+el supermercado – supermarket
+el teatro – theater
+el cine – movie theater
+el club – club
+el café – café
+la discoteca – discotheque
+la estación de trenes – train station
+la estación de autobuses – bus station
+los servicios sanitarios – restrooms
+la librería – bookstore
+la pizzería – pizzeria
+la frutería – fruit store
+la zapatería – shoe store
+la panadería – bakery
+la perfumería – perfume store
+el gimnasio – gymnasium
+el estadio – stadium
+el bar – bar
+el zoológico – zoo
+la catedral – cathedral
+el correo – post office
+la calle – street
+la autopista – highway
+el edificio – building
+el parque – park
+el hospital – hospital
+la biblioteca – library
+
+-- 47 of 97 --
+
+42
+la tienda – store
+la oficina – office
+la iglesia – church
+el aeropuerto – airport
+el mercado – market
+En el aula / In the Classroom
+el aula – classroom [fem.]
+el curso – course
+la clase – class
+asistir a – to attend
+enseñar – to teach
+aprender – to learn
+escuchar – to listen
+estudiar – to study
+Hay que estudiar. – It’s necessary to study.
+¡A estudiar! – Let’s study!
+la educación – education
+repasar – to review
+la atención – attention
+prestar atención – to pay attention
+leer – to read
+Trato de leer mucho. – I try to read a lot.
+escribir – to write
+la actividad – activity
+la pregunta – question
+hacer una pregunta – to ask a question
+responder – to answer
+la respuesta – answer
+el papel – paper
+el mapa – map
+el tema – topic
+la cuestión – question, issue
+el estudiante – male student
+la estudiante – female student
+la computadora – computer
+el libro – book
+el diccionario – dictionary
+el lápiz – pencil
+la pluma – pen
+la letra – letter
+la palabra – word
+pronunciar – to pronounce
+la frase – sentence
+el vocabulario – vocabulary
+la gramática – grammar
+el verbo – verb
+el verbo reflexivo – reflexive verb
+la raíz – root, stem of a verb
+la conjugación – conjugation
+la terminación – ending
+el sustantivo – noun
+el adjetivo – adjective
+el adverbio – adverb
+la preposición – preposition
+el objeto directo – direct object
+el objeto indirecto – indirect object
+la lección – lesson
+el cuaderno – notebook, workbook
+la tarea – homework, chore
+el examen – exam
+el cambio – change
+la formación – formation
+la explicación – explanation
+el énfasis – emphasis
+fácil – easy
+difícil – difficult
+el tipo – kind, type
+la comprensión – comprehension
+explicar – to explain
+mejorar – to improve
+En la casa / At Home
+la casa – house
+
+-- 48 of 97 --
+
+43
+la casita – little house
+el comedor – dining room
+la cocina – kitchen
+el garaje – garage
+la sala – living room
+el televisor – television set
+la televisión – television
+la radio – radio
+el teléfono – telephone
+el piano – piano
+la habitación – bedroom
+el dormitorio – bedroom
+la cama – bed
+el estudio – study
+el pasillo – hall
+la pared – wall
+el techo – roof
+el suelo – floor
+el reloj – watch, clock
+la silla – chair
+la mesa – table
+la almohada – pillow
+el armario – closet
+el refrigerador – refrigerator
+la estufa – stove
+el horno – oven
+el microondas – microwave oven
+el lavaplatos – dishwasher
+el fregadero – kitchen sink
+el espejo – mirror
+el baño – bathroom
+la ducha – shower
+la bañera – bathtub
+el inodoro – toilet
+el lavabo – bathroom sink
+la lámpara – lamp
+el sillón – armchair
+la puerta – door
+la ventana – window
+la cómoda – bureau
+la alfombra – rug
+el escritorio – desk
+el estante – bookshelf
+En el comedor / In the Dining Room
+el comedor – dining room
+comer – to eat
+beber – to drink
+cocinar – to cook
+la comida – food
+la bebida – drink
+el plato – plate
+el tazón – bowl
+el tenedor – fork
+el cuchillo – knife
+la cuchara – spoon
+la cucharita – teaspoon
+el platillo – saucer
+la taza – cup
+el vaso – glass
+la copa – wineglass, cocktail
+el vino – wine
+la servilleta – napkin
+el mantel – tablecloth
+la sal – salt
+la pimienta – pepper
+el azúcar – sugar
+el desayuno – breakfast
+desayunar – to eat breakfast
+el almuerzo – lunch
+almorzar (o à ue) – to eat lunch
+la cena – dinner
+cenar – to eat dinner
+
+-- 49 of 97 --
+
+44
+tostar – to toast
+hacer un brindis – to make a toast
+la carta – menu
+el menú – menu
+Las bebidas / Drinks
+la bebida – drink
+beber – to drink
+el agua – water [fem.]
+el agua mineral – mineral water [fem.]
+el café – coffee
+el té – tea
+el jugo de naranja – orange juice
+la leche – milk
+el refresco – soft drink
+la cerveza – beer
+el vino blanco – white wine
+el vino tinto – red wine
+La comida / Food
+comer – to eat
+el pan – bread
+el pan tostado – toast
+la mantequilla – butter
+la mermelada – jam
+el cereal – cereal
+los huevos – eggs
+el tocino – bacon
+el sándwich – sandwich
+la sopa – soup
+el jamón – ham
+el pavo – turkey
+el queso – cheese
+la pasta – pasta
+los frijoles – beans
+el arroz – rice
+la papa – potato
+la fruta – fruit
+el postre – dessert
+salado – salty
+el aperitivo – appetizer
+la lechuga – lettuce
+el tomate – tomato
+las verduras – vegetables
+la ensalada – salad
+el maíz – corn
+los guisantes – peas
+las espinacas – spinach
+el pollo – chicken
+el pescado – fish
+la carne – meat
+el bistec – steak
+el pastel – cake
+el helado – ice cream
+la fruta – fruit
+la fresa – strawberry
+la manzana – apple
+la naranja – orange
+el plátano – banana
+la banana – banana
+el banano – banana
+la pera – pear
+la uva – grape
+el limón – lemon
+el melón – melon
+el aguacate – avocado
+la piña – pineapple
+la toronja – grapefruit
+el brócoli – broccoli
+la zanahoria – carrot
+la cebolla – onion
+el chile – chili, chili pepper
+el chocolate – chocolate
+el flan – custard
+el arroz con leche – rice pudding
+
+-- 50 of 97 --
+
+45
+los dulces – candy
+rico – rich, delicious
+delicioso – delicious
+Los quehaceres / Chores
+los quehaceres – chores
+limpiar – to clean
+ordenar la casa – to straighten up the house
+pasar la aspiradora – to vacuum
+barrer el suelo – to sweep the floor
+recoger – to pick up
+recoger la ropa – to pick up clothing
+sacar la basura – to take out the trash
+quitar el polvo – to dust
+planchar – to iron
+Los pasatiempos / Hobbies
+el ocio – leisure
+libre – free
+el tiempo libre – free time
+la fiesta – party
+hacer una fiesta – to throw a party
+la celebración – celebration
+el regalo – gift
+tocar – to play an instrument, to touch
+la música – music
+el concierto – concert
+la orquesta – orchestra
+la función – show
+el espectáculo – show
+la entrada – admission ticket
+el boleto – ticket
+al aire libre – outdoors
+pasear – to take a walk
+la película – movie
+el film – film
+el filme – film
+acampar – to camp
+la playa – beach
+las vacaciones – vacation
+El transporte / Transportation
+a pie – by foot
+caminar – to walk
+andar – to walk, to go
+la bicicleta – bicycle
+montar – to ride
+montar en bicicleta – to ride a bicycle
+el carro – car
+el coche – car
+el automóvil – car
+conducir – to drive
+manejar – to drive
+el taxi – taxi
+el autobús – bus
+el metro – subway
+el tren – train
+el barco – boat
+el avión – airplane
+volar (o à ue) – to fly
+¡A viajar! / Let’s Travel!
+viajar – to travel
+el mundo – world
+la región – region
+el kilómetro – kilometer
+los Estados Unidos – United States
+la cultura – culture
+la lengua – language
+el español – Spanish language
+el castellano – Spanish language
+la nación – nation
+la libertad – liberty, freedom
+el norte – north
+el oeste – west
+el sur – south
+
+-- 51 of 97 --
+
+46
+el este – east
+explorar – to explore
+el presidente – president
+la situación – situation
+el líder – leader
+la reunión – meeting
+el país – country
+la capital – capital city
+la inmigración – immigration
+legal – legal
+ilegal – illegal
+traducir – to translate
+visitar – to visit
+el intercambio – exchange
+Los deportes / Sports
+el deporte – sport
+el partido – game
+el ejercicio – exercise
+hacer ejercicio – to exercise
+jugar (u à ue) – to play
+el béisbol – baseball
+el tenis – tennis
+la liga – league
+el fútbol – soccer
+el fútbol americano – football
+el básquetbol – basketball
+el boxeo – boxing
+el esquí – skiing
+el golf – golf
+el ciclismo – cycling
+el jugador – player
+rápido – fast
+el aficionado – fan
+la raqueta – racquet
+el bate – bat
+el palo de golf – golf club
+la pelota – ball
+el balón – ball
+el equipo – team
+el campeón – champion
+ganar – to win, to earn
+nadar – to swim
+la natación – swimming
+la piscina – swimming pool
+levantar pesas – to lift weights
+entrenar – to train
+el entrenador – coach, trainer
+la competencia – competition
+esquiar – to ski
+el esquí acuático – water skiing
+el buceo – scuba diving
+bucear – to scuba dive
+tomar el sol – to sunbathe
+montar a caballo – to ride a horse
+hacer yoga – to do yoga
+La tecnología / Technology
+la tecnología – technology
+el sitio web – website
+la página web – web page
+el blog – blog
+el correo electrónico – e-mail
+el mensaje de texto – text message
+el usuario – user
+el enlace – link
+la conexión – connection
+funcionar – to work, to function
+el buscador – search engine
+chatear – to chat online
+acceder a Internet – to access the Internet
+descargar – to download
+navegar por la red – to surf the Internet
+el nombre de usuario – username
+
+-- 52 of 97 --
+
+47
+la contraseña – password
+el/la Internet – Internet
+la conexión inalámbrica – wireless connection
+el teléfono inalámbrico – cordless phone
+el teléfono celular – cell phone
+el celular – cell phone
+el móvil – cell phone
+El dinero / Money
+el dinero – money
+el dinero en efectivo – cash
+el dólar – dollar
+el cajero automático – automated teller machine
+el cheque – check
+gratis – free, at no cost
+cambiar – to change, to exchange
+el préstamo – loan
+depositar – to deposit
+retirar – to withdraw
+la tarjeta de crédito – credit card
+la tarjeta de débito – debit card
+la transacción bancaria – bank transaction
+La puntuación / Punctuation
+la puntuación – punctuation
+el signo de puntuación – punctuation mark
+el punto – point, period
+dos puntos – colon
+la coma – comma
+el punto y coma – semicolon
+los signos de interrogación – question marks
+los signos de exclamación – exclamation marks
+Las palabras interrogativas /
+Interrogative words
+interrogativo – interrogative
+¿cuánto?, ¿cuánta? – how much?
+¿cuántos?, ¿cuántas? – how many?
+¿cómo? – how?
+¿qué? – what?
+¿dónde? – where?
+¿adónde? – to where?
+¿quién? – who? [sing.]
+¿quiénes? – who? [pl.]
+¿por qué? – why?
+¿cuándo? – when?
+Las expresiones afirmativas y negativas /
+Affirmative and Negative Expressions
+afirmativo – affirmative
+negativo – negative
+algo – something
+alguien – someone
+también – also
+o…o – either…or
+nada – nothing
+nadie – no one
+nunca – never
+tampoco – neither
+ni…ni – neither…nor
+alguno – any, one
+algunos – some
+ninguno – none, not any
+Las conjunciones / Conjunctions
+y – and
+o – or
+pero – but
+si – if
+no solo – not only
+sino también – but also
+pues – well
+bueno – well, so
+que – that
+porque – because
+o…o – either…or
+ni…ni – neither…nor
+
+-- 53 of 97 --
+
+48
+Las preposiciones / Prepositions
+a – to
+en – in
+de – of, from
+con – with
+para – for, to, in order to
+por – for, by, through
+sin – without
+entre – between, among
+hacia – toward
+hasta – until
+contra – against
+desde – from, since
+encima de – on top of, over
+sobre – on, about
+debajo de – under
+dentro de – inside of
+detrás de – behind
+delante de – in front of
+enfrente de – across from
+cerca de – near to
+lejos de – far from
+al lado de – next to
+a la derecha de – to the right of
+a la izquierda de – to the left of
+alrededor de – around, about
+Los adverbios / Adverbs
+sí – yes
+no – no, not
+bastante – rather, quite
+muy – very
+más – more
+aquí – here
+allí – there
+allá – over there
+de nuevo – again
+otra vez – again
+ya – now, already
+Ya voy. – I’m coming
+despacio – slowly
+probablemente – probably
+posiblemente – possibly
+tanto como – as well as
+a lo mejor – maybe
+bien – well
+mal – poorly
+como – like, as
+así – so, like this
+demasiado – too much
+todavía – still
+de hecho – in fact
+por lo general – generally
+afortunadamente – fortunately
+inmediatamente – immediately
+actualmente – at present
+realmente – actually
+exactamente – exactly
+sumamente – extremely
+correctamente – correctly
+finalmente – finally
+Expresiones con tener / Tener Expressions
+tener – to have
+tener frío – to be cold
+tener calor – to be hot
+tener hambre – to be hungry
+tener sed – to be thirsty
+tener sueño – to be tired
+tener prisa – to be in a hurry
+tener éxito – to be successful
+tener razón – to be right
+tener miedo – to be afraid
+tener cuidado – to be careful
+tener suerte – to be lucky
+tener treinta años – to be thirty years old
+
+-- 54 of 97 --
+
+49
+tener que + infinitive – to have to do something
+tener ganas de – to feel like doing something
+tener que ver con – to have to do with
+Verbos reflexivos / Reflexive Verbs
+llamarse – to call oneself
+despertarse (e à ie) – to wake up
+levantarse – to get up
+acostarse (o à ue) – to go to bed
+dormirse (o à ue) – to fall asleep
+bañarse – to bathe oneself
+lavarse – to wash oneself
+ducharse – to shower
+secarse – to dry oneself
+afeitarse – to shave
+cepillarse los dientes – to brush your teeth
+maquillarse – to put on makeup
+ponerse la ropa – to put on clothing
+quitarse la ropa – to take off clothing
+vestirse (e à i) – to get dressed
+olvidarse de – to forget
+acordarse de (o à ue) – to remember
+alegrarse de – to become happy
+divertirse (e à ie) – to enjoy oneself
+enamorarse de – to fall in love
+Verbos con cambio de raíz /
+Stem-Changing Verbs
+e à ie
+pensar – to think
+cerrar – to close
+comenzar – to begin
+empezar – to begin
+entender – to understand
+perder – to lose
+querer – to want, to love
+mentir – to lie
+nevar – to snow
+preferir – to prefer
+despertarse – to wake up
+divertirse – to enjoy oneself
+e à i
+despedir – to fire
+servir – to serve
+pedir – to ask for
+repetir – to repeat
+vestirse – to get dressed
+o à ue
+encontrar – to find
+costar – to cost
+poder – to be able to
+almorzar – to have lunch
+recordar – to remember
+mostrar – to show
+volver – to return
+devolver – to return something
+dormir – to sleep
+morir – to die
+llover – to rain
+tronar – to thunder
+volar – to fly
+acostarse – to go to bed
+dormirse – to fall asleep
+acordarse – to remember
+u à ue
+jugar – to play
+
+-- 55 of 97 --
+
+50
+Glosario de cognados / Glossary of Cognates
+A
+abril – April
+absoluto – absolute
+acampar – to camp
+accidental – accidental
+el accidente – accident
+la actitud – attitude
+la actividad – activity
+activo – active
+el adjetivo – adjective
+el adverbio – adverb
+el aeropuerto – airport
+afirmar – to affirm, to declare
+afirmativo – affirmative
+agosto – August
+el aire – air
+argentino – Argentine
+árido – arid
+el arquitecto – architect
+el asistente – assistant
+el aspecto – aspect
+la atención – attention
+el automóvil – automobile
+avanzar – to advance
+B
+la banana – banana
+el banano – banana
+el banco – bank
+el bar – bar
+el básquetbol – basketball
+el bate – bat
+el béisbol – baseball
+el blog – blog
+boliviano – Bolivian
+las botas – boots
+el boxeo – boxing
+el brócoli – broccoli
+C
+el café – café, coffee
+la cafetería – cafeteria
+el campeón – champion
+la capital – capital city
+la característica – characteristic
+el carro – car
+la catedral – cathedral
+la categoría – category
+católico – Catholic
+la celebración – celebration
+el celular – cell phone
+central – central
+el cereal – cereal
+cero – zero
+la chaqueta – jacket
+chatear – to chat online
+chao – ciao, bye
+el cheque – check
+el chile – chili, chili pepper
+chileno – Chilean
+el chocolate – chocolate
+el cine – cinema, movie theater
+claro – clear
+la clase – class
+clásico – classical
+el club – club
+colombiano – Colombian
+el color – color
+la coma – comma
+
+-- 56 of 97 --
+
+51
+comentar – to comment on
+comenzar (e à ie) – to commence, to begin
+comprender – to comprehend, to understand
+la comprensión – comprehension
+la computadora – computer
+común – common
+comunicarse – to communicate
+la comunidad – community
+el concierto – concert
+la conexión – connection
+la conjugación – conjugation
+considerar – to consider
+la construcción – construction
+construir – to construct, to build
+contento – content, happy
+contrario – contrary
+la contribución – contribution
+contribuir – to contribute
+convencido – convinced
+la conversación – conversation
+correcto – correct
+correctamente – correctly
+costar (o à ue) – to cost
+costarricense – Costa Rican
+el creador – creator
+crear – to create
+criticar – to criticize
+cubano – Cuban
+la cuestión – question, issue
+la cultura – culture
+el curso – course
+D
+decidir – to decide
+dedicar – to dedicate
+delicioso – delicious
+demostrativo – demonstrative
+la dentista – female dentist
+el dentista – male dentist
+depositar – to deposit
+descubrir – to discover
+la destrucción – destruction
+destruir – to destroy
+el diccionario – dictionary
+diciembre – December
+diferente – different
+difícil – difficult
+el dilema – dilemma
+la discoteca – discotheque
+el doctor – male doctor
+la doctora – female doctor
+el dólar – dollar
+dominicano – Dominican
+el drama – drama
+E
+ecuatoguineano – Equatorial Guinean
+ecuatoriano – Ecuadorian
+la educación – education
+egoísta – egotistical, selfish
+el ejercicio – exercise
+el elefante – elephant
+elegante – elegant
+emplear – to employ
+el énfasis – emphasis
+enorme – enormous
+la ensalada – salad
+entrar – enter
+español – Spaniard
+el español – Spanish language
+el espectáculo – spectacle, show
+las espinacas – spinach
+el esquí – skiing
+esquiar – to ski
+
+-- 57 of 97 --
+
+52
+el estadio – stadium
+los Estados Unidos – United States
+el estómago – stomach
+la estudiante – female student
+el estudiante – male student
+estudiar – to study
+el estudio – study
+exactamente – exactly
+el examen – exam
+excelente – excellent
+existir – to exist
+expandir – to expand
+explorar – to explore
+expresar – to express
+la expresión – expression
+extra – extra
+F
+la familia – family
+famoso – famous
+fantástico – fantastic
+la farmacia – pharmacy
+favorito – favorite
+febrero – February
+fenomenal – phenomenal
+el film – film
+el filme – film
+la formación – formation
+formal – formal
+formar – to form
+frustrado – frustrated
+la fruta – fruit
+funcionar – to function, to work
+G
+el garaje – garage
+general – general
+el gimnasio – gymnasium
+el golf – golf
+guatemalteco – Guatemalan
+H
+hondureño – Honduran
+la hora – hour, time
+el hospital – hospital
+el hotel – hotel
+humano – human
+el huracán – hurricane
+I
+ideal – ideal
+ilegal – illegal
+impaciente – impatient
+importante – important
+incluir – to include
+incorporar – to incorporate
+indicar – to indicate
+la influencia – influence
+influir – to influence
+informal – informal
+inmediatamente – immediately
+la inmigración – immigration
+inteligente – intelligent
+el interés – interest
+interesante – interesting
+interesar – to interest
+el/la Internet – Internet
+interrogativo – interrogative
+introductorio – introductory
+J
+el jamón – ham
+los jeans – jeans
+julio – July
+junio – June
+
+-- 58 of 97 --
+
+53
+K
+el kilo – kilo
+el kilómetro – kilometer
+L
+la lámpara – lamp
+la lección – lesson
+legal – legal
+la libertad – liberty, freedom
+el líder – leader
+la liga – league
+el limón – lemon
+M
+la mamá – mom
+mami – mommy
+la manera – manner, way
+el mapa – map
+maravilloso – marvelous
+marzo – March
+el material – material
+materno – maternal
+mayo – May
+me – me [dir. obj. pron.]; me – to me, for me;
+me – myself
+el melón – melon
+mencionar – to mention
+el mensaje de texto – text message
+el menú – menu
+el mercado – market
+el metro – metro, subway
+mexicano – Mexican
+el miembro – member
+millón – million
+el mineral – mineral
+el minuto – minute
+el momento – moment
+la montaña – mountain
+mucho – much, a lot
+el museo – museum
+la música – music
+N
+la nación – nation
+negativo – negative
+nervioso – nervous
+nicaragüense – Nicaraguan
+no – no, not
+normal – normal
+el norte – north
+norteamericano – (North) American
+noviembre – November
+el número – number
+O
+el objeto directo – direct object
+octubre – October
+ocupado – occupied, busy
+ocurrir – to occur, to happen
+el oeste – west
+la oficina – office
+optimista – optimistic
+organizar – to organize
+la orquesta – orchestra
+P
+paciente – patient
+panameño – Panamanian
+los pantalones – pants
+el papá – poppa, dad
+el papel – paper
+paraguayo – Paraguayan
+el parque – park
+la parte – part
+pasar – to pass, to happen
+la pasta – pasta
+
+-- 59 of 97 --
+
+54
+paterno – paternal
+la pera – pear
+perdonar – to pardon
+el perfume – perfume
+permitir – to permit, to allow
+la persona – person
+pesimista – pessimistic
+la pianista – female pianist
+el pianista – male pianist
+el piano – piano
+el pijama – pajamas
+la pizzería – pizzeria
+el plato – plate
+la plaza – plaza, city square, town square
+el policía – police officer
+popular – popular
+la posibilidad – possibility
+posible – possible
+posiblemente – possibly
+la precipitación – precipitation
+preferir (e à ie) – to prefer
+preparado – prepared
+preparar – to prepare
+la preposición – preposition
+presentar – to present, to introduce
+el presente – present
+el presidente – president
+el problema – problem
+producir – to produce
+la profesión – profession
+el profesor – male professor
+la profesora – female professor
+el programa – program
+progresivo – progressive
+pronunciar – to pronounce
+proteger – to protect
+próximo – proximate, next
+puertorriqueño – Puerto Rican
+el punto – point, period
+la puntuación – punctuation
+R
+la radio – radio
+rápido – rapid, fast
+la raqueta – racquet
+el rayo – ray, lightning, lightning bolt
+reducir – to reduce
+el refrigerador – refrigerator
+la región – region
+repetir (e à i) – to repeat
+la residencia estudiantil – student residence,
+dormitory
+responder – to respond, to answer
+responsable – responsible
+el restaurante – restaurant
+resultar – to result, to turn out to be
+rico – rich, delicious
+S
+la sal – salt
+salvadoreño – Salvadoran
+las sandalias – sandals
+el sándwich – sandwich
+el secretario – secretary
+segundo – second
+septiembre – September
+servir (e à i) – to serve
+el sistema – system
+el sitio web – website
+la situación – situation
+solo – solo, alone, only
+la sopa – soup
+el suéter – sweater
+suficiente – sufficient
+
+-- 60 of 97 --
+
+55
+la superioridad – superiority
+el supermercado – supermarket
+el supervisor – supervisor
+T
+tarde – tardy, late
+el taxi – taxi
+el té – tea
+el teatro – theater
+la tecnología – technology
+el teléfono – telephone;
+el teléfono celular – cellular phone
+la televisión – television
+el televisor – television set
+la temperatura – temperature
+el tenis – tennis
+terminar – to terminate, to finish
+terrible – terrible
+tímido – timid
+típico – typical
+el tipo – type, kind
+el tomate – tomato
+tostar – to toast (bread)
+tranquilo – tranquil, calm
+la transacción bancaria – bank transaction
+el tren – train
+U
+último – ultimate, last
+único – unique, only
+la universidad – university
+uruguayo – Uruguayan
+usual – usual
+V
+las vacaciones – vacation
+la variedad – variety
+varios – various
+vender – to vend, to sell
+venezolano – Venezuelan
+el verbo – verb; el verbo reflexivo – reflexive verb
+la virtud – virtue
+visitar – to visit
+el vocabulario – vocabulary
+Y
+el yoga – yoga
+Z
+la zona – zone
+el zoológico – zoo
+
+-- 61 of 97 --
+
+56
+Glosario español‑inglés / Spanish‑English Glossary
+A
+a – to; a + verb – let’s + infinitive;
+a lo mejor – maybe; a menudo – often
+abierto – open
+el abogado – lawyer
+el abrigo – coat
+abril – April
+abrir – to open
+absoluto – absolute
+la abuela – grandmother
+el abuelo – grandfather
+aburrido – bored (with estar), boring (with ser)
+acabar – to finish;
+acabar de + infinitive – to have just done something
+acampar – to camp
+acceder – to access;
+acceder a Internet – to access the Internet
+accidental – accidental
+el accidente – accident
+acordarse de (o à ue) – to remember
+acostarse (o à ue) – to go to bed
+acostumbrado – accustomed
+la actitud – attitude
+la actividad – activity
+activo – active
+actualmente – at present
+adiós – good-bye
+el adjetivo – adjective
+¿adónde? – to where?
+el adverbio – adverb
+el aeropuerto – airport
+afeitarse – to shave
+el aficionado – fan
+afirmar – to declare
+afirmativo – affirmative
+afortunadamente – fortunately
+agosto – August
+agotado – used up
+el agua – water [fem.]
+el aguacate – avocado
+el águila – eagle [fem.]
+ahora – now; ahora mismo – right now
+el aire – air
+alegrarse de – to become happy
+alegre – happy
+la alfombra – rug
+algo – something
+el algodón – cotton
+alguien – someone
+alguno – any, one; algunos – some
+allá – over there
+allí – there
+el alma – soul [fem.]; el alma gemela – soul mate
+la almohada – pillow
+almorzar (o à ue) – to eat lunch
+el almuerzo – lunch
+alrededor de – around, about
+alto – tall
+amarillo – yellow
+la amiga – female friend
+el amigo – male friend
+anaranjado – orange (adj.)
+andar – to walk, to go
+el anillo – ring
+animar – to encourage
+el año – year; el Año Nuevo – New Year’s Day
+anoche – last night
+anteayer – the day before yesterday
+antes de – before
+
+-- 62 of 97 --
+
+57
+antes de Cristo – B.C.
+antipático – unfriendly
+el apellido – last name
+el aperitivo – appetizer
+aprender – to learn
+aquel – that over there
+aquello – that
+aquí – here
+los aretes – earrings
+argentino – Argentine
+árido – arid
+el armario – closet
+el arquitecto – architect
+el arroz – rice; el arroz con leche – rice pudding
+así – so, like this
+el asiento – seat
+el asistente – assistant
+asistir a – to attend
+el aspecto – aspect
+la atención – attention
+el aula – classroom [fem.]
+el autobús – bus
+el automóvil – car
+la autopista – highway
+avanzar – to progress, to advance
+avergonzado – embarrassed
+el avión – airplane
+ayer – yesterday
+ayudar – to help
+el azúcar – sugar
+azul – blue
+B
+bailar – to dance
+bajar – to take down
+el balón – ball
+la banana – banana
+el banano – banana
+bañarse – to bathe oneself
+el banco – bank
+la bandera – flag
+la bañera – bathtub
+el baño – bathroom
+el bar – bar
+barato – inexpensive
+el barco – boat
+barrer – to sweep
+el básquetbol – basketball
+bastante – rather, quite
+la basura – trash
+el bate – bat
+beber – to drink
+la bebida – drink
+el béisbol – baseball
+la biblioteca – library
+la bicicleta – bicycle
+bien – well
+bienvenidos – welcome [masc., pl.]
+el bisabuelo – great-grandfather
+la bisnieta – great-granddaughter
+el bistec – steak
+blanco – white
+el blog – blog
+la blusa – blouse
+la boca – mouth
+el boleto – ticket
+boliviano – Bolivian
+la bolsa – purse
+bonito – pretty
+las botas – boots
+el boxeo – boxing
+el brazo – arm
+el brindis – toast (to celebrate)
+
+-- 63 of 97 --
+
+58
+el brócoli – broccoli
+bucear – to scuba dive
+el buceo – scuba diving
+bueno – good; well, so
+la bufanda – scarf
+el buscador – search engine
+buscar – to look for
+C
+caber – to fit
+la cabeza – head
+cada – each
+caer – to fall
+el café – café, coffee
+la cafetería – cafeteria
+el cajero automático – automated teller machine
+los calcetines – socks
+caliente – hot
+la calle – street
+el calor – heat
+la cama – bed
+cambiar – to change, to exchange
+el cambio – change
+caminar – to walk
+la camisa – shirt
+la camiseta – T-shirt
+el campeón – champion
+cansado – tired
+cantar – to sing
+capaz – capable
+la capital – capital city
+la cara – face
+la característica – characteristic
+la carne – meat
+caro – expensive
+el carro – car
+la carta – menu
+la cartera – wallet
+la casa – house
+casado – married
+el castellano – Spanish language
+la catedral – cathedral
+la categoría – category
+católico – Catholic
+catorce – fourteen
+la cebolla – onion
+la celebración – celebration
+el celular – cell phone
+la cena – dinner
+cenar – to eat dinner
+central – central
+cepillarse los dientes – to brush your teeth
+cerca de – near to
+el cereal – cereal
+cero – zero
+cerrado – closed
+cerrar (e à ie) – to close
+la cerveza – beer
+la chaqueta – jacket
+charlar – to chat
+chatear – to chat online
+chao – bye
+el cheque – check
+la chica – girl
+chico – small
+el chico – boy
+el chile – chili, chili pepper
+chileno – Chilean
+el chocolate – chocolate
+el ciclismo – cycling
+el cielo – sky
+cien – one hundred
+cierto – certain; ¿cierto? – right?
+
+-- 64 of 97 --
+
+59
+cinco – five
+cincuenta – fifty
+el cine – movie theater
+la cintura – waist
+el cinturón – belt
+la ciudad – city
+claro – clear
+la clase – class
+clásico – classical
+el club – club
+el coche – car
+la cocina – kitchen
+cocinar – to cook
+la cocinera – female cook
+el cocinero – male cook
+el codo – elbow
+el colegio – high school
+el collar – necklace
+colombiano – Colombian
+el color – color
+colorado – red-colored
+la coma – comma
+el comedor – dining room
+comentar – to comment on
+comenzar (e à ie) – to begin
+comer – to eat
+la comida – food
+como – like, as
+¿cómo? – how?
+la cómoda – bureau
+la competencia – competition
+comprar – to buy
+comprender – to understand
+la comprensión – comprehension
+la computadora – computer
+común – common
+comunicarse – to communicate
+la comunidad – community
+con – with; conmigo – with me;
+contigo – with you [inf., sing.]
+el concierto – concert
+conducir – to drive
+la conexión – connection; la conexión inalámbrica
+– wireless connection
+confundido – confused
+la conjugación – conjugation
+conocer – to know a person, place, or thing
+el conquistador – conqueror
+conquistar – to conquer
+considerar – to consider
+la construcción – construction
+construir – to build
+el contador – accountant
+contento – happy
+contra – against
+contrario – contrary
+la contraseña – password
+contratar – to hire
+la contribución – contribution
+contribuir – to contribute
+convencido – convinced
+la conversación – conversation
+la copa – wineglass, cocktail
+el corazón – heart
+la corbata – tie
+correctamente – correctly
+correcto – correct
+corregir (e à i) – to correct
+el correo – post office;
+el correo electrónico – e-mail
+correr – to run
+corto – short in length
+la cosa – thing
+costar (o à ue) – to cost
+costarricense – Costa Rican
+
+-- 65 of 97 --
+
+60
+el creador – creator
+crear – to create
+creer – to believe, to think
+criticar – to criticize
+el cuaderno – notebook, workbook
+¿cuándo? – when?
+¿cuánto?, ¿cuánta? – how much?
+¿cuántos?, ¿cuántas? – how many?
+cuarenta – forty
+cuarto – fourth, quarter
+cuatro – four
+cuatrocientos – four hundred
+cubano – Cuban
+la cuchara – spoon
+la cucharita – teaspoon
+el cuchillo – knife
+el cuello – neck
+el cuero – leather
+el cuerpo – body
+la cuestión – question, issue
+cuidadoso – careful
+la cultura – culture
+el cumpleaños – birthday
+la cuñada – sister-in-law
+el cuñado – brother-in-law
+el curso – course
+D
+dar – to give
+de – of, from; de hecho – in fact; de nuevo – again
+debajo de – under
+deber – should
+decidir – to decide
+décimo – tenth
+decir – to say, to tell
+dedicar – to dedicate
+el dedo – finger; el dedo del pie – toe
+delante de – in front of
+delicioso – delicious
+demasiado – too much
+demostrativo – demonstrative
+la dentista – female dentist
+el dentista – male dentist
+dentro de – inside of
+el deporte – sport
+depositar – to deposit
+la derecha – right side
+desayunar – to eat breakfast
+el desayuno – breakfast
+descargar – to download
+descubrir – to discover
+desde – from, since; desde cuando – since when
+el deseo – desire
+desordenado – disorganized, messy
+despacio – slowly
+despedir (e à i) – to fire
+despejado – clear, cloudless
+despertarse (e à ie) – to wake up
+después de – after
+después de Cristo – A.D.
+la destrucción – destruction
+destruir – to destroy
+detrás de – behind
+devolver (o à ue) – to return something
+el día – day
+el diccionario – dictionary
+diciembre – December
+diecinueve – nineteen
+dieciocho – eighteen
+dieciséis – sixteen
+diecisiete – seventeen
+el diente – tooth
+diez – ten
+
+-- 66 of 97 --
+
+61
+diferente – different
+difícil – difficult
+el dilema – dilemma
+el dinero – money; el dinero en efectivo – cash
+el director de escuela – school principal
+la discoteca – discotheque
+disculpar – to excuse
+disponible – available
+dispuesto – willing
+divertirse (e à ie) – to enjoy oneself
+doce – twelve
+el doctor – male doctor
+la doctora – female doctor
+el dólar – dollar
+domingo – Sunday
+dominicano – Dominican
+¿dónde? – where?
+dormir (o à ue) – to sleep;
+dormirse (o à ue) – to fall asleep
+el dormitorio – bedroom
+dos – two
+doscientos – two hundred
+dos puntos – colon
+el drama – drama
+la ducha – shower
+ducharse – to shower
+el dueño – owner
+los dulces – candy
+E
+ecuatoguineano – Equatorial Guinean
+ecuatoriano – Ecuadorian
+el edificio – building
+la educación – education
+egoísta – selfish
+el ejercicio – exercise
+el – the [masc., sing.]
+él – he; ellos – they [masc.]
+el elefante – elephant
+elegante – elegant
+ella – she; ellas – they [fem.]
+embarazada – pregnant
+empezar (e à ie) – to begin
+el empleado – employee
+emplear – to employ
+en – in; en punto – on the dot, exactly
+enamorarse de – to fall in love
+encantada – pleased to meet you [fem. speaker];
+encantado – pleased to meet you [masc. speaker]
+encantar – to be very pleasing
+encima de – on top of, over
+encontrar (o à ue) – to find
+enero – January
+el énfasis – emphasis
+el enfermero – nurse
+enfermo – sick
+enfrente de – across from
+enhorabuena – congratulations
+el enlace – link
+enojado – angry
+enorme – enormous
+la ensalada – salad
+enseñar – to teach
+entender (e à ie) – to understand
+entonces – then
+la entrada – admission ticket
+entrar – enter
+entre – between, among
+el entrenador – coach, trainer
+entrenar – to train
+la entrevista – interview
+entrevistar – to interview
+el equipo – team
+escoger – to choose
+
+-- 67 of 97 --
+
+62
+escondido – hidden
+escribir – to write
+el escritorio – desk
+escuchar – to hear
+la escuela – school
+ese – that [adj. or pron.]
+eso – that [pron.]
+la espalda – back
+español – Spaniard
+el español – Spanish language
+el espectáculo – show
+el espejo – mirror
+esperar – to wait for, to hope
+las espinacas – spinach
+la esposa – wife
+el esposo – husband
+el esquí – skiing
+el esquí acuático – water skiing
+esquiar – to ski
+la estación – season
+la estación de autobuses – bus station;
+la estación de trenes – train station
+el estadio – stadium
+los Estados Unidos – United States
+el estante – bookshelf
+estar – to be
+el este – east
+este – this [adj. or pron.]
+esto – this [pron.]
+el estómago – stomach
+la estudiante – female student
+el estudiante – male student
+estudiar – to study
+el estudio – study
+la estufa – stove
+exactamente – exactly
+el examen – exam
+excelente – excellent
+existir – to exist
+expandir – to expand
+la explicación – explanation
+explicar – to explain
+explorar – to explore
+expresar – to express
+la expresión – expression
+extra – extra
+F
+fácil – easy
+la falda – skirt
+la familia – family
+famoso – famous
+fantástico – fantastic
+la farmacia – pharmacy
+favorito – favorite
+febrero – February
+la fecha – date
+la felicidad – happiness
+felicidades – congratulations
+feliz – happy
+fenomenal – phenomenal
+feo – ugly
+la fiesta – party
+el film – film
+el filme – film
+el fin – end; el fin de semana – weekend
+finalmente – finally
+el flan – custard
+florida – covered with flowers
+la formación – formation
+formal – formal
+formar – to form
+la frase – sentence
+frecuentemente – frequently
+
+-- 68 of 97 --
+
+63
+el fregadero – kitchen sink
+la frente – forehead
+la fresa – strawberry
+fresco – fresh, cool
+los frijoles – beans
+frío – cold (adj.)
+el frío – cold
+frustrado – frustrated
+la fruta – fruit
+la frutería – fruit store
+fuerte – strong
+la función – show
+funcionar – to work, to function
+el fútbol – soccer
+el fútbol americano – football
+la futbolista – female soccer player
+el futbolista – male soccer player
+G
+ganar – to win, to earn
+el garaje – garage
+la garganta – throat
+el gemelo – twin
+general – general
+la gente – people
+el gerente – manager
+el gimnasio – gymnasium
+el golf – golf
+la gorra – cap
+gracias – thank you
+los grados – degrees
+la gramática – grammar
+grande – large
+gratis – free, at no cost
+gris – gray
+los guantes – gloves
+guapo – good-looking
+guatemalteco – Guatemalan
+los guisantes – peas
+gustar – to be pleasing
+H
+la habitación – bedroom
+hablador – talkative
+hablar – to speak, to talk
+hacer – to make, to do
+hacia – toward
+hasta – until
+hay – there is, there are
+hay que + infinitive – it’s necessary to + verb
+el helado – ice cream
+la hermana – sister
+la hermanastra – stepsister
+el hermanastro – stepbrother
+el hermano – brother
+el hielo – ice
+la hija – daughter
+la hijastra – stepdaughter
+el hijastro – stepson
+el hijo – son
+hola – hello
+el hombre – man;
+el hombre de negocios – businessman
+el hombro – shoulder
+hondureño – Honduran
+la hora – hour, time
+el horno – oven
+el hospital – hospital
+el hotel – hotel
+hoy – today
+los huevos – eggs
+huir – to run away
+humano – human
+el huracán – hurricane
+
+-- 69 of 97 --
+
+64
+I
+ideal – ideal
+la iglesia – church
+igualmente – likewise
+ilegal – illegal
+impaciente – impatient
+el impermeable – raincoat
+importante – important
+incluir – to include
+incorporar – to incorporate
+indicar – to indicate
+la influencia – influence
+influir – to influence
+informal – informal
+inmediatamente – immediately
+la inmigración – immigration
+el inodoro – toilet
+inteligente – intelligent
+el intercambio – exchange
+el interés – interest
+interesante – interesting
+interesar – to interest
+el/la Internet – Internet
+interrogativo – interrogative
+introductorio – introductory
+el invierno – winter
+ir – to go; ir de compras – to go shopping
+la izquierda – left side
+J
+el jamón – ham
+los jeans – jeans
+joven – young
+la joyería – jewelry
+jueves – Thursday
+el jugador – player
+jugar (u à ue) – to play
+el jugo de naranja – orange juice
+julio – July
+junio – June
+juntos – together
+K
+el kilo – kilo
+el kilómetro – kilometer
+L
+la – the [fem., sing.];
+la – her, it [fem., sing., dir. obj. pron.]
+el labio – lip
+el lado – side; al lado de – next to
+la lámpara – lamp
+la lana – wool
+el lápiz – pencil
+largo – long
+las – the [fem., pl.]; las – them [fem., pl., dir. obj.
+pron.]
+el lavabo – bathroom sink
+el lavaplatos – dishwasher
+lavarse – to wash oneself
+le – to him, for him, to her, for her, to you [form.,
+sing.], for you [form., sing.]
+la lección – lesson
+la leche – milk
+la lechuga – lettuce
+leer – to read
+legal – legal
+lejos de – far from
+la lengua – language, tongue
+los lentes – glasses; los lentes de sol – sunglasses
+les – to them, for them, to you [form., pl.], for you
+[form., pl.]
+la letra – letter of the alphabet
+levantar pesas – to lift weights;
+levantarse – to get up
+la libertad – liberty, freedom
+libre – free
+
+-- 70 of 97 --
+
+65
+la librería – bookstore
+el libro – book
+el líder – leader
+la liga – league
+el limón – lemon
+limpiar – to clean
+llamar – to call; llamarse – to call oneself
+llegar – to arrive
+llevar – to wear, to carry
+llover (o à ue) – to rain
+lloviznar – to drizzle
+la lluvia – rain
+lo – him, it [masc., sing., dir. obj. pron.]
+los – the [masc., pl.];
+los – them [masc., pl., dir. obj. pron.]
+luego – later
+lunes – Monday
+M
+la madrastra – stepmother
+la madre – mother
+el maestro – teacher
+el maíz – corn
+mal – not well, poorly
+malo – bad
+la mamá – mom
+mami – mommy
+mañana – tomorrow
+la mañana – morning
+el mandato – command
+manejar – to drive
+la manera – way
+la mano – hand
+el mantel – tablecloth
+la mantequilla – butter
+la manzana – apple
+el mapa – map
+maquillarse – to put on makeup
+maravilloso – marvelous
+marrón – brown
+martes – Tuesday
+marzo – March
+más – more; más o menos – so-so
+el material – material
+materno – maternal
+mayo – May
+mayor – older
+me – me [dir. obj. pron.];
+me – to me, for me; me – myself
+la media naranja – soul mate
+mediano – medium
+la medianoche – midnight
+las medias – stockings
+medio – half; el medio hermano – half brother
+el mediodía – noon
+la mejilla – cheek
+mejor – better
+mejorar – to improve
+el melón – melon
+mencionar – to mention
+menor – younger
+el mensaje de texto – text message
+mentir (e à ie) – to lie
+el menú – menu
+el mercado – market
+la mermelada – jam
+el mes – month
+la mesa – table
+la mesera – waitress
+el mesero – waiter
+el metro – subway
+mexicano – Mexican
+mi / mis – my
+el microondas – microwave oven
+el miembro – member
+
+-- 71 of 97 --
+
+66
+miércoles – Wednesday
+mil – thousand
+millón – million
+el mineral – mineral
+el minuto – minute
+mirar – to look at
+molestar – to bother
+el momento – moment
+la montaña – mountain
+montar – to ride; montar a caballo – to ride a horse
+morado – purple
+morir (o à ue) – to die
+mostrar (o à ue) – to show
+el móvil – cell phone
+la muchacha – girl
+el muchacho – boy
+mucho – a lot; muchos – many
+muerto – dead
+la mujer – woman; la mujer de negocios –
+businesswoman
+el mundo – world
+la muñeca – wrist
+el museo – museum
+la música – music
+muy – very
+N
+la nación – nation
+nada – nothing
+nadar – to swim
+nadie – no one
+la naranja – orange
+la nariz – nose
+la natación – swimming
+navegar por la red – to surf the Internet
+la Navidad – Christmas
+necesitar – to need
+negativo – negative
+negro – black
+nervioso – nervous
+nevado – snow-covered
+nevar (e à ie) – to snow
+ni…ni – neither…nor
+nicaragüense – Nicaraguan
+la niebla – fog
+la nieta – granddaughter
+el nieto – grandson
+la niña – girl
+ninguno – none, not any
+el niño – boy
+no – no, not; ¿no? – Isn’t that so?; no solo – not only
+la noche – night
+el nombre – name
+normal – normal
+el norte – north
+norteamericano – (North) American
+nos – us [dir. obj. pron.];
+nos – to us, for us; nos – ourselves
+nosotras – we [fem.]; nosotros – we [masc.]
+novecientos – nine hundred
+noveno – ninth
+noventa – ninety
+la novia – girlfriend
+noviembre – November
+el novio – boyfriend
+nublado – cloudy
+la nuera – daughter-in-law
+nuestro(s) / nuestra(s) – our
+nueve – nine
+nuevo – new
+el número – number
+nunca – never
+O
+o – or; o…o – either…or
+el objeto directo – direct object
+
+-- 72 of 97 --
+
+67
+ochenta – eighty
+ocho – eight
+ochocientos – eight hundred
+el ocio – leisure
+octavo – eighth
+octubre – October
+ocupado – busy
+ocurrir – to occur, to happen
+el oeste – west
+la oficina – office
+ofrecer – to offer
+oír – to hear
+el ojo – eye
+olvidarse de – to forget
+once – eleven
+optimista – optimistic
+ordenado – organized, tidy
+ordenar – to order, to straighten
+la oreja – ear
+organizar – to organize
+el oro – gold
+la orquesta – orchestra
+os – you [inf., plur., dir. obj. pron.]; os – to vosotros/
+as, for vosotros/as; yourselves [inf.]
+el otoño – autumn
+otro – other, another; otra vez – again
+P
+paciente – patient
+el padrastro – stepfather
+el padre – father
+los padres – parents
+pagar – to pay
+la página web – web page
+el país – country
+la palabra – word
+el palo de golf – golf club
+el pan – bread; el pan tostado – toast; Es pan
+comido. – It’s a piece of cake.
+la panadería – bakery
+panameño – Panamanian
+los pantalones – pants;
+los pantalones cortos – shorts
+el pañuelo – handkerchief
+el papá – dad
+la papa – potato
+el papel – paper
+papi – daddy
+para – for, to, in order to
+paraguayo – Paraguayan
+parecer – to seem
+la pared – wall
+la pareja – partner, couple
+los parientes – relatives
+el parque – park
+la parte – part
+el partido – game
+pasado – past (adj.), last
+el pasado – past
+pasar – to happen; pasar la aspiradora – to vacuum
+la Pascua – Easter
+pasear – to take a walk
+el pasillo – hall
+la pasta – pasta
+el pastel – cake
+paterno – paternal
+el pavo – turkey
+la paz – peace
+el pecho – chest
+pedir (e à i) – to ask for
+la película – movie
+el pelo – hair
+la pelota – ball
+pensar (e à ie) – to think; pensar + infinitive – to
+plan to do something; pensar en – to think about
+
+-- 73 of 97 --
+
+68
+peor – worse
+pequeño – small
+la pera – pear
+perder (e à ie) – to lose
+perdonar – to pardon
+el perfume – perfume
+la perfumería – perfume store
+el periódico – newspaper
+permitir – to allow, to permit
+pero – but
+el perro – dog
+la persona – person
+peruano – Peruvian
+el pescado – fish
+pesimista – pessimistic
+la pianista – female pianist
+el pianista – male pianist
+el piano – piano
+el pie – foot; a pie – by foot
+la pierna – leg
+el pijama – pajamas
+la pimienta – pepper
+la piña – pineapple
+la piscina – swimming pool
+la pizzería – pizzeria
+el placer – pleasure
+planchar – to iron
+la plata – silver
+el plátano – banana
+el platillo – saucer
+el plato – plate
+la playa – beach
+la plaza – city square, town square
+la pluma – pen
+poco – little; pocos – few
+poder (o à ue) – to be able to
+el policía – police officer
+el pollo – chicken
+el polvo – dust
+poner – to put; ponerse la ropa – to put on clothing
+popular – popular
+por – for, by, through; por favor – please;
+por lo general – generally
+¿por qué? – why?
+porque – because
+la posibilidad – possibility
+posible – possible
+posiblemente – possibly
+el postre – dessert
+la precipitación – precipitation
+preocupado – worried
+preferir (e à ie) – to prefer
+la pregunta – question
+la prenda – item of clothing
+preparado – prepared
+preparar – to prepare
+la preposición – preposition
+presentar – to present, to introduce
+el presente – present
+el presidente – president
+el préstamo – loan
+prestar – to lend; prestar atención – to pay attention
+la prima – female cousin
+la primavera – spring
+primero – first
+el primo – male cousin
+probablemente – probably
+el problema – problem
+producir – to produce
+la profesión – profession
+el profesor – male professor
+la profesora – female professor
+el programa – program
+
+-- 74 of 97 --
+
+69
+progresivo – progressive
+pronunciar – to pronounce
+proteger – to protect
+próximo – next
+la puerta – door
+puertorriqueño – Puerto Rican
+pues – well
+los pulmones – lungs
+la pulsera – bracelet
+el punto – point, period
+el punto y coma – semicolon
+la puntuación – punctuation
+Q
+que – that
+qué + adjective – how + adjective; qué + noun – what
+a(n) + noun
+¿qué? – what?
+los quehaceres – chores
+querer (e à ie) – to want, to love
+el queso – cheese
+¿quién? – who? [sing.]; ¿quiénes? – who? [pl.]
+quince – fifteen
+quinientos – five hundred
+quinto – fifth
+quitar – to take away
+quitarse la ropa – to take off clothing
+R
+la radio – radio
+la raíz – root, stem of a verb
+rápido – fast
+la raqueta – racquet
+el rayo – lightning, lightning bolt
+realmente – actually
+recibir – to receive
+recoger – to pick up
+recordar (o à ue) – to remember
+reducir – to reduce
+el refresco – soft drink
+el refrigerador – refrigerator
+el regalo – gift
+la región – region
+regular – so-so
+el reloj – watch, clock
+repasar – to review
+repetir (e à i) – to repeat
+la residencia estudiantil – dormitory
+responder – to answer
+responsable – responsible
+la respuesta – answer
+el restaurante – restaurant
+resuelto – resolved
+resultar – to turn out to be
+retirar – to withdraw
+la reunión – meeting
+rico – rich, delicious
+la rodilla – knee
+rojo – red
+la ropa – clothing; la ropa interior – underwear
+rosado – pink
+roto – broken
+S
+sábado – Saturday
+saber – to know facts, to know how to do something
+sacar – to take out, to get
+el saco – suit jacket
+la sal – salt
+la sala – living room
+salado – salty
+salir – to leave, to go out
+saludar – to greet
+salvadoreño – Salvadoran
+las sandalias – sandals
+
+-- 75 of 97 --
+
+70
+el sándwich – sandwich
+satisfecho – satisfied
+se – himself, herself, yourself, yourselves, themselves
+secarse – to dry oneself
+el secretario – secretary
+la seda – silk
+segundo – second
+seis – six
+seiscientos – six hundred
+la semana – week
+el señor – Mr., man
+la señora – Mrs., woman
+la señorita – Miss, young woman
+sentado – seated
+septiembre – September
+séptimo – seventh
+ser – to be
+los servicios sanitarios – restrooms
+la servilleta – napkin
+servir (e à i) – to serve
+sesenta – sixty
+setecientos – seven hundred
+setenta – seventy
+sexto – sixth
+si – if
+sí – yes
+siempre – always
+la sierra – mountain range, saw
+siete – seven
+el signo de puntuación – punctuation mark
+los signos de exclamación – exclamation marks
+los signos de interrogación – question marks
+la silla – chair
+el sillón – armchair
+simpático – nice
+sin – without
+sino – but rather; sino también – but also
+el sistema – system
+el sitio web – website
+la situación – situation
+sobre – on, about
+la sobrina – niece
+el sobrino – nephew
+el sol – sun
+solo – alone, only
+el sombrero – hat
+la sopa – soup
+su / sus – his, her, their, your [form., sing. and pl.]
+subir – to go up
+la suegra – mother-in-law
+el suegro – father-in-law
+el suelo – floor
+el suéter – sweater
+suficiente – sufficient
+sumamente – extremely
+sumo – extreme
+la superioridad – superiority
+el supermercado – supermarket
+el supervisor – supervisor
+el sur – south
+el sustantivo – noun
+T
+la talla – size
+también – also
+tampoco – neither
+tanto como – as well as
+tarde – late
+la tarde – afternoon
+la tarea – homework, chore
+la tarjeta – card; la tarjeta de crédito – credit card;
+la tarjeta de débito – debit card
+el taxi – taxi
+la taza – cup
+el tazón – bowl
+
+-- 76 of 97 --
+
+71
+Glosario español-inglés / Spanish-English Glossary
+el té – tea
+te – you [inf., sing., dir. obj. pron.]; to you, for you [inf.,
+sing., ind. obj. pron.]; yourself
+el teatro – theater
+el techo – roof
+la tecnología – technology
+la tela – fabric
+el teléfono – telephone; el teléfono celular – cell
+phone; el teléfono inalámbrico – cordless phone
+la telenovela – soap opera
+la televisión – television
+el televisor – television set
+el tema – topic
+la temperatura – temperature
+temprano – early
+el tenedor – fork
+tener – to have
+el tenis – tennis
+tercero – third
+la terminación – ending
+terminar – to finish
+terrible – terrible
+la tía – aunt
+el tiempo – time, weather; el tiempo libre – free time
+la tienda – store
+tímido – timid
+el tío – uncle
+típico – typical
+el tipo – kind, type
+el tobillo – ankle
+tocar – to play an instrument, to touch
+el tocino – bacon
+todavía – still
+todo – all, every
+tomar – to take, to drink; tomar el sol – to sunbathe
+el tomate – tomato
+tópico – cliché
+la tormenta – storm
+la toronja – grapefruit
+tostar – to toast (bread)
+trabajador – hard-working
+el trabajador – worker; el trabajador social – social
+worker
+trabajar – to work
+el trabajo – work, job
+traducir – to translate
+traer – to bring
+el traje – suit; el traje de baño – bathing suit
+tranquilo – calm
+la transacción bancaria – bank transaction
+tratar de + infinitive – to try to + verb
+trece – thirteen
+treinta – thirty
+el tren – train
+tres – three
+trescientos – three hundred
+triste – sad
+tronar (o à ue) – to thunder
+tú – you [sing., inf.]
+tu / tus – your [sing., inf.]
+U
+último – last
+un – a, an [masc., sing.]; una – a, an [fem., sing.];
+unos – some [masc., pl.]; unas – some [fem., pl.]
+único – only, unique
+la universidad – university
+uno – one
+uruguayo – Uruguayan
+usted – you [sing., form.]; ustedes – you [pl., form.]
+usual – usual
+el usuario – user
+útil – useful
+la uva – grape
+
+-- 77 of 97 --
+
+72
+V
+las vacaciones – vacation
+la variedad – variety
+varios – various
+el vaso – glass
+la vecina – female neighbor
+el vecino – male neighbor
+veinte – twenty
+vender – to sell
+venezolano – Venezuelan
+venir – to come
+la ventana – window
+ver – to see
+el verano – summer
+el verbo – verb; el verbo reflexivo – reflexive verb
+la verdad – truth; ¿verdad? – right?
+verde – green
+las verduras – vegetables
+el vestido – dress
+vestirse (e à i) – to get dressed
+la vez – time; a veces – at times;
+de vez en cuando – from time to time
+viajar – to travel
+viejo – old
+el viento – wind
+viernes – Friday
+el vino – wine; el vino blanco – white wine;
+el vino tinto – red wine
+la virtud – virtue
+visitar – to visit
+vivir – to live
+el vocabulario – vocabulary
+volar (o à ue) – to fly
+volver (o à ue) – to return
+vosotras – you [fem. pl., inf.];
+vosotros – you [masc. pl., inf.]
+vuestro(s) / vuestra(s) – your [inf., pl.]
+Y
+y – and
+ya – now, already
+el yerno – son-in-law
+yo – I
+el yoga – yoga
+Z
+la zanahoria – carrot
+la zapatería – shoe store
+el zapato – shoe; los zapatos de tacón alto – high-
+heel shoes; los zapatos de tenis – sneakers
+la zona – zone
+el zoológico – zoo
+
+-- 78 of 97 --
+
+73
+Glosario inglés‑español / English‑Spanish Glossary
+A
+a, an – un [masc., sing.], una [fem., sing.]
+absolute – absoluto
+access – acceder;
+access the Internet – acceder a Internet
+accident – el accidente
+accidental – accidental
+accountant – el contador
+accustomed – acostumbrado
+across from – enfrente de
+active – activo
+activity – la actividad
+actually – realmente
+adjective – el adjetivo
+admission ticket – la entrada
+adverb – el adverbio
+affirmative – afirmativo
+after – después de
+afternoon – la tarde
+again – de nuevo, otra vez
+against – contra
+air – el aire
+airplane – el avión
+airport – el aeropuerto
+allow – permitir
+alone – solo
+already – ya
+always – siempre
+(North) American – norteamericano
+and – y
+angry – enojado
+ankle – el tobillo
+another – otro
+answer – la respuesta; to answer – responder
+any – alguno
+appetizer – el aperitivo
+apple – la manzana
+April – abril
+architect – el arquitecto
+Argentine – argentino
+arid – árido
+arm – el brazo
+armchair – el sillón
+around – alrededor de
+arrive – llegar
+as – como
+as well as – tanto como
+ask a question – hacer una pregunta
+ask for – pedir (e à i)
+aspect – el aspecto
+assistant – el asistente
+at present – actualmente
+attend – asistir a
+attention – la atención
+attitude – la actitud
+August – agosto
+aunt – la tía
+automated teller machine – el cajero automático
+autumn – el otoño
+available – disponible
+avocado – el aguacate
+B
+back – la espalda
+bacon – el tocino
+bad – malo
+bakery – la panadería
+ball – la pelota, el balón
+banana – la banana, el banano, el plátano
+
+-- 79 of 97 --
+
+74
+bank – el banco
+bank transaction – la transacción bancaria
+bar – el bar
+baseball – el béisbol
+basketball – el básquetbol
+bat – el bate
+bathe oneself – bañarse
+bathing suit – el traje de baño
+bathroom – el baño
+bathroom sink – el lavabo
+bathtub – la bañera
+be – ser, estar
+be able to – poder (o à ue)
+beach – la playa
+beans – los frijoles
+because – porque
+become happy – alegrarse de
+bed – la cama
+bedroom – la habitación, el dormitorio
+beer – la cerveza
+before – antes de
+begin – comenzar (e à ie), empezar (e à ie)
+behind – detrás de
+believe – creer
+belt – el cinturón
+better – mejor
+between – entre
+bicycle – la bicicleta; ride a bicycle – montar en
+bicicleta
+birthday – el cumpleaños
+black – negro
+blog – el blog
+blouse – la blusa
+blue – azul
+boat – el barco
+body – el cuerpo
+Bolivian – boliviano
+book – el libro
+bookshelf – el estante
+bookstore – la librería
+boots – las botas
+bored – aburrido (with estar)
+boring – aburrido (with ser)
+bother – molestar
+bowl – el tazón
+boxing – el boxeo
+boy – el chico, el muchacho, el niño
+boyfriend – el novio
+bracelet – la pulsera
+bread – el pan
+breakfast – el desayuno
+bring – traer
+broccoli – el brócoli
+broken – roto
+brother-in-law – el cuñado
+brother – el hermano
+brown – marrón
+brush your teeth – cepillarse los dientes
+build – construir
+building – el edificio
+bureau – la cómoda
+bus – el autobús
+bus station – la estación de autobuses
+businessman – el hombre de negocios
+businesswoman – la mujer de negocios
+busy – ocupado
+but – pero; but rather – sino
+butter – la mantequilla
+buy – comprar
+bye – chao
+C
+cash – el dinero en efectivo
+café – el café
+
+-- 80 of 97 --
+
+75
+cafeteria – la cafetería
+cake – el pastel; It’s a piece of cake. – Es pan
+comido.
+call – llamar; to call oneself – llamarse
+calm – tranquilo
+camp – acampar
+candy – los dulces
+cap – la gorra
+capable – capaz
+capital city – la capital
+car – el automóvil, el carro, el coche
+card – la tarjeta; credit card – la tarjeta de crédito;
+debit card – la tarjeta de débito
+careful – cuidadoso
+carrot – la zanahoria
+carry – llevar
+category – la categoría
+cathedral – la catedral
+Catholic – católico
+celebration – la celebración
+cell phone – el teléfono celular, el celular, el móvil
+central – central
+cereal – el cereal
+certain – cierto
+chair – la silla
+champion – el campeón
+change – el cambio; to change – cambiar
+characteristic – la característica
+chat – charlar
+chat online – chatear
+check – el cheque
+cheek – la mejilla
+cheese – el queso
+chest – el pecho
+chicken – el pollo
+Chilean – chileno
+chili, chili pepper – el chile
+chocolate – el chocolate
+choose – escoger
+chores – los quehaceres
+Christmas – la Navidad
+church – la iglesia
+city – la ciudad
+city square – la plaza
+class – la clase
+classical – clásico
+classroom – el aula [fem.]
+clean – limpiar
+clear – claro
+cloudless – despejado
+cliché – tópico
+clock – el reloj
+close – cerrar (e à ie)
+closed – cerrado
+closet – el armario
+clothing – la ropa
+cloudy – nublado
+club – el club
+coach – el entrenador
+coat – el abrigo
+cocktail – la copa
+coffee – el café
+cold (adj.) – frío; cold – el frío
+Colombian – colombiano
+colon – dos puntos
+color – el color
+come – venir
+comma – la coma
+command – el mandato
+comment on – comentar
+common – común
+communicate – comunicarse
+community – la comunidad
+competition – la competencia
+
+-- 81 of 97 --
+
+76
+comprehension – la comprensión
+computer – la computadora
+concert – el concierto
+confused – confundido
+congratulations – enhorabuena, felicidades
+conjugation – la conjugación
+connection – la conexión;
+wireless connection – la conexión inalámbrica
+conquer – conquistar
+conqueror – el conquistador
+consider – considerar
+construction – la construcción
+contrary – contrario
+contribute – contribuir
+contribution – la contribución
+conversation – la conversación
+convinced – convencido
+cook – el cocinero; to cook – cocinar
+cool – fresco
+corn – el maíz
+correct – correcto; to correct – corregir (e à i)
+correctly – correctamente
+cost – costar (o à ue)
+Costa Rican – costarricense
+cotton – el algodón
+country – el país
+couple – la pareja
+course – el curso
+cousin – el primo
+covered with flowers – florida
+create – crear
+creator – el creador
+criticize – criticar
+Cuban – cubano
+culture – la cultura
+cup – la taza
+custard – el flan
+cycling – el ciclismo
+D
+dad – el papá
+daddy – papi
+dance – bailar
+date – la fecha
+daughter – la hija
+daughter-in-law – la nuera
+day – el día
+day before yesterday – anteayer
+dead – muerto
+December – diciembre
+decide – decidir
+declare – afirmar
+dedicate – dedicar
+degrees – los grados
+delicious – delicioso, rico
+demonstrative – demostrativo
+dentist – el dentista
+deposit – depositar
+desire – el deseo
+desk – el escritorio
+dessert – el postre
+destroy – destruir
+destruction – la destrucción
+dictionary – el diccionario
+die – morir (o à ue)
+different – diferente
+difficult – difícil
+dilemma – el dilema
+dining room – el comedor
+dinner – la cena
+direct object – el objeto directo
+discotheque – la discoteca
+discover – descubrir
+dishwasher – el lavaplatos
+disorganized – desordenado
+
+-- 82 of 97 --
+
+77
+do – hacer
+doctor – el doctor
+dog – el perro
+dollar – el dólar
+Dominican – dominicano
+door – la puerta
+dormitory – la residencia estudiantil
+download – descargar
+drama – el drama
+dress – el vestido
+drink – la bebida; to drink – beber, tomar
+drive – manejar, conducir
+drizzle – lloviznar
+dry oneself – secarse
+dust – el polvo
+E
+each – cada
+eagle – el águila [fem.]
+ear – la oreja
+early – temprano
+earn – ganar
+earrings – los aretes
+east – el este
+Easter – la Pascua
+easy – fácil
+eat – comer
+eat breakfast – desayunar
+eat dinner – cenar
+eat lunch – almorzar (o à ue)
+Ecuadorian – ecuatoriano
+Equatorial Guinean – ecuatoguineano
+education – la educación
+eggs – los huevos
+eight – ocho
+eight hundred – ochocientos
+eighteen – dieciocho
+eighth – octavo
+eighty – ochenta
+either…or – o…o
+elbow – el codo
+elegant – elegante
+elephant – el elefante
+eleven – once
+e-mail – el correo electrónico
+embarrassed – avergonzado
+emphasis – el énfasis
+employ – emplear
+employee – el empleado
+encourage – animar
+end – el fin
+ending – la terminación
+enjoy oneself – divertirse (e à ie)
+enormous – enorme
+enter – entrar
+every – todos
+exactly – exactamente
+exam – el examen
+excellent – excelente
+exchange – el intercambio
+exclamation marks – los signos de exclamación
+excuse – disculpar
+exercise – el ejercicio; to exercise – hacer ejercicio
+exist – existir
+expand – expandir
+expensive – caro
+explain – explicar
+explanation – la explicación
+explore – explorar
+express – expresar
+expression – la expresión
+extra – extra
+extreme – sumo
+extremely – sumamente
+eye – el ojo
+
+-- 83 of 97 --
+
+78
+F
+fall asleep – dormirse (o à ue)
+fall in love – enamorarse de
+family – la familia
+famous – famoso
+fan – el aficionado
+fantastic – fantástico
+far from – lejos de
+fast – rápido
+father – el padre
+father-in-law – el suegro
+favorite – favorito
+February – febrero
+fabric – la tela
+face – la cara
+fall – caer
+few – pocos
+fifteen – quince
+fifth – quinto
+fifty – cincuenta
+film – el film, el filme
+finally – finalmente
+find – encontrar (o à ue)
+finger – el dedo
+finish – terminar, acabar
+fire – despedir (e à i)
+first – primero
+fish – el pescado
+fit – caber
+five – cinco
+five hundred – quinientos
+flag – la bandera
+floor – el suelo
+fly – volar (o à ue)
+fog – la niebla
+food – la comida
+foot – el pie; by foot – a pie
+football – el fútbol americano
+for – por, para
+forehead – la frente
+forget – olvidarse de
+fork – el tenedor
+form – formar
+formal – formal
+formation – la formación
+fortunately – afortunadamente
+forty – cuarenta
+four – cuatro
+four hundred – cuatrocientos
+fourteen – catorce
+fourth – cuarto
+free – libre
+free (at no cost) – gratis
+freedom – la libertad
+frequently – frecuentemente, con frecuencia
+fresh – fresco
+Friday – viernes
+friend – el amigo
+from – de, desde
+fruit – la fruta
+fruit store – la frutería
+frustrated – frustrado
+function – funcionar
+G
+game – el partido
+garage – el garaje
+general – general
+generally – por lo general
+get dressed – vestirse (e à i)
+get up – levantarse
+gift – el regalo
+girl – la chica, la muchacha, la niña
+
+-- 84 of 97 --
+
+79
+girlfriend – la novia
+give – dar
+glass – el vaso
+glasses – los lentes; sunglasses – los lentes de sol
+gloves – los guantes
+go – ir; go out – salir; go up – subir; go shopping – ir
+de compras; go to bed – acostarse (o à ue)
+gold – el oro
+golf – el golf
+golf club – el palo de golf
+good-bye – adiós
+good-looking – guapo
+good – bueno
+grammar – la gramática
+granddaughter – la nieta
+grandfather – el abuelo
+grandmother – la abuela
+grandson – el nieto
+grape – la uva
+grapefruit – la toronja
+gray – gris
+great-granddaughter – la bisnieta
+great-grandfather – el bisabuelo
+green – verde
+greet – saludar
+Guatemalan – guatemalteco
+gymnasium – el gimnasio
+H
+hair – el pelo
+half – medio; half brother – el medio hermano
+hall – el pasillo
+ham – el jamón
+hand – la mano
+handkerchief – el pañuelo
+happen – pasar, ocurrir
+happiness – la felicidad
+happy – alegre, contento, feliz
+hard-working – trabajador
+hat – el sombrero
+have – tener
+he – él
+head – la cabeza
+hear – oír
+heart – el corazón
+heat – el calor
+hello – hola
+help – ayudar
+her – la; to her, for her – le
+here – aquí
+hidden – escondido
+high school – el colegio
+highway – la autopista
+him – lo; to him, for him – le
+hire – contratar
+homework – la tarea
+Honduran – hondureño
+hope – esperar
+hospital – el hospital
+hot – caliente
+hotel – el hotel
+hour – la hora
+house – la casa
+how + adjective – qué + adjective
+how many? – ¿cuántos?, ¿cuántas?
+how much? – ¿cuánto?, ¿cuánta?
+how? – ¿cómo?
+human – humano
+hurricane – el huracán
+husband – el esposo
+I
+I – yo
+ice – el hielo
+
+-- 85 of 97 --
+
+80
+ice cream – el helado
+ideal – ideal
+if – si
+illegal – ilegal
+immediately – inmediatamente
+immigration – la inmigración
+impatient – impaciente
+important – importante
+improve – mejorar
+in front of – delante de
+in – en
+include – incluir
+incorporate – incorporar
+indicate – indicar
+inexpensive – barato
+influence – la influencia; to influence – influir
+informal – informal
+inside of – dentro de
+intelligent – inteligente
+interest – el interés; to interest – interesar
+interesting – interesante
+Internet – el/la Internet
+interrogative – interrogativo
+interview – la entrevista; to interview – entrevistar
+introduce – presentar
+introductory – introductorio
+iron – planchar
+it’s necessary to + verb – hay que + infinitive
+item of clothing – la prenda
+J
+jacket – la chaqueta
+jam – la mermelada
+January – enero
+jeans – los jeans
+jewelry – la joyería
+job – el trabajo
+July – julio
+June – junio
+K
+kilo – el kilo
+kilometer – el kilómetro
+kitchen – la cocina
+kitchen sink – el fregadero
+knee – la rodilla
+knife – el cuchillo
+know – (facts, how to do something) saber; (a
+person, place, or thing) conocer
+L
+lamp – la lámpara
+language – la lengua
+large – grande
+last – pasado, último
+last name – el apellido
+last night – anoche
+late – tarde
+later – luego, más tarde
+lawyer – el abogado
+leader – el líder
+league – la liga
+learn – aprender
+leather – el cuero
+leave – salir
+left side – la izquierda
+leg – la pierna
+legal – legal
+leisure – el ocio
+lemon – el limón
+lend – prestar
+lesson – la lección
+let’s + verb – a + infinitive
+letter of the alphabet – la letra
+lettuce – la lechuga
+
+-- 86 of 97 --
+
+81
+liberty – la libertad
+library – la biblioteca
+lie – mentir (e à ie)
+lift weights – levantar pesas
+lightning bolt – el rayo
+like – como
+likewise – igualmente
+link – el enlace
+lip – el labio
+listen – escuchar
+little – poco
+live – vivir
+living room – la sala
+loan – el préstamo
+long – largo
+look at – mirar
+look for – buscar
+lose – perder (e à ie)
+lot, a lot – mucho
+love – querer
+lunch – el almuerzo
+lungs – los pulmones
+M
+make – hacer
+man – el hombre, el señor
+manager – el gerente
+many – muchos
+map – el mapa
+March – marzo
+market – el mercado
+married – casado
+marvelous – maravilloso
+material – el material
+maternal – materno
+May – mayo
+maybe – a lo mejor
+me – me [dir. obj. pron.];
+to me, for me – me [ind. obj. pron.]
+meat – la carne
+medium – mediano
+meeting – la reunión
+melon – el melón
+member – el miembro
+mention – mencionar
+menu – la carta, el menú
+Mexican – mexicano
+microwave oven – el microondas
+midnight – la medianoche
+milk – la leche
+million – millón
+mineral – el mineral
+minute – el minuto
+mirror – el espejo
+Miss – la señorita
+mom – la mamá
+moment – el momento
+mommy – mami
+Monday – lunes
+money – el dinero
+month – el mes
+more – más
+morning – la mañana
+mother – la madre
+mother-in-law – la suegra
+mountain – la montaña
+mountain range – la sierra
+mouth – la boca
+movie – la película
+movie theater – el cine
+Mr. – el señor
+Mrs. – la señora
+museum – el museo
+music – la música
+
+-- 87 of 97 --
+
+82
+my – mi / mis
+myself – me
+N
+name – el nombre
+napkin – la servilleta
+nation – la nación
+near to – cerca de
+neck – el cuello
+necklace – el collar
+need – necesitar
+negative – negativo
+neighbor – el vecino
+neither – tampoco
+neither…nor – ni…ni
+nephew – el sobrino
+nervous – nervioso
+never – nunca
+new – nuevo
+New Year’s Day – el Año Nuevo
+newspaper – el periódico
+next – próximo
+next to – al lado de
+Nicaraguan – nicaragüense
+nice – simpático
+niece – la sobrina
+night – la noche
+nine – nueve
+nine hundred – novecientos
+nineteen – diecinueve
+ninety – noventa
+ninth – noveno
+no one – nadie
+no, not – no; not only – no solo
+none, not any – ninguno
+noon – el mediodía
+normal – normal
+north – el norte
+nose – la nariz
+notebook – el cuaderno
+nothing – nada
+noun – el sustantivo
+November – noviembre
+now – ahora; right now – ahora mismo
+number – el número
+nurse – el enfermero
+O
+occur – ocurrir, pasar
+October – octubre
+of – de
+offer – ofrecer
+office – la oficina
+often – a menudo
+old – viejo
+older – mayor
+on – encima de, sobre; on the dot – en punto
+one – uno
+one hundred – cien
+onion – la cebolla
+only – solo; only child – hijo único
+open – abierto
+open – abrir
+optimistic – optimista
+or – o
+orange (adj.) – anaranjado; orange – la naranja
+orange juice – el jugo de naranja
+orchestra – la orquesta
+order – ordenar
+organize – organizar
+organized – ordenado
+other – otro
+our – nuestro(s) / nuestra(s)
+oven – el horno
+
+-- 88 of 97 --
+
+83
+over there – allá
+owner – el dueño
+P
+pajamas – el pijama
+Panamanian – panameño
+pants – los pantalones
+paper – el papel
+Paraguayan – paraguayo
+pardon – perdonar
+parents – los padres
+park – el parque
+part – la parte
+partner – la pareja
+party – la fiesta
+password – la contraseña
+past (adj.) – pasado; past – el pasado
+pasta – la pasta
+paternal – paterno
+patient – paciente
+pay – pagar; pay attention – prestar atención
+peace – la paz
+pear – la pera
+peas – los guisantes
+pen – la pluma
+pencil – el lápiz
+people – la gente
+pepper – la pimienta
+perfume – el perfume
+perfume store – la perfumería
+period – el punto
+person – la persona
+Peruvian – peruano
+pessimistic – pesimista
+pharmacy – la farmacia
+phenomenal – fenomenal
+pianist – el pianista
+piano – el piano
+pick up – recoger
+pillow – la almohada
+pineapple – la piña
+pink – rosado
+pizzeria – la pizzería
+plan to do something – pensar + infinitive
+plate – el plato
+play a sport – jugar (u à ue)
+play an instrument – tocar
+player – el jugador
+please – por favor; to please – gustar;
+to please very much – encantar
+pleasure – el placer
+point – el punto
+police officer – el policía
+poorly – mal
+popular – popular
+possibility – la posibilidad
+possible – posible
+possibly – posiblemente
+post office – el correo
+potato – la papa
+precipitation – la precipitación
+prefer – preferir (e à ie)
+pregnant – embarazada
+prepare – preparar
+prepared – preparado
+preposition – la preposición
+present – el presente; to present – presentar
+president – el presidente
+pretty – bonito
+probably – probablemente
+problem – el problema
+produce – producir
+profession – la profesión
+professor – el profesor
+
+-- 89 of 97 --
+
+84
+program – el programa
+progress – avanzar
+progressive – progresivo
+pronounce – pronunciar
+protect – proteger
+Puerto Rican – puertorriqueño
+punctuation – la puntuación
+punctuation mark – el signo de puntuación
+purple – morado
+purse – la bolsa
+put – poner; put on clothing – ponerse la ropa;
+put on makeup – maquillarse
+Q
+quarter – el cuarto
+question – la pregunta; question, issue – la cuestión
+question marks – los signos de interrogación
+quite – bastante
+R
+racquet – la raqueta
+radio – la radio
+rain – la lluvia
+rain – llover (o à ue)
+raincoat – el impermeable
+rather – bastante
+read – leer
+receive – recibir
+red – rojo
+red-colored – colorado
+reduce – reducir
+refrigerator – el refrigerador
+region – la región
+relatives – los parientes
+remember – recordar (o à ue), acordarse de (o à
+ue)
+repeat – repetir (e à i)
+resolved – resuelto
+responsible – responsable
+restaurant – el restaurante
+restrooms – los servicios sanitarios
+return – volver (o à ue)
+return something – devolver (o à ue)
+review – repasar
+rice – el arroz; rice pudding – el arroz con leche
+rich – rico
+ride – montar; ride a horse – montar a caballo
+right? – ¿verdad?, ¿cierto?
+right side – la derecha
+ring – el anillo
+roof – el techo
+root – la raíz
+rug – la alfombra
+run – correr
+run away – huir
+S
+sad – triste
+salad – la ensalada
+salt – la sal
+salty – salado
+Salvadoran – salvadoreño
+sandals – las sandalias
+sandwich – el sándwich
+satisfied – satisfecho
+Saturday – sábado
+saucer – el platillo
+say – decir
+scarf – la bufanda
+school – la escuela
+school principal – el director de escuela
+scuba diving – el buceo; to scuba dive – bucear
+search engine – el buscador
+season – la estación
+seat – el asiento
+seated – sentado
+
+-- 90 of 97 --
+
+85
+second – segundo
+secretary – el secretario
+see – ver
+seem – parecer
+selfish – egoísta
+sell – vender
+semicolon – el punto y coma
+sentence – la frase
+September – septiembre
+serve – servir (e à i)
+seven – siete
+seven hundred – setecientos
+seventeen – diecisiete
+seventh – séptimo
+seventy – setenta
+shave – afeitarse
+she – ella
+shirt – la camisa
+shoe store – la zapatería
+shoe – el zapato; high-heel shoes – los zapatos de
+tacón alto
+short in length – corto
+shorts – los pantalones cortos
+should – deber
+shoulder – el hombro
+show – el espectáculo, la función
+show – mostrar (o à ue)
+shower – la ducha; to shower – ducharse
+sick – enfermo
+side – el lado
+silk – la seda
+silver – la plata
+since – desde; since when – desde cuando
+sing – cantar
+sister – la hermana
+sister-in-law – la cuñada
+situation – la situación
+six – seis
+six hundred – seiscientos
+sixteen – dieciséis
+sixth – sexto
+sixty – sesenta
+size – la talla
+to ski – esquiar
+skiing – el esquí
+skirt – la falda
+sky – el cielo
+sleep – dormir (o à ue); to fall asleep – dormirse (o
+à ue)
+slowly – despacio
+small – pequeño, chico
+sneakers – los zapatos de tenis
+snow-covered – nevado
+snow – nevar (e à ie)
+so – así
+so-so – más o menos, regular
+soap opera – la telenovela
+soccer – el fútbol
+soccer player – el futbolista
+social worker – el trabajador social
+socks – los calcetines
+soft drink – el refresco
+some – unos [masc., pl.], unas [fem., pl.], algunos
+[masc. pl.], algunas [fem. pl.]
+someone – alguien
+something – algo
+son – el hijo
+son-in-law – el yerno
+soul – el alma [fem.]
+soul mate – el alma gemela, la media naranja
+soup – la sopa
+south – el sur
+Spaniard – español
+Spanish language – el español, el castellano
+
+-- 91 of 97 --
+
+86
+speak – hablar
+spinach – las espinacas
+spoon – la cuchara
+sport – el deporte
+spring – la primavera
+stadium – el estadio
+steak – el bistec
+stepbrother – el hermanastro
+stepdaughter – la hijastra
+stepfather – el padrastro
+stepmother – la madrastra
+stepsister – la hermanastra
+stepson – el hijastro
+still – todavía
+stockings – las medias
+stomach – el estómago
+store – la tienda
+storm – la tormenta
+stove – la estufa
+strawberry – la fresa
+street – la calle
+strong – fuerte
+student – el estudiante
+study – el estudio; to study – estudiar
+subway – el metro
+sufficient – suficiente
+sugar – el azúcar
+suit jacket – el saco
+suit – el traje
+summer – el verano
+sun – el sol
+sunbathe – tomar el sol
+Sunday – domingo
+superiority – la superioridad
+supermarket – el supermercado
+supervisor – el supervisor
+surf the Internet – navegar por la red
+sweater – el suéter
+sweep – barrer
+swim – nadar
+swimming – la natación
+swimming pool – la piscina
+system – el sistema
+T
+T-shirt – la camiseta
+table – la mesa
+tablecloth – el mantel
+take – tomar
+take away – quitar; take off clothing – quitarse la
+ropa
+take down – bajar
+take out – sacar
+talk – hablar
+talkative – hablador
+tall – alto
+taxi – el taxi
+tea – el té
+teach – enseñar
+teacher – el maestro
+team – el equipo
+teaspoon – la cucharita
+technology – la tecnología
+telephone – el teléfono; cell phone – el teléfono
+celular, el celular, el móvil; cordless phone – el
+teléfono inalámbrico
+television – la televisión
+television set – el televisor
+tell – decir
+temperature – la temperatura
+ten – diez
+tennis – el tenis
+tenth – décimo
+terrible – terrible
+text message – el mensaje de texto
+
+-- 92 of 97 --
+
+87
+thank you – gracias
+that – que, ese [adj. or pron.], eso [pron.], aquello
+[pron.]
+that over there – aquel
+the – el [masc., sing.], la [fem., sing.], los [masc., pl.],
+las [fem., pl.]
+theater – el teatro
+their – su / sus
+them – los [masc.], las [fem.]; to them – les
+then – entonces
+there – allí
+there is, there are – hay
+they – ellos [masc.]; ellas [fem.]
+thing – la cosa
+think – pensar (e à ie); think about – pensar en
+third – tercero
+thirteen – trece
+thirty – treinta
+this – este [adj. or pron.], esto [pron.]
+thousand – mil
+three – tres
+three hundred – trescientos
+throat – la garganta
+thunder – tronar (o à ue)
+Thursday – jueves
+ticket – el boleto
+tie – la corbata
+time – el tiempo, la vez; free time – el tiempo libre;
+at times – a veces; from time to time – de vez en
+cuando
+timid – tímido
+tired – cansado
+to – a; to where? – ¿adónde?
+toast – el pan tostado; toast (to celebrate) – el
+brindis; to toast (bread) – tostar
+today – hoy
+toe – el dedo del pie
+together – juntos
+toilet – el inodoro
+tomato – el tomate
+tomorrow – mañana
+tongue – la lengua
+too much – demasiado
+tooth – el diente
+topic – el tema
+touch – tocar
+toward – hacia
+town square – la plaza
+train – el tren; to train – entrenar
+train station – la estación de trenes
+translate – traducir
+trash – la basura
+travel – viajar
+truth – la verdad
+try to + verb – tratar de + infinitive
+Tuesday – martes
+turkey – el pavo
+turn out to be – resultar
+twelve – doce
+twenty – veinte
+twin – el gemelo
+two – dos
+two hundred – doscientos
+type – el tipo
+typical – típico
+U
+ugly – feo
+uncle – el tío
+under – debajo de
+understand – entender (e à ie), comprender
+unfriendly – antipático
+unique – único
+United States – los Estados Unidos
+university – la universidad
+underwear – la ropa interior
+
+-- 93 of 97 --
+
+88
+until – hasta
+Uruguayan – uruguayo
+us – nos [dir. obj. pron.]; to us – nos [ind. obj. pron.]
+used up – agotado
+useful – útil
+user – el usuario
+usual – usual
+V
+vacation – las vacaciones
+vacuum – pasar la aspiradora
+variety – la variedad
+various – varios
+vegetables – las verduras
+Venezuelan – venezolano
+verb – el verbo; reflexive verb – el verbo reflexivo
+very – muy
+virtue – la virtud
+visit – visitar
+vocabulary – el vocabulario
+W
+waist – la cintura
+wait for – esperar
+waiter – el mesero
+waitress – la mesera
+wake up – despertarse (e à ie)
+walk – caminar, andar; to take a walk – pasear
+wall – la pared
+wallet – la cartera
+want – querer (e à ie)
+to wash – lavar; to wash oneself – lavarse
+watch – el reloj
+water – el agua [fem.]
+water skiing – el esquí acuático
+way – la manera
+we – nosotros [masc.], nosotras [fem.]
+wear – llevar
+weather – el tiempo
+web page – la página web
+website – el sitio web
+Wednesday – miércoles
+week – la semana
+weekend – el fin de semana
+welcome – bienvenidos [masc., pl.]
+well – bien
+well, so – pues, bueno
+west – el oeste
+what? – ¿qué?
+what a(n) + noun – qué + noun
+when? – ¿cuándo?
+where? – ¿dónde?
+white – blanco
+who? – ¿quién? [sing.], ¿quiénes? [pl.]
+why? – ¿por qué?
+wife – la esposa
+willing – dispuesto
+win – ganar
+wind – el viento
+window – la ventana
+wine – el vino; white wine – el vino blanco; red wine
+– el vino tinto
+wineglass – la copa
+winter – el invierno
+with – con; with me – conmigo; with you – contigo
+[inf., sing.]
+withdraw – retirar
+without – sin
+woman – la mujer, la señora
+wool – la lana
+word – la palabra
+work – el trabajo; to work – trabajar
+workbook – el cuaderno
+worker – el trabajador
+world – el mundo
+
+-- 94 of 97 --
+
+89
+worried – preocupado
+worse – peor
+wrist – la muñeca
+write – escribir
+Y
+yellow – amarillo
+year – el año
+yes – sí
+yesterday – ayer
+yoga – el yoga
+you – tú [sing., inf.]; usted [sing., form.]; vosotros
+[masc. pl., inf.]; vosotras [fem. pl., inf.]; ustedes [pl.,
+form.]; to you – te [sing., inf.], os [pl., inf.], les [pl.,
+form.]
+young – joven
+younger – menor
+your – tu / tus [sing., inf.]; vuestro(s) / vuestra(s)
+[inf., pl.]; su / sus [form., pl.]
+Z
+zero – cero
+zone – la zona
+zoo – el zoológico
+
+-- 95 of 97 --
+
+90
+Resources for Further Study
+Dictionaries
+It is always useful for a language learner to have access to a good dictionary. One that is recommended to beginning
+Spanish language learners is McGraw-Hill’s Vox Everyday Spanish and English Dictionary. This dictionary includes
+just about all the words you’re likely to come across without overwhelming you with too many entries.
+In terms of online resources, the most useful dictionary is the one at wordreference.com. This is a particularly good
+website for a number of reasons. First, it allows you to find the English for a Spanish word, the Spanish for an English
+word, a definition in Spanish, and even Spanish synonyms for a given word. In addition to showing the WordReference
+definition, this website also allows you to consult the Collins online dictionary, which is another excellent resource.
+Beyond the definitions you can find at wordreference.com, another useful feature of the website is the forum discussion
+section, which is content created by users of the dictionary. Someone asks a question in the forum, such as, “What’s
+the difference between the word x and the word y?,” and users will then respond, saying something like the following:
+“In Colombia, we say….” or “In Argentina, we use the word x when….” Some users write in Spanish while others write
+in English, and the answers to the questions asked in the forum give real insight into how words and expressions are
+used in daily communication by Spanish speakers.
+One final dictionary worth mentioning is the dictionary of the Real Academia Española [Royal Spanish Academy],
+found at rae.es. All of the definitions in this dictionary are entirely in Spanish, so it’s not an ideal resource for a
+beginning language learner. Nevertheless, it’s a website worth taking a look at, given that the Real Academia Española
+is the official institution that oversees the Spanish language. This dictionary will become more useful to you as your
+level of Spanish improves.
+Listening to Varieties of Spoken Spanish
+There are two very interesting and useful academic websites that can help you become familiar with different varieties
+of spoken Spanish. One website, maintained by The Ohio State University, is called the Digital Catalog of the
+Sounds of Spanish and can be found at dialectos.osu.edu. If you go to this website, you will be able to see short
+videos of Spanish speakers from Spain, almost all of the Spanish-speaking countries in Latin America, and even the
+United States. Most of the videos also include a transcript of the Spanish being spoken by the person in the video. So,
+as you’re listening to the words being spoken, you can, if you want, read the words as well.
+Another academic website is called Spanish Proficiency Exercises, and you can find it at the University of Texas at
+Austin website at laits.utexas.edu/spe. This website also includes video clips of a variety of Spanish speakers from
+different countries talking about a wide range of topics. And very often, you can read the text of what the person is
+saying as you listen to the Spanish.
+Both of these websites are recommended as a way to begin to get a sense of different ways that Spanish is spoken in
+different countries. It will allow you to compare, for example, a Mexican accent with one from Chile or a Guatemalan
+accent with one from Spain.
+Practice with Grammar and Vocabulary
+There are several useful websites that offer online practice of both grammar and vocabulary. One of these is found
+at conjuguemos.com (conjuguemos means “let’s conjugate”). This website will allow you to practice, for example,
+adjective agreement with nouns, verb conjugation, comparisons, and many other grammatical topics. You enter
+answers to specific questions, and the website will let you know which answers are correct and which are incorrect.
+Some of the questions are based on what you read, while others relate to videos of different Spanish speakers.
+Another useful website for practicing with the language is called Spanish Language and Culture with Barbara
+Kuczun Nelson and can be found at personal.colby.edu/~bknelson/SLC. This website offers a wide range of activities
+that allow you to work on developing your skills with a variety of grammar topics.
+
+-- 96 of 97 --
+
+91
+Grammar Reference
+Any introductory Spanish textbook can be a good resource for you to consult regarding questions you might have
+related to grammar topics. Introductory textbooks are also good places to find readings that are not too difficult for
+beginning language learners.
+An online resource that offers helpful explanations of grammar topics is spanishgrammarguide.com, a website
+developed by the Spanish Institute of Puebla. The grammar explanations on this website are in Spanish, but they are
+short and tend not to be too difficult to understand, even for beginning language learners. Several examples are given
+for all grammar points, allowing you to see the specific grammar topic being used in a variety of sentences.
+Television and Radio Programming
+With the growing number of channels on television, it’s getting easier each year to find Spanish-speaking programs.
+Three specific networks that you might have access to where you live are Univisión, Telemundo, and Azteca. If you
+are able to find some channels in Spanish, you should tune in to the news—which is recommended for a few reasons.
+First, newscasters tend to speak slowly and clearly. For a learner new to the language, this is exactly the kind of
+spoken Spanish you’ll be most likely to understand. Moreover, when watching the news, you’ll see clips or scenes of
+what the newscaster is discussing. These images accompanying the words you hear provide helpful context for what’s
+being said, meaning that you’ll likely be able to understand more of the Spanish that is being used. When listening to
+the radio in Spanish, news programs also tend to be the best kind of programming for beginning language learners.
+You might also choose to watch other kinds of programs on television: sports, telenovelas (soap operas), dramas,
+game shows—anything, really. The more you are able to hear Spanish in any sort of context, the better. If your
+television set allows it, you should occasionally watch a program while looking at the captions in Spanish. You might
+be tempted to use closed captioning in English, but using it in Spanish will help you relate words you hear to the way
+they are spelled. And the entire all-Spanish experience—meaning that both the words you’re hearing and the words
+you’re reading will be in Spanish—will help get you more used to the language in its various aspects.
+Websites of Interest
+The Internet, of course, offers a plethora of websites in Spanish. Although language learners should at times use the
+Internet as a study guide—when consulting an online dictionary, for example—at other times it’s a good idea to visit
+different websites in Spanish simply to explore topics that are of interest to you. As a beginning language learner,
+you certainly won’t be able to understand everything you read. Nevertheless, your use of context, cognates, and
+conjecture (in other words, educated guesses) can help you make sense of much more than you might think possible
+in your reading.
+To read the news in Spanish, you might consult cnnenespanol.com or the Spanish page of foxnewslatino.com.
+You can find news from Mexico at eluniversal.com.mx and news from Spain at elpais.com; those countries, of
+course, have other newspapers, too. If you’re interested in news from a specific Spanish-speaking country, just google
+“periódico” [newspaper] with the name of the country and you’ll be directed to a number of different websites.
+To see a weather report, you can consult the website of Spain’s Agencia Estatal de Meteorología [State
+Meteorological Agency] found at aemet.es, which always has a video of a meteorologist giving the weather for all the
+regions in Spain. If you like to read about sports, you might be interested in the U.S. website espndeportes.com, the
+Mexican website aztecadeportes.com, or the Spanish website marca.com. If your interests are culinary, the website
+elgourmet.com is a place where you can explore lots of recipes and articles related to food. Finally, Spain’s public
+broadcasting service, Radio y televisión española (which can be found online at rtve.es), offers programs dedicated
+to news, sports, music, and more.
+Any reading you do in Spanish is good for the development of your reading skills, so take some time to explore the
+Internet to find websites in Spanish that match your interests.
+
+-- 97 of 97 --
+
