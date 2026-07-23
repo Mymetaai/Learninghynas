@@ -23,9 +23,13 @@ import {
   MessageSquare,
   HelpCircle,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  Quote,
+  Target,
+  FileText
 } from 'lucide-react';
 import { useStatsStore } from '../state/statsStore';
+import { ALL_SYLLABUS_LESSONS, type SyllabusLessonData } from '../data/syllabusLessonsData';
 
 // Types
 export type CoursePart = 'part1' | 'part2' | 'part3' | 'part4' | 'part5' | 'part6' | 'part7';
@@ -184,8 +188,8 @@ const BasicEspanolScreen: FC = () => {
     }
   });
 
-  // Mini Tryout interactive answer state
-  const [userTryoutAnswer, setUserTryoutAnswer] = useState<Record<string, string>>({});
+  // Interactive Quick Practice state per lesson
+  const [userPracticeAnswers, setUserPracticeAnswers] = useState<Record<string, string>>({});
 
   // Quiz states
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -342,8 +346,11 @@ const BasicEspanolScreen: FC = () => {
   const completedInPart = sectionsList.filter(s => s.id.startsWith('lesson') && completedLessons[s.id]).length;
   const progressPercent = Math.round((completedInPart / Math.max(1, totalLessonsInPart)) * 100);
 
+  // Helper to retrieve structured lesson data
+  const currentLessonData: SyllabusLessonData | undefined = activeSection.startsWith('lesson') ? ALL_SYLLABUS_LESSONS[activeSection] : undefined;
+
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary relative overflow-x-hidden font-body pb-12">
+    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary relative overflow-x-hidden font-body pb-16">
       
       {/* Background Decorative Gradient Blobs */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-terracotta/5 rounded-full filter blur-[100px] pointer-events-none" />
@@ -646,178 +653,287 @@ const BasicEspanolScreen: FC = () => {
                 </div>
               )}
 
-              {/* RICH COMPREHENSIVE LESSON RENDERER FOR ALL LESSONS 1-30 */}
-              {activeSection.startsWith('lesson') && (
+              {/* RICH TEXTBOOK-GRADE LESSON PAGE RENDERER (ALL LESSONS 1 TO 30) */}
+              {activeSection.startsWith('lesson') && currentLessonData && (
                 <div className="space-y-8">
                   
-                  {/* LESSON 12 DETAILED EXPANSION */}
-                  {activeSection === 'lesson12' && (
-                    <div className="space-y-6">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <span className="font-hud text-xs text-marigold font-bold uppercase tracking-wider block mb-1">PART 3 • LESSON 12</span>
-                          <h1 className="font-display text-3xl font-extrabold text-text-primary">Hacer, Weather & Saber vs Conocer</h1>
-                          <p className="text-xs text-pencil mt-1">Professor Bill Worden • Course Workbook Reference</p>
-                        </div>
-                        <button
-                          onClick={() => handleLessonComplete('lesson12')}
-                          className={`px-5 py-2.5 rounded-2xl text-xs font-bold transition-all shadow-md cursor-pointer ${
-                            completedLessons.lesson12 ? 'bg-teal-deep/20 text-teal-deep border border-teal-deep/30' : 'bg-terracotta text-white hover:bg-terracotta/90'
-                          }`}
-                        >
-                          {completedLessons.lesson12 ? 'Completed ✓' : 'Mark Completed'}
-                        </button>
-                      </div>
-
-                      {/* SECTION A: HACER FOR WEATHER */}
-                      <div className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 space-y-4">
-                        <div className="flex items-center gap-2 text-terracotta font-bold text-sm">
-                          <Sparkles className="h-4 w-4" />
-                          <span>1. Weather Expressions with HACER</span>
-                        </div>
-                        <p className="text-xs text-pencil leading-relaxed">
-                          In Spanish, weather is usually expressed using the 3rd person singular of <strong>HACER</strong> (it makes). Instead of "It is cold", Spanish says "It makes cold" (<em>Hace frío</em>).
+                  {/* 1. LESSON HEADER BANNER */}
+                  <div className="bg-gradient-to-r from-terracotta/10 via-paper/5 to-marigold/10 border border-pencil/15 rounded-3xl p-6 sm:p-8 space-y-4 shadow-sm relative overflow-hidden">
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                      <div>
+                        <span className="font-hud text-xs text-marigold font-bold uppercase tracking-widest block mb-1">
+                          PART {currentLessonData.partNumber} • LESSON {currentLessonData.lessonNumber}
+                        </span>
+                        <h1 className="font-display text-3xl sm:text-4xl font-extrabold text-text-primary tracking-tight">
+                          {currentLessonData.title}
+                        </h1>
+                        <p className="text-xs text-pencil mt-1 font-semibold">
+                          {currentLessonData.subtitle}
                         </p>
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-                          <div className="bg-bg-elevated p-3 rounded-2xl border border-structural"><span className="font-bold text-terracotta block">Hace frío</span><span className="text-pencil text-[11px]">It is cold</span></div>
-                          <div className="bg-bg-elevated p-3 rounded-2xl border border-structural"><span className="font-bold text-terracotta block">Hace calor</span><span className="text-pencil text-[11px]">It is hot</span></div>
-                          <div className="bg-bg-elevated p-3 rounded-2xl border border-structural"><span className="font-bold text-terracotta block">Hace sol</span><span className="text-pencil text-[11px]">It is sunny</span></div>
-                          <div className="bg-bg-elevated p-3 rounded-2xl border border-structural"><span className="font-bold text-terracotta block">Hace viento</span><span className="text-pencil text-[11px]">It is windy</span></div>
-                          <div className="bg-bg-elevated p-3 rounded-2xl border border-structural"><span className="font-bold text-terracotta block">Hace fresco</span><span className="text-pencil text-[11px]">It is cool</span></div>
-                          <div className="bg-bg-elevated p-3 rounded-2xl border border-structural"><span className="font-bold text-terracotta block">Hace buen tiempo</span><span className="text-pencil text-[11px]">Good weather</span></div>
-                          <div className="bg-bg-elevated p-3 rounded-2xl border border-structural"><span className="font-bold text-terracotta block">Hace mal tiempo</span><span className="text-pencil text-[11px]">Bad weather</span></div>
-                          <div className="bg-bg-elevated p-3 rounded-2xl border border-structural"><span className="font-bold text-terracotta block">Llueve / Nieva</span><span className="text-pencil text-[11px]">It rains / snows</span></div>
-                        </div>
                       </div>
+                      <button
+                        onClick={() => handleLessonComplete(activeSection)}
+                        className={`px-5 py-2.5 rounded-2xl text-xs font-bold transition-all shadow-md cursor-pointer shrink-0 ${
+                          completedLessons[activeSection]
+                            ? 'bg-teal-deep/20 text-teal-deep border border-teal-deep/30'
+                            : 'bg-terracotta text-white hover:bg-terracotta/90'
+                        }`}
+                      >
+                        {completedLessons[activeSection] ? 'Completed ✓' : 'Mark Lesson Completed'}
+                      </button>
+                    </div>
 
-                      {/* SECTION B: SABER VS CONOCER DEEP COMPARISON */}
-                      <div className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 space-y-4">
-                        <div className="flex items-center gap-2 text-marigold font-bold text-sm">
-                          <GraduationCap className="h-4 w-4" />
-                          <span>2. Saber vs Conocer (Knowing Facts vs Familiarity)</span>
-                        </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          <div className="bg-bg-elevated p-4 rounded-2xl border border-structural space-y-2">
-                            <h4 className="font-bold text-xs text-marigold font-hud uppercase">SABER (Facts, Skills, Information)</h4>
-                            <p className="text-xs text-pencil">Yo form is <strong>sé</strong>. Conjugation: sé, sabes, sabe, sabemos, sabéis, saben.</p>
-                            <ul className="text-xs space-y-1 text-text-primary font-mono">
-                              <li>• Sé tu número de teléfono.</li>
-                              <li>• Sé hablar español (skill).</li>
-                              <li>• ¿Sabes dónde está María?</li>
-                            </ul>
+                    {/* Professor Note Box */}
+                    <div className="bg-bg-elevated border-l-4 border-marigold p-4 rounded-r-2xl space-y-1.5 text-xs text-text-primary">
+                      <div className="flex items-center gap-2 text-marigold font-bold font-hud uppercase">
+                        <Quote className="h-4 w-4" />
+                        <span>Professor Bill Worden's Key Teaching Note</span>
+                      </div>
+                      <p className="italic text-pencil leading-relaxed">{currentLessonData.professorNote}</p>
+                    </div>
+
+                    {/* Objectives */}
+                    <div className="pt-2">
+                      <span className="text-[10px] font-hud uppercase tracking-wider text-pencil font-bold block mb-2">Lesson Learning Objectives:</span>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        {currentLessonData.objectives.map((obj, idx) => (
+                          <div key={idx} className="flex items-center gap-2 bg-paper/5 p-2.5 rounded-xl border border-pencil/10 text-xs text-text-primary">
+                            <Target className="h-3.5 w-3.5 text-terracotta shrink-0" />
+                            <span>{obj}</span>
                           </div>
-                          <div className="bg-bg-elevated p-4 rounded-2xl border border-structural space-y-2">
-                            <h4 className="font-bold text-xs text-terracotta font-hud uppercase">CONOCER (People, Places, Familiarity)</h4>
-                            <p className="text-xs text-pencil">Yo form is <strong>conozco</strong>. Conjugation: conozco, conoces, conoce, conocemos, conocéis, conocen.</p>
-                            <ul className="text-xs space-y-1 text-text-primary font-mono">
-                              <li>• Conozco a Juan (requires personal 'a').</li>
-                              <li>• Conozco la ciudad de Madrid.</li>
-                              <li>• ¿Conoces este libro?</li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div className="bg-marigold/10 border border-marigold/30 rounded-2xl p-4 text-xs text-text-primary space-y-1">
-                          <strong className="text-marigold flex items-center gap-1"><AlertCircle className="h-3.5 w-3.5" /> Golden Rule:</strong>
-                          <span>When knowing how to do a skill (swim, drive, speak), use <strong>SABER + INFINITIVE</strong>. (e.g. <em>Sé nadar</em> = I know how to swim).</span>
-                        </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 2. GRAMMAR & STRUCTURAL SECTIONS */}
+                  {currentLessonData.grammarSections.map((section, idx) => (
+                    <div key={idx} className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 sm:p-7 space-y-4">
+                      <div className="flex items-center gap-2 text-terracotta font-bold text-base font-display">
+                        <Sparkles className="h-5 w-5 text-terracotta" />
+                        <span>{section.title}</span>
                       </div>
 
-                      {/* SECTION C: PRACTICAL DIALOGUE */}
-                      <div className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 space-y-3">
-                        <h4 className="font-bold text-xs text-pencil uppercase font-hud flex items-center gap-1.5">
-                          <MessageSquare className="h-4 w-4 text-terracotta" /> Practical Conversation Dialogue
-                        </h4>
-                        <div className="bg-bg-elevated p-4 rounded-2xl border border-structural space-y-2 text-xs">
-                          <p><strong className="text-terracotta">Carlos:</strong> ¡Hola Elena! ¿Sabes si hace frío afuera?</p>
-                          <p><strong className="text-marigold">Elena:</strong> Sí, hace mucho frío y viento. ¿Conoces a mi amigo Mateo?</p>
-                          <p><strong className="text-terracotta">Carlos:</strong> No, no lo conozco. ¿Él sabe hablar español?</p>
-                          <p><strong className="text-marigold">Elena:</strong> Sí, él sabe hablar muy bien. ¡Vamos a conocerlo!</p>
-                        </div>
-                      </div>
+                      <p className="text-xs text-pencil leading-relaxed font-body">
+                        {section.explanation}
+                      </p>
 
-                      {/* SECTION D: INTERACTIVE TRYOUT */}
-                      <div className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 space-y-4">
-                        <h4 className="font-bold text-xs text-pencil uppercase font-hud flex items-center gap-1.5">
-                          <HelpCircle className="h-4 w-4 text-marigold" /> Lesson Quick Practice Tryout
-                        </h4>
-                        <div className="space-y-3">
-                          <p className="text-xs font-semibold text-text-primary">Fill in the blank: "Yo _____ a tu hermano María." (I know your brother María)</p>
-                          <div className="flex gap-2">
-                            {['sé', 'conozco', 'hago', 'estoy'].map((option) => (
-                              <button
-                                key={option}
-                                onClick={() => setUserTryoutAnswer(prev => ({ ...prev, lesson12: option }))}
-                                className={`px-4 py-2 rounded-xl text-xs font-bold cursor-pointer border ${
-                                  userTryoutAnswer.lesson12 === option
-                                    ? option === 'conozco'
-                                      ? 'bg-teal-deep/20 border-teal-deep text-teal-deep'
-                                      : 'bg-terracotta/20 border-terracotta text-terracotta'
-                                    : 'bg-bg-elevated border-structural text-pencil hover:text-text-primary'
-                                }`}
-                              >
-                                {option}
-                              </button>
+                      {/* Rules Bullet List */}
+                      {section.rules && section.rules.length > 0 && (
+                        <div className="bg-bg-elevated p-4 rounded-2xl border border-structural space-y-2">
+                          <span className="text-[10px] font-hud uppercase tracking-wider text-marigold font-bold block">Key Rules & Syntax:</span>
+                          <ul className="space-y-1.5 text-xs text-text-primary">
+                            {section.rules.map((rule, rIdx) => (
+                              <li key={rIdx} className="flex items-start gap-2">
+                                <span className="text-terracotta font-bold">•</span>
+                                <span className="leading-normal">{rule}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* Tables */}
+                      {section.table && (
+                        <div className="overflow-x-auto rounded-2xl border border-pencil/15 shadow-sm">
+                          <table className="w-full text-xs text-left border-collapse">
+                            <thead className="bg-paper/10 font-hud text-terracotta uppercase text-[10px] tracking-wider border-b border-pencil/15">
+                              <tr>
+                                {section.table.headers.map((h, hIdx) => (
+                                  <th key={hIdx} className="p-3 font-bold">{h}</th>
+                                ))}
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-pencil/10 font-mono text-text-primary">
+                              {section.table.rows.map((row, rIdx) => (
+                                <tr key={rIdx} className={rIdx % 2 === 0 ? 'bg-bg-elevated/40' : 'bg-transparent'}>
+                                  {row.map((cell, cIdx) => (
+                                    <td key={cIdx} className="p-3 leading-relaxed">{cell}</td>
+                                  ))}
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      )}
+
+                      {/* Acronym Breakdown */}
+                      {section.acronym && (
+                        <div className="bg-marigold/10 border border-marigold/30 rounded-2xl p-5 space-y-3">
+                          <span className="text-xs font-hud uppercase font-bold text-marigold tracking-wider block">
+                            The {section.acronym.name} Memory Framework:
+                          </span>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+                            {section.acronym.items.map((item, aIdx) => (
+                              <div key={aIdx} className="bg-bg-elevated p-3 rounded-xl border border-structural space-y-1">
+                                <div className="flex items-center gap-1.5 font-bold text-xs text-terracotta">
+                                  <span className="bg-terracotta text-white rounded-md px-1.5 py-0.5 text-[10px] font-mono">{item.letter}</span>
+                                  <span>{item.meaning}</span>
+                                </div>
+                                <p className="text-[11px] font-mono text-pencil italic">{item.example}</p>
+                              </div>
                             ))}
                           </div>
-                          {userTryoutAnswer.lesson12 && (
-                            <p className="text-xs text-pencil">
-                              {userTryoutAnswer.lesson12 === 'conozco' ? (
-                                <span className="text-teal-deep font-bold flex items-center gap-1"><CheckCircle2 className="h-3.5 w-3.5" /> Correct! Conocer is used for people with personal 'a'.</span>
-                              ) : (
-                                <span className="text-terracotta font-bold">Try again. Use conocer for knowing people!</span>
-                              )}
-                            </p>
-                          )}
                         </div>
-                      </div>
+                      )}
 
+                      {/* Callouts */}
+                      {section.callout && (
+                        <div className="bg-terracotta/10 border border-terracotta/30 rounded-2xl p-4 flex items-start gap-2.5 text-xs text-text-primary">
+                          <AlertCircle className="h-4 w-4 text-terracotta shrink-0 mt-0.5" />
+                          <span className="font-semibold">{section.callout}</span>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+
+                  {/* 3. VOCABULARY & PHONETICS REFERENCE TABLE */}
+                  {currentLessonData.vocabularyTable && currentLessonData.vocabularyTable.length > 0 && (
+                    <div className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 sm:p-7 space-y-4">
+                      <div className="flex items-center gap-2 text-marigold font-bold text-base font-display">
+                        <BookOpen className="h-5 w-5 text-marigold" />
+                        <span>Lesson Vocabulary & Phonetic Pronunciation</span>
+                      </div>
+                      <div className="overflow-x-auto rounded-2xl border border-pencil/15">
+                        <table className="w-full text-xs text-left border-collapse">
+                          <thead className="bg-paper/10 font-hud text-marigold uppercase text-[10px] tracking-wider border-b border-pencil/15">
+                            <tr>
+                              <th className="p-3 font-bold">Spanish Expression</th>
+                              <th className="p-3 font-bold">Phonetic Guide</th>
+                              <th className="p-3 font-bold">English Meaning</th>
+                              <th className="p-3 font-bold">Context & Usage</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-pencil/10">
+                            {currentLessonData.vocabularyTable.map((v, vIdx) => (
+                              <tr key={vIdx} className={vIdx % 2 === 0 ? 'bg-bg-elevated/40' : 'bg-transparent'}>
+                                <td className="p-3 font-bold text-terracotta">{v.spanish}</td>
+                                <td className="p-3 font-mono text-pencil text-[11px]">{v.phonetic}</td>
+                                <td className="p-3 font-semibold text-text-primary">{v.english}</td>
+                                <td className="p-3 text-pencil italic">{v.usage}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   )}
 
-                  {/* ALL OTHER LESSONS GENERIC DETAILED TEMPLATE FOR CONTINUITY */}
-                  {activeSection !== 'lesson12' && (
-                    <div className="space-y-6">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <span className="font-hud text-xs text-marigold font-bold uppercase tracking-wider block mb-1">
-                            {PART_OPTIONS.find(o => o.id === coursePart)?.label.split(':')[0]} • {sectionsList.find(s => s.id === activeSection)?.title}
-                          </span>
-                          <h1 className="font-display text-3xl font-extrabold text-text-primary">
-                            {sectionsList.find(s => s.id === activeSection)?.title}
-                          </h1>
-                          <p className="text-xs text-pencil mt-1">Course Workbook Reference Guide & Exercises</p>
-                        </div>
-                        <button
-                          onClick={() => handleLessonComplete(activeSection)}
-                          className={`px-5 py-2.5 rounded-2xl text-xs font-bold transition-all shadow-md cursor-pointer ${
-                            completedLessons[activeSection] ? 'bg-teal-deep/20 text-teal-deep border border-teal-deep/30' : 'bg-terracotta text-white hover:bg-terracotta/90'
-                          }`}
-                        >
-                          {completedLessons[activeSection] ? 'Completed ✓' : 'Mark Completed'}
-                        </button>
+                  {/* 4. REAL CONVERSATION DIALOGUE */}
+                  {currentLessonData.dialogue && currentLessonData.dialogue.length > 0 && (
+                    <div className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 sm:p-7 space-y-4">
+                      <div className="flex items-center gap-2 text-terracotta font-bold text-base font-display">
+                        <MessageSquare className="h-5 w-5 text-terracotta" />
+                        <span>Practical Conversation Dialogue</span>
+                      </div>
+                      <div className="bg-bg-elevated p-5 rounded-2xl border border-structural space-y-3 text-xs">
+                        {currentLessonData.dialogue.map((d, dIdx) => (
+                          <div key={dIdx} className="space-y-1">
+                            <div className="flex items-center gap-2">
+                              <span className="font-bold text-terracotta font-hud uppercase">{d.speaker}:</span>
+                              <span className="font-bold text-text-primary">{d.spanish}</span>
+                            </div>
+                            <p className="text-[11px] text-pencil italic pl-4">({d.english})</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 5. EXAMPLE SENTENCES WITH BREAKDOWN */}
+                  {currentLessonData.exampleSentences && currentLessonData.exampleSentences.length > 0 && (
+                    <div className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 sm:p-7 space-y-4">
+                      <div className="flex items-center gap-2 text-marigold font-bold text-base font-display">
+                        <FileText className="h-5 w-5 text-marigold" />
+                        <span>Sentence Structure Analysis</span>
+                      </div>
+                      <div className="grid grid-cols-1 gap-3">
+                        {currentLessonData.exampleSentences.map((ex, sIdx) => (
+                          <div key={sIdx} className="bg-bg-elevated p-4 rounded-2xl border border-structural space-y-1.5 text-xs">
+                            <div className="flex justify-between items-start">
+                              <span className="font-bold text-text-primary text-sm">{ex.spanish}</span>
+                              <span className="text-[10px] font-hud text-terracotta uppercase font-bold">Example {sIdx + 1}</span>
+                            </div>
+                            <p className="text-pencil font-semibold">{ex.english}</p>
+                            <p className="text-[11px] text-pencil/80 italic pt-1 border-t border-pencil/10">Grammar breakdown: {ex.breakdown}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 6. INTERACTIVE QUICK PRACTICE CHECK */}
+                  {currentLessonData.quickPractice && (
+                    <div className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 sm:p-7 space-y-4">
+                      <div className="flex items-center gap-2 text-terracotta font-bold text-base font-display">
+                        <HelpCircle className="h-5 w-5 text-terracotta" />
+                        <span>Interactive Knowledge Check</span>
                       </div>
 
-                      {/* GRAMMAR & RULES BREAKDOWN */}
-                      <div className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 space-y-4">
-                        <div className="flex items-center gap-2 text-terracotta font-bold text-sm">
-                          <Sparkles className="h-4 w-4" />
-                          <span>Key Grammar Concept & Rules</span>
-                        </div>
-                        <p className="text-xs text-pencil leading-relaxed">
-                          {sectionsList.find(s => s.id === activeSection)?.sub}. Master the formulas, structural patterns, and agreement requirements detailed in the course syllabus workbook.
+                      <div className="bg-bg-elevated p-5 rounded-2xl border border-structural space-y-4">
+                        <p className="font-bold text-sm text-text-primary">
+                          {currentLessonData.quickPractice.question}
                         </p>
-                      </div>
 
-                      {/* INTERACTIVE PRACTICE */}
-                      <div className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 space-y-4">
-                        <div className="flex items-center gap-2 text-marigold font-bold text-sm">
-                          <HelpCircle className="h-4 w-4" />
-                          <span>Interactive Lesson Practice</span>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          {currentLessonData.quickPractice.options.map((opt) => {
+                            const isSelected = userPracticeAnswers[activeSection] === opt;
+                            const isCorrect = opt === currentLessonData.quickPractice.correctAnswer;
+                            
+                            let btnStyle = 'bg-paper/5 border-pencil/15 text-text-primary hover:border-terracotta/40';
+                            if (userPracticeAnswers[activeSection]) {
+                              if (isCorrect) {
+                                btnStyle = 'bg-teal-deep/20 border-teal-deep text-teal-deep font-bold';
+                              } else if (isSelected) {
+                                btnStyle = 'bg-terracotta/20 border-terracotta text-terracotta font-bold';
+                              }
+                            }
+
+                            return (
+                              <button
+                                key={opt}
+                                onClick={() => setUserPracticeAnswers(prev => ({ ...prev, [activeSection]: opt }))}
+                                className={`p-3.5 rounded-xl border text-left text-xs font-semibold transition-all cursor-pointer ${btnStyle}`}
+                              >
+                                {opt}
+                              </button>
+                            );
+                          })}
                         </div>
-                        <p className="text-xs text-pencil">Review lesson rules and mark completed when ready to unlock the Master Exam!</p>
+
+                        {userPracticeAnswers[activeSection] && (
+                          <div className="p-3.5 rounded-xl bg-paper/10 border border-pencil/15 text-xs space-y-1">
+                            {userPracticeAnswers[activeSection] === currentLessonData.quickPractice.correctAnswer ? (
+                              <span className="text-teal-deep font-bold flex items-center gap-1">
+                                <CheckCircle2 className="h-4 w-4" /> Correct! {currentLessonData.quickPractice.explanation}
+                              </span>
+                            ) : (
+                              <span className="text-terracotta font-bold block">
+                                Incorrect. {currentLessonData.quickPractice.explanation}
+                              </span>
+                            )}
+                          </div>
+                        )}
                       </div>
                     </div>
                   )}
+
+                  {/* BOTTOM ACTION BAR */}
+                  <div className="pt-4 border-t border-pencil/15 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <span className="text-xs text-pencil">
+                      Done reading? Mark this lesson completed to track your progress towards the Part Master Exam!
+                    </span>
+                    <button
+                      onClick={() => handleLessonComplete(activeSection)}
+                      className={`px-6 py-3 rounded-2xl text-xs font-bold shadow-md cursor-pointer transition-all ${
+                        completedLessons[activeSection]
+                          ? 'bg-teal-deep/20 text-teal-deep border border-teal-deep/30'
+                          : 'bg-terracotta text-white hover:bg-terracotta/90'
+                      }`}
+                    >
+                      {completedLessons[activeSection] ? 'Lesson Completed ✓' : 'Mark Lesson Completed'}
+                    </button>
+                  </div>
 
                 </div>
               )}
