@@ -7,7 +7,7 @@ import InkRevealCard from '../components/InkRevealCard';
 import { lookupCompanionWord } from '../content/dictionary';
 import { useSettingsStore } from '../state/settingsStore';
 import { translateToHinglish, translateWordToHinglish } from '../utils/hinglish';
-import { isGeminiAvailable, saveUserGeminiApiKey } from '../utils/geminiService';
+import { isGeminiAvailable } from '../utils/geminiService';
 import ActiveImmersionTab from '../components/ActiveImmersionTab';
 import { 
   Send, 
@@ -23,14 +23,12 @@ import {
   CheckCircle2,
   BookCheck,
   Target,
-  Flame,
-  AlertTriangle
+  Flame
 } from 'lucide-react';
 
 const ConversationScreen: FC = () => {
   // Mode selection: 'scenarios' | 'classic' | 'immersion'
   const [tabMode, setTabMode] = useState<'scenarios' | 'classic' | 'immersion'>('scenarios');
-  const [scenarioApiKeyInput, setScenarioApiKeyInput] = useState('');
 
   // Scenario Store
   const {
@@ -40,7 +38,6 @@ const ConversationScreen: FC = () => {
     selectScenario,
     backToSelection,
     sendUserMessage: sendScenarioMessage,
-    retryLastMessage,
     restartScenario,
     addLearnedWord
   } = useScenarioStore();
@@ -401,48 +398,7 @@ const ConversationScreen: FC = () => {
                   </span>
                 </div>
 
-                {/* Gemini Error Banner / API Key Input Form */}
-                {(activeScenarioConv?.error || !isGeminiAvailable()) && (
-                  <div className="m-4 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md animate-fadeIn shrink-0">
-                    <div className="flex items-center gap-2 text-xs flex-1">
-                      <AlertTriangle className="h-4 w-4 text-rose-600 shrink-0" />
-                      <div>
-                        <strong className="font-bold">Conexión con Gemini API:</strong>{' '}
-                        <span>
-                          {activeScenarioConv?.error
-                            ? (typeof activeScenarioConv.error === 'string'
-                                ? activeScenarioConv.error
-                                : activeScenarioConv.error.message || 'Gemini API key is not configured.')
-                            : 'Configura tu API Key de Gemini para chatear en vivo con la IA en este escenario.'}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2 w-full sm:w-auto">
-                      <input
-                        type="password"
-                        placeholder="Pegar API key AIzaSy..."
-                        value={scenarioApiKeyInput}
-                        onChange={(e) => setScenarioApiKeyInput(e.target.value)}
-                        className="px-3 py-1.5 rounded-lg border border-rose-300 bg-white text-text-primary text-xs focus:outline-none focus:border-rose-500 w-full sm:w-48"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => {
-                          if (scenarioApiKeyInput.trim()) {
-                            saveUserGeminiApiKey(scenarioApiKeyInput.trim());
-                            setScenarioApiKeyInput('');
-                          }
-                          if (activeScenario) {
-                            retryLastMessage(activeScenario);
-                          }
-                        }}
-                        className="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs transition-colors shrink-0 cursor-pointer border-none shadow-sm"
-                      >
-                        Guardar y Reconectar
-                      </button>
-                    </div>
-                  </div>
-                )}
+
 
                 {/* Chat Feed */}
                 <div 
@@ -754,39 +710,7 @@ const ConversationScreen: FC = () => {
                 </span>
               </div>
 
-              {/* Gemini API Key Warning Banner for Classic Companion */}
-              {!isGeminiAvailable() && (
-                <div className="m-4 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md animate-fadeIn shrink-0">
-                  <div className="flex items-center gap-2 text-xs flex-1">
-                    <AlertTriangle className="h-4 w-4 text-rose-600 shrink-0" />
-                    <div>
-                      <strong className="font-bold">Conexión con Gemini API:</strong>{' '}
-                      <span>Configura tu API Key de Gemini para chatear en vivo con {activeCompanion.name}.</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2 w-full sm:w-auto">
-                    <input
-                      type="password"
-                      placeholder="Pegar API key AIzaSy..."
-                      value={scenarioApiKeyInput}
-                      onChange={(e) => setScenarioApiKeyInput(e.target.value)}
-                      className="px-3 py-1.5 rounded-lg border border-rose-300 bg-white text-text-primary text-xs focus:outline-none focus:border-rose-500 w-full sm:w-48"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        if (scenarioApiKeyInput.trim()) {
-                          saveUserGeminiApiKey(scenarioApiKeyInput.trim());
-                          setScenarioApiKeyInput('');
-                        }
-                      }}
-                      className="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs transition-colors shrink-0 cursor-pointer border-none shadow-sm"
-                    >
-                      Guardar Key
-                    </button>
-                  </div>
-                </div>
-              )}
+
 
               {/* Classic messages feed */}
               <div 
