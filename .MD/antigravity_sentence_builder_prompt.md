@@ -1,131 +1,227 @@
-# Antigravity Teamwork Prompt — Sentence Builder Exercise (Basic Español tab)
+# Básico Español Interactive Sentence Builder Programming Guide
 
-Paste everything in the fenced block below into Antigravity's Teamwork task box.
+**Version**: 2.0 | **Target**: C1 Spanish Mastery | **Integration**: Basic Español tab only
 
 ---
 
+## 🎯 Project Overview
+
+Build an interactive **Sentence Builder** exercise that teaches Spanish word order through gamified reconstruction. This is a **new exercise TYPE** (not a new tab) that integrates with the existing Basic Español curriculum (Lessons 1-37).
+
+**Critical Constraint**: Do NOT touch Adventure Map.
+
+---
+
+## 🏗️ Development Architecture
+
+### Orchestration Flow
 ```
-TASK: Build a new "Sentence Builder" exercise inside the existing Basic Español
-tab. This is a new exercise TYPE, not a new tab. Do not touch Adventure Map at all.
+┌─────────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│  Extractor  │────▶│  Generator   │────▶│   Mixer      │────▶│  Validator   │
+│  Agent      │     │  Agent       │     │  Agent       │     │  Agent       │
+└─────────────┘     └──────────────┘     └──────────────┘     └──────────────┘
+       │                    │                     │                     │
+       ▼                    ▼                     ▼                     ▼
+   PDF/Markdown       DSPy Module +        JSON Injection       Schema Validation
+   Extraction         Gemini Generation    into Curriculum      & Quality Checks
+```
 
-ORCHESTRATION
-Use /agent-jcode as the top-level orchestrator. jcode should decompose this task
-and delegate to sub-agents/tools rather than doing it all in one pass:
+### Agent Responsibilities
 
-  1. Extractor Agent — uses Marker to parse any source PDFs (starting with the
-     already-uploaded "Spanish, Part 1 – Basic Elements and Simple Sentences"
-     Great Courses workbook) into structured markdown, then uses Chonkie to
-     chunk that markdown by lesson section (Vocabulario nuevo / Repaso general /
-     Actividades / Respuestas). Output: one JSON chunk per lesson, used as
-     seed/reference material — NOT copied verbatim (respect copyright: extract
-     grammar patterns and structure, do not reproduce the workbook's proprietary
-     text or exercises directly).
+| Agent | Tools | Output |
+|-------|-------|--------|
+| **Extractor** | Marker PDF → Markdown, Chonkie chunker | JSON chunks: `{lesson_id, grammar_patterns, vocab, structure}` |
+| **Generator** | DSPy + Gemini (via Instructor) | `{spanish_sentence, english_translation, tokens[], cefr_level}` |
+| **Mixer** | Schema-aware injector | Valid JSON exercises injected into lesson data |
+| **QA/Validator** | Custom validators | Pass/fail reports with error details |
 
-  2. Generator Agent — uses DSPy to define a reusable "SentenceBuilderModule"
-     (declarative, not hand-prompted per lesson) that generates original
-     Spanish practice sentences for a given CEFR level and grammar focus. Wrap
-     every Gemini call through Instructor with a strict Pydantic/Zod schema
-     (see SCHEMA below) so output is always structured JSON — never free text,
-     never a silent template fallback. Optimize the DSPy module's few-shot
-     examples against 3-5 hand-approved sentences per level so quality stays
-     consistent across all lessons instead of drifting lesson to lesson.
+---
 
-  3. Mixer Agent — inserts the newly generated sentence sets into the Basic
-     Español tab's lesson data structure, one exercise per existing lesson,
-     without altering unrelated tabs or Adventure Map.
+## 📚 Content Design Specification
 
-  4. QA/Validator Agent — checks: (a) schema conformance, (b) each sentence's
-     word-order tags are internally consistent (e.g. the tagged "Verb" token
-     is actually a conjugated verb), (c) no duplicate sentences within a
-     lesson, (d) CEFR level is appropriate (A1 = present tense only, no
-     subordinate clauses; C1 = subjunctive/complex clauses allowed, etc.).
+### CEFR Progression Map
 
-  5. Wrap every agent call (Extractor, Generator, Mixer, QA) with Langfuse
-     tracing so failures are debuggable per-agent, per-lesson — same pattern
-     used to debug the earlier canned-reply bug in Active Immersion/Yuki.
+| Level | Lessons | Focus | Sentence Complexity |
+|-------|---------|-------|---------------------|
+| **A1** | 1-4 | Subject-Verb-Object (SVO) | Simple statements, present tense |
+| **A2** | 5-8 | SVO + Place | Locational expressions, basic time |
+| **B1** | 9-12 | SVO + Place + Time | Complete basic sentences, question forms |
+| **B2** | 13-21 | SVO + Pronoun drop | Stem changers, DOP/IOP, pronouns |
+| **C1** | 22-37 | Complex clauses | Subjunctive, idioms, academic register |
 
-CONTENT SPEC
-Build sentence-structure practice covering CEFR levels A1 through C1. Each
-lesson gets its own exercise set of ~30 original Spanish sentences that
-progressively teach word order:
+### Word Order Teaching Progression
 
-  - Levels A1-A2: Subject + Verb + Object
-      e.g. Yo (Subject) + como (Verb) + una manzana (Object).
-  - Levels A2-B1: Subject + Verb + Object + Place
-  - Levels B1-B2: Subject + Verb + Object + Place + Time
-      (place before time, matching natural Spanish word order)
-  - Levels B2-C1: introduce pronoun-drop practice (sentence given both with
-      and without the explicit subject pronoun, since Spanish usually omits
-      it once the verb ending makes the subject clear), plus more complex
-      objects/subordinate clauses appropriate to the level.
+```
+A1-A2: [Subject] + [Verb] + [Object]
+       Yo + como + una manzana
 
-Each sentence object must carry its own word-by-word tags (Subject/Verb/
-Object/Place/Time) so the UI can render draggable/tappable word blocks and
-validate the user's reconstruction of the sentence, not just show static text.
+A2-B1: [Subject] + [Verb] + [Object] + [Place]
+       Yo + como + una manzana + en la cocina
 
-SCHEMA (Instructor/Pydantic — adapt field names to match Supabase conventions
-already in use, e.g. learned_vocabulary):
+B1-B2: [Subject] + [Verb] + [Object] + [Place] + [Time]
+       Yo + como + una manzana + en la cocina + ahora
 
-  SentenceExercise {
-    id: uuid
-    lesson_id: string          # ties to existing Basic Español lesson id
-    cefr_level: enum[A1,A2,B1,B2,C1]
-    spanish_sentence: string
-    english_translation: string
-    tokens: [
-      { text: string, role: enum[Subject,Verb,Object,Place,Time,Other], order: int }
-    ]
-    pronoun_dropped_variant: string | null   # only for B2/C1
-    notes: string | null
-  }
-
-SUPABASE
-Add a new table (e.g. sentence_builder_exercises) following the exact same
-pattern as the existing three tables: user_id UUID references auth.users(id),
-appropriate unique constraint on (user_id, lesson_id, sentence_id) for
-progress tracking, indexes, and RLS scoped to auth.uid() = user_id for the
-authenticated role. Confirm this before writing migrations — do not silently
-assume table shape.
-
-UI
-New exercise screen inside Basic Español: user sees the English translation
-and a shuffled set of word blocks (Subject/Verb/Object/[Place]/[Time]); user
-taps/drags blocks into correct order; on submit, highlight correct vs
-incorrect placement and show the labeled breakdown (Subject/Verb/Object/etc.)
-so the pattern is reinforced, not just marked right/wrong.
-
-CONSTRAINTS
-- Do not hardcode any API keys anywhere, including scratch/analysis files
-  under .agents/. Use the existing Gemini proxy setup (or flag if it isn't
-  wired up yet — do not call the Gemini API directly from the client).
-- Do not modify Adventure Map.
-- Do not silently fall back to template/canned sentences if Gemini or the
-  schema validation fails — surface the error so it's visible, per the
-  earlier root-cause fix for the canned-reply bug.
-- Reuse existing auth.uid() wiring; do not reintroduce 'default-user'.
-
-DELIVERABLE
-1. Supabase migration for the new table + RLS policy (for review before applying).
-2. DSPy module + Instructor schema for sentence generation.
-3. Generated exercise sets for all existing Basic Español lessons (A1-C1).
-4. Sentence Builder UI component wired into the Basic Español tab.
-5. Langfuse trace links or logs for the generation run so quality can be spot-checked.
+B2-C1: Pronoun-dropped variants + complex objects
+       Como una manzana (yo implícito)
+       Aunque estoy cansado, sigo estudiando
 ```
 
 ---
 
-## Notes for you (not part of the paste)
+## 🔧 Technical Schema Definition
 
-- **jcode's exact role**: since you're routing this through `/agent-jcode` as
-  the coordinator, Antigravity/jcode should decide the concrete tool-calling
-  details (how it shells out to Marker/Chonkie/DSPy/etc.). The prompt above
-  tells it *what* each stage must produce, not how to wire the libraries —
-  that's intentional so jcode has room to plan.
-- **Copyright**: I deliberately phrased the Extractor step as "extract
-  structure/patterns, don't reproduce the workbook's text or exercises
-  verbatim." The workbook is © The Teaching Company — fine to use as a
-  structural reference (the S+V+O progression, lesson shape) but the app's
-  own sentences should be original generations, not lifted example sentences.
-- **Scope check**: this only touches Basic Español + a new Supabase table. If
-  jcode's plan starts touching other tabs' data models, that's a sign the task
-  description above wasn't followed — worth flagging in review.
+### Database Schema
+
+```sql
+CREATE TABLE sentence_builder_exercises (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  lesson_id TEXT NOT NULL,
+  cefr_level TEXT NOT NULL CHECK (cefr_level IN ('A1','A2','B1','B2','C1')),
+  spanish_sentence TEXT NOT NULL,
+  english_translation TEXT NOT NULL,
+  tokens JSONB NOT NULL,
+  pronoun_dropped_variant TEXT,
+  notes TEXT,
+  created_at TIMESTAMPTZ DEFAULT timezone('utc'::text, now()),
+  updated_at TIMESTAMPTZ DEFAULT timezone('utc'::text, now())
+);
+
+-- Indexes
+CREATE INDEX idx_sbe_lesson_id ON sentence_builder_exercises(lesson_id);
+CREATE INDEX idx_sbe_cefr ON sentence_builder_exercises(cefr_level);
+CREATE INDEX idx_sbe_user_progress ON sentence_builder_exercises(user_id, lesson_id);
+
+-- RLS Policy
+CREATE POLICY "Users can read/write own exercises"
+  ON sentence_builder_exercises
+  FOR ALL TO authenticated
+  USING (auth.uid() = user_id OR user_id IS NULL);
+```
+
+### JSON Schema (Pydantic/Instructor)
+
+```python
+class Token(BaseModel):
+    text: str
+    role: Literal["Subject", "Verb", "Object", "Place", "Time", "Other"]
+    order: int = Field(gt=0)
+
+class SentenceExercise(BaseModel):
+    lesson_id: str
+    cefr_level: Literal["A1", "A2", "B1", "B2", "C1"]
+    spanish_sentence: str
+    english_translation: str
+    tokens: List[Token]
+    pronoun_dropped_variant: Optional[str] = None
+    notes: Optional[str] = None
+```
+
+---
+
+## 🎨 UI Component Specification
+
+### Component: `SentenceBuilderExercise.tsx`
+
+**Props Interface**:
+```typescript
+interface SentenceBuilderExerciseProps {
+  exercise: SentenceExercise;
+  onCompleted: (correct: boolean) => void;
+  showHints?: boolean;
+}
+```
+
+**UI Elements**:
+1. **English prompt** at top: "Reconstruct: The apple is on the table"
+2. **Word blocks** (draggable/tappable): `[Yo] [como] [una manzana]`
+3. **Target sentence display**: `_ _ _ _ _`
+4. **Submit button**: Validates order, highlights correct/incorrect
+5. **Feedback panel**: Shows labeled breakdown with color-coded roles
+
+**Interaction Flow**:
+```
+User sees English → Drags blocks into order → Clicks Submit → 
+UI highlights correct positions → Shows "Subject: Yo ✓ | Verb: como ✓ | Object: una manzana ✓"
+```
+
+**Styling Guide**:
+- Subject blocks: Blue background
+- Verb blocks: Green background  
+- Object blocks: Purple background
+- Place/Time blocks: Orange background
+- Correct placement: Green glow
+- Incorrect placement: Red pulse
+
+---
+
+## ✅ Success Criteria
+
+| Criterion | Acceptance Test |
+|-----------|-----------------|
+| **Schema Validation** | 100% of generated sentences pass Pydantic validation |
+| **No Duplicates** | No duplicate sentences within a lesson (hash check) |
+| **CEFR Compliance** | A1 sentences: no subjunctive; C1 sentences: subjunctive allowed |
+| **Word Tagging** | Each token's role matches actual word function |
+| **UI Integration** | Exercise renders in BasicEspanolScreen without errors |
+| **RLS Security** | RLS policies prevent cross-user data access |
+| **Copyright Safe** | No direct copy from workbook; all sentences original |
+
+---
+
+## 🚨 Failure Handling
+
+If Gemini generation fails or schema validation fails:
+1. **DO NOT** fall back to template/canned sentences
+2. **DO** surface error to user: "Unable to generate exercise - please try again"
+3. **DO** log error to Langfuse with full context
+4. **DO** mark lesson as "needs regeneration" in UI
+
+---
+
+## 📋 Deliverables Checklist
+
+- [ ] Supabase migration file (`20260723_sentence_builder.sql`)
+- [ ] DSPy module (`src/lib/sentenceBuilder.ts`)
+- [ ] Instructor schema validation
+- [ ] Generated exercises for all 37 lessons (A1-C1)
+- [ ] UI component with drag-drop functionality
+- [ ] Integration into BasicEspanolScreen
+- [ ] Langfuse trace documentation
+
+---
+
+## 🔗 References
+
+- Existing tables: `user_stats`, `learned_vocabulary`, `immersion_chat_messages`
+- Pattern reference: `learned_vocabulary` has `user_id UUID REFERENCES auth.users(id)`
+- UI library: lucide-react icons, framer-motion for animations
+- State management: Zustand stores (`useStatsStore`)
+- Authentication: `auth.uid()` pattern already established
+
+---
+
+## ⚠️ Scope Boundary
+
+**IN SCOPE**:
+- Basic Español tabs and lessons
+- New sentence_builder_exercises table
+- Exercise generation and UI
+
+**OUT OF SCOPE**:
+- Adventure Map modifications
+- Other tabs (Stories, Quest Journey, etc.)
+- User authentication changes
+- API key modifications
+
+---
+
+## 🧪 Testing Protocol
+
+1. **Unit Tests**: Validate schema parsing, token ordering
+2. **Integration Tests**: Render component, simulate drag-drop
+3. **E2E Tests**: Complete lesson with sentence builder
+4. **Load Test**: Generate 30 sentences per lesson, verify performance
+
+---
+
+*For questions or clarifications, reference the original `.agents/orchestrator/plan.md` for project context.*
