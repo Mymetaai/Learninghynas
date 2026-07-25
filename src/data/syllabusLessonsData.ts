@@ -749,6 +749,72 @@ export const ALL_SYLLABUS_LESSONS: Record<string, SyllabusLessonData> = {
     }
   },
 
+  lesson12: {
+    lessonNumber: 12,
+    partNumber: 3,
+    title: 'Hacer, Weather & Saber vs Conocer',
+    subtitle: 'Weather Expressions with Hacer, Impersonal Expressions & Saber vs Conocer',
+    professorNote: 'Hacer is used for weather (Hace frío, hace sol) and Saber vs Conocer distinguishes facts/skills (Saber) from familiarity with people/places (Conocer).',
+    objectives: [
+      'Master weather expressions using impersonal HACER (Hace frío, hace calor, hace viento)',
+      'Distinguish between SABER (facts, information, skills) and CONOCER (people, places, acquaintance)',
+      'Understand the personal "a" required with CONOCER when referencing specific people'
+    ],
+    grammarSections: [
+      {
+        title: 'Weather Expressions with HACER',
+        explanation: 'In Spanish, we use HACER (it makes) for weather conditions rather than SER or ESTAR.',
+        rules: [
+          'Hace frío = It is cold / Hace calor = It is hot',
+          'Hace sol = It is sunny / Hace viento = It is windy',
+          'Hace buen tiempo = The weather is good / Hace mal tiempo = The weather is bad',
+          '¿Qué tiempo hace? = How is the weather?'
+        ]
+      },
+      {
+        title: 'SABER vs CONOCER Matrix',
+        explanation: 'Both mean "to know", but they are never interchangeable.',
+        table: {
+          headers: ['Verb', 'Conjugation (Yo)', 'Use Case', 'Example'],
+          rows: [
+            ['SABER', 'sé', 'Facts, information, learned skills (+ inf)', 'Sé hablar español. / No sé la respuesta.'],
+            ['CONOCER', 'conozco', 'People, places, pets, familiar subjects', 'Conozco a María. / Conozco Barcelona.']
+          ]
+        }
+      },
+      {
+        title: 'The Personal "a"',
+        explanation: 'When the direct object of a verb is a specific person, precede it with the preposition "a".',
+        rules: [
+          'Conozco a Carlos. (I know Carlos - human direct object)',
+          'Veo a mi profesora. (I see my teacher)'
+        ]
+      }
+    ],
+    vocabularyTable: [
+      { spanish: 'hace frío', phonetic: 'AH-seh FREE-oh', english: 'it is cold', usage: 'Weather with hacer' },
+      { spanish: 'hace sol', phonetic: 'AH-seh SOHL', english: 'it is sunny', usage: 'Weather with hacer' },
+      { spanish: 'sé', phonetic: 'SEH', english: 'I know (fact/skill)', usage: 'Saber 1st person' },
+      { spanish: 'conozco', phonetic: 'koh-NOHZ-koh', english: 'I know (person/place)', usage: 'Conocer 1st person' },
+      { spanish: 'saber', phonetic: 'sah-BEHR', english: 'to know facts/skills', usage: 'Infinitive' },
+      { spanish: 'conocer', phonetic: 'koh-noh-SEHR', english: 'to know people/places', usage: 'Infinitive' }
+    ],
+    exampleSentences: [
+      { spanish: 'Hoy hace mucho frío y no sé si va a llover.', english: 'Today it is very cold and I don\'t know if it\'s going to rain.', breakdown: 'Uses hace for weather and sé for knowing facts.' },
+      { spanish: '¿Conoces a la profesora de español? Sí, la conozco muy bien.', english: 'Do you know the Spanish teacher? Yes, I know her very well.', breakdown: 'Uses personal a with human object.' }
+    ],
+    dialogue: [
+      { speaker: 'Ana', spanish: '¿Qué tiempo hace hoy en Madrid?', english: 'How is the weather today in Madrid?' },
+      { speaker: 'Luis', spanish: 'Hace mucho sol pero también hace frío. ¿Sabes si el museo está abierto?', english: 'It is very sunny but also cold. Do you know if the museum is open?' }
+    ],
+    quickPractice: {
+      question: 'Which sentence correctly says "I know Madrid very well"?',
+      options: ['Sé Madrid muy bien', 'Conozco Madrid muy bien', 'Hace Madrid muy bien', 'Tengo Madrid muy bien'],
+      correctAnswer: 'Conozco Madrid muy bien',
+      explanation: 'Conocer is used for familiarity with places.'
+    }
+  },
+
   lesson13: {
     lessonNumber: 13,
     partNumber: 4,

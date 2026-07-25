@@ -366,8 +366,93 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
   const completedInPart = sectionsList.filter(s => s.id.startsWith('lesson') && completedLessons[s.id]).length;
   const progressPercent = Math.round((completedInPart / Math.max(1, totalLessonsInPart)) * 100);
 
-  // Helper to retrieve structured lesson data
-  const currentLessonData: SyllabusLessonData | undefined = activeSection.startsWith('lesson') ? ALL_SYLLABUS_LESSONS[activeSection] : undefined;
+  // Lesson order array and map for next/prev navigation
+  const ALL_LESSON_IDS: ActiveSection[] = [
+    'lesson1', 'lesson2', 'lesson3', 'lesson4',
+    'lesson5', 'lesson6', 'lesson7', 'lesson8',
+    'lesson9', 'lesson10', 'lesson11', 'lesson12',
+    'lesson13', 'lesson14', 'lesson15', 'lesson16',
+    'lesson17', 'lesson18', 'lesson19', 'lesson20', 'lesson21',
+    'lesson22', 'lesson23', 'lesson24', 'lesson25', 'lesson26',
+    'lesson27', 'lesson28', 'lesson29', 'lesson30',
+    'lesson31', 'lesson32', 'lesson33', 'lesson34', 'lesson35', 'lesson36', 'lesson37'
+  ];
+
+  const LESSON_PART_MAP: Record<string, CoursePart> = {
+    lesson1: 'part1', lesson2: 'part1', lesson3: 'part1', lesson4: 'part1',
+    lesson5: 'part2', lesson6: 'part2', lesson7: 'part2', lesson8: 'part2',
+    lesson9: 'part3', lesson10: 'part3', lesson11: 'part3', lesson12: 'part3',
+    lesson13: 'part4', lesson14: 'part4', lesson15: 'part4', lesson16: 'part4',
+    lesson17: 'part5', lesson18: 'part5', lesson19: 'part5', lesson20: 'part5', lesson21: 'part5',
+    lesson22: 'part6', lesson23: 'part6', lesson24: 'part6', lesson25: 'part6', lesson26: 'part6',
+    lesson27: 'part7', lesson28: 'part7', lesson29: 'part7', lesson30: 'part7',
+    lesson31: 'part8', lesson32: 'part8', lesson33: 'part8', lesson34: 'part8', lesson35: 'part8', lesson36: 'part8', lesson37: 'part8'
+  };
+
+  const handleNextLesson = () => {
+    const currentIndex = ALL_LESSON_IDS.indexOf(activeSection);
+    if (currentIndex >= 0 && currentIndex < ALL_LESSON_IDS.length - 1) {
+      const nextLesson = ALL_LESSON_IDS[currentIndex + 1];
+      const nextPart = LESSON_PART_MAP[nextLesson];
+      if (nextPart && nextPart !== coursePart) {
+        setCoursePart(nextPart);
+      }
+      setActiveSection(nextLesson);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (currentIndex === ALL_LESSON_IDS.length - 1) {
+      setActiveSection('exam8');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handlePrevLesson = () => {
+    const currentIndex = ALL_LESSON_IDS.indexOf(activeSection);
+    if (currentIndex > 0) {
+      const prevLesson = ALL_LESSON_IDS[currentIndex - 1];
+      const prevPart = LESSON_PART_MAP[prevLesson];
+      if (prevPart && prevPart !== coursePart) {
+        setCoursePart(prevPart);
+      }
+      setActiveSection(prevLesson);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  // Helper to retrieve structured lesson data with safe fallback
+  const defaultLessonData: SyllabusLessonData = {
+    lessonNumber: parseInt(activeSection.replace('lesson', '')) || 1,
+    partNumber: 1,
+    title: sectionsList.find(s => s.id === activeSection)?.title || `Lesson ${activeSection.replace('lesson', '')}`,
+    subtitle: sectionsList.find(s => s.id === activeSection)?.sub || 'Spanish Grammar & Practice',
+    professorNote: 'Welcome to this Spanish lesson! Review the concepts and practice below.',
+    objectives: ['Master key vocabulary and grammar rules', 'Practice sentence construction', 'Complete the interactive exercise'],
+    grammarSections: [
+      {
+        title: 'Lesson Guide',
+        explanation: 'Study the essential rules and examples for this topic.',
+        rules: ['Pay attention to word order and gender agreement.', 'Practice speaking sentences aloud.']
+      }
+    ],
+    vocabularyTable: [
+      { spanish: 'el español', phonetic: 'ehl ehs-pah-NYOHL', english: 'Spanish language', usage: 'Noun' }
+    ],
+    exampleSentences: [
+      { spanish: 'Estudio español cada día.', english: 'I study Spanish every day.', breakdown: 'Subject + Verb + Object' }
+    ],
+    dialogue: [
+      { speaker: 'Estudiante', spanish: '¡Hola! Me gusta aprender español.', english: 'Hello! I like learning Spanish.' }
+    ],
+    quickPractice: {
+      question: 'How do you say "Spanish" in Spanish?',
+      options: ['El español', 'El inglés', 'El francés', 'El alemán'],
+      correctAnswer: 'El español',
+      explanation: 'El español means Spanish.'
+    }
+  };
+
+  const currentLessonData: SyllabusLessonData | undefined = activeSection.startsWith('lesson')
+    ? (ALL_SYLLABUS_LESSONS[activeSection] || defaultLessonData)
+    : undefined;
 
   return (
     <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary relative overflow-x-hidden font-body pb-16">
@@ -946,7 +1031,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                     </div>
                     {(() => {
                       const exercise = SENTENCE_BUILDER_EXERCISES.find((e) => e.lessonId === activeSection) ||
-                        generateLessonExercises(activeSection, getCEFRLevel(activeSection), currentLessonData.title, 1)[0];
+                        generateLessonExercises(activeSection, getCEFRLevel(activeSection), currentLessonData?.title || 'Lesson', 1)[0];
                       if (!exercise) return null;
                       return (
                         <SentenceBuilderExercise
@@ -957,26 +1042,46 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                               useStatsStore.getState().addRewards(15, 5);
                             }
                           }}
+                          onNext={() => handleNextLesson()}
                         />
                       );
                     })()}
                   </div>
 
                   {/* BOTTOM ACTION BAR */}
-                  <div className="pt-4 border-t border-pencil/15 flex flex-col sm:flex-row justify-between items-center gap-4">
-                    <span className="text-xs text-pencil">
-                      Done reading? Mark this lesson completed to track your progress towards the Part Master Exam!
-                    </span>
-                    <button
-                      onClick={() => handleLessonComplete(activeSection)}
-                      className={`px-6 py-3 rounded-2xl text-xs font-bold shadow-md cursor-pointer transition-all ${
-                        completedLessons[activeSection]
-                          ? 'bg-teal-deep/20 text-teal-deep border border-teal-deep/30'
-                          : 'bg-terracotta text-white hover:bg-terracotta/90'
-                      }`}
-                    >
-                      {completedLessons[activeSection] ? 'Lesson Completed ✓' : 'Mark Lesson Completed'}
-                    </button>
+                  <div className="pt-6 border-t border-pencil/15 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <div className="flex items-center gap-2">
+                      {ALL_LESSON_IDS.indexOf(activeSection) > 0 && (
+                        <button
+                          onClick={handlePrevLesson}
+                          className="px-4 py-2.5 rounded-2xl text-xs font-bold border border-pencil/20 text-pencil hover:text-text-primary hover:bg-paper/10 cursor-pointer transition-all flex items-center gap-1"
+                        >
+                          ← Previous Lesson
+                        </button>
+                      )}
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-3">
+                      <button
+                        onClick={() => handleLessonComplete(activeSection)}
+                        className={`px-6 py-3 rounded-2xl text-xs font-bold shadow-md cursor-pointer transition-all ${
+                          completedLessons[activeSection]
+                            ? 'bg-teal-deep/20 text-teal-deep border border-teal-deep/30'
+                            : 'bg-terracotta text-white hover:bg-terracotta/90'
+                        }`}
+                      >
+                        {completedLessons[activeSection] ? 'Lesson Completed ✓' : 'Mark Lesson Completed'}
+                      </button>
+
+                      {ALL_LESSON_IDS.indexOf(activeSection) < ALL_LESSON_IDS.length - 1 && (
+                        <button
+                          onClick={handleNextLesson}
+                          className="px-6 py-3 rounded-2xl text-xs font-bold bg-marigold text-bg-base hover:bg-marigold/90 shadow-md cursor-pointer transition-all flex items-center gap-1 font-display"
+                        >
+                          Next Lesson →
+                        </button>
+                      )}
+                    </div>
                   </div>
 
                 </div>
