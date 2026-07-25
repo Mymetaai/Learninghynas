@@ -30,6 +30,9 @@ import {
 } from 'lucide-react';
 import { useStatsStore } from '../state/statsStore';
 import { ALL_SYLLABUS_LESSONS, type SyllabusLessonData } from '../data/syllabusLessonsData';
+import SentenceBuilderExercise from '../components/SentenceBuilderExercise';
+import { generateLessonExercises, getCEFRLevel } from '../lib/sentenceBuilder';
+import { SENTENCE_BUILDER_EXERCISES } from '../data/sentenceBuilderExercises';
 
 // Types
 export type CoursePart = 'part1' | 'part2' | 'part3' | 'part4' | 'part5' | 'part6' | 'part7' | 'part8';
@@ -934,6 +937,30 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                       </div>
                     </div>
                   )}
+
+                  {/* 6.5 INTERACTIVE SENTENCE BUILDER WORKSHOP */}
+                  <div className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 sm:p-7 space-y-4">
+                    <div className="flex items-center gap-2 text-terracotta font-bold text-base font-display">
+                      <Layers className="h-5 w-5 text-terracotta" />
+                      <span>Sentence Builder Workshop</span>
+                    </div>
+                    {(() => {
+                      const exercise = SENTENCE_BUILDER_EXERCISES.find((e) => e.lessonId === activeSection) ||
+                        generateLessonExercises(activeSection, getCEFRLevel(activeSection), currentLessonData.title, 1)[0];
+                      if (!exercise) return null;
+                      return (
+                        <SentenceBuilderExercise
+                          exercise={exercise}
+                          showHints={true}
+                          onCompleted={(correct) => {
+                            if (correct) {
+                              useStatsStore.getState().addRewards(15, 5);
+                            }
+                          }}
+                        />
+                      );
+                    })()}
+                  </div>
 
                   {/* BOTTOM ACTION BAR */}
                   <div className="pt-4 border-t border-pencil/15 flex flex-col sm:flex-row justify-between items-center gap-4">

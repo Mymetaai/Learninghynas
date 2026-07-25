@@ -150,6 +150,48 @@ export type Database = {
         };
         Relationships: [];
       };
+      sentence_builder_exercises: {
+        Row: {
+          id: string;
+          user_id: string;
+          lesson_id: string;
+          cefr_level: string;
+          spanish_sentence: string;
+          english_translation: string;
+          tokens: Json;
+          pronoun_dropped_variant: string | null;
+          notes: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          lesson_id: string;
+          cefr_level: string;
+          spanish_sentence: string;
+          english_translation: string;
+          tokens: Json;
+          pronoun_dropped_variant?: string | null;
+          notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          lesson_id?: string;
+          cefr_level?: string;
+          spanish_sentence?: string;
+          english_translation?: string;
+          tokens?: Json;
+          pronoun_dropped_variant?: string | null;
+          notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;
