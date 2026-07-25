@@ -19,6 +19,7 @@ export interface ScenarioConversationState {
   scenarioId: string;
   messages: ScenarioChatMessage[];
   learnedWords: { word: string; meaning: string }[];
+  error?: any;
 }
 
 interface ScenarioStore {
@@ -29,8 +30,10 @@ interface ScenarioStore {
   selectScenario: (scenarioId: string) => void;
   backToSelection: () => void;
   sendUserMessage: (scenario: Scenario, userText: string) => Promise<void>;
+  retryLastMessage: (scenario: Scenario) => Promise<void>;
   restartScenario: (scenario: Scenario) => void;
   addLearnedWord: (scenarioId: string, word: string, meaning: string) => void;
+  clearError: (scenarioId: string) => void;
 }
 
 const initializeScenarioSession = (scenario: Scenario): ScenarioConversationState => ({
@@ -47,6 +50,7 @@ const initializeScenarioSession = (scenario: Scenario): ScenarioConversationStat
     },
   ],
   learnedWords: [],
+  error: null,
 });
 
 export const useScenarioStore = create<ScenarioStore>()(
@@ -77,6 +81,19 @@ export const useScenarioStore = create<ScenarioStore>()(
         set({ activeScenarioId: null });
       },
 
+      clearError: (scenarioId: string) => {
+        set((s) => {
+          const current = s.conversations[scenarioId];
+          if (!current) return s;
+          return {
+            conversations: {
+              ...s.conversations,
+              [scenarioId]: { ...current, error: null },
+            },
+          };
+        });
+      },
+
       sendUserMessage: async (scenario: Scenario, userText: string) => {
         const state = get();
         const scenarioId = scenario.id;
@@ -98,6 +115,7 @@ export const useScenarioStore = create<ScenarioStore>()(
             [scenarioId]: {
               ...currentSession,
               messages: updatedMessages,
+              error: null,
             },
           },
         });
@@ -105,74 +123,147 @@ export const useScenarioStore = create<ScenarioStore>()(
         // Award rewards (+10 XP, +5 Coins)
         useStatsStore.getState().addRewards(10, 5);
 
-        // Convert messages format for Gemini
-        const history = updatedMessages.map((m) => ({
+        // Previous messages history excluding current user text
+        const history = currentSession.messages.map((m) => ({
           role: m.sender === 'user' ? ('user' as const) : ('assistant' as const),
           text: m.text,
         }));
-
-        let aiReplyText = '';
-        let aiTranslation = '';
-        let aiSignOff = `Saludos, ${scenario.characterName}`;
-        let aiQuickReplies: { text: string; translation: string }[] = [];
-        let aiNewVocab: { word: string; meaning: string }[] = [];
 
         if (isGeminiAvailable()) {
           const geminiRes = await getScenarioGeminiResponse(scenario, userText, history);
 
           if (geminiRes.success) {
-            aiReplyText = geminiRes.data.text;
-            aiTranslation = geminiRes.data.translation;
-            aiSignOff = geminiRes.data.signOff;
-            aiQuickReplies = geminiRes.data.quickReplies || [];
-            aiNewVocab = geminiRes.data.newVocabWords || [];
+            const assistantMsg: ScenarioChatMessage = {
+              id: `assistant-${Date.now()}`,
+              sender: 'assistant',
+              text: geminiRes.data.text,
+              translation: geminiRes.data.translation,
+              timestamp: new Date().toISOString(),
+              quickReplies: geminiRes.data.quickReplies || [],
+              newVocabWords: geminiRes.data.newVocabWords || [],
+              signOff: geminiRes.data.signOff || `Saludos, ${scenario.characterName}`,
+            };
+
+            const updatedLearned = [...currentSession.learnedWords];
+            (geminiRes.data.newVocabWords || []).forEach((item) => {
+              if (!updatedLearned.some((w) => w.word.toLowerCase() === item.word.toLowerCase())) {
+                updatedLearned.push(item);
+                useStatsStore.getState().learnVocab([item.word.toLowerCase()], scenarioId);
+              }
+            });
+
+            set((s) => ({
+              isTyping: false,
+              conversations: {
+                ...s.conversations,
+                [scenarioId]: {
+                  ...currentSession,
+                  messages: [...updatedMessages, assistantMsg],
+                  learnedWords: updatedLearned,
+                  error: null,
+                },
+              },
+            }));
+            return;
+          } else {
+            set((s) => ({
+              isTyping: false,
+              conversations: {
+                ...s.conversations,
+                [scenarioId]: {
+                  ...currentSession,
+                  messages: updatedMessages,
+                  error: geminiRes.error,
+                },
+              },
+            }));
+            return;
           }
+        } else {
+          set((s) => ({
+            isTyping: false,
+            conversations: {
+              ...s.conversations,
+              [scenarioId]: {
+                ...currentSession,
+                messages: updatedMessages,
+                error: 'Gemini API key is not configured. Please set your API key.',
+              },
+            },
+          }));
         }
+      },
 
-        // Fallback response if Gemini unavailable or failed
-        if (!aiReplyText) {
-          aiReplyText = `¡Comprendo perfectamente! En la situación de "${scenario.title}", es genial seguir practicando. ¿Quieres continuar conversando?`;
-          aiTranslation = `I understand completely! In the "${scenario.title}" situation, it is great to keep practicing. Want to continue conversing?`;
-          aiQuickReplies = [
-            { text: '¡Sí, me gustaría saber más!', translation: 'Yes, I would like to know more!' },
-            { text: '¿Qué me aconsejas decir ahora?', translation: 'What do you advise me to say now?' },
-          ];
-        }
+      retryLastMessage: async (scenario: Scenario) => {
+        const state = get();
+        const scenarioId = scenario.id;
+        const currentSession = state.conversations[scenarioId];
+        if (!currentSession || currentSession.messages.length === 0) return;
 
-        const assistantMsg: ScenarioChatMessage = {
-          id: `assistant-${Date.now()}`,
-          sender: 'assistant',
-          text: aiReplyText,
-          translation: aiTranslation,
-          timestamp: new Date().toISOString(),
-          quickReplies: aiQuickReplies,
-          newVocabWords: aiNewVocab,
-          signOff: aiSignOff,
-        };
+        const lastUserMsg = [...currentSession.messages].reverse().find((m) => m.sender === 'user');
+        if (!lastUserMsg) return;
 
-        // Automatically sync new vocabulary to learned words list
-        const updatedLearned = [...currentSession.learnedWords];
-        aiNewVocab.forEach((item) => {
-          if (!updatedLearned.some((w) => w.word.toLowerCase() === item.word.toLowerCase())) {
-            updatedLearned.push(item);
-            // Also sync to global stats store
-            useStatsStore.getState().learnVocab([item.word.toLowerCase()], scenarioId);
-          }
-        });
+        // Remove trailing assistant message if last message was assistant or failed
+        const historyMsgs = currentSession.messages.slice(0, currentSession.messages.lastIndexOf(lastUserMsg));
+        const history = historyMsgs.map((m) => ({
+          role: m.sender === 'user' ? ('user' as const) : ('assistant' as const),
+          text: m.text,
+        }));
 
-        const finalSessionMessages = [...updatedMessages, assistantMsg];
-
-        set((s) => ({
-          isTyping: false,
+        set({
+          isTyping: true,
           conversations: {
-            ...s.conversations,
+            ...state.conversations,
             [scenarioId]: {
               ...currentSession,
-              messages: finalSessionMessages,
-              learnedWords: updatedLearned,
+              error: null,
             },
           },
-        }));
+        });
+
+        if (isGeminiAvailable()) {
+          const geminiRes = await getScenarioGeminiResponse(scenario, lastUserMsg.text, history);
+
+          if (geminiRes.success) {
+            const assistantMsg: ScenarioChatMessage = {
+              id: `assistant-${Date.now()}`,
+              sender: 'assistant',
+              text: geminiRes.data.text,
+              translation: geminiRes.data.translation,
+              timestamp: new Date().toISOString(),
+              quickReplies: geminiRes.data.quickReplies || [],
+              newVocabWords: geminiRes.data.newVocabWords || [],
+              signOff: geminiRes.data.signOff || `Saludos, ${scenario.characterName}`,
+            };
+
+            const cleanMessages = currentSession.messages.slice(0, currentSession.messages.indexOf(lastUserMsg) + 1);
+
+            set((s) => ({
+              isTyping: false,
+              conversations: {
+                ...s.conversations,
+                [scenarioId]: {
+                  ...currentSession,
+                  messages: [...cleanMessages, assistantMsg],
+                  error: null,
+                },
+              },
+            }));
+          } else {
+            set((s) => ({
+              isTyping: false,
+              conversations: {
+                ...s.conversations,
+                [scenarioId]: {
+                  ...currentSession,
+                  error: geminiRes.error,
+                },
+              },
+            }));
+          }
+        } else {
+          set({ isTyping: false });
+        }
       },
 
       restartScenario: (scenario: Scenario) => {

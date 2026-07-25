@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import type { Database } from './database.types';
 import { useStatsStore } from '../state/statsStore';
 import { useActiveImmersionStore } from '../state/activeImmersionStore';
 import { useAuthStore } from '../state/authStore';
@@ -8,7 +9,7 @@ const supabaseAnonKey =
   import.meta.env.VITE_SUPABASE_ANON_KEY ||
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN6Y3RidHh3emZmbnZub3F1Z3l5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ3MzYxMjksImV4cCI6MjEwMDMxMjEyOX0.Ktql4HSI2FFTGb5h-ixdz8PIXbNlkVTE7kRxQJWzPAo';
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
   auth: { persistSession: true, autoRefreshToken: true },
 });
 
@@ -224,32 +225,32 @@ export const fetchAndHydrateRemoteState = async (userId: string): Promise<void> 
         xp: statsData.xp ?? state.xp,
         coins: statsData.coins ?? state.coins,
         streak: statsData.streak ?? state.streak,
-        lastActiveDate: statsData.last_active_date || statsData.lastActiveDate || state.lastActiveDate,
+        lastActiveDate: statsData.last_active_date || state.lastActiveDate,
         collectedCardIds: Array.from(
           new Set([
             ...(state.collectedCardIds || []),
-            ...(statsData.collected_card_ids || statsData.collected_card_ids || []),
+            ...(statsData.collected_card_ids || []),
           ])
         ),
         claimedQuestRewards: Array.from(
           new Set([
             ...(state.claimedQuestRewards || []),
-            ...(statsData.claimed_quest_rewards || statsData.claimed_quest_rewards || []),
+            ...(statsData.claimed_quest_rewards || []),
           ])
         ),
         claimedExamIds: Array.from(
           new Set([
             ...(state.claimedExamIds || []),
-            ...(statsData.claimed_exam_ids || statsData.claimed_exam_ids || []),
+            ...(statsData.claimed_exam_ids || []),
           ])
         ),
         earnedBadges: {
           ...(state.earnedBadges || {}),
-          ...(statsData.earned_badges || statsData.earned_badges || {}),
+          ...((statsData.earned_badges as Record<string, any>) || {}),
         },
         completedLessons: {
           ...(state.completedLessons || {}),
-          ...(statsData.completed_lessons || statsData.completed_lessons || {}),
+          ...((statsData.completed_lessons as Record<string, any>) || {}),
         },
       }));
     }
@@ -268,8 +269,8 @@ export const fetchAndHydrateRemoteState = async (userId: string): Promise<void> 
           if (!vocabMap.has(wLower)) {
             vocabMap.set(wLower, {
               word: row.word,
-              questId: row.quest_id || row.questId || 'remote',
-              date: row.date || (row.learned_at ? row.learned_at.split('T')[0] : new Date().toISOString().split('T')[0]),
+              questId: row.quest_id || 'remote',
+              date: row.date || (row.created_at ? row.created_at.split('T')[0] : new Date().toISOString().split('T')[0]),
             });
           }
         });
@@ -297,16 +298,16 @@ export const fetchAndHydrateRemoteState = async (userId: string): Promise<void> 
           }
           const existingMsgs = nextSessions[key].messages;
           if (!existingMsgs.some((m) => m.id === row.id)) {
-            const meta = row.metadata || {};
+            const meta = (row.metadata as Record<string, any>) || {};
             existingMsgs.push({
               id: row.id,
               sender: row.sender as 'user' | 'assistant',
               text: row.text,
               translation: row.translation || undefined,
               timestamp: row.timestamp || row.created_at || new Date().toISOString(),
-              quickReplies: row.quick_replies || meta.quickReplies || undefined,
-              newVocabWords: row.new_vocab_words || meta.newVocabWords || undefined,
-              structuredContent: row.structured_content || meta.structuredContent || undefined,
+              quickReplies: (row.quick_replies as any) || meta.quickReplies || undefined,
+              newVocabWords: (row.new_vocab_words as any) || meta.newVocabWords || undefined,
+              structuredContent: (row.structured_content as any) || meta.structuredContent || undefined,
             });
           }
         });
