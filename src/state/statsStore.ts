@@ -5,14 +5,7 @@
 // reads live values from here.
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { ONE_PIECE_CARDS } from '../content/onePieceCards';
-import { DEMON_SLAYER_CARDS } from '../content/demonSlayerCards';
 import { getCurrentUserId, syncUserStats, syncLearnedVocab } from '../lib/supabaseClient';
-
-const allCardIds = [
-  ...ONE_PIECE_CARDS.map(c => c.id),
-  ...DEMON_SLAYER_CARDS.map(c => c.id)
-];
 
 interface LearnedVocabEntry {
   /** The Spanish word, e.g. "hola". */
@@ -36,6 +29,14 @@ interface StatsState {
   learnedVocab: LearnedVocabEntry[];
   /** Collected One Piece card ids in the shop. */
   collectedCardIds: string[];
+  /** Completed/claimed quest reward ids (for idempotency). */
+  claimedQuestRewards: string[];
+  /** Claimed master exam ids. */
+  claimedExamIds: string[];
+  /** Earned syllabus badges per course part. */
+  earnedBadges: Record<string, boolean>;
+  /** Completed syllabus lesson checklist. */
+  completedLessons: Record<string, boolean>;
 
   /** Grant XP and coins for completing a quest (idempotent per quest). */
   grantQuestRewards: (questId: string, xp: number, coins: number) => void;
@@ -49,6 +50,10 @@ interface StatsState {
   collectCard: (cardId: string) => void;
   /** Collect a list of shop cards at once. */
   collectAllCards: (cardIds: string[]) => void;
+  /** Claim master exam rewards (once per part). */
+  claimExamReward: (examId: string, xp: number, coins: number, coursePart: string) => boolean;
+  /** Toggle lesson completion state. */
+  toggleLessonComplete: (lessonKey: string) => void;
   /** Reset all stats to zero (fresh account / testing). */
   reset: () => void;
 }
@@ -71,11 +76,24 @@ const dayDiff = (a: string, b: string): number => {
 
 const DEFAULT_STATE = {
   xp: 0,
-  coins: 0,
-  streak: 0,
+  coins: 100,
+  streak: 1,
   lastActiveDate: '',
   learnedVocab: [] as LearnedVocabEntry[],
   collectedCardIds: [] as string[],
+  claimedQuestRewards: [] as string[],
+  claimedExamIds: [] as string[],
+  earnedBadges: {
+    part1: false,
+    part2: false,
+    part3: false,
+    part4: false,
+    part5: false,
+    part6: false,
+    part7: false,
+    part8: false,
+  } as Record<string, boolean>,
+  completedLessons: {} as Record<string, boolean>,
 };
 
 export const useStatsStore = create<StatsState>()(
@@ -85,22 +103,23 @@ export const useStatsStore = create<StatsState>()(
 
       grantQuestRewards: (questId, xp, coins) => {
         // Idempotent: if this quest already granted rewards, skip.
-        const already = get().learnedVocab.some((v) => v.questId === questId);
-        if (already) return;
+        const state = get();
+        if (state.claimedQuestRewards.includes(questId)) return;
 
         // Update streak based on today's activity.
         const today = todayKey();
-        const prev = get().lastActiveDate;
-        let newStreak = get().streak;
+        const prev = state.lastActiveDate;
+        let newStreak = state.streak;
         if (prev !== today) {
           newStreak = prev && dayDiff(prev, today) === 1 ? newStreak + 1 : 1;
         }
 
-        set((state) => ({
-          xp: state.xp + xp,
-          coins: state.coins + coins,
+        set((s) => ({
+          xp: s.xp + xp,
+          coins: s.coins + coins,
           streak: newStreak,
           lastActiveDate: today,
+          claimedQuestRewards: [...s.claimedQuestRewards, questId],
         }));
         const uid = getCurrentUserId();
         if (uid) syncUserStats(uid, get()).catch(() => {});
@@ -166,8 +185,43 @@ export const useStatsStore = create<StatsState>()(
         if (uid) syncUserStats(uid, get()).catch(() => {});
       },
 
+      claimExamReward: (examId, xp, coins, coursePart) => {
+        const state = get();
+        if (state.claimedExamIds.includes(examId) || state.claimedExamIds.includes(coursePart)) {
+          return false;
+        }
+
+        const today = todayKey();
+        const prev = state.lastActiveDate;
+        let newStreak = state.streak;
+        if (prev !== today) {
+          newStreak = prev && dayDiff(prev, today) === 1 ? newStreak + 1 : 1;
+        }
+
+        set((s) => ({
+          xp: s.xp + xp,
+          coins: s.coins + coins,
+          streak: newStreak,
+          lastActiveDate: today,
+          claimedExamIds: Array.from(new Set([...s.claimedExamIds, examId, coursePart])),
+          earnedBadges: { ...s.earnedBadges, [coursePart]: true },
+        }));
+        const uid = getCurrentUserId();
+        if (uid) syncUserStats(uid, get()).catch(() => {});
+        return true;
+      },
+
+      toggleLessonComplete: (lessonKey) => {
+        set((s) => {
+          const next = { ...s.completedLessons, [lessonKey]: !s.completedLessons[lessonKey] };
+          return { completedLessons: next };
+        });
+        const uid = getCurrentUserId();
+        if (uid) syncUserStats(uid, get()).catch(() => {});
+      },
+
       reset: () => {
-        set({ ...DEFAULT_STATE });
+        set({ ...DEFAULT_STATE, lastActiveDate: todayKey() });
         const uid = getCurrentUserId();
         if (uid) {
           syncUserStats(uid, get()).catch(() => {});
@@ -184,21 +238,25 @@ export const useStatsStore = create<StatsState>()(
         lastActiveDate: state.lastActiveDate,
         learnedVocab: state.learnedVocab,
         collectedCardIds: state.collectedCardIds,
+        claimedQuestRewards: state.claimedQuestRewards,
+        claimedExamIds: state.claimedExamIds,
+        earnedBadges: state.earnedBadges,
+        completedLessons: state.completedLessons,
       }),
     },
   ),
 );
 
 if (typeof window !== 'undefined') {
-  // Clear any old mock stats from localStorage and reset store immediately to 0
+  // Clear any old mock stats from localStorage and reset store immediately
   try {
     const raw = localStorage.getItem('wayfarer-stats');
     if (raw) {
       const parsed = JSON.parse(raw);
       if (parsed?.state && (parsed.state.xp > 10000 || parsed.state.coins > 1000 || parsed.state.streak > 10)) {
         parsed.state.xp = 0;
-        parsed.state.coins = 0;
-        parsed.state.streak = 0;
+        parsed.state.coins = 100;
+        parsed.state.streak = 1;
         localStorage.setItem('wayfarer-stats', JSON.stringify(parsed));
         useStatsStore.getState().reset();
       }
@@ -206,14 +264,6 @@ if (typeof window !== 'undefined') {
   } catch (e) {
     console.warn("Failed to reset stats:", e);
   }
-
-  setTimeout(() => {
-    try {
-      useStatsStore.getState().collectAllCards(allCardIds);
-    } catch (e) {
-      console.warn("Failed to auto-unlock cards:", e);
-    }
-  }, 100);
 
   useStatsStore.subscribe((state) => {
     const uid = getCurrentUserId();

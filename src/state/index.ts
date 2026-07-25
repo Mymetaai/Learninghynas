@@ -2,7 +2,8 @@ export * from './authStore';
 export * from './companionStore';
 export * from './dailyQuestStore';
 export * from './progressStore';
+export * from './questStore';
 export * from './settingsStore';
+export * from './shopStore';
 export * from './statsStore';
 export * from './trainingStore';
-

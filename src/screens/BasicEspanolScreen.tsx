@@ -171,25 +171,14 @@ const BasicEspanolScreen: FC = () => {
   const [activeSection, setActiveSection] = useState<ActiveSection>('overview');
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
-  // Lesson progression checklist across 30 lessons
-  const [completedLessons, setCompletedLessons] = useState<Record<string, boolean>>(() => {
-    try {
-      const saved = localStorage.getItem('wayfarer-basic-espanol-completed');
-      return saved ? JSON.parse(saved) : {};
-    } catch {
-      return {};
-    }
-  });
+  // Lesson progression checklist across lessons (stored in Zustand store & Supabase)
+  const completedLessons = useStatsStore((s) => s.completedLessons);
+  const toggleLessonComplete = useStatsStore((s) => s.toggleLessonComplete);
 
-  // Earned Master Badges
-  const [earnedBadges, setEarnedBadges] = useState<Record<CoursePart, boolean>>(() => {
-    try {
-      const saved = localStorage.getItem('wayfarer-basic-espanol-badges');
-      return saved ? JSON.parse(saved) : { part1: false, part2: false, part3: false, part4: false, part5: false, part6: false, part7: false };
-    } catch {
-      return { part1: false, part2: false, part3: false, part4: false, part5: false, part6: false, part7: false };
-    }
-  });
+  // Earned Master Badges & Claimed Exams (stored in Zustand store & Supabase)
+  const earnedBadges = useStatsStore((s) => s.earnedBadges);
+  const claimedExamIds = useStatsStore((s) => s.claimedExamIds);
+  const claimExamReward = useStatsStore((s) => s.claimExamReward);
 
   // Interactive Quick Practice state per lesson
   const [userPracticeAnswers, setUserPracticeAnswers] = useState<Record<string, string>>({});
@@ -203,11 +192,7 @@ const BasicEspanolScreen: FC = () => {
   const [rewardClaimed, setRewardClaimed] = useState(false);
 
   const handleLessonComplete = (lessonKey: string) => {
-    setCompletedLessons(prev => {
-      const next = { ...prev, [lessonKey]: !prev[lessonKey] };
-      localStorage.setItem('wayfarer-basic-espanol-completed', JSON.stringify(next));
-      return next;
-    });
+    toggleLessonComplete(lessonKey);
   };
 
 const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
@@ -270,16 +255,19 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
   const claimQuizRewards = () => {
     if (rewardClaimed) return;
+    const examId = `${coursePart}-exam`;
+    const isAlreadyClaimed = claimedExamIds.includes(examId) || claimedExamIds.includes(coursePart);
+
+    if (isAlreadyClaimed) {
+      setRewardClaimed(true);
+      return;
+    }
+
     const badgeInfo = PART_BADGES[coursePart];
     const passRate = score / activeQuestions.length;
     
-    if (passRate >= 0.7) {
-      useStatsStore.getState().addRewards(badgeInfo.coins, badgeInfo.xp);
-      setEarnedBadges(prev => {
-        const next = { ...prev, [coursePart]: true };
-        localStorage.setItem('wayfarer-basic-espanol-badges', JSON.stringify(next));
-        return next;
-      });
+    if (passRate >= 0.6) {
+      claimExamReward(examId, badgeInfo.xp, badgeInfo.coins, coursePart);
     }
     setRewardClaimed(true);
   };

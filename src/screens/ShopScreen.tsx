@@ -1,6 +1,7 @@
 import { useState, useMemo, type FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStatsStore } from '../state/statsStore';
+import { useShopStore } from '../state/shopStore';
 import { ONE_PIECE_CARDS, type OnePieceCard } from '../content/onePieceCards';
 import { DEMON_SLAYER_CARDS, type DemonSlayerCard } from '../content/demonSlayerCards';
 import {
@@ -180,6 +181,7 @@ const ShopScreen: FC = () => {
 
     if (item.consumableKey) {
       addConsumable(item.consumableKey, 1);
+      useShopStore.getState().buyPowerUp(item.consumableKey, 0);
     } else if (item.auraId) {
       addAura(item.auraId);
     } else if (item.themeId) {

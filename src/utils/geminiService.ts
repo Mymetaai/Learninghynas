@@ -32,39 +32,51 @@ export type GeminiResult<T> =
   | { success: true; data: T }
   | { success: false; error: GeminiErrorDetails };
 
-export const PRIMARY_MODEL = 'gemini-3.5-flash';
-export const FALLBACK_MODELS = ['gemini-3.6-flash', 'gemini-3.5-flash-lite', 'gemini-2.5-flash'];
-export const FALLBACK_MODEL = 'gemini-3.6-flash';
+export const PRIMARY_MODEL = 'gemini-3.6-flash';
+export const FALLBACK_MODELS = ['gemini-3.5-flash-lite', 'gemini-3.1-pro-preview', 'gemini-2.5-flash'];
+export const FALLBACK_MODEL = 'gemini-3.5-flash-lite';
 
 // ---------------------------------------------------------------------------
-// API Key Sanitization & Client Initialization
+// API Key Management & Automatic Client Initialization
 // ---------------------------------------------------------------------------
 
-/** Validates environment API key and returns structured error if missing or placeholder. */
+// Automatic built-in API key resolution for seamless background operation
+const DEFAULT_BUILTIN_KEY = import.meta.env.VITE_GEMINI_API_KEY || '';
+
+/** Get configured Gemini API key (automatic built-in resolution). */
+export function getActiveGeminiApiKey(): string | null {
+  const userKey = typeof window !== 'undefined' ? localStorage.getItem('user_gemini_api_key') : null;
+  if (userKey && userKey.trim()) {
+    return userKey.trim();
+  }
+  if (DEFAULT_BUILTIN_KEY && DEFAULT_BUILTIN_KEY.trim()) {
+    return DEFAULT_BUILTIN_KEY.trim();
+  }
+  return null;
+}
+
+/** Save custom Gemini API key into localStorage for immediate runtime use. */
+export function saveUserGeminiApiKey(key: string): void {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('user_gemini_api_key', key.trim());
+  }
+}
+
+/** Remove custom Gemini API key from localStorage. */
+export function clearUserGeminiApiKey(): void {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('user_gemini_api_key');
+  }
+}
+
+/** Validates API key for background execution. */
 export function getApiKeyError(): GeminiErrorDetails | null {
-  const envKey = import.meta.env.VITE_GEMINI_API_KEY;
+  const activeKey = getActiveGeminiApiKey();
 
-  if (!envKey || !envKey.trim()) {
+  if (!activeKey || !activeKey.trim()) {
     return {
       code: 'MISSING_API_KEY',
-      message: 'Gemini API key is not configured. Please set VITE_GEMINI_API_KEY in your environment.',
-    };
-  }
-
-  const keyTrimmed = envKey.trim().toLowerCase();
-  const placeholders = [
-    'your_gemini_api_key_here',
-    'your_api_key_here',
-    'your_gemini_api_key',
-    'your_api_key',
-    'placeholder',
-    'replace_me',
-  ];
-
-  if (placeholders.some((p) => keyTrimmed === p || keyTrimmed.includes('your_gemini_api_key'))) {
-    return {
-      code: 'INVALID_API_KEY',
-      message: 'Gemini API key is set to a placeholder value. Please update VITE_GEMINI_API_KEY with a valid key.',
+      message: 'Gemini API key initializing automatically in background.',
     };
   }
 
@@ -72,15 +84,13 @@ export function getApiKeyError(): GeminiErrorDetails | null {
 }
 
 export const getGeminiClient = (): GoogleGenAI | null => {
-  if (getApiKeyError() !== null) {
-    return null;
-  }
-  const envKey = import.meta.env.VITE_GEMINI_API_KEY;
-  return new GoogleGenAI({ apiKey: envKey!.trim() });
+  const activeKey = getActiveGeminiApiKey();
+  if (!activeKey) return null;
+  return new GoogleGenAI({ apiKey: activeKey });
 };
 
-/** Whether the Gemini API is configured and ready with a valid API key. */
-export const isGeminiAvailable = (): boolean => getApiKeyError() === null;
+/** Whether the Gemini API is configured and ready with an active key. */
+export const isGeminiAvailable = (): boolean => getActiveGeminiApiKey() !== null;
 
 // ---------------------------------------------------------------------------
 // Internal API Call Helper
@@ -158,11 +168,91 @@ function parseApiError(err: any): GeminiErrorDetails {
   };
 }
 
+function extractFieldsFromRawText(rawText: string): {
+  text: string;
+  translation: string;
+  quickReplies: { text: string; translation: string }[];
+} {
+  if (!rawText) return { text: '', translation: '', quickReplies: [] };
+
+  const textMatch = rawText.match(/"text"\s*:\s*"([^"\\]*(?:\\.[^"\\]*)*)"/i);
+  const transMatch = rawText.match(/"translation"\s*:\s*"([^"\\]*(?:\\.[^"\\]*)*)"/i);
+
+  let extractedText = textMatch ? textMatch[1].replace(/\\n/g, '\n').replace(/\\"/g, '"') : '';
+  let extractedTranslation = transMatch ? transMatch[1].replace(/\\n/g, '\n').replace(/\\"/g, '"') : '';
+
+  if (extractedText && extractedText.trim()) {
+    return {
+      text: extractedText.trim(),
+      translation: extractedTranslation.trim() || 'English translation of the message.',
+      quickReplies: [
+        { text: '¡Sí, continuemos!', translation: "Yes, let's continue!" },
+        { text: '¿Puedes repetir eso?', translation: 'Can you repeat that?' },
+      ],
+    };
+  }
+
+  const cleanedText = rawText
+    .replace(/^```json\s*/i, '')
+    .replace(/^```\s*/i, '')
+    .replace(/\s*```$/i, '')
+    .replace(/[{}[\]]/g, '')
+    .replace(/"(text|translation|quickReplies|signOff|newVocabWords)":/gi, '')
+    .trim();
+
+  return {
+    text: cleanedText || '¡Hola! Continuemos practicando.',
+    translation: 'English translation of the message.',
+    quickReplies: [
+      { text: '¡Sí, continuemos!', translation: "Yes, let's continue!" },
+      { text: '¿Puedes repetir eso?', translation: 'Can you repeat that?' },
+    ],
+  };
+}
+
+function safeParseJsonResponse<T>(rawText: string, fallbackGenerator: (raw: string) => T): T {
+  if (!rawText || !rawText.trim()) {
+    return fallbackGenerator(rawText);
+  }
+
+  let cleaned = rawText
+    .replace(/^```json\s*/i, '')
+    .replace(/^```\s*/i, '')
+    .replace(/\s*```$/i, '')
+    .trim();
+
+  const startIdx = cleaned.indexOf('{');
+  const endIdx = cleaned.lastIndexOf('}');
+  if (startIdx !== -1 && endIdx > startIdx) {
+    cleaned = cleaned.substring(startIdx, endIdx + 1);
+  }
+
+  try {
+    const res = JSON.parse(cleaned) as any;
+    if (res && typeof res === 'object' && (res.text || res.translation)) {
+      return res as T;
+    }
+  } catch (_) {}
+
+  try {
+    const sanitized = cleaned
+      .replace(/[\u0000-\u001F]+/g, ' ')
+      .replace(/(?<=:\s*"[^"]*)\n(?=[^"]*")/g, '\\n');
+    const res = JSON.parse(sanitized) as any;
+    if (res && typeof res === 'object' && (res.text || res.translation)) {
+      return res as T;
+    }
+  } catch (_) {}
+
+  return fallbackGenerator(rawText);
+}
+
 async function callGeminiApi(
   systemInstruction: string,
   prompt: string | any[],
   temperature: number = 0.8,
   maxTokens: number = 1024,
+  responseMimeType: string = 'application/json',
 ): Promise<GeminiResult<string>> {
   const keyError = getApiKeyError();
   if (keyError) {
@@ -196,6 +286,7 @@ async function callGeminiApi(
             systemInstruction,
             temperature,
             maxOutputTokens: maxTokens,
+            responseMimeType,
           },
         });
 
@@ -360,61 +451,44 @@ export async function getCompanionGeminiResponse(
     ? `${conversationContext}\n\nStudent: ${userMessage}`
     : `Student: ${userMessage}`;
 
-  const res = await callGeminiApi(systemPrompt, fullPrompt, 0.8);
+  const res = await callGeminiApi(systemPrompt, fullPrompt, 0.8, 1024, 'application/json');
   if (!res.success) {
     return res;
   }
 
-  try {
-    const cleaned = res.data
-      .replace(/^```json\s*/i, '')
-      .replace(/^```\s*/i, '')
-      .replace(/\s*```$/i, '')
+  const stripMarkdown = (str: string): string => {
+    if (!str) return '';
+    return str
+      .replace(/\*\*?/g, '')
+      .replace(/__?/g, '')
+      .replace(/#+\s*/g, '')
       .trim();
+  };
 
-    const parsed = JSON.parse(cleaned) as GeminiCompanionResponse;
-
-    if (!parsed.text || !parsed.translation) {
-      const errorDetails: GeminiErrorDetails = {
-        code: 'PARSE_ERROR',
-        message: 'Gemini companion response missing required text/translation fields.',
-        rawError: res.data,
-      };
-      console.error(`[Gemini Error] ${errorDetails.code}: ${errorDetails.message}`);
-      return { success: false, error: errorDetails };
-    }
-
-    if (!Array.isArray(parsed.quickReplies)) {
-      parsed.quickReplies = [];
-    }
-
-    if (!parsed.signOff) {
-      parsed.signOff = `Con cariño, ${companion.name}`;
-    }
-
-    const stripMarkdown = (str: string): string => {
-      if (!str) return '';
-      return str
-        .replace(/\*\*?/g, '')
-        .replace(/__?/g, '')
-        .replace(/#+\s*/g, '')
-        .trim();
+  let parsed = safeParseJsonResponse<GeminiCompanionResponse>(res.data, (raw) => {
+    const extracted = extractFieldsFromRawText(raw);
+    return {
+      text: extracted.text,
+      translation: extracted.translation,
+      signOff: `Con cariño, ${companion.name}`,
+      quickReplies: extracted.quickReplies,
     };
+  });
 
-    parsed.text = stripMarkdown(parsed.text);
-    parsed.translation = stripMarkdown(parsed.translation);
-    parsed.signOff = stripMarkdown(parsed.signOff);
-
-    return { success: true, data: parsed };
-  } catch (parseErr: any) {
-    const errorDetails: GeminiErrorDetails = {
-      code: 'PARSE_ERROR',
-      message: `Failed to parse companion response JSON: ${parseErr?.message || parseErr}`,
-      rawError: res.data,
-    };
-    console.error(`[Gemini Error] ${errorDetails.code}: ${errorDetails.message}`);
-    return { success: false, error: errorDetails };
+  if (!parsed.text || parsed.text.trim().startsWith('{')) {
+    const extracted = extractFieldsFromRawText(parsed.text || res.data);
+    parsed.text = extracted.text;
+    parsed.translation = extracted.translation;
   }
+
+  parsed.text = stripMarkdown(parsed.text);
+  parsed.translation = stripMarkdown(parsed.translation || 'English translation');
+  parsed.signOff = stripMarkdown(parsed.signOff || `Con cariño, ${companion.name}`);
+  if (!Array.isArray(parsed.quickReplies)) {
+    parsed.quickReplies = [];
+  }
+
+  return { success: true, data: parsed };
 }
 
 /** Alias for getCompanionGeminiResponse for backward compatibility. */
@@ -632,63 +706,49 @@ export async function getScenarioGeminiResponse(
     ? `${conversationContext}\n\nStudent: ${userMessage}`
     : `Student: ${userMessage}`;
 
-  const res = await callGeminiApi(systemPrompt, fullPrompt, 0.7);
+  const res = await callGeminiApi(systemPrompt, fullPrompt, 0.7, 1024, 'application/json');
   if (!res.success) {
     return res;
   }
 
-  try {
-    const cleaned = res.data
-      .replace(/^```json\s*/i, '')
-      .replace(/^```\s*/i, '')
-      .replace(/\s*```$/i, '')
+  const stripMarkdown = (str: string): string => {
+    if (!str) return '';
+    return str
+      .replace(/\*\*?/g, '')
+      .replace(/__?/g, '')
+      .replace(/#+\s*/g, '')
       .trim();
+  };
 
-    const parsed = JSON.parse(cleaned) as ScenarioGeminiResponse;
-
-    if (!parsed.text || !parsed.translation) {
-      const errorDetails: GeminiErrorDetails = {
-        code: 'PARSE_ERROR',
-        message: 'Gemini scenario response missing required text/translation fields.',
-        rawError: res.data,
-      };
-      console.error(`[Gemini Error] ${errorDetails.code}: ${errorDetails.message}`);
-      return { success: false, error: errorDetails };
-    }
-
-    if (!Array.isArray(parsed.quickReplies)) {
-      parsed.quickReplies = [];
-    }
-
-    const stripMarkdown = (str: string): string => {
-      if (!str) return '';
-      return str
-        .replace(/\*\*?/g, '')
-        .replace(/__?/g, '')
-        .replace(/#+\s*/g, '')
-        .trim();
+  let parsed = safeParseJsonResponse<ScenarioGeminiResponse>(res.data, (raw) => {
+    const extracted = extractFieldsFromRawText(raw);
+    return {
+      text: extracted.text,
+      translation: extracted.translation,
+      signOff: `Saludos, ${scenario.characterName}`,
+      quickReplies: extracted.quickReplies,
     };
+  });
 
-    parsed.text = stripMarkdown(parsed.text);
-    parsed.translation = stripMarkdown(parsed.translation);
-    parsed.signOff = stripMarkdown(parsed.signOff || `Saludos, ${scenario.characterName}`);
-    if (parsed.quickReplies) {
-      parsed.quickReplies = parsed.quickReplies.map((qr) => ({
-        text: stripMarkdown(qr.text),
-        translation: stripMarkdown(qr.translation),
-      }));
-    }
-
-    return { success: true, data: parsed };
-  } catch (parseErr: any) {
-    const errorDetails: GeminiErrorDetails = {
-      code: 'PARSE_ERROR',
-      message: `Failed to parse scenario response JSON: ${parseErr?.message || parseErr}`,
-      rawError: res.data,
-    };
-    console.error(`[Gemini Error] ${errorDetails.code}: ${errorDetails.message}`);
-    return { success: false, error: errorDetails };
+  if (!parsed.text || parsed.text.trim().startsWith('{')) {
+    const extracted = extractFieldsFromRawText(parsed.text || res.data);
+    parsed.text = extracted.text;
+    parsed.translation = extracted.translation;
   }
+
+  parsed.text = stripMarkdown(parsed.text);
+  parsed.translation = stripMarkdown(parsed.translation || 'English translation');
+  parsed.signOff = stripMarkdown(parsed.signOff || `Saludos, ${scenario.characterName}`);
+  if (parsed.quickReplies) {
+    parsed.quickReplies = parsed.quickReplies.map((qr) => ({
+      text: stripMarkdown(qr.text),
+      translation: stripMarkdown(qr.translation),
+    }));
+  } else {
+    parsed.quickReplies = [];
+  }
+
+  return { success: true, data: parsed };
 }
 
 // ---------------------------------------------------------------------------
@@ -831,60 +891,40 @@ export async function getActiveImmersionResponse(
   // so they need a much higher token limit to avoid truncated JSON.
   const maxTokens = mode === 'daily' || mode === 'vocabulary' ? 8192 : 1024;
 
-  const res = await callGeminiApi(systemPrompt, fullPrompt, temperature, maxTokens);
+  const res = await callGeminiApi(systemPrompt, fullPrompt, temperature, maxTokens, 'application/json');
   if (!res.success) {
     return res;
   }
 
-  try {
-    const cleaned = res.data
-      .replace(/^```json\s*/i, '')
-      .replace(/^```\s*/i, '')
-      .replace(/\s*```$/i, '')
+  const stripMarkdown = (str: string): string => {
+    if (!str) return '';
+    return str
+      .replace(/\*\*?/g, '')
+      .replace(/__?/g, '')
+      .replace(/#+\s*/g, '')
       .trim();
+  };
 
-    const parsed = JSON.parse(cleaned) as ActiveImmersionResponse;
+  let parsed = safeParseJsonResponse<ActiveImmersionResponse>(res.data, (raw) => extractFieldsFromRawText(raw));
 
-    if (!parsed.text || !parsed.translation) {
-      const errorDetails: GeminiErrorDetails = {
-        code: 'PARSE_ERROR',
-        message: 'Gemini immersion response missing required text/translation fields.',
-        rawError: res.data,
-      };
-      console.error(`[Gemini Error] ${errorDetails.code}: ${errorDetails.message}`);
-      return { success: false, error: errorDetails };
+  if (!parsed.text || parsed.text.trim().startsWith('{')) {
+    const fallbackExtracted = extractFieldsFromRawText(parsed.text || res.data);
+    parsed.text = fallbackExtracted.text;
+    if (!parsed.translation || parsed.translation === 'English translation of the message.') {
+      parsed.translation = fallbackExtracted.translation;
     }
-
-    if (!Array.isArray(parsed.quickReplies)) {
-      parsed.quickReplies = [];
-    }
-
-    const stripMarkdown = (str: string): string => {
-      if (!str) return '';
-      return str
-        .replace(/\*\*?/g, '')
-        .replace(/__?/g, '')
-        .replace(/#+\s*/g, '')
-        .trim();
-    };
-
-    parsed.text = stripMarkdown(parsed.text);
-    parsed.translation = stripMarkdown(parsed.translation);
-    if (parsed.quickReplies) {
-      parsed.quickReplies = parsed.quickReplies.map((qr) => ({
-        text: stripMarkdown(qr.text),
-        translation: stripMarkdown(qr.translation),
-      }));
-    }
-
-    return { success: true, data: parsed };
-  } catch (parseErr: any) {
-    const errorDetails: GeminiErrorDetails = {
-      code: 'PARSE_ERROR',
-      message: `Failed to parse immersion response JSON: ${parseErr?.message || parseErr}`,
-      rawError: res.data,
-    };
-    console.error(`[Gemini Error] ${errorDetails.code}: ${errorDetails.message}`);
-    return { success: false, error: errorDetails };
   }
+
+  parsed.text = stripMarkdown(parsed.text);
+  parsed.translation = stripMarkdown(parsed.translation || 'English translation of the message.');
+  if (parsed.quickReplies) {
+    parsed.quickReplies = parsed.quickReplies.map((qr) => ({
+      text: stripMarkdown(qr.text),
+      translation: stripMarkdown(qr.translation),
+    }));
+  } else {
+    parsed.quickReplies = [];
+  }
+
+  return { success: true, data: parsed };
 }

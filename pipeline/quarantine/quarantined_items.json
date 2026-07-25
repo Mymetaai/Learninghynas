@@ -1,0 +1,2420 @@
+[
+  {
+    "item": {
+      "id": "vocab_3_tú eres",
+      "level": "A1",
+      "type": "vocabulary",
+      "es": "tú eres",
+      "en": "you are",
+      "prompt": "Tú eres mi mejor amigo.",
+      "answer": "tú eres",
+      "options": [
+        "tú eres",
+        "gracias",
+        "adios",
+        "hola"
+      ]
+    },
+    "validation_result": {
+      "item_id": "vocab_3_tú eres",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "A1",
+      "computed_cefr": "B2",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'A1' (A1) but content difficulty evaluates to 'B2'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l11_1",
+      "level": "A2",
+      "type": "multiple-choice",
+      "prompt": "Which tener idiom means 'I am hungry'?",
+      "answer": "Tengo hambre",
+      "options": [
+        "Tengo hambre",
+        "Soy hambriento",
+        "Tengo frío",
+        "Estoy hambre"
+      ],
+      "explanation": "'Tener hambre' literally means to have hunger."
+    },
+    "validation_result": {
+      "item_id": "mcq_l11_1",
+      "confidence_score": 0.795,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 1.0,
+      "phrasing_score": 0.5,
+      "schema_score": 1.0,
+      "claimed_cefr": "A2",
+      "computed_cefr": "A2",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "Unnatural phrasing detected: '\\bsoy hambriento\\b' -> suggest 'tengo hambre'"
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l11_1",
+      "level": "A2",
+      "type": "fill-blank",
+      "prompt": "Cuando hace frío, yo ___ frío.",
+      "answer": "tengo",
+      "options": [
+        "tengo",
+        "soy",
+        "estoy",
+        "hago"
+      ],
+      "context": "Tener idiom for physical state"
+    },
+    "validation_result": {
+      "item_id": "fill_l11_1",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "A2",
+      "computed_cefr": "B2",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'A2' (A2) but content difficulty evaluates to 'B2'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l17_1",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "Which demonstrative adjective means 'this book' (close to speaker)?",
+      "answer": "este libro",
+      "options": [
+        "este libro",
+        "ese libro",
+        "aquel libro",
+        "esta libro"
+      ],
+      "explanation": "'Este' is used for masculine singular near the speaker."
+    },
+    "validation_result": {
+      "item_id": "mcq_l17_1",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l17_2",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "What is the English meaning of the Spanish term 'este libro'?",
+      "answer": "this book",
+      "options": [
+        "our",
+        "this book",
+        "thank you",
+        "good morning"
+      ],
+      "explanation": "'este libro' translates to 'this book' in Spanish (Lesson 17: demonstratives)."
+    },
+    "validation_result": {
+      "item_id": "mcq_l17_2",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l17_3",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "What is the English meaning of the Spanish term 'nuestro'?",
+      "answer": "our",
+      "options": [
+        "our",
+        "this book",
+        "thank you",
+        "good morning"
+      ],
+      "explanation": "'nuestro' translates to 'our' in Spanish (Lesson 17: possessives)."
+    },
+    "validation_result": {
+      "item_id": "mcq_l17_3",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l17_1",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "___ (this) libro es muy interesante.",
+      "answer": "Este",
+      "options": [
+        "Este",
+        "Ese",
+        "Aquel",
+        "Esta"
+      ],
+      "context": "Demonstrative adjective"
+    },
+    "validation_result": {
+      "item_id": "fill_l17_1",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l17_2",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "Completa la frase: 'El estudiante usa ___ (this book).'",
+      "answer": "este libro",
+      "options": [
+        "hola",
+        "adios",
+        "gracias",
+        "este libro"
+      ],
+      "context": "Select the correct Spanish word for 'this book'."
+    },
+    "validation_result": {
+      "item_id": "fill_l17_2",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l17_3",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "Completa la frase: 'El estudiante usa ___ (our).'",
+      "answer": "nuestro",
+      "options": [
+        "hola",
+        "adios",
+        "nuestro",
+        "gracias"
+      ],
+      "context": "Select the correct Spanish word for 'our'."
+    },
+    "validation_result": {
+      "item_id": "fill_l17_3",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "vocab_17_este libro",
+      "level": "B1",
+      "type": "vocabulary",
+      "es": "este libro",
+      "en": "this book",
+      "prompt": "Este libro es muy interesante.",
+      "answer": "este libro",
+      "options": [
+        "este libro",
+        "gracias",
+        "adios",
+        "hola"
+      ]
+    },
+    "validation_result": {
+      "item_id": "vocab_17_este libro",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "vocab_17_nuestro",
+      "level": "B1",
+      "type": "vocabulary",
+      "es": "nuestro",
+      "en": "our",
+      "prompt": "Nuestro profesor es amable.",
+      "answer": "nuestro",
+      "options": [
+        "nuestro",
+        "gracias",
+        "adios",
+        "hola"
+      ]
+    },
+    "validation_result": {
+      "item_id": "vocab_17_nuestro",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l18_2",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "What is the English meaning of the Spanish term 'nada'?",
+      "answer": "nothing",
+      "options": [
+        "nothing",
+        "someone",
+        "thank you",
+        "good morning"
+      ],
+      "explanation": "'nada' translates to 'nothing' in Spanish (Lesson 18: negatives)."
+    },
+    "validation_result": {
+      "item_id": "mcq_l18_2",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l18_3",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "What is the English meaning of the Spanish term 'alguien'?",
+      "answer": "someone",
+      "options": [
+        "someone",
+        "nothing",
+        "thank you",
+        "good morning"
+      ],
+      "explanation": "'alguien' translates to 'someone' in Spanish (Lesson 18: indefinites)."
+    },
+    "validation_result": {
+      "item_id": "mcq_l18_3",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l18_2",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "No hay ___ en la caja.",
+      "answer": "nada",
+      "options": [
+        "nada",
+        "hola",
+        "adios",
+        "gracias"
+      ],
+      "context": "Select the correct Spanish word for 'nothing'."
+    },
+    "validation_result": {
+      "item_id": "fill_l18_2",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l18_3",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "¿Hay ___ en la clase?",
+      "answer": "alguien",
+      "options": [
+        "hola",
+        "adios",
+        "alguien",
+        "gracias"
+      ],
+      "context": "Select the correct Spanish word for 'someone'."
+    },
+    "validation_result": {
+      "item_id": "fill_l18_3",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "vocab_18_nada",
+      "level": "B1",
+      "type": "vocabulary",
+      "es": "nada",
+      "en": "nothing",
+      "prompt": "No hay nada en la caja.",
+      "answer": "nada",
+      "options": [
+        "nada",
+        "gracias",
+        "adios",
+        "hola"
+      ]
+    },
+    "validation_result": {
+      "item_id": "vocab_18_nada",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "vocab_18_alguien",
+      "level": "B1",
+      "type": "vocabulary",
+      "es": "alguien",
+      "en": "someone",
+      "prompt": "¿Hay alguien en la clase?",
+      "answer": "alguien",
+      "options": [
+        "alguien",
+        "gracias",
+        "adios",
+        "hola"
+      ]
+    },
+    "validation_result": {
+      "item_id": "vocab_18_alguien",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l19_2",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "What is the English meaning of the Spanish term 'me gusta'?",
+      "answer": "I like (it pleases me)",
+      "options": [
+        "they love",
+        "thank you",
+        "good morning",
+        "I like (it pleases me)"
+      ],
+      "explanation": "'me gusta' translates to 'I like (it pleases me)' in Spanish (Lesson 19: iop)."
+    },
+    "validation_result": {
+      "item_id": "mcq_l19_2",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l19_3",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "What is the English meaning of the Spanish term 'les encanta'?",
+      "answer": "they love",
+      "options": [
+        "they love",
+        "thank you",
+        "good morning",
+        "I like (it pleases me)"
+      ],
+      "explanation": "'les encanta' translates to 'they love' in Spanish (Lesson 19: gustar)."
+    },
+    "validation_result": {
+      "item_id": "mcq_l19_3",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l19_1",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "A mí ___ gusta aprender idiomas.",
+      "answer": "me",
+      "options": [
+        "me",
+        "te",
+        "le",
+        "nos"
+      ],
+      "context": "Indirect object pronoun with gustar"
+    },
+    "validation_result": {
+      "item_id": "fill_l19_1",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l19_2",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "Completa la frase: 'El estudiante usa ___ (I like (it pleases me)).'",
+      "answer": "me gusta",
+      "options": [
+        "hola",
+        "adios",
+        "gracias",
+        "me gusta"
+      ],
+      "context": "Select the correct Spanish word for 'I like (it pleases me)'."
+    },
+    "validation_result": {
+      "item_id": "fill_l19_2",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l19_3",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "Completa la frase: 'El estudiante usa ___ (they love).'",
+      "answer": "les encanta",
+      "options": [
+        "hola",
+        "adios",
+        "gracias",
+        "les encanta"
+      ],
+      "context": "Select the correct Spanish word for 'they love'."
+    },
+    "validation_result": {
+      "item_id": "fill_l19_3",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "vocab_19_me gusta",
+      "level": "B1",
+      "type": "vocabulary",
+      "es": "me gusta",
+      "en": "I like (it pleases me)",
+      "prompt": "Me gusta la música española.",
+      "answer": "me gusta",
+      "options": [
+        "me gusta",
+        "gracias",
+        "adios",
+        "hola"
+      ]
+    },
+    "validation_result": {
+      "item_id": "vocab_19_me gusta",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "vocab_19_les encanta",
+      "level": "B1",
+      "type": "vocabulary",
+      "es": "les encanta",
+      "en": "they love",
+      "prompt": "Les encanta aprender idiomas.",
+      "answer": "les encanta",
+      "options": [
+        "les encanta",
+        "gracias",
+        "adios",
+        "hola"
+      ]
+    },
+    "validation_result": {
+      "item_id": "vocab_19_les encanta",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l20_1",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "When direct and indirect pronouns combine (le + lo), what does 'le' change to?",
+      "answer": "se",
+      "options": [
+        "se",
+        "me",
+        "te",
+        "nos"
+      ],
+      "explanation": "Le/les changes to 'se' before lo/la/los/las."
+    },
+    "validation_result": {
+      "item_id": "mcq_l20_1",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l20_2",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "What is the English meaning of the Spanish term 'se lo doy'?",
+      "answer": "I give it to him/her",
+      "options": [
+        "thank you",
+        "good morning",
+        "he brings it to me",
+        "I give it to him/her"
+      ],
+      "explanation": "'se lo doy' translates to 'I give it to him/her' in Spanish (Lesson 20: double-objects)."
+    },
+    "validation_result": {
+      "item_id": "mcq_l20_2",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l20_3",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "What is the English meaning of the Spanish term 'me la trae'?",
+      "answer": "he brings it to me",
+      "options": [
+        "thank you",
+        "good morning",
+        "he brings it to me",
+        "I give it to him/her"
+      ],
+      "explanation": "'me la trae' translates to 'he brings it to me' in Spanish (Lesson 20: pronouns)."
+    },
+    "validation_result": {
+      "item_id": "mcq_l20_3",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l20_1",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "El regalo es para María, se ___ doy ahora.",
+      "answer": "lo",
+      "options": [
+        "lo",
+        "la",
+        "los",
+        "las"
+      ],
+      "context": "Double object pronoun combination"
+    },
+    "validation_result": {
+      "item_id": "fill_l20_1",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l20_2",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "El libro es de Juan, ___.",
+      "answer": "se lo doy",
+      "options": [
+        "hola",
+        "adios",
+        "gracias",
+        "se lo doy"
+      ],
+      "context": "Select the correct Spanish word for 'I give it to him/her'."
+    },
+    "validation_result": {
+      "item_id": "fill_l20_2",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l20_3",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "La comida está lista, ___.",
+      "answer": "me la trae",
+      "options": [
+        "hola",
+        "adios",
+        "gracias",
+        "me la trae"
+      ],
+      "context": "Select the correct Spanish word for 'he brings it to me'."
+    },
+    "validation_result": {
+      "item_id": "fill_l20_3",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "vocab_20_se lo doy",
+      "level": "B1",
+      "type": "vocabulary",
+      "es": "se lo doy",
+      "en": "I give it to him/her",
+      "prompt": "El libro es de Juan, se lo doy.",
+      "answer": "se lo doy",
+      "options": [
+        "se lo doy",
+        "gracias",
+        "adios",
+        "hola"
+      ]
+    },
+    "validation_result": {
+      "item_id": "vocab_20_se lo doy",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "vocab_20_me la trae",
+      "level": "B1",
+      "type": "vocabulary",
+      "es": "me la trae",
+      "en": "he brings it to me",
+      "prompt": "La comida está lista, me la trae.",
+      "answer": "me la trae",
+      "options": [
+        "me la trae",
+        "gracias",
+        "adios",
+        "hola"
+      ]
+    },
+    "validation_result": {
+      "item_id": "vocab_20_me la trae",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l22_1",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "What does the expression 'acabo de comer' mean?",
+      "answer": "I have just eaten",
+      "options": [
+        "I have just eaten",
+        "I am going to eat",
+        "I ate yesterday",
+        "I want to eat"
+      ],
+      "explanation": "'Acabar de + infinitive' means to have just done something."
+    },
+    "validation_result": {
+      "item_id": "mcq_l22_1",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l22_2",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "What is the English meaning of the Spanish term 'acabo de'?",
+      "answer": "I have just",
+      "options": [
+        "thank you",
+        "I have just",
+        "good morning",
+        "two hours ago"
+      ],
+      "explanation": "'acabo de' translates to 'I have just' in Spanish (Lesson 22: recent-past)."
+    },
+    "validation_result": {
+      "item_id": "mcq_l22_2",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l22_3",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "What is the English meaning of the Spanish term 'hace dos horas'?",
+      "answer": "two hours ago",
+      "options": [
+        "thank you",
+        "I have just",
+        "good morning",
+        "two hours ago"
+      ],
+      "explanation": "'hace dos horas' translates to 'two hours ago' in Spanish (Lesson 22: duration)."
+    },
+    "validation_result": {
+      "item_id": "mcq_l22_3",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l22_1",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "Acabo ___ terminar la lección.",
+      "answer": "de",
+      "options": [
+        "de",
+        "a",
+        "con",
+        "por"
+      ],
+      "context": "Acabar de idiom"
+    },
+    "validation_result": {
+      "item_id": "fill_l22_1",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l22_2",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "Completa la frase: 'El estudiante usa ___ (I have just).'",
+      "answer": "acabo de",
+      "options": [
+        "hola",
+        "adios",
+        "gracias",
+        "acabo de"
+      ],
+      "context": "Select the correct Spanish word for 'I have just'."
+    },
+    "validation_result": {
+      "item_id": "fill_l22_2",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l22_3",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "Llegué ___.",
+      "answer": "hace dos horas",
+      "options": [
+        "hola",
+        "adios",
+        "gracias",
+        "hace dos horas"
+      ],
+      "context": "Select the correct Spanish word for 'two hours ago'."
+    },
+    "validation_result": {
+      "item_id": "fill_l22_3",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "vocab_22_acabo de",
+      "level": "B1",
+      "type": "vocabulary",
+      "es": "acabo de",
+      "en": "I have just",
+      "prompt": "Acabo de terminar la lección.",
+      "answer": "acabo de",
+      "options": [
+        "acabo de",
+        "gracias",
+        "adios",
+        "hola"
+      ]
+    },
+    "validation_result": {
+      "item_id": "vocab_22_acabo de",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "vocab_22_hace dos horas",
+      "level": "B1",
+      "type": "vocabulary",
+      "es": "hace dos horas",
+      "en": "two hours ago",
+      "prompt": "Llegué hace dos horas.",
+      "answer": "hace dos horas",
+      "options": [
+        "hace dos horas",
+        "gracias",
+        "adios",
+        "hola"
+      ]
+    },
+    "validation_result": {
+      "item_id": "vocab_22_hace dos horas",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l23_3",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "What is the English meaning of the Spanish term 'llevo tres años'?",
+      "answer": "I have been ... for three years",
+      "options": [
+        "thank you",
+        "good morning",
+        "how long has it been?",
+        "I have been ... for three years"
+      ],
+      "explanation": "'llevo tres años' translates to 'I have been ... for three years' in Spanish (Lesson 23: duration)."
+    },
+    "validation_result": {
+      "item_id": "mcq_l23_3",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l23_1",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "Llevo dos años ___ (vivir) aquí.",
+      "answer": "viviendo",
+      "options": [
+        "viviendo",
+        "vivir",
+        "vivo",
+        "vivido"
+      ],
+      "context": "Duration with gerund"
+    },
+    "validation_result": {
+      "item_id": "fill_l23_1",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l23_3",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "Completa la frase: 'El estudiante usa ___ (I have been ... for three years).'",
+      "answer": "llevo tres años",
+      "options": [
+        "hola",
+        "adios",
+        "gracias",
+        "llevo tres años"
+      ],
+      "context": "Select the correct Spanish word for 'I have been ... for three years'."
+    },
+    "validation_result": {
+      "item_id": "fill_l23_3",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "vocab_23_llevo tres años",
+      "level": "B1",
+      "type": "vocabulary",
+      "es": "llevo tres años",
+      "en": "I have been ... for three years",
+      "prompt": "Llevo tres años viviendo aquí.",
+      "answer": "llevo tres años",
+      "options": [
+        "llevo tres años",
+        "gracias",
+        "adios",
+        "hola"
+      ]
+    },
+    "validation_result": {
+      "item_id": "vocab_23_llevo tres años",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l24_1",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "What is the formal 'usted' command for 'hablar'?",
+      "answer": "hable",
+      "options": [
+        "hable",
+        "habla",
+        "hablas",
+        "hablen"
+      ],
+      "explanation": "Formal usted command for -AR verbs ends in -e."
+    },
+    "validation_result": {
+      "item_id": "mcq_l24_1",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l24_2",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "What is the English meaning of the Spanish term 'hable usted'?",
+      "answer": "speak (formal)",
+      "options": [
+        "more than",
+        "thank you",
+        "good morning",
+        "speak (formal)"
+      ],
+      "explanation": "'hable usted' translates to 'speak (formal)' in Spanish (Lesson 24: commands-usted)."
+    },
+    "validation_result": {
+      "item_id": "mcq_l24_2",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l24_3",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "What is the English meaning of the Spanish term 'más que'?",
+      "answer": "more than",
+      "options": [
+        "more than",
+        "thank you",
+        "good morning",
+        "speak (formal)"
+      ],
+      "explanation": "'más que' translates to 'more than' in Spanish (Lesson 24: comparisons)."
+    },
+    "validation_result": {
+      "item_id": "mcq_l24_3",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l24_1",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "Por favor, señor, ___ (hablar) despacio.",
+      "answer": "hable",
+      "options": [
+        "hable",
+        "habla",
+        "hablas",
+        "hablen"
+      ],
+      "context": "Formal command"
+    },
+    "validation_result": {
+      "item_id": "fill_l24_1",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l24_2",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "Por favor, ___ más despacio.",
+      "answer": "hable usted",
+      "options": [
+        "hola",
+        "adios",
+        "gracias",
+        "hable usted"
+      ],
+      "context": "Select the correct Spanish word for 'speak (formal)'."
+    },
+    "validation_result": {
+      "item_id": "fill_l24_2",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l24_3",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "Completa la frase: 'El estudiante usa ___ (more than).'",
+      "answer": "más que",
+      "options": [
+        "hola",
+        "adios",
+        "más que",
+        "gracias"
+      ],
+      "context": "Select the correct Spanish word for 'more than'."
+    },
+    "validation_result": {
+      "item_id": "fill_l24_3",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "vocab_24_hable usted",
+      "level": "B1",
+      "type": "vocabulary",
+      "es": "hable usted",
+      "en": "speak (formal)",
+      "prompt": "Por favor, hable usted más despacio.",
+      "answer": "hable usted",
+      "options": [
+        "hable usted",
+        "gracias",
+        "adios",
+        "hola"
+      ]
+    },
+    "validation_result": {
+      "item_id": "vocab_24_hable usted",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "vocab_24_más que",
+      "level": "B1",
+      "type": "vocabulary",
+      "es": "más que",
+      "en": "more than",
+      "prompt": "Este curso es más interesante que el anterior.",
+      "answer": "más que",
+      "options": [
+        "más que",
+        "gracias",
+        "adios",
+        "hola"
+      ]
+    },
+    "validation_result": {
+      "item_id": "vocab_24_más que",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l25_1",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "What is the informal affirmative 'tú' command for 'hablar'?",
+      "answer": "habla",
+      "options": [
+        "habla",
+        "hables",
+        "hable",
+        "hablar"
+      ],
+      "explanation": "Affirmative tú command uses 3rd person singular present form."
+    },
+    "validation_result": {
+      "item_id": "mcq_l25_1",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l25_2",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "What is the English meaning of the Spanish term 'habla'?",
+      "answer": "speak! (informal)",
+      "options": [
+        "thank you",
+        "good morning",
+        "speak! (informal)",
+        "don't speak! (informal)"
+      ],
+      "explanation": "'habla' translates to 'speak! (informal)' in Spanish (Lesson 25: commands-tu)."
+    },
+    "validation_result": {
+      "item_id": "mcq_l25_2",
+      "confidence_score": 0.59,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.4,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "Exclamation mark '!' found without opening inverted '¡'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l25_3",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "What is the English meaning of the Spanish term 'no hables'?",
+      "answer": "don't speak! (informal)",
+      "options": [
+        "thank you",
+        "good morning",
+        "speak! (informal)",
+        "don't speak! (informal)"
+      ],
+      "explanation": "'no hables' translates to 'don't speak! (informal)' in Spanish (Lesson 25: imperative)."
+    },
+    "validation_result": {
+      "item_id": "mcq_l25_3",
+      "confidence_score": 0.59,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.4,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "Exclamation mark '!' found without opening inverted '¡'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l25_1",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "¡___ (hablar) en español ahora!",
+      "answer": "Habla",
+      "options": [
+        "Habla",
+        "Hables",
+        "Hable",
+        "Hablar"
+      ],
+      "context": "Informal tú command"
+    },
+    "validation_result": {
+      "item_id": "fill_l25_1",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l25_2",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "Completa la frase: 'El estudiante usa ___ (speak! (informal)).'",
+      "answer": "habla",
+      "options": [
+        "hola",
+        "habla",
+        "adios",
+        "gracias"
+      ],
+      "context": "Select the correct Spanish word for 'speak! (informal)'."
+    },
+    "validation_result": {
+      "item_id": "fill_l25_2",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Exclamation mark '!' found without opening inverted '¡'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l25_3",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "Completa la frase: 'El estudiante usa ___ (don't speak! (informal)).'",
+      "answer": "no hables",
+      "options": [
+        "hola",
+        "adios",
+        "gracias",
+        "no hables"
+      ],
+      "context": "Select the correct Spanish word for 'don't speak! (informal)'."
+    },
+    "validation_result": {
+      "item_id": "fill_l25_3",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Exclamation mark '!' found without opening inverted '¡'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "vocab_25_habla",
+      "level": "B1",
+      "type": "vocabulary",
+      "es": "habla",
+      "en": "speak! (informal)",
+      "prompt": "¡Habla en español con tu compañero!",
+      "answer": "habla",
+      "options": [
+        "habla",
+        "gracias",
+        "adios",
+        "hola"
+      ]
+    },
+    "validation_result": {
+      "item_id": "vocab_25_habla",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "vocab_25_no hables",
+      "level": "B1",
+      "type": "vocabulary",
+      "es": "no hables",
+      "en": "don't speak! (informal)",
+      "prompt": "¡No hables durante el examen!",
+      "answer": "no hables",
+      "options": [
+        "no hables",
+        "gracias",
+        "adios",
+        "hola"
+      ]
+    },
+    "validation_result": {
+      "item_id": "vocab_25_no hables",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l26_1",
+      "level": "A2",
+      "type": "fill-blank",
+      "prompt": "Ayer yo ___ (comer) una ensalada.",
+      "answer": "comí",
+      "options": [
+        "comí",
+        "como",
+        "comía",
+        "comeré"
+      ],
+      "context": "Preterite past tense"
+    },
+    "validation_result": {
+      "item_id": "fill_l26_1",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "A2",
+      "computed_cefr": "B2",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'A2' (A2) but content difficulty evaluates to 'B2'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l26_2",
+      "level": "A2",
+      "type": "fill-blank",
+      "prompt": "Ayer ___ con el director.",
+      "answer": "hablé",
+      "options": [
+        "hola",
+        "hablé",
+        "adios",
+        "gracias"
+      ],
+      "context": "Select the correct Spanish word for 'I spoke'."
+    },
+    "validation_result": {
+      "item_id": "fill_l26_2",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "A2",
+      "computed_cefr": "B2",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'A2' (A2) but content difficulty evaluates to 'B2'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l26_3",
+      "level": "A2",
+      "type": "fill-blank",
+      "prompt": "Anoche ___ una pizza deliciosa.",
+      "answer": "comí",
+      "options": [
+        "comí",
+        "hola",
+        "adios",
+        "gracias"
+      ],
+      "context": "Select the correct Spanish word for 'I ate'."
+    },
+    "validation_result": {
+      "item_id": "fill_l26_3",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "A2",
+      "computed_cefr": "B2",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'A2' (A2) but content difficulty evaluates to 'B2'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "vocab_26_hablé",
+      "level": "A2",
+      "type": "vocabulary",
+      "es": "hablé",
+      "en": "I spoke",
+      "prompt": "Ayer hablé con el director.",
+      "answer": "hablé",
+      "options": [
+        "hablé",
+        "gracias",
+        "adios",
+        "hola"
+      ]
+    },
+    "validation_result": {
+      "item_id": "vocab_26_hablé",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "A2",
+      "computed_cefr": "B2",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'A2' (A2) but content difficulty evaluates to 'B2'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "vocab_26_comí",
+      "level": "A2",
+      "type": "vocabulary",
+      "es": "comí",
+      "en": "I ate",
+      "prompt": "Anoche comí una pizza deliciosa.",
+      "answer": "comí",
+      "options": [
+        "comí",
+        "gracias",
+        "adios",
+        "hola"
+      ]
+    },
+    "validation_result": {
+      "item_id": "vocab_26_comí",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "A2",
+      "computed_cefr": "B2",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'A2' (A2) but content difficulty evaluates to 'B2'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l27_1",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "Which tense is used to describe habitual past actions (e.g. 'I used to live')?",
+      "answer": "imperfect",
+      "options": [
+        "imperfect",
+        "preterite",
+        "present",
+        "future"
+      ],
+      "explanation": "Imperfect describes ongoing/habitual past actions."
+    },
+    "validation_result": {
+      "item_id": "mcq_l27_1",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l27_2",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "What is the English meaning of the Spanish term 'hablaba'?",
+      "answer": "I used to speak / was speaking",
+      "options": [
+        "thank you",
+        "good morning",
+        "I used to live / was living",
+        "I used to speak / was speaking"
+      ],
+      "explanation": "'hablaba' translates to 'I used to speak / was speaking' in Spanish (Lesson 27: imperfect)."
+    },
+    "validation_result": {
+      "item_id": "mcq_l27_2",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l27_3",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "What is the English meaning of the Spanish term 'vivía'?",
+      "answer": "I used to live / was living",
+      "options": [
+        "thank you",
+        "good morning",
+        "I used to live / was living",
+        "I used to speak / was speaking"
+      ],
+      "explanation": "'vivía' translates to 'I used to live / was living' in Spanish (Lesson 27: past-description)."
+    },
+    "validation_result": {
+      "item_id": "mcq_l27_3",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l27_3",
+      "level": "B1",
+      "type": "fill-blank",
+      "prompt": "Completa la frase: 'El estudiante usa ___ (I used to live / was living).'",
+      "answer": "vivía",
+      "options": [
+        "hola",
+        "vivía",
+        "adios",
+        "gracias"
+      ],
+      "context": "Select the correct Spanish word for 'I used to live / was living'."
+    },
+    "validation_result": {
+      "item_id": "fill_l27_3",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "vocab_27_vivía",
+      "level": "B1",
+      "type": "vocabulary",
+      "es": "vivía",
+      "en": "I used to live / was living",
+      "prompt": "Vivía en una casa pequeña.",
+      "answer": "vivía",
+      "options": [
+        "vivía",
+        "gracias",
+        "adios",
+        "hola"
+      ]
+    },
+    "validation_result": {
+      "item_id": "vocab_27_vivía",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l29_3",
+      "level": "B1",
+      "type": "multiple-choice",
+      "prompt": "What is the English meaning of the Spanish term 'de repente'?",
+      "answer": "suddenly",
+      "options": [
+        "while",
+        "suddenly",
+        "thank you",
+        "good morning"
+      ],
+      "explanation": "'de repente' translates to 'suddenly' in Spanish (Lesson 29: past)."
+    },
+    "validation_result": {
+      "item_id": "mcq_l29_3",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B1",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B1' (B1) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "mcq_l30_2",
+      "level": "B2",
+      "type": "multiple-choice",
+      "prompt": "What is the English meaning of the Spanish term 'el más grande'?",
+      "answer": "the biggest",
+      "options": [
+        "thank you",
+        "the biggest",
+        "good morning",
+        "the best option"
+      ],
+      "explanation": "'el más grande' translates to 'the biggest' in Spanish (Lesson 30: superlatives)."
+    },
+    "validation_result": {
+      "item_id": "mcq_l30_2",
+      "confidence_score": 0.695,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 0.7,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B2",
+      "computed_cefr": "A1",
+      "error_category": "GRAMMAR_ERROR",
+      "details": [
+        "Question mark '?' found without opening inverted '¿'.",
+        "CEFR Mismatch: Claimed 'B2' (B2) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "fill_l30_2",
+      "level": "B2",
+      "type": "fill-blank",
+      "prompt": "Completa la frase: 'El estudiante usa ___ (the biggest).'",
+      "answer": "el más grande",
+      "options": [
+        "hola",
+        "adios",
+        "gracias",
+        "el más grande"
+      ],
+      "context": "Select the correct Spanish word for 'the biggest'."
+    },
+    "validation_result": {
+      "item_id": "fill_l30_2",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B2",
+      "computed_cefr": "A1",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B2' (B2) but content difficulty evaluates to 'A1'."
+      ]
+    }
+  },
+  {
+    "item": {
+      "id": "vocab_30_el más grande",
+      "level": "B2",
+      "type": "vocabulary",
+      "es": "el más grande",
+      "en": "the biggest",
+      "prompt": "Este es el edificio más grande de la ciudad.",
+      "answer": "el más grande",
+      "options": [
+        "el más grande",
+        "gracias",
+        "adios",
+        "hola"
+      ]
+    },
+    "validation_result": {
+      "item_id": "vocab_30_el más grande",
+      "confidence_score": 0.8,
+      "is_valid": false,
+      "is_quarantined": true,
+      "grammar_score": 1.0,
+      "cefr_score": 0.0,
+      "phrasing_score": 1.0,
+      "schema_score": 1.0,
+      "claimed_cefr": "B2",
+      "computed_cefr": "A2",
+      "error_category": "CEFR_MISMATCH",
+      "details": [
+        "CEFR Mismatch: Claimed 'B2' (B2) but content difficulty evaluates to 'A2'."
+      ]
+    }
+  }
+]

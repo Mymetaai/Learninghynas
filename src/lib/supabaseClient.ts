@@ -90,6 +90,10 @@ export const syncUserStats = async (userId?: string, stats?: any): Promise<void>
       streak: currentStats.streak ?? 0,
       last_active_date: currentStats.lastActiveDate || currentStats.last_active_date || '',
       collected_card_ids: currentStats.collectedCardIds || currentStats.collected_card_ids || [],
+      claimed_quest_rewards: currentStats.claimedQuestRewards || currentStats.claimed_quest_rewards || [],
+      claimed_exam_ids: currentStats.claimedExamIds || currentStats.claimed_exam_ids || [],
+      earned_badges: currentStats.earnedBadges || currentStats.earned_badges || {},
+      completed_lessons: currentStats.completedLessons || currentStats.completed_lessons || {},
       updated_at: new Date().toISOString(),
     };
 
@@ -227,6 +231,26 @@ export const fetchAndHydrateRemoteState = async (userId: string): Promise<void> 
             ...(statsData.collected_card_ids || statsData.collected_card_ids || []),
           ])
         ),
+        claimedQuestRewards: Array.from(
+          new Set([
+            ...(state.claimedQuestRewards || []),
+            ...(statsData.claimed_quest_rewards || statsData.claimed_quest_rewards || []),
+          ])
+        ),
+        claimedExamIds: Array.from(
+          new Set([
+            ...(state.claimedExamIds || []),
+            ...(statsData.claimed_exam_ids || statsData.claimed_exam_ids || []),
+          ])
+        ),
+        earnedBadges: {
+          ...(state.earnedBadges || {}),
+          ...(statsData.earned_badges || statsData.earned_badges || {}),
+        },
+        completedLessons: {
+          ...(state.completedLessons || {}),
+          ...(statsData.completed_lessons || statsData.completed_lessons || {}),
+        },
       }));
     }
 

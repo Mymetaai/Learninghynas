@@ -12,6 +12,13 @@ const LEVEL_COLORS: Record<VocabItem['level'], {
   glowShadow: string;
   dotColor: string;
 }> = {
+  'Pre-A1': {
+    badgeBg: 'bg-slate-100',
+    badgeText: 'text-slate-700',
+    edgeTint: 'border-slate-400/25',
+    glowShadow: '0 8px 32px rgba(100,116,139,0.12)',
+    dotColor: 'bg-slate-500',
+  },
   A1: {
     badgeBg: 'bg-emerald-100',
     badgeText: 'text-emerald-700',
@@ -46,6 +53,62 @@ const LEVEL_COLORS: Record<VocabItem['level'], {
     edgeTint: 'border-purple-400/25',
     glowShadow: '0 8px 32px rgba(168,85,247,0.12)',
     dotColor: 'bg-purple-500',
+  },
+  C2: {
+    badgeBg: 'bg-rose-100',
+    badgeText: 'text-rose-700',
+    edgeTint: 'border-rose-400/25',
+    glowShadow: '0 8px 32px rgba(244,63,94,0.12)',
+    dotColor: 'bg-rose-500',
+  },
+  'Part 1': {
+    badgeBg: 'bg-emerald-100',
+    badgeText: 'text-emerald-700',
+    edgeTint: 'border-emerald-400/25',
+    glowShadow: '0 8px 32px rgba(16,185,129,0.12)',
+    dotColor: 'bg-emerald-500',
+  },
+  'Part 2': {
+    badgeBg: 'bg-sky-100',
+    badgeText: 'text-sky-700',
+    edgeTint: 'border-sky-400/25',
+    glowShadow: '0 8px 32px rgba(14,165,233,0.12)',
+    dotColor: 'bg-sky-500',
+  },
+  'Part 3': {
+    badgeBg: 'bg-amber-100',
+    badgeText: 'text-amber-700',
+    edgeTint: 'border-amber-400/25',
+    glowShadow: '0 8px 32px rgba(245,158,11,0.12)',
+    dotColor: 'bg-amber-500',
+  },
+  'Part 4': {
+    badgeBg: 'bg-orange-100',
+    badgeText: 'text-orange-700',
+    edgeTint: 'border-orange-400/25',
+    glowShadow: '0 8px 32px rgba(249,115,22,0.12)',
+    dotColor: 'bg-orange-500',
+  },
+  'Part 5': {
+    badgeBg: 'bg-purple-100',
+    badgeText: 'text-purple-700',
+    edgeTint: 'border-purple-400/25',
+    glowShadow: '0 8px 32px rgba(168,85,247,0.12)',
+    dotColor: 'bg-purple-500',
+  },
+  'Part 6': {
+    badgeBg: 'bg-rose-100',
+    badgeText: 'text-rose-700',
+    edgeTint: 'border-rose-400/25',
+    glowShadow: '0 8px 32px rgba(244,63,94,0.12)',
+    dotColor: 'bg-rose-500',
+  },
+  'Part 7': {
+    badgeBg: 'bg-indigo-100',
+    badgeText: 'text-indigo-700',
+    edgeTint: 'border-indigo-400/25',
+    glowShadow: '0 8px 32px rgba(99,102,241,0.12)',
+    dotColor: 'bg-indigo-500',
   },
 };
 

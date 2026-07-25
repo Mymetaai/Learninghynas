@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, type FC } from 'react';
 import { useActiveImmersionStore } from '../state/activeImmersionStore';
 import type { ImmersionMode } from '../utils/geminiService';
-import { isGeminiAvailable } from '../utils/geminiService';
+import { isGeminiAvailable, saveUserGeminiApiKey } from '../utils/geminiService';
 import {
   Send,
   Languages,
@@ -17,6 +17,7 @@ import {
   MapPin,
   ChevronRight,
   AlertTriangle,
+  Key,
 } from 'lucide-react';
 
 /* ─── Mode Definitions ─────────────────────────────────────────────────────── */
@@ -101,6 +102,7 @@ const ActiveImmersionTab: FC = () => {
 
   const [inputText, setInputText] = useState('');
   const [customTopic, setCustomTopic] = useState('');
+  const [apiKeyInput, setApiKeyInput] = useState('');
   const [revealedTranslations, setRevealedTranslations] = useState<Set<string>>(new Set());
   const [showLearnedWordsModal, setShowLearnedWordsModal] = useState(false);
   const feedRef = useRef<HTMLDivElement>(null);
@@ -415,31 +417,44 @@ const ActiveImmersionTab: FC = () => {
         </span>
       </div>
 
-      {/* ── Visible Error Banner UI ────────────────────────────────────── */}
+      {/* ── Background Error Banner UI ────────────────────────────────────── */}
       {currentSession.error && (
-        <div className="m-4 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-800 flex items-center justify-between gap-3 shadow-md animate-fadeIn shrink-0">
-          <div className="flex items-center gap-2 text-xs">
+        <div className="m-4 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md animate-fadeIn shrink-0">
+          <div className="flex items-center gap-2 text-xs flex-1">
             <AlertTriangle className="h-4 w-4 text-rose-600 shrink-0" />
             <div>
               <strong className="font-bold">Gemini API Error:</strong>{' '}
               <span>
                 {typeof currentSession.error === 'string'
                   ? currentSession.error
-                  : currentSession.error.message || 'An error occurred during Gemini API call.'}
+                  : currentSession.error.message || 'Gemini API key is not configured.'}
               </span>
             </div>
           </div>
-          <button
-            type="button"
-            onClick={() => {
-              if (activeMode && selectedTopic) {
-                retryLastMessage(activeMode, selectedTopic, selectedAccent);
-              }
-            }}
-            className="px-3.5 py-1.5 rounded-lg bg-rose-600 text-white font-bold text-xs hover:bg-rose-700 transition-colors shadow cursor-pointer border-none shrink-0 flex items-center gap-1.5"
-          >
-            <RefreshCw className="h-3.5 w-3.5" /> Retry
-          </button>
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            <input
+              type="password"
+              placeholder="Paste AIzaSy... API key"
+              value={apiKeyInput}
+              onChange={(e) => setApiKeyInput(e.target.value)}
+              className="px-3 py-1.5 rounded-lg border border-rose-300 bg-white text-text-primary text-xs focus:outline-none focus:border-rose-500 w-full sm:w-48"
+            />
+            <button
+              type="button"
+              onClick={() => {
+                if (apiKeyInput.trim()) {
+                  saveUserGeminiApiKey(apiKeyInput.trim());
+                  setApiKeyInput('');
+                }
+                if (activeMode && selectedTopic) {
+                  retryLastMessage(activeMode, selectedTopic, selectedAccent);
+                }
+              }}
+              className="px-3.5 py-1.5 rounded-lg bg-rose-600 text-white font-bold text-xs hover:bg-rose-700 transition-colors shadow cursor-pointer border-none shrink-0 flex items-center gap-1.5 whitespace-nowrap"
+            >
+              <Key className="h-3.5 w-3.5" /> Save Key & Retry
+            </button>
+          </div>
         </div>
       )}
 

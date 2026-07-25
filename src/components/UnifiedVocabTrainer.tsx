@@ -201,11 +201,20 @@ const UnifiedVocabTrainer: FC = () => {
 
   // Color tokens per CEFR Level for border accents
   const LEVEL_ACCENTS: Record<VocabItem['level'], string> = {
+    'Pre-A1': 'bg-slate-500',
     A1: 'bg-emerald-500',
     A2: 'bg-sky-500',
     B1: 'bg-amber-500',
     B2: 'bg-orange-500',
     C1: 'bg-purple-500',
+    C2: 'bg-rose-500',
+    'Part 1': 'bg-emerald-500',
+    'Part 2': 'bg-sky-500',
+    'Part 3': 'bg-amber-500',
+    'Part 4': 'bg-orange-500',
+    'Part 5': 'bg-purple-500',
+    'Part 6': 'bg-rose-500',
+    'Part 7': 'bg-indigo-500',
   };
 
   return (

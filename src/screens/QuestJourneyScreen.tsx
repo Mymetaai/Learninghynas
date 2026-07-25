@@ -4,6 +4,7 @@ import { useMemo, type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BOOK_LEVELS, TOTAL_BOOK_LEVELS } from '../content';
 import { useProgressStore } from '../state/progressStore';
+import { useQuestStore } from '../state/questStore';
 import {
   BookOpen,
   Lock,
@@ -47,16 +48,21 @@ function getColor(lvl: number) {
 
 const QuestJourneyScreen: FC = () => {
   const navigate = useNavigate();
-  const completedIds = useProgressStore((s) => s.completedQuestIds);
-  const isUnlocked = useProgressStore((s) => s.isQuestUnlocked);
+  const completedIdsProgress = useProgressStore((s) => s.completedQuestIds);
+  const isUnlockedProgress = useProgressStore((s) => s.isQuestUnlocked);
+  
+  const questStoreCompletedIds = useQuestStore((s) => s.completedLevelIds);
+  const questStoreIsUnlocked = useQuestStore((s) => s.isLevelUnlocked);
+  const getLevelStars = useQuestStore((s) => s.getLevelStars);
 
   const levels = useMemo(() => {
     return BOOK_LEVELS.map((quest, idx) => {
-      const completed = completedIds.includes(quest.id);
-      const unlocked = isUnlocked(quest.id);
-      return { quest, idx, completed, unlocked };
+      const completed = completedIdsProgress.includes(quest.id) || questStoreCompletedIds.includes(quest.id);
+      const unlocked = isUnlockedProgress(quest.id) || questStoreIsUnlocked(quest.id);
+      const stars = getLevelStars(quest.id);
+      return { quest, idx, completed, unlocked, stars };
     });
-  }, [completedIds, isUnlocked]);
+  }, [completedIdsProgress, isUnlockedProgress, questStoreCompletedIds, questStoreIsUnlocked, getLevelStars]);
 
   const completedCount = levels.filter((l) => l.completed).length;
   const nextLevel = levels.find((l) => l.unlocked && !l.completed);
@@ -121,7 +127,7 @@ const QuestJourneyScreen: FC = () => {
       {/* Level grid */}
       <div className="mx-auto max-w-4xl px-4 py-6">
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {levels.map(({ quest, idx, completed, unlocked }) => (
+          {levels.map(({ quest, idx, completed, unlocked, stars }) => (
             <LevelCard
               key={quest.id}
               questId={quest.id}
@@ -134,6 +140,7 @@ const QuestJourneyScreen: FC = () => {
               coins={quest.rewards.coins}
               completed={completed}
               unlocked={unlocked}
+              stars={stars}
               color={getColor(idx + 1)}
               onPlay={handlePlay}
             />
@@ -157,6 +164,7 @@ interface LevelCardProps {
   coins: number;
   completed: boolean;
   unlocked: boolean;
+  stars?: number;
   color: string;
   onPlay: (id: string) => void;
 }

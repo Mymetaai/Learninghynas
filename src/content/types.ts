@@ -71,7 +71,7 @@ export interface VocabWord {
 
 export interface VocabItem {
   id: string;                    // stable slug, e.g. "a1-042"
-  level: 'A1' | 'A2' | 'B1' | 'B2' | 'C1';
+  level: Level;
   category: string;               // e.g. "Saludos", "Subjuntivo"
   es: string;                     // Spanish term or phrase
   en: string;                     // English translation

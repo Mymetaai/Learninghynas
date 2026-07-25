@@ -4,6 +4,7 @@
 // localStorage. NOTE: XP/coins/streak live in a separate store (Step 10).
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { ALL_WORLDS } from '../content/worlds';
 
 interface ProgressState {
   /** Quest ids the player has completed (set, but stored as array). */
@@ -29,7 +30,7 @@ interface ProgressState {
 
 export const useProgressStore = create<ProgressState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       completedQuestIds: [],
       defeatedGuardianWorldIds: [],
       defeatedSentinelIds: [],
@@ -52,14 +53,35 @@ export const useProgressStore = create<ProgressState>()(
           return { defeatedSentinelIds: [...state.defeatedSentinelIds, sentinelId] };
         }),
 
-      isQuestUnlocked: (_questId) => {
-        // Dev bypass: always unlocked
-        return true;
+      isQuestUnlocked: (questId) => {
+        const state = get();
+        for (const world of ALL_WORLDS) {
+          const idx = world.quests.findIndex((q) => q.id === questId);
+          if (idx !== -1) {
+            if (!state.isWorldUnlocked(world.id)) return false;
+            if (idx === 0) return true;
+            const prevQuest = world.quests[idx - 1];
+            return state.completedQuestIds.includes(prevQuest.id);
+          }
+        }
+        return false;
       },
 
-      isWorldUnlocked: (_worldId) => {
-        // Dev bypass: always unlocked
-        return true;
+      isWorldUnlocked: (worldId) => {
+        const state = get();
+        const world = ALL_WORLDS.find((w) => w.id === worldId);
+        if (!world) return false;
+        if (world.unlockRequirement === 'first' || world.id === 'world-pre-a1') return true;
+
+        if (state.defeatedGuardianWorldIds.includes(world.unlockRequirement)) {
+          return true;
+        }
+        const prereqWorld = ALL_WORLDS.find((w) => w.id === world.unlockRequirement);
+        if (prereqWorld && prereqWorld.quests.length > 0) {
+          const allDone = prereqWorld.quests.every((q) => state.completedQuestIds.includes(q.id));
+          if (allDone) return true;
+        }
+        return false;
       },
 
       reset: () => set({ completedQuestIds: [], defeatedGuardianWorldIds: [], defeatedSentinelIds: [] }),
