@@ -263,7 +263,7 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
           {shuffledTokens.map((token) => (
             <motion.div
               key={token.order}
-              layoutId={`token-${token.order}`}
+              layoutId={`token-${exercise.id}-${token.order}`}
               draggable={!isSubmitted}
               onDragStart={() => handleDragStart(token)}
               className={`px-4 py-2.5 rounded-xl border font-semibold text-sm cursor-grab transition-all hover:scale-105 ${
@@ -295,7 +295,7 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
           {placedTokens.map((token, index) => (
             <motion.div
               key={`${token.order}-${index}`}
-              layoutId={`token-${token.order}`}
+              layoutId={`token-${exercise.id}-${token.order}`}
               className={`px-4 py-2.5 rounded-xl border font-semibold text-sm ${
                 isSubmitted
                   ? token.order === exercise.tokens[index].order

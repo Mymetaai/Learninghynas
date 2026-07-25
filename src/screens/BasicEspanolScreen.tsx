@@ -1035,6 +1035,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                       if (!exercise) return null;
                       return (
                         <SentenceBuilderExercise
+                          key={exercise.id || activeSection}
                           exercise={exercise}
                           showHints={true}
                           onCompleted={(correct) => {
