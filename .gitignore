@@ -35,4 +35,5 @@ spanish_data/
 
 # Subagent scratch files
 .agents/
+!.agents/AGENTS.md
 

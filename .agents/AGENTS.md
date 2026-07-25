@@ -18,3 +18,13 @@
 
 ## Animations & Transitions
 - Use `framer-motion` for complex page transitions, micro-interactions (e.g., node pulses, character transitions), and dynamic UI elements, matching the guidelines in `.agents/skills/motion-framer/SKILL.md`.
+
+## Supabase & GitHub Synchronization Protocol
+- **Supabase Schema Migrations**: When database schema modifications are made (new columns, table constraints, RLS policies):
+  1. Apply DDL migrations using `supabase` MCP `apply_migration` or `execute_sql`.
+  2. Run `generate_typescript_types` via Supabase MCP tool.
+  3. Save generated types to `src/lib/database.types.ts` and ensure `supabaseClient.ts` uses `createClient<Database>`.
+  4. Run `npm run build` to verify end-to-end TypeScript compilation.
+- **GitHub Synchronization**:
+  - Always stage (`git add .`), commit with descriptive messages, and push (`git push origin main`) after completing backend and feature updates.
+
