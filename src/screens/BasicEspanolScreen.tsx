@@ -1,4 +1,4 @@
-import { useState, type FC } from 'react';
+import { useState, useMemo, useEffect, type FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   BookOpen,
@@ -186,6 +186,31 @@ const BasicEspanolScreen: FC = () => {
   // Interactive Quick Practice state per lesson
   const [userPracticeAnswers, setUserPracticeAnswers] = useState<Record<string, string>>({});
 
+  // Sentence Builder Carousel state
+  const [sentenceExerciseIndex, setSentenceExerciseIndex] = useState(0);
+
+  // Memoized & shuffled exercises for current lesson
+  const lessonSentenceExercises = useMemo(() => {
+    const filtered = SENTENCE_BUILDER_EXERCISES.filter((e) => e.lessonId === activeSection);
+    if (filtered.length === 0) {
+      // Fallback: generate 1 exercise on the fly
+      const fallback = generateLessonExercises(activeSection, getCEFRLevel(activeSection), 'Lesson', 1);
+      return fallback;
+    }
+    // Shuffle using Fisher-Yates
+    const shuffled = [...filtered];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }, [activeSection]);
+
+  // Reset carousel index when lesson changes
+  useEffect(() => {
+    setSentenceExerciseIndex(0);
+  }, [activeSection]);
+
   // Quiz states
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
@@ -367,53 +392,53 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
   const progressPercent = Math.round((completedInPart / Math.max(1, totalLessonsInPart)) * 100);
 
   // Lesson order array and map for next/prev navigation
-  const ALL_LESSON_IDS: ActiveSection[] = [
-    'lesson1', 'lesson2', 'lesson3', 'lesson4',
-    'lesson5', 'lesson6', 'lesson7', 'lesson8',
-    'lesson9', 'lesson10', 'lesson11', 'lesson12',
-    'lesson13', 'lesson14', 'lesson15', 'lesson16',
-    'lesson17', 'lesson18', 'lesson19', 'lesson20', 'lesson21',
-    'lesson22', 'lesson23', 'lesson24', 'lesson25', 'lesson26',
-    'lesson27', 'lesson28', 'lesson29', 'lesson30',
-    'lesson31', 'lesson32', 'lesson33', 'lesson34', 'lesson35', 'lesson36', 'lesson37'
+  // Section order array and map for seamless next/prev navigation (including exams)
+  const ALL_SECTIONS_ORDERED: ActiveSection[] = [
+    'overview',
+    'lesson1', 'lesson2', 'lesson3', 'lesson4', 'exam',
+    'lesson5', 'lesson6', 'lesson7', 'lesson8', 'exam2',
+    'lesson9', 'lesson10', 'lesson11', 'lesson12', 'exam3',
+    'lesson13', 'lesson14', 'lesson15', 'lesson16', 'exam4',
+    'lesson17', 'lesson18', 'lesson19', 'lesson20', 'lesson21', 'exam5',
+    'lesson22', 'lesson23', 'lesson24', 'lesson25', 'lesson26', 'exam6',
+    'lesson27', 'lesson28', 'lesson29', 'lesson30', 'exam7',
+    'lesson31', 'lesson32', 'lesson33', 'lesson34', 'lesson35', 'lesson36', 'lesson37', 'exam8'
   ];
 
-  const LESSON_PART_MAP: Record<string, CoursePart> = {
-    lesson1: 'part1', lesson2: 'part1', lesson3: 'part1', lesson4: 'part1',
-    lesson5: 'part2', lesson6: 'part2', lesson7: 'part2', lesson8: 'part2',
-    lesson9: 'part3', lesson10: 'part3', lesson11: 'part3', lesson12: 'part3',
-    lesson13: 'part4', lesson14: 'part4', lesson15: 'part4', lesson16: 'part4',
-    lesson17: 'part5', lesson18: 'part5', lesson19: 'part5', lesson20: 'part5', lesson21: 'part5',
-    lesson22: 'part6', lesson23: 'part6', lesson24: 'part6', lesson25: 'part6', lesson26: 'part6',
-    lesson27: 'part7', lesson28: 'part7', lesson29: 'part7', lesson30: 'part7',
-    lesson31: 'part8', lesson32: 'part8', lesson33: 'part8', lesson34: 'part8', lesson35: 'part8', lesson36: 'part8', lesson37: 'part8'
+  const SECTION_PART_MAP: Record<ActiveSection, CoursePart> = {
+    overview: 'part1',
+    lesson1: 'part1', lesson2: 'part1', lesson3: 'part1', lesson4: 'part1', exam: 'part1',
+    lesson5: 'part2', lesson6: 'part2', lesson7: 'part2', lesson8: 'part2', exam2: 'part2',
+    lesson9: 'part3', lesson10: 'part3', lesson11: 'part3', lesson12: 'part3', exam3: 'part3',
+    lesson13: 'part4', lesson14: 'part4', lesson15: 'part4', lesson16: 'part4', exam4: 'part4',
+    lesson17: 'part5', lesson18: 'part5', lesson19: 'part5', lesson20: 'part5', lesson21: 'part5', exam5: 'part5',
+    lesson22: 'part6', lesson23: 'part6', lesson24: 'part6', lesson25: 'part6', lesson26: 'part6', exam6: 'part6',
+    lesson27: 'part7', lesson28: 'part7', lesson29: 'part7', lesson30: 'part7', exam7: 'part7',
+    lesson31: 'part8', lesson32: 'part8', lesson33: 'part8', lesson34: 'part8', lesson35: 'part8', lesson36: 'part8', lesson37: 'part8', exam8: 'part8'
   };
 
   const handleNextLesson = () => {
-    const currentIndex = ALL_LESSON_IDS.indexOf(activeSection);
-    if (currentIndex >= 0 && currentIndex < ALL_LESSON_IDS.length - 1) {
-      const nextLesson = ALL_LESSON_IDS[currentIndex + 1];
-      const nextPart = LESSON_PART_MAP[nextLesson];
+    const currentIndex = ALL_SECTIONS_ORDERED.indexOf(activeSection);
+    if (currentIndex >= 0 && currentIndex < ALL_SECTIONS_ORDERED.length - 1) {
+      const nextSection = ALL_SECTIONS_ORDERED[currentIndex + 1];
+      const nextPart = SECTION_PART_MAP[nextSection];
       if (nextPart && nextPart !== coursePart) {
         setCoursePart(nextPart);
       }
-      setActiveSection(nextLesson);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (currentIndex === ALL_LESSON_IDS.length - 1) {
-      setActiveSection('exam8');
+      setActiveSection(nextSection);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const handlePrevLesson = () => {
-    const currentIndex = ALL_LESSON_IDS.indexOf(activeSection);
+    const currentIndex = ALL_SECTIONS_ORDERED.indexOf(activeSection);
     if (currentIndex > 0) {
-      const prevLesson = ALL_LESSON_IDS[currentIndex - 1];
-      const prevPart = LESSON_PART_MAP[prevLesson];
+      const prevSection = ALL_SECTIONS_ORDERED[currentIndex - 1];
+      const prevPart = SECTION_PART_MAP[prevSection];
       if (prevPart && prevPart !== coursePart) {
         setCoursePart(prevPart);
       }
-      setActiveSection(prevLesson);
+      setActiveSection(prevSection);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -1023,41 +1048,104 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                     </div>
                   )}
 
-                  {/* 6.5 INTERACTIVE SENTENCE BUILDER WORKSHOP */}
+                  {/* 6.5 INTERACTIVE SENTENCE BUILDER WORKSHOP (Carousel) */}
                   <div className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 sm:p-7 space-y-4">
-                    <div className="flex items-center gap-2 text-terracotta font-bold text-base font-display">
-                      <Layers className="h-5 w-5 text-terracotta" />
-                      <span>Sentence Builder Workshop</span>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-terracotta font-bold text-base font-display">
+                        <Layers className="h-5 w-5 text-terracotta" />
+                        <span>Sentence Builder Workshop</span>
+                      </div>
+                      {lessonSentenceExercises.length > 1 && (
+                        <span className="text-[10px] font-hud uppercase tracking-wider text-pencil font-bold bg-paper/10 px-2.5 py-1 rounded-full border border-pencil/15">
+                          Exercise {sentenceExerciseIndex + 1} of {lessonSentenceExercises.length}
+                        </span>
+                      )}
                     </div>
-                    {(() => {
-                      const exercise = SENTENCE_BUILDER_EXERCISES.find((e) => e.lessonId === activeSection) ||
-                        generateLessonExercises(activeSection, getCEFRLevel(activeSection), currentLessonData?.title || 'Lesson', 1)[0];
-                      if (!exercise) return null;
-                      return (
-                        <SentenceBuilderExercise
-                          key={exercise.id || activeSection}
-                          exercise={exercise}
-                          showHints={true}
-                          onCompleted={(correct) => {
-                            if (correct) {
-                              useStatsStore.getState().addRewards(15, 5);
-                            }
-                          }}
-                          onNext={() => handleNextLesson()}
+
+                    {/* Progress bar */}
+                    {lessonSentenceExercises.length > 1 && (
+                      <div className="w-full bg-paper/10 h-1.5 rounded-full overflow-hidden">
+                        <div
+                          className="bg-terracotta h-full transition-all duration-300 rounded-full"
+                          style={{ width: `${((sentenceExerciseIndex + 1) / lessonSentenceExercises.length) * 100}%` }}
                         />
-                      );
-                    })()}
+                      </div>
+                    )}
+
+                    {lessonSentenceExercises.length > 0 && (
+                      <SentenceBuilderExercise
+                        key={lessonSentenceExercises[sentenceExerciseIndex]?.id || `${activeSection}-${sentenceExerciseIndex}`}
+                        exercise={lessonSentenceExercises[sentenceExerciseIndex]}
+                        showHints={true}
+                        onCompleted={(correct) => {
+                          if (correct) {
+                            useStatsStore.getState().addRewards(15, 5);
+                          }
+                        }}
+                        onNext={() => {
+                          if (sentenceExerciseIndex < lessonSentenceExercises.length - 1) {
+                            setSentenceExerciseIndex((prev) => prev + 1);
+                          } else {
+                            handleNextLesson();
+                          }
+                        }}
+                        onPrevious={
+                          sentenceExerciseIndex > 0
+                            ? () => setSentenceExerciseIndex((prev) => prev - 1)
+                            : undefined
+                        }
+                      />
+                    )}
+
+                    {/* Carousel navigation */}
+                    {lessonSentenceExercises.length > 1 && (
+                      <div className="flex items-center justify-center gap-2 pt-2">
+                        <button
+                          onClick={() => setSentenceExerciseIndex((prev) => Math.max(0, prev - 1))}
+                          disabled={sentenceExerciseIndex === 0}
+                          className="px-3 py-1.5 rounded-xl text-[10px] font-bold border border-pencil/20 text-pencil hover:text-text-primary hover:bg-paper/10 cursor-pointer transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                        >
+                          ← Prev
+                        </button>
+                        <div className="flex gap-1">
+                          {lessonSentenceExercises.slice(
+                            Math.max(0, sentenceExerciseIndex - 3),
+                            Math.min(lessonSentenceExercises.length, sentenceExerciseIndex + 4)
+                          ).map((_, i) => {
+                            const actualIdx = Math.max(0, sentenceExerciseIndex - 3) + i;
+                            return (
+                              <button
+                                key={actualIdx}
+                                onClick={() => setSentenceExerciseIndex(actualIdx)}
+                                className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
+                                  actualIdx === sentenceExerciseIndex
+                                    ? 'bg-terracotta scale-125'
+                                    : 'bg-pencil/30 hover:bg-pencil/50'
+                                }`}
+                              />
+                            );
+                          })}
+                        </div>
+                        <button
+                          onClick={() => setSentenceExerciseIndex((prev) => Math.min(lessonSentenceExercises.length - 1, prev + 1))}
+                          disabled={sentenceExerciseIndex === lessonSentenceExercises.length - 1}
+                          className="px-3 py-1.5 rounded-xl text-[10px] font-bold border border-pencil/20 text-pencil hover:text-text-primary hover:bg-paper/10 cursor-pointer transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                        >
+                          Next →
+                        </button>
+                      </div>
+                    )}
                   </div>
 
                   {/* BOTTOM ACTION BAR */}
                   <div className="pt-6 border-t border-pencil/15 flex flex-col sm:flex-row justify-between items-center gap-4">
                     <div className="flex items-center gap-2">
-                      {ALL_LESSON_IDS.indexOf(activeSection) > 0 && (
+                      {ALL_SECTIONS_ORDERED.indexOf(activeSection) > 0 && (
                         <button
                           onClick={handlePrevLesson}
                           className="px-4 py-2.5 rounded-2xl text-xs font-bold border border-pencil/20 text-pencil hover:text-text-primary hover:bg-paper/10 cursor-pointer transition-all flex items-center gap-1"
                         >
-                          ← Previous Lesson
+                          ← Previous Section
                         </button>
                       )}
                     </div>
@@ -1074,7 +1162,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                         {completedLessons[activeSection] ? 'Lesson Completed ✓' : 'Mark Lesson Completed'}
                       </button>
 
-                      {ALL_LESSON_IDS.indexOf(activeSection) < ALL_LESSON_IDS.length - 1 && (
+                      {ALL_SECTIONS_ORDERED.indexOf(activeSection) < ALL_SECTIONS_ORDERED.length - 1 && (
                         <button
                           onClick={handleNextLesson}
                           className="px-6 py-3 rounded-2xl text-xs font-bold bg-marigold text-bg-base hover:bg-marigold/90 shadow-md cursor-pointer transition-all flex items-center gap-1 font-display"
@@ -1088,8 +1176,8 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                 </div>
               )}
 
-              {/* MASTER EXAMS (Part 1 - 7) */}
-              {(activeSection === 'exam' || activeSection === 'exam2' || activeSection === 'exam3' || activeSection === 'exam4' || activeSection === 'exam5' || activeSection === 'exam6' || activeSection === 'exam7') && (
+              {/* MASTER EXAMS (Parts 1 - 8) */}
+              {activeSection.startsWith('exam') && (
                 <div className="space-y-6">
                   <div className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 relative overflow-hidden">
                     <div className="flex justify-between items-start mb-4">

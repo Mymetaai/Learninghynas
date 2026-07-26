@@ -1,0 +1,951 @@
+{
+  "timestamp": "2026-07-26T08:32:18.461Z",
+  "totalTarget": 1480,
+  "lessons": {
+    "lesson1": {
+      "cefrLevel": "A1",
+      "target": 40,
+      "generated": 45,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 1,
+      "failedSamples": [
+        {
+          "sentence": "Ellos estudian la lección",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        }
+      ]
+    },
+    "lesson2": {
+      "cefrLevel": "A1",
+      "target": 40,
+      "generated": 45,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 2,
+      "failedSamples": [
+        {
+          "sentence": "Yo leo el libro",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        },
+        {
+          "sentence": "Ellos tienen los perros",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        }
+      ]
+    },
+    "lesson3": {
+      "cefrLevel": "A1",
+      "target": 40,
+      "generated": 51,
+      "validated": 40,
+      "retries": 2,
+      "failedCount": 7,
+      "failedSamples": [
+        {
+          "sentence": "Yo soy un estudiante",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        },
+        {
+          "sentence": "Él es de España",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        },
+        {
+          "sentence": "Yo soy de México",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        },
+        {
+          "sentence": "Tú eres mi amigo",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        },
+        {
+          "sentence": "Ella es mi hermana",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        }
+      ]
+    },
+    "lesson4": {
+      "cefrLevel": "A1",
+      "target": 40,
+      "generated": 51,
+      "validated": 40,
+      "retries": 2,
+      "failedCount": 6,
+      "failedSamples": [
+        {
+          "sentence": "Yo hablo español",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        },
+        {
+          "sentence": "Tú estudias matemáticas",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        },
+        {
+          "sentence": "Él busca el libro",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        },
+        {
+          "sentence": "Ellos escuchan la música",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        },
+        {
+          "sentence": "Yo cocino la cena",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        }
+      ]
+    },
+    "lesson5": {
+      "cefrLevel": "A2",
+      "target": 40,
+      "generated": 45,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 0,
+      "failedSamples": []
+    },
+    "lesson6": {
+      "cefrLevel": "A2",
+      "target": 40,
+      "generated": 45,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 0,
+      "failedSamples": []
+    },
+    "lesson7": {
+      "cefrLevel": "A2",
+      "target": 40,
+      "generated": 45,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 1,
+      "failedSamples": [
+        {
+          "sentence": "María aprende español en la escuela",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        }
+      ]
+    },
+    "lesson8": {
+      "cefrLevel": "A2",
+      "target": 40,
+      "generated": 45,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 1,
+      "failedSamples": [
+        {
+          "sentence": "¿Adónde vas tú esta tarde?",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        }
+      ]
+    },
+    "lesson9": {
+      "cefrLevel": "B1",
+      "target": 40,
+      "generated": 65,
+      "validated": 40,
+      "retries": 2,
+      "failedCount": 20,
+      "failedSamples": [
+        {
+          "sentence": "Yo celebro mi cumpleaños en casa el lunes.",
+          "errors": [
+            "Token concatenation mismatch: \"Yo celebro mi cumpleaños en casa el lunes\" vs \"Yo celebro mi cumpleaños en casa el lunes.\""
+          ]
+        },
+        {
+          "sentence": "Nosotros visitamos el museo en Madrid en verano.",
+          "errors": [
+            "Token concatenation mismatch: \"Nosotros visitamos el museo en Madrid en verano\" vs \"Nosotros visitamos el museo en Madrid en verano.\""
+          ]
+        },
+        {
+          "sentence": "Ella compra fruta fresca en el mercado los viernes.",
+          "errors": [
+            "Token concatenation mismatch: \"Ella compra fruta fresca en el mercado los viernes\" vs \"Ella compra fruta fresca en el mercado los viernes.\""
+          ]
+        },
+        {
+          "sentence": "Tú estudias español en la biblioteca el martes.",
+          "errors": [
+            "Token concatenation mismatch: \"Tú estudias español en la biblioteca el martes\" vs \"Tú estudias español en la biblioteca el martes.\""
+          ]
+        },
+        {
+          "sentence": "Él busca un coche en la tienda en enero.",
+          "errors": [
+            "Token concatenation mismatch: \"Él busca un coche en la tienda en enero\" vs \"Él busca un coche en la tienda en enero.\""
+          ]
+        }
+      ]
+    },
+    "lesson10": {
+      "cefrLevel": "B1",
+      "target": 40,
+      "generated": 45,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 0,
+      "failedSamples": []
+    },
+    "lesson11": {
+      "cefrLevel": "B1",
+      "target": 40,
+      "generated": 70,
+      "validated": 40,
+      "retries": 2,
+      "failedCount": 27,
+      "failedSamples": [
+        {
+          "sentence": "Yo tengo mucho calor en la playa hoy.",
+          "errors": [
+            "Token concatenation mismatch: \"Yo tengo mucho calor en la playa hoy\" vs \"Yo tengo mucho calor en la playa hoy.\""
+          ]
+        },
+        {
+          "sentence": "Tú tienes mucha hambre en el restaurante ahora.",
+          "errors": [
+            "Token concatenation mismatch: \"Tú tienes mucha hambre en el restaurante ahora\" vs \"Tú tienes mucha hambre en el restaurante ahora.\""
+          ]
+        },
+        {
+          "sentence": "Ella tiene frío en el parque esta tarde.",
+          "errors": [
+            "Token concatenation mismatch: \"Ella tiene frío en el parque esta tarde\" vs \"Ella tiene frío en el parque esta tarde.\""
+          ]
+        },
+        {
+          "sentence": "Nosotros tenemos mucho sueño en la clase hoy.",
+          "errors": [
+            "Token concatenation mismatch: \"Nosotros tenemos mucho sueño en la clase hoy\" vs \"Nosotros tenemos mucho sueño en la clase hoy.\""
+          ]
+        },
+        {
+          "sentence": "Ellos tienen prisa en la estación esta mañana.",
+          "errors": [
+            "Token concatenation mismatch: \"Ellos tienen prisa en la estación esta mañana\" vs \"Ellos tienen prisa en la estación esta mañana.\""
+          ]
+        }
+      ]
+    },
+    "lesson12": {
+      "cefrLevel": "B1",
+      "target": 40,
+      "generated": 45,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 0,
+      "failedSamples": []
+    },
+    "lesson13": {
+      "cefrLevel": "B2",
+      "target": 40,
+      "generated": 65,
+      "validated": 40,
+      "retries": 2,
+      "failedCount": 24,
+      "failedSamples": [
+        {
+          "sentence": "Yo quiero comprar un libro nuevo en la librería esta tarde.",
+          "errors": [
+            "Token concatenation mismatch: \"Yo quiero comprar un libro nuevo en la librería esta tarde\" vs \"Yo quiero comprar un libro nuevo en la librería esta tarde.\""
+          ]
+        },
+        {
+          "sentence": "Tú piensas resolver este problema difícil en tu oficina por la mañana.",
+          "errors": [
+            "Token concatenation mismatch: \"Tú piensas resolver este problema difícil en tu oficina por la mañana\" vs \"Tú piensas resolver este problema difícil en tu oficina por la mañana.\""
+          ]
+        },
+        {
+          "sentence": "Ella prefiere tomar un café caliente en la terraza cada día.",
+          "errors": [
+            "Token concatenation mismatch: \"Ella prefiere tomar un café caliente en la terraza cada día\" vs \"Ella prefiere tomar un café caliente en la terraza cada día.\""
+          ]
+        },
+        {
+          "sentence": "Nosotros podemos terminar el proyecto grande en la escuela ahora mismo.",
+          "errors": [
+            "Token concatenation mismatch: \"Nosotros podemos terminar el proyecto grande en la escuela ahora mismo\" vs \"Nosotros podemos terminar el proyecto grande en la escuela ahora mismo.\""
+          ]
+        },
+        {
+          "sentence": "Ustedes duermen ocho horas completas en su dormitorio durante la noche.",
+          "errors": [
+            "Token concatenation mismatch: \"Ustedes duermen ocho horas completas en su dormitorio durante la noche\" vs \"Ustedes duermen ocho horas completas en su dormitorio durante la noche.\""
+          ]
+        }
+      ]
+    },
+    "lesson14": {
+      "cefrLevel": "B2",
+      "target": 40,
+      "generated": 45,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 3,
+      "failedSamples": [
+        {
+          "sentence": "Yo tengo una reunión importante en la oficina a las diez",
+          "errors": [
+            "Token concatenation mismatch: \"Yo tengo una reunión importante en la oficina a las dios\" vs \"Yo tengo una reunión importante en la oficina a las diez\""
+          ]
+        },
+        {
+          "sentence": "Yo conozco un restaurante excelente en el centro histórico ahora",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        },
+        {
+          "sentence": "Usted sale de la gran ciudad hacia el campo mañana",
+          "errors": [
+            "Token concatenation mismatch: \"Usted sale de la gran ciudad hacia el campo маñana\" vs \"Usted sale de la gran ciudad hacia el campo mañana\""
+          ]
+        }
+      ]
+    },
+    "lesson15": {
+      "cefrLevel": "B2",
+      "target": 40,
+      "generated": 46,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 4,
+      "failedSamples": [
+        {
+          "sentence": "El profesor está explicando la lección difícil en la clase hoy",
+          "errors": [
+            "Token concatenation mismatch: \"El profesor está explicando la lección dificil en la clase hoy\" vs \"El profesor está explicando la lección difícil en la clase hoy\""
+          ]
+        },
+        {
+          "sentence": "Yo estoy leyendo un libro interesante en la biblioteca ahora",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        },
+        {
+          "sentence": "Yo estoy escuchando música clásica en mi estudio a las ocho",
+          "errors": [
+            "Token concatenation mismatch: \"Yo estoy escuchando música clásica en mi estudio a las ochos\" vs \"Yo estoy escuchando música clásica en mi estudio a las ocho\""
+          ]
+        },
+        {
+          "sentence": "Nosotros estamos construyendo una casa nueva en las afueras este año",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        }
+      ]
+    },
+    "lesson16": {
+      "cefrLevel": "B2",
+      "target": 40,
+      "generated": 45,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 0,
+      "failedSamples": []
+    },
+    "lesson17": {
+      "cefrLevel": "B2",
+      "target": 40,
+      "generated": 45,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 0,
+      "failedSamples": []
+    },
+    "lesson18": {
+      "cefrLevel": "B2",
+      "target": 40,
+      "generated": 51,
+      "validated": 40,
+      "retries": 2,
+      "failedCount": 6,
+      "failedSamples": [
+        {
+          "sentence": "Nosotros vimos a nadie sospechoso por la calle entonces",
+          "errors": [
+            "Token 7: missing text",
+            "Token 7: invalid role \"undefined\"",
+            "Token 7: order should be 8, got undefined",
+            "Token concatenation mismatch: \"Nosotros vimos a nadie sospechoso por la  entonces\" vs \"Nosotros vimos a nadie sospechoso por la calle entonces\""
+          ]
+        },
+        {
+          "sentence": "Ustedes siempre recuerdan un detalle importante en las reuniones siempre",
+          "errors": [
+            "Token concatenation mismatch: \"Ustedes siempre recuerdan un detalle importante en las reuniones\" vs \"Ustedes siempre recuerdan un detalle importante en las reuniones siempre\""
+          ]
+        },
+        {
+          "sentence": "Ellos nunca olvidan un compromiso laboral en la oficina jamás",
+          "errors": [
+            "Token concatenation mismatch: \"Ellos nunca olvidan un compromiso laboral en la oficina\" vs \"Ellos nunca olvidan un compromiso laboral en la oficina jamás\""
+          ]
+        },
+        {
+          "sentence": "Ella tampoco acepta un trato injusto en la empresa jamás",
+          "errors": [
+            "Token concatenation mismatch: \"Ella tampoco acepta un trato injusto en la empresa\" vs \"Ella tampoco acepta un trato injusto en la empresa jamás\""
+          ]
+        },
+        {
+          "sentence": "Carlos siempre escribe un artículo brillante para la revista semanalmente",
+          "errors": [
+            "Token concatenation mismatch: \"Carlos siempre escribe un artículo brillante para la revista\" vs \"Carlos siempre escribe un artículo brillante para la revista semanalmente\""
+          ]
+        }
+      ]
+    },
+    "lesson19": {
+      "cefrLevel": "B2",
+      "target": 40,
+      "generated": 46,
+      "validated": 40,
+      "retries": 2,
+      "failedCount": 1,
+      "failedSamples": [
+        {
+          "sentence": "A nosotros nos importa la opinión pública en el país hoy",
+          "errors": [
+            "Token concatenation mismatch: \"A nosotros nos importa la opinión pública en el pais hoy\" vs \"A nosotros nos importa la opinión pública en el país hoy\""
+          ]
+        }
+      ]
+    },
+    "lesson20": {
+      "cefrLevel": "B2",
+      "target": 40,
+      "generated": 45,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 3,
+      "failedSamples": [
+        {
+          "sentence": "Yo se lo doy en la oficina por la tarde",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        },
+        {
+          "sentence": "Tú me lo compras en el mercado cada sábado",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        },
+        {
+          "sentence": "Ella te la vende en la tienda hoy",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        }
+      ]
+    },
+    "lesson21": {
+      "cefrLevel": "B2",
+      "target": 40,
+      "generated": 45,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 0,
+      "failedSamples": []
+    },
+    "lesson22": {
+      "cefrLevel": "B2",
+      "target": 40,
+      "generated": 45,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 1,
+      "failedSamples": [
+        {
+          "sentence": "Yo acabo de firmar el contrato importante en la oficina hoy",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        }
+      ]
+    },
+    "lesson23": {
+      "cefrLevel": "B2",
+      "target": 40,
+      "generated": 75,
+      "validated": 40,
+      "retries": 2,
+      "failedCount": 34,
+      "failedSamples": [
+        {
+          "sentence": "Yo estudio español en la biblioteca desde hace tres años.",
+          "errors": [
+            "Token concatenation mismatch: \"Yo estudio español en la biblioteca desde hace tres años\" vs \"Yo estudio español en la biblioteca desde hace tres años.\""
+          ]
+        },
+        {
+          "sentence": "¿Cuánto tiempo hace que trabajas en esta oficina moderna?",
+          "errors": [
+            "Token concatenation mismatch: \"¿Cuánto tiempo hace que trabajas en esta oficina moderna\" vs \"¿Cuánto tiempo hace que trabajas en esta oficina moderna?\""
+          ]
+        },
+        {
+          "sentence": "Ella lleva viviendo en Madrid desde el mes pasado.",
+          "errors": [
+            "Token concatenation mismatch: \"Ella lleva viviendo en Madrid desde el mes pasado\" vs \"Ella lleva viviendo en Madrid desde el mes pasado.\""
+          ]
+        },
+        {
+          "sentence": "¿Desde cuándo esperas el autobús en la parada principal?",
+          "errors": [
+            "Token concatenation mismatch: \"¿Desde cuándo esperas el autobús en la parada principal\" vs \"¿Desde cuándo esperas el autobús en la parada principal?\""
+          ]
+        },
+        {
+          "sentence": "Nosotros jugamos tenis en el club privado desde ayer.",
+          "errors": [
+            "Token concatenation mismatch: \"Nosotros jugamos tenis en el club privado desde ayer\" vs \"Nosotros jugamos tenis en el club privado desde ayer.\""
+          ]
+        }
+      ]
+    },
+    "lesson24": {
+      "cefrLevel": "B2",
+      "target": 40,
+      "generated": 47,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 1,
+      "failedSamples": [
+        {
+          "sentence": "Usted traduzca textos tan complejos en la clase ahora",
+          "errors": [
+            "Token concatenation mismatch: \"Usted traduzca textos tan complexos en la clase ahora\" vs \"Usted traduzca textos tan complejos en la clase ahora\""
+          ]
+        }
+      ]
+    },
+    "lesson25": {
+      "cefrLevel": "B2",
+      "target": 40,
+      "generated": 45,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 0,
+      "failedSamples": []
+    },
+    "lesson26": {
+      "cefrLevel": "B2",
+      "target": 40,
+      "generated": 45,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 0,
+      "failedSamples": []
+    },
+    "lesson27": {
+      "cefrLevel": "C1",
+      "target": 40,
+      "generated": 47,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 3,
+      "failedSamples": [
+        {
+          "sentence": "Aquella antigua casona poseía una arquitectura colonial que fascinaba a los historiadores.",
+          "errors": [
+            "Token concatenation mismatch: \"Aquella antiguas casona poseía una arquitectura colonial que fascinaba a los historiadores.\" vs \"Aquella antigua casona poseía una arquitectura colonial que fascinaba a los historiadores.\""
+          ]
+        },
+        {
+          "sentence": "Nosotros caminábamos por la playa cuando descubrimos una cueva secreta.",
+          "errors": [
+            "Token concatenation mismatch: \"Nosotros caminábamos por la playa cuando descubrimos una cuevas secreta.\" vs \"Nosotros caminábamos por la playa cuando descubrimos una cueva secreta.\""
+          ]
+        },
+        {
+          "sentence": "Ella siempre iba a la biblioteca antigua porque allí encontraba la paz que tanto ansiaba.",
+          "errors": [
+            "Token concatenation mismatch: \"Ella siempre iba a la biblioteca antigua porque allí encontraba la paz que tanto ansiada.\" vs \"Ella siempre iba a la biblioteca antigua porque allí encontraba la paz que tanto ansiaba.\""
+          ]
+        }
+      ]
+    },
+    "lesson28": {
+      "cefrLevel": "C1",
+      "target": 40,
+      "generated": 70,
+      "validated": 40,
+      "retries": 2,
+      "failedCount": 27,
+      "failedSamples": [
+        {
+          "sentence": "A pesar de que no tuve tiempo, hice todo lo posible para terminar el informe.",
+          "errors": [
+            "Token concatenation mismatch: \"A pesar de que no tuve tiempo , hice todo lo posible para terminar el informe .\" vs \"A pesar de que no tuve tiempo, hice todo lo posible para terminar el informe.\""
+          ]
+        },
+        {
+          "sentence": "Cuando estuve en Madrid, pude visitar el Museo del Prado antes de que cerrara.",
+          "errors": [
+            "Token concatenation mismatch: \"Cuando estuve en Madrid , pude visitar el Museo del Prado antes de que cerrara .\" vs \"Cuando estuve en Madrid, pude visitar el Museo del Prado antes de que cerrara.\""
+          ]
+        },
+        {
+          "sentence": "Ella puso los documentos sobre la mesa para que todos los revisaran.",
+          "errors": [
+            "Token concatenation mismatch: \"Ella puso los documentos sobre la mesa para que todos los revisaran .\" vs \"Ella puso los documentos sobre la mesa para que todos los revisaran.\""
+          ]
+        },
+        {
+          "sentence": "Nosotros supimos la verdad tan pronto como condujimos hasta la comisaría.",
+          "errors": [
+            "Token concatenation mismatch: \"Nosotros supimos la verdad tan pronto como condujimos hasta la comisaría .\" vs \"Nosotros supimos la verdad tan pronto como condujimos hasta la comisaría.\""
+          ]
+        },
+        {
+          "sentence": "Aquel día fui testigo de cómo ella trajo las pruebas que pediste.",
+          "errors": [
+            "Token concatenation mismatch: \"Aquel día fui testigo de cómocómo ella trajo las pruebas que pediste .\" vs \"Aquel día fui testigo de cómo ella trajo las pruebas que pediste.\""
+          ]
+        }
+      ]
+    },
+    "lesson29": {
+      "cefrLevel": "C1",
+      "target": 40,
+      "generated": 67,
+      "validated": 40,
+      "retries": 2,
+      "failedCount": 23,
+      "failedSamples": [
+        {
+          "sentence": "Ella tenía veinte años cuando publicó su primera novela galardonada.",
+          "errors": [
+            "Token concatenation mismatch: \"Ella tenía veinte años cuando publicó su first primera novela galardonada.\" vs \"Ella tenía veinte años cuando publicó su primera novela galardonada.\""
+          ]
+        },
+        {
+          "sentence": "Mientras el profesor explicaba la compleja teoría cuántica, sonó repentinamente la alarma de incendios.",
+          "errors": [
+            "Token concatenation mismatch: \"Mientras el profesor explicaba la compleja teoría cuántica sonó repentinamente la alarma de incendios\" vs \"Mientras el profesor explicaba la compleja teoría cuántica, sonó repentinamente la alarma de incendios.\""
+          ]
+        },
+        {
+          "sentence": "Cuando yo vivía en aquella hermosa ciudad costera, conocí al amor de mi vida.",
+          "errors": [
+            "Token concatenation mismatch: \"Cuando yo vivía en aquella hermosa ciudad costera conocí al amor de mi vida\" vs \"Cuando yo vivía en aquella hermosa ciudad costera, conocí al amor de mi vida.\""
+          ]
+        },
+        {
+          "sentence": "Ayer fuimos al museo, aunque nosotros siempre preferíamos pasear por el parque histórico.",
+          "errors": [
+            "Token concatenation mismatch: \"Ayer fuimos al museo aunque nosotros siempre preferíamos pasear por el parque histórico\" vs \"Ayer fuimos al museo, aunque nosotros siempre preferíamos pasear por el parque histórico.\""
+          ]
+        },
+        {
+          "sentence": "Mientras ella preparaba la cena anoche, alguien tocó la puerta insistentemente.",
+          "errors": [
+            "Token concatenation mismatch: \"Mientras ella preparaba la cena anoche alguien tocó la puerta insistentemente\" vs \"Mientras ella preparaba la cena anoche, alguien tocó la puerta insistentemente.\""
+          ]
+        }
+      ]
+    },
+    "lesson30": {
+      "cefrLevel": "C1",
+      "target": 40,
+      "generated": 77,
+      "validated": 0,
+      "retries": 2,
+      "failedCount": 77,
+      "failedSamples": [
+        {
+          "sentence": "Considero que esta novela histórica es la más cautivadora que he leído jamás.",
+          "errors": [
+            "Token concatenation mismatch: \"Considero que esta novela histórica es la más cautivadora que he leído jamás\" vs \"Considero que esta novela histórica es la más cautivadora que he leído jamás.\""
+          ]
+        },
+        {
+          "sentence": "Vosotros habéis demostrado ser los empleados menos conflictivos de toda la empresa.",
+          "errors": [
+            "Token concatenation mismatch: \"Vosotros habéis demostrado ser los empleados menos conflictivos de toda la empresa\" vs \"Vosotros habéis demostrado ser los empleados menos conflictivos de toda la empresa.\""
+          ]
+        },
+        {
+          "sentence": "Ella preparó un banquete riquísimo aunque nadie lo apreció debidamente.",
+          "errors": [
+            "Token concatenation mismatch: \"Ella preparó un banquete riquísimo aunque nadie lo apreció debidamente\" vs \"Ella preparó un banquete riquísimo aunque nadie lo apreció debidamente.\""
+          ]
+        },
+        {
+          "sentence": "Aquella cumbre montañosa resultó ser altísima para los alpinistas inexpertos.",
+          "errors": [
+            "Token concatenation mismatch: \"Aquella cumbre montañosa resultó ser altísima para los alpinistas inexpertos\" vs \"Aquella cumbre montañosa resultó ser altísima para los alpinistas inexpertos.\""
+          ]
+        },
+        {
+          "sentence": "Mi hermano menor obtuvo resultados peores que los tuyos este semestre.",
+          "errors": [
+            "Token concatenation mismatch: \"Mi hermano menor obtuvo resultados peores que los tuyos este semestre\" vs \"Mi hermano menor obtuvo resultados peores que los tuyos este semestre.\""
+          ]
+        }
+      ]
+    },
+    "lesson31": {
+      "cefrLevel": "C1",
+      "target": 40,
+      "generated": 45,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 1,
+      "failedSamples": [
+        {
+          "sentence": "Aunque la situación sea difícil, decidimos hacer borrón y cuenta nueva para avanzar.",
+          "errors": [
+            "Duplicate or too similar to existing"
+          ]
+        }
+      ]
+    },
+    "lesson32": {
+      "cefrLevel": "C1",
+      "target": 40,
+      "generated": 76,
+      "validated": 0,
+      "retries": 2,
+      "failedCount": 76,
+      "failedSamples": [
+        {
+          "sentence": "El comité decidió llevar a cabo la investigación.",
+          "errors": [
+            "Token concatenation mismatch: \"El comité decidió llevar a cabo la investigación\" vs \"El comité decidió llevar a cabo la investigación.\""
+          ]
+        },
+        {
+          "sentence": "Es preciso poner de manifiesto las contradicciones.",
+          "errors": [
+            "Token concatenation mismatch: \"Es preciso poner de manifiesto las contradicciones\" vs \"Es preciso poner de manifiesto las contradicciones.\""
+          ]
+        },
+        {
+          "sentence": "Debemos hacer hincapié en la sostenibilidad económica.",
+          "errors": [
+            "Token concatenation mismatch: \"Debemos hacer hincapié en la sostenibilidad económica\" vs \"Debemos hacer hincapié en la sostenibilidad económica.\""
+          ]
+        },
+        {
+          "sentence": "A tenor de lo dispuesto, anularemos el contrato.",
+          "errors": [
+            "Token concatenation mismatch: \"A tenor de lo dispuesto anularemos el contrato\" vs \"A tenor de lo dispuesto, anularemos el contrato.\""
+          ]
+        },
+        {
+          "sentence": "El ministro firmó el decreto en virtud de sus facultades.",
+          "errors": [
+            "Token concatenation mismatch: \"El ministro firmó el decreto en virtud de sus facultades\" vs \"El ministro firmó el decreto en virtud de sus facultades.\""
+          ]
+        }
+      ]
+    },
+    "lesson33": {
+      "cefrLevel": "C1",
+      "target": 40,
+      "generated": 45,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 0,
+      "failedSamples": []
+    },
+    "lesson34": {
+      "cefrLevel": "C1",
+      "target": 40,
+      "generated": 77,
+      "validated": 18,
+      "retries": 2,
+      "failedCount": 59,
+      "failedSamples": [
+        {
+          "sentence": "El investigador logró corroborar la hipótesis según los datos recientes.",
+          "errors": [
+            "Token concatenation mismatch: \"El investigador logró corroborar la hipótesis según los datos recientes\" vs \"El investigador logró corroborar la hipótesis según los datos recientes.\""
+          ]
+        },
+        {
+          "sentence": "Se podría argumentar que el estudio carece de rigor metodológico.",
+          "errors": [
+            "Token concatenation mismatch: \"Se podría argumentar que el estudio carece de rigor metodológico\" vs \"Se podría argumentar que el estudio carece de rigor metodológico.\""
+          ]
+        },
+        {
+          "sentence": "Los críticos intentaron refutar la teoría antes de que fuera publicada.",
+          "errors": [
+            "Token concatenation mismatch: \"Los críticos intentaron refutar la teoría antes de que fuera publicada\" vs \"Los críticos intentaron refutar la teoría antes de que fuera publicada.\""
+          ]
+        },
+        {
+          "sentence": "Cabe destacar que estos resultados suscitaron un intenso debate académico.",
+          "errors": [
+            "Token concatenation mismatch: \"Cabe destacar que estos resultados suscitaron un intenso debate académico\" vs \"Cabe destacar que estos resultados suscitaron un intenso debate académico.\""
+          ]
+        },
+        {
+          "sentence": "Ella fundamentó su postura analizando las tendencias sociológicas actuales.",
+          "errors": [
+            "Token concatenation mismatch: \"Ella fundamentó su postura analizando las tendencias sociológicas actuales\" vs \"Ella fundamentó su postura analizando las tendencias sociológicas actuales.\""
+          ]
+        }
+      ]
+    },
+    "lesson35": {
+      "cefrLevel": "C1",
+      "target": 40,
+      "generated": 45,
+      "validated": 40,
+      "retries": 1,
+      "failedCount": 0,
+      "failedSamples": []
+    },
+    "lesson36": {
+      "cefrLevel": "C1",
+      "target": 40,
+      "generated": 76,
+      "validated": 21,
+      "retries": 2,
+      "failedCount": 55,
+      "failedSamples": [
+        {
+          "sentence": "Ojalá que ella pueda resolver este dilema ético antes de que termine el plazo.",
+          "errors": [
+            "Token concatenation mismatch: \"Ojalá que ella pueda resolver este dilema ético antes de que termine el plazo\" vs \"Ojalá que ella pueda resolver este dilema ético antes de que termine el plazo.\""
+          ]
+        },
+        {
+          "sentence": "Es posible que los investigadores descubran una cura definitiva aunque el camino sea arduo.",
+          "errors": [
+            "Token concatenation mismatch: \"Es posible que los investigadores descubran una cura definitiva aunque el camino sea arduo\" vs \"Es posible que los investigadores descubran una cura definitiva aunque el camino sea arduo.\""
+          ]
+        },
+        {
+          "sentence": "Actuaba como si no conociera la gravedad de las consecuencias legales.",
+          "errors": [
+            "Token concatenation mismatch: \"Actuaba como si no conociera la gravedad de las consecuencias legales\" vs \"Actuaba como si no conociera la gravedad de las consecuencias legales.\""
+          ]
+        },
+        {
+          "sentence": "Dudo mucho que el gobierno apruebe la nueva reforma fiscal sin un consenso amplio.",
+          "errors": [
+            "Token concatenation mismatch: \"Dudo mucho que el gobierno apruebe la nueva reforma fiscal sin un consenso amplio\" vs \"Dudo mucho que el gobierno apruebe la nueva reforma fiscal sin un consenso amplio.\""
+          ]
+        },
+        {
+          "sentence": "Aunque llueva a cántaros esta tarde, saldremos a recorrer el centro histórico.",
+          "errors": [
+            "Token concatenation mismatch: \"Aunque llueva a cántaros esta tarde saldremos a recorrer el centro histórico\" vs \"Aunque llueva a cántaros esta tarde, saldremos a recorrer el centro histórico.\""
+          ]
+        }
+      ]
+    },
+    "lesson37": {
+      "cefrLevel": "C1",
+      "target": 40,
+      "generated": 76,
+      "validated": 0,
+      "retries": 2,
+      "failedCount": 76,
+      "failedSamples": [
+        {
+          "sentence": "Ella decidió realizar su sueño antes de que terminara el año académico.",
+          "errors": [
+            "Token concatenation mismatch: \"Ella decidió realizar su sueño antes de que terminara el año académico\" vs \"Ella decidió realizar su sueño antes de que terminara el año académico.\""
+          ]
+        },
+        {
+          "sentence": "Mis padres pretenden comprar una casa amplia aunque los precios sigan subiendo.",
+          "errors": [
+            "Token concatenation mismatch: \"Mis padres pretenden comprar una casa amplia aunque los precios sigan subiendo\" vs \"Mis padres pretenden comprar una casa amplia aunque los precios sigan subiendo.\""
+          ]
+        },
+        {
+          "sentence": "La mujer embarazada asistió a la conferencia internacional sobre la salud pública.",
+          "errors": [
+            "Token concatenation mismatch: \"La mujer embarazada asistió a la conferencia internacional sobre la salud pública\" vs \"La mujer embarazada asistió a la conferencia internacional sobre la salud pública.\""
+          ]
+        },
+        {
+          "sentence": "El conferenciante estaba muy constipado durante su intervención magistral en el paraninfo.",
+          "errors": [
+            "Token concatenation mismatch: \"El conferenciante estaba muy constipado durante su intervención magistral en el paraninfo\" vs \"El conferenciante estaba muy constipado durante su intervención magistral en el paraninfo.\""
+          ]
+        },
+        {
+          "sentence": "El rotundo éxito de la obra teatral sorprendió a los críticos literarios más exigentes.",
+          "errors": [
+            "Token concatenation mismatch: \"El rotundo éxito de la obra teatral sorprendió a los críticos literarios más exigentes\" vs \"El rotundo éxito de la obra teatral sorprendió a los críticos literarios más exigentes.\""
+          ]
+        }
+      ]
+    }
+  },
+  "summary": {
+    "total": 1319,
+    "passed": 1319,
+    "shortLessons": [
+      {
+        "lessonId": "lesson30",
+        "got": 0,
+        "target": 40
+      },
+      {
+        "lessonId": "lesson32",
+        "got": 0,
+        "target": 40
+      },
+      {
+        "lessonId": "lesson34",
+        "got": 18,
+        "target": 40
+      },
+      {
+        "lessonId": "lesson36",
+        "got": 21,
+        "target": 40
+      },
+      {
+        "lessonId": "lesson37",
+        "got": 0,
+        "target": 40
+      }
+    ]
+  }
+}

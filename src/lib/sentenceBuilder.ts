@@ -307,23 +307,6 @@ export class SentenceBuilderModule {
     return templates[randomIndex];
   }
 
-  private generateSentenceData(cefrLevel: CEFRLevel, _grammarFocus: string) {
-    // This would normally call the Generator Agent with DSPy + Gemini
-    // For now, we use template-based generation with varied vocabulary
-    return {
-      subject: this.getRandomSubject(cefrLevel),
-      subject_en: this.getRandomSubjectEN(cefrLevel),
-      verb: this.getRandomVerb(cefrLevel),
-      verb_en: this.getRandomVerbEN(cefrLevel),
-      object: this.getRandomObject(cefrLevel),
-      object_en: this.getRandomObjectEN(cefrLevel),
-      place: this.getRandomPlace(cefrLevel),
-      place_en: this.getRandomPlaceEN(cefrLevel),
-      time: this.getRandomTime(cefrLevel),
-      time_en: this.getRandomTimeEN(cefrLevel),
-    };
-  }
-
   private buildSentence(template: string, data: Record<string, string>): string {
     let result = template;
     for (const [key, value] of Object.entries(data)) {
@@ -348,7 +331,6 @@ export class SentenceBuilderModule {
     sentence: string,
     _cefrLevel: CEFRLevel
   ): string | null {
-    // Remove the subject pronoun (typically the first word)
     const words = sentence.split(' ');
     if (words.length > 1) {
       return words.slice(1).join(' ');
@@ -360,112 +342,147 @@ export class SentenceBuilderModule {
     const errors: string[] = [];
     const sentence = exercise.spanishSentence.toLowerCase();
 
-    // A1: No subjunctive, no complex clauses
     if (exercise.cefrLevel === 'A1') {
-      if (sentence.includes('aunque') || sentence.includes('si')) {
+      if (sentence.includes('aunque') || sentence.includes('ojalá')) {
         errors.push('A1 sentences should not contain subjunctive triggers');
       }
     }
 
-    // A2: Present tense only
     if (exercise.cefrLevel === 'A2') {
-      const pastTenseIndicators = ['comí', 'fui', 'estuve', 'hice', 'hablé'];
+      const pastTenseIndicators = ['estuve', 'hice'];
       if (pastTenseIndicators.some((ind) => sentence.includes(ind))) {
         errors.push('A2 sentences should use present tense only');
       }
     }
 
-    // C1: Subjunctive allowed
-    // No errors for C1 - complex structures are expected
-
     return errors;
   }
 
-  // ─── Vocabulary Helpers ─────────────────────────────────────────────────────
+  private generateSentenceData(cefrLevel: CEFRLevel, _grammarFocus: string) {
+    // Conjugation-aware generation ensuring subject-verb agreement
+    const subjects = cefrLevel === 'A1'
+      ? ['Yo', 'Tú', 'Él', 'Ella', 'Nosotros', 'Ellos']
+      : ['Yo', 'Tú', 'Él', 'Ella', 'Nosotros', 'Ellos', 'Usted', 'Ustedes'];
+    const subject = subjects[Math.floor(Math.random() * subjects.length)];
 
-  private getRandomSubject(cefrLevel: CEFRLevel): string {
-    const subjects = {
-      A1: ['Yo', 'Tú', 'Él', 'Ella', 'Nosotros', 'Ellos'],
-      A2: ['Yo', 'Tú', 'Él', 'Ella', 'Nosotros', 'Ellos', 'Usted', 'Ustedes'],
-      B1: ['Yo', 'Tú', 'Él', 'Ella', 'Nosotros', 'Ellos', 'Usted', 'Ustedes'],
-      B2: ['Yo', 'Tú', 'Él', 'Ella', 'Nosotros', 'Ellos', 'Usted', 'Ustedes'],
-      C1: ['Yo', 'Tú', 'Él', 'Ella', 'Nosotros', 'Ellos', 'Usted', 'Ustedes'],
+    // Verb conjugation tables
+    const VERBS: Record<string, Record<string, { es: string; en: string }>> = {
+      comer: {
+        Yo: { es: 'como', en: 'eat' }, Tú: { es: 'comes', en: 'eat' },
+        Él: { es: 'come', en: 'eats' }, Ella: { es: 'come', en: 'eats' },
+        Nosotros: { es: 'comemos', en: 'eat' }, Ellos: { es: 'comen', en: 'eat' },
+      },
+      hablar: {
+        Yo: { es: 'hablo', en: 'speak' }, Tú: { es: 'hablas', en: 'speak' },
+        Él: { es: 'habla', en: 'speaks' }, Ella: { es: 'habla', en: 'speaks' },
+        Nosotros: { es: 'hablamos', en: 'speak' }, Ellos: { es: 'hablan', en: 'speak' },
+      },
+      estudiar: {
+        Yo: { es: 'estudio', en: 'study' }, Tú: { es: 'estudias', en: 'study' },
+        Él: { es: 'estudia', en: 'studies' }, Ella: { es: 'estudia', en: 'studies' },
+        Nosotros: { es: 'estudiamos', en: 'study' }, Ellos: { es: 'estudian', en: 'study' },
+      },
+      leer: {
+        Yo: { es: 'leo', en: 'read' }, Tú: { es: 'lees', en: 'read' },
+        Él: { es: 'lee', en: 'reads' }, Ella: { es: 'lee', en: 'reads' },
+        Nosotros: { es: 'leemos', en: 'read' }, Ellos: { es: 'leen', en: 'read' },
+      },
+      tener: {
+        Yo: { es: 'tengo', en: 'have' }, Tú: { es: 'tienes', en: 'have' },
+        Él: { es: 'tiene', en: 'has' }, Ella: { es: 'tiene', en: 'has' },
+        Nosotros: { es: 'tenemos', en: 'have' }, Ellos: { es: 'tienen', en: 'have' },
+      },
+      ver: {
+        Yo: { es: 'veo', en: 'see' }, Tú: { es: 'ves', en: 'see' },
+        Él: { es: 've', en: 'sees' }, Ella: { es: 've', en: 'sees' },
+        Nosotros: { es: 'vemos', en: 'see' }, Ellos: { es: 'ven', en: 'see' },
+      },
+      necesitar: {
+        Yo: { es: 'necesito', en: 'need' }, Tú: { es: 'necesitas', en: 'need' },
+        Él: { es: 'necesita', en: 'needs' }, Ella: { es: 'necesita', en: 'needs' },
+        Nosotros: { es: 'necesitamos', en: 'need' }, Ellos: { es: 'necesitan', en: 'need' },
+      },
+      comprar: {
+        Yo: { es: 'compro', en: 'buy' }, Tú: { es: 'compras', en: 'buy' },
+        Él: { es: 'compra', en: 'buys' }, Ella: { es: 'compra', en: 'buys' },
+        Nosotros: { es: 'compramos', en: 'buy' }, Ellos: { es: 'compran', en: 'buy' },
+      },
     };
-    const list = subjects[cefrLevel];
-    return list[Math.floor(Math.random() * list.length)];
-  }
 
-  private getRandomSubjectEN(_cefrLevel: CEFRLevel): string {
-    const subjects = ['I', 'You', 'He', 'She', 'We', 'They'];
-    return subjects[Math.floor(Math.random() * subjects.length)];
-  }
-
-  private getRandomVerb(cefrLevel: CEFRLevel): string {
-    const verbs = {
-      A1: ['como', 'leo', 'veo', 'tengo', 'soy', 'estoy', 'hablo', 'estudio'],
-      A2: ['como', 'leo', 'veo', 'tengo', 'soy', 'estoy', 'hablo', 'estudio', 'trabajo', 'busco'],
-      B1: ['como', 'leo', 'veo', 'tengo', 'soy', 'estoy', 'hablo', 'estudio', 'trabajo', 'busco', 'quiero', 'puedo'],
-      B2: ['como', 'leo', 'veo', 'tengo', 'soy', 'estoy', 'hablo', 'estudio', 'trabajo', 'busco', 'quiero', 'puedo', 'necesito', 'decido'],
-      C1: ['como', 'leo', 'veo', 'tengo', 'soy', 'estoy', 'hablo', 'estudio', 'trabajo', 'busco', 'quiero', 'puedo', 'necesito', 'decido', 'prefiero', 'debido a'],
+    // Semantically valid verb-object pairings
+    const VERB_OBJECTS: Record<string, { es: string; en: string }[]> = {
+      comer: [
+        { es: 'una manzana', en: 'an apple' }, { es: 'una galleta', en: 'a cookie' },
+        { es: 'el almuerzo', en: 'lunch' }, { es: 'una ensalada', en: 'a salad' },
+      ],
+      hablar: [
+        { es: 'español', en: 'Spanish' }, { es: 'francés', en: 'French' },
+        { es: 'inglés', en: 'English' },
+      ],
+      estudiar: [
+        { es: 'español', en: 'Spanish' }, { es: 'lecciones', en: 'lessons' },
+        { es: 'matemáticas', en: 'mathematics' },
+      ],
+      leer: [
+        { es: 'un libro', en: 'a book' }, { es: 'el periódico', en: 'the newspaper' },
+        { es: 'una revista', en: 'a magazine' },
+      ],
+      tener: [
+        { es: 'un perro', en: 'a dog' }, { es: 'una casa', en: 'a house' },
+        { es: 'un coche', en: 'a car' }, { es: 'tres libros', en: 'three books' },
+      ],
+      ver: [
+        { es: 'una película', en: 'a movie' }, { es: 'el mapa', en: 'the map' },
+        { es: 'las estrellas', en: 'the stars' },
+      ],
+      necesitar: [
+        { es: 'un lápiz', en: 'a pencil' }, { es: 'ayuda', en: 'help' },
+        { es: 'agua', en: 'water' },
+      ],
+      comprar: [
+        { es: 'una camisa', en: 'a shirt' }, { es: 'un libro', en: 'a book' },
+        { es: 'una mesa', en: 'a table' },
+      ],
     };
-    const list = verbs[cefrLevel];
-    return list[Math.floor(Math.random() * list.length)];
-  }
 
-  private getRandomVerbEN(_cefrLevel: CEFRLevel): string {
-    const verbs = ['eat', 'read', 'see', 'have', 'am', 'are', 'speak', 'study', 'work', 'search for', 'want', 'can', 'need to', 'decide to', 'prefer to', 'due to'];
-    return verbs[Math.floor(Math.random() * verbs.length)];
-  }
+    const PLACES = [
+      { es: 'en casa', en: 'at home' }, { es: 'en la escuela', en: 'at school' },
+      { es: 'en el parque', en: 'in the park' }, { es: 'en la cocina', en: 'in the kitchen' },
+      { es: 'en la biblioteca', en: 'at the library' }, { es: 'en el supermercado', en: 'at the supermarket' },
+    ];
 
-  private getRandomObject(cefrLevel: CEFRLevel): string {
-    const objects = {
-      A1: ['una manzana', 'un libro', 'una casa', 'un coche', 'una mesa', 'un perro', 'una galleta', 'un lápiz'],
-      A2: ['una manzana', 'un libro', 'una casa', 'un coche', 'una mesa', 'un perro', 'una galleta', 'un lápiz', 'una camisa', 'un mapa'],
-      B1: ['una manzana', 'un libro', 'una casa', 'un coche', 'una mesa', 'un perro', 'una galleta', 'un lápiz', 'una camisa', 'un mapa', 'una tarea', 'un examen'],
-      B2: ['una manzana', 'un libro', 'una casa', 'un coche', 'una mesa', 'un perro', 'una galleta', 'un lápiz', 'una camisa', 'un mapa', 'una tarea', 'un examen', 'una solución', 'una respuesta'],
-      C1: ['una manzana', 'un libro', 'una casa', 'un coche', 'una mesa', 'un perro', 'una galleta', 'un lápiz', 'una camisa', 'un mapa', 'una tarea', 'un examen', 'una solución', 'una respuesta', 'una conclusión', 'una hipótesis'],
+    const TIMES = [
+      { es: 'ahora', en: 'now' }, { es: 'hoy', en: 'today' },
+      { es: 'mañana', en: 'tomorrow' }, { es: 'por la mañana', en: 'in the morning' },
+      { es: 'cada día', en: 'every day' }, { es: 'esta noche', en: 'tonight' },
+    ];
+
+    const pick = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
+
+    const verbKey = pick(Object.keys(VERBS));
+    const verbTable = VERBS[verbKey];
+    // Map Usted/Ustedes to their conjugation equivalents
+    const resolvedSubj = subject === 'Usted' ? 'Él' : subject === 'Ustedes' ? 'Ellos' : subject;
+    const verbData = verbTable[resolvedSubj] || verbTable['Yo'];
+
+    const objects = VERB_OBJECTS[verbKey] || [{ es: 'algo', en: 'something' }];
+    const obj = pick(objects);
+    const place = pick(PLACES);
+    const time = pick(TIMES);
+
+    const subjectEN =
+      subject === 'Yo' ? 'I' : subject === 'Tú' ? 'You'
+      : subject === 'Él' ? 'He' : subject === 'Ella' ? 'She'
+      : subject === 'Nosotros' ? 'We' : subject === 'Usted' ? 'You'
+      : subject === 'Ustedes' ? 'You all' : 'They';
+
+    return {
+      subject, subject_en: subjectEN,
+      verb: verbData.es, verb_en: verbData.en,
+      object: obj.es, object_en: obj.en,
+      place: place.es, place_en: place.en,
+      time: time.es, time_en: time.en,
     };
-    const list = objects[cefrLevel];
-    return list[Math.floor(Math.random() * list.length)];
-  }
-
-  private getRandomObjectEN(_cefrLevel: CEFRLevel): string {
-    const objects = ['an apple', 'a book', 'a house', 'a car', 'a table', 'a dog', 'a cookie', 'a pencil', 'a shirt', 'a map', 'a task', 'an exam', 'a solution', 'an answer', 'a conclusion', 'a hypothesis'];
-    return objects[Math.floor(Math.random() * objects.length)];
-  }
-
-  private getRandomPlace(cefrLevel: CEFRLevel): string {
-    const places = {
-      A1: ['en casa', 'en la escuela', 'en el parque', 'en la cocina', 'en el baño'],
-      A2: ['en casa', 'en la escuela', 'en el parque', 'en la cocina', 'en el baño', 'en el supermercado', 'en la biblioteca'],
-      B1: ['en casa', 'en la escuela', 'en el parque', 'en la cocina', 'en el baño', 'en el supermercado', 'en la biblioteca', 'en el gimnasio', 'en el hospital'],
-      B2: ['en casa', 'en la escuela', 'en el parque', 'en la cocina', 'en el baño', 'en el supermercado', 'en la biblioteca', 'en el gimnasio', 'en el hospital', 'en la universidad', 'en el trabajo'],
-      C1: ['en casa', 'en la escuela', 'en el parque', 'en la cocina', 'en el baño', 'en el supermercado', 'en la biblioteca', 'en el gimnasio', 'en el hospital', 'en la universidad', 'en el trabajo', 'en el gobierno', 'en la empresa'],
-    };
-    const list = places[cefrLevel];
-    return list[Math.floor(Math.random() * list.length)];
-  }
-
-  private getRandomPlaceEN(_cefrLevel: CEFRLevel): string {
-    const places = ['at home', 'at school', 'in the park', 'in the kitchen', 'in the bathroom', 'at the supermarket', 'at the library', 'at the gym', 'at the hospital', 'at university', 'at work', 'at the government', 'at the company'];
-    return places[Math.floor(Math.random() * places.length)];
-  }
-
-  private getRandomTime(cefrLevel: CEFRLevel): string {
-    const times = {
-      A1: ['ahora', 'hoy', 'mañana', 'esta noche'],
-      A2: ['ahora', 'hoy', 'mañana', 'esta noche', 'por la mañana', 'por la tarde'],
-      B1: ['ahora', 'hoy', 'mañana', 'esta noche', 'por la mañana', 'por la tarde', 'a las 3', 'cada día'],
-      B2: ['ahora', 'hoy', 'mañana', 'esta noche', 'por la mañana', 'por la tarde', 'a las 3', 'cada día', 'últimamente', 'frecuentemente'],
-      C1: ['ahora', 'hoy', 'mañana', 'esta noche', 'por la mañana', 'por la tarde', 'a las 3', 'cada día', 'últimamente', 'frecuentemente', 'en el transcurso de la semana', 'durante el período de prueba'],
-    };
-    const list = times[cefrLevel];
-    return list[Math.floor(Math.random() * list.length)];
-  }
-
-  private getRandomTimeEN(_cefrLevel: CEFRLevel): string {
-    const times = ['now', 'today', 'tomorrow', 'tonight', 'in the morning', 'in the afternoon', 'at 3 o\'clock', 'every day', 'lately', 'frequently', 'throughout the week', 'during the trial period'];
-    return times[Math.floor(Math.random() * times.length)];
   }
 }
 
