@@ -56,32 +56,31 @@ export const GachaCard: FC<GachaCardProps> = ({ card, onClick, isUnlocked = true
       }`}
     >
       {/* ── THE ART LAYER ────────────────────────────────────────────────── */}
-      <div className={`absolute inset-0 rounded-xl overflow-hidden border-[3px] ${borderColor} bg-[#111111]`}>
-        {card.imageUrl && !imgError ? (
+      <div className={`absolute inset-0 rounded-xl overflow-hidden border-[3px] ${borderColor} bg-[#111111] z-0`}>
+        {/* Fallback Gradient Background (Behind Image) */}
+        <div className={`w-full h-full bg-gradient-to-br ${card.themeColor || 'from-slate-800 to-slate-900'} absolute inset-0 z-0 flex flex-col items-center justify-center p-4`}>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-black/60 pointer-events-none" />
+          <div className="relative z-10 text-center space-y-2 my-auto">
+            <span className="font-serif text-2xl font-black text-white/30 tracking-widest uppercase block">
+              {card.anime === 'Demon Slayer' ? 'KIMETSU' : 'ONE PIECE'}
+            </span>
+            <div className="w-16 h-0.5 bg-white/30 mx-auto" />
+          </div>
+        </div>
+
+        {/* Character Image (Layered on top of gradient) */}
+        {card.imageUrl && !imgError && (
           <img
             src={card.imageUrl}
             alt={card.name}
-            className="w-full h-full object-cover object-top"
+            className="w-full h-full object-cover object-top rounded-xl absolute inset-0 z-10"
             loading="lazy"
             onError={() => setImgError(true)}
           />
-        ) : (
-          <div className={`w-full h-full bg-gradient-to-br ${card.themeColor || 'from-slate-800 to-slate-900'} relative overflow-hidden flex flex-col items-center justify-center p-4`}>
-            {/* Radial Light Overlay */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-black/60 pointer-events-none" />
-            
-            {/* Clean Character Watermark (NO EMOJIS) */}
-            <div className="relative z-10 text-center space-y-2 my-auto">
-              <span className="font-serif text-2xl font-black text-white/30 tracking-widest uppercase block">
-                {card.anime === 'Demon Slayer' ? 'KIMETSU' : 'ONE PIECE'}
-              </span>
-              <div className="w-16 h-0.5 bg-white/30 mx-auto" />
-            </div>
-          </div>
         )}
 
         {/* Subtle Vignette Overlay for Depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none z-10" />
       </div>
 
       {/* ── TOP-RIGHT RARITY SEAL ────────────────────────────────────────── */}
