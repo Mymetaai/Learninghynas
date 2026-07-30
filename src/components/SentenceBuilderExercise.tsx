@@ -300,7 +300,7 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
                 isSubmitted
                   ? token.order === exercise.tokens[index].order
                     ? 'bg-teal-500/20 border-teal-500/50 text-teal-800'
-                    : 'bg-red-500/20 border-red-500/50 text-red-800'
+                    : 'bg-[#F5A991]/20 border-[#F5A991]/50 text-[#2C1E11]'
                   : `${ROLE_COLORS[token.role]} cursor-pointer`
               }`}
               onClick={() => handleRemoveToken(token)}
@@ -341,7 +341,7 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
               disabled={!allPlaced}
               className={`px-6 py-2.5 rounded-xl font-bold text-sm transition-all shadow-md flex items-center gap-2 ${
                 allPlaced
-                  ? 'bg-accent-action text-bg-base hover:bg-accent-action-hover cursor-pointer'
+                  ? 'bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border-2 border-[#2C1E11] shadow-[0_3px_0_#5C524E] cursor-pointer'
                   : 'bg-bg-elevated border border-structural text-text-tertiary cursor-not-allowed'
               }`}
             >
@@ -351,7 +351,7 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
           {isSubmitted && onNext && (
             <button
               onClick={onNext}
-              className="px-6 py-2.5 rounded-xl font-bold text-sm bg-accent-action text-bg-base hover:bg-accent-action-hover transition-colors shadow-md cursor-pointer"
+              className="px-6 py-2.5 rounded-xl font-bold text-sm bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border-2 border-[#2C1E11] shadow-[0_3px_0_#5C524E] transition-all cursor-pointer"
             >
               Next Exercise
             </button>
@@ -369,14 +369,14 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
             className={`rounded-2xl p-5 border ${
               isCorrect
                 ? 'bg-teal-500/10 border-teal-500/30'
-                : 'bg-red-500/10 border-red-500/30'
+                : 'bg-[#F5A991]/10 border-[#F5A991]/30'
             }`}
           >
             <div className="flex items-start gap-3">
               {isCorrect ? (
                 <CheckCircle2 className="h-5 w-5 text-teal-600 shrink-0 mt-0.5" />
               ) : (
-                <XCircle className="h-5 w-5 text-red-600 shrink-0 mt-0.5" />
+                <XCircle className="h-5 w-5 text-[#F5A991] shrink-0 mt-0.5" />
               )}
               <div className="flex-1">
                 <p className="font-bold text-sm mb-2">

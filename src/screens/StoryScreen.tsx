@@ -73,11 +73,12 @@ const StoriesLibrary: FC = () => {
   const [selectedLevel, setSelectedLevel] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const levels = ['All', 'Nursery', 'A1', 'A2', 'B1', 'B2', 'C1'];
+  const levels = ['All Stories', 'Nursery', 'A1', 'A2', 'B1'];
 
   const filteredStories = useMemo(() => {
     return LIBRARY_STORIES.filter((story) => {
-      const matchesLevel = selectedLevel === 'All' || story.level === selectedLevel;
+      const levelKey = selectedLevel === 'All Stories' ? 'All' : selectedLevel;
+      const matchesLevel = levelKey === 'All' || story.level === levelKey;
       const matchesSearch = 
         story.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         story.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -89,19 +90,15 @@ const StoriesLibrary: FC = () => {
   const getLevelBadgeStyles = (level: string) => {
     switch (level) {
       case 'Nursery':
-        return 'bg-teal-deep/10 text-teal-deep border-teal-deep/20';
+        return 'bg-accent-lavender text-text-primary border-text-primary font-bold';
       case 'A1':
-        return 'bg-marigold/10 text-marigold border-marigold/20';
+        return 'bg-accent-mint text-text-primary border-text-primary font-bold';
       case 'A2':
-        return 'bg-terracotta/10 text-terracotta border-terracotta/20';
+        return 'bg-accent-action text-text-primary border-text-primary font-bold';
       case 'B1':
-        return 'bg-blue-500/10 text-blue-400 border-blue-500/20';
-      case 'B2':
-        return 'bg-purple-500/10 text-purple-400 border-purple-500/20';
-      case 'C1':
-        return 'bg-red-500/10 text-red-400 border-red-500/20';
+        return 'bg-accent-lavender text-text-primary border-text-primary font-bold';
       default:
-        return 'bg-pencil/10 text-pencil border-pencil/20';
+        return 'bg-bg-elevated-2 text-text-primary border-text-primary font-bold';
     }
   };
 
@@ -110,50 +107,51 @@ const StoriesLibrary: FC = () => {
       <div className="max-w-6xl mx-auto space-y-6">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-pencil/20 pb-4">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b-2 border-text-primary/20 pb-4">
           <div>
-            <p className="font-hud text-[10px] uppercase tracking-[0.3em] text-pencil">
-              Biblioteca de Lectura
+            <p className="font-hud text-xs uppercase tracking-[0.3em] font-bold text-accent-action">
+              📚 Biblioteca de Lectura
             </p>
-            <h1 className="font-display text-2xl font-bold text-text-primary">Stories Library</h1>
-            <p className="font-body text-xs text-pencil mt-1">
-              Explore 50 hand-crafted stories designed to build Spanish proficiency from Starter to Expert level.
+            <h1 className="font-display text-3xl font-bold text-text-primary">Stories Library</h1>
+            <p className="font-body text-xs text-text-secondary mt-1">
+              Explore hand-crafted stories designed to build Spanish proficiency in cozy pastel booklets.
             </p>
           </div>
-          <div className="flex items-center gap-1 bg-paper/5 border border-pencil/25 rounded-xl px-3 py-1.5 w-full md:w-64 max-w-sm">
-            <Search className="h-4 w-4 text-pencil" />
+          <div className="flex items-center gap-2 bg-bg-elevated border-2 border-text-primary rounded-full px-4 py-2 w-full md:w-72 shadow-[0_3px_0_#2C1E11]">
+            <Search className="h-4 w-4 text-text-secondary shrink-0" />
             <input
               type="text"
-              placeholder="Search stories..."
+              placeholder="Search story titles or concepts..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-transparent text-xs text-text-primary focus:outline-none w-full placeholder:text-pencil/50"
+              className="bg-transparent text-xs text-text-primary focus:outline-none w-full placeholder:text-text-tertiary"
             />
           </div>
         </div>
 
-        {/* Level Filters */}
-        <div className="flex gap-2 overflow-x-auto pb-2 [scrollbar-width:none]">
+        {/* Level Filters per UI Stitch.md */}
+        <div className="flex gap-3 overflow-x-auto pb-2 [scrollbar-width:none]">
           {levels.map((lvl) => (
             <button
               key={lvl}
               onClick={() => setSelectedLevel(lvl)}
-              className={`px-3 py-1 rounded-lg border text-xs font-hud transition-all cursor-pointer ${
+              className={`px-4 py-2 rounded-full border-2 text-xs font-bold transition-all cursor-pointer ${
                 selectedLevel === lvl
-                  ? 'bg-terracotta text-text-primary border-terracotta shadow-md scale-105'
-                  : 'bg-paper/5 border-pencil/20 text-pencil hover:bg-paper/10 hover:text-text-primary'
+                  ? 'bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border-[#2C1E11] shadow-[0_3px_0_#5C524E] scale-105'
+                  : 'bg-bg-elevated border-structural text-text-secondary hover:border-text-primary hover:text-text-primary'
               }`}
             >
-              {lvl === 'All' ? 'Todos' : lvl}
+              {lvl === 'All Stories' ? '📚 All Stories' : `[${lvl}]`}
             </button>
           ))}
         </div>
 
-        {/* Grid Catalog */}
+        {/* 3x4 Grid Booklet Catalog */}
         {filteredStories.length === 0 ? (
-          <div className="text-center py-16 border border-dashed border-pencil/25 rounded-2xl bg-paper/5">
-            <BookOpen className="h-8 w-8 text-pencil/40 mx-auto mb-2 animate-pulse" />
-            <p className="font-display text-base text-pencil">No stories match your search or filter.</p>
+          <div className="text-center py-16 border-2 border-dashed border-text-primary/30 rounded-[28px] bg-bg-elevated p-8">
+            <BookOpen className="h-10 w-10 text-text-tertiary mx-auto mb-3 animate-bounce" />
+            <p className="font-display text-lg font-bold text-text-primary">No stories match your search.</p>
+            <p className="font-body text-xs text-text-secondary mt-1">Try resetting the level filter or search term.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -161,31 +159,34 @@ const StoriesLibrary: FC = () => {
               <button
                 key={story.id}
                 onClick={() => navigate(`/stories?story=${story.id}`)}
-                className="w-full text-left rounded-2xl border border-pencil/30 bg-paper/5 p-5 shadow-lg transition-all duration-200 hover:scale-[1.01] hover:border-pencil/50 group flex flex-col justify-between h-48 cursor-pointer"
+                className="w-full text-left rounded-[28px] border-2 border-text-primary bg-bg-elevated p-6 shadow-[0_4px_0_#5C524E] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_6px_0_#5C524E] active:translate-y-0.5 active:shadow-[0_2px_0_#5C524E] group flex flex-col justify-between h-56 cursor-pointer relative overflow-hidden"
               >
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className={`font-hud text-[9px] uppercase px-2 py-0.5 rounded-full border ${getLevelBadgeStyles(story.level)}`}>
+                {/* Book Cover Decorative Tint Header */}
+                <div className="absolute top-0 left-0 right-0 h-3 bg-gradient-to-r from-[#F5A991] via-accent-mint to-accent-lavender border-b-2 border-text-primary" />
+
+                <div className="pt-2">
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className={`font-hud text-[10px] uppercase px-2.5 py-0.5 rounded-full border ${getLevelBadgeStyles(story.level)}`}>
                       {story.levelLabel}
                     </span>
-                    <span className="font-hud text-[10px] text-pencil group-hover:text-text-primary transition-colors">
-                      {story.storyLines.length} líneas
+                    <span className="font-hud text-[10px] text-text-secondary font-semibold">
+                      📖 {story.storyLines.length} lines
                     </span>
                   </div>
-                  <h3 className="font-display font-bold text-lg text-text-primary group-hover:text-terracotta transition-colors line-clamp-1">
+                  <h3 className="font-display font-bold text-xl text-text-primary group-hover:text-[#F5A991] transition-colors line-clamp-1">
                     {story.title}
                   </h3>
-                  <p className="font-body text-xs text-pencil mt-2 line-clamp-3 leading-relaxed">
+                  <p className="font-body text-xs text-text-secondary mt-2 line-clamp-2 leading-relaxed">
                     {story.description}
                   </p>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-pencil/10 flex items-center justify-between">
-                  <span className="font-hud text-[10px] text-pencil flex items-center gap-1.5">
-                    <FileText className="h-3.5 w-3.5" />
-                    {story.vocabulary.length} vocablos
+                <div className="mt-4 pt-3 border-t-2 border-structural flex items-center justify-between">
+                  <span className="font-hud text-[11px] font-bold text-text-primary bg-bg-elevated-2 border border-text-primary/30 rounded-full px-2.5 py-0.5 flex items-center gap-1.5">
+                    <FileText className="h-3.5 w-3.5 text-[#F5A991]" />
+                    {story.vocabulary.length} vocab
                   </span>
-                  <span className="font-display text-xs text-terracotta font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                  <span className="font-body text-xs text-[#2C1E11] font-bold bg-[#F5A991] hover:bg-[#EAA088] px-3.5 py-1.5 rounded-full border-2 border-[#2C1E11] shadow-[0_2px_0_#5C524E] flex items-center gap-1 group-hover:translate-x-0.5 transition-all">
                     Leer Historia →
                   </span>
                 </div>
@@ -273,7 +274,7 @@ const StoryChapter: FC<StoryChapterProps> = ({
                     className={`border-b-2 border-dashed transition-colors cursor-pointer ${
                       isRevealed
                         ? 'border-marigold/60 text-marigold hover:bg-marigold/20 font-medium'
-                        : 'border-terracotta/60 text-ink hover:bg-terracotta/20 hover:text-marigold font-medium'
+                        : 'border-[#F5A991]/60 text-ink hover:bg-[#F5A991]/20 hover:text-marigold font-medium'
                     }`}
                     aria-label={`${vocab.word}: ${vocab.meaning}`}
                   >
@@ -313,7 +314,7 @@ const StoryChapter: FC<StoryChapterProps> = ({
                 onClick={() => setShowFullTranslation(!showFullTranslation)}
                 className={`flex items-center gap-1.5 text-xs font-hud px-2.5 py-1 rounded transition-colors cursor-pointer border ${
                   showFullTranslation 
-                    ? 'bg-terracotta text-text-primary border-terracotta'
+                    ? 'bg-[#F5A991] text-[#2C1E11] border-[#2C1E11]'
                     : 'bg-paper/5 border-pencil/20 text-pencil hover:bg-paper/10 hover:text-text-primary'
                 }`}
               >
@@ -375,7 +376,7 @@ const StoryChapter: FC<StoryChapterProps> = ({
                 <p className="mt-1.5 font-body text-xs leading-relaxed text-text-primary/85">
                   {gn.explanation}
                 </p>
-                <p className="mt-2.5 font-body text-xs italic text-terracotta bg-terracotta/5 border border-terracotta/10 rounded px-2.5 py-1">
+                <p className="mt-2.5 font-body text-xs italic text-text-primary bg-[#F5A991]/10 border border-[#F5A991]/20 rounded px-2.5 py-1">
                   Ejemplo: "{gn.exampleFromStory}"
                 </p>
               </div>
@@ -388,7 +389,7 @@ const StoryChapter: FC<StoryChapterProps> = ({
           <button
             type="button"
             onClick={onContinue}
-            className="mt-6 w-full rounded-xl bg-terracotta px-4 py-3 font-display text-base font-semibold text-text-primary shadow-lg hover:bg-terracotta/90 transition-colors cursor-pointer text-center block"
+            className="mt-6 w-full rounded-xl bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border-2 border-[#2C1E11] shadow-[0_4px_0_#5C524E] px-4 py-3 font-display text-base font-bold transition-all cursor-pointer text-center block"
           >
             {isLibrary ? 'Volver a la Biblioteca' : 'Continuar a Ejercicios →'}
           </button>

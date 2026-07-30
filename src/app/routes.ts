@@ -7,7 +7,8 @@ import { lazy } from 'react';
 
 // ── Lazy-loaded screen components ────────────────────────────────────────────
 
-const DashboardScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/HomeScreen'));
+const LearnScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/LearnScreen'));
+const PracticeViewScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/PracticeViewScreen'));
 const WorldMapScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/WorldMapScreen'));
 const QuestPreviewScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/QuestPreviewScreen'));
 const QuestJourneyScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/QuestJourneyScreen'));
@@ -26,6 +27,10 @@ const WhyUsScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/WhyUs
 // ── Types ────────────────────────────────────────────────────────────────────
 
 export type RouteId =
+  | 'learn'
+  | 'practice'
+  | 'library'
+  | 'shop'
   | 'dashboard'
   | 'map'
   | 'quests'
@@ -35,7 +40,6 @@ export type RouteId =
   | 'companion'
   | 'voice'
   | 'daily'
-  | 'shop'
   | 'profile'
   | 'quest-complete'
   | 'boss'
@@ -60,13 +64,49 @@ export interface RouteDef {
 
 export const ROUTES: RouteDef[] = [
   {
+    id: 'learn',
+    path: '/learn',
+    label: 'Learn',
+    icon: 'Home',
+    component: LearnScreen,
+    showInNav: true,
+    navOrder: 0,
+  },
+  {
+    id: 'practice',
+    path: '/practice',
+    label: 'Practice',
+    icon: 'Swords',
+    component: PracticeViewScreen,
+    showInNav: true,
+    navOrder: 1,
+  },
+  {
+    id: 'library',
+    path: '/library',
+    label: 'Library',
+    icon: 'BookOpen',
+    component: StoryScreen,
+    showInNav: true,
+    navOrder: 2,
+  },
+  {
+    id: 'shop',
+    path: '/shop',
+    label: 'Gacha Shrine',
+    icon: 'ShoppingBag',
+    component: ShopScreen,
+    showInNav: true,
+    navOrder: 3,
+  },
+  {
     id: 'dashboard',
     path: '/',
     label: 'Dashboard',
     icon: 'LayoutDashboard',
-    component: DashboardScreen,
-    showInNav: true,
-    navOrder: 0,
+    component: LearnScreen,
+    showInNav: false,
+    navOrder: 99,
   },
   {
     id: 'map',
@@ -74,8 +114,8 @@ export const ROUTES: RouteDef[] = [
     label: 'Adventure Map',
     icon: 'Map',
     component: WorldMapScreen,
-    showInNav: true,
-    navOrder: 2,
+    showInNav: false,
+    navOrder: 99,
   },
   {
     id: 'basic-espanol',
@@ -83,8 +123,8 @@ export const ROUTES: RouteDef[] = [
     label: 'Basic Español',
     icon: 'GraduationCap',
     component: BasicEspanolScreen,
-    showInNav: true,
-    navOrder: 1,
+    showInNav: false,
+    navOrder: 99,
   },
   {
     id: 'quests',
@@ -93,7 +133,7 @@ export const ROUTES: RouteDef[] = [
     icon: 'ScrollText',
     component: QuestPreviewScreen,
     showInNav: false,
-    navOrder: 3,
+    navOrder: 99,
   },
   {
     id: 'quest-journey',
@@ -101,8 +141,8 @@ export const ROUTES: RouteDef[] = [
     label: 'Quest Journey',
     icon: 'Swords',
     component: QuestJourneyScreen,
-    showInNav: true,
-    navOrder: 3,
+    showInNav: false,
+    navOrder: 99,
   },
   {
     id: 'stories',
@@ -110,8 +150,8 @@ export const ROUTES: RouteDef[] = [
     label: 'Stories',
     icon: 'BookOpen',
     component: StoryScreen,
-    showInNav: true,
-    navOrder: 4,
+    showInNav: false,
+    navOrder: 99,
   },
   {
     id: 'training',
@@ -119,8 +159,8 @@ export const ROUTES: RouteDef[] = [
     label: 'Training Grounds',
     icon: 'Dumbbell',
     component: TrainingScreen,
-    showInNav: true,
-    navOrder: 5,
+    showInNav: false,
+    navOrder: 99,
   },
   {
     id: 'companion',
@@ -128,8 +168,8 @@ export const ROUTES: RouteDef[] = [
     label: 'AI Companion',
     icon: 'MessageCircle',
     component: AICompanionScreen,
-    showInNav: true,
-    navOrder: 6,
+    showInNav: false,
+    navOrder: 99,
   },
   {
     id: 'voice',
@@ -137,8 +177,8 @@ export const ROUTES: RouteDef[] = [
     label: 'Voice Arena',
     icon: 'Mic',
     component: VoiceArenaScreen,
-    showInNav: true,
-    navOrder: 7,
+    showInNav: false,
+    navOrder: 99,
   },
   {
     id: 'daily',
@@ -146,17 +186,8 @@ export const ROUTES: RouteDef[] = [
     label: "Today's Quest",
     icon: 'Sun',
     component: DailyQuestScreen,
-    showInNav: true,
-    navOrder: 8,
-  },
-  {
-    id: 'shop',
-    path: '/shop',
-    label: 'Shop',
-    icon: 'ShoppingBag',
-    component: ShopScreen,
-    showInNav: true,
-    navOrder: 9,
+    showInNav: false,
+    navOrder: 99,
   },
   {
     id: 'profile',
@@ -165,7 +196,7 @@ export const ROUTES: RouteDef[] = [
     icon: 'User',
     component: ProfileSettingsScreen,
     showInNav: false,
-    navOrder: 9,
+    navOrder: 99,
   },
   {
     id: 'quest-complete',
@@ -174,7 +205,7 @@ export const ROUTES: RouteDef[] = [
     icon: 'Award',
     component: QuestCompletionScreen,
     showInNav: false,
-    navOrder: 0,
+    navOrder: 99,
   },
   {
     id: 'boss',
@@ -183,7 +214,7 @@ export const ROUTES: RouteDef[] = [
     icon: 'Sword',
     component: BossBattleScreen,
     showInNav: false,
-    navOrder: 0,
+    navOrder: 99,
   },
   {
     id: 'why-us',
@@ -192,7 +223,7 @@ export const ROUTES: RouteDef[] = [
     icon: 'Trophy',
     component: WhyUsScreen,
     showInNav: false,
-    navOrder: 0,
+    navOrder: 99,
   },
 ];
 

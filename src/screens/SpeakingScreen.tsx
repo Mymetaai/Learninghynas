@@ -631,11 +631,11 @@ const SpeakingScreen: FC = () => {
                   {/* Stop button */}
                   <button
                     onClick={stopRecording}
-                    className="relative h-16 w-16 rounded-full bg-error flex items-center justify-center text-bg-base cursor-pointer recording-pulse"
+                    className="relative h-16 w-16 rounded-full bg-accent-action border-2 border-text-primary text-text-primary flex items-center justify-center cursor-pointer shadow-[0_4px_0_#5C524E] hover:scale-105 transition-all"
                   >
                     <MicOff className="h-7 w-7 relative z-10" />
                   </button>
-                  <p className="font-body text-xs text-error animate-pulse font-bold">
+                  <p className="font-body text-xs text-text-primary animate-pulse font-bold">
                     Listening... Say the phrase in Spanish
                     {speedMode && speedTimer !== null && (
                       <span className="ml-2 text-accent-action">({speedTimer}s left)</span>

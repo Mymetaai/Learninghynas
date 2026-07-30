@@ -803,10 +803,10 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                       </div>
                       <button
                         onClick={() => handleLessonComplete(activeSection)}
-                        className={`px-5 py-2.5 rounded-2xl text-xs font-bold transition-all shadow-md cursor-pointer shrink-0 ${
+                        className={`px-5 py-2.5 rounded-2xl text-xs font-bold transition-all cursor-pointer shrink-0 ${
                           completedLessons[activeSection]
-                            ? 'bg-teal-deep/20 text-teal-deep border border-teal-deep/30'
-                            : 'bg-terracotta text-white hover:bg-terracotta/90'
+                            ? 'bg-accent-mint/20 text-text-primary border-2 border-text-primary'
+                            : 'bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border-2 border-[#2C1E11] shadow-[0_3px_0_#5C524E] hover:-translate-y-0.5'
                         }`}
                       >
                         {completedLessons[activeSection] ? 'Completed ✓' : 'Mark Lesson Completed'}

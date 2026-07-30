@@ -189,7 +189,7 @@ const ConversationScreen: FC = () => {
     <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary font-body pb-12">
       
       {/* Upper Mode Header */}
-      <div className="border-b border-structural bg-bg-base/80 backdrop-blur-md px-4 py-4 sm:px-6 sticky top-0 z-20">
+      <div className="border-b border-structural bg-bg-base/80 backdrop-blur-md px-4 py-4 sm:px-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 max-w-6xl mx-auto">
           <div>
             <div className="flex items-center gap-2">
@@ -197,7 +197,7 @@ const ConversationScreen: FC = () => {
                 Conversación interactiva con IA
               </span>
               {isGeminiAvailable() && (
-                <span className="flex items-center gap-1 bg-accent-action/10 text-accent-action px-2 py-0.5 rounded-full text-[10px] font-hud border border-accent-action/25 animate-pulse">
+                <span className="flex items-center gap-1 bg-[#7D927D]/10 text-[#7D927D] px-2 py-0.5 rounded-full text-[10px] font-hud border border-[#7D927D]/25 font-bold">
                   <BrainCircuit className="h-3 w-3" /> Gemini 3.5
                 </span>
               )}
@@ -206,13 +206,13 @@ const ConversationScreen: FC = () => {
           </div>
 
           {/* Mode Switcher Tabs */}
-          <div className="flex items-center bg-bg-elevated p-1 rounded-xl border border-structural shadow-sm">
+          <div className="flex items-center gap-1.5 bg-bg-elevated p-1.5 rounded-2xl border border-structural shadow-sm overflow-x-auto">
             <button
               onClick={() => setTabMode('scenarios')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 tabMode === 'scenarios'
-                  ? 'bg-accent-action text-bg-base shadow'
-                  : 'text-text-secondary hover:text-text-primary'
+                  ? 'bg-[#7D927D] text-white shadow-sm'
+                  : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
               }`}
             >
               <Compass className="h-4 w-4" /> Escenarios Reales (15 Temas)
@@ -221,8 +221,8 @@ const ConversationScreen: FC = () => {
               onClick={() => setTabMode('classic')}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                 tabMode === 'classic'
-                  ? 'bg-accent-action text-bg-base shadow'
-                  : 'text-text-secondary hover:text-text-primary'
+                  ? 'bg-[#7D927D] text-white shadow-sm'
+                  : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
               }`}
             >
               <BookOpen className="h-4 w-4" /> Amigos por Carta
@@ -231,8 +231,8 @@ const ConversationScreen: FC = () => {
               onClick={() => setTabMode('immersion')}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                 tabMode === 'immersion'
-                  ? 'bg-accent-action text-bg-base shadow'
-                  : 'text-text-secondary hover:text-text-primary'
+                  ? 'bg-[#7D927D] text-white shadow-sm'
+                  : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
               }`}
             >
               <Flame className="h-4 w-4" /> Active Immersion

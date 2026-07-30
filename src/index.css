@@ -1,28 +1,153 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@400;500;600&family=Atkinson+Hyperlegible+Next:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600&family=Atkinson+Hyperlegible+Next:ital,wght@0,400..700;1,400..700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --bg-base: #FBE9D0;        /* Soft warm cream background */
-  --bg-elevated: #FFFFFF;    /* Crisp clean white for cards */
-  --bg-elevated-2: #FFF3E3;  /* Nested warm highlights */
-  --structural: #E1D3C0;     /* Warm light border outline */
+  /* ── Serene Lexicon Design System ─────────────────────────────────── */
+  --bg-base: #F9F7F2;        /* Warm Off-White canvas */
+  --bg-elevated: #FFFFFF;    /* Pure White for cards */
+  --bg-elevated-2: #F1EDE6;  /* Warm neutral highlight */
+  --structural: #D4DCD4;     /* Light Sage border tint (≈ #7D927D at 20% on white) */
 
-  --text-primary: #244855;   /* Deep Slate Navy for high-contrast primary text */
-  --text-secondary: #4D6470; /* Muted Slate Gray for sub-labels */
-  --text-tertiary: #7C919D;  /* Muted placeholder text */
+  --text-primary: #2F353B;   /* Dark Slate / Charcoal */
+  --text-secondary: #777775; /* Medium Gray */
+  --text-tertiary: #A0A0A0;  /* Light Gray placeholder text */
 
-  --accent-action: #E64833;  /* High-Contrast Amber/Orange for primary CTAs */
-  --accent-action-hover: #CF3A27;
+  --accent-action: #7D927D;  /* Muted Sage Green — primary accent */
+  --accent-action-hover: #6B826B; /* Darker Sage hover state */
 
-  --success: #2E7D32;        /* Vibrant success green */
-  --error: #C62828;          /* Muted red/coral for incorrect states */
+  --accent-mint: #7D927D;    /* Sage Green (matches primary) */
+  --accent-lavender: #E8E4DF;/* Warm neutral accent */
 
-  --info: #244855;           /* Deep Slate Blue informational accents */
-  --streak-warm: #E64833;    /* Streak flame warm orange-red */
+  --success: #7D927D;        /* Sage Green success */
+  --error: #C4796B;          /* Muted Terracotta — never bright red */
+
+  --info: #2F353B;           /* Dark Slate informational */
+  --streak-warm: #D4A574;    /* Warm Gold tone for streaks */
 }
+
+/* ── Serene Lexicon — Flat Card Utilities ────────────────────────────── */
+.squircle-28 {
+  border-radius: 16px;
+}
+
+.clay-card {
+  border-radius: 16px;
+  background-color: var(--bg-elevated);
+  border: 1px solid rgba(125, 146, 125, 0.2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.clay-card-interactive {
+  border-radius: 16px;
+  background-color: var(--bg-elevated);
+  border: 1px solid rgba(125, 146, 125, 0.2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.clay-card-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.clay-card-interactive:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.clay-button {
+  border-radius: 9999px;
+  border: 1px solid rgba(125, 146, 125, 0.2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.clay-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+}
+
+.clay-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.clay-tab-active {
+  background-color: #7D927D !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  border: 1px solid rgba(125, 146, 125, 0.3) !important;
+  box-shadow: 0 1px 4px rgba(125, 146, 125, 0.2) !important;
+}
+
+/* ── Serene Lexicon — Flat Input Fields ──────────────────────────── */
+.recessed-input {
+  background-color: #F9F7F2;
+  border: 1px solid rgba(125, 146, 125, 0.2);
+  box-shadow: none;
+  color: #2F353B;
+  font-weight: 500;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.recessed-input::placeholder {
+  color: rgba(119, 119, 117, 0.7);
+  font-weight: 400;
+}
+
+.recessed-input:focus {
+  outline: none;
+  border-color: #7D927D;
+  box-shadow: 0 0 0 3px rgba(125, 146, 125, 0.15);
+}
+
+/* ── Holographic Sheen Animation for Anime Cards ── */
+@keyframes holographic-sweep {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  100% { transform: translateX(200%) rotate(25deg); }
+}
+
+.holographic-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.holographic-sheen::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.4) 40%,
+    rgba(217, 188, 242, 0.5) 50%,
+    rgba(160, 179, 146, 0.4) 60%,
+    transparent 80%
+  );
+  transform: translateX(-100%) rotate(25deg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.holographic-sheen:hover::after {
+  opacity: 1;
+  animation: holographic-sweep 1.2s ease-in-out infinite;
+}
+
 
 /* ── STEP 1 — global defaults from design tokens ───────────────────────
    Body uses the new token variables for background and text; fonts are opt-in
@@ -139,74 +264,50 @@
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   LIQUID GLASS DESIGN SYSTEM — iOS 26 / macOS Tahoe inspired
+   SERENE LEXICON — Flat Design System
    ══════════════════════════════════════════════════════════════════════════ */
 
-/* ── Glass Surface — reusable translucent material ────────────────────── */
+/* ── Clean Surface — simple white card material ─────────────────── */
 .glass-surface {
-  background: rgba(255, 255, 255, 0.7); /* Translucent light white */
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--structural);
-  box-shadow:
-    0 8px 24px rgba(36, 72, 85, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  background: var(--bg-elevated);
+  border: 1px solid rgba(125, 146, 125, 0.15);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
   position: relative;
 }
 
-/* Custom nav-glass for header chrome */
+/* Clean nav bar header */
 .nav-glass {
-  background: rgba(255, 255, 255, 0.8); /* var(--bg-elevated) tint */
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid var(--structural);
-  box-shadow: 0 4px 16px rgba(36, 72, 85, 0.05);
+  background: var(--bg-elevated);
+  border-bottom: 1px solid rgba(125, 146, 125, 0.15);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
   position: relative;
 }
 
-/* Specular highlight — top-edge "light hitting curved glass" */
+/* Remove specular highlight pseudo-elements */
 .glass-surface::before, .nav-glass::before {
   content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.6) 0%,
-    transparent 40%
-  );
-  pointer-events: none;
-  z-index: 0;
+  display: none;
 }
 
-/* ── Glass Nav Capsule — pill-shaped container for tabs ────────────────── */
+/* ── Flat Nav Capsule — pill-shaped container for tabs ─────────────── */
 .glass-nav-capsule {
-  background: rgba(255, 255, 255, 0.6); /* var(--bg-elevated-2) with opacity */
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
-  backdrop-filter: blur(16px) saturate(160%);
-  border: 1px solid var(--structural);
+  background: var(--bg-elevated);
+  border: 1px solid rgba(125, 146, 125, 0.15);
   border-radius: 999px;
-  box-shadow:
-    0 4px 12px rgba(36, 72, 85, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
   position: relative;
 }
 
-/* ── Sliding Glass Tab Indicator ──────────────────────────────────────── */
+/* ── Sliding Tab Indicator ────────────────────────────────────── */
 .glass-tab-indicator {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   height: calc(100% - 8px);
   border-radius: 999px;
-  background: rgba(230, 72, 51, 0.18); /* var(--accent-action) with opacity */
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(230, 72, 51, 0.35);
-  box-shadow:
-    0 0 16px rgba(230, 72, 51, 0.25),
-    inset 0 1px 1px rgba(255, 255, 255, 0.8);
-  /* Spring-like slide animation */
+  background: rgba(125, 146, 125, 0.15);
+  border: 1px solid rgba(125, 146, 125, 0.2);
+  box-shadow: 0 1px 4px rgba(125, 146, 125, 0.1);
   transition:
     left 280ms cubic-bezier(0.34, 1.56, 0.64, 1),
     width 280ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -214,7 +315,7 @@
   z-index: 0;
 }
 
-/* ── Ambient Background Blobs ─────────────────────────────────────────── */
+/* ── Serene Lexicon — Subtle Background Accents ─────────────────── */
 .ambient-blob-container {
   position: fixed;
   top: 0;
@@ -223,7 +324,7 @@
   height: 140px;
   overflow: hidden;
   pointer-events: none;
-  z-index: 30; /* Below header z-40 */
+  z-index: 30;
 }
 
 .ambient-blob {

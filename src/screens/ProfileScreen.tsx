@@ -1,30 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import {
-  LogOut,
   User,
   Mail,
-  KeyRound,
-  ShieldCheck,
   Sparkles,
   Flame,
   Trophy,
-  UserPlus,
 } from 'lucide-react';
-import { useAuthStore } from '../state/authStore';
+import { useUser, SignOutButton } from '@clerk/clerk-react';
 import { useStatsStore } from '../state/statsStore';
-import { AccountUpgradeModal } from '../components/AccountUpgradeModal';
 
 const ProfileScreen: React.FC = () => {
-  const { userEmail, loginMethod, isAnonymous, logout } = useAuthStore();
+  const { user, isLoaded, isSignedIn } = useUser();
   const xp = useStatsStore((s) => s.xp);
   const coins = useStatsStore((s) => s.coins);
   const streak = useStatsStore((s) => s.streak);
 
-  const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
-  const isUnregistered = isAnonymous || !userEmail;
-
-  // Mock achievements list
+  // Achievements list
   const achievements = [
     { id: 1, title: 'First Steps', desc: 'Completed the basic Español intro.', earned: true, icon: '🐣' },
     { id: 2, title: 'Word Weaver', desc: 'Learned 50 Spanish words.', earned: true, icon: '📚' },
@@ -33,39 +25,12 @@ const ProfileScreen: React.FC = () => {
     { id: 5, title: 'Unstoppable', desc: 'Maintained a 7-day learning streak.', earned: true, icon: '🔥' },
   ];
 
+  const userDisplayName = isLoaded && user ? (user.fullName || user.primaryEmailAddress?.emailAddress || 'Wayfarer Learner') : 'Wayfarer Guest';
+  const userEmailAddress = isLoaded && user ? user.primaryEmailAddress?.emailAddress : 'Guest Session';
+  const userAvatarUrl = isLoaded && user ? user.imageUrl : null;
+
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
-      {/* Account Upgrade Banner for Anonymous Users */}
-      {isUnregistered && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-8 rounded-3xl border border-accent-action/30 bg-accent-action/10 p-5 shadow-sm"
-        >
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-accent-action text-white shadow-md shrink-0">
-                <Sparkles className="h-5 w-5" />
-              </div>
-              <div>
-                <h3 className="font-display text-sm font-bold text-text-primary">
-                  Save Your Progress / Create Account
-                </h3>
-                <p className="font-body text-xs text-text-secondary mt-0.5">
-                  You are currently using an anonymous session. Link an email to save your stats & progress!
-                </p>
-              </div>
-            </div>
-            <button
-              onClick={() => setIsUpgradeModalOpen(true)}
-              className="w-full sm:w-auto shrink-0 flex items-center justify-center gap-2 rounded-xl bg-accent-action px-4 py-2.5 font-body text-xs font-bold text-white shadow-md hover:bg-accent-action/90 transition-all"
-            >
-              <UserPlus className="h-4 w-4" />
-              <span>Save Progress</span>
-            </button>
-          </div>
-        </motion.div>
-      )}
 
       {/* Profile Header Card */}
       <motion.div
@@ -73,57 +38,43 @@ const ProfileScreen: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         className="relative overflow-hidden rounded-3xl border border-structural bg-bg-elevated p-6 shadow-md mb-8"
       >
-        <div className="absolute top-0 right-0 h-32 w-32 rounded-full bg-accent-action/5 blur-2xl pointer-events-none" />
+        <div className="absolute top-0 right-0 h-32 w-32 rounded-full bg-[#7D927D]/10 blur-2xl pointer-events-none" />
 
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-start">
           {/* Avatar frame */}
-          <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl bg-bg-elevated-2 border border-structural text-accent-action shadow-inner">
-            <User className="h-10 w-10" />
-            <div className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-success text-white text-[10px] border border-bg-elevated font-semibold">
-              ✓
-            </div>
+          <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl bg-bg-elevated-2 border border-structural text-[#7D927D] shadow-inner overflow-hidden">
+            {userAvatarUrl ? (
+              <img src={userAvatarUrl} alt={userDisplayName} className="h-full w-full object-cover" />
+            ) : (
+              <User className="h-10 w-10" />
+            )}
           </div>
 
           {/* User info */}
           <div className="flex-1 text-center sm:text-left">
             <h2 className="font-display text-xl font-bold text-text-primary">
-              Wayfarer {userEmail ? userEmail.split('@')[0] : 'Guest'}
+              {userDisplayName}
             </h2>
             <p className="font-body text-xs text-text-secondary mt-0.5 flex items-center justify-center sm:justify-start gap-1">
-              <Mail className="h-3 w-3" /> {userEmail || 'Anonymous Guest Session'}
+              <Mail className="h-3 w-3" /> {userEmailAddress}
             </p>
-            <p className="font-body text-xs text-text-secondary mt-1 flex items-center justify-center sm:justify-start gap-1">
-              <KeyRound className="h-3 w-3" /> Method: {isUnregistered ? 'Anonymous Local Session' : loginMethod || 'Email & Password'}
-            </p>
-
-            {isUnregistered ? (
-              <button
-                onClick={() => setIsUpgradeModalOpen(true)}
-                className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-accent-action/10 px-3 py-1 font-body text-[10px] font-semibold text-accent-action border border-accent-action/20 hover:bg-accent-action hover:text-white transition-all cursor-pointer"
-              >
-                <Sparkles className="h-3.5 w-3.5" /> Save Progress / Create Account
-              </button>
-            ) : (
-              <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-success/10 px-3 py-1 font-body text-[10px] font-semibold text-success border border-success/20">
-                <ShieldCheck className="h-3.5 w-3.5" /> Account Saved & Verified
-              </div>
-            )}
           </div>
 
-          {/* Action button */}
-          <button
-            onClick={() => logout()}
-            className="flex items-center justify-center gap-1.5 rounded-xl border border-error/20 bg-bg-elevated px-4 py-2 font-body text-xs font-semibold text-error hover:bg-error/5 transition-all shadow-sm self-center"
-          >
-            <LogOut className="h-3.5 w-3.5" /> Sign Out / Lock
-          </button>
+          {/* Clerk Sign Out button if signed in */}
+          {isSignedIn && (
+            <SignOutButton>
+              <button className="flex items-center justify-center gap-1.5 rounded-xl border border-structural bg-bg-elevated px-4 py-2 font-body text-xs font-semibold text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2 transition-all shadow-sm self-center border-none cursor-pointer">
+                Sign Out
+              </button>
+            </SignOutButton>
+          )}
         </div>
       </motion.div>
 
       {/* Grid of quick stats */}
       <div className="grid grid-cols-3 gap-4 mb-8">
         {[
-          { label: 'XP Points', value: xp, icon: <Sparkles className="h-4 w-4 text-accent-action" />, bg: 'bg-accent-action/5' },
+          { label: 'XP Points', value: xp, icon: <Sparkles className="h-4 w-4 text-[#7D927D]" />, bg: 'bg-[#7D927D]/5' },
           { label: 'Gold Coins', value: coins, icon: '🪙', bg: 'bg-bg-elevated-2' },
           { label: 'Day Streak', value: streak, icon: <Flame className="h-4 w-4 text-streak-warm" />, bg: 'bg-streak-warm/5' },
         ].map((stat, idx) => (
@@ -152,7 +103,7 @@ const ProfileScreen: React.FC = () => {
       >
         <div className="mb-6 flex items-center justify-between border-b border-structural/30 pb-4">
           <h3 className="font-display text-lg font-bold text-text-primary flex items-center gap-2">
-            <Trophy className="h-5 w-5 text-accent-action" /> Stamp Achievements
+            <Trophy className="h-5 w-5 text-[#7D927D]" /> Stamp Achievements
           </h3>
           <span className="font-body text-xs font-semibold text-text-secondary">
             {achievements.filter((a) => a.earned).length} / {achievements.length} Unlocked
@@ -177,7 +128,7 @@ const ProfileScreen: React.FC = () => {
                 <p className="font-body text-[11px] text-text-secondary mt-0.5">{a.desc}</p>
               </div>
               {a.earned ? (
-                <div className="rounded-full bg-success/10 px-2 py-0.5 font-body text-[9px] font-bold text-success border border-success/20">
+                <div className="rounded-full bg-[#7D927D]/10 px-2 py-0.5 font-body text-[9px] font-bold text-[#7D927D] border border-[#7D927D]/20">
                   Earned
                 </div>
               ) : (
@@ -189,15 +140,8 @@ const ProfileScreen: React.FC = () => {
           ))}
         </div>
       </motion.div>
-
-      {/* Account Upgrade Modal */}
-      <AccountUpgradeModal
-        isOpen={isUpgradeModalOpen}
-        onClose={() => setIsUpgradeModalOpen(false)}
-      />
     </div>
   );
 };
 
 export default ProfileScreen;
-

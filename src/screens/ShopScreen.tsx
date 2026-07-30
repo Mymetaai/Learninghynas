@@ -464,26 +464,26 @@ const ShopScreen: FC = () => {
       <div className="mx-auto max-w-5xl">
         
         {/* ── HEADER ────────────────────────────────────────────────── */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 bg-bg-elevated p-6 rounded-[28px] border-2 border-text-primary shadow-[0_4px_0_#5C524E]">
           <div>
             <h1 className="font-display text-3xl font-bold text-text-primary flex items-center gap-2">
-              <ShoppingBag className="text-accent-action h-8 w-8" />
-              Kitsune Shop
+              <ShoppingBag className="text-[#F5A991] h-8 w-8" />
+              Gacha Shrine
             </h1>
-            <p className="text-text-secondary text-sm mt-1">
-              Spend your hard-earned Kitsune Coins (KC) on boosts, cosmetic companion auras, and mystery chests!
+            <p className="text-text-secondary text-xs mt-1">
+              Spend your hard-earned Kitsune Coins at the Gacha Shrine on boosts, companion auras, and card summonings!
             </p>
           </div>
 
           <div className="flex items-center gap-3">
             {/* Coins indicator */}
-            <div className="flex items-center gap-2 bg-bg-elevated border-2 border-structural rounded-xl px-4 py-2.5 shadow-md">
-              <Coins className="h-5 w-5 text-accent-action" />
+            <div className="flex items-center gap-2 bg-[#F5A991] text-[#2C1E11] border-2 border-[#2C1E11] rounded-full px-5 py-2 shadow-[0_3px_0_#5C524E]">
+              <Coins className="h-5 w-5 text-[#2C1E11]" />
               <div className="flex flex-col">
-                <span className="font-hud text-lg font-bold leading-none text-accent-action">
+                <span className="font-hud text-lg font-bold leading-none">
                   {coins} KC
                 </span>
-                <span className="font-body text-[9px] uppercase tracking-wider text-text-secondary mt-0.5">
+                <span className="font-body text-[9px] uppercase tracking-wider text-[#2C1E11] font-bold">
                   Balance
                 </span>
               </div>
@@ -492,42 +492,42 @@ const ShopScreen: FC = () => {
             {/* Dev Coin Booster */}
             <button
               onClick={claimCheatCoins}
-              className="bg-info/10 hover:bg-info/20 border border-info/30 text-info font-hud text-[9px] uppercase px-3 py-2.5 rounded-xl transition-colors cursor-pointer"
+              className="bg-bg-elevated hover:bg-bg-elevated-2 border-2 border-text-primary text-text-primary font-body text-xs font-bold px-3 py-2 rounded-full shadow-[0_2px_0_#5C524E] transition-all cursor-pointer"
               title="Get free coins for quick testing"
             >
-              +100 Coins (Test)
+              +100 KC
             </button>
             <button
               onClick={handleUnlockAll}
-              className="bg-accent-action/10 hover:bg-accent-action/20 border border-accent-action/30 text-accent-action font-hud text-[9px] uppercase px-3 py-2.5 rounded-xl transition-colors cursor-pointer"
+              className="bg-accent-mint hover:bg-accent-mint/90 border-2 border-text-primary text-text-primary font-body text-xs font-bold px-3 py-2 rounded-full shadow-[0_2px_0_#5C524E] transition-all cursor-pointer"
               title="Unlock all collectible cards"
             >
-              Unlock All (Test)
+              Unlock All
             </button>
           </div>
         </div>
 
         {/* ── TAB SWITCHER ───────────────────────────────────────────── */}
-        <div className="flex border-b border-structural mb-6">
+        <div className="flex justify-center gap-4 mb-6">
           <button
             onClick={() => setActiveTab('kitsune')}
-            className={`px-5 py-2.5 font-display text-sm font-bold border-b-2 bg-transparent cursor-pointer transition-all ${
+            className={`px-6 py-2.5 rounded-full font-body text-xs font-bold border-2 transition-all cursor-pointer ${
               activeTab === 'kitsune'
-                ? 'border-accent-action text-accent-action'
-                : 'border-transparent text-text-secondary hover:text-text-primary'
+                ? 'bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border-[#2C1E11] shadow-[0_3px_0_#5C524E]'
+                : 'bg-bg-elevated text-text-secondary border-structural hover:border-text-primary'
             }`}
           >
             🦊 Kitsune Store
           </button>
           <button
             onClick={() => setActiveTab('anime-gacha')}
-            className={`px-5 py-2.5 font-display text-sm font-bold border-b-2 bg-transparent cursor-pointer transition-all ${
+            className={`px-6 py-2.5 rounded-full font-body text-xs font-bold border-2 transition-all cursor-pointer ${
               activeTab === 'anime-gacha'
-                ? 'border-accent-action text-accent-action'
-                : 'border-transparent text-text-secondary hover:text-text-primary'
+                ? 'bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border-[#2C1E11] shadow-[0_3px_0_#5C524E]'
+                : 'bg-bg-elevated text-text-secondary border-structural hover:border-text-primary'
             }`}
           >
-            🏴‍☠️ Anime Gacha Altar
+            ✦ Summoning Altar & Card Album
           </button>
         </div>
 
@@ -761,19 +761,19 @@ const ShopScreen: FC = () => {
               </select>
             </div>
 
-            <div className={`gacha-stage-panel stage border rounded-3xl p-6 mb-8 flex flex-col md:flex-row items-center justify-center gap-8 shadow-xl relative overflow-hidden transition-all duration-700 ${summonPhase} ${
-              summonPhase !== 's-altar' ? 'bg-[#07060a] border-purple/30 shadow-[0_0_50px_rgba(139,63,251,0.25)] min-h-[500px]' : 'bg-paper/5 border-pencil/20'
+            <div className={`gacha-stage-panel stage rounded-[28px] p-6 mb-8 flex flex-col md:flex-row items-center justify-center gap-8 shadow-[0_4px_0_#5C524E] relative overflow-hidden transition-all duration-700 ${summonPhase} ${
+              summonPhase !== 's-altar' ? 'bg-gradient-to-b from-white via-[#FAF6F0] to-[#E6E1F7]/40 border-2 border-text-primary min-h-[620px]' : 'bg-gradient-to-b from-white via-[#FAF6F0] to-[#FAF6F0] border-2 border-text-primary min-h-[460px]'
             }`}>
               {/* Grain overlay */}
-              <div className="grain-overlay pointer-events-none absolute inset-0 z-5 opacity-[0.03]" />
+              <div className="grain-overlay pointer-events-none absolute inset-0 z-5 opacity-[0.02]" />
               <div className="vignette-overlay pointer-events-none absolute inset-0 z-5" />
 
               {/* Background Summoning Circle */}
               <div className="glyph-wrap pointer-events-none absolute z-1">
                 <svg viewBox="0 0 200 200" className="w-full h-full">
                   <g className="glyph-ring r1" transform="translate(100,100)">
-                    <circle r="92" fill="none" stroke="#8b3ffb" strokeOpacity="0.4" strokeWidth="0.8" />
-                    <g stroke="#f3c969" strokeOpacity="0.5" strokeWidth="0.8">
+                    <circle r="92" fill="none" stroke="#F5A991" strokeOpacity="0.6" strokeWidth="1" />
+                    <g stroke="#FBBF24" strokeOpacity="0.7" strokeWidth="1">
                       <line x1="0" y1="-92" x2="0" y2="-82" /><line x1="0" y1="92" x2="0" y2="82" />
                       <line x1="-92" y1="0" x2="-82" y2="0" /><line x1="92" y1="0" x2="82" y2="0" />
                       <line x1="-65" y1="-65" x2="-58" y2="-58" /><line x1="65" y1="-65" x2="58" y2="-58" />
@@ -781,11 +781,11 @@ const ShopScreen: FC = () => {
                     </g>
                   </g>
                   <g className="glyph-ring r2" transform="translate(100,100)">
-                    <circle r="70" fill="none" stroke="#f3c969" strokeOpacity="0.3" strokeWidth="0.8" strokeDasharray="2 4" />
+                    <circle r="70" fill="none" stroke="#FBBF24" strokeOpacity="0.5" strokeWidth="1" strokeDasharray="2 4" />
                   </g>
                   <g className="glyph-ring r3" transform="translate(100,100)">
-                    <circle r="46" fill="none" stroke="#8b3ffb" strokeOpacity="0.4" strokeWidth="0.8" />
-                    <path d="M0,-46 L13,-13 L46,0 L13,13 L0,46 L-13,13 L-46,0 L-13,-13 Z" fill="none" stroke="#f3c969" strokeOpacity="0.35" strokeWidth="0.8" />
+                    <circle r="46" fill="none" stroke="#C084FC" strokeOpacity="0.6" strokeWidth="1" />
+                    <path d="M0,-46 L13,-13 L46,0 L13,13 L0,46 L-13,13 L-46,0 L-13,-13 Z" fill="none" stroke="#F5A991" strokeOpacity="0.5" strokeWidth="1" />
                   </g>
                 </svg>
               </div>
@@ -793,7 +793,7 @@ const ShopScreen: FC = () => {
               {/* Lightning SVG Layer */}
               <div className="fx-layer absolute inset-0 z-4 pointer-events-none">
                 {lightningFlash && (
-                  <div className="absolute inset-0 bg-white/10 z-4 pointer-events-none" />
+                  <div className="absolute inset-0 bg-amber-200/20 z-4 pointer-events-none" />
                 )}
                 <svg viewBox="0 0 1000 1000" className="w-full h-full" preserveAspectRatio="none">
                   {lightningBolts.map((bolt) => (
@@ -801,10 +801,10 @@ const ShopScreen: FC = () => {
                       key={bolt.id}
                       d={bolt.path}
                       className="bolt-path"
-                      stroke="#8b3ffb"
+                      stroke="#F5A991"
                       strokeWidth="3.5"
                       fill="none"
-                      filter="drop-shadow(0 0 8px #8b3ffb)"
+                      filter="drop-shadow(0 0 10px #FBBF24)"
                     />
                   ))}
                 </svg>
@@ -815,7 +815,7 @@ const ShopScreen: FC = () => {
                 {gachaParticles.map((p) => (
                   <div
                     key={p.id}
-                    className={`gacha-particle absolute rounded-sm ${p.gold ? 'gold' : ''}`}
+                    className={`gacha-particle absolute rounded-full ${p.gold ? 'gold' : ''}`}
                     style={{
                       left: `${p.left}%`,
                       '--drift': `${p.drift}px`,
@@ -829,126 +829,108 @@ const ShopScreen: FC = () => {
               {summonPhase === 's-altar' && (
                 <>
                   <div className="card-static-wrap z-10 relative flex items-center justify-center">
-                    <div className="card-custom">
+                    <div className="card-custom border-2 border-text-primary shadow-[0_4px_0_#5C524E]">
                       <div className="card-emblem">
                         <div className="text-4xl mb-2 select-none">
                           {selectedSeries === 'one-piece' ? '🏴‍☠️' : '⚔️'}
                         </div>
                       </div>
                       <div>
-                        <div className="card-title select-none font-display text-sm tracking-wider text-text-primary">
+                        <div className="card-title select-none font-display text-sm tracking-wider text-text-primary font-bold">
                           {selectedSeries === 'one-piece' ? 'ONE PIECE CARD' : 'KIMETSU CARD'}
                         </div>
-                        <div className="card-subtitle select-none font-mono text-[9px] tracking-widest text-[#ff7a3c] mt-1">
+                        <div className="card-subtitle select-none font-hud text-[10px] font-bold text-accent-action mt-1">
                           MYSTERY CARD
                         </div>
                       </div>
-                      <div className="card-cost select-none font-mono text-[10px] text-pencil/60">
-                        Cost: {DRAW_COST} Coins
+                      <div className="card-cost select-none font-hud text-xs text-text-secondary font-bold">
+                        Cost: {DRAW_COST} KC
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex-1 max-w-sm space-y-6 z-10 relative">
+                  <div className="flex-1 max-w-sm space-y-5 z-10 relative">
                     <div>
-                      <h2 className="font-display text-xl font-bold text-text-primary">Summoning Altar</h2>
-                      <p className="text-pencil text-xs mt-2 leading-relaxed">
+                      <h2 className="font-display text-2xl font-bold text-text-primary">Summoning Altar</h2>
+                      <p className="text-text-secondary text-xs mt-1 leading-relaxed">
                         Unlock {selectedSeries === 'one-piece' ? ONE_PIECE_CARDS.length : DEMON_SLAYER_CARDS.length} mystical cards from this set.
                       </p>
                       
-                      <div className="mt-3.5 p-3 bg-paper/5 border border-pencil/15 rounded-xl flex items-start gap-2.5 shadow-md">
+                      <div className="mt-3.5 p-3.5 bg-bg-elevated/70 border-2 border-text-primary rounded-2xl flex items-start gap-2.5 shadow-[0_3px_0_#5C524E]">
                         <span className="text-xl select-none mt-0.5">
                           {selectedSeries === 'one-piece' ? '🏴‍☠️' : '⚔️'}
                         </span>
                         <div>
-                          <h4 className="font-hud text-[9px] uppercase font-bold text-marigold tracking-wider leading-none">
+                          <h4 className="font-hud text-[10px] uppercase font-bold text-accent-action tracking-wider leading-none">
                             {selectedSeries === 'one-piece' ? 'Pirate King Lore' : 'Corps Motto'}
                           </h4>
-                          <p className="text-[11px] italic text-text-primary/85 leading-relaxed mt-1">
+                          <p className="text-xs italic text-text-primary leading-relaxed mt-1">
                             {selectedSeries === 'one-piece'
-                              ? '"Inherited Will, the Destiny of Age, and the Dreams of People. As long as people continue to pursue the meaning of Freedom, these things will never cease to be!"'
-                              : '"No matter how many people you lose, you have no choice but to go on living. Set your heart ablaze and surpass your limits!"'}
+                              ? '"Inherited Will, the Destiny of Age, and the Dreams of People. As long as people continue to pursue Freedom, these things will never cease to be!"'
+                              : '"No matter how many people you lose, set your heart ablaze and surpass your limits!"'}
                           </p>
                         </div>
                       </div>
                     </div>
 
-                    <div className="space-y-2 border-y border-pencil/10 py-4 font-hud text-xs text-pencil">
+                    <div className="space-y-2 border-y-2 border-text-primary/20 py-3.5 font-hud text-xs text-text-secondary">
                       <div className="flex justify-between">
                         <span>Legendary Drop Rate:</span>
-                        <span className="text-[#f3c969] font-bold">5%</span>
+                        <span className="text-amber-500 font-bold">5%</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Epic Drop Rate:</span>
-                        <span className="text-[#b388ff] font-bold">20%</span>
+                        <span className="text-purple-600 font-bold">20%</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Rare Drop Rate:</span>
-                        <span className="text-[#5fb6ff] font-bold">35%</span>
+                        <span className="text-blue-500 font-bold">35%</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Common Drop Rate:</span>
-                        <span className="text-text-primary/60 font-bold">40%</span>
+                        <span className="text-text-primary font-bold">40%</span>
                       </div>
                     </div>
 
                     <button
                       onClick={handleDraw}
                       disabled={isDrawing || coins < DRAW_COST}
-                      className="w-full summon-btn"
+                      className="w-full py-3.5 px-6 rounded-full bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] font-body text-xs font-bold border-2 border-[#2C1E11] shadow-[0_4px_0_#5C524E] hover:-translate-y-0.5 hover:shadow-[0_6px_0_#5C524E] active:translate-y-0.5 active:shadow-[0_2px_0_#5C524E] transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed uppercase"
                     >
-                      ✦ Summon Card ({DRAW_COST} Coins)
+                      ✦ SUMMON CARD ({DRAW_COST} COINS)
                     </button>
                   </div>
                 </>
               )}
 
-              {/* ACTIVE SUMMON ACTIVE RITUAL STAGE */}
+              {/* STEP 1-4 ANIMATIONS & REVEALED HEROIC CARD */}
               {summonPhase !== 's-altar' && (
-                <div className={`ritual-stage-wrap z-10 relative flex flex-col items-center justify-center w-full min-h-[460px] ${
-                  summonPhase === 's-intensity' ? 'stage-shake' : ''
-                }`}>
-                  <div className="platform-custom" />
-
-                  <div className="card-wrap-custom">
-                    <div className={`card-3d-custom ${summonPhase}`}>
-                      
-                      <div className="card-face-custom back">
-                        <div className="h-16 w-16 rounded-full bg-paper/5 border border-purple-500/20 flex items-center justify-center text-4xl mb-4 select-none animate-pulse">
-                          {selectedSeries === 'one-piece' ? '🏴‍☠️' : '⚔️'}
-                        </div>
-                        <h3 className="font-display text-base font-bold text-purple-300 tracking-wider text-center">
-                          {selectedSeries === 'one-piece' ? 'ONE PIECE' : 'DEMON SLAYER'}
-                        </h3>
-                      </div>
-
+                <div className="flex flex-col items-center justify-center w-full z-10 relative my-2">
+                  <div className="card-stage-active flex flex-col items-center justify-center w-full">
+                    <div className={`card-gacha-animated ${summonPhase} flex justify-center`}>
                       {drawnCard && (
-                        <div 
-                          className="card-face-custom front"
-                          style={{
-                            '--rarity-color': drawnCard.rarity === 'legendary' ? '#f3c969' :
-                                             drawnCard.rarity === 'epic' ? '#b388ff' :
-                                             drawnCard.rarity === 'rare' ? '#5fb6ff' : '#bfb6a8',
-                            '--bg1': drawnCard.rarity === 'legendary' ? '#3a2a08' :
-                                     drawnCard.rarity === 'epic' ? '#241338' :
-                                     drawnCard.rarity === 'rare' ? '#0c2438' : '#211d18',
-                            '--bg2': drawnCard.rarity === 'legendary' ? '#1f1505' :
-                                     drawnCard.rarity === 'epic' ? '#150b22' :
-                                     drawnCard.rarity === 'rare' ? '#06151f' : '#15120e',
-                          } as React.CSSProperties}
-                        >
-                          <div className="w-full flex items-center justify-between border-b border-white/10 pb-2">
-                            <span className="font-hud text-[9px] uppercase tracking-wider text-[#a89b8a] font-semibold">
-                              {selectedSeries === 'one-piece' ? 'Wanted' : 'Kimetsu'}
+                        <div className={`card-revealed-inner bg-white border-4 border-white rounded-[28px] p-5 shadow-2xl flex flex-col items-center justify-between text-center transition-all duration-500 w-[320px] sm:w-[360px] min-h-[480px] sm:min-h-[520px] max-h-[560px] ${
+                          drawnCard.rarity === 'legendary' ? 'shadow-[0_0_45px_rgba(245,158,11,0.7)] border-amber-300' :
+                          drawnCard.rarity === 'epic' ? 'shadow-[0_0_40px_rgba(168,85,247,0.7)] border-purple-300' :
+                          drawnCard.rarity === 'rare' ? 'shadow-[0_0_30px_rgba(59,130,246,0.6)] border-blue-300' :
+                          'shadow-[0_8px_24px_rgba(92,82,78,0.3)] border-white'
+                        }`}>
+                          <div className="flex justify-between items-center w-full">
+                            <span className="font-hud text-[10px] uppercase font-bold text-accent-action tracking-wider">
+                              {selectedSeries === 'one-piece' ? '🏴‍☠️ ONE PIECE' : '⚔️ DEMON SLAYER'}
                             </span>
-                            <span className="font-hud text-[9px] uppercase text-ink font-bold px-2 py-0.5 rounded-full"
-                                  style={{ backgroundColor: 'var(--rarity-color)' }}>
+                            <span className={`font-hud text-[10px] uppercase px-3 py-1 rounded-full font-bold border ${
+                              drawnCard.rarity === 'legendary' ? 'bg-amber-100 text-amber-800 border-amber-300' :
+                              drawnCard.rarity === 'epic' ? 'bg-purple-100 text-purple-800 border-purple-300' :
+                              drawnCard.rarity === 'rare' ? 'bg-blue-100 text-blue-800 border-blue-300' :
+                              'bg-gray-100 text-gray-700 border-gray-300'
+                            }`}>
                               {drawnCard.rarity}
                             </span>
                           </div>
 
-                          <div className={`my-3 h-32 w-full rounded-xl bg-gradient-to-tr ${drawnCard.color} flex items-center justify-center text-6xl shadow-inner relative overflow-hidden select-none`}>
-                            <div className="absolute inset-0 animate-shimmer pointer-events-none z-10" />
+                          <div className={`my-3.5 h-60 sm:h-64 w-full rounded-2xl bg-gradient-to-tr ${drawnCard.color} flex items-center justify-center text-7xl shadow-inner relative overflow-hidden select-none`}>
+                            <div className="absolute inset-0 animate-shimmer pointer-events-none z-10 opacity-30" />
                             {imageErrors[drawnCard.id] ? (
                               drawnCard.emoji
                             ) : (
@@ -961,20 +943,19 @@ const ShopScreen: FC = () => {
                             )}
                           </div>
 
-                          <div className="w-full text-left space-y-1">
-                            <span className="font-hud text-[8px] uppercase tracking-widest text-pencil/80">Character</span>
-                            <h3 className="font-display text-sm font-bold text-text-primary truncate">{drawnCard.name}</h3>
-                            <p className="font-body text-[10px] text-pencil/90 truncate italic">"{drawnCard.description}"</p>
+                          <div className="w-full text-left space-y-1 px-1">
+                            <h3 className="font-display text-lg sm:text-xl font-extrabold text-text-primary truncate">{drawnCard.name}</h3>
+                            <p className="font-body text-xs text-text-secondary truncate italic">"{drawnCard.description}"</p>
                           </div>
 
-                          <div className="w-full border-t border-white/10 pt-2 grid grid-cols-2 gap-2 font-hud text-[9px] text-[#ff7a3c] font-semibold">
+                          <div className="w-full border-t-2 border-text-primary/15 pt-3 grid grid-cols-2 gap-2 font-hud text-xs text-accent-action font-bold">
                             <div className="flex flex-col text-left">
-                              <span className="text-white/40 text-[7px] uppercase tracking-wider">Power</span>
-                              <span className="truncate">{drawnCard.bounty}</span>
+                              <span className="text-text-secondary text-[8px] uppercase tracking-wider">Power / Bounty</span>
+                              <span className="truncate text-sm text-text-primary">{drawnCard.bounty}</span>
                             </div>
                             <div className="flex flex-col text-right">
-                              <span className="text-white/40 text-[7px] uppercase tracking-wider">Special Move</span>
-                              <span className="truncate" title={drawnCard.specialMove}>{drawnCard.specialMove}</span>
+                              <span className="text-text-secondary text-[8px] uppercase tracking-wider">Special Move</span>
+                              <span className="truncate text-sm text-accent-action" title={drawnCard.specialMove}>{drawnCard.specialMove}</span>
                             </div>
                           </div>
                         </div>
@@ -984,13 +965,13 @@ const ShopScreen: FC = () => {
                   </div>
 
                   {summonPhase === 's-reveal' && (
-                    <div className="reveal-panel-custom">
-                      <p className="text-xl font-bold text-white mb-2">
+                    <div className="reveal-panel-custom mt-6 flex flex-col items-center gap-3 z-20">
+                      <p className="text-base sm:text-lg font-bold text-text-primary font-display bg-white/95 backdrop-blur-md px-6 py-2.5 rounded-full border-2 border-text-primary shadow-[0_4px_0_#5C524E]">
                         {drawResult === 'new' ? '✨ NEW CARD UNLOCKED! ✨' : `Duplicate! (Refunded +${DUP_REFUND} Coins)`}
                       </p>
                       <button
                         onClick={() => setSummonPhase('s-altar')}
-                        className="again-btn-custom"
+                        className="px-8 py-3 rounded-full bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] font-bold border-2 border-[#2C1E11] shadow-[0_4px_0_#5C524E] hover:-translate-y-0.5 hover:shadow-[0_6px_0_#5C524E] active:translate-y-0.5 active:shadow-[0_2px_0_#5C524E] transition-all cursor-pointer text-xs font-hud uppercase font-bold"
                       >
                         Okay
                       </button>
@@ -1003,20 +984,20 @@ const ShopScreen: FC = () => {
             {/* Stats Dashboard */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               <StatBox label="Owned Cards" value={stats.collectedCount} color="text-text-primary" />
-              <StatBox label="Completion Rate" value={`${stats.rate}%`} color="text-info" />
-              <StatBox label="Legendaries Found" value={stats.legendaryCount} color="text-accent-action" />
-              <StatBox label="Epics Found" value={stats.epicCount} color="text-success" />
+              <StatBox label="Completion Rate" value={`${stats.rate}%`} color="text-accent-mint" />
+              <StatBox label="Legendaries Found" value={stats.legendaryCount} color="text-amber-500" />
+              <StatBox label="Epics Found" value={stats.epicCount} color="text-purple-600" />
             </div>
 
             {/* Card Binder Section */}
-            <div className="bg-bg-elevated border-2 border-structural rounded-3xl p-6 shadow-md">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b border-structural pb-4">
+            <div className="bg-bg-elevated border-2 border-text-primary rounded-[28px] p-6 shadow-[0_4px_0_#5C524E]">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b-2 border-text-primary/20 pb-4">
                 <div>
-                  <h2 className="font-display text-xl font-bold text-text-primary flex items-center gap-2">
+                  <h2 className="font-display text-2xl font-bold text-text-primary flex items-center gap-2">
                     <Trophy className="text-accent-action h-6 w-6" />
                     Card Album
                   </h2>
-                  <p className="text-text-secondary text-xs mt-1">Review your collected cards and study active hotspots</p>
+                  <p className="text-text-secondary text-xs mt-1">Review your collected anime character cards and study active hotspots</p>
                 </div>
 
                 <div className="flex flex-wrap gap-2">
@@ -1024,10 +1005,10 @@ const ShopScreen: FC = () => {
                     <button
                       key={r}
                       onClick={() => setFilterRarity(r)}
-                      className={`px-3 py-1.5 rounded-xl font-hud text-[10px] uppercase font-bold transition-all cursor-pointer ${
+                      className={`px-4 py-1.5 rounded-full font-hud text-[10px] uppercase font-bold transition-all cursor-pointer border-2 ${
                         filterRarity === r
-                          ? 'ios-glass-button-active'
-                          : 'ios-glass-button text-text-secondary hover:text-text-primary'
+                          ? 'bg-accent-action text-text-primary border-text-primary shadow-[0_2px_0_#5C524E]'
+                          : 'bg-bg-elevated text-text-secondary border-structural hover:border-text-primary'
                       }`}
                     >
                       {r}
@@ -1042,17 +1023,23 @@ const ShopScreen: FC = () => {
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                   {filteredCards.map((card) => {
                     const isCollected = collectedCardIds.includes(card.id);
+                    const cardStyle = isCollected
+                      ? card.rarity === 'legendary'
+                        ? 'border-2 border-amber-400 shadow-[0_0_18px_rgba(251,191,36,0.6)] bg-white hover:scale-105 transition-all duration-300 holographic-sheen cursor-pointer rounded-[24px]'
+                        : card.rarity === 'epic'
+                        ? 'border-2 border-purple-400 shadow-[0_0_18px_rgba(192,132,252,0.6)] bg-white hover:scale-105 transition-all duration-300 holographic-sheen cursor-pointer rounded-[24px]'
+                        : card.rarity === 'rare'
+                        ? 'border-2 border-blue-400 shadow-[0_0_14px_rgba(96,165,250,0.5)] bg-white hover:scale-105 transition-all duration-300 holographic-sheen cursor-pointer rounded-[24px]'
+                        : 'border-2 border-[#5C524E] shadow-[0_4px_0_#5C524E] bg-white hover:scale-105 transition-all duration-300 holographic-sheen cursor-pointer rounded-[24px]'
+                      : 'bg-[#FAF6F0]/40 border-2 border-[#8F8683]/40 opacity-40 select-none rounded-[24px]';
+
                     return (
                       <div
                         key={card.id}
                         onClick={() => isCollected && setSelectedCard(card)}
-                        className={`relative rounded-xl border p-3 flex flex-col items-center justify-between text-center binder-card ${
-                          isCollected
-                            ? `ios-glass-card cursor-pointer glow-${card.rarity}`
-                            : 'bg-bg-base/5 border-structural/35 opacity-40 select-none'
-                        }`}
+                        className={`relative p-3.5 flex flex-col items-center justify-between text-center binder-card ${cardStyle}`}
                       >
-                        <div className={`h-24 w-full rounded-lg bg-gradient-to-tr ${isCollected ? card.color : 'from-structural to-structural/50'} flex items-center justify-center text-4xl shadow-inner relative overflow-hidden`}>
+                        <div className={`h-28 w-full rounded-[18px] bg-gradient-to-tr ${isCollected ? card.color : 'from-structural to-structural/50'} flex items-center justify-center text-4xl shadow-inner relative overflow-hidden`}>
                           {!isCollected && <Lock className="text-text-secondary/70 h-6 w-6 absolute z-10" />}
                           {isCollected && (
                             imageErrors[card.id] ? (
@@ -1067,8 +1054,13 @@ const ShopScreen: FC = () => {
                             )
                           )}
                         </div>
-                        <h4 className="font-display text-xs font-bold text-text-primary mt-2 truncate w-full">{card.name}</h4>
-                        <span className="font-hud text-[8px] uppercase tracking-wider text-text-secondary mt-1 block">
+                        <h4 className="font-display text-xs font-bold text-text-primary mt-2.5 truncate w-full">{card.name}</h4>
+                        <span className={`font-hud text-[9px] uppercase tracking-wider font-bold mt-1 px-2 py-0.5 rounded-full border ${
+                          card.rarity === 'legendary' ? 'bg-amber-100 text-amber-800 border-amber-300' :
+                          card.rarity === 'epic' ? 'bg-purple-100 text-purple-800 border-purple-300' :
+                          card.rarity === 'rare' ? 'bg-blue-100 text-blue-800 border-blue-300' :
+                          'bg-gray-100 text-gray-700 border-gray-300'
+                        }`}>
                           {card.rarity}
                         </span>
                       </div>
@@ -1424,17 +1416,27 @@ const ShopScreen: FC = () => {
         .stage.s-rise { background: #0c0814; }
         .stage.s-begin { background: #0c0814; }
         .stage.s-intensity { background: #12091f; }
-        .stage.s-reveal { background: #0a0610; }
+        .vignette-overlay {
+          background: radial-gradient(circle at center, transparent 40%, rgba(250, 246, 240, 0.4));
+        }
+
+        .stage.s-transition,
+        .stage.s-rise,
+        .stage.s-begin,
+        .stage.s-intensity,
+        .stage.s-reveal {
+          background: radial-gradient(circle at 50% 40%, #FFFFFF 0%, #FAF6F0 60%, rgba(217, 188, 242, 0.3) 100%) !important;
+        }
 
         .glyph-wrap {
-          width: 320px;
-          height: 320px;
-          opacity: 0.2;
+          width: 340px;
+          height: 340px;
+          opacity: 0.35;
           transition: opacity 0.8s ease;
         }
-        .stage.s-transition .glyph-wrap { opacity: 0.45; }
-        .stage.s-rise .glyph-wrap { opacity: 0.6; }
-        .stage.s-begin .glyph-wrap { opacity: 0.75; }
+        .stage.s-transition .glyph-wrap { opacity: 0.55; }
+        .stage.s-rise .glyph-wrap { opacity: 0.7; }
+        .stage.s-begin .glyph-wrap { opacity: 0.85; }
         .stage.s-intensity .glyph-wrap { opacity: 1.0; }
         .stage.s-reveal .glyph-wrap { opacity: 0.6; }
 
@@ -1452,10 +1454,10 @@ const ShopScreen: FC = () => {
           transform: scale(1.02);
         }
         .bolt-path {
-          stroke: #8b3ffb;
+          stroke: #F5A991;
           stroke-width: 3.5;
           fill: none;
-          filter: drop-shadow(0 0 6px #8b3ffb);
+          filter: drop-shadow(0 0 10px #FBBF24);
           animation: boltFlashEffect 0.42s ease-out forwards;
         }
         @keyframes boltFlashEffect {
@@ -1469,15 +1471,16 @@ const ShopScreen: FC = () => {
         /* Gold/Ember Particles */
         .gacha-particle {
           bottom: 30%;
-          width: 6px;
-          height: 6px;
-          background: #ff7a3c;
-          box-shadow: 0 0 8px #ff7a3c;
+          width: 8px;
+          height: 8px;
+          border-radius: 9999px;
+          background: #F5A991;
+          box-shadow: 0 0 10px #F5A991;
           animation: particleRise linear forwards;
         }
         .gacha-particle.gold {
-          background: #f3c969;
-          box-shadow: 0 0 8px #f3c969;
+          background: #FBBF24;
+          box-shadow: 0 0 12px #FBBF24;
         }
         @keyframes particleRise {
           0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
@@ -1503,10 +1506,10 @@ const ShopScreen: FC = () => {
         .card-custom {
           width: 210px;
           height: 310px;
-          border-radius: 14px;
-          background: linear-gradient(160deg, #2c1608, #1a0d05 55%, #0d0703);
-          border: 2px solid #6e5326;
-          box-shadow: 0 0 0 1px rgba(243, 201, 105, 0.15), 0 18px 50px rgba(0,0,0,0.6), 0 0 40px rgba(255, 122, 60, 0.12);
+          border-radius: 24px;
+          background: linear-gradient(160deg, #FFFFFF, #FAF6F0 55%, #E6E1F7);
+          border: 2px solid #5C524E;
+          box-shadow: 0 4px 0 #5C524E, 0 10px 25px rgba(0,0,0,0.06);
           display: flex;
           flex-direction: column;
           align-items: center;

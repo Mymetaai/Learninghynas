@@ -36,8 +36,8 @@ export default {
 
       // ── Font families (self-hosted via @fontsource or Google Fonts) ──
       fontFamily: {
-        // Display: titles only. Fraunces, heavy weight.
-        display: ['Fraunces', 'ui-serif', 'Georgia', 'serif'],
+        // Display: titles only. Playfair Display — Serene Lexicon serif.
+        display: ['"Playfair Display"', 'ui-serif', 'Georgia', 'serif'],
         // Body: story text, UI copy. Inter.
         body: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         // Target: Any Spanish/target language text. Atkinson Hyperlegible Next.

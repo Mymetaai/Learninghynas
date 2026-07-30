@@ -1,35 +1,23 @@
-// Persistent top HUD bar with stats + navigation tabs.
-// Row 1: brand, XP/coins/streak stats.
-// Row 2: horizontally-scrollable nav tabs inside a Liquid Glass capsule
-//         with a sliding glass indicator that tracks the active tab.
-import { useRef, useLayoutEffect, useState, useCallback, useEffect } from 'react';
-import type { FC } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { useRef, useCallback, useEffect, type FC } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import { NAV_TABS } from '../app/routes';
 import { useStatsStore } from '../state/statsStore';
 import { useSettingsStore } from '../state/settingsStore';
-import { useAuthStore } from '../state/authStore';
-import { Lock, Sparkles } from 'lucide-react';
-import { AccountUpgradeModal } from './AccountUpgradeModal';
-
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton
+} from '@clerk/clerk-react';
 
 const HUD: FC = () => {
   const xp = useStatsStore((s) => s.xp);
   const coins = useStatsStore((s) => s.coins);
   const streak = useStatsStore((s) => s.streak);
   const { language, setLanguage } = useSettingsStore();
-  const { isAnonymous, userEmail, logout } = useAuthStore();
-  const isUnregistered = isAnonymous || !userEmail;
-  const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
-  const location = useLocation();
-
-
-  // ── Sliding indicator state ──────────────────────────────────────────
-  const navScrollRef = useRef<HTMLDivElement>(null);
-  const tabRefs = useRef<Map<string, HTMLAnchorElement>>(new Map());
-  const [indicator, setIndicator] = useState({ left: 0, width: 0, visible: false });
 
   // ── Edge-Hover Auto-Scrolling ─────────────────────────────────────────
+  const navScrollRef = useRef<HTMLDivElement>(null);
   const scrollIntervalRef = useRef<number | null>(null);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -78,38 +66,10 @@ const HUD: FC = () => {
     };
   }, []);
 
-  const setTabRef = useCallback(
-    (id: string) => (el: HTMLAnchorElement | null) => {
-      if (el) tabRefs.current.set(id, el);
-      else tabRefs.current.delete(id);
-    },
-    [],
-  );
-
-  // Measure the active tab and position the indicator
-  useLayoutEffect(() => {
-    const scrollContainer = navScrollRef.current;
-    if (!scrollContainer) return;
-
-    // Find the active NavLink by aria-current
-    const activeTab = scrollContainer.querySelector<HTMLAnchorElement>('a[aria-current="page"]');
-    if (activeTab) {
-      const containerRect = scrollContainer.getBoundingClientRect();
-      const tabRect = activeTab.getBoundingClientRect();
-      setIndicator({
-        left: tabRect.left - containerRect.left + scrollContainer.scrollLeft,
-        width: tabRect.width,
-        visible: true,
-      });
-    } else {
-      setIndicator((prev) => ({ ...prev, visible: false }));
-    }
-  }, [location.pathname]);
-
   return (
     <header className="nav-glass sticky top-0 z-40">
       <div className="relative z-10 mx-auto max-w-6xl w-full px-2 sm:px-4">
-        {/* Row 1 — Brand + stats */}
+        {/* Row 1 — Brand + stats + Clerk Auth */}
         <div className="flex h-14 items-center justify-between gap-2 sm:gap-4 px-2 sm:px-4">
           {/* Brand / home link */}
           <Link
@@ -127,18 +87,18 @@ const HUD: FC = () => {
             </span>
           </Link>
 
-          {/* Stats cluster — Unified stats font-body / text-primary */}
+          {/* Stats cluster + Clerk Auth Buttons */}
           <div className="flex items-center gap-2 font-body text-xs sm:gap-4 sm:text-sm">
             <Stat
               label="XP"
               value={xp}
-              className="text-text-primary"
+              className="text-text-primary font-bold"
               title={`${xp} experience points`}
             />
             <Stat
               label="coins"
               value={coins}
-              className="text-text-primary"
+              className="text-text-primary font-bold"
               title={`${coins} coins`}
               icon={
                 <div className="coin-3d-container" aria-hidden="true">
@@ -152,7 +112,7 @@ const HUD: FC = () => {
             <Stat
               label="day streak"
               value={streak}
-              className="text-text-primary"
+              className="text-text-primary font-bold"
               title={`${streak}-day streak`}
               icon={
                 <div className="flame-3d-container" aria-hidden="true">
@@ -172,25 +132,7 @@ const HUD: FC = () => {
             >
               📜
             </Link>
-            {isUnregistered && (
-              <button
-                onClick={() => setIsUpgradeModalOpen(true)}
-                className="flex h-8 items-center gap-1 rounded-md bg-accent-action/10 px-2 font-body text-[11px] font-semibold text-accent-action border border-accent-action/30 hover:bg-accent-action hover:text-white transition-all shadow-sm cursor-pointer"
-                aria-label="Save Progress / Create Account"
-                title="Save Your Progress / Create Account"
-              >
-                <Sparkles className="h-3.5 w-3.5" />
-                <span className="hidden sm:inline">Save</span>
-              </button>
-            )}
-            <Link
-              to="/profile"
-              className="flex h-8 w-8 items-center justify-center rounded-md border border-structural text-text-primary transition-colors hover:border-text-secondary hover:bg-bg-elevated-2"
-              aria-label="Profile Settings"
-              title="Profile Settings"
-            >
-              👤
-            </Link>
+
             <select
               value={language}
               onChange={(e) => setLanguage(e.target.value as any)}
@@ -201,14 +143,27 @@ const HUD: FC = () => {
               <option value="en">EN</option>
               <option value="hinglish">Hinglish</option>
             </select>
-            <button
-              onClick={() => logout()}
-              className="flex h-8 w-8 items-center justify-center rounded-md border border-structural text-text-primary transition-colors hover:border-error hover:text-error hover:bg-bg-elevated-2"
-              aria-label="Lock / Sign Out"
-              title="Lock / Sign Out"
-            >
-              <Lock className="h-3.5 w-3.5" />
-            </button>
+
+            {/* Clerk Auth Integration: Logged Out State */}
+            <SignedOut>
+              <SignInButton mode="modal">
+                <button className="bg-[#7D927D] hover:bg-[#6B826B] text-white font-sans text-xs font-semibold px-4 py-2 rounded-full shadow-sm cursor-pointer border-none transition-all">
+                  Sign In
+                </button>
+              </SignInButton>
+            </SignedOut>
+
+            {/* Clerk Auth Integration: Logged In State */}
+            <SignedIn>
+              <UserButton
+                appearance={{
+                  elements: {
+                    avatarBox: "h-8 w-8 rounded-full border border-[#7D927D]/30 shadow-sm"
+                  }
+                }}
+              />
+            </SignedIn>
+
           </div>
         </div>
 
@@ -219,30 +174,17 @@ const HUD: FC = () => {
               ref={navScrollRef}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
-              className="relative flex gap-1 overflow-x-auto px-2 py-1.5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+              className="relative flex gap-2 overflow-x-auto justify-center px-3 py-1.5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
             >
-              {/* Sliding glass indicator */}
-              {indicator.visible && (
-                <span
-                  className="glass-tab-indicator"
-                  style={{
-                    left: `${indicator.left}px`,
-                    width: `${indicator.width}px`,
-                  }}
-                />
-              )}
-
               {NAV_TABS.map((tab) => (
                 <NavLink
                   key={tab.id}
                   to={tab.path}
-                  end={tab.id === 'dashboard'}
-                  ref={setTabRef(tab.id)}
                   className={({ isActive }) =>
-                    `relative z-10 whitespace-nowrap rounded-full px-3 py-1.5 font-body text-[11px] transition-colors duration-200 ${
+                    `relative z-10 whitespace-nowrap rounded-full px-4 py-2 font-body text-xs font-semibold transition-all duration-200 ${
                       isActive
-                        ? 'text-text-primary font-medium'
-                        : 'text-text-secondary hover:text-text-primary/80'
+                        ? 'bg-[#7D927D] text-white shadow-sm'
+                        : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
                     }`
                   }
                 >
@@ -253,11 +195,6 @@ const HUD: FC = () => {
           </div>
         </nav>
       </div>
-
-      <AccountUpgradeModal
-        isOpen={isUpgradeModalOpen}
-        onClose={() => setIsUpgradeModalOpen(false)}
-      />
     </header>
   );
 };

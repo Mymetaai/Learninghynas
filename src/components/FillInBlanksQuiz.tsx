@@ -256,7 +256,6 @@ const FillInBlanksQuiz: FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <span className="text-lg">✍️</span>
           <p className="font-hud text-[10px] uppercase tracking-[0.3em] text-[var(--text-secondary)]">
             Sentence Practice
           </p>
@@ -292,7 +291,7 @@ const FillInBlanksQuiz: FC = () => {
                 : 'bg-[var(--bg-elevated)] hover:bg-[var(--bg-elevated-2)] border border-structural text-[var(--text-secondary)]'
             }`}
           >
-            {cat.emoji} {cat.name}
+            {cat.name}
           </button>
         ))}
       </div>
@@ -313,14 +312,14 @@ const FillInBlanksQuiz: FC = () => {
                   value={answers[q.id] ?? ''}
                   onChange={(e) => handleInputChange(q.id, e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleCheckAnswer(q)}
-                  placeholder="..."
+                  placeholder="type here..."
                   disabled={status === 'correct'}
-                  className={`w-28 text-center bg-[var(--bg-elevated)] border font-target rounded-lg px-2.5 py-1 text-sm focus:outline-none transition-all duration-250 ${
+                  className={`w-32 text-center font-target rounded-xl px-3 py-1.5 text-sm transition-all duration-200 ${
                     status === 'correct'
-                      ? 'border-success bg-success/5 text-success font-bold'
+                      ? 'border-2 border-success bg-success/10 text-success font-bold shadow-sm'
                       : status === 'incorrect'
-                      ? 'border-error bg-error/5 text-error animate-shake'
-                      : 'border-structural focus:border-[var(--accent-action)]/50 focus:shadow-[0_0_8px_rgba(230,72,51,0.15)] text-[var(--text-primary)]'
+                      ? 'border-2 border-error bg-error/10 text-error animate-shake shadow-sm'
+                      : 'recessed-input'
                   }`}
                 />
                 <span>{q.sentenceAfter}</span>

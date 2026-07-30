@@ -24,7 +24,7 @@ const LEVEL_COLORS = [
   'from-amber-500/80 to-amber-600',
   'from-orange-500/80 to-orange-600',
   'from-terracotta/80 to-terracotta',
-  'from-red-500/80 to-red-600',
+  'from-accent-action/80 to-accent-action',
   'from-rose-500/80 to-rose-600',
   'from-pink-500/80 to-pink-600',
   'from-fuchsia-500/80 to-fuchsia-600',
