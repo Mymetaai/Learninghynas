@@ -43,6 +43,32 @@ export const GACHA_CARDS: GachaCardData[] = [
     specialMove: 'Gomu Gomu no Bajrang Gun'
   },
   {
+    id: 'ds-gyomei',
+    name: 'Gyomei Himejima',
+    anime: 'Demon Slayer',
+    rank: 'UR',
+    quote: 'Namu Amida Butsu. We shall eliminate the demons.',
+    attack: 295,
+    defense: 295,
+    imagePlaceholderColor: '#78716C',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/b/b8/Gyomei_anime.png',
+    emoji: '📿🪨',
+    specialMove: 'Stone Breathing Fifth Form: Arcs of Justice'
+  },
+  {
+    id: 'op-kaido',
+    name: 'Kaido of the Beasts',
+    anime: 'One Piece',
+    rank: 'UR',
+    quote: 'If it is one-on-one, Kaido will win.',
+    attack: 298,
+    defense: 290,
+    imagePlaceholderColor: '#4C1D95',
+    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/e/e0/Kaido_Anime_Infobox.png',
+    emoji: '🐉🌩️',
+    specialMove: 'Koso Volcanic Flame Dragon'
+  },
+  {
     id: 'ds-zenitsu-ur',
     name: 'Zenitsu Agatsuma',
     anime: 'Demon Slayer',
@@ -84,6 +110,32 @@ export const GACHA_CARDS: GachaCardData[] = [
 
   // ── SSR (Top 5%) ────────────────────────────────────────────────────────────
   {
+    id: 'ds-sanemi',
+    name: 'Sanemi Shinazugawa',
+    anime: 'Demon Slayer',
+    rank: 'SSR',
+    quote: 'I will shred every single demon into pieces!',
+    attack: 270,
+    defense: 220,
+    imagePlaceholderColor: '#059669',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/0/07/Sanemi_anime.png',
+    emoji: '🌪️⚔️',
+    specialMove: 'Wind Breathing Eighth Form: Primary Gale Slash'
+  },
+  {
+    id: 'ds-tokito',
+    name: 'Muichiro Tokito',
+    anime: 'Demon Slayer',
+    rank: 'SSR',
+    quote: 'The mist will clear, revealing the truth.',
+    attack: 265,
+    defense: 210,
+    imagePlaceholderColor: '#0D9488',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/8/87/Muichiro_anime.png',
+    emoji: '🌫️⚔️',
+    specialMove: 'Mist Breathing Seventh Form: Obscuring Clouds'
+  },
+  {
     id: 'ds-tanjiro',
     name: 'Tanjiro Kamado',
     anime: 'Demon Slayer',
@@ -121,6 +173,19 @@ export const GACHA_CARDS: GachaCardData[] = [
     imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/b/b7/Edward_Newgate_Anime_Infobox.png',
     emoji: '🌊👨‍🦳',
     specialMove: 'Gekishin (Severe Earthquake)'
+  },
+  {
+    id: 'op-bigmom',
+    name: 'Charlotte Linlin (Big Mom)',
+    anime: 'One Piece',
+    rank: 'SSR',
+    quote: 'Life or treat?!',
+    attack: 272,
+    defense: 275,
+    imagePlaceholderColor: '#DB2777',
+    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/2/20/Charlotte_Linlin_Anime_Infobox.png',
+    emoji: '👑🍬',
+    specialMove: 'Maser Cannon / Ikoku Sovereignty'
   },
   {
     id: 'ds-kokushibo',
@@ -163,6 +228,19 @@ export const GACHA_CARDS: GachaCardData[] = [
   },
 
   // ── SR (Top 10%) ────────────────────────────────────────────────────────────
+  {
+    id: 'ds-obanai',
+    name: 'Obanai Iguro',
+    anime: 'Demon Slayer',
+    rank: 'SR',
+    quote: 'I want to die defeating Muzan, and be reborn in a peaceful world.',
+    attack: 225,
+    defense: 210,
+    imagePlaceholderColor: '#475569',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/2/21/Obanai_anime.png',
+    emoji: '🐍⚔️',
+    specialMove: 'Serpent Breathing Fifth Form: Slithering Serpent'
+  },
   {
     id: 'ds-nezuko',
     name: 'Nezuko Kamado',
@@ -214,6 +292,32 @@ export const GACHA_CARDS: GachaCardData[] = [
     imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/4/4f/Portgas_D._Ace_Anime_Infobox.png',
     emoji: '🔥🤠',
     specialMove: 'Enkai: Hibashira (Fire Pillar)'
+  },
+  {
+    id: 'op-jinbe',
+    name: 'Jinbe',
+    anime: 'One Piece',
+    rank: 'SR',
+    quote: 'I am a man who wants to join the future Pirate King!',
+    attack: 215,
+    defense: 240,
+    imagePlaceholderColor: '#0284C7',
+    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/a/a2/Jinbe_Anime_Infobox.png',
+    emoji: '🦈🌊',
+    specialMove: 'Fishman Karate: Vagabond Drill'
+  },
+  {
+    id: 'ds-gyutaro',
+    name: 'Gyutaro',
+    anime: 'Demon Slayer',
+    rank: 'SR',
+    quote: 'I will destroy everyone who has it better than us!',
+    attack: 230,
+    defense: 190,
+    imagePlaceholderColor: '#15803D',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/f/f4/Gyutaro_Anime.png',
+    emoji: '🪓🐍',
+    specialMove: 'Flying Blood Sickles'
   },
   {
     id: 'ds-tomioka',
@@ -335,6 +439,58 @@ export const GACHA_CARDS: GachaCardData[] = [
     specialMove: 'Mil Fleur: Giganteresco Mano'
   },
   {
+    id: 'op-franky',
+    name: 'Franky',
+    anime: 'One Piece',
+    rank: 'Rare',
+    quote: 'SUUUPER!',
+    attack: 170,
+    defense: 180,
+    imagePlaceholderColor: '#0284C7',
+    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/8/8c/Franky_Anime_Post_Timeskip_Infobox.png',
+    emoji: '🦾🤖',
+    specialMove: 'Radical Beam'
+  },
+  {
+    id: 'op-brook',
+    name: 'Brook',
+    anime: 'One Piece',
+    rank: 'Rare',
+    quote: 'Yo-ho-ho-ho!',
+    attack: 160,
+    defense: 145,
+    imagePlaceholderColor: '#475569',
+    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/4/41/Brook_Anime_Post_Timeskip_Infobox.png',
+    emoji: '🎻💀',
+    specialMove: 'Soul Solid Blizzard'
+  },
+  {
+    id: 'ds-kanao',
+    name: 'Kanao Tsuyuri',
+    anime: 'Demon Slayer',
+    rank: 'Rare',
+    quote: 'I will follow my heart and protect my friends.',
+    attack: 170,
+    defense: 160,
+    imagePlaceholderColor: '#A21CAF',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/0/02/Kanao_anime_right_face.png',
+    emoji: '🦋🪙',
+    specialMove: 'Flower Breathing: Equinoctial Vermilion Eye'
+  },
+  {
+    id: 'ds-genya',
+    name: 'Genya Shinazugawa',
+    anime: 'Demon Slayer',
+    rank: 'Rare',
+    quote: 'I will do whatever it takes to become stronger!',
+    attack: 165,
+    defense: 170,
+    imagePlaceholderColor: '#431407',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/c/cb/Genya_Shinazugawa_Full_Body_%28Anime%29.png',
+    emoji: '🔫🩸',
+    specialMove: 'Demon Repulsion Flesh Gun'
+  },
+  {
     id: 'ds-shinobu',
     name: 'Shinobu Kocho',
     anime: 'Demon Slayer',
@@ -426,6 +582,32 @@ export const GACHA_CARDS: GachaCardData[] = [
     imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/8/89/Murata_anime_design.png',
     emoji: '🗡️🧑',
     specialMove: 'Water Breathing Basic Slash'
+  },
+  {
+    id: 'ds-rui',
+    name: 'Rui',
+    anime: 'Demon Slayer',
+    rank: 'Common',
+    quote: 'A family built on fear is unbreakable.',
+    attack: 130,
+    defense: 120,
+    imagePlaceholderColor: '#475569',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/9/95/Rui_anime_2.png',
+    emoji: '🕷️🕸️',
+    specialMove: 'Cutting Thread Cage'
+  },
+  {
+    id: 'ds-enmu',
+    name: 'Enmu',
+    anime: 'Demon Slayer',
+    rank: 'Common',
+    quote: 'Sleep sweet dreams and die in your nightmare.',
+    attack: 125,
+    defense: 115,
+    imagePlaceholderColor: '#334155',
+    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/7/79/Enmu_anime.png',
+    emoji: '😴🚂',
+    specialMove: 'Forced Hypnosis Whispers'
   }
 ];
 
