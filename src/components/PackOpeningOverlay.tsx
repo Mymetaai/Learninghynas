@@ -2,7 +2,7 @@ import { useState, useEffect, type FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Zap, Flame, Compass, Sword } from 'lucide-react';
 import { GachaCard } from './GachaCard';
-import type { GachaCardData, RarityRank } from '../data/gachaData';
+import type { GachaCardData } from '../data/gachaData';
 
 interface PackOpeningOverlayProps {
   isOpen: boolean;
@@ -10,17 +10,19 @@ interface PackOpeningOverlayProps {
   onClose: () => void;
 }
 
-export const getRarityGlowColor = (rank?: RarityRank): string => {
-  switch (rank) {
+export const getRarityGlowColor = (rank?: string): string => {
+  switch ((rank || '').toUpperCase()) {
     case 'UR':
       return 'rgba(255, 215, 0, 0.85)';
     case 'SSR':
       return 'rgba(212, 175, 55, 0.75)';
     case 'SR':
       return 'rgba(192, 192, 192, 0.65)';
-    case 'Rare':
+    case 'R':
+    case 'RARE':
       return 'rgba(125, 146, 125, 0.55)';
-    case 'Common':
+    case 'C':
+    case 'COMMON':
     default:
       return 'rgba(47, 53, 59, 0.45)';
   }

@@ -6,7 +6,7 @@ import { ONE_PIECE_CARDS, type OnePieceCard } from '../content/onePieceCards';
 import { DEMON_SLAYER_CARDS, type DemonSlayerCard } from '../content/demonSlayerCards';
 import GachaCard from '../components/GachaCard';
 import PackOpeningOverlay from '../components/PackOpeningOverlay';
-import { GACHA_CARDS, getRandomGachaCard, type GachaCardData } from '../data/gachaData';
+import { gachaData, GACHA_CARDS, getRandomGachaCard, type GachaCardData } from '../data/gachaData';
 import {
   ShoppingBag,
   Coins,
@@ -243,7 +243,8 @@ const ShopScreen: FC = () => {
   const [unlockedGachaIds, setUnlockedGachaIds] = useState<string[]>(() => [
     'op-luffy', 'op-zoro', 'ds-tanjiro', 'ds-nezuko', 'ds-zenitsu'
   ]);
-  const [gachaFilterRank, setGachaFilterRank] = useState<'all' | 'UR' | 'SSR' | 'SR' | 'Rare' | 'Common'>('all');
+  const [gachaFilterRank, setGachaFilterRank] = useState<'all' | 'UR' | 'SSR' | 'SR' | 'R' | 'C' | 'Rare' | 'Common'>('all');
+  const [selectedSetFilter, setSelectedSetFilter] = useState<'all' | 'Demon Slayer' | 'One Piece'>('all');
 
   const handleDrawPackCard = () => {
     if (coins < DRAW_COST) {
@@ -845,40 +846,57 @@ const ShopScreen: FC = () => {
                   </p>
                 </div>
 
-                {/* Rank Filter Pills */}
-                <div className="flex flex-wrap gap-2">
-                  {(['all', 'UR', 'SSR', 'SR', 'Rare', 'Common'] as const).map((r) => (
-                    <button
-                      key={r}
-                      onClick={() => setGachaFilterRank(r)}
-                      className={`px-3 py-1 rounded-full font-sans text-[10px] font-bold transition-all cursor-pointer border ${
-                        gachaFilterRank === r
-                          ? 'bg-[#7D927D] text-white border-[#2F353B]'
-                          : 'bg-bg-base text-text-secondary border-structural hover:border-text-primary'
-                      }`}
-                    >
-                      {r}
-                    </button>
-                  ))}
+                {/* Set Dropdown Filter & Rank Pills */}
+                <div className="flex flex-wrap items-center gap-3">
+                  <select
+                    value={selectedSetFilter}
+                    onChange={(e) => setSelectedSetFilter(e.target.value as 'all' | 'Demon Slayer' | 'One Piece')}
+                    className="bg-[#F9F7F2] border border-[#7D927D]/20 text-[#2F353B] font-mono text-xs rounded-xl px-3 py-1.5 focus:outline-none cursor-pointer font-bold shadow-sm"
+                  >
+                    <option value="all">All Sets</option>
+                    <option value="Demon Slayer">Demon Slayer</option>
+                    <option value="One Piece">One Piece</option>
+                  </select>
+
+                  <div className="flex flex-wrap gap-1.5">
+                    {(['all', 'UR', 'SSR', 'SR', 'R', 'C'] as const).map((r) => (
+                      <button
+                        key={r}
+                        onClick={() => setGachaFilterRank(r as any)}
+                        className={`px-3 py-1 rounded-full font-sans text-[10px] font-bold transition-all cursor-pointer border ${
+                          gachaFilterRank === r || (gachaFilterRank === 'Rare' && r === 'R') || (gachaFilterRank === 'Common' && r === 'C')
+                            ? 'bg-[#7D927D] text-white border-[#2F353B]'
+                            : 'bg-bg-base text-text-secondary border-structural hover:border-text-primary'
+                        }`}
+                      >
+                        {r}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              {/* Grid of Gacha Cards */}
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-                {GACHA_CARDS.filter((c) => gachaFilterRank === 'all' || c.rank === gachaFilterRank).map((card) => {
-                  const isUnlocked = unlockedGachaIds.includes(card.id);
-                  return (
+              {/* Grid of Gacha Cards (Developer Review Mode: All Unlocked) */}
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 pt-2">
+                {gachaData
+                  .filter((c) => selectedSetFilter === 'all' || c.anime === selectedSetFilter)
+                  .filter((c) => {
+                    if (gachaFilterRank === 'all') return true;
+                    if (gachaFilterRank === 'R' || gachaFilterRank === 'Rare') return c.rank === 'R' || c.rank === 'Rare';
+                    if (gachaFilterRank === 'C' || gachaFilterRank === 'Common') return c.rank === 'C' || c.rank === 'Common';
+                    return c.rank === gachaFilterRank;
+                  })
+                  .map((card) => (
                     <GachaCard
                       key={card.id}
                       card={card}
-                      isUnlocked={isUnlocked}
+                      isUnlocked={true}
                       onClick={() => {
                         setDrawnPackCard(card);
                         setIsPackDrawing(true);
                       }}
                     />
-                  );
-                })}
+                  ))}
               </div>
             </div>
           </>
