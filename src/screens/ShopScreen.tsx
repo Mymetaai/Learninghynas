@@ -754,21 +754,16 @@ const ShopScreen: FC = () => {
               {summonPhase === 's-altar' && (
                 <>
                   <div className="card-static-wrap z-10 relative flex items-center justify-center">
-                    <div className="card-custom border border-text-primary shadow-sm">
-                      <div className="card-emblem">
-                        <div className="text-4xl mb-2 select-none">
-                          {selectedSeries === 'one-piece' ? '🏴‍☠️' : '⚔️'}
-                        </div>
-                      </div>
-                      <div>
-                        <div className="card-title select-none font-serif text-sm tracking-wider text-text-primary font-bold">
-                          {selectedSeries === 'one-piece' ? 'ONE PIECE CARD' : 'KIMETSU CARD'}
-                        </div>
-                        <div className="card-subtitle select-none font-mono text-[10px] font-bold text-accent-action mt-1">
-                          MYSTERY CARD
-                        </div>
-                      </div>
-                      <div className="card-cost select-none font-mono text-xs text-text-secondary font-bold">
+                    <div className="w-56 sm:w-64 aspect-[2.5/3.5] rounded-2xl overflow-hidden border-2 border-[#D4AF37] ring-1 ring-[#D4AF37]/50 shadow-xl relative group transition-transform hover:scale-105 cursor-pointer bg-[#111111]">
+                      {/* High-Fidelity Stitch Pack Image */}
+                      <img
+                        src={selectedSeries === 'one-piece' ? '/cards/op_pack.png' : '/cards/ds_pack.png'}
+                        alt={selectedSeries === 'one-piece' ? 'One Piece Pack' : 'Demon Slayer Pack'}
+                        className="w-full h-full object-cover"
+                      />
+                      {/* Metallic Foil Reflection Sheen */}
+                      <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-amber-200/20 pointer-events-none" />
+                      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-md text-[#FFFDF5] border border-[#D4AF37]/60 font-mono text-[10px] font-bold px-3 py-1 rounded-full whitespace-nowrap shadow-md">
                         Cost: {DRAW_COST} KC
                       </div>
                     </div>

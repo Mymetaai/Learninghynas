@@ -1,6 +1,6 @@
 import { useState, useEffect, type FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Zap, Flame, ShieldAlert } from 'lucide-react';
+import { Sparkles, Zap, Flame, Compass, Sword } from 'lucide-react';
 import { GachaCard } from './GachaCard';
 import type { GachaCardData, RarityRank } from '../data/gachaData';
 
@@ -13,16 +13,16 @@ interface PackOpeningOverlayProps {
 export const getRarityGlowColor = (rank?: RarityRank): string => {
   switch (rank) {
     case 'UR':
-      return 'rgba(255, 215, 0, 0.75)';
+      return 'rgba(255, 215, 0, 0.85)';
     case 'SSR':
-      return 'rgba(212, 175, 55, 0.65)';
+      return 'rgba(212, 175, 55, 0.75)';
     case 'SR':
-      return 'rgba(192, 192, 192, 0.55)';
+      return 'rgba(192, 192, 192, 0.65)';
     case 'Rare':
-      return 'rgba(125, 146, 125, 0.45)';
+      return 'rgba(125, 146, 125, 0.55)';
     case 'Common':
     default:
-      return 'rgba(47, 53, 59, 0.4)';
+      return 'rgba(47, 53, 59, 0.45)';
   }
 };
 
@@ -45,6 +45,8 @@ export const PackOpeningOverlay: FC<PackOpeningOverlayProps> = ({ isOpen, drawnC
 
   const glowColor = getRarityGlowColor(drawnCard.rank);
   const isHighRarity = drawnCard.rank === 'UR' || drawnCard.rank === 'SSR';
+  const isDs = drawnCard.anime === 'Demon Slayer';
+  const packImage = isDs ? '/cards/ds_pack.png' : '/cards/op_pack.png';
 
   return (
     <AnimatePresence>
@@ -62,10 +64,10 @@ export const PackOpeningOverlay: FC<PackOpeningOverlayProps> = ({ isOpen, drawnC
           className="text-center mt-6 z-20 space-y-1"
         >
           <span className="font-serif italic text-xs text-[#D4AF37] tracking-widest uppercase">
-            {isFlipped ? `${drawnCard.rank} Card Summoned` : 'Summoning Secret Lore...'}
+            {isFlipped ? `${drawnCard.rank} Card Summoned` : 'Opening Mystical Pack...'}
           </span>
           <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#FFFDF5] tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-            {isFlipped ? drawnCard.name : 'The Summoning Altar'}
+            {isFlipped ? drawnCard.name : `${drawnCard.anime} Collection`}
           </h2>
         </motion.div>
 
@@ -75,7 +77,7 @@ export const PackOpeningOverlay: FC<PackOpeningOverlayProps> = ({ isOpen, drawnC
           <motion.div
             initial={{ opacity: 0, scale: 0.6 }}
             animate={{
-              opacity: isFlipped ? 1 : 0.25,
+              opacity: isFlipped ? 1 : 0.35,
               scale: isFlipped ? 1.4 : 1
             }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
@@ -88,7 +90,6 @@ export const PackOpeningOverlay: FC<PackOpeningOverlayProps> = ({ isOpen, drawnC
           {/* LIGHTNING & AURA PARTICLES FOR UR / SSR REVEAL */}
           {isFlipped && isHighRarity && (
             <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center">
-              {/* Lightning vectors */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: [0, 1, 0.8, 1], scale: 1.2 }}
@@ -140,31 +141,64 @@ export const PackOpeningOverlay: FC<PackOpeningOverlayProps> = ({ isOpen, drawnC
               style={{ transformStyle: 'preserve-3d' }}
               className="relative aspect-[2.5/3.5] w-full"
             >
-              {/* ── PHASE 1: CARD BACK (FRONT FACE) ─────────────────────────── */}
+              {/* ── PHASE 1: STITCH SERENE LEXICON CARD PACK FOIL (FRONT FACE) ── */}
               <div
-                className="absolute inset-0 rounded-xl overflow-hidden border-2 border-[#D4AF37]/50 bg-[#1E1E1E] p-6 flex flex-col items-center justify-between shadow-2xl backface-hidden"
+                className="absolute inset-0 rounded-xl overflow-hidden border-2 border-[#D4AF37] ring-1 ring-[#D4AF37]/50 shadow-2xl backface-hidden select-none"
                 style={{ backfaceVisibility: 'hidden' }}
               >
-                <div className="w-full flex justify-between items-center text-[#D4AF37]">
-                  <Sparkles className="h-4 w-4" />
-                  <span className="font-mono text-[10px] uppercase font-bold tracking-widest text-[#D4AF37]/80">
-                    MYSTERY CARD
-                  </span>
-                  <Sparkles className="h-4 w-4" />
-                </div>
-
-                <div className="flex flex-col items-center justify-center my-auto space-y-3">
-                  <div className="h-20 w-20 rounded-full bg-[#D4AF37]/10 border-2 border-[#D4AF37]/40 flex items-center justify-center text-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,0.3)]">
-                    <ShieldAlert className="h-10 w-10 animate-pulse" />
+                {/* Check if local Stitch Pack Image exists */}
+                {packImage ? (
+                  <div className="relative w-full h-full">
+                    <img
+                      src={packImage}
+                      alt={`${drawnCard.anime} Pack`}
+                      className="w-full h-full object-cover"
+                    />
+                    {/* Metallic sheen over pack illustration */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-black/50 via-transparent to-amber-200/20 pointer-events-none" />
                   </div>
-                  <div className="w-28 h-0.5 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent" />
-                </div>
+                ) : (
+                  /* Stylized Split Sage / Charcoal Foil Design Fallback */
+                  <div className="relative w-full h-full bg-[#2F353B] flex flex-col justify-between p-4 overflow-hidden">
+                    {/* Diagonal Split Background */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#7D927D] via-[#7D927D] to-transparent w-[140%] h-[140%] -top-1/4 -left-1/4 transform -rotate-12 pointer-events-none opacity-90" />
 
-                <div className="text-center space-y-1">
-                  <p className="font-serif italic text-xs text-[#FFFDF5]/80">
-                    The Altar Awakens
-                  </p>
-                </div>
+                    {/* Top Left Kanji/Emblem Flag */}
+                    <div className="relative z-10 flex justify-between items-start">
+                      <div className="bg-[#2F353B] border border-[#D4AF37]/80 text-[#D4AF37] px-2 py-1 rounded-b-md shadow-md text-xs font-serif font-bold">
+                        {isDs ? '滅' : '海賊'}
+                      </div>
+                      <div className="flex items-center gap-1 text-[#D4AF37]">
+                        <Sparkles className="w-3.5 h-3.5" />
+                        <span className="font-mono text-[9px] uppercase font-bold tracking-widest text-[#FFFDF5]">
+                          MYSTERY CARD
+                        </span>
+                        <Sparkles className="w-3.5 h-3.5" />
+                      </div>
+                    </div>
+
+                    {/* Center Iconography */}
+                    <div className="relative z-10 flex flex-col items-center justify-center my-auto space-y-2 text-center">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#B8860B] border-2 border-[#FFFDF5] flex items-center justify-center text-[#FFFDF5] shadow-[0_0_20px_rgba(212,175,55,0.6)] animate-pulse">
+                        {isDs ? <Sword className="w-8 h-8" /> : <Compass className="w-8 h-8" />}
+                      </div>
+                      <h3 className="font-serif text-lg font-extrabold text-[#FFFDF5] tracking-wide drop-shadow-md">
+                        {isDs ? 'DEMON SLAYER' : 'ONE PIECE'}
+                      </h3>
+                      <span className="bg-[#2F353B]/90 text-[#D4AF37] text-[9px] font-sans font-bold px-3 py-0.5 rounded-full border border-[#D4AF37]/40 uppercase tracking-widest shadow-sm">
+                        Premium Card Pack
+                      </span>
+                    </div>
+
+                    {/* Footer Lore */}
+                    <div className="relative z-10 text-center space-y-0.5">
+                      <div className="w-20 h-0.5 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mx-auto mb-1" />
+                      <p className="font-serif italic text-[11px] text-[#FFFDF5]/90">
+                        The Altar Awakens
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* ── PHASE 2: CARD REVEAL (BACK FACE, ROTATED 180 DEG) ───────── */}
