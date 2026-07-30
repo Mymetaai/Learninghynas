@@ -25,7 +25,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 300,
     defense: 285,
     imagePlaceholderColor: '#C59B27',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/0/08/Yoriichi_Tsugikuni_%28Anime%29.png',
     emoji: '☀️⚔️',
     specialMove: 'Sun Breathing: Dragon Sun Halo Head Dance'
   },
@@ -38,7 +37,7 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 295,
     defense: 280,
     imagePlaceholderColor: '#D4AF37',
-    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/0/06/Nika_Anime_Infobox.png',
+    imageUrl: '/cards/luffy.png',
     emoji: '👒🌩️',
     specialMove: 'Gomu Gomu no Bajrang Gun'
   },
@@ -51,7 +50,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 295,
     defense: 295,
     imagePlaceholderColor: '#78716C',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/b/b8/Gyomei_anime.png',
     emoji: '📿🪨',
     specialMove: 'Stone Breathing Fifth Form: Arcs of Justice'
   },
@@ -64,7 +62,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 298,
     defense: 290,
     imagePlaceholderColor: '#4C1D95',
-    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/e/e0/Kaido_Anime_Infobox.png',
     emoji: '🐉🌩️',
     specialMove: 'Koso Volcanic Flame Dragon'
   },
@@ -77,7 +74,7 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 280,
     defense: 150,
     imagePlaceholderColor: '#EAB308',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/c/c5/Zenitsu_anime_design.png',
+    imageUrl: '/cards/zenitsu.png',
     emoji: '⚡🌩️',
     specialMove: 'Thunderclap and Flash: God Speed'
   },
@@ -90,7 +87,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 290,
     defense: 275,
     imagePlaceholderColor: '#B8860B',
-    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/2/24/Gol_D._Roger_Anime_Infobox.png',
     emoji: '🏴‍☠️👑',
     specialMove: 'Divine Departure (Kamusari)'
   },
@@ -103,7 +99,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 285,
     defense: 290,
     imagePlaceholderColor: '#990000',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/0/0e/Muzan_Kibutsuji_Full_Body_%28Anime%29.png',
     emoji: '🎩🩸',
     specialMove: 'Blood Demon Art: Biokinesis'
   },
@@ -118,7 +113,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 270,
     defense: 220,
     imagePlaceholderColor: '#059669',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/0/07/Sanemi_anime.png',
     emoji: '🌪️⚔️',
     specialMove: 'Wind Breathing Eighth Form: Primary Gale Slash'
   },
@@ -131,7 +125,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 265,
     defense: 210,
     imagePlaceholderColor: '#0D9488',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/8/87/Muichiro_anime.png',
     emoji: '🌫️⚔️',
     specialMove: 'Mist Breathing Seventh Form: Obscuring Clouds'
   },
@@ -144,7 +137,7 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 250,
     defense: 220,
     imagePlaceholderColor: '#1488E0',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/0/05/Tanjiro_anime_right_face.png',
+    imageUrl: '/cards/tanjiro.png',
     emoji: '🎴🔥',
     specialMove: 'Hinokami Kagura: Clear Blue Sky'
   },
@@ -157,7 +150,7 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 270,
     defense: 240,
     imagePlaceholderColor: '#A9A9A9',
-    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/6/66/Shanks_Anime_Infobox.png',
+    imageUrl: '/cards/shanks.png',
     emoji: '⚔️🔴',
     specialMove: 'Gryphon Haki Slash'
   },
@@ -170,7 +163,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 275,
     defense: 260,
     imagePlaceholderColor: '#C0C0C0',
-    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/b/b7/Edward_Newgate_Anime_Infobox.png',
     emoji: '🌊👨‍🦳',
     specialMove: 'Gekishin (Severe Earthquake)'
   },
@@ -183,7 +175,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 272,
     defense: 275,
     imagePlaceholderColor: '#DB2777',
-    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/2/20/Charlotte_Linlin_Anime_Infobox.png',
     emoji: '👑🍬',
     specialMove: 'Maser Cannon / Ikoku Sovereignty'
   },
@@ -196,7 +187,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 265,
     defense: 250,
     imagePlaceholderColor: '#4B0082',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/5/5f/Kokushibo_back_facing.png',
     emoji: '👁️⚔️',
     specialMove: 'Moon Breathing: Catastrophe'
   },
@@ -209,7 +199,7 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 260,
     defense: 215,
     imagePlaceholderColor: '#D97706',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/d/de/Kyojuro_anime_right_face.png',
+    imageUrl: '/cards/rengoku.png',
     emoji: '🔥🦉',
     specialMove: 'Flame Breathing Ninth Form: Rengoku'
   },
@@ -222,7 +212,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 255,
     defense: 235,
     imagePlaceholderColor: '#E0F2FE',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/2/24/Anime_Doma%27s_cult_wear.png',
     emoji: '🪭❄️',
     specialMove: 'Crystalline Divine Bodhisattva'
   },
@@ -237,7 +226,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 225,
     defense: 210,
     imagePlaceholderColor: '#475569',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/2/21/Obanai_anime.png',
     emoji: '🐍⚔️',
     specialMove: 'Serpent Breathing Fifth Form: Slithering Serpent'
   },
@@ -250,7 +238,7 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 210,
     defense: 260,
     imagePlaceholderColor: '#EC4899',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/8/89/Nezuko_anime_design.png',
+    imageUrl: '/cards/nezuko.png',
     emoji: '🎋🌸',
     specialMove: 'Blood Demon Art: Exploding Blood'
   },
@@ -263,7 +251,7 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 235,
     defense: 210,
     imagePlaceholderColor: '#10B981',
-    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/5/52/Roronoa_Zoro_Anime_Post_Timeskip_Infobox.png',
+    imageUrl: '/cards/zoro.png',
     emoji: '⚔️🟢',
     specialMove: 'Santoryu Ogi: Ichidai Sanzen Daisen Sekai'
   },
@@ -276,7 +264,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 225,
     defense: 200,
     imagePlaceholderColor: '#0EA5E9',
-    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/4/4d/Trafalgar_D._Water_Law_Anime_Post_Timeskip_Infobox.png',
     emoji: '🩺🟡',
     specialMove: 'Kroom: Radio Knife'
   },
@@ -289,7 +276,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 230,
     defense: 185,
     imagePlaceholderColor: '#F97316',
-    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/4/4f/Portgas_D._Ace_Anime_Infobox.png',
     emoji: '🔥🤠',
     specialMove: 'Enkai: Hibashira (Fire Pillar)'
   },
@@ -302,7 +288,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 215,
     defense: 240,
     imagePlaceholderColor: '#0284C7',
-    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/a/a2/Jinbe_Anime_Infobox.png',
     emoji: '🦈🌊',
     specialMove: 'Fishman Karate: Vagabond Drill'
   },
@@ -315,7 +300,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 230,
     defense: 190,
     imagePlaceholderColor: '#15803D',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/f/f4/Gyutaro_Anime.png',
     emoji: '🪓🐍',
     specialMove: 'Flying Blood Sickles'
   },
@@ -328,7 +312,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 220,
     defense: 230,
     imagePlaceholderColor: '#2563EB',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/b/b8/Giyu_anime_right_face.png',
     emoji: '🌊⚔️',
     specialMove: 'Water Breathing Eleventh Form: Dead Calm'
   },
@@ -341,7 +324,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 240,
     defense: 210,
     imagePlaceholderColor: '#DB2777',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/9/99/Akaza_IC_anime_render.png',
     emoji: '❄️👊',
     specialMove: 'Destructive Death: Compass Needle'
   },
@@ -354,7 +336,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 225,
     defense: 195,
     imagePlaceholderColor: '#10B981',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/0/07/Tengen_anime.png',
     emoji: '💎🔊',
     specialMove: 'Sound Breathing: Roar'
   },
@@ -369,7 +350,7 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 180,
     defense: 165,
     imagePlaceholderColor: '#8A79AF',
-    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/6/6d/Monkey_D._Luffy_Anime_Post_Timeskip_Infobox.png',
+    imageUrl: '/cards/luffy.png',
     emoji: '👒🍖',
     specialMove: 'Gomu Gomu no Red Hawk'
   },
@@ -382,7 +363,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 185,
     defense: 170,
     imagePlaceholderColor: '#D946EF',
-    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/b/bd/Yamato_Anime_Infobox.png',
     emoji: '📿❄️',
     specialMove: 'Raimei Hakka (Thunder Bagua)'
   },
@@ -395,7 +375,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 175,
     defense: 150,
     imagePlaceholderColor: '#3B82F6',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/f/fe/Inosuke_anime_design.png',
     emoji: '🐗⚔️',
     specialMove: 'Beast Breathing Third Fang: Devour'
   },
@@ -408,7 +387,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 155,
     defense: 140,
     imagePlaceholderColor: '#7D927D',
-    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/6/68/Nami_Anime_Post_Timeskip_Infobox.png',
     emoji: '🍊⚡',
     specialMove: 'Zeus Tempo: Lightning Blast'
   },
@@ -421,7 +399,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 180,
     defense: 160,
     imagePlaceholderColor: '#7D927D',
-    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/b/b6/Sanji_Anime_Post_Timeskip_Infobox.png',
     emoji: '🚬🔥',
     specialMove: 'Diable Jambe: Concasser'
   },
@@ -434,7 +411,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 165,
     defense: 155,
     imagePlaceholderColor: '#7D927D',
-    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/b/bc/Nico_Robin_Anime_Post_Timeskip_Infobox.png',
     emoji: '👁️🌸',
     specialMove: 'Mil Fleur: Giganteresco Mano'
   },
@@ -447,7 +423,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 170,
     defense: 180,
     imagePlaceholderColor: '#0284C7',
-    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/8/8c/Franky_Anime_Post_Timeskip_Infobox.png',
     emoji: '🦾🤖',
     specialMove: 'Radical Beam'
   },
@@ -460,7 +435,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 160,
     defense: 145,
     imagePlaceholderColor: '#475569',
-    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/4/41/Brook_Anime_Post_Timeskip_Infobox.png',
     emoji: '🎻💀',
     specialMove: 'Soul Solid Blizzard'
   },
@@ -473,7 +447,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 170,
     defense: 160,
     imagePlaceholderColor: '#A21CAF',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/0/02/Kanao_anime_right_face.png',
     emoji: '🦋🪙',
     specialMove: 'Flower Breathing: Equinoctial Vermilion Eye'
   },
@@ -486,7 +459,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 165,
     defense: 170,
     imagePlaceholderColor: '#431407',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/c/cb/Genya_Shinazugawa_Full_Body_%28Anime%29.png',
     emoji: '🔫🩸',
     specialMove: 'Demon Repulsion Flesh Gun'
   },
@@ -499,7 +471,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 170,
     defense: 145,
     imagePlaceholderColor: '#7D927D',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/f/f8/Shinobu_anime_design.png',
     emoji: '🦋🟣',
     specialMove: 'Insect Breathing: Dance of the Bee Sting'
   },
@@ -512,7 +483,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 175,
     defense: 150,
     imagePlaceholderColor: '#7D927D',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/5/52/Mitsuri_anime_design.png',
     emoji: '💖🍡',
     specialMove: 'Love Breathing Fifth Form'
   },
@@ -527,7 +497,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 120,
     defense: 110,
     imagePlaceholderColor: '#2F353B',
-    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/b/b8/Koby_Anime_Post_Timeskip_Infobox.png',
     emoji: '⚓👓',
     specialMove: 'Honesty Impact'
   },
@@ -540,7 +509,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 115,
     defense: 105,
     imagePlaceholderColor: '#2F353B',
-    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/f/f7/Buggy_Anime_Post_Timeskip_Infobox.png',
     emoji: '🤡🔴',
     specialMove: 'Mugen Bara Bara'
   },
@@ -553,7 +521,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 110,
     defense: 95,
     imagePlaceholderColor: '#2F353B',
-    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/3/35/Usopp_Anime_Post_Timeskip_Infobox.png',
     emoji: '🎯👃',
     specialMove: 'Green Star Pop Green'
   },
@@ -566,7 +533,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 105,
     defense: 125,
     imagePlaceholderColor: '#2F353B',
-    imageUrl: 'https://static.wikia.nocookie.net/onepiece/images/a/af/Tony_Tony_Chopper_Anime_Post_Timeskip_Infobox.png',
     emoji: '🩺🦌',
     specialMove: 'Monster Point Heavy Gon'
   },
@@ -579,7 +545,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 95,
     defense: 100,
     imagePlaceholderColor: '#2F353B',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/8/89/Murata_anime_design.png',
     emoji: '🗡️🧑',
     specialMove: 'Water Breathing Basic Slash'
   },
@@ -592,7 +557,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 130,
     defense: 120,
     imagePlaceholderColor: '#475569',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/9/95/Rui_anime_2.png',
     emoji: '🕷️🕸️',
     specialMove: 'Cutting Thread Cage'
   },
@@ -605,7 +569,6 @@ export const GACHA_CARDS: GachaCardData[] = [
     attack: 125,
     defense: 115,
     imagePlaceholderColor: '#334155',
-    imageUrl: 'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/7/79/Enmu_anime.png',
     emoji: '😴🚂',
     specialMove: 'Forced Hypnosis Whispers'
   }
