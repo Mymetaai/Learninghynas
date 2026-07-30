@@ -385,13 +385,13 @@ const ShopScreen: FC = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary p-4 sm:p-6 lg:p-8 font-body pb-20">
+    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary p-4 sm:p-6 lg:p-8 font-sans pb-20">
       <div className="mx-auto max-w-5xl">
         
         {/* ── HEADER ────────────────────────────────────────────────── */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 bg-bg-elevated p-6 rounded-[28px] border-2 border-text-primary shadow-[0_4px_0_#5C524E]">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 bg-bg-elevated p-6 rounded-2xl border border-text-primary shadow-sm">
           <div>
-            <h1 className="font-display text-3xl font-bold text-text-primary flex items-center gap-2">
+            <h1 className="font-serif text-3xl font-bold text-text-primary flex items-center gap-2">
               <ShoppingBag className="text-[#F5A991] h-8 w-8" />
               Gacha Shrine
             </h1>
@@ -402,13 +402,13 @@ const ShopScreen: FC = () => {
 
           <div className="flex items-center gap-3">
             {/* Coins indicator */}
-            <div className="flex items-center gap-2 bg-[#F5A991] text-[#2C1E11] border-2 border-[#2C1E11] rounded-full px-5 py-2 shadow-[0_3px_0_#5C524E]">
+            <div className="flex items-center gap-2 bg-[#F5A991] text-[#2C1E11] border border-[#2C1E11] rounded-full px-5 py-2 shadow-sm">
               <Coins className="h-5 w-5 text-[#2C1E11]" />
               <div className="flex flex-col">
-                <span className="font-hud text-lg font-bold leading-none">
+                <span className="font-mono text-lg font-bold leading-none">
                   {coins} KC
                 </span>
-                <span className="font-body text-[9px] uppercase tracking-wider text-[#2C1E11] font-bold">
+                <span className="font-sans text-[9px] uppercase tracking-wider text-[#2C1E11] font-bold">
                   Balance
                 </span>
               </div>
@@ -417,14 +417,14 @@ const ShopScreen: FC = () => {
             {/* Dev Coin Booster */}
             <button
               onClick={claimCheatCoins}
-              className="bg-bg-elevated hover:bg-bg-elevated-2 border-2 border-text-primary text-text-primary font-body text-xs font-bold px-3 py-2 rounded-full shadow-[0_2px_0_#5C524E] transition-all cursor-pointer"
+              className="bg-bg-elevated hover:bg-bg-elevated-2 border border-text-primary text-text-primary font-sans text-xs font-bold px-3 py-2 rounded-full shadow-sm transition-all cursor-pointer"
               title="Get free coins for quick testing"
             >
               +100 KC
             </button>
             <button
               onClick={handleUnlockAll}
-              className="bg-accent-mint hover:bg-accent-mint/90 border-2 border-text-primary text-text-primary font-body text-xs font-bold px-3 py-2 rounded-full shadow-[0_2px_0_#5C524E] transition-all cursor-pointer"
+              className="bg-accent-mint hover:bg-accent-mint/90 border border-text-primary text-text-primary font-sans text-xs font-bold px-3 py-2 rounded-full shadow-sm transition-all cursor-pointer"
               title="Unlock all collectible cards"
             >
               Unlock All
@@ -436,9 +436,9 @@ const ShopScreen: FC = () => {
         <div className="flex justify-center gap-4 mb-6">
           <button
             onClick={() => setActiveTab('kitsune')}
-            className={`px-6 py-2.5 rounded-full font-body text-xs font-bold border-2 transition-all cursor-pointer ${
+            className={`px-6 py-2.5 rounded-full font-sans text-xs font-bold border transition-all cursor-pointer ${
               activeTab === 'kitsune'
-                ? 'bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border-[#2C1E11] shadow-[0_3px_0_#5C524E]'
+                ? 'bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border-[#2C1E11] shadow-sm'
                 : 'bg-bg-elevated text-text-secondary border-structural hover:border-text-primary'
             }`}
           >
@@ -446,9 +446,9 @@ const ShopScreen: FC = () => {
           </button>
           <button
             onClick={() => setActiveTab('anime-gacha')}
-            className={`px-6 py-2.5 rounded-full font-body text-xs font-bold border-2 transition-all cursor-pointer ${
+            className={`px-6 py-2.5 rounded-full font-sans text-xs font-bold border transition-all cursor-pointer ${
               activeTab === 'anime-gacha'
-                ? 'bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border-[#2C1E11] shadow-[0_3px_0_#5C524E]'
+                ? 'bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border-[#2C1E11] shadow-sm'
                 : 'bg-bg-elevated text-text-secondary border-structural hover:border-text-primary'
             }`}
           >
@@ -461,25 +461,25 @@ const ShopScreen: FC = () => {
           <div className="space-y-6">
             
             {/* Featured Daily Deal */}
-            <div className="relative overflow-hidden rounded-2xl border-2 border-accent-action bg-bg-elevated p-5 shadow-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              <div className="absolute top-0 right-0 bg-accent-action text-white font-hud text-[9px] uppercase tracking-widest px-3 py-1 rounded-bl-xl font-bold">
+            <div className="relative overflow-hidden rounded-2xl border border-accent-action bg-bg-elevated p-5 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <div className="absolute top-0 right-0 bg-accent-action text-white font-mono text-[9px] uppercase tracking-widest px-3 py-1 rounded-bl-xl font-bold">
                 Featured Deal • 24h Left
               </div>
               <div className="space-y-1">
-                <span className="font-hud text-[9px] uppercase tracking-wider text-accent-action font-bold bg-accent-action/10 px-2 py-0.5 rounded">
+                <span className="font-mono text-[9px] uppercase tracking-wider text-accent-action font-bold bg-accent-action/10 px-2 py-0.5 rounded">
                   Daily Special
                 </span>
-                <h3 className="font-display text-lg font-bold text-text-primary mt-2">Golden Nine-tail Aura</h3>
-                <p className="font-body text-xs text-text-secondary">Volumetric golden aura effect for your Kitsune companion, Yuki.</p>
+                <h3 className="font-serif text-lg font-bold text-text-primary mt-2">Golden Nine-tail Aura</h3>
+                <p className="font-sans text-xs text-text-secondary">Volumetric golden aura effect for your Kitsune companion, Yuki.</p>
                 <div className="flex items-center gap-2 mt-1.5">
-                  <span className="font-hud text-base font-bold text-accent-action">720 KC</span>
-                  <span className="font-hud text-xs text-text-secondary/65 line-through">900 KC</span>
+                  <span className="font-mono text-base font-bold text-accent-action">720 KC</span>
+                  <span className="font-mono text-xs text-text-secondary/65 line-through">900 KC</span>
                 </div>
               </div>
               <button
                 onClick={handleBuyFeatured}
                 disabled={coins < 720 || inventory.auras.includes('aura_golden')}
-                className={`px-6 py-3 rounded-xl font-body text-xs font-bold shadow-sm transition-all border-none ${
+                className={`px-6 py-3 rounded-xl font-sans text-xs font-bold shadow-sm transition-all border-none ${
                   inventory.auras.includes('aura_golden')
                     ? 'bg-success/15 text-success cursor-default'
                     : coins >= 720
@@ -496,9 +496,9 @@ const ShopScreen: FC = () => {
               
               {/* Render Standard Categories */}
               {SHOP_CATEGORIES.map((cat) => (
-                <div key={cat.id} className="bg-bg-elevated border-2 border-structural rounded-2xl p-5 shadow-md flex flex-col justify-between">
+                <div key={cat.id} className="bg-bg-elevated border border-structural rounded-2xl p-5 shadow-sm flex flex-col justify-between">
                   <div>
-                    <h3 className="font-display text-base font-bold text-text-primary border-b border-structural pb-2 mb-2">
+                    <h3 className="font-serif text-base font-bold text-text-primary border-b border-structural pb-2 mb-2">
                       {cat.label}
                     </h3>
                     <p className="text-text-secondary text-xs mb-4 leading-relaxed">
@@ -519,26 +519,26 @@ const ShopScreen: FC = () => {
                               <div className="flex justify-between items-start">
                                 <span className="text-xl" role="img" aria-label={item.name}>{item.icon}</span>
                                 {consumableKey && quantity > 0 && (
-                                  <span className="font-hud text-[9px] uppercase tracking-wider text-success font-bold bg-success/10 px-2 py-0.5 rounded">
+                                  <span className="font-mono text-[9px] uppercase tracking-wider text-success font-bold bg-success/10 px-2 py-0.5 rounded">
                                     Owned: {quantity}
                                   </span>
                                 )}
                                 {isOwned && (
-                                  <span className="font-hud text-[9px] uppercase tracking-wider text-success font-bold bg-success/10 px-2 py-0.5 rounded">
+                                  <span className="font-mono text-[9px] uppercase tracking-wider text-success font-bold bg-success/10 px-2 py-0.5 rounded">
                                     Owned
                                   </span>
                                 )}
                               </div>
-                              <h4 className="font-display text-sm font-bold text-text-primary mt-1.5">{item.name}</h4>
-                              <p className="font-body text-[11px] text-text-secondary mt-0.5">{item.effect}</p>
+                              <h4 className="font-serif text-sm font-bold text-text-primary mt-1.5">{item.name}</h4>
+                              <p className="font-sans text-[11px] text-text-secondary mt-0.5">{item.effect}</p>
                             </div>
                             
                             <div className="mt-3 pt-2 border-t border-structural/20 flex items-center justify-between">
-                              <span className="font-hud text-xs font-bold text-accent-action">{item.price} KC</span>
+                              <span className="font-mono text-xs font-bold text-accent-action">{item.price} KC</span>
                               <button
                                 onClick={() => handleBuyItem(item)}
                                 disabled={isOwned || !affordable}
-                                className={`px-3 py-1.5 rounded-lg font-body text-[11px] font-bold border-none transition-all ${
+                                className={`px-3 py-1.5 rounded-lg font-sans text-[11px] font-bold border-none transition-all ${
                                   isOwned
                                     ? 'bg-success/10 text-success cursor-default'
                                     : affordable
@@ -557,7 +557,7 @@ const ShopScreen: FC = () => {
                                 const needed = item.price - coins;
                                 return (
                                   <div className="mt-2 pt-2 border-t border-structural/10">
-                                    <div className="flex justify-between text-[9px] font-body font-semibold text-text-secondary">
+                                    <div className="flex justify-between text-[9px] font-sans font-semibold text-text-secondary">
                                       <span>Almost there! ({pct}%)</span>
                                       <span>Need {needed} KC</span>
                                     </div>
@@ -577,23 +577,23 @@ const ShopScreen: FC = () => {
               ))}
 
               {/* Mystery Kitsune Chest Box (Categorized on its own) */}
-              <div className="bg-bg-elevated border-2 border-accent-action/30 rounded-2xl p-5 shadow-md flex flex-col justify-between">
+              <div className="bg-bg-elevated border border-accent-action/30 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
                 <div>
-                  <h3 className="font-display text-base font-bold text-text-primary border-b border-structural pb-2 mb-2">
+                  <h3 className="font-serif text-base font-bold text-text-primary border-b border-structural pb-2 mb-2">
                     Mystery Chest
                   </h3>
                   <p className="text-text-secondary text-xs mb-4 leading-relaxed">
                     Weighted random reward. The engagement centerpiece of the shop!
                   </p>
                   
-                  <div className="border-2 border-dashed border-accent-action/25 bg-accent-action/5 rounded-xl p-4 text-center space-y-3">
+                  <div className="border border-dashed border-accent-action/25 bg-accent-action/5 rounded-xl p-4 text-center space-y-3">
                     <span className="text-4xl block animate-bounce" role="img" aria-label="Chest">🎁</span>
                     <div>
-                      <h4 className="font-display text-sm font-bold text-text-primary">Kitsune Chest</h4>
-                      <p className="font-body text-[11px] text-text-secondary mt-1">Random aura, refunds, or hint tokens! Jackpot rate: 5%</p>
+                      <h4 className="font-serif text-sm font-bold text-text-primary">Kitsune Chest</h4>
+                      <p className="font-sans text-[11px] text-text-secondary mt-1">Random aura, refunds, or hint tokens! Jackpot rate: 5%</p>
                     </div>
 
-                    <div className="border-t border-structural/25 pt-2 text-[10px] text-text-secondary/70 font-hud text-left space-y-1">
+                    <div className="border-t border-structural/25 pt-2 text-[10px] text-text-secondary/70 font-mono text-left space-y-1">
                       <div className="flex justify-between">
                         <span>Pouch Refund (50-150 KC):</span>
                         <span className="font-semibold text-text-primary">40%</span>
@@ -619,11 +619,11 @@ const ShopScreen: FC = () => {
                 </div>
 
                 <div className="mt-4 pt-3 border-t border-structural/20 flex items-center justify-between">
-                  <span className="font-hud text-xs font-bold text-accent-action">200 KC</span>
+                  <span className="font-mono text-xs font-bold text-accent-action">200 KC</span>
                   <button
                     onClick={handleOpenChest}
                     disabled={coins < 200}
-                    className={`px-4 py-2 rounded-xl font-body text-xs font-bold border-none transition-all shadow-sm ${
+                    className={`px-4 py-2 rounded-xl font-sans text-xs font-bold border-none transition-all shadow-sm ${
                       coins >= 200
                         ? 'bg-accent-action hover:bg-accent-action-hover text-white cursor-pointer hover:scale-103'
                         : 'bg-structural/35 text-text-secondary/65 cursor-not-allowed'
@@ -640,7 +640,7 @@ const ShopScreen: FC = () => {
                     const needed = 200 - coins;
                     return (
                       <div className="mt-2 pt-2 border-t border-structural/10">
-                        <div className="flex justify-between text-[9px] font-body font-semibold text-text-secondary">
+                        <div className="flex justify-between text-[9px] font-sans font-semibold text-text-secondary">
                           <span>Almost there! ({pct}%)</span>
                           <span>Need {needed} KC</span>
                         </div>
@@ -656,7 +656,7 @@ const ShopScreen: FC = () => {
             </div>
 
             {/* Help / Tip Link */}
-            <p className="text-center font-body text-xs text-text-secondary pt-4">
+            <p className="text-center font-sans text-xs text-text-secondary pt-4">
               Need more coins?{' '}
               <button
                 onClick={() => setShowCoinTips(true)}
@@ -671,7 +671,7 @@ const ShopScreen: FC = () => {
           <>
             {/* Series Dropdown Selector inside the Gacha Altar tab */}
             <div className="mb-4 flex items-center gap-2">
-              <span className="text-[10px] uppercase font-hud text-text-secondary tracking-wider font-bold">Set:</span>
+              <span className="text-[10px] uppercase font-mono text-text-secondary tracking-wider font-bold">Set:</span>
               <select
                 value={selectedSeries}
                 onChange={(e) => {
@@ -679,15 +679,15 @@ const ShopScreen: FC = () => {
                   setSelectedCard(null);
                   setSelectedHotspot(null);
                 }}
-                className="bg-bg-elevated hover:bg-bg-elevated/80 border-2 border-structural text-text-primary font-hud text-xs rounded-xl px-3 py-1.5 focus:outline-none transition-all cursor-pointer font-bold"
+                className="bg-bg-elevated hover:bg-bg-elevated/80 border border-structural text-text-primary font-mono text-xs rounded-xl px-3 py-1.5 focus:outline-none transition-all cursor-pointer font-bold"
               >
                 <option value="one-piece">🏴‍☠️ One Piece Set</option>
                 <option value="demon-slayer">⚔️ Demon Slayer Set</option>
               </select>
             </div>
 
-            <div className={`gacha-stage-panel stage rounded-[28px] p-6 mb-8 flex flex-col md:flex-row items-center justify-center gap-8 shadow-[0_4px_0_#5C524E] relative overflow-hidden transition-all duration-700 ${summonPhase} ${
-              summonPhase !== 's-altar' ? 'bg-gradient-to-b from-white via-[#FAF6F0] to-[#E6E1F7]/40 border-2 border-text-primary min-h-[620px]' : 'bg-gradient-to-b from-white via-[#FAF6F0] to-[#FAF6F0] border-2 border-text-primary min-h-[460px]'
+            <div className={`gacha-stage-panel stage rounded-2xl p-6 mb-8 flex flex-col md:flex-row items-center justify-center gap-8 shadow-sm relative overflow-hidden transition-all duration-700 ${summonPhase} ${
+              summonPhase !== 's-altar' ? 'bg-gradient-to-b from-white via-[#FAF6F0] to-[#E6E1F7]/40 border border-text-primary min-h-[620px]' : 'bg-gradient-to-b from-white via-[#FAF6F0] to-[#FAF6F0] border border-text-primary min-h-[460px]'
             }`}>
               {/* Grain overlay */}
               <div className="grain-overlay pointer-events-none absolute inset-0 z-5 opacity-[0.02]" />
@@ -754,21 +754,21 @@ const ShopScreen: FC = () => {
               {summonPhase === 's-altar' && (
                 <>
                   <div className="card-static-wrap z-10 relative flex items-center justify-center">
-                    <div className="card-custom border-2 border-text-primary shadow-[0_4px_0_#5C524E]">
+                    <div className="card-custom border border-text-primary shadow-sm">
                       <div className="card-emblem">
                         <div className="text-4xl mb-2 select-none">
                           {selectedSeries === 'one-piece' ? '🏴‍☠️' : '⚔️'}
                         </div>
                       </div>
                       <div>
-                        <div className="card-title select-none font-display text-sm tracking-wider text-text-primary font-bold">
+                        <div className="card-title select-none font-serif text-sm tracking-wider text-text-primary font-bold">
                           {selectedSeries === 'one-piece' ? 'ONE PIECE CARD' : 'KIMETSU CARD'}
                         </div>
-                        <div className="card-subtitle select-none font-hud text-[10px] font-bold text-accent-action mt-1">
+                        <div className="card-subtitle select-none font-mono text-[10px] font-bold text-accent-action mt-1">
                           MYSTERY CARD
                         </div>
                       </div>
-                      <div className="card-cost select-none font-hud text-xs text-text-secondary font-bold">
+                      <div className="card-cost select-none font-mono text-xs text-text-secondary font-bold">
                         Cost: {DRAW_COST} KC
                       </div>
                     </div>
@@ -776,17 +776,17 @@ const ShopScreen: FC = () => {
 
                   <div className="flex-1 max-w-sm space-y-5 z-10 relative">
                     <div>
-                      <h2 className="font-display text-2xl font-bold text-text-primary">Summoning Altar</h2>
+                      <h2 className="font-serif text-2xl font-bold text-text-primary">Summoning Altar</h2>
                       <p className="text-text-secondary text-xs mt-1 leading-relaxed">
                         Unlock {selectedSeries === 'one-piece' ? ONE_PIECE_CARDS.length : DEMON_SLAYER_CARDS.length} mystical cards from this set.
                       </p>
                       
-                      <div className="mt-3.5 p-3.5 bg-bg-elevated/70 border-2 border-text-primary rounded-2xl flex items-start gap-2.5 shadow-[0_3px_0_#5C524E]">
+                      <div className="mt-3.5 p-3.5 bg-bg-elevated/70 border border-text-primary rounded-2xl flex items-start gap-2.5 shadow-sm">
                         <span className="text-xl select-none mt-0.5">
                           {selectedSeries === 'one-piece' ? '🏴‍☠️' : '⚔️'}
                         </span>
                         <div>
-                          <h4 className="font-hud text-[10px] uppercase font-bold text-accent-action tracking-wider leading-none">
+                          <h4 className="font-mono text-[10px] uppercase font-bold text-accent-action tracking-wider leading-none">
                             {selectedSeries === 'one-piece' ? 'Pirate King Lore' : 'Corps Motto'}
                           </h4>
                           <p className="text-xs italic text-text-primary leading-relaxed mt-1">
@@ -798,18 +798,18 @@ const ShopScreen: FC = () => {
                       </div>
                     </div>
 
-                    <div className="space-y-2 border-y-2 border-text-primary/20 py-3.5 font-hud text-xs text-text-secondary">
+                    <div className="space-y-2 border-y border-text-primary/20 py-3.5 font-mono text-xs text-text-secondary">
                       <div className="flex justify-between">
                         <span>Legendary Drop Rate:</span>
-                        <span className="text-amber-500 font-bold">5%</span>
+                        <span className="text-[#C4796B] font-bold">5%</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Epic Drop Rate:</span>
-                        <span className="text-purple-600 font-bold">20%</span>
+                        <span className="text-[#7D927D] font-bold">20%</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Rare Drop Rate:</span>
-                        <span className="text-blue-500 font-bold">35%</span>
+                        <span className="text-[#5A7D8B] font-bold">35%</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Common Drop Rate:</span>
@@ -820,7 +820,7 @@ const ShopScreen: FC = () => {
                     <button
                       onClick={handleDrawPackCard}
                       disabled={coins < DRAW_COST}
-                      className="w-full py-3.5 px-6 rounded-full bg-[#7D927D] hover:bg-[#6B826B] text-white font-body text-xs font-bold border-2 border-[#2F353B] shadow-[0_4px_0_#2F353B] hover:-translate-y-0.5 active:translate-y-0.5 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed uppercase"
+                      className="w-full py-3.5 px-6 rounded-full bg-[#7D927D] hover:bg-[#6B826B] text-white font-sans text-xs font-bold border border-[#2F353B] shadow-sm hover:-translate-y-0.5 active:translate-y-0.5 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed uppercase"
                     >
                       ✦ DRAW x1 ({DRAW_COST} COINS)
                     </button>
@@ -833,13 +833,13 @@ const ShopScreen: FC = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               <StatBox label="Owned Cards" value={stats.collectedCount} color="text-text-primary" />
               <StatBox label="Completion Rate" value={`${stats.rate}%`} color="text-accent-mint" />
-              <StatBox label="Legendaries Found" value={stats.legendaryCount} color="text-amber-500" />
-              <StatBox label="Epics Found" value={stats.epicCount} color="text-purple-600" />
+              <StatBox label="Legendaries Found" value={stats.legendaryCount} color="text-[#C4796B]" />
+              <StatBox label="Epics Found" value={stats.epicCount} color="text-[#7D927D]" />
             </div>
 
             {/* Your Collection (Gacha Cards Grid) */}
-            <div className="bg-bg-elevated border-2 border-text-primary rounded-[28px] p-6 shadow-[0_4px_0_#5C524E]">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b-2 border-text-primary/20 pb-4">
+            <div className="bg-bg-elevated border border-text-primary/20 rounded-2xl p-6 shadow-sm">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b border-text-primary/20 pb-4">
                 <div>
                   <h2 className="font-serif text-2xl font-bold text-text-primary flex items-center gap-2">
                     <Trophy className="text-accent-action h-6 w-6" />
@@ -906,7 +906,7 @@ const ShopScreen: FC = () => {
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="ios-glass-panel rounded-3xl max-w-2xl w-full p-5 shadow-2xl relative flex flex-col md:flex-row gap-6"
+              className="ios-glass-panel rounded-2xl max-w-2xl w-full p-5 shadow-sm relative flex flex-col md:flex-row gap-6"
             >
               <button
                 onClick={() => {
@@ -920,7 +920,7 @@ const ShopScreen: FC = () => {
 
               <div className="flex-1 flex flex-col items-center">
                 <div
-                  className={`w-[200px] h-[300px] rounded-2xl border-2 p-4 text-center flex flex-col justify-between relative overflow-hidden glow-${selectedCard.rarity} pulse-glow-${selectedCard.rarity}`}
+                  className={`w-[200px] h-[300px] rounded-2xl border p-4 text-center flex flex-col justify-between relative overflow-hidden glow-${selectedCard.rarity} pulse-glow-${selectedCard.rarity}`}
                   style={{
                     background: selectedCard.rarity === 'legendary' ? 'linear-gradient(135deg, rgba(58, 42, 8, 0.8) 0%, rgba(31, 21, 5, 0.9) 100%)' :
                                 selectedCard.rarity === 'epic' ? 'linear-gradient(135deg, rgba(36, 19, 56, 0.8) 0%, rgba(21, 11, 34, 0.9) 100%)' :
@@ -929,7 +929,7 @@ const ShopScreen: FC = () => {
                     WebkitBackdropFilter: 'blur(30px)',
                   }}
                 >
-                  <div className="w-full flex items-center justify-between border-b border-white/10 pb-1.5 text-[8px] font-hud font-semibold text-text-secondary/80">
+                  <div className="w-full flex items-center justify-between border-b border-white/10 pb-1.5 text-[8px] font-mono font-semibold text-text-secondary/80">
                     <span>Card Registry</span>
                     <span className="text-ink px-2 py-0.5 rounded-full"
                           style={{ backgroundColor: selectedCard.rarity === 'legendary' ? '#f3c969' :
@@ -953,11 +953,11 @@ const ShopScreen: FC = () => {
                   </div>
 
                   <div className="text-left space-y-1">
-                    <h3 className="font-display text-sm font-bold text-white truncate">{selectedCard.name}</h3>
-                    <p className="font-body text-[10px] text-text-secondary italic line-clamp-2">"{selectedCard.description}"</p>
+                    <h3 className="font-serif text-sm font-bold text-white truncate">{selectedCard.name}</h3>
+                    <p className="font-sans text-[10px] text-text-secondary italic line-clamp-2">"{selectedCard.description}"</p>
                   </div>
 
-                  <div className="w-full border-t border-white/10 pt-1.5 grid grid-cols-2 gap-2 font-hud text-[8px] text-[#ff7a3c] font-semibold">
+                  <div className="w-full border-t border-white/10 pt-1.5 grid grid-cols-2 gap-2 font-mono text-[8px] text-[#ff7a3c] font-semibold">
                     <div className="flex flex-col text-left">
                       <span className="text-white/40 text-[7px] uppercase tracking-wider">Power</span>
                       <span className="truncate">{selectedCard.bounty}</span>
@@ -972,7 +972,7 @@ const ShopScreen: FC = () => {
 
               <div className="flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-display text-lg font-bold text-text-primary">Card Hotspot Analyzer</h3>
+                  <h3 className="font-serif text-lg font-bold text-text-primary">Card Hotspot Analyzer</h3>
                   <p className="text-xs text-text-secondary mt-1">Tap a section header below to analyze its design mechanics and gameplay synergy details.</p>
                   
                   <div className="mt-4 grid grid-cols-2 gap-2">
@@ -993,7 +993,7 @@ const ShopScreen: FC = () => {
 
                   {selectedHotspot && (
                     <div className="mt-4 p-3 ios-glass-inner-panel rounded-2xl">
-                      <h4 className="font-display text-xs font-bold text-text-primary flex items-center gap-1.5">
+                      <h4 className="font-serif text-xs font-bold text-text-primary flex items-center gap-1.5">
                         <Info size={13} className="text-accent-action" />
                         {activeHotspots[selectedHotspot].title}
                       </h4>
@@ -1005,7 +1005,7 @@ const ShopScreen: FC = () => {
                 </div>
 
                 <div className="border-t border-structural pt-3 mt-4 flex items-center justify-between">
-                  <span className="font-hud text-[9px] uppercase tracking-wider text-text-secondary">
+                  <span className="font-mono text-[9px] uppercase tracking-wider text-text-secondary">
                     Card ID: {selectedCard.id}
                   </span>
                   <button
@@ -1013,7 +1013,7 @@ const ShopScreen: FC = () => {
                       setSelectedCard(null);
                       setSelectedHotspot(null);
                     }}
-                    className="bg-accent-action hover:bg-accent-action-hover text-white font-body text-xs font-semibold px-4 py-2 rounded-xl transition-colors cursor-pointer border-none"
+                    className="bg-accent-action hover:bg-accent-action-hover text-white font-sans text-xs font-semibold px-4 py-2 rounded-xl transition-colors cursor-pointer border-none"
                   >
                     Close Entry
                   </button>
@@ -1037,22 +1037,22 @@ const ShopScreen: FC = () => {
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="ios-glass-panel rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl relative space-y-4"
+              className="ios-glass-panel rounded-2xl max-w-sm w-full p-6 text-center shadow-sm relative space-y-4"
             >
               <span className="text-5xl block animate-bounce" role="img" aria-label="Gift">🎁</span>
               <div>
-                <h3 className="font-display text-lg font-bold text-text-primary">Chest Opened!</h3>
-                <p className="font-body text-xs text-text-secondary mt-1">Here is the random reward you pulled:</p>
+                <h3 className="font-serif text-lg font-bold text-text-primary">Chest Opened!</h3>
+                <p className="font-sans text-xs text-text-secondary mt-1">Here is the random reward you pulled:</p>
               </div>
 
               <div className="ios-glass-inner-panel rounded-2xl p-4">
-                <h4 className="font-display text-base font-extrabold text-accent-action">{chestReward.title}</h4>
-                <p className="font-body text-xs text-text-secondary mt-1.5 leading-relaxed">{chestReward.detail}</p>
+                <h4 className="font-serif text-base font-extrabold text-accent-action">{chestReward.title}</h4>
+                <p className="font-sans text-xs text-text-secondary mt-1.5 leading-relaxed">{chestReward.detail}</p>
               </div>
 
               <button
                 onClick={() => setChestReward(null)}
-                className="w-full bg-accent-action hover:bg-accent-action-hover text-white font-body text-xs font-bold py-2.5 rounded-xl border-none cursor-pointer hover:scale-103 transition-transform"
+                className="w-full bg-accent-action hover:bg-accent-action-hover text-white font-sans text-xs font-bold py-2.5 rounded-xl border-none cursor-pointer hover:scale-103 transition-transform"
               >
                 Claim Reward
               </button>
@@ -1074,25 +1074,25 @@ const ShopScreen: FC = () => {
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="ios-glass-panel rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl space-y-4"
+              className="ios-glass-panel rounded-2xl max-w-sm w-full p-6 text-center shadow-sm space-y-4"
             >
               <span className="text-5xl block animate-pulse" role="img" aria-label="Celebration">🎉</span>
               <div>
-                <h3 className="font-display text-lg font-bold text-text-primary">Purchase Successful!</h3>
-                <p className="font-body text-xs text-text-secondary mt-1">Thank you for your purchase!</p>
+                <h3 className="font-serif text-lg font-bold text-text-primary">Purchase Successful!</h3>
+                <p className="font-sans text-xs text-text-secondary mt-1">Thank you for your purchase!</p>
               </div>
 
               <div className="ios-glass-inner-panel rounded-2xl p-4">
-                <h4 className="font-display text-sm font-extrabold text-success">{purchaseCelebration.name}</h4>
-                <p className="font-body text-[11px] text-text-secondary mt-1">Cost: {purchaseCelebration.cost} KC</p>
+                <h4 className="font-serif text-sm font-extrabold text-success">{purchaseCelebration.name}</h4>
+                <p className="font-sans text-[11px] text-text-secondary mt-1">Cost: {purchaseCelebration.cost} KC</p>
                 {purchaseCelebration.desc && (
-                  <p className="font-body text-xs text-text-secondary/90 italic mt-2 border-t border-structural/20 pt-2">{purchaseCelebration.desc}</p>
+                  <p className="font-sans text-xs text-text-secondary/90 italic mt-2 border-t border-structural/20 pt-2">{purchaseCelebration.desc}</p>
                 )}
               </div>
 
               <button
                 onClick={() => setPurchaseCelebration(null)}
-                className="w-full bg-success hover:bg-success-hover text-white font-body text-xs font-bold py-2.5 rounded-xl border-none cursor-pointer hover:scale-103 transition-transform"
+                className="w-full bg-success hover:bg-success-hover text-white font-sans text-xs font-bold py-2.5 rounded-xl border-none cursor-pointer hover:scale-103 transition-transform"
               >
                 Continue
               </button>
@@ -1114,7 +1114,7 @@ const ShopScreen: FC = () => {
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="ios-glass-panel rounded-3xl max-w-md w-full p-6 shadow-2xl relative space-y-4"
+              className="ios-glass-panel rounded-2xl max-w-md w-full p-6 shadow-sm relative space-y-4"
             >
               <button
                 onClick={() => setShowCoinTips(false)}
@@ -1123,11 +1123,11 @@ const ShopScreen: FC = () => {
                 <X size={18} />
               </button>
 
-              <h3 className="font-display text-lg font-bold text-text-primary border-b border-white/20 pb-2">
+              <h3 className="font-serif text-lg font-bold text-text-primary border-b border-white/20 pb-2">
                 💰 How to Earn Kitsune Coins Faster
               </h3>
 
-              <div className="space-y-3.5 font-body text-xs text-text-secondary leading-relaxed">
+              <div className="space-y-3.5 font-sans text-xs text-text-secondary leading-relaxed">
                 <div className="flex gap-2.5 items-start">
                   <span className="text-base select-none">📅</span>
                   <div>
@@ -1160,7 +1160,7 @@ const ShopScreen: FC = () => {
 
               <button
                 onClick={() => setShowCoinTips(false)}
-                className="w-full bg-accent-action hover:bg-accent-action-hover text-white font-body text-xs font-bold py-2.5 rounded-xl border-none cursor-pointer mt-4"
+                className="w-full bg-accent-action hover:bg-accent-action-hover text-white font-sans text-xs font-bold py-2.5 rounded-xl border-none cursor-pointer mt-4"
               >
                 Understood
               </button>
@@ -1580,9 +1580,9 @@ interface StatBoxProps {
 }
 
 const StatBox: FC<StatBoxProps> = ({ label, value, color = "text-text-primary", icon }) => (
-  <div className="bg-paper/5 border border-pencil/20 rounded-xl p-4 text-center flex flex-col justify-center items-center shadow-md">
+  <div className="bg-paper/5 border border-pencil/20 rounded-xl p-4 text-center flex flex-col justify-center items-center shadow-sm">
     {icon && <div className="text-pencil/70 mb-1">{icon}</div>}
-    <div className={`text-xl font-bold font-hud leading-none ${color}`}>{value}</div>
+    <div className={`text-xl font-bold font-mono leading-none ${color}`}>{value}</div>
     <div className="text-[9px] uppercase tracking-wider text-pencil mt-1.5 leading-none">{label}</div>
   </div>
 );

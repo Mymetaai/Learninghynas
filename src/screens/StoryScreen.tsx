@@ -103,21 +103,21 @@ const StoriesLibrary: FC = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary font-body py-6 px-4">
+    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary font-sans py-6 px-4">
       <div className="max-w-6xl mx-auto space-y-6">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b-2 border-text-primary/20 pb-4">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-text-primary/20 pb-4">
           <div>
-            <p className="font-hud text-xs uppercase tracking-[0.3em] font-bold text-accent-action">
+            <p className="font-mono text-xs uppercase tracking-[0.3em] font-bold text-accent-action">
               📚 Biblioteca de Lectura
             </p>
-            <h1 className="font-display text-3xl font-bold text-text-primary">Stories Library</h1>
-            <p className="font-body text-xs text-text-secondary mt-1">
+            <h1 className="font-serif text-3xl font-bold text-text-primary">Stories Library</h1>
+            <p className="font-sans text-xs text-text-secondary mt-1">
               Explore hand-crafted stories designed to build Spanish proficiency in cozy pastel booklets.
             </p>
           </div>
-          <div className="flex items-center gap-2 bg-bg-elevated border-2 border-text-primary rounded-full px-4 py-2 w-full md:w-72 shadow-[0_3px_0_#2C1E11]">
+          <div className="flex items-center gap-2 bg-bg-elevated border border-text-primary rounded-full px-4 py-2 w-full md:w-72 shadow-sm">
             <Search className="h-4 w-4 text-text-secondary shrink-0" />
             <input
               type="text"
@@ -135,9 +135,9 @@ const StoriesLibrary: FC = () => {
             <button
               key={lvl}
               onClick={() => setSelectedLevel(lvl)}
-              className={`px-4 py-2 rounded-full border-2 text-xs font-bold transition-all cursor-pointer ${
+              className={`px-4 py-2 rounded-full border text-xs font-bold transition-all cursor-pointer ${
                 selectedLevel === lvl
-                  ? 'bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border-[#2C1E11] shadow-[0_3px_0_#5C524E] scale-105'
+                  ? 'bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border-[#2C1E11] shadow-sm scale-105'
                   : 'bg-bg-elevated border-structural text-text-secondary hover:border-text-primary hover:text-text-primary'
               }`}
             >
@@ -148,10 +148,10 @@ const StoriesLibrary: FC = () => {
 
         {/* 3x4 Grid Booklet Catalog */}
         {filteredStories.length === 0 ? (
-          <div className="text-center py-16 border-2 border-dashed border-text-primary/30 rounded-[28px] bg-bg-elevated p-8">
+          <div className="text-center py-16 border border-dashed border-text-primary/30 rounded-2xl bg-bg-elevated p-8">
             <BookOpen className="h-10 w-10 text-text-tertiary mx-auto mb-3 animate-bounce" />
-            <p className="font-display text-lg font-bold text-text-primary">No stories match your search.</p>
-            <p className="font-body text-xs text-text-secondary mt-1">Try resetting the level filter or search term.</p>
+            <p className="font-serif text-lg font-bold text-text-primary">No stories match your search.</p>
+            <p className="font-sans text-xs text-text-secondary mt-1">Try resetting the level filter or search term.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -159,34 +159,34 @@ const StoriesLibrary: FC = () => {
               <button
                 key={story.id}
                 onClick={() => navigate(`/stories?story=${story.id}`)}
-                className="w-full text-left rounded-[28px] border-2 border-text-primary bg-bg-elevated p-6 shadow-[0_4px_0_#5C524E] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_6px_0_#5C524E] active:translate-y-0.5 active:shadow-[0_2px_0_#5C524E] group flex flex-col justify-between h-56 cursor-pointer relative overflow-hidden"
+                className="w-full text-left rounded-2xl border border-text-primary bg-bg-elevated p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-sm active:translate-y-0.5 active:shadow-sm group flex flex-col justify-between h-56 cursor-pointer relative overflow-hidden"
               >
                 {/* Book Cover Decorative Tint Header */}
-                <div className="absolute top-0 left-0 right-0 h-3 bg-gradient-to-r from-[#F5A991] via-accent-mint to-accent-lavender border-b-2 border-text-primary" />
+                <div className="absolute top-0 left-0 right-0 h-3 bg-gradient-to-r from-[#F5A991] via-accent-mint to-accent-lavender border-b border-text-primary" />
 
                 <div className="pt-2">
                   <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className={`font-hud text-[10px] uppercase px-2.5 py-0.5 rounded-full border ${getLevelBadgeStyles(story.level)}`}>
+                    <span className={`font-mono text-[10px] uppercase px-2.5 py-0.5 rounded-full border ${getLevelBadgeStyles(story.level)}`}>
                       {story.levelLabel}
                     </span>
-                    <span className="font-hud text-[10px] text-text-secondary font-semibold">
+                    <span className="font-mono text-[10px] text-text-secondary font-semibold">
                       📖 {story.storyLines.length} lines
                     </span>
                   </div>
-                  <h3 className="font-display font-bold text-xl text-text-primary group-hover:text-[#F5A991] transition-colors line-clamp-1">
+                  <h3 className="font-serif font-bold text-xl text-text-primary group-hover:text-[#F5A991] transition-colors line-clamp-1">
                     {story.title}
                   </h3>
-                  <p className="font-body text-xs text-text-secondary mt-2 line-clamp-2 leading-relaxed">
+                  <p className="font-sans text-xs text-text-secondary mt-2 line-clamp-2 leading-relaxed">
                     {story.description}
                   </p>
                 </div>
 
                 <div className="mt-4 pt-3 border-t-2 border-structural flex items-center justify-between">
-                  <span className="font-hud text-[11px] font-bold text-text-primary bg-bg-elevated-2 border border-text-primary/30 rounded-full px-2.5 py-0.5 flex items-center gap-1.5">
+                  <span className="font-mono text-[11px] font-bold text-text-primary bg-bg-elevated-2 border border-text-primary/30 rounded-full px-2.5 py-0.5 flex items-center gap-1.5">
                     <FileText className="h-3.5 w-3.5 text-[#F5A991]" />
                     {story.vocabulary.length} vocab
                   </span>
-                  <span className="font-body text-xs text-[#2C1E11] font-bold bg-[#F5A991] hover:bg-[#EAA088] px-3.5 py-1.5 rounded-full border-2 border-[#2C1E11] shadow-[0_2px_0_#5C524E] flex items-center gap-1 group-hover:translate-x-0.5 transition-all">
+                  <span className="font-sans text-xs text-[#2C1E11] font-bold bg-[#F5A991] hover:bg-[#EAA088] px-3.5 py-1.5 rounded-full border border-[#2C1E11] shadow-sm flex items-center gap-1 group-hover:translate-x-0.5 transition-all">
                     Leer Historia →
                   </span>
                 </div>
@@ -258,7 +258,7 @@ const StoryChapter: FC<StoryChapterProps> = ({
       const translation = (language === 'hinglish' && rawTranslation) ? translateToHinglish(rawTranslation) : rawTranslation;
       return (
         <div key={lineIndex} className="mb-4">
-          <p className="font-body text-lg leading-relaxed text-ink">
+          <p className="font-sans text-lg leading-relaxed text-ink">
             {parts.map((part, pi) => {
               const vocab = vocabLookup.get(part.toLowerCase());
               if (vocab && fullyRevealed) {
@@ -271,7 +271,7 @@ const StoryChapter: FC<StoryChapterProps> = ({
                       e.stopPropagation();
                       handleWordTap(vocab);
                     }}
-                    className={`border-b-2 border-dashed transition-colors cursor-pointer ${
+                    className={`border-b border-dashed transition-colors cursor-pointer ${
                       isRevealed
                         ? 'border-marigold/60 text-marigold hover:bg-marigold/20 font-medium'
                         : 'border-[#F5A991]/60 text-ink hover:bg-[#F5A991]/20 hover:text-marigold font-medium'
@@ -286,7 +286,7 @@ const StoryChapter: FC<StoryChapterProps> = ({
             })}
           </p>
           {showFullTranslation && translation && fullyRevealed && (
-            <p className="font-body text-sm italic text-pencil/80 mt-1 animate-fadeIn leading-relaxed">
+            <p className="font-sans text-sm italic text-pencil/80 mt-1 animate-fadeIn leading-relaxed">
               {translation}
             </p>
           )}
@@ -303,16 +303,16 @@ const StoryChapter: FC<StoryChapterProps> = ({
         {/* Breadcrumb Header */}
         <div className="mb-6 flex items-center justify-between">
           <div>
-            <p className="font-hud text-[10px] uppercase tracking-[0.3em] text-pencil">
+            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-pencil">
               {subtitle} · {questId}
             </p>
-            <h1 className="font-display text-2xl font-bold text-text-primary mt-1">{questTitle}</h1>
+            <h1 className="font-serif text-2xl font-bold text-text-primary mt-1">{questTitle}</h1>
           </div>
           <div className="flex items-center gap-2">
             {storyTranslations && storyTranslations.length > 0 && (
               <button
                 onClick={() => setShowFullTranslation(!showFullTranslation)}
-                className={`flex items-center gap-1.5 text-xs font-hud px-2.5 py-1 rounded transition-colors cursor-pointer border ${
+                className={`flex items-center gap-1.5 text-xs font-mono px-2.5 py-1 rounded transition-colors cursor-pointer border ${
                   showFullTranslation 
                     ? 'bg-[#F5A991] text-[#2C1E11] border-[#2C1E11]'
                     : 'bg-paper/5 border-pencil/20 text-pencil hover:bg-paper/10 hover:text-text-primary'
@@ -325,7 +325,7 @@ const StoryChapter: FC<StoryChapterProps> = ({
             {isLibrary && (
               <button
                 onClick={onContinue}
-                className="flex items-center gap-1 font-hud text-xs text-pencil hover:text-text-primary transition-colors cursor-pointer border border-pencil/20 rounded px-2.5 py-1 bg-paper/5 hover:bg-paper/10 shadow"
+                className="flex items-center gap-1 font-mono text-xs text-pencil hover:text-text-primary transition-colors cursor-pointer border border-pencil/20 rounded px-2.5 py-1 bg-paper/5 hover:bg-paper/10 shadow"
               >
                 <ArrowLeft className="h-3 w-3" /> Biblioteca
               </button>
@@ -334,10 +334,10 @@ const StoryChapter: FC<StoryChapterProps> = ({
         </div>
 
         {/* Story parchment card */}
-        <div className="rounded-2xl border-2 border-[#DDD0B5] bg-[#FAF6EE] p-6 text-ink shadow-[0_12px_40px_rgba(0,0,0,0.4)] relative">
+        <div className="rounded-2xl border border-[#DDD0B5] bg-[#FAF6EE] p-6 text-ink shadow-sm relative">
           
           {/* Postmark stamp detail */}
-          <div className="absolute top-4 right-4 flex items-center justify-center w-8 h-8 rounded-full border border-[#DDD0B5] border-dashed text-xs text-pencil select-none font-hud opacity-60">
+          <div className="absolute top-4 right-4 flex items-center justify-center w-8 h-8 rounded-full border border-[#DDD0B5] border-dashed text-xs text-pencil select-none font-mono opacity-60">
             {isLibrary ? 'LIB' : 'QST'}
           </div>
 
@@ -353,7 +353,7 @@ const StoryChapter: FC<StoryChapterProps> = ({
         <div className="mt-4 rounded-xl border border-pencil/20 bg-paper/5 p-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <span className="text-xl" role="img" aria-hidden="true">🔊</span>
-            <span className="font-hud text-[10px] text-pencil">
+            <span className="font-mono text-[10px] text-pencil">
               Toca las palabras subrayadas para escuchar y ver su significado.
             </span>
           </div>
@@ -362,7 +362,7 @@ const StoryChapter: FC<StoryChapterProps> = ({
         {/* Grammar notes panel */}
         {storyComplete && grammarNotes.length > 0 && (
           <div className="mt-6 space-y-4">
-            <p className="font-hud text-[10px] uppercase tracking-[0.25em] text-marigold flex items-center gap-1.5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-marigold flex items-center gap-1.5">
               <Award className="h-3.5 w-3.5" /> Notas Gramaticales
             </p>
             {grammarNotes.map((gn, i) => (
@@ -370,13 +370,13 @@ const StoryChapter: FC<StoryChapterProps> = ({
                 key={i}
                 className="rounded-xl border border-pencil/20 bg-paper/5 p-4 relative"
               >
-                <h3 className="font-display text-sm font-semibold text-text-primary">
+                <h3 className="font-serif text-sm font-semibold text-text-primary">
                   {gn.title}
                 </h3>
-                <p className="mt-1.5 font-body text-xs leading-relaxed text-text-primary/85">
+                <p className="mt-1.5 font-sans text-xs leading-relaxed text-text-primary/85">
                   {gn.explanation}
                 </p>
-                <p className="mt-2.5 font-body text-xs italic text-text-primary bg-[#F5A991]/10 border border-[#F5A991]/20 rounded px-2.5 py-1">
+                <p className="mt-2.5 font-sans text-xs italic text-text-primary bg-[#F5A991]/10 border border-[#F5A991]/20 rounded px-2.5 py-1">
                   Ejemplo: "{gn.exampleFromStory}"
                 </p>
               </div>
@@ -389,7 +389,7 @@ const StoryChapter: FC<StoryChapterProps> = ({
           <button
             type="button"
             onClick={onContinue}
-            className="mt-6 w-full rounded-xl bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border-2 border-[#2C1E11] shadow-[0_4px_0_#5C524E] px-4 py-3 font-display text-base font-bold transition-all cursor-pointer text-center block"
+            className="mt-6 w-full rounded-xl bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border border-[#2C1E11] shadow-sm px-4 py-3 font-serif text-base font-bold transition-all cursor-pointer text-center block"
           >
             {isLibrary ? 'Volver a la Biblioteca' : 'Continuar a Ejercicios →'}
           </button>

@@ -150,27 +150,27 @@ const ChibiPet: FC = () => {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="absolute bottom-28 sm:bottom-32 w-[calc(100vw-32px)] sm:w-80 h-96 bg-[#FAF6F0] rounded-2xl flex flex-col overflow-hidden border-2 border-[#D9BCF2] shadow-2xl pointer-events-auto left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0"
+              className="absolute bottom-28 sm:bottom-32 w-[calc(100vw-32px)] sm:w-80 h-96 bg-[#FAF6F0] rounded-2xl flex flex-col overflow-hidden border border-[#D9BCF2] shadow-sm pointer-events-auto left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0"
               style={{
                 left: window.innerWidth > 640 ? `calc(${Math.max(15, Math.min(position, 85))}% - 140px)` : '50%',
                 transition: 'left 0.1s ease-out'
               }}
             >
               {/* Header */}
-              <div className="bg-gradient-to-r from-[#F5A991]/20 via-[#D9BCF2]/20 to-[#A0B392]/20 px-4 py-3 border-b-2 border-[#D9BCF2] flex items-center justify-between">
+              <div className="bg-gradient-to-r from-[#F5A991]/20 via-[#D9BCF2]/20 to-[#A0B392]/20 px-4 py-3 border-b border-[#D9BCF2] flex items-center justify-between">
                 <div className="flex items-center gap-2 overflow-hidden">
-                  <div className="h-7 w-7 rounded-full bg-[#FAF6F0] border-2 border-[#2C1E11] flex items-center justify-center text-xs shrink-0 select-none shadow-[0_2px_0_#5C524E]">
+                  <div className="h-7 w-7 rounded-full bg-[#FAF6F0] border border-[#2C1E11] flex items-center justify-center text-xs shrink-0 select-none shadow-sm">
                     🦊
                   </div>
                   <div className="min-w-0">
                     <div className="flex items-center gap-1.5">
-                      <h3 className="font-display text-xs font-bold text-[#2C1E11] shrink-0">Yuki</h3>
+                      <h3 className="font-serif text-xs font-bold text-[#2C1E11] shrink-0">Yuki</h3>
                       {apiError ? (
                         <span className="text-[8px] font-mono bg-[#F5A991]/20 text-[#2C1E11] border border-[#F5A991] px-1.5 py-0.5 rounded truncate font-bold" title={apiError}>
                           Offline ({apiError})
                         </span>
                       ) : isGeminiAvailable() ? (
-                        <span className="text-[7px] font-hud bg-[#F5A991] text-[#2C1E11] px-1.5 py-0.5 rounded-full border border-[#2C1E11] font-bold shrink-0 shadow-sm">
+                        <span className="text-[7px] font-mono bg-[#F5A991] text-[#2C1E11] px-1.5 py-0.5 rounded-full border border-[#2C1E11] font-bold shrink-0 shadow-sm">
                           AI
                         </span>
                       ) : (
@@ -179,7 +179,7 @@ const ChibiPet: FC = () => {
                         </span>
                       )}
                     </div>
-                    <span className="font-hud text-[8px] text-[#8F8683] font-bold tracking-wider uppercase block leading-none mt-0.5">Nine-Tailed Spirit Guide</span>
+                    <span className="font-mono text-[8px] text-[#8F8683] font-bold tracking-wider uppercase block leading-none mt-0.5">Nine-Tailed Spirit Guide</span>
                   </div>
                 </div>
                 <button 
@@ -205,10 +205,10 @@ const ChibiPet: FC = () => {
                     key={index}
                     className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
-                    <div className={`max-w-[85%] rounded-2xl px-3 py-2 text-xs font-body whitespace-pre-line ${
+                    <div className={`max-w-[85%] rounded-2xl px-3 py-2 text-xs font-sans whitespace-pre-line ${
                       msg.sender === 'user' 
-                        ? 'bg-[#F5A991] text-[#2C1E11] border-2 border-[#2C1E11] shadow-[0_2px_0_#5C524E] font-semibold rounded-tr-none' 
-                        : 'bg-white border-2 border-[#2C1E11] text-[#2C1E11] shadow-[0_2px_0_#5C524E] rounded-tl-none'
+                        ? 'bg-[#F5A991] text-[#2C1E11] border border-[#2C1E11] shadow-sm font-semibold rounded-tr-none' 
+                        : 'bg-white border border-[#2C1E11] text-[#2C1E11] shadow-sm rounded-tl-none'
                     }`}>
                       {msg.text}
                     </div>
@@ -216,7 +216,7 @@ const ChibiPet: FC = () => {
                 ))}
                 {isTyping && (
                   <div className="flex justify-start">
-                    <div className="bg-white border-2 border-[#2C1E11] rounded-2xl rounded-tl-none px-4 py-3 text-xs text-[#8F8683] flex gap-1 items-center shadow-[0_2px_0_#5C524E]">
+                    <div className="bg-white border border-[#2C1E11] rounded-2xl rounded-tl-none px-4 py-3 text-xs text-[#8F8683] flex gap-1 items-center shadow-sm">
                       <span className="h-1.5 w-1.5 bg-[#2C1E11] rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                       <span className="h-1.5 w-1.5 bg-[#2C1E11] rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
                       <span className="h-1.5 w-1.5 bg-[#2C1E11] rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
@@ -230,19 +230,19 @@ const ChibiPet: FC = () => {
               <div className="px-3 py-2 flex gap-2 overflow-x-auto bg-[#FAF6F0] border-t border-[#D9BCF2]/40 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 <button 
                   onClick={() => { setInputValue('Ser vs Estar'); }}
-                  className="text-[10px] font-body bg-[#E8DDF2] hover:bg-[#D9BCF2] border-2 border-[#2C1E11] text-[#2C1E11] px-3 py-1 rounded-full cursor-pointer shrink-0 transition-all font-bold shadow-[0_2px_0_#5C524E]"
+                  className="text-[10px] font-sans bg-[#E8DDF2] hover:bg-[#D9BCF2] border border-[#2C1E11] text-[#2C1E11] px-3 py-1 rounded-full cursor-pointer shrink-0 transition-all font-bold shadow-sm"
                 >
                   Ser vs Estar
                 </button>
                 <button 
                   onClick={() => { setInputValue('How to earn coins'); }}
-                  className="text-[10px] font-body bg-[#E8DDF2] hover:bg-[#D9BCF2] border-2 border-[#2C1E11] text-[#2C1E11] px-3 py-1 rounded-full cursor-pointer shrink-0 transition-all font-bold shadow-[0_2px_0_#5C524E]"
+                  className="text-[10px] font-sans bg-[#E8DDF2] hover:bg-[#D9BCF2] border border-[#2C1E11] text-[#2C1E11] px-3 py-1 rounded-full cursor-pointer shrink-0 transition-all font-bold shadow-sm"
                 >
                   Earn Rewards
                 </button>
                 <button 
                   onClick={() => { setInputValue('Workbook exam'); }}
-                  className="text-[10px] font-body bg-[#E8DDF2] hover:bg-[#D9BCF2] border-2 border-[#2C1E11] text-[#2C1E11] px-3 py-1 rounded-full cursor-pointer shrink-0 transition-all font-bold shadow-[0_2px_0_#5C524E]"
+                  className="text-[10px] font-sans bg-[#E8DDF2] hover:bg-[#D9BCF2] border border-[#2C1E11] text-[#2C1E11] px-3 py-1 rounded-full cursor-pointer shrink-0 transition-all font-bold shadow-sm"
                 >
                   Final Exam
                 </button>
@@ -256,11 +256,11 @@ const ChibiPet: FC = () => {
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                   placeholder="Ask Yuki..."
-                  className="flex-1 bg-[#F4F9F4] border-2 border-[#A0B392] rounded-xl px-3 py-2 text-xs text-[#2C1E11] font-semibold focus:outline-none focus:border-[#F5A991] placeholder:text-[#8F8683] shadow-inner"
+                  className="flex-1 bg-[#F4F9F4] border border-[#A0B392] rounded-xl px-3 py-2 text-xs text-[#2C1E11] font-semibold focus:outline-none focus:border-[#F5A991] placeholder:text-[#8F8683] shadow-inner"
                 />
                 <button 
                   onClick={handleSend}
-                  className="h-9 w-9 rounded-xl bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border-2 border-[#2C1E11] shadow-[0_2px_0_#5C524E] flex items-center justify-center transition-all cursor-pointer shrink-0"
+                  className="h-9 w-9 rounded-xl bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border border-[#2C1E11] shadow-sm flex items-center justify-center transition-all cursor-pointer shrink-0"
                 >
                   <Send className="h-4 w-4" />
                 </button>
@@ -285,7 +285,7 @@ const ChibiPet: FC = () => {
                 initial={{ opacity: 0, scale: 0.8, x: 20 }}
                 animate={{ opacity: 1, scale: 1, x: 0 }}
                 exit={{ opacity: 0, scale: 0.8, x: 20 }}
-                className="bg-bg-elevated text-text-primary font-body text-[10px] font-semibold px-3 py-2 rounded-xl rounded-br-none shadow-lg border border-structural max-w-[145px] relative select-none shrink-0"
+                className="bg-bg-elevated text-text-primary font-sans text-[10px] font-semibold px-3 py-2 rounded-xl rounded-br-none shadow-sm border border-structural max-w-[145px] relative select-none shrink-0"
               >
                 {bubbleText}
                 <div className="absolute right-0 bottom-[-5px] w-2 h-2 bg-bg-elevated border-r border-b border-structural rotate-45" />
@@ -297,7 +297,7 @@ const ChibiPet: FC = () => {
           <motion.div
             whileHover={{ scale: 1.15 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="h-28 w-28 cursor-pointer drop-shadow-[0_8px_20px_rgba(74,151,242,0.3)] hover:drop-shadow-[0_12px_32px_rgba(74,151,242,0.5)] transition-all duration-300 relative select-none shrink-0"
+            className="h-28 w-28 cursor-pointer drop-shadow-sm hover:drop-shadow-sm transition-all duration-300 relative select-none shrink-0"
           >
             <Kitsune3D direction={direction} mode={isOpen ? 'wag' : 'idle'} />
             {/* Notification bubble if there is a pending tip - positioned lower relative to the fox geometry */}

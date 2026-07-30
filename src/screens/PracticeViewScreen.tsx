@@ -16,7 +16,7 @@ export default function PracticeViewScreen() {
         <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-3">
           <button
             onClick={() => setActiveSubView('training')}
-            className={`px-5 py-2 rounded-full font-body text-xs font-bold transition-all cursor-pointer ${
+            className={`px-5 py-2 rounded-full font-sans text-xs font-bold transition-all cursor-pointer ${
               activeSubView === 'training'
                 ? 'bg-[#7D927D] text-white shadow-sm'
                 : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
@@ -26,7 +26,7 @@ export default function PracticeViewScreen() {
           </button>
           <button
             onClick={() => setActiveSubView('voice')}
-            className={`px-5 py-2 rounded-full font-body text-xs font-bold transition-all cursor-pointer ${
+            className={`px-5 py-2 rounded-full font-sans text-xs font-bold transition-all cursor-pointer ${
               activeSubView === 'voice'
                 ? 'bg-[#7D927D] text-white shadow-sm'
                 : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
@@ -36,7 +36,7 @@ export default function PracticeViewScreen() {
           </button>
           <button
             onClick={() => setActiveSubView('companion')}
-            className={`px-5 py-2 rounded-full font-body text-xs font-bold transition-all cursor-pointer ${
+            className={`px-5 py-2 rounded-full font-sans text-xs font-bold transition-all cursor-pointer ${
               activeSubView === 'companion'
                 ? 'bg-[#7D927D] text-white shadow-sm'
                 : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
@@ -46,7 +46,7 @@ export default function PracticeViewScreen() {
           </button>
           <button
             onClick={() => setActiveSubView('adventure-map')}
-            className={`px-5 py-2 rounded-full font-body text-xs font-bold transition-all cursor-pointer ${
+            className={`px-5 py-2 rounded-full font-sans text-xs font-bold transition-all cursor-pointer ${
               activeSubView === 'adventure-map'
                 ? 'bg-[#7D927D] text-white shadow-sm'
                 : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'

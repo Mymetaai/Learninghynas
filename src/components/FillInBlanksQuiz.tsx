@@ -252,11 +252,11 @@ const FillInBlanksQuiz: FC = () => {
   const isCompleted = correctCount === currentCategory.questions.length;
 
   return (
-    <section className="glass-surface border border-pencil/20 rounded-2xl p-6 shadow-xl flex flex-col h-full bg-paper/5">
+    <section className="glass-surface border border-pencil/20 rounded-2xl p-6 shadow-sm flex flex-col h-full bg-paper/5">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <p className="font-hud text-[10px] uppercase tracking-[0.3em] text-[var(--text-secondary)]">
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--text-secondary)]">
             Sentence Practice
           </p>
         </div>
@@ -264,7 +264,7 @@ const FillInBlanksQuiz: FC = () => {
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="flex items-center gap-1 bg-success/10 border border-success/30 text-success text-[10px] uppercase tracking-wider font-hud px-2.5 py-1 rounded-full"
+            className="flex items-center gap-1 bg-success/10 border border-success/30 text-success text-[10px] uppercase tracking-wider font-mono px-2.5 py-1 rounded-full"
           >
             <Award className="h-3 w-3" />
             Perfect Score!
@@ -272,10 +272,10 @@ const FillInBlanksQuiz: FC = () => {
         )}
       </div>
 
-      <h2 className="font-display text-xl font-bold text-[var(--text-primary)] mb-1">
+      <h2 className="font-serif text-xl font-bold text-[var(--text-primary)] mb-1">
         Fill in the Blanks
       </h2>
-      <p className="font-body text-xs text-[var(--text-secondary)] mb-6">
+      <p className="font-sans text-xs text-[var(--text-secondary)] mb-6">
         Complete the sentences using appropriate conversational terms.
       </p>
 
@@ -285,9 +285,9 @@ const FillInBlanksQuiz: FC = () => {
           <button
             key={cat.id}
             onClick={() => setActiveTab(cat.id)}
-            className={`px-3 py-1.5 rounded-full text-xs font-hud tracking-wide whitespace-nowrap transition-all duration-200 cursor-pointer ${
+            className={`px-3 py-1.5 rounded-full text-xs font-mono tracking-wide whitespace-nowrap transition-all duration-200 cursor-pointer ${
               activeTab === cat.id
-                ? 'bg-[var(--accent-action)] text-white shadow-md'
+                ? 'bg-[var(--accent-action)] text-white shadow-sm'
                 : 'bg-[var(--bg-elevated)] hover:bg-[var(--bg-elevated-2)] border border-structural text-[var(--text-secondary)]'
             }`}
           >
@@ -305,7 +305,7 @@ const FillInBlanksQuiz: FC = () => {
           return (
             <div key={q.id} className="relative flex flex-col gap-2">
               {/* Question Text with input inside */}
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-3 font-body text-sm font-semibold text-[var(--text-primary)]">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-3 font-sans text-sm font-semibold text-[var(--text-primary)]">
                 <span>{q.sentenceBefore}</span>
                 <input
                   type="text"
@@ -316,9 +316,9 @@ const FillInBlanksQuiz: FC = () => {
                   disabled={status === 'correct'}
                   className={`w-32 text-center font-target rounded-xl px-3 py-1.5 text-sm transition-all duration-200 ${
                     status === 'correct'
-                      ? 'border-2 border-success bg-success/10 text-success font-bold shadow-sm'
+                      ? 'border border-success bg-success/10 text-success font-bold shadow-sm'
                       : status === 'incorrect'
-                      ? 'border-2 border-error bg-error/10 text-error animate-shake shadow-sm'
+                      ? 'border border-error bg-error/10 text-error animate-shake shadow-sm'
                       : 'recessed-input'
                   }`}
                 />
@@ -341,7 +341,7 @@ const FillInBlanksQuiz: FC = () => {
               </div>
 
               {/* Translation/context */}
-              <p className="font-body text-[11px] text-[var(--text-secondary)] italic leading-relaxed">
+              <p className="font-sans text-[11px] text-[var(--text-secondary)] italic leading-relaxed">
                 Translation: &ldquo;{q.translation}&rdquo;
               </p>
 
@@ -349,7 +349,7 @@ const FillInBlanksQuiz: FC = () => {
               <div className="flex items-center justify-between mt-1">
                 <button
                   onClick={() => handleToggleHint(q.id)}
-                  className="flex items-center gap-1 text-[10px] font-hud uppercase tracking-wider text-[var(--text-tertiary)] hover:text-[var(--accent-action)] transition-colors cursor-pointer"
+                  className="flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-[var(--text-tertiary)] hover:text-[var(--accent-action)] transition-colors cursor-pointer"
                 >
                   <HelpCircle className="h-3.5 w-3.5" />
                   {showHints[q.id] ? 'Hide Hint' : 'Need Hint?'}
@@ -359,7 +359,7 @@ const FillInBlanksQuiz: FC = () => {
                   <button
                     onClick={() => handleCheckAnswer(q)}
                     disabled={!hasAnswer}
-                    className={`px-3 py-1 rounded-lg font-hud text-[10px] uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                    className={`px-3 py-1 rounded-lg font-mono text-[10px] uppercase tracking-wider transition-all duration-200 cursor-pointer ${
                       hasAnswer
                         ? 'bg-[var(--accent-action)]/15 border border-[var(--accent-action)]/30 text-[var(--accent-action)] hover:bg-[var(--accent-action)]/25'
                         : 'bg-pencil/5 border border-pencil/10 text-pencil/40 cursor-not-allowed'
@@ -377,7 +377,7 @@ const FillInBlanksQuiz: FC = () => {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    className="overflow-hidden bg-[var(--bg-elevated-2)] border border-structural/40 rounded-xl mt-1.5 p-3 text-xs font-body text-[var(--text-secondary)]"
+                    className="overflow-hidden bg-[var(--bg-elevated-2)] border border-structural/40 rounded-xl mt-1.5 p-3 text-xs font-sans text-[var(--text-secondary)]"
                   >
                     <div className="flex gap-1.5">
                       <Sparkles className="h-3.5 w-3.5 text-marigold shrink-0 mt-0.5" />
@@ -400,12 +400,12 @@ const FillInBlanksQuiz: FC = () => {
 
       {/* Footer controls */}
       <div className="mt-8 pt-4 border-t border-structural/30 flex items-center justify-between">
-        <span className="font-hud text-[10px] text-[var(--text-secondary)]">
+        <span className="font-mono text-[10px] text-[var(--text-secondary)]">
           Completed: {correctCount} / {currentCategory.questions.length}
         </span>
         <button
           onClick={handleResetQuiz}
-          className="flex items-center gap-1 text-[10px] font-hud uppercase tracking-wider text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
+          className="flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
         >
           <RefreshCw className="h-3 w-3" />
           Reset Quiz

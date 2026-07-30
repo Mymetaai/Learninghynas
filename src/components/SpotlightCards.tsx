@@ -207,11 +207,11 @@ const SpotlightCardItem: FC<SpotlightCardItemProps> = ({
         filter: isDimmed ? 'blur(0.5px)' : 'none'
       }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
-      className="relative rounded-3xl p-6 cursor-pointer overflow-hidden border border-[#777775]/20 bg-white shadow-sm group transition-all duration-300 select-none"
+      className="relative rounded-2xl p-6 cursor-pointer overflow-hidden border border-[#777775]/20 bg-white shadow-sm group transition-all duration-300 select-none"
     >
       {/* ── AURORA AMBIENT GLOW BEHIND CARD ───────────────────────────────── */}
       <div
-        className={`absolute -inset-1 rounded-3xl blur-xl transition-opacity duration-500 pointer-events-none ${
+        className={`absolute -inset-1 rounded-2xl blur-xl transition-opacity duration-500 pointer-events-none ${
           isHovered ? 'opacity-70' : 'opacity-0'
         }`}
         style={{
@@ -221,7 +221,7 @@ const SpotlightCardItem: FC<SpotlightCardItemProps> = ({
 
       {/* ── DYNAMIC SPOTLIGHT BEAM ────────────────────────────────────────── */}
       <motion.div
-        className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{
           background: useTransform(
             [spotX, spotY],

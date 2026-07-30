@@ -18,7 +18,7 @@ const DevNav = () => {
             key={r.id}
             to={r.path}
             className={({ isActive }) =>
-              `whitespace-nowrap rounded-md px-2.5 py-1 font-body text-[11px] transition-colors ${
+              `whitespace-nowrap rounded-md px-2.5 py-1 font-sans text-[11px] transition-colors ${
                 isActive
                   ? 'bg-accent-action text-bg-base font-bold'
                   : 'text-text-secondary hover:bg-bg-elevated hover:text-text-primary'

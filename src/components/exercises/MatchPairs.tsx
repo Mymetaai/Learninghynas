@@ -132,9 +132,9 @@ const MatchPairs: FC<MatchPairsProps> = ({
   return (
     <div>
       {context && (
-        <p className="mb-2 font-body text-[10px] text-text-secondary">{context}</p>
+        <p className="mb-2 font-sans text-[10px] text-text-secondary">{context}</p>
       )}
-      <p className="mb-4 font-body text-base text-text-primary">{prompt}</p>
+      <p className="mb-4 font-sans text-base text-text-primary">{prompt}</p>
 
       <div className="flex gap-4">
         {/* Left column */}
@@ -148,7 +148,7 @@ const MatchPairs: FC<MatchPairsProps> = ({
                 type="button"
                 whileTap={!matched ? { scale: 0.97 } : undefined}
                 onClick={() => !matched && setSelectedLeft(item)}
-                className={`w-full rounded-xl border px-3 py-2.5 font-body text-sm text-left transition-colors border-none cursor-pointer ${
+                className={`w-full rounded-xl border px-3 py-2.5 font-sans text-sm text-left transition-colors border-none cursor-pointer ${
                   matched
                     ? 'border border-success/60 bg-success/10 text-success font-bold'
                     : selected
@@ -175,7 +175,7 @@ const MatchPairs: FC<MatchPairsProps> = ({
                 transition={{ duration: 0.4 }}
                 whileTap={!matched && selectedLeft ? { scale: 0.97 } : undefined}
                 onClick={() => !matched && selectedLeft && handleRightTap(item, index)}
-                className={`w-full rounded-xl border px-3 py-2.5 font-body text-sm text-left transition-colors border-none cursor-pointer ${
+                className={`w-full rounded-xl border px-3 py-2.5 font-sans text-sm text-left transition-colors border-none cursor-pointer ${
                   matched
                     ? 'border border-success/60 bg-success/10 text-success font-bold'
                     : selectedLeft
@@ -194,7 +194,7 @@ const MatchPairs: FC<MatchPairsProps> = ({
         <motion.p
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-3 font-body text-sm text-success font-semibold"
+          className="mt-3 font-sans text-sm text-success font-semibold"
         >
           ✓ All pairs matched!
         </motion.p>

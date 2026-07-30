@@ -337,19 +337,19 @@ const SpeakingScreen: FC = () => {
       <div className="mx-auto max-w-6xl">
         {/* ═══ Header ═══ */}
         <div className="mb-6">
-          <p className="font-hud text-[10px] uppercase tracking-[0.3em] text-pencil">
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-pencil">
             Desafío de Pronunciación
           </p>
           <div className="flex items-center justify-between mt-1">
-            <h1 className="font-display text-2xl font-bold text-text-primary">Voice Arena</h1>
+            <h1 className="font-serif text-2xl font-bold text-text-primary">Voice Arena</h1>
             {/* Session Streak */}
             {sessionStreak > 0 && (
               <div className="flex items-center gap-1.5 streak-glow">
                 <Flame className="h-5 w-5 text-accent-action" />
-                <span className="font-display text-lg font-bold text-accent-action">
+                <span className="font-serif text-lg font-bold text-accent-action">
                   {sessionStreak}
                 </span>
-                <span className="font-body text-[10px] text-pencil uppercase tracking-wider">
+                <span className="font-sans text-[10px] text-pencil uppercase tracking-wider">
                   Streak
                 </span>
               </div>
@@ -378,7 +378,7 @@ const SpeakingScreen: FC = () => {
                   key={level}
                   ref={(el) => { tabRefs.current[level] = el; }}
                   onClick={() => handleLevelChange(level)}
-                  className={`relative z-10 px-3 py-1.5 rounded-full font-hud text-[11px] tracking-wide transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                  className={`relative z-10 px-3 py-1.5 rounded-full font-mono text-[11px] tracking-wide transition-all duration-200 cursor-pointer whitespace-nowrap ${
                     isActive
                       ? 'font-bold'
                       : 'text-text-secondary hover:text-text-primary'
@@ -404,7 +404,7 @@ const SpeakingScreen: FC = () => {
               }}
             />
           </div>
-          <span className="font-body text-[11px] text-text-secondary whitespace-nowrap">
+          <span className="font-sans text-[11px] text-text-secondary whitespace-nowrap">
             {completedCount}/25 completed
           </span>
         </div>
@@ -413,7 +413,7 @@ const SpeakingScreen: FC = () => {
         <div className="mb-5 flex flex-wrap items-center gap-2">
           <button
             onClick={() => setSpeedMode((p) => !p)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-hud tracking-wider transition-all cursor-pointer border ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-mono tracking-wider transition-all cursor-pointer border ${
               speedMode
                 ? 'bg-accent-action/15 border-accent-action/30 text-accent-action'
                 : 'bg-bg-elevated-2 border-structural text-text-secondary hover:text-text-primary'
@@ -424,7 +424,7 @@ const SpeakingScreen: FC = () => {
           </button>
           <button
             onClick={() => setAutoAdvance((p) => !p)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-hud tracking-wider transition-all cursor-pointer border ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-mono tracking-wider transition-all cursor-pointer border ${
               autoAdvance
                 ? 'bg-success/15 border-success/30 text-success'
                 : 'bg-bg-elevated-2 border-structural text-text-secondary hover:text-text-primary'
@@ -435,7 +435,7 @@ const SpeakingScreen: FC = () => {
           </button>
           <button
             onClick={toggleShuffle}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-hud tracking-wider transition-all cursor-pointer border ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-mono tracking-wider transition-all cursor-pointer border ${
               isShuffled
                 ? 'bg-info/15 border-info/30 text-info'
                 : 'bg-bg-elevated-2 border-structural text-text-secondary hover:text-text-primary'
@@ -451,11 +451,11 @@ const SpeakingScreen: FC = () => {
           {/* ─── Left Column: Exercise Sidebar ─── */}
           <section className="lg:col-span-4 space-y-3">
             <div className="flex items-center justify-between px-1">
-              <h2 className="font-hud text-[10px] uppercase tracking-wider text-pencil">
+              <h2 className="font-mono text-[10px] uppercase tracking-wider text-pencil">
                 Speaking Exercises
               </h2>
               <span
-                className="font-body text-[9px] px-2 py-0.5 rounded-full border"
+                className="font-sans text-[9px] px-2 py-0.5 rounded-full border"
                 style={{
                   color: levelMeta.color,
                   borderColor: levelMeta.borderColor,
@@ -479,7 +479,7 @@ const SpeakingScreen: FC = () => {
                     onClick={() => handleSelectChallenge(idx)}
                     className={`stagger-item card-hover-lift w-full text-left rounded-xl border p-3 transition-all duration-200 cursor-pointer group ${
                       isActive
-                        ? 'bg-bg-elevated border-accent-action/40 text-text-primary shadow-md'
+                        ? 'bg-bg-elevated border-accent-action/40 text-text-primary shadow-sm'
                         : 'bg-bg-elevated-2 border-structural text-text-primary hover:bg-structural/50'
                     }`}
                     style={{ animationDelay: `${idx * 0.03}s` }}
@@ -487,7 +487,7 @@ const SpeakingScreen: FC = () => {
                     <div className="flex items-center justify-between gap-2">
                       <div className="flex items-center gap-2">
                         <span
-                          className="font-body text-[9px] font-bold uppercase px-1.5 py-0.5 rounded"
+                          className="font-sans text-[9px] font-bold uppercase px-1.5 py-0.5 rounded"
                           style={{
                             color: levelMeta.color,
                             borderColor: levelMeta.borderColor,
@@ -501,7 +501,7 @@ const SpeakingScreen: FC = () => {
                           <CheckCircle2 className="h-3.5 w-3.5 text-success" />
                         )}
                       </div>
-                      <span className="font-body text-[9px] text-text-secondary">
+                      <span className="font-sans text-[9px] text-text-secondary">
                         #{idx + 1}
                       </span>
                     </div>
@@ -509,13 +509,13 @@ const SpeakingScreen: FC = () => {
                     {/* Hover-to-reveal translation */}
                     <div className="relative mt-1">
                       <p
-                        className={`font-body text-[11px] truncate transition-all duration-300 ${
+                        className={`font-sans text-[11px] truncate transition-all duration-300 ${
                           isActive ? 'text-text-secondary' : 'text-text-tertiary'
                         } blur-reveal-light`}
                       >
                         {getTranslation(ch.translation)}
                       </p>
-                      <span className="absolute inset-0 flex items-center font-body text-[9px] text-text-tertiary/60 pointer-events-none group-hover:opacity-0 transition-opacity">
+                      <span className="absolute inset-0 flex items-center font-sans text-[9px] text-text-tertiary/60 pointer-events-none group-hover:opacity-0 transition-opacity">
                         <Eye className="h-3 w-3 mr-1 opacity-40" />
                         Hover to reveal
                       </span>
@@ -527,18 +527,18 @@ const SpeakingScreen: FC = () => {
           </section>
 
           {/* ─── Right Column: Speaking Arena ─── */}
-          <section className="lg:col-span-8 glass-surface rounded-2xl p-5 sm:p-6 shadow-2xl flex flex-col justify-between min-h-[520px]">
+          <section className="lg:col-span-8 glass-surface rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col justify-between min-h-[520px]">
             {/* Active Challenge Display */}
             <div
               key={phraseKey}
               className="text-center py-5 bg-paper/[0.02] border border-pencil/10 rounded-xl p-5 fade-slide-in"
             >
               <div className="flex items-center justify-center gap-2 mb-3">
-                <span className="font-hud text-[9px] uppercase tracking-widest text-pencil">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-pencil">
                   Spanish Phrase to Speak
                 </span>
                 {speedMode && isRecording && speedTimer !== null && (
-                  <span className="font-display text-sm font-bold text-accent-action animate-pulse">
+                  <span className="font-serif text-sm font-bold text-accent-action animate-pulse">
                     {speedTimer}s
                   </span>
                 )}
@@ -547,7 +547,7 @@ const SpeakingScreen: FC = () => {
               {/* Key Focus badge */}
               <div className="flex justify-center mb-3">
                 <span
-                  className="inline-flex items-center gap-1 font-body text-[10px] px-2.5 py-1 rounded-full border"
+                  className="inline-flex items-center gap-1 font-sans text-[10px] px-2.5 py-1 rounded-full border"
                   style={{
                     color: levelMeta.color,
                     borderColor: levelMeta.borderColor,
@@ -560,7 +560,7 @@ const SpeakingScreen: FC = () => {
               </div>
 
               {/* Animated phrase — word by word */}
-              <p className="font-display text-2xl sm:text-3xl font-extrabold text-text-primary tracking-wide leading-relaxed">
+              <p className="font-serif text-2xl sm:text-3xl font-extrabold text-text-primary tracking-wide leading-relaxed">
                 {activeChallenge.phrase.split(/\s+/).map((word, i) => (
                   <span
                     key={`${phraseKey}-${i}`}
@@ -574,10 +574,10 @@ const SpeakingScreen: FC = () => {
 
               {/* Hover-to-reveal translation */}
               <div className="mt-3 relative inline-block group cursor-help">
-                <p className="font-body text-sm text-pencil/90 italic blur-reveal">
+                <p className="font-sans text-sm text-pencil/90 italic blur-reveal">
                   "{getTranslation(activeChallenge.translation)}"
                 </p>
-                <span className="absolute inset-0 flex items-center justify-center font-body text-[10px] text-text-tertiary/70 pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
+                <span className="absolute inset-0 flex items-center justify-center font-sans text-[10px] text-text-tertiary/70 pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
                   <Eye className="h-3.5 w-3.5 mr-1.5 opacity-50" />
                   Hover to reveal meaning
                 </span>
@@ -586,7 +586,7 @@ const SpeakingScreen: FC = () => {
               {/* TTS play button */}
               <button
                 onClick={playTTS}
-                className="mt-4 mx-auto flex items-center gap-2 bg-teal-deep/10 border border-teal-deep/20 hover:bg-teal-deep/20 text-teal-deep font-hud text-xs px-4 py-2 rounded-xl transition-all cursor-pointer hover:scale-105"
+                className="mt-4 mx-auto flex items-center gap-2 bg-teal-deep/10 border border-teal-deep/20 hover:bg-teal-deep/20 text-teal-deep font-mono text-xs px-4 py-2 rounded-xl transition-all cursor-pointer hover:scale-105"
                 title="Listen to native voice pronunciation"
               >
                 <Volume2 className="h-4.5 w-4.5" />
@@ -600,10 +600,10 @@ const SpeakingScreen: FC = () => {
             >
               <HelpCircle className="h-5 w-5 text-info shrink-0 mt-0.5" />
               <div>
-                <h4 className="font-body text-[10px] uppercase tracking-wider text-info font-bold">
+                <h4 className="font-sans text-[10px] uppercase tracking-wider text-info font-bold">
                   Pronunciation Tip
                 </h4>
-                <p className="font-body text-xs text-text-primary mt-1 leading-relaxed">
+                <p className="font-sans text-xs text-text-primary mt-1 leading-relaxed">
                   {activeChallenge.pronunciationTip}
                 </p>
               </div>
@@ -631,11 +631,11 @@ const SpeakingScreen: FC = () => {
                   {/* Stop button */}
                   <button
                     onClick={stopRecording}
-                    className="relative h-16 w-16 rounded-full bg-accent-action border-2 border-text-primary text-text-primary flex items-center justify-center cursor-pointer shadow-[0_4px_0_#5C524E] hover:scale-105 transition-all"
+                    className="relative h-16 w-16 rounded-full bg-accent-action border border-text-primary text-text-primary flex items-center justify-center cursor-pointer shadow-sm hover:scale-105 transition-all"
                   >
                     <MicOff className="h-7 w-7 relative z-10" />
                   </button>
-                  <p className="font-body text-xs text-text-primary animate-pulse font-bold">
+                  <p className="font-sans text-xs text-text-primary animate-pulse font-bold">
                     Listening... Say the phrase in Spanish
                     {speedMode && speedTimer !== null && (
                       <span className="ml-2 text-accent-action">({speedTimer}s left)</span>
@@ -651,12 +651,12 @@ const SpeakingScreen: FC = () => {
                     <div className="pulse-ring pulse-ring-3" />
                     <button
                       onClick={startRecording}
-                      className="relative z-10 h-16 w-16 rounded-full bg-accent-action hover:bg-accent-action-hover flex items-center justify-center text-bg-base hover:scale-105 transition-transform cursor-pointer shadow-lg"
+                      className="relative z-10 h-16 w-16 rounded-full bg-accent-action hover:bg-accent-action-hover flex items-center justify-center text-bg-base hover:scale-105 transition-transform cursor-pointer shadow-sm"
                     >
                       <Mic className="h-7 w-7" />
                     </button>
                   </div>
-                  <p className="font-body text-xs text-text-secondary">
+                  <p className="font-sans text-xs text-text-secondary">
                     Tap the microphone to speak
                     {speedMode && (
                       <span className="ml-1 text-accent-action font-bold">(5s timer)</span>
@@ -679,7 +679,7 @@ const SpeakingScreen: FC = () => {
               <div className="mt-5 p-4 rounded-xl bg-bg-elevated border border-structural space-y-4 fade-slide-in">
                 {/* Word-by-word feedback */}
                 <div>
-                  <span className="font-body text-[9px] uppercase tracking-widest text-text-secondary">
+                  <span className="font-sans text-[9px] uppercase tracking-widest text-text-secondary">
                     Pronunciation Feedback
                   </span>
                   <div className="mt-2 flex flex-wrap gap-x-2 gap-y-1.5 text-lg font-target tracking-[0.015em]">
@@ -699,7 +699,7 @@ const SpeakingScreen: FC = () => {
                         </span>
                       ))
                     ) : (
-                      <span className="text-text-secondary italic text-sm font-body">
+                      <span className="text-text-secondary italic text-sm font-sans">
                         Evaluating...
                       </span>
                     )}
@@ -732,12 +732,12 @@ const SpeakingScreen: FC = () => {
                             style={{ transition: 'stroke-dashoffset 0.8s ease' }}
                           />
                         </svg>
-                        <div className="absolute inset-0 flex items-center justify-center font-body text-xs font-bold text-text-primary">
+                        <div className="absolute inset-0 flex items-center justify-center font-sans text-xs font-bold text-text-primary">
                           {score}%
                         </div>
                       </div>
                       <div>
-                        <h4 className="font-display font-bold text-sm text-text-primary">
+                        <h4 className="font-serif font-bold text-sm text-text-primary">
                           {score >= 80 ? '¡Excelente Trabajo!' : 'Inténtalo de Nuevo'}
                         </h4>
                         <p className="text-text-secondary text-xs mt-0.5">
@@ -753,7 +753,7 @@ const SpeakingScreen: FC = () => {
                       {hasEarnedBonus && (
                         <div className="bg-accent-action/10 border border-accent-action/20 rounded-xl px-3 py-2 flex items-center gap-2 text-accent-action fade-slide-in shrink-0">
                           <Trophy className="h-4.5 w-4.5 shrink-0" />
-                          <div className="font-body text-[10px] leading-tight">
+                          <div className="font-sans text-[10px] leading-tight">
                             <p className="font-bold uppercase tracking-wider">Bonus</p>
                             <p className="mt-0.5 text-text-primary">+10 XP · +5 Coins</p>
                           </div>
@@ -764,7 +764,7 @@ const SpeakingScreen: FC = () => {
                       {autoAdvance &&
                         hasEarnedBonus &&
                         activeChallengeIndex < levelChallenges.length - 1 && (
-                          <div className="flex items-center gap-1 text-success text-[10px] font-body animate-pulse">
+                          <div className="flex items-center gap-1 text-success text-[10px] font-sans animate-pulse">
                             <ChevronRight className="h-3.5 w-3.5" />
                             Next in 2s...
                           </div>

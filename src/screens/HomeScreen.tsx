@@ -406,7 +406,7 @@ const HomeScreen: FC = () => {
             {userData.recommendedLessons.map((lesson) => (
               <div
                 key={lesson.id}
-                className="bg-white border border-[#777775]/20 rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow"
+                className="bg-white border border-[#777775]/20 rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between hover:shadow-sm transition-shadow"
               >
                 {/* Top half */}
                 <div className="bg-[#F9F7F2] p-6 flex flex-col justify-between h-32 border-b border-[#777775]/20 relative">

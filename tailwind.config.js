@@ -34,15 +34,21 @@ export default {
         marigold: 'var(--accent-action)',
       },
 
-      // ── Font families (self-hosted via @fontsource or Google Fonts) ──
+      // ── Font families (Serene Lexicon system) ────────────────────────
       fontFamily: {
-        // Display: titles only. Playfair Display — Serene Lexicon serif.
-        display: ['"Playfair Display"', 'ui-serif', 'Georgia', 'serif'],
-        // Body: story text, UI copy. Inter.
-        body: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        // Target: Any Spanish/target language text. Atkinson Hyperlegible Next.
+        // PRIMARY — use these in all new code:
+        // font-serif  → Titles, headings. Playfair Display.
+        serif: ['"Playfair Display"', 'ui-serif', 'Georgia', 'serif'],
+        // font-sans   → Body text, UI copy. Inter.
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        // font-mono   → HUD/data: XP, timers, counters. JetBrains Mono.
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        // font-target → Spanish / target-language text. Atkinson Hyperlegible Next.
         target: ['"Atkinson Hyperlegible Next"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        // HUD/data: XP, timers, counters. JetBrains Mono.
+
+        // LEGACY aliases (backward-compat, will be removed later):
+        display: ['"Playfair Display"', 'ui-serif', 'Georgia', 'serif'],
+        body: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         hud: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
     },

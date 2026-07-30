@@ -93,10 +93,10 @@ const Flashcard: FC<FlashcardProps> = ({
         <motion.div
           animate={{ opacity: isFlipped ? 0 : 1 }}
           transition={{ duration: 0.15 }}
-          className={`absolute inset-0 rounded-2xl border flex flex-col items-center justify-center p-5 shadow-xl
+          className={`absolute inset-0 rounded-2xl border flex flex-col items-center justify-center p-5 shadow-sm
             ${isFront
-              ? 'bg-gradient-to-br from-[var(--bg-elevated)] to-[var(--bg-elevated-2)] border-[var(--accent-action)]/40 shadow-[0_8px_32px_rgba(0,0,0,0.25)]'
-              : 'bg-[var(--bg-elevated)] border-[var(--structural)] shadow-lg'
+              ? 'bg-gradient-to-br from-[var(--bg-elevated)] to-[var(--bg-elevated-2)] border-[var(--accent-action)]/40 shadow-sm'
+              : 'bg-[var(--bg-elevated)] border-[var(--structural)] shadow-sm'
             }`}
           style={{
             backfaceVisibility: 'hidden',
@@ -105,20 +105,20 @@ const Flashcard: FC<FlashcardProps> = ({
           }}
         >
           {/* Decorative corner marks */}
-          <span className="absolute top-3 left-3 text-[var(--accent-action)] opacity-30 text-lg font-display">✦</span>
-          <span className="absolute bottom-3 right-3 text-[var(--accent-action)] opacity-30 text-lg font-display">✦</span>
+          <span className="absolute top-3 left-3 text-[var(--accent-action)] opacity-30 text-lg font-serif">✦</span>
+          <span className="absolute bottom-3 right-3 text-[var(--accent-action)] opacity-30 text-lg font-serif">✦</span>
 
           {/* Spanish word */}
-          <p className="font-display text-2xl sm:text-3xl font-bold text-[var(--text-primary)] text-center leading-tight">
+          <p className="font-serif text-2xl sm:text-3xl font-bold text-[var(--text-primary)] text-center leading-tight">
             {word.word}
           </p>
-          <p className="mt-2 font-hud text-[10px] uppercase tracking-[0.2em] text-[var(--text-tertiary)]">
+          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--text-tertiary)]">
             Español
           </p>
 
           {/* Subtle tap hint on the front card */}
           {isFront && (
-            <p className="absolute bottom-4 font-body text-[9px] text-[var(--text-tertiary)] opacity-60">
+            <p className="absolute bottom-4 font-sans text-[9px] text-[var(--text-tertiary)] opacity-60">
               tap to flip
             </p>
           )}
@@ -128,7 +128,7 @@ const Flashcard: FC<FlashcardProps> = ({
         <motion.div
           animate={{ opacity: isFlipped ? 1 : 0 }}
           transition={{ duration: 0.15 }}
-          className="absolute inset-0 rounded-2xl border bg-gradient-to-br from-[var(--bg-elevated-2)] to-[var(--bg-elevated)] border-[var(--accent-action)]/30 shadow-xl flex flex-col items-center justify-center p-5 gap-3"
+          className="absolute inset-0 rounded-2xl border bg-gradient-to-br from-[var(--bg-elevated-2)] to-[var(--bg-elevated)] border-[var(--accent-action)]/30 shadow-sm flex flex-col items-center justify-center p-5 gap-3"
           style={{
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
@@ -137,7 +137,7 @@ const Flashcard: FC<FlashcardProps> = ({
           }}
         >
           {/* English meaning */}
-          <p className="font-display text-xl sm:text-2xl font-bold text-[var(--accent-action)] text-center">
+          <p className="font-serif text-xl sm:text-2xl font-bold text-[var(--accent-action)] text-center">
             {word.meaning}
           </p>
 
@@ -149,13 +149,13 @@ const Flashcard: FC<FlashcardProps> = ({
             <p className="font-target text-sm text-[var(--text-primary)] italic">
               &ldquo;{word.example}&rdquo;
             </p>
-            <p className="font-body text-xs text-[var(--text-secondary)] mt-1">
+            <p className="font-sans text-xs text-[var(--text-secondary)] mt-1">
               {word.exampleTranslation}
             </p>
           </div>
 
           {/* Pronunciation */}
-          <p className="font-hud text-[9px] text-[var(--text-tertiary)] uppercase tracking-wider mt-1">
+          <p className="font-mono text-[9px] text-[var(--text-tertiary)] uppercase tracking-wider mt-1">
             {word.pronunciation}
           </p>
         </motion.div>
@@ -222,14 +222,14 @@ const FlashcardFan: FC = () => {
       {/* Section header */}
       <div className="flex items-center gap-2 mb-1">
         <span className="text-lg">🃏</span>
-        <p className="font-hud text-[10px] uppercase tracking-[0.3em] text-[var(--text-secondary)]">
+        <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--text-secondary)]">
           Flashcard Shuffle
         </p>
       </div>
-      <h2 className="font-display text-xl font-bold text-[var(--text-primary)] mb-1">
+      <h2 className="font-serif text-xl font-bold text-[var(--text-primary)] mb-1">
         Watch &amp; tap to learn
       </h2>
-      <p className="font-body text-xs text-[var(--text-secondary)] mb-8">
+      <p className="font-sans text-xs text-[var(--text-secondary)] mb-8">
         Cards shuffle automatically — tap any card to flip and see its meaning.
       </p>
 

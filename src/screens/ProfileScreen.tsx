@@ -36,7 +36,7 @@ const ProfileScreen: React.FC = () => {
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden rounded-3xl border border-structural bg-bg-elevated p-6 shadow-md mb-8"
+        className="relative overflow-hidden rounded-2xl border border-structural bg-bg-elevated p-6 shadow-sm mb-8"
       >
         <div className="absolute top-0 right-0 h-32 w-32 rounded-full bg-[#7D927D]/10 blur-2xl pointer-events-none" />
 
@@ -52,10 +52,10 @@ const ProfileScreen: React.FC = () => {
 
           {/* User info */}
           <div className="flex-1 text-center sm:text-left">
-            <h2 className="font-display text-xl font-bold text-text-primary">
+            <h2 className="font-serif text-xl font-bold text-text-primary">
               {userDisplayName}
             </h2>
-            <p className="font-body text-xs text-text-secondary mt-0.5 flex items-center justify-center sm:justify-start gap-1">
+            <p className="font-sans text-xs text-text-secondary mt-0.5 flex items-center justify-center sm:justify-start gap-1">
               <Mail className="h-3 w-3" /> {userEmailAddress}
             </p>
           </div>
@@ -63,7 +63,7 @@ const ProfileScreen: React.FC = () => {
           {/* Clerk Sign Out button if signed in */}
           {isSignedIn && (
             <SignOutButton>
-              <button className="flex items-center justify-center gap-1.5 rounded-xl border border-structural bg-bg-elevated px-4 py-2 font-body text-xs font-semibold text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2 transition-all shadow-sm self-center border-none cursor-pointer">
+              <button className="flex items-center justify-center gap-1.5 rounded-full border border-structural bg-bg-elevated px-4 py-2 font-sans text-xs font-semibold text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2 transition-all shadow-sm self-center border-none cursor-pointer">
                 Sign Out
               </button>
             </SignOutButton>
@@ -88,8 +88,8 @@ const ProfileScreen: React.FC = () => {
             <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-full bg-bg-elevated text-xs shadow-inner">
               {stat.icon}
             </div>
-            <h4 className="mt-2 font-hud text-lg font-bold text-text-primary tabular-nums">{stat.value}</h4>
-            <p className="font-body text-[10px] text-text-secondary font-medium tracking-wider uppercase mt-0.5">{stat.label}</p>
+            <h4 className="mt-2 font-mono text-lg font-bold text-text-primary tabular-nums">{stat.value}</h4>
+            <p className="font-sans text-[10px] text-text-secondary font-medium tracking-wider uppercase mt-0.5">{stat.label}</p>
           </motion.div>
         ))}
       </div>
@@ -99,13 +99,13 @@ const ProfileScreen: React.FC = () => {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="rounded-3xl border border-structural bg-bg-elevated p-6 shadow-md"
+        className="rounded-2xl border border-structural bg-bg-elevated p-6 shadow-sm"
       >
         <div className="mb-6 flex items-center justify-between border-b border-structural/30 pb-4">
-          <h3 className="font-display text-lg font-bold text-text-primary flex items-center gap-2">
+          <h3 className="font-serif text-lg font-bold text-text-primary flex items-center gap-2">
             <Trophy className="h-5 w-5 text-[#7D927D]" /> Stamp Achievements
           </h3>
-          <span className="font-body text-xs font-semibold text-text-secondary">
+          <span className="font-sans text-xs font-semibold text-text-secondary">
             {achievements.filter((a) => a.earned).length} / {achievements.length} Unlocked
           </span>
         </div>
@@ -124,15 +124,15 @@ const ProfileScreen: React.FC = () => {
                 {a.earned ? a.icon : '🔒'}
               </div>
               <div className="flex-1">
-                <h4 className="font-body text-xs font-semibold text-text-primary">{a.title}</h4>
-                <p className="font-body text-[11px] text-text-secondary mt-0.5">{a.desc}</p>
+                <h4 className="font-sans text-xs font-semibold text-text-primary">{a.title}</h4>
+                <p className="font-sans text-[11px] text-text-secondary mt-0.5">{a.desc}</p>
               </div>
               {a.earned ? (
-                <div className="rounded-full bg-[#7D927D]/10 px-2 py-0.5 font-body text-[9px] font-bold text-[#7D927D] border border-[#7D927D]/20">
+                <div className="rounded-full bg-[#7D927D]/10 px-2 py-0.5 font-sans text-[9px] font-bold text-[#7D927D] border border-[#7D927D]/20">
                   Earned
                 </div>
               ) : (
-                <div className="rounded-full bg-text-tertiary/10 px-2 py-0.5 font-body text-[9px] font-bold text-text-secondary border border-structural">
+                <div className="rounded-full bg-text-tertiary/10 px-2 py-0.5 font-sans text-[9px] font-bold text-text-secondary border border-structural">
                   Locked
                 </div>
               )}

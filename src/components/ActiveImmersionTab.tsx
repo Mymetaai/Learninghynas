@@ -154,11 +154,11 @@ const ActiveImmersionTab: FC = () => {
     return (
       <div className="space-y-6">
         {/* Header */}
-        <div className="bg-bg-elevated border border-structural rounded-2xl p-6 shadow-lg relative overflow-hidden">
+        <div className="bg-bg-elevated border border-structural rounded-2xl p-6 shadow-sm relative overflow-hidden">
           <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
             <Sparkles className="w-48 h-48 text-accent-action" />
           </div>
-          <h2 className="font-display text-xl font-bold text-text-primary mb-1">
+          <h2 className="font-serif text-xl font-bold text-text-primary mb-1">
             🔥 Active Immersion
           </h2>
           <p className="text-xs text-text-secondary max-w-2xl leading-relaxed">
@@ -166,7 +166,7 @@ const ActiveImmersionTab: FC = () => {
             your AI coach adapts to your level in real time.
           </p>
           {isGeminiAvailable() && (
-            <span className="inline-flex items-center gap-1 mt-3 bg-accent-action/10 text-accent-action px-2.5 py-1 rounded-full text-[10px] font-hud border border-accent-action/25 animate-pulse">
+            <span className="inline-flex items-center gap-1 mt-3 bg-accent-action/10 text-accent-action px-2.5 py-1 rounded-full text-[10px] font-mono border border-accent-action/25 animate-pulse">
               <BrainCircuit className="h-3 w-3" /> Powered by Gemini 3.5
             </span>
           )}
@@ -180,7 +180,7 @@ const ActiveImmersionTab: FC = () => {
               <button
                 key={mode.id}
                 onClick={() => setMode(mode.id)}
-                className="cursor-pointer text-left bg-bg-elevated border border-structural hover:border-accent-action/50 rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-200 group"
+                className="cursor-pointer text-left bg-bg-elevated border border-structural hover:border-accent-action/50 rounded-2xl p-6 shadow-sm hover:shadow-sm transition-all duration-200 group"
               >
                 <div className="flex items-start gap-4">
                   <span className="text-3xl p-3 bg-bg-elevated-2 rounded-xl border border-structural shadow-inner group-hover:scale-110 transition-transform">
@@ -189,7 +189,7 @@ const ActiveImmersionTab: FC = () => {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                       <ModeIcon className="h-4 w-4 text-accent-action shrink-0" />
-                      <h3 className="font-display text-base font-bold text-text-primary group-hover:text-accent-action transition-colors">
+                      <h3 className="font-serif text-base font-bold text-text-primary group-hover:text-accent-action transition-colors">
                         {mode.label}
                       </h3>
                     </div>
@@ -218,7 +218,7 @@ const ActiveImmersionTab: FC = () => {
     return (
       <div className="space-y-6">
         {/* Back + Mode Header */}
-        <div className="bg-bg-elevated border border-structural rounded-2xl p-6 shadow-lg relative overflow-hidden">
+        <div className="bg-bg-elevated border border-structural rounded-2xl p-6 shadow-sm relative overflow-hidden">
           <button
             onClick={handleBackToModes}
             className="flex items-center gap-1.5 text-xs text-text-secondary hover:text-text-primary mb-4 cursor-pointer bg-transparent border-none"
@@ -228,7 +228,7 @@ const ActiveImmersionTab: FC = () => {
           <div className="flex items-center gap-3">
             <span className="text-3xl">{currentModeConfig?.emoji}</span>
             <div>
-              <h2 className="font-display text-xl font-bold text-text-primary">
+              <h2 className="font-serif text-xl font-bold text-text-primary">
                 {currentModeConfig?.label}
               </h2>
               <p className="text-xs text-text-secondary">{currentModeConfig?.description}</p>
@@ -238,10 +238,10 @@ const ActiveImmersionTab: FC = () => {
 
         {/* Level Selection Toggle */}
         {showLevelToggle && (
-          <div className="bg-bg-elevated border border-structural rounded-2xl p-5 shadow-md">
+          <div className="bg-bg-elevated border border-structural rounded-2xl p-5 shadow-sm">
             <div className="flex items-center gap-2 mb-3">
               <Sparkles className="h-4 w-4 text-accent-action" />
-              <h3 className="font-display text-sm font-bold text-text-primary">Select Practice Level</h3>
+              <h3 className="font-serif text-sm font-bold text-text-primary">Select Practice Level</h3>
             </div>
             <div className="grid grid-cols-2 gap-3">
               <button
@@ -249,7 +249,7 @@ const ActiveImmersionTab: FC = () => {
                 onClick={() => setSelectedLevel('beginner')}
                 className={`cursor-pointer flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-xs font-bold border transition-all ${
                   selectedLevel === 'beginner'
-                    ? 'bg-accent-action text-bg-base border-accent-action shadow-md scale-[1.02]'
+                    ? 'bg-accent-action text-bg-base border-accent-action shadow-sm scale-[1.02]'
                     : 'bg-bg-elevated-2 text-text-secondary border-structural hover:border-accent-action/50 hover:text-text-primary'
                 }`}
               >
@@ -260,7 +260,7 @@ const ActiveImmersionTab: FC = () => {
                 onClick={() => setSelectedLevel('intermediate')}
                 className={`cursor-pointer flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-xs font-bold border transition-all ${
                   selectedLevel === 'intermediate'
-                    ? 'bg-accent-action text-bg-base border-accent-action shadow-md scale-[1.02]'
+                    ? 'bg-accent-action text-bg-base border-accent-action shadow-sm scale-[1.02]'
                     : 'bg-bg-elevated-2 text-text-secondary border-structural hover:border-accent-action/50 hover:text-text-primary'
                 }`}
               >
@@ -272,11 +272,11 @@ const ActiveImmersionTab: FC = () => {
 
         {/* Accent Picker (conversation mode only) */}
         {showAccentPicker && (
-          <div className="bg-bg-elevated border border-structural rounded-2xl p-5 shadow-md">
+          <div className="bg-bg-elevated border border-structural rounded-2xl p-5 shadow-sm">
             <div className="flex items-center gap-2 mb-3">
               <MapPin className="h-4 w-4 text-accent-action" />
-              <h3 className="font-display text-sm font-bold text-text-primary">Accent / Persona</h3>
-              <span className="text-[10px] text-text-tertiary font-hud">(optional)</span>
+              <h3 className="font-serif text-sm font-bold text-text-primary">Accent / Persona</h3>
+              <span className="text-[10px] text-text-tertiary font-mono">(optional)</span>
             </div>
             <div className="flex flex-wrap gap-2">
               {ACCENT_OPTIONS.map((opt) => (
@@ -297,8 +297,8 @@ const ActiveImmersionTab: FC = () => {
         )}
 
         {/* Topic Chips */}
-        <div className="bg-bg-elevated border border-structural rounded-2xl p-5 shadow-md">
-          <h3 className="font-display text-sm font-bold text-text-primary mb-1">Choose a Topic</h3>
+        <div className="bg-bg-elevated border border-structural rounded-2xl p-5 shadow-sm">
+          <h3 className="font-serif text-sm font-bold text-text-primary mb-1">Choose a Topic</h3>
           <p className="text-[11px] text-text-secondary mb-4">Pick a preset or type your own below.</p>
 
           <div className="flex flex-wrap gap-2 mb-4">
@@ -348,7 +348,7 @@ const ActiveImmersionTab: FC = () => {
   const lastAssistantMsg = [...currentSession.messages].reverse().find((m) => m.sender === 'assistant');
 
   return (
-    <div className="flex flex-col h-[75vh] min-h-[550px] border border-structural rounded-2xl overflow-hidden shadow-2xl bg-bg-elevated">
+    <div className="flex flex-col h-[75vh] min-h-[550px] border border-structural rounded-2xl overflow-hidden shadow-sm bg-bg-elevated">
       {/* ── Session Header ─────────────────────────────────────────────── */}
       <div className="bg-bg-elevated-2 p-4 border-b border-structural flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-3">
@@ -362,14 +362,14 @@ const ActiveImmersionTab: FC = () => {
           <span className="text-3xl">{currentModeConfig?.emoji}</span>
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="font-display text-lg font-bold text-text-primary leading-tight">
+              <h2 className="font-serif text-lg font-bold text-text-primary leading-tight">
                 {currentModeConfig?.label}
               </h2>
-              <span className="text-[10px] font-hud font-bold px-2 py-0.5 rounded-full bg-accent-action/10 text-accent-action border border-accent-action/20">
+              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-accent-action/10 text-accent-action border border-accent-action/20">
                 {selectedLevel === 'intermediate' ? '⚡ Intermediate' : '🌱 Beginner'}
               </span>
               {selectedAccent && (
-                <span className="text-[10px] font-hud font-bold px-2 py-0.5 rounded-full bg-info/10 text-info border border-info/20">
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-info/10 text-info border border-info/20">
                   {ACCENT_OPTIONS.find((a) => a.id === selectedAccent)?.flag} {selectedAccent}
                 </span>
               )}
@@ -408,7 +408,7 @@ const ActiveImmersionTab: FC = () => {
             <strong>Active Immersion:</strong> {isStructuredMode ? 'Structured coaching mode' : 'Free-form chat mode'}
           </span>
         </div>
-        <span className="text-[10px] font-hud text-text-tertiary hidden md:inline">
+        <span className="text-[10px] font-mono text-text-tertiary hidden md:inline">
           +10 XP • +5 Coins per message
         </span>
       </div>
@@ -431,8 +431,8 @@ const ActiveImmersionTab: FC = () => {
           if (isUser) {
             return (
               <div key={msg.id} className="flex justify-end pl-12">
-                <div className="max-w-lg bg-bg-elevated-2 border border-structural text-text-primary rounded-xl p-4 shadow-md text-sm border-l-4 border-l-accent-action/60">
-                  <p className="font-hud text-[9px] uppercase tracking-wider text-accent-action mb-1">
+                <div className="max-w-lg bg-bg-elevated-2 border border-structural text-text-primary rounded-xl p-4 shadow-sm text-sm border-l-4 border-l-accent-action/60">
+                  <p className="font-mono text-[9px] uppercase tracking-wider text-accent-action mb-1">
                     Tu Mensaje
                   </p>
                   <p className="whitespace-pre-wrap leading-relaxed">{msg.text}</p>
@@ -444,11 +444,11 @@ const ActiveImmersionTab: FC = () => {
           // Assistant message
           return (
             <div key={msg.id} className="flex justify-start pr-12">
-              <div className="relative max-w-xl bg-bg-elevated-2 border border-structural text-text-primary rounded-xl p-5 shadow-lg flex flex-col">
+              <div className="relative max-w-xl bg-bg-elevated-2 border border-structural text-text-primary rounded-xl p-5 shadow-sm flex flex-col">
                 {/* Avatar header */}
                 <div className="flex items-center gap-2 mb-3 pb-2 border-b border-structural/50">
                   <span className="text-xl">{currentModeConfig?.emoji}</span>
-                  <span className="font-display font-bold text-xs text-text-primary">
+                  <span className="font-serif font-bold text-xs text-text-primary">
                     Spanish Coach
                   </span>
                   <span className="text-[10px] text-text-tertiary italic">
@@ -463,7 +463,7 @@ const ActiveImmersionTab: FC = () => {
                   {/* Structured Content Rendering */}
                   {msg.structuredContent && msg.structuredContent.items.length > 0 && (
                     <div className="mt-3 bg-bg-elevated rounded-xl border border-structural p-4 space-y-2">
-                      <p className="text-[10px] font-hud uppercase tracking-wider font-bold text-accent-action flex items-center gap-1">
+                      <p className="text-[10px] font-mono uppercase tracking-wider font-bold text-accent-action flex items-center gap-1">
                         {msg.structuredContent.type === 'plan' && '📋 Plan'}
                         {msg.structuredContent.type === 'quiz' && '📝 Quiz'}
                         {msg.structuredContent.type === 'vocab-group' && '📚 Vocabulary Group'}
@@ -491,7 +491,7 @@ const ActiveImmersionTab: FC = () => {
                   {/* New Vocabulary Highlight */}
                   {msg.newVocabWords && msg.newVocabWords.length > 0 && (
                     <div className="mt-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-3 space-y-1">
-                      <p className="text-[10px] font-hud uppercase tracking-wider font-bold text-emerald-800 flex items-center gap-1">
+                      <p className="text-[10px] font-mono uppercase tracking-wider font-bold text-emerald-800 flex items-center gap-1">
                         <Sparkles className="h-3 w-3" /> New Vocabulary:
                       </p>
                       <div className="flex flex-wrap gap-2 pt-1">
@@ -526,7 +526,7 @@ const ActiveImmersionTab: FC = () => {
                   <div className="mt-4 pt-3 border-t border-structural/50 flex items-center justify-between">
                     <button
                       onClick={() => toggleTranslation(msg.id)}
-                      className={`flex items-center gap-1.5 text-[11px] font-hud px-2.5 py-1 rounded-lg transition-colors cursor-pointer ${
+                      className={`flex items-center gap-1.5 text-[11px] font-mono px-2.5 py-1 rounded-lg transition-colors cursor-pointer ${
                         showTranslation
                           ? 'bg-accent-action/10 text-accent-action font-semibold'
                           : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated'
@@ -547,7 +547,7 @@ const ActiveImmersionTab: FC = () => {
           <div className="flex justify-start pr-12">
             <div className="bg-bg-elevated-2 border border-structural rounded-xl p-4 shadow flex items-center gap-2.5">
               <BrainCircuit className="h-4 w-4 text-accent-action animate-pulse" />
-              <span className="font-hud text-xs text-text-secondary">
+              <span className="font-mono text-xs text-text-secondary">
                 Your coach is thinking...
               </span>
               <span className="flex gap-1">
@@ -565,7 +565,7 @@ const ActiveImmersionTab: FC = () => {
         {/* Quick Replies */}
         {lastAssistantMsg?.quickReplies && lastAssistantMsg.quickReplies.length > 0 && (
           <div className="space-y-1.5">
-            <p className="font-hud text-[9px] uppercase tracking-wider text-text-tertiary px-1">
+            <p className="font-mono text-[9px] uppercase tracking-wider text-text-tertiary px-1">
               Suggested replies:
             </p>
             <div className="flex flex-wrap gap-2">
@@ -574,7 +574,7 @@ const ActiveImmersionTab: FC = () => {
                   key={qri}
                   onClick={() => handleSend(qr.text)}
                   disabled={isTyping}
-                  className="cursor-pointer text-left rounded-xl border border-structural bg-bg-elevated hover:bg-bg-elevated-2 px-3 py-1.5 font-body text-xs text-text-primary transition-all hover:border-accent-action shadow-sm flex flex-col group disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="cursor-pointer text-left rounded-xl border border-structural bg-bg-elevated hover:bg-bg-elevated-2 px-3 py-1.5 font-sans text-xs text-text-primary transition-all hover:border-accent-action shadow-sm flex flex-col group disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <span className="font-semibold text-text-primary group-hover:text-accent-action">
                     {qr.text}
@@ -611,7 +611,7 @@ const ActiveImmersionTab: FC = () => {
           <button
             type="submit"
             disabled={!inputText.trim() || isTyping}
-            className="bg-accent-action text-bg-base rounded-xl px-5 py-3 hover:bg-accent-action-hover transition-colors flex items-center justify-center gap-1.5 shadow font-body text-sm font-bold border-none disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer shrink-0"
+            className="bg-accent-action text-bg-base rounded-xl px-5 py-3 hover:bg-accent-action-hover transition-colors flex items-center justify-center gap-1.5 shadow font-sans text-sm font-bold border-none disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer shrink-0"
           >
             <Send className="h-4 w-4" /> Send
           </button>
@@ -621,9 +621,9 @@ const ActiveImmersionTab: FC = () => {
       {/* ── Learned Words Modal ────────────────────────────────────────── */}
       {showLearnedWordsModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-          <div className="bg-bg-elevated border border-structural rounded-2xl shadow-2xl max-w-md w-full p-6 max-h-[80vh] overflow-y-auto">
+          <div className="bg-bg-elevated border border-structural rounded-2xl shadow-sm max-w-md w-full p-6 max-h-[80vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-display text-lg font-bold text-text-primary flex items-center gap-2">
+              <h3 className="font-serif text-lg font-bold text-text-primary flex items-center gap-2">
                 <BookCheck className="h-5 w-5 text-emerald-600" />
                 Learned Words ({currentSession.learnedWords.length})
               </h3>

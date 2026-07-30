@@ -78,15 +78,15 @@ const SectionTitle: FC<{
     className="mb-12 text-center"
   >
     {label && (
-      <p className="mb-2 font-hud text-[10px] uppercase tracking-[0.3em] text-marigold">
+      <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.3em] text-marigold">
         {label}
       </p>
     )}
-    <h2 className="font-display text-3xl font-bold text-text-primary sm:text-4xl">
+    <h2 className="font-serif text-3xl font-bold text-text-primary sm:text-4xl">
       {title}
     </h2>
     {subtitle && (
-      <p className="mx-auto mt-3 max-w-2xl font-body text-base text-pencil">
+      <p className="mx-auto mt-3 max-w-2xl font-sans text-base text-pencil">
         {subtitle}
       </p>
     )}
@@ -111,7 +111,7 @@ const HeroSection: FC = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="font-display text-4xl font-bold sm:text-5xl lg:text-6xl"
+          className="font-serif text-4xl font-bold sm:text-5xl lg:text-6xl"
         >
           <span className="glitter-text">Why TheLearningHyena?</span>
         </motion.h1>
@@ -120,7 +120,7 @@ const HeroSection: FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="mx-auto mt-6 max-w-3xl font-body text-lg text-pencil sm:text-xl"
+          className="mx-auto mt-6 max-w-3xl font-sans text-lg text-pencil sm:text-xl"
         >
           The only platform that combines anime-powered engagement with AI
           conversation practice — at{' '}
@@ -139,7 +139,7 @@ const HeroSection: FC = () => {
               key={badge.label}
               variants={fadeUp}
               custom={i + 2}
-              className="glass-nav-capsule flex items-center gap-2 px-5 py-2.5 font-hud text-xs text-text-primary"
+              className="glass-nav-capsule flex items-center gap-2 px-5 py-2.5 font-mono text-xs text-text-primary"
             >
               <span className="text-marigold">{badge.icon}</span>
               {badge.label}
@@ -215,15 +215,15 @@ const ProblemSection: FC = () => (
           >
             {p.icon}
           </div>
-          <h3 className="font-display text-lg font-bold text-text-primary">
+          <h3 className="font-serif text-lg font-bold text-text-primary">
             {p.competitor}
           </h3>
           <span
-            className={`mt-1 inline-block font-hud text-[10px] uppercase tracking-widest ${p.color}`}
+            className={`mt-1 inline-block font-mono text-[10px] uppercase tracking-widest ${p.color}`}
           >
             {p.tag}
           </span>
-          <p className="mt-3 font-body text-sm leading-relaxed text-pencil">
+          <p className="mt-3 font-sans text-sm leading-relaxed text-pencil">
             {p.description}
           </p>
         </motion.div>
@@ -305,7 +305,7 @@ const CellValue: FC<{ value: string; highlight?: boolean }> = ({
 
   return (
     <span
-      className={`font-body text-sm leading-snug ${
+      className={`font-sans text-sm leading-snug ${
         highlight
           ? 'font-semibold text-text-primary'
           : isCross
@@ -340,19 +340,19 @@ const ComparisonSection: FC = () => (
         <table className="w-full border-collapse text-left">
           <thead>
             <tr className="border-b border-pencil/20">
-              <th className="px-6 py-4 font-display text-sm font-bold text-pencil">
+              <th className="px-6 py-4 font-serif text-sm font-bold text-pencil">
                 Feature
               </th>
-              <th className="px-4 py-4 font-display text-sm font-bold text-pencil">
+              <th className="px-4 py-4 font-serif text-sm font-bold text-pencil">
                 Duolingo 🦉
               </th>
-              <th className="px-4 py-4 font-display text-sm font-bold text-pencil">
+              <th className="px-4 py-4 font-serif text-sm font-bold text-pencil">
                 Preply 👥
               </th>
-              <th className="px-4 py-4 font-display text-sm font-bold text-pencil">
+              <th className="px-4 py-4 font-serif text-sm font-bold text-pencil">
                 Babbel 📘
               </th>
-              <th className="relative px-4 py-4 font-display text-sm font-bold text-marigold">
+              <th className="relative px-4 py-4 font-serif text-sm font-bold text-marigold">
                 {/* Glow column indicator */}
                 <span className="absolute inset-0 -z-10 bg-marigold/[0.04]" />
                 TheLearningHyena 🐆
@@ -367,7 +367,7 @@ const ComparisonSection: FC = () => (
                   i % 2 === 0 ? 'bg-paper/[0.02]' : ''
                 }`}
               >
-                <td className="px-6 py-4 font-display text-sm font-semibold text-text-primary">
+                <td className="px-6 py-4 font-serif text-sm font-semibold text-text-primary">
                   {row.feature}
                 </td>
                 <td className="px-4 py-4">
@@ -399,30 +399,30 @@ const ComparisonSection: FC = () => (
             key={row.feature}
             className="rounded-xl border border-pencil/15 bg-paper/[0.03] p-4"
           >
-            <p className="mb-3 font-display text-sm font-bold text-text-primary">
+            <p className="mb-3 font-serif text-sm font-bold text-text-primary">
               {row.feature}
             </p>
             <div className="grid grid-cols-2 gap-2 text-xs">
               <div>
-                <span className="font-hud text-[10px] text-pencil/60">
+                <span className="font-mono text-[10px] text-pencil/60">
                   🦉 Duolingo
                 </span>
                 <p className="mt-0.5 text-pencil">{row.duolingo}</p>
               </div>
               <div>
-                <span className="font-hud text-[10px] text-pencil/60">
+                <span className="font-mono text-[10px] text-pencil/60">
                   👥 Preply
                 </span>
                 <p className="mt-0.5 text-pencil">{row.preply}</p>
               </div>
               <div>
-                <span className="font-hud text-[10px] text-pencil/60">
+                <span className="font-mono text-[10px] text-pencil/60">
                   📘 Babbel
                 </span>
                 <p className="mt-0.5 text-pencil">{row.babbel}</p>
               </div>
               <div className="rounded-lg bg-marigold/10 p-2">
-                <span className="font-hud text-[10px] text-marigold">
+                <span className="font-mono text-[10px] text-marigold">
                   🐆 Hyena
                 </span>
                 <p className="mt-0.5 font-semibold text-text-primary">{row.hyena}</p>
@@ -502,10 +502,10 @@ const SolutionSection: FC = () => (
             >
               {s.icon}
             </div>
-            <h3 className="font-display text-lg font-bold text-text-primary">
+            <h3 className="font-serif text-lg font-bold text-text-primary">
               {s.title}
             </h3>
-            <p className="mt-3 font-body text-sm leading-relaxed text-pencil">
+            <p className="mt-3 font-sans text-sm leading-relaxed text-pencil">
               {s.description}
             </p>
           </motion.div>
@@ -575,11 +575,11 @@ const InstitutionsSection: FC = () => (
           </div>
           <div className="flex items-center gap-2">
             <School size={14} className="text-pencil/60" />
-            <h3 className="font-display text-lg font-bold text-text-primary">
+            <h3 className="font-serif text-lg font-bold text-text-primary">
               {b.title}
             </h3>
           </div>
-          <p className="mt-3 font-body text-sm leading-relaxed text-pencil">
+          <p className="mt-3 font-sans text-sm leading-relaxed text-pencil">
             {b.description}
           </p>
         </motion.div>
@@ -624,10 +624,10 @@ const ROICalculator: FC = () => {
           {/* Students slider */}
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <label className="font-display text-sm font-semibold text-text-primary">
+              <label className="font-serif text-sm font-semibold text-text-primary">
                 Number of Students
               </label>
-              <span className="font-hud text-lg tabular-nums text-marigold">
+              <span className="font-mono text-lg tabular-nums text-marigold">
                 {students}
               </span>
             </div>
@@ -640,7 +640,7 @@ const ROICalculator: FC = () => {
               onChange={(e) => setStudents(Number(e.target.value))}
               className="h-2 w-full cursor-pointer appearance-none rounded-full bg-structural accent-accent-action"
             />
-            <div className="mt-1 flex justify-between font-body text-[10px] text-text-secondary/50">
+            <div className="mt-1 flex justify-between font-sans text-[10px] text-text-secondary/50">
               <span>10</span>
               <span>500</span>
             </div>
@@ -649,10 +649,10 @@ const ROICalculator: FC = () => {
           {/* Hours slider */}
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <label className="font-display text-sm font-semibold text-text-primary">
+              <label className="font-serif text-sm font-semibold text-text-primary">
                 Practice Hours / Week per Student
               </label>
-              <span className="font-body text-lg font-bold tabular-nums text-accent-action">
+              <span className="font-sans text-lg font-bold tabular-nums text-accent-action">
                 {hoursPerWeek}h
               </span>
             </div>
@@ -665,7 +665,7 @@ const ROICalculator: FC = () => {
               onChange={(e) => setHoursPerWeek(Number(e.target.value))}
               className="h-2 w-full cursor-pointer appearance-none rounded-full bg-structural accent-accent-action"
             />
-            <div className="mt-1 flex justify-between font-body text-[10px] text-text-secondary/50">
+            <div className="mt-1 flex justify-between font-sans text-[10px] text-text-secondary/50">
               <span>1h</span>
               <span>10h</span>
             </div>
@@ -687,28 +687,28 @@ const ROICalculator: FC = () => {
           >
             <div className="flex items-center justify-center gap-2">
               <TrendingDown size={16} className="text-error" />
-              <p className="font-body text-[10px] uppercase tracking-widest text-error">
+              <p className="font-sans text-[10px] uppercase tracking-widest text-error">
                 Traditional Tutoring
               </p>
             </div>
-            <p className="mt-2 font-body text-3xl font-bold tabular-nums text-error">
+            <p className="mt-2 font-sans text-3xl font-bold tabular-nums text-error">
               {formatCurrency(traditionalMonthlyCost)}
             </p>
-            <p className="mt-1 font-body text-xs text-text-secondary">/month</p>
+            <p className="mt-1 font-sans text-xs text-text-secondary">/month</p>
           </motion.div>
 
           {/* Hyena Cost */}
           <div className="rounded-xl border border-success/20 bg-success/10 p-5 text-center">
             <div className="flex items-center justify-center gap-2">
               <Check size={16} className="text-success" />
-              <p className="font-body text-[10px] uppercase tracking-widest text-success">
+              <p className="font-sans text-[10px] uppercase tracking-widest text-success">
                 With TheLearningHyena
               </p>
             </div>
-            <p className="mt-2 font-body text-3xl font-bold tabular-nums text-success">
+            <p className="mt-2 font-sans text-3xl font-bold tabular-nums text-success">
               $299
             </p>
-            <p className="mt-1 font-body text-xs text-text-secondary">/month flat</p>
+            <p className="mt-1 font-sans text-xs text-text-secondary">/month flat</p>
           </div>
 
           {/* Monthly Savings */}
@@ -719,10 +719,10 @@ const ROICalculator: FC = () => {
             transition={{ type: 'spring', stiffness: 280, damping: 22 }}
             className="rounded-xl border border-accent-action/30 bg-accent-action/10 p-5 text-center"
           >
-            <p className="font-body text-[10px] uppercase tracking-widest text-accent-action font-semibold">
+            <p className="font-sans text-[10px] uppercase tracking-widest text-accent-action font-semibold">
               Monthly Savings
             </p>
-            <p className="mt-2 font-body text-4xl font-bold tabular-nums text-accent-action">
+            <p className="mt-2 font-sans text-4xl font-bold tabular-nums text-accent-action">
               {formatCurrency(monthlySavings)}
             </p>
           </motion.div>
@@ -740,13 +740,13 @@ const ROICalculator: FC = () => {
             }}
             className="rounded-xl border border-structural bg-bg-elevated p-5 text-center"
           >
-            <p className="font-body text-[10px] uppercase tracking-widest text-text-secondary">
+            <p className="font-sans text-[10px] uppercase tracking-widest text-text-secondary">
               Annual Savings
             </p>
-            <p className="mt-2 font-display text-3xl font-bold tabular-nums text-text-primary">
+            <p className="mt-2 font-serif text-3xl font-bold tabular-nums text-text-primary">
               {formatCurrency(annualSavings)}
             </p>
-            <p className="mt-1 font-body text-xs text-accent-action font-semibold">per year</p>
+            <p className="mt-1 font-sans text-xs text-accent-action font-semibold">per year</p>
           </motion.div>
         </div>
       </motion.div>
@@ -767,10 +767,10 @@ const CTASection: FC = () => (
       transition={{ duration: 0.6 }}
       className="text-center"
     >
-      <h2 className="font-display text-3xl font-bold text-text-primary sm:text-4xl">
+      <h2 className="font-serif text-3xl font-bold text-text-primary sm:text-4xl">
         Ready to Transform Language Learning?
       </h2>
-      <p className="mx-auto mt-4 max-w-xl font-body text-base text-text-secondary">
+      <p className="mx-auto mt-4 max-w-xl font-sans text-base text-text-secondary">
         Join thousands of learners and institutions already using
         TheLearningHyena to build real fluency — faster and cheaper.
       </p>
@@ -779,7 +779,7 @@ const CTASection: FC = () => (
         <motion.button
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.97 }}
-          className="flex items-center gap-2 rounded-xl bg-accent-action px-8 py-3.5 font-body text-base font-semibold text-bg-base shadow-lg transition-colors hover:bg-accent-action-hover border-none cursor-pointer"
+          className="flex items-center gap-2 rounded-xl bg-accent-action px-8 py-3.5 font-sans text-base font-semibold text-bg-base shadow-sm transition-colors hover:bg-accent-action-hover border-none cursor-pointer"
         >
           <Zap size={18} />
           Start Free Trial
@@ -788,7 +788,7 @@ const CTASection: FC = () => (
         <motion.button
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.97 }}
-          className="glass-nav-capsule flex items-center gap-2 rounded-xl px-8 py-3.5 font-body text-base font-semibold text-text-primary transition-all hover:bg-bg-elevated border-none cursor-pointer"
+          className="glass-nav-capsule flex items-center gap-2 rounded-xl px-8 py-3.5 font-sans text-base font-semibold text-text-primary transition-all hover:bg-bg-elevated border-none cursor-pointer"
         >
           <School size={18} className="text-accent-action" />
           Contact for Schools

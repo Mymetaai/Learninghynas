@@ -62,7 +62,7 @@ const InkRevealCard: FC<InkRevealCardProps> = ({
             className="fixed inset-x-0 bottom-0 z-50 flex justify-center px-4 pb-6"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="w-full max-w-sm rounded-t-2xl border border-structural bg-bg-elevated p-6 text-text-primary shadow-[0_-8px_40px_rgba(20,24,28,0.5)]">
+            <div className="w-full max-w-sm rounded-t-2xl border border-structural bg-bg-elevated p-6 text-text-primary shadow-sm">
               {/* Drag handle */}
               <div className="mx-auto mb-4 h-1 w-10 rounded-full bg-text-tertiary/30" />
 
@@ -81,7 +81,7 @@ const InkRevealCard: FC<InkRevealCardProps> = ({
                 initial={{ y: 10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.15 }}
-                className="mt-1 font-body text-xs text-text-secondary"
+                className="mt-1 font-sans text-xs text-text-secondary"
               >
                 [{pronunciation}]
               </motion.p>
@@ -99,7 +99,7 @@ const InkRevealCard: FC<InkRevealCardProps> = ({
                 initial={{ y: 10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.25 }}
-                className="font-body text-base text-text-primary"
+                className="font-sans text-base text-text-primary"
               >
                 {meaning}
               </motion.p>
@@ -111,7 +111,7 @@ const InkRevealCard: FC<InkRevealCardProps> = ({
                 transition={{ delay: 0.3 }}
                 type="button"
                 onClick={onClose}
-                className="mt-4 w-full rounded-xl border border-structural bg-bg-elevated-2 py-2 font-body text-xs uppercase tracking-[0.2em] text-text-secondary transition-colors hover:bg-structural hover:text-text-primary"
+                className="mt-4 w-full rounded-xl border border-structural bg-bg-elevated-2 py-2 font-sans text-xs uppercase tracking-[0.2em] text-text-secondary transition-colors hover:bg-structural hover:text-text-primary"
               >
                 Tap to close
               </motion.button>

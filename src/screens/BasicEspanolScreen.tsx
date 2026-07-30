@@ -481,7 +481,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
     : undefined;
 
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary relative overflow-x-hidden font-body pb-16">
+    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary relative overflow-x-hidden font-sans pb-16">
       
       {/* Background Decorative Gradient Blobs */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-terracotta/5 rounded-full filter blur-[100px] pointer-events-none" />
@@ -498,11 +498,11 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <Compass className="h-5 w-5 text-marigold" />
-                <span className="font-hud text-[9px] tracking-[0.25em] uppercase text-pencil">
+                <span className="font-mono text-[9px] tracking-[0.25em] uppercase text-pencil">
                   Spanish Course (Parts 1-7)
                 </span>
               </div>
-              <h2 className="font-display text-xl font-bold tracking-tight text-text-primary">
+              <h2 className="font-serif text-xl font-bold tracking-tight text-text-primary">
                 Básico Español 🇪🇸
               </h2>
               <p className="text-[11px] text-pencil mt-0.5">Lessons 1–30 & Master Exams</p>
@@ -510,7 +510,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
             {/* Course Part Selector Dropdown Menu */}
             <div className="space-y-1.5 bg-paper/5 border border-pencil/15 p-3 rounded-2xl">
-              <label htmlFor="course-part-select-desktop" className="text-[10px] font-hud uppercase tracking-wider text-marigold font-bold flex items-center justify-between">
+              <label htmlFor="course-part-select-desktop" className="text-[10px] font-mono uppercase tracking-wider text-marigold font-bold flex items-center justify-between">
                 <span>Select Course Part:</span>
                 <ChevronDown className="h-3.5 w-3.5 text-marigold" />
               </label>
@@ -541,7 +541,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
               <div className="bg-marigold/10 border border-marigold/30 rounded-xl p-2.5 flex items-center gap-2.5">
                 <Trophy className="h-4 w-4 text-marigold shrink-0" />
                 <div>
-                  <span className="text-[9px] font-hud uppercase tracking-wider text-marigold block font-bold">Badge Unlocked</span>
+                  <span className="text-[9px] font-mono uppercase tracking-wider text-marigold block font-bold">Badge Unlocked</span>
                   <span className="text-xs font-bold text-text-primary">{PART_BADGES[coursePart].badge}</span>
                 </div>
               </div>
@@ -549,7 +549,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
             {/* Section List / Lessons */}
             <nav className="space-y-1">
-              <span className="text-[10px] font-hud uppercase tracking-wider text-pencil font-bold block mb-2 px-1">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-pencil font-bold block mb-2 px-1">
                 Modules & Master Exam
               </span>
               {sectionsList.map((sec) => {
@@ -601,7 +601,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
           <div className="flex items-center gap-2">
             <Compass className="h-5 w-5 text-terracotta" />
             <div>
-              <h2 className="font-display text-sm font-bold text-text-primary">Básico Español</h2>
+              <h2 className="font-serif text-sm font-bold text-text-primary">Básico Español</h2>
               <span className="text-[10px] text-pencil">{PART_OPTIONS.find(o => o.id === coursePart)?.label.split(':')[0]}</span>
             </div>
           </div>
@@ -635,7 +635,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                 <div className="space-y-5">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h2 className="font-display text-lg font-bold text-text-primary">Básico Español 🇪🇸</h2>
+                      <h2 className="font-serif text-lg font-bold text-text-primary">Básico Español 🇪🇸</h2>
                       <p className="text-[10px] text-pencil">Lessons 1–30 & Master Exams</p>
                     </div>
                     <button
@@ -648,7 +648,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
                   {/* Course Part Selector Dropdown (Mobile) */}
                   <div className="space-y-1.5 bg-paper/5 border border-pencil/15 p-3 rounded-2xl">
-                    <label htmlFor="course-part-select-mobile" className="text-[10px] font-hud uppercase tracking-wider text-marigold font-bold flex items-center justify-between">
+                    <label htmlFor="course-part-select-mobile" className="text-[10px] font-mono uppercase tracking-wider text-marigold font-bold flex items-center justify-between">
                       <span>Select Course Part:</span>
                       <ChevronDown className="h-3.5 w-3.5 text-marigold" />
                     </label>
@@ -735,23 +735,23 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
               {/* OVERVIEW SECTION */}
               {activeSection === 'overview' && (
                 <div className="space-y-6">
-                  <div className="bg-gradient-to-r from-terracotta/10 to-marigold/10 border border-pencil/15 rounded-3xl p-6 sm:p-8 relative overflow-hidden">
+                  <div className="bg-gradient-to-r from-terracotta/10 to-marigold/10 border border-pencil/15 rounded-2xl p-6 sm:p-8 relative overflow-hidden">
                     <div className="relative z-10 space-y-3">
-                      <div className="inline-flex items-center gap-1.5 bg-marigold/10 border border-marigold/30 text-marigold rounded-full px-3 py-1 text-[10px] font-hud uppercase tracking-wider font-bold">
+                      <div className="inline-flex items-center gap-1.5 bg-marigold/10 border border-marigold/30 text-marigold rounded-full px-3 py-1 text-[10px] font-mono uppercase tracking-wider font-bold">
                         <Sparkles className="h-3 w-3" />
                         Complete Spanish Curriculum (Parts 1–7)
                       </div>
-                      <h1 className="font-display text-3xl sm:text-4xl font-extrabold text-text-primary leading-tight">
+                      <h1 className="font-serif text-3xl sm:text-4xl font-extrabold text-text-primary leading-tight">
                         Master All 30 Spanish Lessons 🇪🇸
                       </h1>
-                      <p className="font-body text-sm text-pencil max-w-2xl leading-relaxed">
+                      <p className="font-sans text-sm text-pencil max-w-2xl leading-relaxed">
                         Welcome to your complete interactive workbook guide. Progress through all 7 curriculum parts covering greetings, articles, verbs, time, stem-changers, pronouns, commands, preterite, and imperfect tenses.
                       </p>
                     </div>
                   </div>
 
                   <div className="space-y-4">
-                    <h3 className="font-display text-lg font-bold text-text-primary flex items-center gap-2">
+                    <h3 className="font-serif text-lg font-bold text-text-primary flex items-center gap-2">
                       <BookOpenCheck className="h-5 w-5 text-terracotta" />
                       Curriculum Parts Index
                     </h3>
@@ -788,13 +788,13 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                 <div className="space-y-8">
                   
                   {/* 1. LESSON HEADER BANNER */}
-                  <div className="bg-gradient-to-r from-terracotta/10 via-paper/5 to-marigold/10 border border-pencil/15 rounded-3xl p-6 sm:p-8 space-y-4 shadow-sm relative overflow-hidden">
+                  <div className="bg-gradient-to-r from-terracotta/10 via-paper/5 to-marigold/10 border border-pencil/15 rounded-2xl p-6 sm:p-8 space-y-4 shadow-sm relative overflow-hidden">
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                       <div>
-                        <span className="font-hud text-xs text-marigold font-bold uppercase tracking-widest block mb-1">
+                        <span className="font-mono text-xs text-marigold font-bold uppercase tracking-widest block mb-1">
                           PART {currentLessonData.partNumber} • LESSON {currentLessonData.lessonNumber}
                         </span>
-                        <h1 className="font-display text-3xl sm:text-4xl font-extrabold text-text-primary tracking-tight">
+                        <h1 className="font-serif text-3xl sm:text-4xl font-extrabold text-text-primary tracking-tight">
                           {currentLessonData.title}
                         </h1>
                         <p className="text-xs text-pencil mt-1 font-semibold">
@@ -805,8 +805,8 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                         onClick={() => handleLessonComplete(activeSection)}
                         className={`px-5 py-2.5 rounded-2xl text-xs font-bold transition-all cursor-pointer shrink-0 ${
                           completedLessons[activeSection]
-                            ? 'bg-accent-mint/20 text-text-primary border-2 border-text-primary'
-                            : 'bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border-2 border-[#2C1E11] shadow-[0_3px_0_#5C524E] hover:-translate-y-0.5'
+                            ? 'bg-accent-mint/20 text-text-primary border border-text-primary'
+                            : 'bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border border-[#2C1E11] shadow-sm hover:-translate-y-0.5'
                         }`}
                       >
                         {completedLessons[activeSection] ? 'Completed ✓' : 'Mark Lesson Completed'}
@@ -815,7 +815,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
                     {/* Professor Note Box */}
                     <div className="bg-bg-elevated border-l-4 border-marigold p-4 rounded-r-2xl space-y-1.5 text-xs text-text-primary">
-                      <div className="flex items-center gap-2 text-marigold font-bold font-hud uppercase">
+                      <div className="flex items-center gap-2 text-marigold font-bold font-mono uppercase">
                         <Quote className="h-4 w-4" />
                         <span>Professor Bill Worden's Key Teaching Note</span>
                       </div>
@@ -824,7 +824,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
                     {/* Objectives */}
                     <div className="pt-2">
-                      <span className="text-[10px] font-hud uppercase tracking-wider text-pencil font-bold block mb-2">Lesson Learning Objectives:</span>
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-pencil font-bold block mb-2">Lesson Learning Objectives:</span>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                         {currentLessonData.objectives.map((obj, idx) => (
                           <div key={idx} className="flex items-center gap-2 bg-paper/5 p-2.5 rounded-xl border border-pencil/10 text-xs text-text-primary">
@@ -838,20 +838,20 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
                   {/* 2. GRAMMAR & STRUCTURAL SECTIONS */}
                   {currentLessonData.grammarSections.map((section, idx) => (
-                    <div key={idx} className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 sm:p-7 space-y-4">
-                      <div className="flex items-center gap-2 text-terracotta font-bold text-base font-display">
+                    <div key={idx} className="bg-paper/5 border border-pencil/15 rounded-2xl p-6 sm:p-7 space-y-4">
+                      <div className="flex items-center gap-2 text-terracotta font-bold text-base font-serif">
                         <Sparkles className="h-5 w-5 text-terracotta" />
                         <span>{section.title}</span>
                       </div>
 
-                      <p className="text-xs text-pencil leading-relaxed font-body">
+                      <p className="text-xs text-pencil leading-relaxed font-sans">
                         {section.explanation}
                       </p>
 
                       {/* Rules Bullet List */}
                       {section.rules && section.rules.length > 0 && (
                         <div className="bg-bg-elevated p-4 rounded-2xl border border-structural space-y-2">
-                          <span className="text-[10px] font-hud uppercase tracking-wider text-marigold font-bold block">Key Rules & Syntax:</span>
+                          <span className="text-[10px] font-mono uppercase tracking-wider text-marigold font-bold block">Key Rules & Syntax:</span>
                           <ul className="space-y-1.5 text-xs text-text-primary">
                             {section.rules.map((rule, rIdx) => (
                               <li key={rIdx} className="flex items-start gap-2">
@@ -867,7 +867,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                       {section.table && (
                         <div className="overflow-x-auto rounded-2xl border border-pencil/15 shadow-sm">
                           <table className="w-full text-xs text-left border-collapse">
-                            <thead className="bg-paper/10 font-hud text-terracotta uppercase text-[10px] tracking-wider border-b border-pencil/15">
+                            <thead className="bg-paper/10 font-mono text-terracotta uppercase text-[10px] tracking-wider border-b border-pencil/15">
                               <tr>
                                 {section.table.headers.map((h, hIdx) => (
                                   <th key={hIdx} className="p-3 font-bold">{h}</th>
@@ -890,7 +890,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                       {/* Acronym Breakdown */}
                       {section.acronym && (
                         <div className="bg-marigold/10 border border-marigold/30 rounded-2xl p-5 space-y-3">
-                          <span className="text-xs font-hud uppercase font-bold text-marigold tracking-wider block">
+                          <span className="text-xs font-mono uppercase font-bold text-marigold tracking-wider block">
                             The {section.acronym.name} Memory Framework:
                           </span>
                           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
@@ -919,14 +919,14 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
                   {/* 3. VOCABULARY & PHONETICS REFERENCE TABLE */}
                   {currentLessonData.vocabularyTable && currentLessonData.vocabularyTable.length > 0 && (
-                    <div className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 sm:p-7 space-y-4">
-                      <div className="flex items-center gap-2 text-marigold font-bold text-base font-display">
+                    <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-6 sm:p-7 space-y-4">
+                      <div className="flex items-center gap-2 text-marigold font-bold text-base font-serif">
                         <BookOpen className="h-5 w-5 text-marigold" />
                         <span>Lesson Vocabulary & Phonetic Pronunciation</span>
                       </div>
                       <div className="overflow-x-auto rounded-2xl border border-pencil/15">
                         <table className="w-full text-xs text-left border-collapse">
-                          <thead className="bg-paper/10 font-hud text-marigold uppercase text-[10px] tracking-wider border-b border-pencil/15">
+                          <thead className="bg-paper/10 font-mono text-marigold uppercase text-[10px] tracking-wider border-b border-pencil/15">
                             <tr>
                               <th className="p-3 font-bold">Spanish Expression</th>
                               <th className="p-3 font-bold">Phonetic Guide</th>
@@ -951,8 +951,8 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
                   {/* 4. REAL CONVERSATION DIALOGUE */}
                   {currentLessonData.dialogue && currentLessonData.dialogue.length > 0 && (
-                    <div className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 sm:p-7 space-y-4">
-                      <div className="flex items-center gap-2 text-terracotta font-bold text-base font-display">
+                    <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-6 sm:p-7 space-y-4">
+                      <div className="flex items-center gap-2 text-terracotta font-bold text-base font-serif">
                         <MessageSquare className="h-5 w-5 text-terracotta" />
                         <span>Practical Conversation Dialogue</span>
                       </div>
@@ -960,7 +960,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                         {currentLessonData.dialogue.map((d, dIdx) => (
                           <div key={dIdx} className="space-y-1">
                             <div className="flex items-center gap-2">
-                              <span className="font-bold text-terracotta font-hud uppercase">{d.speaker}:</span>
+                              <span className="font-bold text-terracotta font-mono uppercase">{d.speaker}:</span>
                               <span className="font-bold text-text-primary">{d.spanish}</span>
                             </div>
                             <p className="text-[11px] text-pencil italic pl-4">({d.english})</p>
@@ -972,8 +972,8 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
                   {/* 5. EXAMPLE SENTENCES WITH BREAKDOWN */}
                   {currentLessonData.exampleSentences && currentLessonData.exampleSentences.length > 0 && (
-                    <div className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 sm:p-7 space-y-4">
-                      <div className="flex items-center gap-2 text-marigold font-bold text-base font-display">
+                    <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-6 sm:p-7 space-y-4">
+                      <div className="flex items-center gap-2 text-marigold font-bold text-base font-serif">
                         <FileText className="h-5 w-5 text-marigold" />
                         <span>Sentence Structure Analysis</span>
                       </div>
@@ -982,7 +982,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                           <div key={sIdx} className="bg-bg-elevated p-4 rounded-2xl border border-structural space-y-1.5 text-xs">
                             <div className="flex justify-between items-start">
                               <span className="font-bold text-text-primary text-sm">{ex.spanish}</span>
-                              <span className="text-[10px] font-hud text-terracotta uppercase font-bold">Example {sIdx + 1}</span>
+                              <span className="text-[10px] font-mono text-terracotta uppercase font-bold">Example {sIdx + 1}</span>
                             </div>
                             <p className="text-pencil font-semibold">{ex.english}</p>
                             <p className="text-[11px] text-pencil/80 italic pt-1 border-t border-pencil/10">Grammar breakdown: {ex.breakdown}</p>
@@ -994,8 +994,8 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
                   {/* 6. INTERACTIVE QUICK PRACTICE CHECK */}
                   {currentLessonData.quickPractice && (
-                    <div className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 sm:p-7 space-y-4">
-                      <div className="flex items-center gap-2 text-terracotta font-bold text-base font-display">
+                    <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-6 sm:p-7 space-y-4">
+                      <div className="flex items-center gap-2 text-terracotta font-bold text-base font-serif">
                         <HelpCircle className="h-5 w-5 text-terracotta" />
                         <span>Interactive Knowledge Check</span>
                       </div>
@@ -1049,14 +1049,14 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                   )}
 
                   {/* 6.5 INTERACTIVE SENTENCE BUILDER WORKSHOP (Carousel) */}
-                  <div className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 sm:p-7 space-y-4">
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-6 sm:p-7 space-y-4">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-terracotta font-bold text-base font-display">
+                      <div className="flex items-center gap-2 text-terracotta font-bold text-base font-serif">
                         <Layers className="h-5 w-5 text-terracotta" />
                         <span>Sentence Builder Workshop</span>
                       </div>
                       {lessonSentenceExercises.length > 1 && (
-                        <span className="text-[10px] font-hud uppercase tracking-wider text-pencil font-bold bg-paper/10 px-2.5 py-1 rounded-full border border-pencil/15">
+                        <span className="text-[10px] font-mono uppercase tracking-wider text-pencil font-bold bg-paper/10 px-2.5 py-1 rounded-full border border-pencil/15">
                           Exercise {sentenceExerciseIndex + 1} of {lessonSentenceExercises.length}
                         </span>
                       )}
@@ -1153,7 +1153,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                     <div className="flex flex-wrap items-center gap-3">
                       <button
                         onClick={() => handleLessonComplete(activeSection)}
-                        className={`px-6 py-3 rounded-2xl text-xs font-bold shadow-md cursor-pointer transition-all ${
+                        className={`px-6 py-3 rounded-2xl text-xs font-bold shadow-sm cursor-pointer transition-all ${
                           completedLessons[activeSection]
                             ? 'bg-teal-deep/20 text-teal-deep border border-teal-deep/30'
                             : 'bg-terracotta text-white hover:bg-terracotta/90'
@@ -1165,7 +1165,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                       {ALL_SECTIONS_ORDERED.indexOf(activeSection) < ALL_SECTIONS_ORDERED.length - 1 && (
                         <button
                           onClick={handleNextLesson}
-                          className="px-6 py-3 rounded-2xl text-xs font-bold bg-marigold text-bg-base hover:bg-marigold/90 shadow-md cursor-pointer transition-all flex items-center gap-1 font-display"
+                          className="px-6 py-3 rounded-full text-xs font-bold bg-marigold text-bg-base hover:bg-marigold/90 shadow-sm cursor-pointer transition-all flex items-center gap-1 font-serif"
                         >
                           Next Lesson →
                         </button>
@@ -1179,17 +1179,17 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
               {/* MASTER EXAMS (Parts 1 - 8) */}
               {activeSection.startsWith('exam') && (
                 <div className="space-y-6">
-                  <div className="bg-paper/5 border border-pencil/15 rounded-3xl p-6 relative overflow-hidden">
+                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-6 relative overflow-hidden">
                     <div className="flex justify-between items-start mb-4">
                       <div>
-                        <span className="text-[10px] font-hud uppercase tracking-wider text-marigold font-bold block mb-1">
+                        <span className="text-[10px] font-mono uppercase tracking-wider text-marigold font-bold block mb-1">
                           {PART_BADGES[coursePart].title}
                         </span>
-                        <h2 className="font-display text-2xl font-bold text-text-primary">
+                        <h2 className="font-serif text-2xl font-bold text-text-primary">
                           {PART_OPTIONS.find(o => o.id === coursePart)?.label.split(':')[0]} Master Exam 🏆
                         </h2>
                       </div>
-                      <div className="flex items-center gap-1.5 bg-marigold/10 border border-marigold/30 text-marigold rounded-full px-3 py-1 text-xs font-bold font-hud">
+                      <div className="flex items-center gap-1.5 bg-marigold/10 border border-marigold/30 text-marigold rounded-full px-3 py-1 text-xs font-bold font-mono">
                         <Award className="h-4 w-4" />
                         <span>+{PART_BADGES[coursePart].coins} Coins / +{PART_BADGES[coursePart].xp} XP</span>
                       </div>
@@ -1197,13 +1197,13 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
                     {!quizFinished ? (
                       <div className="space-y-6">
-                        <div className="flex justify-between items-center text-xs text-pencil font-hud">
+                        <div className="flex justify-between items-center text-xs text-pencil font-mono">
                           <span>Question {currentQuestionIndex + 1} of {activeQuestions.length}</span>
                           <span>Score: {score}</span>
                         </div>
 
                         <div className="bg-bg-elevated p-5 rounded-2xl border border-structural space-y-4">
-                          <h3 className="font-display text-base font-bold text-text-primary leading-relaxed">
+                          <h3 className="font-serif text-base font-bold text-text-primary leading-relaxed">
                             {activeQuestions[currentQuestionIndex].question}
                           </h3>
 
@@ -1245,7 +1245,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                           <button
                             onClick={handleNextQuestion}
                             disabled={selectedAnswer === null}
-                            className="px-5 py-2.5 rounded-xl bg-terracotta text-white font-bold text-xs shadow-md disabled:opacity-40 disabled:cursor-not-allowed hover:bg-terracotta/90 cursor-pointer"
+                            className="px-5 py-2.5 rounded-xl bg-terracotta text-white font-bold text-xs shadow-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-terracotta/90 cursor-pointer"
                           >
                             {currentQuestionIndex < activeQuestions.length - 1 ? 'Next Question &rarr;' : 'Finish Exam'}
                           </button>
@@ -1256,14 +1256,14 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                         <div className="inline-flex p-4 rounded-full bg-marigold/15 text-marigold mb-2">
                           <Trophy className="h-12 w-12" />
                         </div>
-                        <h3 className="font-display text-2xl font-bold text-text-primary">Exam Completed!</h3>
+                        <h3 className="font-serif text-2xl font-bold text-text-primary">Exam Completed!</h3>
                         <p className="text-sm text-pencil">
                           You scored <strong className="text-text-primary font-bold">{score} / {activeQuestions.length}</strong> ({Math.round((score / activeQuestions.length) * 100)}%).
                         </p>
 
                         {(score / activeQuestions.length) >= 0.7 ? (
                           <div className="bg-teal-deep/10 border border-teal-deep/30 rounded-2xl p-4 max-w-md mx-auto space-y-2">
-                            <span className="font-hud text-xs text-teal-deep font-bold uppercase tracking-wider block">Passing Grade Reached!</span>
+                            <span className="font-mono text-xs text-teal-deep font-bold uppercase tracking-wider block">Passing Grade Reached!</span>
                             <p className="text-xs text-text-primary">
                               You unlocked the <strong className="text-marigold">{PART_BADGES[coursePart].badge}</strong>!
                             </p>
@@ -1284,7 +1284,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                           {(score / activeQuestions.length) >= 0.7 && !rewardClaimed && (
                             <button
                               onClick={claimQuizRewards}
-                              className="px-5 py-2.5 rounded-xl bg-marigold text-bg-base font-bold text-xs shadow-md hover:bg-marigold/90 cursor-pointer"
+                              className="px-5 py-2.5 rounded-xl bg-marigold text-bg-base font-bold text-xs shadow-sm hover:bg-marigold/90 cursor-pointer"
                             >
                               Claim Rewards 🪙
                             </button>

@@ -54,11 +54,11 @@ const QuestCompletionScreen: FC = () => {
             className="relative flex h-24 w-24 items-center justify-center"
           >
             {/* Outer ring */}
-            <div className="absolute inset-0 rounded-full border-4 border-terracotta bg-terracotta/20" />
+            <div className="absolute inset-0 rounded-full border border-terracotta bg-terracotta/20" />
             {/* Inner circle */}
-            <div className="absolute inset-2 rounded-full border-2 border-marigold bg-terracotta" />
+            <div className="absolute inset-2 rounded-full border border-marigold bg-terracotta" />
             {/* Seal mark */}
-            <span className="relative font-display text-4xl text-marigold">✓</span>
+            <span className="relative font-serif text-4xl text-marigold">✓</span>
           </motion.div>
         </div>
 
@@ -69,10 +69,10 @@ const QuestCompletionScreen: FC = () => {
           transition={{ delay: 0.3 }}
           className="text-center"
         >
-          <p className="font-hud text-[10px] uppercase tracking-[0.3em] text-marigold">
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-marigold">
             Quest Complete
           </p>
-          <h1 className="mt-2 font-display text-3xl font-bold text-text-primary">
+          <h1 className="mt-2 font-serif text-3xl font-bold text-text-primary">
             {quest.title}
           </h1>
         </motion.div>
@@ -109,7 +109,7 @@ const QuestCompletionScreen: FC = () => {
             transition={{ delay: 1.0 }}
             className="mt-8"
           >
-            <p className="mb-3 text-center font-hud text-[10px] uppercase tracking-[0.25em] text-pencil">
+            <p className="mb-3 text-center font-mono text-[10px] uppercase tracking-[0.25em] text-pencil">
               {quest.vocabulary.length} New Words Learned
             </p>
             <div className="space-y-2">
@@ -121,16 +121,16 @@ const QuestCompletionScreen: FC = () => {
                   transition={{ delay: 1.2 + i * 0.08 }}
                   className="flex items-center gap-3 rounded-lg border border-pencil/20 bg-paper/5 p-3"
                 >
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-marigold/20 font-display text-sm text-marigold">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-marigold/20 font-serif text-sm text-marigold">
                     {vocab.word.charAt(0).toUpperCase()}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="font-display text-sm font-semibold text-text-primary">
+                    <p className="font-serif text-sm font-semibold text-text-primary">
                       {vocab.word}
                     </p>
-                    <p className="font-body text-xs text-pencil">{vocab.meaning}</p>
+                    <p className="font-sans text-xs text-pencil">{vocab.meaning}</p>
                   </div>
-                  <p className="font-hud text-[10px] text-terracotta">
+                  <p className="font-mono text-[10px] text-terracotta">
                     {vocab.pronunciation}
                   </p>
                 </motion.div>
@@ -147,7 +147,7 @@ const QuestCompletionScreen: FC = () => {
           transition={{ delay: 1.4 + quest.vocabulary.length * 0.08 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => navigate('/map')}
-          className="mt-8 w-full rounded-xl bg-terracotta px-4 py-3 font-display text-base font-semibold text-text-primary shadow-lg transition-colors hover:bg-terracotta/90"
+          className="mt-8 w-full rounded-xl bg-terracotta px-4 py-3 font-serif text-base font-semibold text-text-primary shadow-sm transition-colors hover:bg-terracotta/90"
         >
           Continue to Map →
         </motion.button>
@@ -192,10 +192,10 @@ const Counter: FC<CounterProps> = ({ icon, value, label, color, delay }) => {
       <span className="text-2xl" aria-hidden>
         {icon}
       </span>
-      <span className={`font-hud text-3xl font-bold tabular-nums ${color}`}>
+      <span className={`font-mono text-3xl font-bold tabular-nums ${color}`}>
         +{display}
       </span>
-      <span className="font-body text-[10px] text-pencil">{label}</span>
+      <span className="font-sans text-[10px] text-pencil">{label}</span>
     </div>
   );
 };

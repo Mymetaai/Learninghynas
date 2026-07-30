@@ -182,7 +182,7 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
-          <span className="font-hud text-xs uppercase tracking-widest text-text-secondary">
+          <span className="font-mono text-xs uppercase tracking-widest text-text-secondary">
             CEFR Level:
           </span>
           <div className="flex flex-wrap gap-1">
@@ -192,7 +192,7 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
                 <button
                   key={lvl}
                   onClick={() => setSelectedLevel(lvl)}
-                  className={`px-3 py-1 rounded-full text-xs font-hud tracking-wide cursor-pointer transition-all ${
+                  className={`px-3 py-1 rounded-full text-xs font-mono tracking-wide cursor-pointer transition-all ${
                     isSel
                       ? 'bg-accent-action text-white shadow-sm font-semibold'
                       : 'bg-paper/5 border border-structural hover:bg-paper/10 text-text-secondary'
@@ -209,7 +209,7 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
 
         <button
           onClick={() => initializeDeck(selectedLevel)}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-structural bg-paper/5 font-hud text-[10px] uppercase tracking-wider text-text-secondary hover:text-text-primary transition-all cursor-pointer"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-structural bg-paper/5 font-mono text-[10px] uppercase tracking-wider text-text-secondary hover:text-text-primary transition-all cursor-pointer"
           aria-label="Reshuffle deck"
         >
           <Shuffle className="h-3.5 w-3.5" />
@@ -221,12 +221,12 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
       <div className="w-full px-4 py-3 rounded-xl border border-structural/40 bg-paper/5">
         <div className="flex justify-between items-center mb-2">
           <div className="flex flex-col gap-1">
-            <span className="font-hud text-[10px] text-text-secondary uppercase tracking-[0.15em] leading-none">
+            <span className="font-mono text-[10px] text-text-secondary uppercase tracking-[0.15em] leading-none">
               REVIEWING SHUFFLED DECK ({levelLabel})
             </span>
             <span className={`w-2 h-2 rounded-full ${accent.dot}`} />
           </div>
-          <span className="font-hud text-[12px] text-text-primary font-bold tabular-nums">
+          <span className="font-mono text-[12px] text-text-primary font-bold tabular-nums">
             {index + 1} / {deck.length} words
           </span>
         </div>
@@ -243,7 +243,7 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
       {/* ── Stacked deck view ── */}
       <div className="relative w-full flex items-center justify-center mt-2 mb-2" style={{ minHeight: '460px' }}>
         {deck.length === 0 || !currentItem ? (
-          <p className="text-sm font-body text-text-secondary">Loading words...</p>
+          <p className="text-sm font-sans text-text-secondary">Loading words...</p>
         ) : (
           <motion.div
             key={`card-${currentItem.id}-${index}`}
@@ -267,7 +267,7 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
       {/* ── Player controls ── */}
       <div className="mx-auto max-w-sm w-full flex flex-col items-center gap-3">
         {/* State message */}
-        <p className="font-hud text-[9px] uppercase tracking-widest text-text-tertiary">
+        <p className="font-mono text-[9px] uppercase tracking-widest text-text-tertiary">
           {isPaused ? 'Auto-play paused · Interact manually' : 'Auto-playing hands-free...'}
         </p>
 
@@ -288,7 +288,7 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
 
           <button
             onClick={() => setIsPaused((prev) => !prev)}
-            className={`p-4 rounded-full text-white shadow-md transition-all cursor-pointer active:scale-95 flex items-center justify-center ${
+            className={`p-4 rounded-full text-white shadow-sm transition-all cursor-pointer active:scale-95 flex items-center justify-center ${
               isPaused ? 'bg-accent-action hover:bg-accent-action-hover' : 'bg-success hover:bg-success/90'
             }`}
             aria-label={isPaused ? 'Resume auto-play' : 'Pause auto-play'}

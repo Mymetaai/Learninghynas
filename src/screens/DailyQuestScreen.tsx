@@ -77,7 +77,7 @@ const DailyQuestScreen: FC = () => {
 
   // ── Dashboard list view ─────────────────────────────────────────────────
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary font-body">
+    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary font-sans">
       <Confetti fire={confetti} />
 
       {/* Hero header */}
@@ -85,14 +85,14 @@ const DailyQuestScreen: FC = () => {
         <div className="mx-auto max-w-3xl">
           <div className="flex items-center gap-2">
             <Sun size={16} className="text-accent-action" />
-            <p className="font-body text-[10px] uppercase tracking-[0.3em] text-accent-action font-semibold">
+            <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-accent-action font-semibold">
               Misión Diaria
             </p>
           </div>
-          <h1 className="mt-1 font-display text-3xl font-bold text-text-primary">
+          <h1 className="mt-1 font-serif text-3xl font-bold text-text-primary">
             Today's Quest
           </h1>
-          <p className="mt-2 font-body text-sm text-text-secondary">
+          <p className="mt-2 font-sans text-sm text-text-secondary">
             5 fresh micro-quests shuffle in every day. Complete them all for a
             bonus, and watch your score climb.
           </p>
@@ -124,10 +124,10 @@ const DailyQuestScreen: FC = () => {
           {/* Daily progress bar */}
           <div className="mt-4">
             <div className="mb-1 flex items-center justify-between">
-              <span className="font-body text-[10px] uppercase tracking-wider text-text-secondary">
+              <span className="font-sans text-[10px] uppercase tracking-wider text-text-secondary">
                 Daily progress
               </span>
-              <span className="font-body text-[10px] text-accent-action font-semibold">
+              <span className="font-sans text-[10px] text-accent-action font-semibold">
                 {Math.round((doneCount / microQuests.length) * 100)}%
               </span>
             </div>
@@ -176,17 +176,17 @@ const DailyQuestScreen: FC = () => {
               className="rounded-xl border border-teal-deep/40 bg-teal-deep/10 p-4 text-center"
             >
               <Trophy size={20} className="mx-auto mb-1 text-teal-deep" />
-              <p className="font-display text-sm font-bold text-teal-deep">
+              <p className="font-serif text-sm font-bold text-teal-deep">
                 Daily bonus claimed! +75 XP, +30 coins
               </p>
-              <p className="font-body text-xs text-pencil">
+              <p className="font-sans text-xs text-pencil">
                 Come back tomorrow for 5 fresh micro-quests.
               </p>
             </motion.div>
           ) : (
             <div className="rounded-xl border border-dashed border-pencil/25 bg-paper/5 p-4 text-center">
               <Sparkles size={16} className="mx-auto mb-1 text-amber-400" />
-              <p className="font-body text-xs text-pencil">
+              <p className="font-sans text-xs text-pencil">
                 Complete all {microQuests.length} micro-quests to auto-claim the
                 daily bonus (+75 XP, +30 coins).
               </p>
@@ -246,7 +246,7 @@ const MicroQuestRow: FC<MicroQuestRowProps> = ({
         {done ? (
           <CheckCircle2 size={18} />
         ) : unlocked ? (
-          <span className="font-body text-sm font-bold">{index + 1}</span>
+          <span className="font-sans text-sm font-bold">{index + 1}</span>
         ) : (
           <Lock size={16} />
         )}
@@ -254,10 +254,10 @@ const MicroQuestRow: FC<MicroQuestRowProps> = ({
 
       {/* Title + meta */}
       <div className="min-w-0 flex-1">
-        <p className="font-display text-sm font-bold text-text-primary leading-tight">
+        <p className="font-serif text-sm font-bold text-text-primary leading-tight">
           {microQuest.title}
         </p>
-        <div className="mt-1 flex flex-wrap items-center gap-2 font-body text-[11px] text-text-secondary">
+        <div className="mt-1 flex flex-wrap items-center gap-2 font-sans text-[11px] text-text-secondary">
           <span>📘 Level {microQuest.sourceLevel}</span>
           <span>·</span>
           <span>✏️ {microQuest.exercises.length} quick questions</span>
@@ -269,11 +269,11 @@ const MicroQuestRow: FC<MicroQuestRowProps> = ({
       {/* Action */}
       <div className="shrink-0">
         {done ? (
-          <span className="font-body text-[10px] uppercase tracking-wider text-success font-bold">
+          <span className="font-sans text-[10px] uppercase tracking-wider text-success font-bold">
             Done
           </span>
         ) : unlocked ? (
-          <span className="font-body text-xs font-bold text-accent-action group-hover:translate-x-0.5 transition-transform">
+          <span className="font-sans text-xs font-bold text-accent-action group-hover:translate-x-0.5 transition-transform">
             Play →
           </span>
         ) : null}
@@ -342,40 +342,40 @@ const MicroQuestPlayer: FC<MicroQuestPlayerProps> = ({
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ type: 'spring', damping: 20 }}
-        className="rounded-2xl border border-structural bg-bg-elevated p-8 text-center shadow-2xl"
+        className="rounded-2xl border border-structural bg-bg-elevated p-8 text-center shadow-sm"
       >
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, type: 'spring', damping: 12 }}
-          className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 border-accent-action/30 bg-accent-action/10 text-3xl"
+          className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-accent-action/30 bg-accent-action/10 text-3xl"
         >
           🎉
         </motion.div>
 
-        <h2 className="font-display text-2xl font-bold text-text-primary">
+        <h2 className="font-serif text-2xl font-bold text-text-primary">
           {passed ? '¡Excelente!' : '¡Buen trabajo!'}
         </h2>
-        <p className="mt-1 font-body text-sm text-text-secondary">{microQuest.title}</p>
+        <p className="mt-1 font-sans text-sm text-text-secondary">{microQuest.title}</p>
 
         {/* Score */}
         <div className="mt-6 flex items-center justify-center gap-6">
           <div>
             <p
-              className={`font-body text-3xl font-bold tabular-nums ${
+              className={`font-sans text-3xl font-bold tabular-nums ${
                 passed ? 'text-success' : 'text-error'
               }`}
             >
               {pct}%
             </p>
-            <p className="font-body text-xs text-text-secondary">accuracy</p>
+            <p className="font-sans text-xs text-text-secondary">accuracy</p>
           </div>
           <div className="h-8 w-px bg-structural" />
           <div>
-            <p className="font-body text-3xl font-bold tabular-nums text-accent-action">
+            <p className="font-sans text-3xl font-bold tabular-nums text-accent-action">
               {score.correct}
             </p>
-            <p className="font-body text-xs text-text-secondary">
+            <p className="font-sans text-xs text-text-secondary">
               of {score.total} correct
             </p>
           </div>
@@ -383,7 +383,7 @@ const MicroQuestPlayer: FC<MicroQuestPlayerProps> = ({
 
         {/* Points earned */}
         {alreadyDone ? (
-          <p className="mt-5 font-body text-xs italic text-text-secondary">
+          <p className="mt-5 font-sans text-xs italic text-text-secondary">
             Already completed today — no extra points, but nice practice!
           </p>
         ) : (
@@ -393,10 +393,10 @@ const MicroQuestPlayer: FC<MicroQuestPlayerProps> = ({
             transition={{ delay: 0.4 }}
             className="mt-5 flex items-center justify-center gap-4 rounded-xl border border-accent-action/20 bg-accent-action/10 py-2"
           >
-            <span className="flex items-center gap-1 font-body text-sm text-accent-action font-semibold">
+            <span className="flex items-center gap-1 font-sans text-sm text-accent-action font-semibold">
               <Zap size={14} /> +{earnedXp} XP
             </span>
-            <span className="flex items-center gap-1 font-body text-sm text-accent-action font-semibold">
+            <span className="flex items-center gap-1 font-sans text-sm text-accent-action font-semibold">
               <Coins size={14} /> +{earnedCoins}
             </span>
           </motion.div>
@@ -405,7 +405,7 @@ const MicroQuestPlayer: FC<MicroQuestPlayerProps> = ({
         <button
           type="button"
           onClick={onExit}
-          className="mt-6 w-full rounded-xl bg-accent-action hover:bg-accent-action-hover px-4 py-3 font-display text-base font-semibold text-bg-base border-none shadow-md cursor-pointer transition-all duration-200"
+          className="mt-6 w-full rounded-xl bg-accent-action hover:bg-accent-action-hover px-4 py-3 font-serif text-base font-semibold text-bg-base border-none shadow-sm cursor-pointer transition-all duration-200"
         >
           Back to Today's Quest
         </button>
@@ -421,21 +421,21 @@ const MicroQuestPlayer: FC<MicroQuestPlayerProps> = ({
         <button
           type="button"
           onClick={onExit}
-          className="flex items-center gap-1 font-body text-xs text-text-secondary transition-colors hover:text-text-primary bg-transparent border-none p-0 cursor-pointer"
+          className="flex items-center gap-1 font-sans text-xs text-text-secondary transition-colors hover:text-text-primary bg-transparent border-none p-0 cursor-pointer"
         >
           <ChevronLeft size={14} /> Today's Quest
         </button>
-        <p className="font-body text-[10px] uppercase tracking-[0.25em] text-text-secondary">
+        <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-text-secondary">
           Micro-quest · Lvl {microQuest.sourceLevel}
         </p>
       </div>
 
       <div className="mb-3">
         <div className="flex items-center justify-between">
-          <p className="font-display text-sm font-bold text-text-primary">
+          <p className="font-serif text-sm font-bold text-text-primary">
             {microQuest.title}
           </p>
-          <p className="font-body text-[10px] text-success font-bold">
+          <p className="font-sans text-[10px] text-success font-bold">
             {score.correct}✓
           </p>
         </div>
@@ -444,7 +444,7 @@ const MicroQuestPlayer: FC<MicroQuestPlayerProps> = ({
       {/* Progress */}
       <div className="mb-4">
         <div className="flex items-center justify-between">
-          <p className="font-body text-[10px] uppercase tracking-[0.25em] text-text-secondary">
+          <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-text-secondary">
             Question {currentIndex + 1} of {exercises.length}
           </p>
         </div>
@@ -486,7 +486,7 @@ const DashStat: FC<DashStatProps> = ({ icon, label, value }) => (
   <div className="flex items-center gap-2 rounded-lg border border-pencil/15 bg-bg-base/40 px-3 py-2">
     {icon}
     <div>
-      <p className="font-hud text-base font-bold leading-none text-text-primary tabular-nums">
+      <p className="font-mono text-base font-bold leading-none text-text-primary tabular-nums">
         {value}
       </p>
       <p className="text-[9px] uppercase tracking-wide text-pencil">{label}</p>

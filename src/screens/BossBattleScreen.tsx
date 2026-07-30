@@ -199,7 +199,7 @@ const BossBattleScreen = () => {
   };
 
   return (
-    <div className="min-h-screen bg-bg-base text-text-primary px-4 py-8 flex flex-col items-center justify-center font-body">
+    <div className="min-h-screen bg-bg-base text-text-primary px-4 py-8 flex flex-col items-center justify-center font-sans">
       {/* HUD Top Bar */}
       <div className="w-full max-w-4xl flex items-center justify-between mb-6">
         <button
@@ -208,7 +208,7 @@ const BossBattleScreen = () => {
         >
           <ArrowLeft className="h-4 w-4" /> Back to Map
         </button>
-        <h1 className="font-display text-xl font-bold text-text-primary">{world.name} Boss Battle</h1>
+        <h1 className="font-serif text-xl font-bold text-text-primary">{world.name} Boss Battle</h1>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 text-sm text-text-secondary">
             <span>Soft Timer</span>
@@ -235,18 +235,18 @@ const BossBattleScreen = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="w-full max-w-md p-6 rounded-xl border border-structural bg-bg-elevated shadow-xl text-center"
+            className="w-full max-w-md p-6 rounded-xl border border-structural bg-bg-elevated shadow-sm text-center"
           >
             <div className="h-32 w-32 mx-auto mb-4">
               <Kitsune3D direction="right" mode="idle" />
             </div>
-            <h2 className="font-display text-2xl font-bold mb-2 text-text-primary">Challenge {sentinelBoss ? sentinelBoss.name : world.guardian}</h2>
+            <h2 className="font-serif text-2xl font-bold mb-2 text-text-primary">Challenge {sentinelBoss ? sentinelBoss.name : world.guardian}</h2>
             <p className="text-sm text-text-secondary mb-6">
               Test your Spanish skills in an HP Duel! Beat the {sentinelId ? 'sentinel' : 'guardian'} to unlock the next {sentinelId ? 'chapter' : 'region'}.
             </p>
             <button
               onClick={() => setGameState('playing')}
-              className="w-full py-3 bg-accent-action text-bg-elevated font-semibold rounded-xl hover:bg-accent-action-hover shadow-md cursor-pointer border-none transition-colors"
+              className="w-full py-3 bg-accent-action text-bg-elevated font-semibold rounded-xl hover:bg-accent-action-hover shadow-sm cursor-pointer border-none transition-colors"
             >
               Enter Duel
             </button>
@@ -267,10 +267,10 @@ const BossBattleScreen = () => {
               <motion.div
                 animate={isHitFlashing ? { backgroundColor: ['var(--bg-elevated)', 'var(--error)', 'var(--bg-elevated)'], scale: [1, 1.05, 1] } : {}}
                 transition={{ duration: 0.3 }}
-                className="p-4 rounded-xl border border-structural bg-bg-elevated shadow-md relative"
+                className="p-4 rounded-xl border border-structural bg-bg-elevated shadow-sm relative"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-display text-base font-bold text-text-primary">{sentinelBoss ? sentinelBoss.name : world.guardian}</span>
+                  <span className="font-serif text-base font-bold text-text-primary">{sentinelBoss ? sentinelBoss.name : world.guardian}</span>
                   <span className="text-xs font-semibold px-2 py-0.5 rounded bg-error/10 text-error">{sentinelId ? 'SENTINEL' : 'BOSS'}</span>
                 </div>
 
@@ -291,7 +291,7 @@ const BossBattleScreen = () => {
                     />
                   ))}
                 </div>
-                <div className="text-right text-xs text-text-secondary font-bold font-hud">
+                <div className="text-right text-xs text-text-secondary font-bold font-mono">
                   HP: {guardianHp}/{sentinelBoss ? sentinelBoss.hp : 8}
                 </div>
               </motion.div>
@@ -300,10 +300,10 @@ const BossBattleScreen = () => {
               <motion.div
                 animate={isPlayerShaking ? { x: [-10, 10, -10, 10, -5, 5, 0] } : {}}
                 transition={{ duration: 0.4 }}
-                className="p-4 rounded-xl border border-structural bg-bg-elevated shadow-md"
+                className="p-4 rounded-xl border border-structural bg-bg-elevated shadow-sm"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-display text-base font-bold text-text-primary">Yuki's Fox Lives</span>
+                  <span className="font-serif text-base font-bold text-text-primary">Yuki's Fox Lives</span>
                   <div className="flex gap-1.5">
                     {Array.from({ length: 3 }).map((_, i) => (
                       <motion.span
@@ -324,10 +324,10 @@ const BossBattleScreen = () => {
               </motion.div>
 
               {/* Soft Timer Ring & Combo Status */}
-              <div className="p-4 rounded-xl border border-structural bg-bg-elevated shadow-md flex items-center justify-around">
+              <div className="p-4 rounded-xl border border-structural bg-bg-elevated shadow-sm flex items-center justify-around">
                 {/* Draining Ring Timer */}
                 {timerEnabled ? (
-                  <div className="relative w-16 h-16 flex items-center justify-center font-hud">
+                  <div className="relative w-16 h-16 flex items-center justify-center font-mono">
                     <svg className="w-full h-full transform -rotate-90">
                       <circle
                         cx="32"
@@ -356,7 +356,7 @@ const BossBattleScreen = () => {
                     </span>
                   </div>
                 ) : (
-                  <div className="flex flex-col items-center font-hud">
+                  <div className="flex flex-col items-center font-mono">
                     <span className="text-2xl text-text-secondary">∞</span>
                     <span className="text-[10px] text-text-secondary uppercase">Timer Paused</span>
                   </div>
@@ -366,9 +366,9 @@ const BossBattleScreen = () => {
 
                 {/* Combo Fire Indicator */}
                 <div className="flex flex-col items-center">
-                  <div className="flex items-center gap-1 font-hud">
+                  <div className="flex items-center gap-1 font-mono">
                     <Flame className={`h-5 w-5 ${comboCount >= 3 ? 'text-accent-action animate-pulse' : 'text-text-tertiary'}`} />
-                    <span className="font-display font-bold text-lg text-text-primary">{comboCount}</span>
+                    <span className="font-serif font-bold text-lg text-text-primary">{comboCount}</span>
                   </div>
                   <span className="text-[10px] text-text-secondary uppercase">Combo Streak</span>
                 </div>
@@ -381,7 +381,7 @@ const BossBattleScreen = () => {
                     initial={{ opacity: 0, y: 10, scale: 0.9 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
-                    className="p-3 bg-accent-action text-bg-elevated text-center font-display font-bold text-sm rounded-xl shadow-lg flex items-center justify-center gap-2"
+                    className="p-3 bg-accent-action text-bg-elevated text-center font-serif font-bold text-sm rounded-xl shadow-sm flex items-center justify-center gap-2"
                   >
                     🔥 Fox Fire Combo! Double Damage! 🔥
                   </motion.div>
@@ -416,9 +416,9 @@ const BossBattleScreen = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="w-full max-w-lg p-8 rounded-xl border border-structural bg-bg-elevated shadow-2xl text-center"
+            className="w-full max-w-lg p-8 rounded-xl border border-structural bg-bg-elevated shadow-sm text-center"
           >
-            <h2 className="font-display text-3xl font-bold text-success mb-2">Victory!</h2>
+            <h2 className="font-serif text-3xl font-bold text-success mb-2">Victory!</h2>
             <p className="text-sm text-text-secondary mb-6">
               You defeated {sentinelBoss ? sentinelBoss.name : world.guardian} and proved your Spanish mastery!
             </p>
@@ -463,14 +463,14 @@ const BossBattleScreen = () => {
             )}
 
             {/* Rewards */}
-            <div className="p-4 rounded-xl bg-bg-elevated-2 border border-structural flex items-center justify-around mb-6 font-hud">
+            <div className="p-4 rounded-xl bg-bg-elevated-2 border border-structural flex items-center justify-around mb-6 font-mono">
               <div className="flex items-center gap-2 text-text-primary">
                 <Coins className="h-5 w-5 text-accent-action" />
-                <span className="font-display font-bold">+{sentinelBoss ? sentinelBoss.coinReward : (sentinelId ? 50 : 100)} Coins</span>
+                <span className="font-serif font-bold">+{sentinelBoss ? sentinelBoss.coinReward : (sentinelId ? 50 : 100)} Coins</span>
               </div>
               <div className="flex items-center gap-2 text-text-primary">
                 <Trophy className="h-5 w-5 text-success" />
-                <span className="font-display font-bold">{sentinelId ? 'Chapter Cleared' : 'Region Unlocked'}</span>
+                <span className="font-serif font-bold">{sentinelId ? 'Chapter Cleared' : 'Region Unlocked'}</span>
               </div>
             </div>
 
@@ -483,7 +483,7 @@ const BossBattleScreen = () => {
               </button>
               <button
                 onClick={() => navigate('/map')}
-                className="flex-1 py-3 bg-accent-action text-bg-elevated font-semibold rounded-xl hover:bg-accent-action-hover shadow-md cursor-pointer border-none transition-colors"
+                className="flex-1 py-3 bg-accent-action text-bg-elevated font-semibold rounded-xl hover:bg-accent-action-hover shadow-sm cursor-pointer border-none transition-colors"
               >
                 Continue Map
               </button>
@@ -497,9 +497,9 @@ const BossBattleScreen = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="w-full max-w-md p-8 rounded-xl border border-structural bg-bg-elevated shadow-2xl text-center"
+            className="w-full max-w-md p-8 rounded-xl border border-structural bg-bg-elevated shadow-sm text-center"
           >
-            <h2 className="font-display text-2xl font-bold text-error mb-2">Defeated</h2>
+            <h2 className="font-serif text-2xl font-bold text-error mb-2">Defeated</h2>
             <p className="text-sm text-text-secondary mb-6">
               The guardian's counter-attack was too strong this time! Don't worry, there are no penalties. Review your vocabulary and try again.
             </p>
@@ -516,7 +516,7 @@ const BossBattleScreen = () => {
               </button>
               <button
                 onClick={resetBattle}
-                className="flex-1 py-3 bg-accent-action text-bg-elevated font-semibold rounded-xl hover:bg-accent-action-hover shadow-md cursor-pointer border-none transition-colors"
+                className="flex-1 py-3 bg-accent-action text-bg-elevated font-semibold rounded-xl hover:bg-accent-action-hover shadow-sm cursor-pointer border-none transition-colors"
               >
                 Try Again
               </button>

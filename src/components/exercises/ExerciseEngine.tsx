@@ -99,42 +99,42 @@ const ExerciseEngine: FC<ExerciseEngineProps> = ({
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ type: 'spring', damping: 20 }}
-          className="rounded-xl border border-structural bg-bg-elevated p-8 text-center shadow-2xl"
+          className="rounded-xl border border-structural bg-bg-elevated p-8 text-center shadow-sm"
         >
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.2, type: 'spring', damping: 15 }}
-            className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 text-3xl ${
+            className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border text-3xl ${
               passed ? 'border-success/40 bg-success/10 text-success' : 'border-error/40 bg-error/10 text-error'
             }`}
           >
             {passed ? '🎉' : '💪'}
           </motion.div>
 
-          <h2 className="font-display text-2xl font-bold text-text-primary">
+          <h2 className="font-serif text-2xl font-bold text-text-primary">
             {passed ? 'Well Done!' : 'Keep Practicing!'}
           </h2>
-          <p className="mt-1 font-body text-sm text-text-secondary">{questTitle}</p>
+          <p className="mt-1 font-sans text-sm text-text-secondary">{questTitle}</p>
 
           {/* Score */}
           <div className="mt-6 flex items-center justify-center gap-6">
             <div>
               <p
-                className={`font-body text-3xl font-bold tabular-nums ${
+                className={`font-sans text-3xl font-bold tabular-nums ${
                   passed ? 'text-success' : 'text-error'
                 }`}
               >
                 {percentage}%
               </p>
-              <p className="font-body text-xs text-text-secondary">accuracy</p>
+              <p className="font-sans text-xs text-text-secondary">accuracy</p>
             </div>
             <div className="h-8 w-px bg-structural" />
             <div>
-              <p className="font-body text-3xl font-bold tabular-nums text-accent-action">
+              <p className="font-sans text-3xl font-bold tabular-nums text-accent-action">
                 {score.correct}
               </p>
-              <p className="font-body text-xs text-text-secondary">
+              <p className="font-sans text-xs text-text-secondary">
                 of {score.total} correct
               </p>
             </div>
@@ -148,7 +148,7 @@ const ExerciseEngine: FC<ExerciseEngineProps> = ({
             transition={{ delay: 0.4 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleFinish}
-            className="mt-6 w-full rounded-xl bg-accent-action px-4 py-3 font-display text-base font-semibold text-bg-base border-none shadow-md transition-colors hover:bg-accent-action-hover cursor-pointer"
+            className="mt-6 w-full rounded-xl bg-accent-action px-4 py-3 font-serif text-base font-semibold text-bg-base border-none shadow-sm transition-colors hover:bg-accent-action-hover cursor-pointer"
           >
             Continue →
           </motion.button>
@@ -162,10 +162,10 @@ const ExerciseEngine: FC<ExerciseEngineProps> = ({
       {/* Progress bar */}
       <div className="mb-4">
         <div className="flex items-center justify-between">
-          <p className="font-body text-[10px] uppercase tracking-[0.25em] text-text-secondary">
+          <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-text-secondary">
             Exercise {currentIndex + 1} of {exercises.length}
           </p>
-          <p className="font-body text-[10px] text-success font-bold">
+          <p className="font-sans text-[10px] text-success font-bold">
             {score.correct}✓
           </p>
         </div>

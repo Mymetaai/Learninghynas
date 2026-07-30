@@ -39,7 +39,7 @@ const FillBlank: FC<FillBlankProps> = ({
   const renderPrompt = () => {
     const parts = prompt.split('___');
     return (
-      <p className="mb-4 font-body text-base text-text-primary">
+      <p className="mb-4 font-sans text-base text-text-primary">
         {parts[0]}
         <AnimatePresence mode="wait">
           {answered ? (
@@ -54,7 +54,7 @@ const FillBlank: FC<FillBlankProps> = ({
               {selected}
             </motion.span>
           ) : (
-            <span className="inline-block min-w-[4rem] border-b-2 border-dashed border-accent-action/60" />
+            <span className="inline-block min-w-[4rem] border-b border-dashed border-accent-action/60" />
           )}
         </AnimatePresence>
         {parts[1]}
@@ -65,21 +65,21 @@ const FillBlank: FC<FillBlankProps> = ({
   return (
     <div>
       {context && (
-        <p className="mb-2 font-body text-[10px] text-text-secondary">{context}</p>
+        <p className="mb-2 font-sans text-[10px] text-text-secondary">{context}</p>
       )}
       {renderPrompt()}
       <div className="flex flex-wrap gap-2">
         {chips.map((chip) => {
           let classes =
-            'inline-flex items-center rounded-full border border-structural bg-bg-elevated px-3 py-1.5 font-body text-sm text-text-primary transition-all';
+            'inline-flex items-center rounded-full border border-structural bg-bg-elevated px-3 py-1.5 font-sans text-sm text-text-primary transition-all';
 
           if (answered) {
             if (chip === answer) {
               classes =
-                'inline-flex items-center rounded-full border border-success/60 bg-success/10 px-3 py-1.5 font-body text-sm font-bold text-success';
+                'inline-flex items-center rounded-full border border-success/60 bg-success/10 px-3 py-1.5 font-sans text-sm font-bold text-success';
             } else if (chip === selected && chip !== answer) {
               classes =
-                'inline-flex items-center rounded-full border border-error/60 bg-error/10 px-3 py-1.5 font-body text-sm text-error line-through';
+                'inline-flex items-center rounded-full border border-error/60 bg-error/10 px-3 py-1.5 font-sans text-sm text-error line-through';
             } else {
               classes += ' opacity-30';
             }

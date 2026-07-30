@@ -51,20 +51,20 @@ const QuestPreviewScreen = () => {
       />
 
       {/* Card — slides up from bottom */}
-      <div className="relative z-10 w-full max-w-lg rounded-t-2xl border border-pencil/30 bg-paper p-6 shadow-[0_-8px_40px_rgba(0,0,0,0.4)]">
+      <div className="relative z-10 w-full max-w-lg rounded-t-2xl border border-pencil/30 bg-paper p-6 shadow-sm">
         {/* Drag handle */}
         <div className="mx-auto mb-4 h-1 w-10 rounded-full bg-pencil/30" />
 
         {/* Topic badge */}
-        <p className="font-hud text-[10px] uppercase tracking-[0.3em] text-terracotta">
+        <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-terracotta">
           {quest.topicFocus.join(' · ')}
         </p>
 
         {/* Title */}
-        <h1 className="mt-1 font-display text-2xl font-bold text-ink">
+        <h1 className="mt-1 font-serif text-2xl font-bold text-ink">
           {quest.title}
         </h1>
-        <p className="mt-1 font-body text-sm text-pencil">{quest.subtitle}</p>
+        <p className="mt-1 font-sans text-sm text-pencil">{quest.subtitle}</p>
 
         {/* Stats row */}
         <div className="mt-5 flex items-center gap-6 rounded-xl border border-pencil/20 bg-bg-base/5 px-4 py-3">
@@ -78,21 +78,21 @@ const QuestPreviewScreen = () => {
         {/* Vocabulary preview — first 5 words */}
         {quest.vocabulary.length > 0 && (
           <div className="mt-4">
-            <p className="font-hud text-[9px] uppercase tracking-[0.25em] text-pencil">
+            <p className="font-mono text-[9px] uppercase tracking-[0.25em] text-pencil">
               New words in this quest
             </p>
             <div className="mt-2 flex flex-wrap gap-2">
               {quest.vocabulary.slice(0, 5).map((v) => (
                 <span
                   key={v.word}
-                  className="inline-flex items-center gap-1 rounded-full border border-pencil/20 bg-bg-base/5 px-2.5 py-1 font-body text-xs text-ink"
+                  className="inline-flex items-center gap-1 rounded-full border border-pencil/20 bg-bg-base/5 px-2.5 py-1 font-sans text-xs text-ink"
                 >
                   {v.word}
                   <span className="text-pencil">({language === 'hinglish' ? translateWordToHinglish(v.meaning) : v.meaning})</span>
                 </span>
               ))}
               {quest.vocabulary.length > 5 && (
-                <span className="inline-flex items-center rounded-full border border-pencil/20 bg-bg-base/5 px-2.5 py-1 font-body text-xs text-pencil">
+                <span className="inline-flex items-center rounded-full border border-pencil/20 bg-bg-base/5 px-2.5 py-1 font-sans text-xs text-pencil">
                   +{quest.vocabulary.length - 5} more
                 </span>
               )}
@@ -105,7 +105,7 @@ const QuestPreviewScreen = () => {
           <button
             type="button"
             onClick={handleBack}
-            className="flex-1 rounded-xl border border-pencil/30 bg-paper px-4 py-3 font-display text-sm font-semibold text-ink transition-colors hover:bg-pencil/10"
+            className="flex-1 rounded-xl border border-pencil/30 bg-paper px-4 py-3 font-serif text-sm font-semibold text-ink transition-colors hover:bg-pencil/10"
           >
             ← Back
           </button>
@@ -113,7 +113,7 @@ const QuestPreviewScreen = () => {
             <button
               type="button"
               onClick={handleBegin}
-              className="flex-1 rounded-xl border border-teal-deep/40 bg-teal-deep px-4 py-3 font-display text-sm font-semibold text-white transition-colors hover:bg-teal-deep/90"
+              className="flex-1 rounded-xl border border-teal-deep/40 bg-teal-deep px-4 py-3 font-serif text-sm font-semibold text-white transition-colors hover:bg-teal-deep/90"
             >
               ✓ Replay
             </button>
@@ -122,7 +122,7 @@ const QuestPreviewScreen = () => {
               type="button"
               disabled={!unlocked}
               onClick={handleBegin}
-              className={`flex-1 rounded-xl px-4 py-3 font-display text-sm font-semibold transition-colors ${
+              className={`flex-1 rounded-xl px-4 py-3 font-serif text-sm font-semibold transition-colors ${
                 unlocked
                   ? 'bg-terracotta text-white hover:bg-terracotta/90'
                   : 'cursor-not-allowed border border-pencil/30 bg-paper text-pencil'
@@ -146,8 +146,8 @@ interface StatProps {
 const Stat = ({ icon, label, value }: StatProps) => (
   <div className="flex flex-col items-center">
     <span aria-hidden>{icon}</span>
-    <span className="mt-0.5 font-hud text-xs font-semibold text-ink">{value}</span>
-    <span className="font-body text-[9px] text-pencil">{label}</span>
+    <span className="mt-0.5 font-mono text-xs font-semibold text-ink">{value}</span>
+    <span className="font-sans text-[9px] text-pencil">{label}</span>
   </div>
 );
 

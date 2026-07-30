@@ -194,7 +194,7 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="font-display text-xl font-bold text-text-primary">
+          <h2 className="font-serif text-xl font-bold text-text-primary">
             Sentence Builder Exercise
           </h2>
           <p className="text-sm text-text-secondary mt-1">
@@ -212,8 +212,8 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
       </div>
 
       {/* English Prompt */}
-      <div className="bg-bg-elevated-2 border border-structural rounded-2xl p-5 shadow-md">
-        <p className="text-xs font-hud uppercase tracking-wider text-accent-action mb-2">
+      <div className="bg-bg-elevated-2 border border-structural rounded-2xl p-5 shadow-sm">
+        <p className="text-xs font-mono uppercase tracking-wider text-accent-action mb-2">
           Reconstruct this sentence in Spanish
         </p>
         <p className="text-lg font-semibold text-text-primary leading-relaxed">
@@ -229,7 +229,7 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
       {/* Pronoun Drop Variant (B2/C1) */}
       {exercise.pronounDroppedVariant && (
         <div className="bg-info/10 border border-info/30 rounded-2xl p-4">
-          <p className="text-xs font-hud uppercase tracking-wider text-info mb-1">
+          <p className="text-xs font-mono uppercase tracking-wider text-info mb-1">
             Pronoun Drop Variant
           </p>
           <p className="text-sm text-text-primary italic">
@@ -241,7 +241,7 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
       {/* Word Blocks Pool */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <p className="text-xs font-hud uppercase tracking-wider text-text-tertiary">
+          <p className="text-xs font-mono uppercase tracking-wider text-text-tertiary">
             Available Word Blocks ({shuffledTokens.length})
           </p>
           <button
@@ -254,7 +254,7 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
           </button>
         </div>
 
-        <div className="flex flex-wrap gap-2 min-h-[48px] p-3 bg-bg-elevated-2 rounded-xl border-2 border-dashed border-structural">
+        <div className="flex flex-wrap gap-2 min-h-[48px] p-3 bg-bg-elevated-2 rounded-xl border border-dashed border-structural">
           {shuffledTokens.length === 0 && !isSubmitted && (
             <p className="text-xs text-text-tertiary italic">
               Drag all word blocks here to build the sentence
@@ -281,9 +281,9 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
         ref={dropZoneRef}
         onDragOver={handleDragOver}
         onDrop={handleDropOnSentence}
-        className="min-h-[64px] p-4 bg-bg-elevated rounded-2xl border-2 border-dashed border-structural transition-all"
+        className="min-h-[64px] p-4 bg-bg-elevated rounded-2xl border border-dashed border-structural transition-all"
       >
-        <p className="text-xs font-hud uppercase tracking-wider text-text-tertiary mb-2">
+        <p className="text-xs font-mono uppercase tracking-wider text-text-tertiary mb-2">
           Your Sentence
         </p>
         <div className="flex flex-wrap gap-2 min-h-[40px] items-center">
@@ -339,9 +339,9 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
             <button
               onClick={handleSubmit}
               disabled={!allPlaced}
-              className={`px-6 py-2.5 rounded-xl font-bold text-sm transition-all shadow-md flex items-center gap-2 ${
+              className={`px-6 py-2.5 rounded-xl font-bold text-sm transition-all shadow-sm flex items-center gap-2 ${
                 allPlaced
-                  ? 'bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border-2 border-[#2C1E11] shadow-[0_3px_0_#5C524E] cursor-pointer'
+                  ? 'bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border border-[#2C1E11] shadow-sm cursor-pointer'
                   : 'bg-bg-elevated border border-structural text-text-tertiary cursor-not-allowed'
               }`}
             >
@@ -351,7 +351,7 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
           {isSubmitted && onNext && (
             <button
               onClick={onNext}
-              className="px-6 py-2.5 rounded-xl font-bold text-sm bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border-2 border-[#2C1E11] shadow-[0_3px_0_#5C524E] transition-all cursor-pointer"
+              className="px-6 py-2.5 rounded-xl font-bold text-sm bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border border-[#2C1E11] shadow-sm transition-all cursor-pointer"
             >
               Next Exercise
             </button>
@@ -387,7 +387,7 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
 
                 {/* Token Breakdown */}
                 <div className="space-y-2 mt-3">
-                  <p className="text-xs font-hud uppercase tracking-wider text-text-tertiary">
+                  <p className="text-xs font-mono uppercase tracking-wider text-text-tertiary">
                     Sentence Breakdown
                   </p>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">

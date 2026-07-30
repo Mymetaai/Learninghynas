@@ -103,7 +103,7 @@ export const PackOpeningOverlay: FC<PackOpeningOverlayProps> = ({ isOpen, drawnC
             >
               {/* ── PHASE 1: CARD BACK (FRONT FACE) ─────────────────────────── */}
               <div
-                className="absolute inset-0 rounded-xl overflow-hidden border-2 border-[#7D927D]/40 bg-[#2F353B] p-6 flex flex-col items-center justify-between shadow-2xl backface-hidden"
+                className="absolute inset-0 rounded-xl overflow-hidden border border-[#7D927D]/40 bg-[#2F353B] p-6 flex flex-col items-center justify-between shadow-sm backface-hidden"
                 style={{ backfaceVisibility: 'hidden' }}
               >
                 <div className="w-full flex justify-between items-center text-[#7D927D]">

@@ -123,7 +123,7 @@ const UnifiedVocabTrainer: FC = () => {
   if (!current) {
     return (
       <div className="flex flex-col items-center justify-center p-8 text-center glass-surface border border-pencil/20 rounded-2xl bg-paper/5">
-        <p className="font-body text-sm text-text-secondary">
+        <p className="font-sans text-sm text-text-secondary">
           No vocabulary words found for this category.
         </p>
       </div>
@@ -163,9 +163,9 @@ const UnifiedVocabTrainer: FC = () => {
         const before = sentence.substring(0, indexWord);
         const after = sentence.substring(indexWord + current.es.length);
         return (
-          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2 font-body text-base font-semibold text-text-primary text-center">
+          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2 font-sans text-base font-semibold text-text-primary text-center">
             <span>{before}</span>
-            <span className="inline-block border-b-2 border-accent-action px-2 py-0.5 text-accent-action min-w-[5rem]">
+            <span className="inline-block border-b border-accent-action px-2 py-0.5 text-accent-action min-w-[5rem]">
               {status === 'correct' || status === 'revealed' ? current.es : '_____'}
             </span>
             <span>{after}</span>
@@ -176,14 +176,14 @@ const UnifiedVocabTrainer: FC = () => {
 
     return (
       <div className="flex flex-col items-center gap-2">
-        <span className="font-hud text-[10px] uppercase tracking-wider text-text-tertiary">
+        <span className="font-mono text-[10px] uppercase tracking-wider text-text-tertiary">
           Translate English to Spanish
         </span>
-        <p className="font-display text-xl sm:text-2xl font-bold text-text-primary italic">
+        <p className="font-serif text-xl sm:text-2xl font-bold text-text-primary italic">
           &ldquo;{current.en}&rdquo;
         </p>
         {(status === 'revealed') && (
-          <p className="mt-2 font-display text-lg font-bold text-accent-action">
+          <p className="mt-2 font-serif text-lg font-bold text-accent-action">
             Answer: {current.es}
           </p>
         )}
@@ -230,7 +230,7 @@ const UnifiedVocabTrainer: FC = () => {
               <button
                 key={lvl}
                 onClick={() => setActiveLevel(lvl)}
-                className={`relative px-4 py-1.5 rounded-lg text-xs font-hud tracking-widest uppercase transition-all duration-200 cursor-pointer ${
+                className={`relative px-4 py-1.5 rounded-lg text-xs font-mono tracking-widest uppercase transition-all duration-200 cursor-pointer ${
                   isActive
                     ? 'text-white shadow-sm font-semibold'
                     : 'bg-paper/5 border border-structural hover:bg-paper/10 text-text-secondary'
@@ -262,7 +262,7 @@ const UnifiedVocabTrainer: FC = () => {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-1.5 rounded-full text-xs font-hud tracking-wide whitespace-nowrap transition-all duration-200 cursor-pointer ${
+                className={`px-4 py-1.5 rounded-full text-xs font-mono tracking-wide whitespace-nowrap transition-all duration-200 cursor-pointer ${
                   isActive
                     ? 'bg-accent-action text-white shadow-sm'
                     : 'bg-paper/5 border border-structural hover:bg-paper/10 text-text-secondary'
@@ -280,10 +280,10 @@ const UnifiedVocabTrainer: FC = () => {
         {/* Progress Tracker */}
         <div className="flex-1 w-full">
           <div className="flex justify-between items-center mb-1.5">
-            <span className="font-hud text-[10px] text-text-secondary uppercase tracking-wider">
+            <span className="font-mono text-[10px] text-text-secondary uppercase tracking-wider">
               Deck Progress
             </span>
-            <span className="font-hud text-[11px] text-text-primary font-bold tabular-nums">
+            <span className="font-mono text-[11px] text-text-primary font-bold tabular-nums">
               {index + 1} / {deck.length} words
             </span>
           </div>
@@ -302,7 +302,7 @@ const UnifiedVocabTrainer: FC = () => {
           <button
             onClick={shuffleDeck}
             title="Shuffle Deck"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-structural/60 bg-paper/5 font-hud text-[10px] uppercase tracking-wider text-text-secondary hover:text-text-primary hover:border-text-primary transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-structural/60 bg-paper/5 font-mono text-[10px] uppercase tracking-wider text-text-secondary hover:text-text-primary hover:border-text-primary transition-all cursor-pointer"
           >
             <Shuffle className="h-3.5 w-3.5" />
             Shuffle
@@ -310,7 +310,7 @@ const UnifiedVocabTrainer: FC = () => {
           <button
             onClick={resetDeck}
             title="Reset Deck Progress"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-structural/60 bg-paper/5 font-hud text-[10px] uppercase tracking-wider text-text-secondary hover:text-text-primary hover:border-text-primary transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-structural/60 bg-paper/5 font-mono text-[10px] uppercase tracking-wider text-text-secondary hover:text-text-primary hover:border-text-primary transition-all cursor-pointer"
           >
             <RefreshCw className="h-3 w-3" />
             Reset
@@ -322,17 +322,17 @@ const UnifiedVocabTrainer: FC = () => {
       <div className="max-w-3xl mx-auto w-full flex flex-col justify-start">
         <div className="flex items-center gap-2 mb-3 px-1">
           <span className="text-base">✍️</span>
-          <p className="font-hud text-[10px] uppercase tracking-[0.2em] text-text-secondary">
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-text-secondary">
             Sentence Practice
           </p>
         </div>
 
-        <section className="w-full min-h-[18rem] glass-surface border border-pencil/20 rounded-2xl p-6 shadow-xl flex flex-col justify-between bg-paper/5 transition-all duration-300">
+        <section className="w-full min-h-[18rem] glass-surface border border-pencil/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between bg-paper/5 transition-all duration-300">
           <div>
-            <h3 className="font-display text-lg font-bold text-text-primary mb-1">
+            <h3 className="font-serif text-lg font-bold text-text-primary mb-1">
               Fill in the Blank
             </h3>
-            <p className="font-body text-xs text-text-secondary mb-6">
+            <p className="font-sans text-xs text-text-secondary mb-6">
               Type the correct Spanish vocabulary item to complete the translation.
             </p>
 
@@ -365,7 +365,7 @@ const UnifiedVocabTrainer: FC = () => {
                   <button
                     onClick={handleCheck}
                     disabled={!userAnswer.trim()}
-                    className={`px-4 rounded-xl font-hud text-[11px] uppercase tracking-widest transition-all duration-200 cursor-pointer ${
+                    className={`px-4 rounded-xl font-mono text-[11px] uppercase tracking-widest transition-all duration-200 cursor-pointer ${
                       userAnswer.trim()
                         ? 'bg-accent-action text-white hover:bg-accent-action-hover shadow-sm'
                         : 'bg-structural/30 text-text-tertiary cursor-not-allowed'
@@ -377,7 +377,7 @@ const UnifiedVocabTrainer: FC = () => {
                 {(status === 'correct' || status === 'revealed') && (
                   <button
                     onClick={advance}
-                    className="px-4 bg-success text-white hover:bg-success/90 rounded-xl font-hud text-[11px] uppercase tracking-widest transition-all duration-200 flex items-center gap-1 cursor-pointer"
+                    className="px-4 bg-success text-white hover:bg-success/90 rounded-xl font-mono text-[11px] uppercase tracking-widest transition-all duration-200 flex items-center gap-1 cursor-pointer"
                   >
                     Next <ArrowRight className="h-3.5 w-3.5" />
                   </button>
@@ -415,7 +415,7 @@ const UnifiedVocabTrainer: FC = () => {
             <div className="flex items-center justify-between">
               <button
                 onClick={() => setShowHint((prev) => !prev)}
-                className="flex items-center gap-1 text-[11px] font-hud uppercase tracking-wider text-text-tertiary hover:text-accent-action transition-colors cursor-pointer"
+                className="flex items-center gap-1 text-[11px] font-mono uppercase tracking-wider text-text-tertiary hover:text-accent-action transition-colors cursor-pointer"
               >
                 <HelpCircle className="h-4 w-4" />
                 {showHint ? 'Hide Hint' : 'Need Hint?'}
@@ -424,7 +424,7 @@ const UnifiedVocabTrainer: FC = () => {
               {status !== 'correct' && (
                 <button
                   onClick={() => reveal()}
-                  className="text-[11px] font-hud uppercase tracking-wider text-text-tertiary hover:text-accent-action transition-colors cursor-pointer"
+                  className="text-[11px] font-mono uppercase tracking-wider text-text-tertiary hover:text-accent-action transition-colors cursor-pointer"
                 >
                   Reveal Answer
                 </button>
@@ -438,7 +438,7 @@ const UnifiedVocabTrainer: FC = () => {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: 'auto', opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  className="overflow-hidden rounded-xl border border-structural/40 bg-paper/5 p-3 text-xs font-body text-text-secondary"
+                  className="overflow-hidden rounded-xl border border-structural/40 bg-paper/5 p-3 text-xs font-sans text-text-secondary"
                 >
                   <div className="flex gap-2">
                     <Sparkles className="h-4 w-4 text-marigold shrink-0 mt-0.5" />

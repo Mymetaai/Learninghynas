@@ -140,7 +140,7 @@ const ConversationScreen: FC = () => {
                     pronunciation: 'Escenario recomendado'
                   });
                 }}
-                className="inline-flex items-center gap-0.5 bg-emerald-500/15 border-b-2 border-emerald-500 text-emerald-800 font-bold px-1 py-0.5 rounded hover:bg-emerald-500/25 cursor-pointer transition-colors"
+                className="inline-flex items-center gap-0.5 bg-emerald-500/15 border-b border-emerald-500 text-emerald-800 font-bold px-1 py-0.5 rounded hover:bg-emerald-500/25 cursor-pointer transition-colors"
                 title={`Nueva palabra: ${vocabMatch.word} (${vocabMatch.meaning})`}
               >
                 {part} ✨
@@ -186,23 +186,23 @@ const ConversationScreen: FC = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary font-body pb-12">
+    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary font-sans pb-12">
       
       {/* Upper Mode Header */}
       <div className="border-b border-structural bg-bg-base/80 backdrop-blur-md px-4 py-4 sm:px-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 max-w-6xl mx-auto">
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-hud text-[10px] uppercase tracking-[0.25em] text-text-secondary">
+              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-text-secondary">
                 Conversación interactiva con IA
               </span>
               {isGeminiAvailable() && (
-                <span className="flex items-center gap-1 bg-[#7D927D]/10 text-[#7D927D] px-2 py-0.5 rounded-full text-[10px] font-hud border border-[#7D927D]/25 font-bold">
+                <span className="flex items-center gap-1 bg-[#7D927D]/10 text-[#7D927D] px-2 py-0.5 rounded-full text-[10px] font-mono border border-[#7D927D]/25 font-bold">
                   <BrainCircuit className="h-3 w-3" /> Gemini 3.5
                 </span>
               )}
             </div>
-            <h1 className="font-display text-2xl font-bold text-text-primary">AI Companion</h1>
+            <h1 className="font-serif text-2xl font-bold text-text-primary">AI Companion</h1>
           </div>
 
           {/* Mode Switcher Tabs */}
@@ -250,11 +250,11 @@ const ConversationScreen: FC = () => {
             {/* SCENARIO SELECTION GRID VIEW */}
             {!activeScenarioId || !activeScenario ? (
               <div className="space-y-6">
-                <div className="bg-bg-elevated border border-structural rounded-2xl p-6 shadow-lg relative overflow-hidden">
+                <div className="bg-bg-elevated border border-structural rounded-2xl p-6 shadow-sm relative overflow-hidden">
                   <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
                     <Compass className="w-48 h-48 text-accent-action" />
                   </div>
-                  <h2 className="font-display text-xl font-bold text-text-primary mb-1">
+                  <h2 className="font-serif text-xl font-bold text-text-primary mb-1">
                     🎯 Elige un Escenario de la Vida Real
                   </h2>
                   <p className="text-xs text-text-secondary max-w-2xl leading-relaxed">
@@ -273,15 +273,15 @@ const ConversationScreen: FC = () => {
                     return (
                       <div
                         key={scen.id}
-                        className="bg-bg-elevated border border-structural hover:border-accent-action/50 rounded-2xl p-5 shadow-md hover:shadow-xl transition-all duration-200 flex flex-col justify-between group"
+                        className="bg-bg-elevated border border-structural hover:border-accent-action/50 rounded-2xl p-5 shadow-sm hover:shadow-sm transition-all duration-200 flex flex-col justify-between group"
                       >
                         <div>
                           {/* Header badges */}
                           <div className="flex items-center justify-between mb-3">
-                            <span className="font-hud text-[10px] font-bold text-text-tertiary bg-bg-elevated-2 px-2 py-0.5 rounded border border-structural">
+                            <span className="font-mono text-[10px] font-bold text-text-tertiary bg-bg-elevated-2 px-2 py-0.5 rounded border border-structural">
                               Tema #{scen.topicNumber}
                             </span>
-                            <span className={`font-hud text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${
+                            <span className={`font-mono text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${
                               scen.cefr === 'A1'
                                 ? 'bg-emerald-500/10 text-emerald-700 border-emerald-500/30'
                                 : 'bg-amber-500/10 text-amber-700 border-amber-500/30'
@@ -296,10 +296,10 @@ const ConversationScreen: FC = () => {
                               {scen.icon}
                             </span>
                             <div>
-                              <h3 className="font-display text-base font-bold text-text-primary leading-snug group-hover:text-accent-action transition-colors">
+                              <h3 className="font-serif text-base font-bold text-text-primary leading-snug group-hover:text-accent-action transition-colors">
                                 {scen.title}
                               </h3>
-                              <p className="font-body text-xs text-text-secondary mt-0.5">
+                              <p className="font-sans text-xs text-text-secondary mt-0.5">
                                 {scen.characterName} • <span className="italic">{scen.characterRole}</span>
                               </p>
                             </div>
@@ -316,7 +316,7 @@ const ConversationScreen: FC = () => {
 
                         {/* Card Footer */}
                         <div className="pt-3 border-t border-structural flex items-center justify-between gap-2">
-                          <div className="text-[10px] font-hud text-text-tertiary">
+                          <div className="text-[10px] font-mono text-text-tertiary">
                             {session ? (
                               <span className="flex items-center gap-1 text-emerald-700 font-semibold">
                                 <CheckCircle2 className="h-3 w-3" /> {msgCount} msgs • {learnedCount} palabras
@@ -328,7 +328,7 @@ const ConversationScreen: FC = () => {
 
                           <button
                             onClick={() => selectScenario(scen.id)}
-                            className="bg-accent-action hover:bg-accent-action-hover text-bg-base rounded-xl px-4 py-2 text-xs font-bold transition-all shadow-md cursor-pointer border-none flex items-center gap-1 group-hover:translate-x-1"
+                            className="bg-accent-action hover:bg-accent-action-hover text-bg-base rounded-xl px-4 py-2 text-xs font-bold transition-all shadow-sm cursor-pointer border-none flex items-center gap-1 group-hover:translate-x-1"
                           >
                             {session ? 'Continuar →' : 'Iniciar →'}
                           </button>
@@ -340,7 +340,7 @@ const ConversationScreen: FC = () => {
               </div>
             ) : (
               /* ACTIVE SCENARIO CHAT VIEW */
-              <div className="flex flex-col h-[75vh] min-h-[550px] border border-structural rounded-2xl overflow-hidden shadow-2xl bg-bg-elevated">
+              <div className="flex flex-col h-[75vh] min-h-[550px] border border-structural rounded-2xl overflow-hidden shadow-sm bg-bg-elevated">
                 
                 {/* Active Scenario Header Bar */}
                 <div className="bg-bg-elevated-2 p-4 border-b border-structural flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -355,10 +355,10 @@ const ConversationScreen: FC = () => {
                     <span className="text-3xl">{activeScenario.icon}</span>
                     <div>
                       <div className="flex items-center gap-2">
-                        <h2 className="font-display text-lg font-bold text-text-primary leading-tight">
+                        <h2 className="font-serif text-lg font-bold text-text-primary leading-tight">
                           {activeScenario.title}
                         </h2>
-                        <span className="text-[10px] font-hud font-bold px-2 py-0.5 rounded-full bg-accent-action/10 text-accent-action border border-accent-action/20">
+                        <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-accent-action/10 text-accent-action border border-accent-action/20">
                           {activeScenario.cefr}
                         </span>
                       </div>
@@ -393,7 +393,7 @@ const ConversationScreen: FC = () => {
                     <Target className="h-3.5 w-3.5 text-accent-action" />
                     <span><strong>Objetivo del escenario:</strong> {activeScenario.goal}</span>
                   </div>
-                  <span className="text-[10px] font-hud text-text-tertiary hidden md:inline">
+                  <span className="text-[10px] font-mono text-text-tertiary hidden md:inline">
                     Puntos de recompensa: +10 XP • +5 Monedas por mensaje
                   </span>
                 </div>
@@ -413,8 +413,8 @@ const ConversationScreen: FC = () => {
                     if (isUser) {
                       return (
                         <div key={msg.id} className="flex justify-end pl-12">
-                          <div className="max-w-lg bg-bg-elevated-2 border border-structural text-text-primary rounded-xl p-4 shadow-md text-sm border-l-4 border-l-accent-action/60">
-                            <p className="font-hud text-[9px] uppercase tracking-wider text-accent-action mb-1">
+                          <div className="max-w-lg bg-bg-elevated-2 border border-structural text-text-primary rounded-xl p-4 shadow-sm text-sm border-l-4 border-l-accent-action/60">
+                            <p className="font-mono text-[9px] uppercase tracking-wider text-accent-action mb-1">
                               Tu Respuesta
                             </p>
                             <p className="whitespace-pre-wrap leading-relaxed">{msg.text}</p>
@@ -424,12 +424,12 @@ const ConversationScreen: FC = () => {
                     } else {
                       return (
                         <div key={msg.id} className="flex justify-start pr-12">
-                          <div className="relative max-w-xl bg-bg-elevated-2 border border-structural text-text-primary rounded-xl p-5 shadow-lg flex flex-col">
+                          <div className="relative max-w-xl bg-bg-elevated-2 border border-structural text-text-primary rounded-xl p-5 shadow-sm flex flex-col">
                             
                             {/* Avatar header */}
                             <div className="flex items-center gap-2 mb-3 pb-2 border-b border-structural/50">
                               <span className="text-xl">{activeScenario.avatar.startsWith('http') ? activeScenario.icon : activeScenario.avatar}</span>
-                              <span className="font-display font-bold text-xs text-text-primary">
+                              <span className="font-serif font-bold text-xs text-text-primary">
                                 {activeScenario.characterName}
                               </span>
                               <span className="text-[10px] text-text-tertiary italic">
@@ -444,7 +444,7 @@ const ConversationScreen: FC = () => {
                               {/* Newly introduced vocabulary highlight card */}
                               {msg.newVocabWords && msg.newVocabWords.length > 0 && (
                                 <div className="mt-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-3 space-y-1">
-                                  <p className="text-[10px] font-hud uppercase tracking-wider font-bold text-emerald-800 flex items-center gap-1">
+                                  <p className="text-[10px] font-mono uppercase tracking-wider font-bold text-emerald-800 flex items-center gap-1">
                                     <Sparkles className="h-3 w-3" /> Vocabulario Clave del Escenario:
                                   </p>
                                   <div className="flex flex-wrap gap-2 pt-1">
@@ -481,7 +481,7 @@ const ConversationScreen: FC = () => {
 
                             {/* Signoff */}
                             {msg.signOff && (
-                              <p className="font-display italic text-xs text-accent-action text-right mt-3">
+                              <p className="font-serif italic text-xs text-accent-action text-right mt-3">
                                 — {msg.signOff}
                               </p>
                             )}
@@ -490,7 +490,7 @@ const ConversationScreen: FC = () => {
                             <div className="mt-4 pt-3 border-t border-structural/50 flex items-center justify-between">
                               <button
                                 onClick={() => toggleTranslation(msg.id)}
-                                className={`flex items-center gap-1.5 text-[11px] font-hud px-2.5 py-1 rounded-lg transition-colors cursor-pointer ${
+                                className={`flex items-center gap-1.5 text-[11px] font-mono px-2.5 py-1 rounded-lg transition-colors cursor-pointer ${
                                   showTranslation
                                     ? 'bg-accent-action/10 text-accent-action font-semibold'
                                     : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated'
@@ -512,7 +512,7 @@ const ConversationScreen: FC = () => {
                     <div className="flex justify-start pr-12">
                       <div className="bg-bg-elevated-2 border border-structural rounded-xl p-4 shadow flex items-center gap-2.5">
                         <BrainCircuit className="h-4 w-4 text-accent-action animate-pulse" />
-                        <span className="font-hud text-xs text-text-secondary">
+                        <span className="font-mono text-xs text-text-secondary">
                           {activeScenario.characterName} está respondiendo en vivo...
                         </span>
                         <span className="flex gap-1">
@@ -535,7 +535,7 @@ const ConversationScreen: FC = () => {
                       if (!lastMsg || !lastMsg.quickReplies || lastMsg.quickReplies.length === 0) return null;
                       return (
                         <div className="space-y-1.5">
-                          <p className="font-hud text-[9px] uppercase tracking-wider text-text-tertiary px-1">
+                          <p className="font-mono text-[9px] uppercase tracking-wider text-text-tertiary px-1">
                             Respuestas rápidas sugeridas:
                           </p>
                           <div className="flex flex-wrap gap-2">
@@ -544,7 +544,7 @@ const ConversationScreen: FC = () => {
                                 key={qri}
                                 onClick={() => handleSendScenario(qr.text)}
                                 disabled={isScenarioTyping}
-                                className="cursor-pointer text-left rounded-xl border border-structural bg-bg-elevated hover:bg-bg-elevated-2 px-3 py-1.5 font-body text-xs text-text-primary transition-all hover:border-accent-action shadow-sm flex flex-col group disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="cursor-pointer text-left rounded-xl border border-structural bg-bg-elevated hover:bg-bg-elevated-2 px-3 py-1.5 font-sans text-xs text-text-primary transition-all hover:border-accent-action shadow-sm flex flex-col group disabled:opacity-50 disabled:cursor-not-allowed"
                               >
                                 <span className="font-semibold text-text-primary group-hover:text-accent-action">{qr.text}</span>
                                 <span className="text-[10px] text-text-secondary/80 italic">{qr.translation}</span>
@@ -575,7 +575,7 @@ const ConversationScreen: FC = () => {
                     <button
                       type="submit"
                       disabled={!inputText.trim() || isScenarioTyping}
-                      className="bg-accent-action text-bg-base rounded-xl px-5 py-3 hover:bg-accent-action-hover transition-colors flex items-center justify-center gap-1.5 shadow font-body text-sm font-bold border-none disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer shrink-0"
+                      className="bg-accent-action text-bg-base rounded-xl px-5 py-3 hover:bg-accent-action-hover transition-colors flex items-center justify-center gap-1.5 shadow font-sans text-sm font-bold border-none disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer shrink-0"
                     >
                       <Send className="h-4 w-4" /> Enviar
                     </button>
@@ -593,7 +593,7 @@ const ConversationScreen: FC = () => {
             
             {/* Left column: Companion selection */}
             <section className="lg:col-span-4 space-y-4">
-              <h2 className="font-hud text-xs uppercase tracking-wider text-text-secondary px-1">
+              <h2 className="font-mono text-xs uppercase tracking-wider text-text-secondary px-1">
                 Amigos por Carta
               </h2>
 
@@ -620,8 +620,8 @@ const ConversationScreen: FC = () => {
                         </span>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between gap-2">
-                            <h3 className="font-display font-bold text-base truncate">{comp.name}</h3>
-                            <span className={`font-hud text-[9px] uppercase px-1.5 py-0.5 rounded border ${
+                            <h3 className="font-serif font-bold text-base truncate">{comp.name}</h3>
+                            <span className={`font-mono text-[9px] uppercase px-1.5 py-0.5 rounded border ${
                               comp.speed === 'Fácil' 
                                 ? 'bg-emerald-500/15 text-emerald-800 border-emerald-500/30'
                                 : comp.speed === 'Intermedio'
@@ -631,7 +631,7 @@ const ConversationScreen: FC = () => {
                               {comp.speed}
                             </span>
                           </div>
-                          <p className="font-body text-xs text-text-secondary mt-0.5 truncate">
+                          <p className="font-sans text-xs text-text-secondary mt-0.5 truncate">
                             {comp.role}
                           </p>
                         </div>
@@ -639,7 +639,7 @@ const ConversationScreen: FC = () => {
 
                       {/* Friendship bar */}
                       <div className="mt-3 pt-3 border-t border-structural/40">
-                        <div className="flex items-center justify-between text-[10px] font-hud mb-1">
+                        <div className="flex items-center justify-between text-[10px] font-mono mb-1">
                           <span className="flex items-center gap-1">
                             <Heart className="h-3 w-3 text-accent-action fill-accent-action" />
                             Nivel {compConv.friendshipLevel}
@@ -662,7 +662,7 @@ const ConversationScreen: FC = () => {
               <div className="rounded-xl border border-structural bg-bg-elevated/40 p-4 text-center">
                 {showConfirmReset ? (
                   <div className="space-y-3">
-                    <p className="font-body text-xs text-text-secondary">
+                    <p className="font-sans text-xs text-text-secondary">
                       ¿Seguro? Se borrará el historial de cartas.
                     </p>
                     <div className="flex items-center justify-center gap-2">
@@ -671,13 +671,13 @@ const ConversationScreen: FC = () => {
                           resetClassicConversations();
                           setShowConfirmReset(false);
                         }}
-                        className="rounded bg-accent-action hover:bg-accent-action-hover px-3 py-1 font-display text-xs text-bg-base shadow transition-colors cursor-pointer border-none"
+                        className="rounded bg-accent-action hover:bg-accent-action-hover px-3 py-1 font-serif text-xs text-bg-base shadow transition-colors cursor-pointer border-none"
                       >
                         Sí, borrar
                       </button>
                       <button
                         onClick={() => setShowConfirmReset(false)}
-                        className="rounded border border-structural hover:bg-bg-elevated px-3 py-1 font-display text-xs text-text-primary transition-colors cursor-pointer"
+                        className="rounded border border-structural hover:bg-bg-elevated px-3 py-1 font-serif text-xs text-text-primary transition-colors cursor-pointer"
                       >
                         Cancelar
                       </button>
@@ -686,7 +686,7 @@ const ConversationScreen: FC = () => {
                 ) : (
                   <button
                     onClick={() => setShowConfirmReset(true)}
-                    className="flex items-center justify-center gap-2 mx-auto text-text-secondary hover:text-text-primary font-body text-xs transition-colors cursor-pointer bg-transparent border-none p-0"
+                    className="flex items-center justify-center gap-2 mx-auto text-text-secondary hover:text-text-primary font-sans text-xs transition-colors cursor-pointer bg-transparent border-none p-0"
                   >
                     <RefreshCw className="h-3.5 w-3.5" /> Reiniciar Historial Clásico
                   </button>
@@ -695,17 +695,17 @@ const ConversationScreen: FC = () => {
             </section>
 
             {/* Right column: Classic Correspondence Board */}
-            <section className="lg:col-span-8 flex flex-col h-[70vh] min-h-[500px] border border-structural rounded-2xl overflow-hidden shadow-2xl bg-bg-elevated">
+            <section className="lg:col-span-8 flex flex-col h-[70vh] min-h-[500px] border border-structural rounded-2xl overflow-hidden shadow-sm bg-bg-elevated">
               
               <div className="bg-bg-elevated-2 text-text-primary p-4 border-b border-structural flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <span className="text-3xl">{activeCompanion.avatar}</span>
                   <div>
-                    <h2 className="font-display text-lg font-bold leading-tight">{activeCompanion.name}</h2>
-                    <p className="font-body text-xs text-text-secondary italic">{activeCompanion.role}</p>
+                    <h2 className="font-serif text-lg font-bold leading-tight">{activeCompanion.name}</h2>
+                    <p className="font-sans text-xs text-text-secondary italic">{activeCompanion.role}</p>
                   </div>
                 </div>
-                <span className="font-body text-xs text-accent-action bg-accent-action/10 px-2.5 py-1 rounded-full border border-accent-action/20">
+                <span className="font-sans text-xs text-accent-action bg-accent-action/10 px-2.5 py-1 rounded-full border border-accent-action/20">
                   📬 {activeClassicConv.letterCount} cartas
                 </span>
               </div>
@@ -724,7 +724,7 @@ const ConversationScreen: FC = () => {
                   if (isUser) {
                     return (
                       <div key={msg.id} className="flex justify-end pl-12">
-                        <div className="max-w-lg bg-bg-elevated-2 border border-structural text-text-primary rounded-xl p-4 shadow-md text-sm border-l-4 border-l-accent-action/60">
+                        <div className="max-w-lg bg-bg-elevated-2 border border-structural text-text-primary rounded-xl p-4 shadow-sm text-sm border-l-4 border-l-accent-action/60">
                           <p className="whitespace-pre-wrap leading-relaxed">{msg.text}</p>
                         </div>
                       </div>
@@ -732,8 +732,8 @@ const ConversationScreen: FC = () => {
                   } else {
                     return (
                       <div key={msg.id} className="flex justify-start pr-12">
-                        <div className="relative max-w-xl bg-bg-elevated-2 border border-structural text-text-primary rounded-xl p-5 shadow-lg flex flex-col">
-                          <p className="font-display italic text-sm font-semibold mb-3">Estimado estudiante,</p>
+                        <div className="relative max-w-xl bg-bg-elevated-2 border border-structural text-text-primary rounded-xl p-5 shadow-sm flex flex-col">
+                          <p className="font-serif italic text-sm font-semibold mb-3">Estimado estudiante,</p>
                           <div className="space-y-3 leading-relaxed text-sm pr-6">
                             <p>{renderInteractiveSpanishText(msg.text)}</p>
                             {showTranslation && (
@@ -743,14 +743,14 @@ const ConversationScreen: FC = () => {
                             )}
                           </div>
                           {msg.signOff && (
-                            <p className="font-display italic text-base text-accent-action text-right mt-4 self-end">
+                            <p className="font-serif italic text-base text-accent-action text-right mt-4 self-end">
                               — {msg.signOff}
                             </p>
                           )}
                           <div className="mt-4 pt-3 border-t border-structural flex items-center justify-between">
                             <button
                               onClick={() => toggleTranslation(msg.id)}
-                              className="flex items-center gap-1.5 text-[11px] font-hud text-text-secondary hover:text-text-primary cursor-pointer"
+                              className="flex items-center gap-1.5 text-[11px] font-mono text-text-secondary hover:text-text-primary cursor-pointer"
                             >
                               <Languages className="h-3.5 w-3.5" />
                               {showTranslation ? 'Ocultar Traducción' : 'Traducir Carta'}
@@ -766,7 +766,7 @@ const ConversationScreen: FC = () => {
                   <div className="flex justify-start pr-12">
                     <div className="bg-bg-elevated-2 border border-structural rounded-xl p-4 shadow flex items-center gap-2.5">
                       <PenTool className="h-4 w-4 text-accent-action animate-bounce" />
-                      <span className="font-hud text-xs text-text-secondary">
+                      <span className="font-mono text-xs text-text-secondary">
                         {activeCompanion.name} está escribiendo...
                       </span>
                     </div>
@@ -814,11 +814,11 @@ const ConversationScreen: FC = () => {
       {/* Learned Words Modal */}
       {showLearnedWordsModal && activeScenarioConv && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bg-base/80 backdrop-blur-sm">
-          <div className="w-full max-w-md bg-bg-elevated border border-structural rounded-2xl shadow-2xl p-6 space-y-4">
+          <div className="w-full max-w-md bg-bg-elevated border border-structural rounded-2xl shadow-sm p-6 space-y-4">
             <div className="flex items-center justify-between border-b border-structural pb-3">
               <div className="flex items-center gap-2">
                 <BookCheck className="h-5 w-5 text-emerald-600" />
-                <h3 className="font-display font-bold text-lg text-text-primary">
+                <h3 className="font-serif font-bold text-lg text-text-primary">
                   Vocabulario Aprendido ({activeScenarioConv.learnedWords.length})
                 </h3>
               </div>

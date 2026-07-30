@@ -16,7 +16,7 @@ export default function LearnScreen() {
         <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-3">
           <button
             onClick={() => setActiveSubView('dashboard')}
-            className={`px-5 py-2 rounded-full font-body text-xs font-bold transition-all cursor-pointer ${
+            className={`px-5 py-2 rounded-full font-sans text-xs font-bold transition-all cursor-pointer ${
               activeSubView === 'dashboard'
                 ? 'bg-[#7D927D] text-white shadow-sm'
                 : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
@@ -26,7 +26,7 @@ export default function LearnScreen() {
           </button>
           <button
             onClick={() => setActiveSubView('daily-quest')}
-            className={`px-5 py-2 rounded-full font-body text-xs font-bold transition-all cursor-pointer ${
+            className={`px-5 py-2 rounded-full font-sans text-xs font-bold transition-all cursor-pointer ${
               activeSubView === 'daily-quest'
                 ? 'bg-[#7D927D] text-white shadow-sm'
                 : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
@@ -36,7 +36,7 @@ export default function LearnScreen() {
           </button>
           <button
             onClick={() => setActiveSubView('quest-journey')}
-            className={`px-5 py-2 rounded-full font-body text-xs font-bold transition-all cursor-pointer ${
+            className={`px-5 py-2 rounded-full font-sans text-xs font-bold transition-all cursor-pointer ${
               activeSubView === 'quest-journey'
                 ? 'bg-[#7D927D] text-white shadow-sm'
                 : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
@@ -46,7 +46,7 @@ export default function LearnScreen() {
           </button>
           <button
             onClick={() => setActiveSubView('basic-espanol')}
-            className={`px-5 py-2 rounded-full font-body text-xs font-bold transition-all cursor-pointer ${
+            className={`px-5 py-2 rounded-full font-sans text-xs font-bold transition-all cursor-pointer ${
               activeSubView === 'basic-espanol'
                 ? 'bg-[#7D927D] text-white shadow-sm'
                 : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'

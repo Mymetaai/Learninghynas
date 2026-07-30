@@ -39,21 +39,21 @@ const WorldMapScreen = () => {
   return (
     <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base">
       {/* Header */}
-      <div className="border-b-2 border-structural bg-bg-elevated px-5 py-4">
+      <div className="border-b border-structural bg-bg-elevated px-5 py-4">
         <div className="flex items-center justify-between">
           <div>
-            <p className="font-hud text-[10px] uppercase tracking-[0.3em] text-text-secondary">
+            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-text-secondary">
               El Mapa del Camino
             </p>
-            <h1 className="font-display text-2xl font-bold text-text-primary">Kitsune's Path</h1>
+            <h1 className="font-serif text-2xl font-bold text-text-primary">Kitsune's Path</h1>
           </div>
           {/* Tail counter */}
-          <div className="flex items-center gap-2 rounded-full border-2 border-accent-action/30 bg-accent-action/10 px-4 py-2">
+          <div className="flex items-center gap-2 rounded-full border border-accent-action/30 bg-accent-action/10 px-4 py-2">
             <span className="text-lg" role="img" aria-label="Kitsune">🦊</span>
-            <span className="font-hud text-sm font-bold text-accent-action">
+            <span className="font-mono text-sm font-bold text-accent-action">
               {tails.earned}/{tails.total}
             </span>
-            <span className="font-body text-[10px] uppercase tracking-wider text-text-secondary">
+            <span className="font-sans text-[10px] uppercase tracking-wider text-text-secondary">
               Tails
             </span>
           </div>
@@ -66,11 +66,11 @@ const WorldMapScreen = () => {
           <div className="flex items-center gap-2.5">
             <ClipboardList className="h-5 w-5 text-text-secondary" />
             <div>
-              <p className="font-body text-xs font-semibold text-text-primary">Daily quest: finish 2 lessons today</p>
-              <p className="font-body text-[10px] text-text-secondary">Complete quizzes or speaking tasks</p>
+              <p className="font-sans text-xs font-semibold text-text-primary">Daily quest: finish 2 lessons today</p>
+              <p className="font-sans text-[10px] text-text-secondary">Complete quizzes or speaking tasks</p>
             </div>
           </div>
-          <span className="font-hud text-xs font-bold text-accent-action bg-accent-action/10 px-2.5 py-1 rounded-full">+30 KC</span>
+          <span className="font-mono text-xs font-bold text-accent-action bg-accent-action/10 px-2.5 py-1 rounded-full">+30 KC</span>
         </div>
 
         {/* Vertical trail of regions */}
@@ -88,7 +88,7 @@ const WorldMapScreen = () => {
       </div>
 
       {/* Footer hint */}
-      <p className="px-6 pb-8 text-center font-body text-xs text-text-secondary">
+      <p className="px-6 pb-8 text-center font-sans text-xs text-text-secondary">
         Complete all guardians to become the Nine-Tailed Kitsune Master 🦊
       </p>
     </div>
@@ -155,7 +155,7 @@ const RegionCard = ({
   if (status === 'locked') {
     return (
       <section
-        className="relative overflow-hidden rounded-2xl border-2 border-structural/40 bg-bg-elevated shadow-md animate-fade-in"
+        className="relative overflow-hidden rounded-2xl border border-structural/40 bg-bg-elevated shadow-sm animate-fade-in"
         aria-label={`Locked region: ${world.name}. ${prevGuardian ? `Defeat ${prevGuardian} to unlock.` : 'Complete the previous region to unlock.'}`}
       >
         <div className="relative px-5 py-4 backdrop-blur-[2px]">
@@ -167,14 +167,14 @@ const RegionCard = ({
                 <Lock size={18} />
               </div>
               <div>
-                <p className="font-hud text-[9px] uppercase tracking-[0.2em] text-text-tertiary">
+                <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-text-tertiary">
                   {world.level}
                 </p>
-                <h2 className="font-display text-base font-bold text-text-tertiary">{world.name}</h2>
+                <h2 className="font-serif text-base font-bold text-text-tertiary">{world.name}</h2>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <span className="font-hud text-[10px] uppercase text-text-tertiary">Locked</span>
+              <span className="font-mono text-[10px] uppercase text-text-tertiary">Locked</span>
               <ChevronDown size={16} className="text-text-tertiary" />
             </div>
           </div>
@@ -185,7 +185,7 @@ const RegionCard = ({
 
   return (
     <section
-      className={`rounded-2xl border-2 shadow-lg transition-all duration-300 animate-fade-in ${
+      className={`rounded-2xl border shadow-sm transition-all duration-300 animate-fade-in ${
         status === 'completed'
           ? 'border-success/40 bg-bg-elevated'
           : 'border-accent-action/40 bg-bg-elevated'
@@ -199,7 +199,7 @@ const RegionCard = ({
       >
         <div className="flex items-center gap-3">
           <div
-            className={`flex h-10 w-10 items-center justify-center rounded-full border-2 ${
+            className={`flex h-10 w-10 items-center justify-center rounded-full border ${
               status === 'completed'
                 ? 'border-success bg-success/15'
                 : 'border-accent-action bg-accent-action/15'
@@ -212,10 +212,10 @@ const RegionCard = ({
             )}
           </div>
           <div>
-            <p className="font-hud text-[9px] uppercase tracking-[0.2em] text-text-secondary">
+            <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-text-secondary">
               {world.level}
             </p>
-            <h2 className="font-display text-base font-bold text-text-primary">{world.name}</h2>
+            <h2 className="font-serif text-base font-bold text-text-primary">{world.name}</h2>
           </div>
         </div>
 
@@ -224,7 +224,7 @@ const RegionCard = ({
           {isGuardianDefeated && (
             <div className="flex items-center gap-1 rounded-full bg-success/15 px-2.5 py-1">
               <span className="text-sm">🦊</span>
-              <span className="font-hud text-[10px] font-bold text-success">+{world.tailsAwarded}</span>
+              <span className="font-mono text-[10px] font-bold text-success">+{world.tailsAwarded}</span>
             </div>
           )}
           {/* Progress pill */}
@@ -237,7 +237,7 @@ const RegionCard = ({
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
-            <span className="font-hud text-[10px] text-text-secondary">
+            <span className="font-mono text-[10px] text-text-secondary">
               {completedCount}/{totalQuests}
             </span>
           </div>
@@ -253,7 +253,7 @@ const RegionCard = ({
       {/* Expanded map content */}
       {expanded && (
         <div className="px-5 pb-5 pt-2 border-t border-structural/20 space-y-5">
-          <p className="font-body text-xs text-text-secondary mb-1">{world.description}</p>
+          <p className="font-sans text-xs text-text-secondary mb-1">{world.description}</p>
           
           <div className="space-y-4">
             {chapters.map((chapter) => (
@@ -391,13 +391,13 @@ const ChapterSegment = ({
             <Check size={16} />
           </div>
           <div>
-            <p className="font-hud text-[9px] uppercase tracking-wider text-text-secondary">Chapter {chapter.chapterNumber}</p>
-            <h3 className="font-display text-sm font-bold text-text-primary">{chapter.name}</h3>
+            <p className="font-mono text-[9px] uppercase tracking-wider text-text-secondary">Chapter {chapter.chapterNumber}</p>
+            <h3 className="font-serif text-sm font-bold text-text-primary">{chapter.name}</h3>
           </div>
         </div>
         <div className="flex items-center gap-2">
           <span className="text-sm">🏆</span>
-          <span className="font-hud text-[10px] text-success font-bold uppercase tracking-wider">Completed</span>
+          <span className="font-mono text-[10px] text-success font-bold uppercase tracking-wider">Completed</span>
         </div>
       </div>
     );
@@ -411,11 +411,11 @@ const ChapterSegment = ({
             <Lock size={16} />
           </div>
           <div>
-            <p className="font-hud text-[9px] uppercase tracking-wider text-text-secondary">Chapter {chapter.chapterNumber}</p>
-            <h3 className="font-display text-sm font-bold text-text-tertiary">{chapter.name}</h3>
+            <p className="font-mono text-[9px] uppercase tracking-wider text-text-secondary">Chapter {chapter.chapterNumber}</p>
+            <h3 className="font-serif text-sm font-bold text-text-tertiary">{chapter.name}</h3>
           </div>
         </div>
-        <span className="font-hud text-[10px] text-text-secondary uppercase tracking-wider">Locked</span>
+        <span className="font-mono text-[10px] text-text-secondary uppercase tracking-wider">Locked</span>
       </div>
     );
   }
@@ -425,9 +425,9 @@ const ChapterSegment = ({
     <div className="border border-accent-action/30 rounded-2xl p-4 bg-bg-elevated/20 shadow-sm space-y-4 animate-fade-in">
       {/* Segment Header */}
       <div>
-        <p className="font-hud text-[9px] uppercase tracking-[0.2em] text-accent-action font-bold">Chapter {chapter.chapterNumber}</p>
-        <h3 className="font-display text-base font-bold text-text-primary">{chapter.name}</h3>
-        <p className="font-body text-xs text-text-secondary mt-0.5">{chapter.description}</p>
+        <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent-action font-bold">Chapter {chapter.chapterNumber}</p>
+        <h3 className="font-serif text-base font-bold text-text-primary">{chapter.name}</h3>
+        <p className="font-sans text-xs text-text-secondary mt-0.5">{chapter.description}</p>
       </div>
 
       {/* SVG Map Path */}
@@ -515,17 +515,17 @@ const ChapterSegment = ({
       {selectedPin ? (
         <div className="bg-bg-elevated border border-structural rounded-xl p-4 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-fade-in">
           <div className="min-w-0">
-            <span className="font-hud text-[9px] uppercase tracking-wider text-accent-action font-bold bg-accent-action/10 px-2 py-0.5 rounded">
+            <span className="font-mono text-[9px] uppercase tracking-wider text-accent-action font-bold bg-accent-action/10 px-2 py-0.5 rounded">
               Lesson {activePinIdx + 1}
             </span>
-            <h3 className="font-display text-sm font-bold text-text-primary mt-1.5">{selectedPin.quest.title}</h3>
-            <p className="font-body text-xs text-text-secondary mt-0.5">{selectedPin.quest.subtitle}</p>
+            <h3 className="font-serif text-sm font-bold text-text-primary mt-1.5">{selectedPin.quest.title}</h3>
+            <p className="font-sans text-xs text-text-secondary mt-0.5">{selectedPin.quest.subtitle}</p>
           </div>
           <button
             type="button"
             disabled={!selectedPin.unlocked}
             onClick={() => selectedPin.unlocked && onPinTap(selectedPin.quest.id)}
-            className={`shrink-0 px-4 py-2.5 rounded-xl font-body text-xs font-bold transition-all shadow-sm border-none ${
+            className={`shrink-0 px-4 py-2.5 rounded-xl font-sans text-xs font-bold transition-all shadow-sm border-none ${
               selectedPin.done
                 ? 'bg-success/15 hover:bg-success/20 text-success cursor-pointer'
                 : selectedPin.unlocked
@@ -539,11 +539,11 @@ const ChapterSegment = ({
       ) : (
         <div className="bg-bg-elevated border border-structural rounded-xl p-4 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-fade-in">
           <div className="min-w-0">
-            <span className="font-hud text-[9px] uppercase tracking-wider text-accent-action font-bold bg-accent-action/10 px-2 py-0.5 rounded">
+            <span className="font-mono text-[9px] uppercase tracking-wider text-accent-action font-bold bg-accent-action/10 px-2 py-0.5 rounded">
               {chapter.endBoss.type === 'sentinel' ? 'Sentinel duel' : 'Guardian Battle'}
             </span>
-            <h3 className="font-display text-sm font-bold text-text-primary mt-1.5">{chapter.endBoss.name}</h3>
-            <p className="font-body text-xs text-text-secondary mt-0.5">
+            <h3 className="font-serif text-sm font-bold text-text-primary mt-1.5">{chapter.endBoss.name}</h3>
+            <p className="font-sans text-xs text-text-secondary mt-0.5">
               {isBossDefeated
                 ? `You defeated the ${chapter.endBoss.type === 'sentinel' ? 'sentinel' : 'guardian'} and claimed your rewards!`
                 : `Challenge the ${chapter.endBoss.type === 'sentinel' ? 'sentinel' : 'guardian'} in an HP duel.`}
@@ -553,7 +553,7 @@ const ChapterSegment = ({
             type="button"
             disabled={!allQuestsDone}
             onClick={handleBossClick}
-            className={`shrink-0 px-4 py-2.5 rounded-xl font-body text-xs font-bold transition-all shadow-sm border-none ${
+            className={`shrink-0 px-4 py-2.5 rounded-xl font-sans text-xs font-bold transition-all shadow-sm border-none ${
               allQuestsDone
                 ? 'bg-success hover:bg-success-hover text-white cursor-pointer hover:scale-103'
                 : 'bg-structural/35 text-text-secondary/65 cursor-not-allowed'

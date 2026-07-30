@@ -72,17 +72,17 @@ const QuestJourneyScreen: FC = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary font-body">
+    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary font-sans">
       {/* Hero header */}
       <div className="relative overflow-hidden border-b border-pencil/20 bg-gradient-to-br from-terracotta/20 via-ink to-teal-deep/20 px-4 py-8">
         <div className="mx-auto max-w-4xl">
-          <p className="font-hud text-[10px] uppercase tracking-[0.3em] text-terracotta">
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-terracotta">
             El Viaje del Conocimiento
           </p>
-          <h1 className="mt-1 font-display text-3xl font-bold text-text-primary">
+          <h1 className="mt-1 font-serif text-3xl font-bold text-text-primary">
             Quest Journey
           </h1>
-          <p className="mt-2 font-body text-sm text-pencil">
+          <p className="mt-2 font-sans text-sm text-pencil">
             Learn Spanish level by level — 24 chapters from your textbook, each
             packed with vocabulary, grammar, and exercises.
           </p>
@@ -193,7 +193,7 @@ const LevelCard: FC<LevelCardProps> = ({
         completed
           ? 'border-teal-deep/40 bg-teal-deep/5 hover:bg-teal-deep/10'
           : unlocked
-          ? 'border-pencil/30 bg-paper hover:border-terracotta/40 hover:shadow-lg'
+          ? 'border-pencil/30 bg-paper hover:border-terracotta/40 hover:shadow-sm'
           : 'cursor-not-allowed border-pencil/10 bg-bg-base/50 opacity-50'
       }`}
     >
@@ -206,7 +206,7 @@ const LevelCard: FC<LevelCardProps> = ({
         {/* Level number + status */}
         <div className="flex items-center justify-between">
           <span
-            className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 font-hud text-[10px] uppercase tracking-wider ${
+            className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider ${
               completed
                 ? 'bg-teal-deep/15 text-teal-deep'
                 : unlocked
@@ -235,10 +235,10 @@ const LevelCard: FC<LevelCardProps> = ({
         </div>
 
         {/* Title */}
-        <h3 className="mt-2 font-display text-sm font-bold text-ink leading-tight">
+        <h3 className="mt-2 font-serif text-sm font-bold text-ink leading-tight">
           {title.replace(`Level ${level}: `, '')}
         </h3>
-        <p className="mt-1 font-body text-[11px] text-pencil leading-snug">
+        <p className="mt-1 font-sans text-[11px] text-pencil leading-snug">
           {subtitle}
         </p>
 
@@ -287,7 +287,7 @@ const StatBadge: FC<StatBadgeProps> = ({ icon, label, value, accent }) => (
   >
     <span className={accent ? 'text-terracotta' : 'text-pencil'}>{icon}</span>
     <div>
-      <p className="font-hud text-xs font-bold leading-none text-text-primary">
+      <p className="font-mono text-xs font-bold leading-none text-text-primary">
         {value}
       </p>
       <p className="text-[9px] text-pencil">{label}</p>

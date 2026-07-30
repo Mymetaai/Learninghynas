@@ -78,7 +78,7 @@ export const LandingEntry: FC<LandingEntryProps> = ({ children }) => {
             <SignInButton mode="modal">
               <button
                 onClick={() => setIsLampOn(true)}
-                className="mt-4 bg-[#7D927D] hover:bg-[#6B826B] text-white font-sans text-xs font-semibold px-6 py-3 rounded-full shadow-lg cursor-pointer border-none transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2 mx-auto"
+                className="mt-4 bg-[#7D927D] hover:bg-[#6B826B] text-white font-sans text-xs font-semibold px-6 py-3 rounded-full shadow-sm cursor-pointer border-none transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2 mx-auto"
               >
                 <span>💡</span> Pull the cord to sign in
               </button>
@@ -134,7 +134,7 @@ const WelcomeTransition: FC<WelcomeTransitionProps> = ({ onTimeout }) => {
       </div>
 
       {/* WELCOME BACK CARD ON THE RIGHT */}
-      <div className="bg-white border border-[#777775]/20 rounded-2xl p-8 shadow-2xl max-w-md w-full text-center space-y-4 animate-scale-up">
+      <div className="bg-white border border-[#777775]/20 rounded-2xl p-8 shadow-sm max-w-md w-full text-center space-y-4 animate-scale-up">
         <div className="flex items-center justify-center mx-auto h-12 w-12 rounded-full bg-[#7D927D]/10 text-[#7D927D]">
           <Loader2 className="h-6 w-6 animate-spin" />
         </div>

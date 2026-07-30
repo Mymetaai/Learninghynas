@@ -161,7 +161,7 @@ const StackCard: FC<{
     >
       {/* Level badge hint on silhouette */}
       <span
-        className={`absolute top-3 right-3 text-[8px] font-hud px-1.5 py-0.5 rounded-full ${colors.badgeBg} ${colors.badgeText} opacity-60`}
+        className={`absolute top-3 right-3 text-[8px] font-mono px-1.5 py-0.5 rounded-full ${colors.badgeBg} ${colors.badgeText} opacity-60`}
       >
         {item.level}
       </span>
@@ -236,20 +236,20 @@ const VocabCard: FC<VocabCardProps> = ({
             <div className="relative z-10 flex flex-col justify-between h-full w-full">
               {/* Top Row: Category Badge & CEFR Level */}
               <div className="flex justify-between items-center w-full">
-                <span className="badge bg-black/25 backdrop-blur-[2px] text-white text-[9px] px-3 py-1 rounded-full font-hud font-semibold uppercase tracking-wider">
+                <span className="badge bg-black/25 backdrop-blur-[2px] text-white text-[9px] px-3 py-1 rounded-full font-mono font-semibold uppercase tracking-wider">
                   {item.category}
                 </span>
-                <span className={`font-hud text-[10px] font-bold px-2.5 py-0.5 rounded-full ${colors.badgeBg} ${colors.badgeText}`}>
+                <span className={`font-mono text-[10px] font-bold px-2.5 py-0.5 rounded-full ${colors.badgeBg} ${colors.badgeText}`}>
                   {item.level}
                 </span>
               </div>
 
               {/* Center: Spanish Word */}
               <div className="flex flex-col items-center justify-center my-auto text-center px-4">
-                <p className="font-display text-3xl sm:text-4xl font-bold text-text-primary leading-tight">
+                <p className="font-serif text-3xl sm:text-4xl font-bold text-text-primary leading-tight">
                   {item.es}
                 </p>
-                <p className="mt-2.5 font-hud text-[10px] uppercase tracking-[0.2em] text-text-secondary font-semibold">
+                <p className="mt-2.5 font-mono text-[10px] uppercase tracking-[0.2em] text-text-secondary font-semibold">
                   SPANISH
                 </p>
               </div>
@@ -257,7 +257,7 @@ const VocabCard: FC<VocabCardProps> = ({
               {/* Bottom Row: Design Details & Tap Hint */}
               <div className="flex justify-between items-center w-full border-t border-structural/30 pt-3">
                 <span className="text-text-tertiary text-xs">✦</span>
-                <p className="font-body text-[10px] text-text-secondary opacity-75 animate-pulse">
+                <p className="font-sans text-[10px] text-text-secondary opacity-75 animate-pulse">
                   tap to flip card
                 </p>
                 <span className="text-text-tertiary text-xs">✦</span>
@@ -271,17 +271,17 @@ const VocabCard: FC<VocabCardProps> = ({
             <div className={`uiverse-card-back-content ${borderClass}`}>
               {/* Top Row: Info label & CEFR Level */}
               <div className="flex justify-between items-center w-full absolute top-5 left-0 px-6 z-10">
-                <span className="text-[9px] font-hud font-semibold uppercase tracking-widest text-text-secondary">
+                <span className="text-[9px] font-mono font-semibold uppercase tracking-widest text-text-secondary">
                   Meaning
                 </span>
-                <span className={`font-hud text-[10px] font-bold px-2.5 py-0.5 rounded-full ${colors.badgeBg} ${colors.badgeText}`}>
+                <span className={`font-mono text-[10px] font-bold px-2.5 py-0.5 rounded-full ${colors.badgeBg} ${colors.badgeText}`}>
                   {item.level}
                 </span>
               </div>
 
               {/* Center Content: English Translation & Example */}
               <div className="flex flex-col items-center justify-center gap-4 text-center w-full my-auto px-2">
-                <p className="font-display text-2xl sm:text-3xl font-bold text-accent-action leading-tight">
+                <p className="font-serif text-2xl sm:text-3xl font-bold text-accent-action leading-tight">
                   {item.en}
                 </p>
                 <div className="w-12 h-[2px] bg-structural" />
@@ -292,7 +292,7 @@ const VocabCard: FC<VocabCardProps> = ({
                       &ldquo;{item.example}&rdquo;
                     </p>
                     {item.exampleTranslation && (
-                      <p className="font-body text-xs text-text-secondary leading-normal">
+                      <p className="font-sans text-xs text-text-secondary leading-normal">
                         {item.exampleTranslation}
                       </p>
                     )}
@@ -300,7 +300,7 @@ const VocabCard: FC<VocabCardProps> = ({
                 ) : (
                   <div className="flex items-center gap-1.5 justify-center text-text-tertiary">
                     <Sparkles className="h-3.5 w-3.5 text-accent-action shrink-0" />
-                    <span className="font-hud text-[9px] uppercase tracking-wider">
+                    <span className="font-mono text-[9px] uppercase tracking-wider">
                       {item.category} Category
                     </span>
                   </div>
@@ -311,7 +311,7 @@ const VocabCard: FC<VocabCardProps> = ({
               {item.tags && item.tags.length > 0 && (
                 <div className="flex flex-wrap gap-1 justify-center absolute bottom-16 left-0 px-6 w-full">
                   {item.tags.slice(0, 3).map((tag) => (
-                    <span key={tag} className="text-[8px] font-hud bg-white/80 px-2 py-0.5 rounded border border-structural text-text-secondary font-medium">
+                    <span key={tag} className="text-[8px] font-mono bg-white/80 px-2 py-0.5 rounded border border-structural text-text-secondary font-medium">
                       {tag}
                     </span>
                   ))}
@@ -332,7 +332,7 @@ const VocabCard: FC<VocabCardProps> = ({
               {/* Bottom Row */}
               <div className="flex justify-between items-center w-full absolute bottom-5 left-0 px-6 border-t border-structural/30 pt-3">
                 <span className="text-text-tertiary text-xs">✦</span>
-                <p className="font-hud text-[9px] uppercase tracking-wider text-text-secondary font-semibold">
+                <p className="font-mono text-[9px] uppercase tracking-wider text-text-secondary font-semibold">
                   Kitsune's Path
                 </p>
                 <span className="text-text-tertiary text-xs">✦</span>

@@ -48,7 +48,7 @@ export const GachaCard: FC<GachaCardProps> = ({ card, onClick, isUnlocked = true
   return (
     <div
       onClick={onClick}
-      className={`aspect-[2.5/3.5] w-full rounded-xl overflow-hidden relative border-2 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-md cursor-pointer select-none ${borderStyle} ${
+      className={`aspect-[2.5/3.5] w-full rounded-xl overflow-hidden relative border shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-sm cursor-pointer select-none ${borderStyle} ${
         !isUnlocked ? 'grayscale opacity-60' : ''
       }`}
     >

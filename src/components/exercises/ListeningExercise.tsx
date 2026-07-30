@@ -44,7 +44,7 @@ const ListeningExercise: FC<ListeningExerciseProps> = ({
   return (
     <div>
       {context && (
-        <p className="mb-2 font-body text-[10px] text-accent-action font-semibold">{context}</p>
+        <p className="mb-2 font-sans text-[10px] text-accent-action font-semibold">{context}</p>
       )}
 
       {/* Audio playback stub — pronunciation card */}
@@ -57,7 +57,7 @@ const ListeningExercise: FC<ListeningExerciseProps> = ({
         >
           🔊
         </button>
-        <p className="mt-2 font-body text-sm text-text-secondary">
+        <p className="mt-2 font-sans text-sm text-text-secondary">
           {revealed ? prompt : 'Tap to hear pronunciation'}
         </p>
         {revealed && (
@@ -71,20 +71,20 @@ const ListeningExercise: FC<ListeningExerciseProps> = ({
         )}
       </div>
 
-      <p className="mb-3 font-body text-base text-text-primary">Which word is it?</p>
+      <p className="mb-3 font-sans text-base text-text-primary">Which word is it?</p>
 
       <div className="space-y-2">
         {shuffledOptions.map((option) => {
           let classes =
-            'w-full rounded-xl border border-structural bg-bg-elevated px-4 py-3 font-body text-sm text-text-primary text-left transition-all';
+            'w-full rounded-xl border border-structural bg-bg-elevated px-4 py-3 font-sans text-sm text-text-primary text-left transition-all';
 
           if (answered) {
             if (option === answer) {
               classes =
-                'w-full rounded-xl border border-success/60 bg-success/10 px-4 py-3 font-body text-sm font-bold text-success text-left';
+                'w-full rounded-xl border border-success/60 bg-success/10 px-4 py-3 font-sans text-sm font-bold text-success text-left';
             } else if (option === selected && option !== answer) {
               classes =
-                'w-full rounded-xl border border-error/60 bg-error/10 px-4 py-3 font-body text-sm text-error text-left';
+                'w-full rounded-xl border border-error/60 bg-error/10 px-4 py-3 font-sans text-sm text-error text-left';
             } else {
               classes += ' opacity-40';
             }
@@ -110,7 +110,7 @@ const ListeningExercise: FC<ListeningExerciseProps> = ({
         <motion.p
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-3 font-body text-sm text-success"
+          className="mt-3 font-sans text-sm text-success"
         >
           ✓ Correct answer: <span className="font-semibold">{answer}</span>
         </motion.p>

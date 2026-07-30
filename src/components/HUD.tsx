@@ -82,13 +82,13 @@ const HUD: FC = () => {
               alt="TheLearningHyena Logo"
               className="h-7 w-7 object-contain shrink-0"
             />
-            <span className="hidden font-display text-sm font-semibold text-text-primary md:inline">
+            <span className="hidden font-serif text-sm font-semibold text-text-primary md:inline">
               TheLearningHyena
             </span>
           </Link>
 
           {/* Stats cluster + Clerk Auth Buttons */}
-          <div className="flex items-center gap-2 font-body text-xs sm:gap-4 sm:text-sm">
+          <div className="flex items-center gap-2 font-sans text-xs sm:gap-4 sm:text-sm">
             <Stat
               label="XP"
               value={xp}
@@ -136,7 +136,7 @@ const HUD: FC = () => {
             <select
               value={language}
               onChange={(e) => setLanguage(e.target.value as any)}
-              className="h-8 rounded-md border border-structural bg-bg-elevated text-[11px] font-body text-text-primary px-2 transition-colors hover:border-text-secondary focus:border-text-secondary focus:outline-none cursor-pointer"
+              className="h-8 rounded-md border border-structural bg-bg-elevated text-[11px] font-sans text-text-primary px-2 transition-colors hover:border-text-secondary focus:border-text-secondary focus:outline-none cursor-pointer"
               aria-label="Select translation language"
               title="Select Translation Language"
             >
@@ -181,7 +181,7 @@ const HUD: FC = () => {
                   key={tab.id}
                   to={tab.path}
                   className={({ isActive }) =>
-                    `relative z-10 whitespace-nowrap rounded-full px-4 py-2 font-body text-xs font-semibold transition-all duration-200 ${
+                    `relative z-10 whitespace-nowrap rounded-full px-4 py-2 font-sans text-xs font-semibold transition-all duration-200 ${
                       isActive
                         ? 'bg-[#7D927D] text-white shadow-sm'
                         : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
