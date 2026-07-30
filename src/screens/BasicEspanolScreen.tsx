@@ -33,6 +33,7 @@ import { ALL_SYLLABUS_LESSONS, type SyllabusLessonData } from '../data/syllabusL
 import SentenceBuilderExercise from '../components/SentenceBuilderExercise';
 import { generateLessonExercises, getCEFRLevel } from '../lib/sentenceBuilder';
 import { SENTENCE_BUILDER_EXERCISES } from '../data/sentenceBuilderExercises';
+import SpotlightCards from '../components/SpotlightCards';
 
 // Types
 export type CoursePart = 'part1' | 'part2' | 'part3' | 'part4' | 'part5' | 'part6' | 'part7' | 'part8';
@@ -755,30 +756,29 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                       Curriculum Parts Index
                     </h3>
                     
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {PART_OPTIONS.map((item) => (
-                        <div
-                          key={item.id}
-                          onClick={() => {
-                            setCoursePart(item.id);
-                            const list = item.id === 'part1' ? part1SectionsList : item.id === 'part2' ? part2SectionsList : item.id === 'part3' ? part3SectionsList : item.id === 'part4' ? part4SectionsList : item.id === 'part5' ? part5SectionsList : item.id === 'part6' ? part6SectionsList : part7SectionsList;
-                            setActiveSection(list[0].id as ActiveSection);
-                          }}
-                          className="bg-paper/5 border border-pencil/10 hover:border-pencil/35 rounded-2xl p-5 transition-all duration-300 cursor-pointer hover:translate-y-[-2px] space-y-2 group"
-                        >
-                          <div className="flex justify-between items-start">
-                            <span className="text-[10px] font-hud tracking-wider text-pencil uppercase font-bold">{item.label.split(':')[0]}</span>
-                            {earnedBadges[item.id] && <Trophy className="h-4 w-4 text-marigold" />}
-                          </div>
-                          <h4 className="font-display font-bold text-sm text-text-primary group-hover:text-terracotta transition-colors">
-                            {item.label}
-                          </h4>
-                          <p className="text-xs text-pencil leading-normal">
-                            {item.desc}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
+                    <SpotlightCards
+                      earnedBadges={earnedBadges}
+                      onSelectPart={(partId) => {
+                        setCoursePart(partId);
+                        const list =
+                          partId === 'part1'
+                            ? part1SectionsList
+                            : partId === 'part2'
+                            ? part2SectionsList
+                            : partId === 'part3'
+                            ? part3SectionsList
+                            : partId === 'part4'
+                            ? part4SectionsList
+                            : partId === 'part5'
+                            ? part5SectionsList
+                            : partId === 'part6'
+                            ? part6SectionsList
+                            : partId === 'part7'
+                            ? part7SectionsList
+                            : part8SectionsList;
+                        setActiveSection(list[0].id as ActiveSection);
+                      }}
+                    />
                   </div>
                 </div>
               )}
