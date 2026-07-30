@@ -7,16 +7,16 @@ export interface GreetingItem {
 }
 
 const GREETINGS: GreetingItem[] = [
-  { text: '¡Hola!', language: 'Spanish' },
-  { text: 'Hello', language: 'English' },
-  { text: 'Bonjour', language: 'French' },
-  { text: 'Ciao', language: 'Italian' },
-  { text: 'Konnichiwa', language: 'Japanese' },
-  { text: 'Olá', language: 'Portuguese' },
-  { text: 'Namaste', language: 'Hindi' },
-  { text: 'Willkommen', language: 'German' },
-  { text: 'Nǐ Hǎo', language: 'Mandarin' },
-  { text: 'Ahlan', language: 'Arabic' }
+  { text: 'Hello', language: 'ENGLISH' },
+  { text: 'こんにちは', language: 'JAPANESE' },
+  { text: 'Bonjour', language: 'FRENCH' },
+  { text: '¡Hola!', language: 'SPANISH' },
+  { text: '안녕하세요', language: 'KOREAN' },
+  { text: 'Ciao', language: 'ITALIAN' },
+  { text: 'Hallo', language: 'GERMAN' },
+  { text: 'नमस्ते', language: 'HINDI' },
+  { text: '你好', language: 'CHINESE' },
+  { text: 'مرحبا', language: 'ARABIC' }
 ];
 
 export const DynamicText: FC = () => {
