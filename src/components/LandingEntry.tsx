@@ -1,6 +1,7 @@
 import { useState, useEffect, type FC, type ReactNode } from 'react';
 import { SignedIn, SignedOut, SignInButton } from '@clerk/clerk-react';
 import { Loader2 } from 'lucide-react';
+import DynamicText from './DynamicText';
 
 interface LandingEntryProps {
   children?: ReactNode;
@@ -62,12 +63,16 @@ export const LandingEntry: FC<LandingEntryProps> = ({ children }) => {
           </div>
 
           {/* THE TRIGGER: PULL THE CORD TO SIGN IN */}
-          <div className="relative z-20 text-center space-y-4">
-            <h2 className="font-serif text-2xl font-bold text-white tracking-wide">
-              Serene Lexicon Entry
+          <div className="relative z-20 text-center space-y-3">
+            <DynamicText />
+            <h2 className="font-serif text-3xl font-bold text-white tracking-wide">
+              TheLearningHyena
             </h2>
-            <p className="font-sans text-xs text-[#999999] max-w-sm">
-              Illuminate your quiet reading room to resume your Spanish learning journey.
+            <p className="font-serif italic text-lg text-[#7D927D]">
+              The Unearthly Vault
+            </p>
+            <p className="font-sans text-xs text-[#777775] max-w-sm mx-auto leading-relaxed">
+              Pull the glowing cord to unlock the unearthly vault. Ancient Spanish secrets and mystical adventures await in the dark...
             </p>
 
             <SignInButton mode="modal">

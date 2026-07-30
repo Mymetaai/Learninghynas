@@ -12,6 +12,7 @@ import {
 import type { PanInfo } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 import AppShell from './components/AppShell';
+import DynamicText from './components/DynamicText';
 import { ROUTES } from './app/routes';
 import './screens/LampLogin.css';
 
@@ -270,8 +271,9 @@ const LampLanding: FC = () => {
               className="text-center mt-4"
               style={{ maxWidth: '400px' }}
             >
+              <DynamicText />
               <h1
-                className="font-serif text-3xl font-bold text-white tracking-wide"
+                className="font-serif text-3xl font-bold text-white tracking-wide mt-1"
                 style={{ fontFamily: "'Fraunces', 'Playfair Display', ui-serif, Georgia, serif" }}
               >
                 TheLearningHyena
