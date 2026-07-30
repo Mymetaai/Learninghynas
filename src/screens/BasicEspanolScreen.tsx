@@ -169,6 +169,19 @@ const EXAM_QUESTIONS_PART7: ExamQuestion[] = [
   { id: 10, lessonId: 28, question: 'In the sentence "Cuando llovía (A), sonó el teléfono (B)", which verb is in the preterite?', options: ['llovía', 'sonó', 'Both A and B', 'Neither'], correctAnswer: 'sonó', explanation: 'Sonó (rang) is the interrupting completed event in preterite.' }
 ];
 
+const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
+  { id: 1, lessonId: 31, question: 'What does the idiom "hacer borrón y cuenta nueva" mean?', options: ['To make a smudge on paper', 'To start fresh / turn over a new leaf', 'To count money twice', 'To cancel a contract'], correctAnswer: 'To start fresh / turn over a new leaf', explanation: '"Hacer borrón y cuenta nueva" means making a clean fresh start.' },
+  { id: 2, lessonId: 31, question: 'What does the C1 idiom "dorar la píldora" express?', options: ['To take medicine', 'To sugarcoat unpleasant news', 'To paint gold', 'To cook dinner'], correctAnswer: 'To sugarcoat unpleasant news', explanation: '"Dorar la píldora" means to sugarcoat bad news.' },
+  { id: 3, lessonId: 32, question: 'Which formal phrase replaces casual "decir claramente"?', options: ['poner de manifiesto', 'dar la lata', 'quedarse en blanco', 'hacer el oso'], correctAnswer: 'poner de manifiesto', explanation: '"Poner de manifiesto" is the formal diplomatic register shift.' },
+  { id: 4, lessonId: 32, question: 'What does "a tenor de lo dispuesto" mean in administrative prose?', options: ['According to regulations / Pursuant to', 'In spite of', 'Before long', 'On the contrary'], correctAnswer: 'According to regulations / Pursuant to', explanation: '"A tenor de lo dispuesto" means pursuant to or in accordance with regulations.' },
+  { id: 5, lessonId: 33, question: 'Which discourse marker requires the Subjunctive mood?', options: ['de ahí que', 'no obstante', 'por consiguiente', 'en resumidas cuentas'], correctAnswer: 'de ahí que', explanation: '"De ahí que" always requires the subjunctive mood.' },
+  { id: 6, lessonId: 34, question: 'Which academic verb means to disprove a claim using empirical evidence?', options: ['refutar', 'corroborar', 'extrapolar', 'suponer'], correctAnswer: 'refutar', explanation: '"Refutar" means to disprove counter-claims.' },
+  { id: 7, lessonId: 35, question: 'What is the Peninsular Spanish (Spain) word for "computer"?', options: ['el ordenador', 'la computadora', 'el computador', 'el equipo'], correctAnswer: 'el ordenador', explanation: '"El ordenador" is Peninsular Spanish (regional:Spain).' },
+  { id: 8, lessonId: 36, question: 'Which mood must follow "como si" in counterfactual statements?', options: ['Imperfecto de Subjuntivo', 'Presente de Indicativo', 'Futuro', 'Gerundio'], correctAnswer: 'Imperfecto de Subjuntivo', explanation: '"Como si" triggers the imperfect subjunctive.' },
+  { id: 9, lessonId: 37, question: 'What does the false friend "pretender" mean in Spanish?', options: ['To intend / claim', 'To pretend (fingir)', 'To protect', 'To prefer'], correctAnswer: 'To intend / claim', explanation: '"Pretender" means to intend or claim, NOT to pretend.' },
+  { id: 10, lessonId: 37, question: 'How do you say "file folders" in Spanish without using false friends?', options: ['carpetas', 'alfombras', 'cartas', 'cuadernos'], correctAnswer: 'carpetas', explanation: '"Carpetas" means file folders or binders.' }
+];
+
 const BasicEspanolScreen: FC = () => {
   // Navigation states
   const [coursePart, setCoursePart] = useState<CoursePart>('part1');
@@ -223,19 +236,6 @@ const BasicEspanolScreen: FC = () => {
   const handleLessonComplete = (lessonKey: string) => {
     toggleLessonComplete(lessonKey);
   };
-
-const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
-  { id: 1, lessonId: 31, question: 'What is the figurative meaning of the C1 idiom "hacer borrón y cuenta nueva"?', options: ['To erase a whiteboard', 'To make a fresh start / turn over a new leaf', 'To count money twice', 'To cancel an account'], correctAnswer: 'To make a fresh start / turn over a new leaf', explanation: '"Hacer borrón y cuenta nueva" means making a fresh start after past difficulties.' },
-  { id: 2, lessonId: 31, question: 'Which idiom means "to sugarcoat" unpleasant news or facts?', options: ['dorar la píldora', 'dar la lata', 'tirar la toalla', 'quedarse en blanco'], correctAnswer: 'dorar la píldora', explanation: '"Dorar la píldora" is the C1 idiom for sugarcoating unpleasant news.' },
-  { id: 3, lessonId: 32, question: 'Which formal register verb phrase replaces "enfatizar la importancia"?', options: ['hacer hincapié en la importancia', 'poner de manifiesto', 'llevar a cabo', 'suscitar el debate'], correctAnswer: 'hacer hincapié en la importancia', explanation: '"Hacer hincapié en" means to emphasize or stress.' },
-  { id: 4, lessonId: 32, question: 'What does the official administrative connector "a tenor de lo dispuesto" mean?', options: ['Pursuant to / In accordance with', 'Instead of', 'Without regarding', 'Because of'], correctAnswer: 'Pursuant to / In accordance with', explanation: '"A tenor de lo dispuesto" means pursuant to or in accordance with official rules.' },
-  { id: 5, lessonId: 33, question: 'Which cause-effect connector forces the SUBJUNCTIVE mood?', options: ['de ahí que', 'por consiguiente', 'no obstante', 'en resumidas cuentas'], correctAnswer: 'de ahí que', explanation: '"De ahí que" always requires the subjunctive mood (e.g., de ahí que fuera).' },
-  { id: 6, lessonId: 34, question: 'Which academic verb means "to disprove a counter-claim using evidence"?', options: ['refutar', 'corroborar', 'extrapolar', 'suscitar'], correctAnswer: 'refutar', explanation: '"Refutar" means to refute or disprove.' },
-  { id: 7, lessonId: 35, question: 'Which regional tag is applied to Peninsular Spanish terms like "el ordenador" or "el coche"?', options: ['regional:Spain', 'regional:LatAm', 'regional:Mexico', 'universal'], correctAnswer: 'regional:Spain', explanation: 'Terms specific to Spain carry the tag regional:Spain.' },
-  { id: 8, lessonId: 36, question: 'Which grammatical mood must follow "como si" in hypothetical statements?', options: ['Imperfecto de Subjuntivo', 'Presente de Indicativo', 'Futuro', 'Gerundio'], correctAnswer: 'Imperfecto de Subjuntivo', explanation: '"Como si" requires the imperfect subjunctive (e.g. como si estuviera).' },
-  { id: 9, lessonId: 37, question: 'What is the true Spanish translation of the English false friend "pretender"?', options: ['To intend / claim / aspire to', 'To pretend / fake', 'To prevent', 'To protect'], correctAnswer: 'To intend / claim / aspire to', explanation: '"Pretender" means to intend or claim. "To pretend" is "fingir".' },
-  { id: 10, lessonId: 37, question: 'What does the Spanish false friend "constipado" mean?', options: ['Having a cold', 'Constipated', 'Constrained', 'Consecutive'], correctAnswer: 'Having a cold', explanation: '"Constipado" means having a cold. "Constipated" is "estreñido".' }
-];
 
   // Active Questions for current Master Exam
   const getActiveQuestions = (): ExamQuestion[] => {
@@ -303,7 +303,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
   // Part Section lists
   const part1SectionsList = [
-    { id: 'overview', title: 'Course Overview', icon: BookOpen, sub: 'Parts 1-7 Curriculum' },
+    { id: 'overview', title: 'Course Overview', icon: BookOpen, sub: 'Parts 1-8 Curriculum' },
     { id: 'lesson1', title: 'Lesson 1: Greetings & Vowels', icon: GraduationCap, sub: 'A, E, I, O, U & Greetings' },
     { id: 'lesson2', title: 'Lesson 2: Nouns & Articles', icon: Layers, sub: 'Definite Articles & Gender Rules' },
     { id: 'lesson3', title: 'Lesson 3: Pronouns & Verb Ser', icon: Users, sub: 'Subject Pronouns & DOCTOR rules' },
@@ -498,14 +498,14 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <Compass className="h-5 w-5 text-marigold" />
-                <span className="font-mono text-[9px] tracking-[0.25em] uppercase text-pencil">
-                  Spanish Course (Parts 1-7)
+                <span className="font-mono text-[9px] tracking-[0.25em] uppercase text-[#777775]">
+                  Spanish Course (Parts 1-8)
                 </span>
               </div>
-              <h2 className="font-serif text-xl font-bold tracking-tight text-text-primary">
+              <h2 className="font-serif text-xl font-bold tracking-tight text-[#2F353B]">
                 Básico Español 🇪🇸
               </h2>
-              <p className="text-[11px] text-pencil mt-0.5">Lessons 1–30 & Master Exams</p>
+              <p className="text-[11px] text-[#777775] mt-0.5">Lessons 1–37 & Master Exams</p>
             </div>
 
             {/* Course Part Selector Dropdown Menu */}
@@ -635,8 +635,8 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                 <div className="space-y-5">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h2 className="font-serif text-lg font-bold text-text-primary">Básico Español 🇪🇸</h2>
-                      <p className="text-[10px] text-pencil">Lessons 1–30 & Master Exams</p>
+                      <h2 className="font-serif text-lg font-bold text-[#2F353B]">Básico Español 🇪🇸</h2>
+                      <p className="text-[10px] text-[#777775]">Lessons 1–37 & Master Exams</p>
                     </div>
                     <button
                       onClick={() => setMobileSidebarOpen(false)}
@@ -735,17 +735,17 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
               {/* OVERVIEW SECTION */}
               {activeSection === 'overview' && (
                 <div className="space-y-6">
-                  <div className="bg-gradient-to-r from-terracotta/10 to-marigold/10 border border-pencil/15 rounded-2xl p-6 sm:p-8 relative overflow-hidden">
+                  <div className="bg-white border border-[#7D927D]/20 shadow-sm rounded-2xl p-6 sm:p-8 relative overflow-hidden">
                     <div className="relative z-10 space-y-3">
-                      <div className="inline-flex items-center gap-1.5 bg-marigold/10 border border-marigold/30 text-marigold rounded-full px-3 py-1 text-[10px] font-mono uppercase tracking-wider font-bold">
+                      <div className="inline-flex items-center gap-1.5 bg-[#7D927D]/10 border border-[#7D927D]/30 text-[#7D927D] rounded-full px-3 py-1 text-[10px] font-mono uppercase tracking-wider font-bold">
                         <Sparkles className="h-3 w-3" />
-                        Complete Spanish Curriculum (Parts 1–7)
+                        Complete Spanish Curriculum (Parts 1–8)
                       </div>
-                      <h1 className="font-serif text-3xl sm:text-4xl font-extrabold text-text-primary leading-tight">
-                        Master All 30 Spanish Lessons 🇪🇸
+                      <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#2F353B] leading-tight">
+                        Master All 37 Spanish Lessons 🇪🇸
                       </h1>
-                      <p className="font-sans text-sm text-pencil max-w-2xl leading-relaxed">
-                        Welcome to your complete interactive workbook guide. Progress through all 7 curriculum parts covering greetings, articles, verbs, time, stem-changers, pronouns, commands, preterite, and imperfect tenses.
+                      <p className="font-sans text-sm text-[#777775] max-w-2xl leading-relaxed">
+                        Welcome to your complete interactive workbook guide. Progress through all 8 curriculum parts covering greetings, articles, verbs, time, stem-changers, pronouns, commands, preterite, imperfect, and C1 advanced tenses.
                       </p>
                     </div>
                   </div>
@@ -788,25 +788,25 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                 <div className="space-y-8">
                   
                   {/* 1. LESSON HEADER BANNER */}
-                  <div className="bg-gradient-to-r from-terracotta/10 via-paper/5 to-marigold/10 border border-pencil/15 rounded-2xl p-6 sm:p-8 space-y-4 shadow-sm relative overflow-hidden">
+                  <div className="bg-white border border-[#7D927D]/20 rounded-2xl p-6 sm:p-8 space-y-4 shadow-sm relative overflow-hidden">
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                       <div>
-                        <span className="font-mono text-xs text-marigold font-bold uppercase tracking-widest block mb-1">
+                        <span className="font-mono text-xs text-[#7D927D] font-bold uppercase tracking-widest block mb-1">
                           PART {currentLessonData.partNumber} • LESSON {currentLessonData.lessonNumber}
                         </span>
-                        <h1 className="font-serif text-3xl sm:text-4xl font-extrabold text-text-primary tracking-tight">
+                        <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#2F353B] tracking-tight">
                           {currentLessonData.title}
                         </h1>
-                        <p className="text-xs text-pencil mt-1 font-semibold">
+                        <p className="text-xs text-[#777775] mt-1 font-semibold">
                           {currentLessonData.subtitle}
                         </p>
                       </div>
                       <button
                         onClick={() => handleLessonComplete(activeSection)}
-                        className={`px-5 py-2.5 rounded-2xl text-xs font-bold transition-all cursor-pointer shrink-0 ${
+                        className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all cursor-pointer shrink-0 ${
                           completedLessons[activeSection]
-                            ? 'bg-accent-mint/20 text-text-primary border border-text-primary'
-                            : 'bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border border-[#2C1E11] shadow-sm hover:-translate-y-0.5'
+                            ? 'bg-[#7D927D]/15 text-[#7D927D] border border-[#7D927D]/30'
+                            : 'bg-[#7D927D] text-white hover:bg-[#6B806B] shadow-sm hover:-translate-y-0.5'
                         }`}
                       >
                         {completedLessons[activeSection] ? 'Completed ✓' : 'Mark Lesson Completed'}
@@ -814,21 +814,21 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                     </div>
 
                     {/* Professor Note Box */}
-                    <div className="bg-bg-elevated border-l-4 border-marigold p-4 rounded-r-2xl space-y-1.5 text-xs text-text-primary">
-                      <div className="flex items-center gap-2 text-marigold font-bold font-mono uppercase">
+                    <div className="bg-[#F9F7F2] border-l-4 border-[#7D927D] p-4 rounded-r-2xl space-y-1.5 text-xs text-[#2F353B]">
+                      <div className="flex items-center gap-2 text-[#7D927D] font-bold font-mono uppercase">
                         <Quote className="h-4 w-4" />
                         <span>Professor Bill Worden's Key Teaching Note</span>
                       </div>
-                      <p className="italic text-pencil leading-relaxed">{currentLessonData.professorNote}</p>
+                      <p className="italic text-[#777775] leading-relaxed">{currentLessonData.professorNote}</p>
                     </div>
 
                     {/* Objectives */}
                     <div className="pt-2">
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-pencil font-bold block mb-2">Lesson Learning Objectives:</span>
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-[#777775] font-bold block mb-2">Lesson Learning Objectives:</span>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                         {currentLessonData.objectives.map((obj, idx) => (
-                          <div key={idx} className="flex items-center gap-2 bg-paper/5 p-2.5 rounded-xl border border-pencil/10 text-xs text-text-primary">
-                            <Target className="h-3.5 w-3.5 text-terracotta shrink-0" />
+                          <div key={idx} className="flex items-center gap-2 bg-[#F9F7F2] p-2.5 rounded-xl border border-[#7D927D]/15 text-xs text-[#2F353B]">
+                            <Target className="h-3.5 w-3.5 text-[#7D927D] shrink-0" />
                             <span>{obj}</span>
                           </div>
                         ))}
@@ -838,25 +838,25 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
                   {/* 2. GRAMMAR & STRUCTURAL SECTIONS */}
                   {currentLessonData.grammarSections.map((section, idx) => (
-                    <div key={idx} className="bg-paper/5 border border-pencil/15 rounded-2xl p-6 sm:p-7 space-y-4">
-                      <div className="flex items-center gap-2 text-terracotta font-bold text-base font-serif">
-                        <Sparkles className="h-5 w-5 text-terracotta" />
+                    <div key={idx} className="bg-white border border-[#7D927D]/20 rounded-2xl p-6 sm:p-7 space-y-4 shadow-sm">
+                      <div className="flex items-center gap-2 text-[#2F353B] font-bold text-lg font-serif">
+                        <Sparkles className="h-5 w-5 text-[#7D927D]" />
                         <span>{section.title}</span>
                       </div>
 
-                      <p className="text-xs text-pencil leading-relaxed font-sans">
+                      <p className="text-xs text-[#777775] leading-relaxed font-sans">
                         {section.explanation}
                       </p>
 
                       {/* Rules Bullet List */}
                       {section.rules && section.rules.length > 0 && (
-                        <div className="bg-bg-elevated p-4 rounded-2xl border border-structural space-y-2">
-                          <span className="text-[10px] font-mono uppercase tracking-wider text-marigold font-bold block">Key Rules & Syntax:</span>
-                          <ul className="space-y-1.5 text-xs text-text-primary">
+                        <div className="bg-[#F9F7F2] p-5 rounded-2xl border border-[#7D927D]/20 space-y-2">
+                          <span className="text-[10px] font-mono uppercase tracking-wider text-[#7D927D] font-bold block">Key Rules & Syntax:</span>
+                          <ul className="space-y-2 text-xs text-[#2F353B]">
                             {section.rules.map((rule, rIdx) => (
                               <li key={rIdx} className="flex items-start gap-2">
-                                <span className="text-terracotta font-bold">•</span>
-                                <span className="leading-normal">{rule}</span>
+                                <span className="text-[#7D927D] font-bold">•</span>
+                                <span className="leading-relaxed font-sans">{rule}</span>
                               </li>
                             ))}
                           </ul>
@@ -865,20 +865,20 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
                       {/* Tables */}
                       {section.table && (
-                        <div className="overflow-x-auto rounded-2xl border border-pencil/15 shadow-sm">
+                        <div className="overflow-x-auto rounded-2xl border border-[#7D927D]/20 shadow-sm">
                           <table className="w-full text-xs text-left border-collapse">
-                            <thead className="bg-paper/10 font-mono text-terracotta uppercase text-[10px] tracking-wider border-b border-pencil/15">
+                            <thead className="bg-[#F9F7F2] font-serif text-[#2F353B] uppercase text-[10px] tracking-wider border-b border-[#7D927D]/20">
                               <tr>
                                 {section.table.headers.map((h, hIdx) => (
-                                  <th key={hIdx} className="p-3 font-bold">{h}</th>
+                                  <th key={hIdx} className="p-3.5 font-bold">{h}</th>
                                 ))}
                               </tr>
                             </thead>
-                            <tbody className="divide-y divide-pencil/10 font-mono text-text-primary">
+                            <tbody className="divide-y divide-[#7D927D]/15 font-sans text-[#2F353B]">
                               {section.table.rows.map((row, rIdx) => (
-                                <tr key={rIdx} className={rIdx % 2 === 0 ? 'bg-bg-elevated/40' : 'bg-transparent'}>
+                                <tr key={rIdx} className={rIdx % 2 === 0 ? 'bg-[#F9F7F2]/40' : 'bg-white'}>
                                   {row.map((cell, cIdx) => (
-                                    <td key={cIdx} className="p-3 leading-relaxed">{cell}</td>
+                                    <td key={cIdx} className={`p-3.5 leading-relaxed ${cIdx === 0 ? 'font-bold text-[#7D927D]' : ''}`}>{cell}</td>
                                   ))}
                                 </tr>
                               ))}
@@ -889,18 +889,18 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
                       {/* Acronym Breakdown */}
                       {section.acronym && (
-                        <div className="bg-marigold/10 border border-marigold/30 rounded-2xl p-5 space-y-3">
-                          <span className="text-xs font-mono uppercase font-bold text-marigold tracking-wider block">
+                        <div className="bg-[#F9F7F2] border border-[#7D927D]/20 rounded-2xl p-5 space-y-3">
+                          <span className="text-xs font-mono uppercase font-bold text-[#7D927D] tracking-wider block">
                             The {section.acronym.name} Memory Framework:
                           </span>
                           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
                             {section.acronym.items.map((item, aIdx) => (
-                              <div key={aIdx} className="bg-bg-elevated p-3 rounded-xl border border-structural space-y-1">
-                                <div className="flex items-center gap-1.5 font-bold text-xs text-terracotta">
-                                  <span className="bg-terracotta text-white rounded-md px-1.5 py-0.5 text-[10px] font-mono">{item.letter}</span>
+                              <div key={aIdx} className="bg-white p-3.5 rounded-xl border border-[#7D927D]/20 space-y-1 shadow-sm">
+                                <div className="flex items-center gap-1.5 font-bold text-xs text-[#2F353B]">
+                                  <span className="bg-[#7D927D] text-white rounded-md px-1.5 py-0.5 text-[10px] font-mono">{item.letter}</span>
                                   <span>{item.meaning}</span>
                                 </div>
-                                <p className="text-[11px] font-mono text-pencil italic">{item.example}</p>
+                                <p className="text-[11px] font-sans text-[#777775] italic">{item.example}</p>
                               </div>
                             ))}
                           </div>
@@ -909,8 +909,8 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
                       {/* Callouts */}
                       {section.callout && (
-                        <div className="bg-terracotta/10 border border-terracotta/30 rounded-2xl p-4 flex items-start gap-2.5 text-xs text-text-primary">
-                          <AlertCircle className="h-4 w-4 text-terracotta shrink-0 mt-0.5" />
+                        <div className="bg-[#C4796B]/10 border border-[#C4796B]/30 rounded-2xl p-4 flex items-start gap-2.5 text-xs text-[#2F353B]">
+                          <AlertCircle className="h-4 w-4 text-[#C4796B] shrink-0 mt-0.5" />
                           <span className="font-semibold">{section.callout}</span>
                         </div>
                       )}
@@ -919,28 +919,28 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
                   {/* 3. VOCABULARY & PHONETICS REFERENCE TABLE */}
                   {currentLessonData.vocabularyTable && currentLessonData.vocabularyTable.length > 0 && (
-                    <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-6 sm:p-7 space-y-4">
-                      <div className="flex items-center gap-2 text-marigold font-bold text-base font-serif">
-                        <BookOpen className="h-5 w-5 text-marigold" />
+                    <div className="bg-white border border-[#7D927D]/20 rounded-2xl p-6 sm:p-7 space-y-4 shadow-sm">
+                      <div className="flex items-center gap-2 text-[#2F353B] font-bold text-lg font-serif">
+                        <BookOpen className="h-5 w-5 text-[#7D927D]" />
                         <span>Lesson Vocabulary & Phonetic Pronunciation</span>
                       </div>
-                      <div className="overflow-x-auto rounded-2xl border border-pencil/15">
+                      <div className="overflow-x-auto rounded-2xl border border-[#7D927D]/20">
                         <table className="w-full text-xs text-left border-collapse">
-                          <thead className="bg-paper/10 font-mono text-marigold uppercase text-[10px] tracking-wider border-b border-pencil/15">
+                          <thead className="bg-[#F9F7F2] font-serif text-[#2F353B] uppercase text-[10px] tracking-wider border-b border-[#7D927D]/20">
                             <tr>
-                              <th className="p-3 font-bold">Spanish Expression</th>
-                              <th className="p-3 font-bold">Phonetic Guide</th>
-                              <th className="p-3 font-bold">English Meaning</th>
-                              <th className="p-3 font-bold">Context & Usage</th>
+                              <th className="p-3.5 font-bold">Spanish Expression</th>
+                              <th className="p-3.5 font-bold">Phonetic Guide</th>
+                              <th className="p-3.5 font-bold">English Meaning</th>
+                              <th className="p-3.5 font-bold">Context & Usage</th>
                             </tr>
                           </thead>
-                          <tbody className="divide-y divide-pencil/10">
+                          <tbody className="divide-y divide-[#7D927D]/15 font-sans">
                             {currentLessonData.vocabularyTable.map((v, vIdx) => (
-                              <tr key={vIdx} className={vIdx % 2 === 0 ? 'bg-bg-elevated/40' : 'bg-transparent'}>
-                                <td className="p-3 font-bold text-terracotta">{v.spanish}</td>
-                                <td className="p-3 font-mono text-pencil text-[11px]">{v.phonetic}</td>
-                                <td className="p-3 font-semibold text-text-primary">{v.english}</td>
-                                <td className="p-3 text-pencil italic">{v.usage}</td>
+                              <tr key={vIdx} className={vIdx % 2 === 0 ? 'bg-[#F9F7F2]/40' : 'bg-white'}>
+                                <td className="p-3.5 font-bold text-[#7D927D]">{v.spanish}</td>
+                                <td className="p-3.5 font-mono text-[#777775] text-[11px]">{v.phonetic}</td>
+                                <td className="p-3.5 font-semibold text-[#2F353B]">{v.english}</td>
+                                <td className="p-3.5 text-[#777775] italic">{v.usage}</td>
                               </tr>
                             ))}
                           </tbody>
@@ -951,19 +951,19 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
                   {/* 4. REAL CONVERSATION DIALOGUE */}
                   {currentLessonData.dialogue && currentLessonData.dialogue.length > 0 && (
-                    <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-6 sm:p-7 space-y-4">
-                      <div className="flex items-center gap-2 text-terracotta font-bold text-base font-serif">
-                        <MessageSquare className="h-5 w-5 text-terracotta" />
+                    <div className="bg-white border border-[#7D927D]/20 rounded-2xl p-6 sm:p-7 space-y-4 shadow-sm">
+                      <div className="flex items-center gap-2 text-[#2F353B] font-bold text-lg font-serif">
+                        <MessageSquare className="h-5 w-5 text-[#7D927D]" />
                         <span>Practical Conversation Dialogue</span>
                       </div>
-                      <div className="bg-bg-elevated p-5 rounded-2xl border border-structural space-y-3 text-xs">
+                      <div className="bg-[#F9F7F2] p-6 rounded-2xl border border-[#7D927D]/20 space-y-3.5 text-xs">
                         {currentLessonData.dialogue.map((d, dIdx) => (
                           <div key={dIdx} className="space-y-1">
                             <div className="flex items-center gap-2">
-                              <span className="font-bold text-terracotta font-mono uppercase">{d.speaker}:</span>
-                              <span className="font-bold text-text-primary">{d.spanish}</span>
+                              <span className="font-bold text-[#7D927D] font-mono text-xs uppercase">{d.speaker}:</span>
+                              <span className="font-bold text-[#2F353B] text-sm">{d.spanish}</span>
                             </div>
-                            <p className="text-[11px] text-pencil italic pl-4">({d.english})</p>
+                            <p className="text-[11px] text-[#777775] italic pl-4 font-sans">({d.english})</p>
                           </div>
                         ))}
                       </div>
@@ -972,20 +972,20 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
                   {/* 5. EXAMPLE SENTENCES WITH BREAKDOWN */}
                   {currentLessonData.exampleSentences && currentLessonData.exampleSentences.length > 0 && (
-                    <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-6 sm:p-7 space-y-4">
-                      <div className="flex items-center gap-2 text-marigold font-bold text-base font-serif">
-                        <FileText className="h-5 w-5 text-marigold" />
+                    <div className="bg-white border border-[#7D927D]/20 rounded-2xl p-6 sm:p-7 space-y-4 shadow-sm">
+                      <div className="flex items-center gap-2 text-[#2F353B] font-bold text-lg font-serif">
+                        <FileText className="h-5 w-5 text-[#7D927D]" />
                         <span>Sentence Structure Analysis</span>
                       </div>
                       <div className="grid grid-cols-1 gap-3">
                         {currentLessonData.exampleSentences.map((ex, sIdx) => (
-                          <div key={sIdx} className="bg-bg-elevated p-4 rounded-2xl border border-structural space-y-1.5 text-xs">
+                          <div key={sIdx} className="bg-[#F9F7F2] p-4.5 rounded-2xl border border-[#7D927D]/20 space-y-1.5 text-xs">
                             <div className="flex justify-between items-start">
-                              <span className="font-bold text-text-primary text-sm">{ex.spanish}</span>
-                              <span className="text-[10px] font-mono text-terracotta uppercase font-bold">Example {sIdx + 1}</span>
+                              <span className="font-bold text-[#2F353B] text-sm">{ex.spanish}</span>
+                              <span className="text-[10px] font-mono text-[#7D927D] uppercase font-bold">Example {sIdx + 1}</span>
                             </div>
-                            <p className="text-pencil font-semibold">{ex.english}</p>
-                            <p className="text-[11px] text-pencil/80 italic pt-1 border-t border-pencil/10">Grammar breakdown: {ex.breakdown}</p>
+                            <p className="text-[#777775] font-semibold">{ex.english}</p>
+                            <p className="text-[11px] text-[#777775]/80 italic pt-1 border-t border-[#7D927D]/15">Grammar breakdown: {ex.breakdown}</p>
                           </div>
                         ))}
                       </div>
@@ -994,14 +994,14 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
                   {/* 6. INTERACTIVE QUICK PRACTICE CHECK */}
                   {currentLessonData.quickPractice && (
-                    <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-6 sm:p-7 space-y-4">
-                      <div className="flex items-center gap-2 text-terracotta font-bold text-base font-serif">
-                        <HelpCircle className="h-5 w-5 text-terracotta" />
+                    <div className="bg-white border border-[#7D927D]/20 rounded-2xl p-6 sm:p-7 space-y-4 shadow-sm">
+                      <div className="flex items-center gap-2 text-[#2F353B] font-bold text-lg font-serif">
+                        <HelpCircle className="h-5 w-5 text-[#7D927D]" />
                         <span>Interactive Knowledge Check</span>
                       </div>
 
-                      <div className="bg-bg-elevated p-5 rounded-2xl border border-structural space-y-4">
-                        <p className="font-bold text-sm text-text-primary">
+                      <div className="bg-[#F9F7F2] p-5 rounded-2xl border border-[#7D927D]/20 space-y-4">
+                        <p className="font-bold text-sm text-[#2F353B]">
                           {currentLessonData.quickPractice.question}
                         </p>
 
@@ -1010,12 +1010,12 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                             const isSelected = userPracticeAnswers[activeSection] === opt;
                             const isCorrect = opt === currentLessonData.quickPractice.correctAnswer;
                             
-                            let btnStyle = 'bg-paper/5 border-pencil/15 text-text-primary hover:border-terracotta/40';
+                            let btnStyle = 'bg-white border-[#7D927D]/20 text-[#2F353B] hover:border-[#7D927D]';
                             if (userPracticeAnswers[activeSection]) {
                               if (isCorrect) {
-                                btnStyle = 'bg-teal-deep/20 border-teal-deep text-teal-deep font-bold';
+                                btnStyle = 'bg-[#7D927D]/20 border-[#7D927D] text-[#7D927D] font-bold';
                               } else if (isSelected) {
-                                btnStyle = 'bg-terracotta/20 border-terracotta text-terracotta font-bold';
+                                btnStyle = 'bg-[#C4796B]/20 border-[#C4796B] text-[#C4796B] font-bold';
                               }
                             }
 
@@ -1023,7 +1023,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                               <button
                                 key={opt}
                                 onClick={() => setUserPracticeAnswers(prev => ({ ...prev, [activeSection]: opt }))}
-                                className={`p-3.5 rounded-xl border text-left text-xs font-semibold transition-all cursor-pointer ${btnStyle}`}
+                                className={`p-3.5 rounded-xl border text-left text-xs font-semibold transition-all cursor-pointer shadow-sm ${btnStyle}`}
                               >
                                 {opt}
                               </button>
@@ -1032,9 +1032,9 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                         </div>
 
                         {userPracticeAnswers[activeSection] && (
-                          <div className="p-3.5 rounded-xl bg-paper/10 border border-pencil/15 text-xs space-y-1">
+                          <div className="p-3.5 rounded-xl bg-white border border-[#7D927D]/20 text-xs space-y-1">
                             {userPracticeAnswers[activeSection] === currentLessonData.quickPractice.correctAnswer ? (
-                              <span className="text-teal-deep font-bold flex items-center gap-1">
+                              <span className="text-[#7D927D] font-bold flex items-center gap-1">
                                 <CheckCircle2 className="h-4 w-4" /> Correct! {currentLessonData.quickPractice.explanation}
                               </span>
                             ) : (
@@ -1049,14 +1049,14 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                   )}
 
                   {/* 6.5 INTERACTIVE SENTENCE BUILDER WORKSHOP (Carousel) */}
-                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-6 sm:p-7 space-y-4">
+                  <div className="bg-white border border-[#7D927D]/20 rounded-2xl p-6 sm:p-7 space-y-4 shadow-sm">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-terracotta font-bold text-base font-serif">
-                        <Layers className="h-5 w-5 text-terracotta" />
+                      <div className="flex items-center gap-2 text-[#2F353B] font-bold text-lg font-serif">
+                        <Layers className="h-5 w-5 text-[#7D927D]" />
                         <span>Sentence Builder Workshop</span>
                       </div>
                       {lessonSentenceExercises.length > 1 && (
-                        <span className="text-[10px] font-mono uppercase tracking-wider text-pencil font-bold bg-paper/10 px-2.5 py-1 rounded-full border border-pencil/15">
+                        <span className="text-[10px] font-mono uppercase tracking-wider text-[#777775] font-bold bg-[#F9F7F2] px-2.5 py-1 rounded-full border border-[#7D927D]/20">
                           Exercise {sentenceExerciseIndex + 1} of {lessonSentenceExercises.length}
                         </span>
                       )}
@@ -1064,9 +1064,9 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
                     {/* Progress bar */}
                     {lessonSentenceExercises.length > 1 && (
-                      <div className="w-full bg-paper/10 h-1.5 rounded-full overflow-hidden">
+                      <div className="w-full bg-[#F9F7F2] h-1.5 rounded-full overflow-hidden">
                         <div
-                          className="bg-terracotta h-full transition-all duration-300 rounded-full"
+                          className="bg-[#7D927D] h-full transition-all duration-300 rounded-full"
                           style={{ width: `${((sentenceExerciseIndex + 1) / lessonSentenceExercises.length) * 100}%` }}
                         />
                       </div>
@@ -1103,7 +1103,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                         <button
                           onClick={() => setSentenceExerciseIndex((prev) => Math.max(0, prev - 1))}
                           disabled={sentenceExerciseIndex === 0}
-                          className="px-3 py-1.5 rounded-xl text-[10px] font-bold border border-pencil/20 text-pencil hover:text-text-primary hover:bg-paper/10 cursor-pointer transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                          className="px-3 py-1.5 rounded-xl text-[10px] font-bold border border-[#7D927D]/20 text-[#777775] hover:text-[#2F353B] hover:bg-[#F9F7F2] cursor-pointer transition-all disabled:opacity-30 disabled:cursor-not-allowed"
                         >
                           ← Prev
                         </button>
@@ -1119,8 +1119,8 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                                 onClick={() => setSentenceExerciseIndex(actualIdx)}
                                 className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
                                   actualIdx === sentenceExerciseIndex
-                                    ? 'bg-terracotta scale-125'
-                                    : 'bg-pencil/30 hover:bg-pencil/50'
+                                    ? 'bg-[#7D927D] scale-125'
+                                    : 'bg-[#777775]/30 hover:bg-[#777775]/50'
                                 }`}
                               />
                             );
@@ -1129,7 +1129,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                         <button
                           onClick={() => setSentenceExerciseIndex((prev) => Math.min(lessonSentenceExercises.length - 1, prev + 1))}
                           disabled={sentenceExerciseIndex === lessonSentenceExercises.length - 1}
-                          className="px-3 py-1.5 rounded-xl text-[10px] font-bold border border-pencil/20 text-pencil hover:text-text-primary hover:bg-paper/10 cursor-pointer transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                          className="px-3 py-1.5 rounded-xl text-[10px] font-bold border border-[#7D927D]/20 text-[#777775] hover:text-[#2F353B] hover:bg-[#F9F7F2] cursor-pointer transition-all disabled:opacity-30 disabled:cursor-not-allowed"
                         >
                           Next →
                         </button>
@@ -1138,12 +1138,12 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                   </div>
 
                   {/* BOTTOM ACTION BAR */}
-                  <div className="pt-6 border-t border-pencil/15 flex flex-col sm:flex-row justify-between items-center gap-4">
+                  <div className="pt-6 border-t border-[#7D927D]/20 flex flex-col sm:flex-row justify-between items-center gap-4">
                     <div className="flex items-center gap-2">
                       {ALL_SECTIONS_ORDERED.indexOf(activeSection) > 0 && (
                         <button
                           onClick={handlePrevLesson}
-                          className="px-4 py-2.5 rounded-2xl text-xs font-bold border border-pencil/20 text-pencil hover:text-text-primary hover:bg-paper/10 cursor-pointer transition-all flex items-center gap-1"
+                          className="px-4 py-2.5 rounded-full text-xs font-bold border border-[#7D927D]/20 text-[#777775] hover:text-[#2F353B] hover:bg-[#F9F7F2] cursor-pointer transition-all flex items-center gap-1"
                         >
                           ← Previous Section
                         </button>
@@ -1153,10 +1153,10 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                     <div className="flex flex-wrap items-center gap-3">
                       <button
                         onClick={() => handleLessonComplete(activeSection)}
-                        className={`px-6 py-3 rounded-2xl text-xs font-bold shadow-sm cursor-pointer transition-all ${
+                        className={`px-6 py-3 rounded-full text-xs font-bold shadow-sm cursor-pointer transition-all ${
                           completedLessons[activeSection]
-                            ? 'bg-teal-deep/20 text-teal-deep border border-teal-deep/30'
-                            : 'bg-terracotta text-white hover:bg-terracotta/90'
+                            ? 'bg-[#7D927D]/15 text-[#7D927D] border border-[#7D927D]/30'
+                            : 'bg-[#7D927D] text-white hover:bg-[#6B806B]'
                         }`}
                       >
                         {completedLessons[activeSection] ? 'Lesson Completed ✓' : 'Mark Lesson Completed'}
@@ -1165,7 +1165,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                       {ALL_SECTIONS_ORDERED.indexOf(activeSection) < ALL_SECTIONS_ORDERED.length - 1 && (
                         <button
                           onClick={handleNextLesson}
-                          className="px-6 py-3 rounded-full text-xs font-bold bg-marigold text-bg-base hover:bg-marigold/90 shadow-sm cursor-pointer transition-all flex items-center gap-1 font-serif"
+                          className="px-6 py-3 rounded-full text-xs font-bold bg-[#7D927D] text-white hover:bg-[#6B806B] shadow-sm cursor-pointer transition-all flex items-center gap-1 font-serif"
                         >
                           Next Lesson →
                         </button>
@@ -1179,17 +1179,17 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
               {/* MASTER EXAMS (Parts 1 - 8) */}
               {activeSection.startsWith('exam') && (
                 <div className="space-y-6">
-                  <div className="bg-paper/5 border border-pencil/15 rounded-2xl p-6 relative overflow-hidden">
-                    <div className="flex justify-between items-start mb-4">
+                  <div className="bg-white border border-[#7D927D]/20 rounded-2xl p-6 sm:p-8 relative overflow-hidden shadow-sm">
+                    <div className="flex justify-between items-start mb-6 border-b border-[#7D927D]/20 pb-4">
                       <div>
-                        <span className="text-[10px] font-mono uppercase tracking-wider text-marigold font-bold block mb-1">
+                        <span className="text-[10px] font-mono uppercase tracking-wider text-[#7D927D] font-bold block mb-1">
                           {PART_BADGES[coursePart].title}
                         </span>
-                        <h2 className="font-serif text-2xl font-bold text-text-primary">
+                        <h2 className="font-serif text-2xl font-bold text-[#2F353B]">
                           {PART_OPTIONS.find(o => o.id === coursePart)?.label.split(':')[0]} Master Exam 🏆
                         </h2>
                       </div>
-                      <div className="flex items-center gap-1.5 bg-marigold/10 border border-marigold/30 text-marigold rounded-full px-3 py-1 text-xs font-bold font-mono">
+                      <div className="flex items-center gap-1.5 bg-[#7D927D]/10 border border-[#7D927D]/30 text-[#7D927D] rounded-full px-3.5 py-1.5 text-xs font-bold font-mono">
                         <Award className="h-4 w-4" />
                         <span>+{PART_BADGES[coursePart].coins} Coins / +{PART_BADGES[coursePart].xp} XP</span>
                       </div>
@@ -1197,13 +1197,13 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
 
                     {!quizFinished ? (
                       <div className="space-y-6">
-                        <div className="flex justify-between items-center text-xs text-pencil font-mono">
+                        <div className="flex justify-between items-center text-xs text-[#777775] font-mono">
                           <span>Question {currentQuestionIndex + 1} of {activeQuestions.length}</span>
                           <span>Score: {score}</span>
                         </div>
 
-                        <div className="bg-bg-elevated p-5 rounded-2xl border border-structural space-y-4">
-                          <h3 className="font-serif text-base font-bold text-text-primary leading-relaxed">
+                        <div className="bg-[#F9F7F2] p-5.5 rounded-2xl border border-[#7D927D]/20 space-y-4">
+                          <h3 className="font-serif text-base font-bold text-[#2F353B] leading-relaxed">
                             {activeQuestions[currentQuestionIndex].question}
                           </h3>
 
@@ -1212,12 +1212,12 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                               const isSelected = selectedAnswer === option;
                               const isCorrect = option === activeQuestions[currentQuestionIndex].correctAnswer;
                               
-                              let btnStyle = 'bg-paper/5 border-pencil/15 text-text-primary hover:border-terracotta/40';
+                              let btnStyle = 'bg-white border-[#7D927D]/20 text-[#2F353B] hover:border-[#7D927D]';
                               if (selectedAnswer !== null) {
                                 if (isCorrect) {
-                                  btnStyle = 'bg-teal-deep/20 border-teal-deep text-teal-deep font-bold';
+                                  btnStyle = 'bg-[#7D927D]/20 border-[#7D927D] text-[#7D927D] font-bold';
                                 } else if (isSelected) {
-                                  btnStyle = 'bg-terracotta/20 border-terracotta text-terracotta font-bold';
+                                  btnStyle = 'bg-[#C4796B]/20 border-[#C4796B] text-[#C4796B] font-bold';
                                 }
                               }
 
@@ -1225,7 +1225,7 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                                 <button
                                   key={option}
                                   onClick={() => handleAnswerClick(option)}
-                                  className={`p-3.5 rounded-xl border text-left text-xs font-semibold transition-all cursor-pointer ${btnStyle}`}
+                                  className={`p-3.5 rounded-xl border text-left text-xs font-semibold transition-all cursor-pointer shadow-sm ${btnStyle}`}
                                 >
                                   {option}
                                 </button>
@@ -1234,8 +1234,8 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                           </div>
 
                           {showExplanation && (
-                            <div className="p-3.5 rounded-xl bg-paper/10 border border-pencil/15 text-xs text-pencil space-y-1 animate-fadeIn">
-                              <span className="font-bold text-text-primary block">Explanation:</span>
+                            <div className="p-3.5 rounded-xl bg-white border border-[#7D927D]/20 text-xs text-[#777775] space-y-1 animate-fadeIn">
+                              <span className="font-bold text-[#2F353B] block">Explanation:</span>
                               <p>{activeQuestions[currentQuestionIndex].explanation}</p>
                             </div>
                           )}
@@ -1245,31 +1245,31 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                           <button
                             onClick={handleNextQuestion}
                             disabled={selectedAnswer === null}
-                            className="px-5 py-2.5 rounded-xl bg-terracotta text-white font-bold text-xs shadow-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-terracotta/90 cursor-pointer"
+                            className="px-6 py-3 rounded-full bg-[#7D927D] text-white font-bold text-xs shadow-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#6B806B] cursor-pointer transition-all"
                           >
-                            {currentQuestionIndex < activeQuestions.length - 1 ? 'Next Question &rarr;' : 'Finish Exam'}
+                            {currentQuestionIndex < activeQuestions.length - 1 ? 'Next Question →' : 'Finish Exam'}
                           </button>
                         </div>
                       </div>
                     ) : (
                       <div className="text-center py-8 space-y-4">
-                        <div className="inline-flex p-4 rounded-full bg-marigold/15 text-marigold mb-2">
+                        <div className="inline-flex p-4 rounded-full bg-[#7D927D]/15 text-[#7D927D] mb-2">
                           <Trophy className="h-12 w-12" />
                         </div>
-                        <h3 className="font-serif text-2xl font-bold text-text-primary">Exam Completed!</h3>
-                        <p className="text-sm text-pencil">
-                          You scored <strong className="text-text-primary font-bold">{score} / {activeQuestions.length}</strong> ({Math.round((score / activeQuestions.length) * 100)}%).
+                        <h3 className="font-serif text-2xl font-bold text-[#2F353B]">Exam Completed!</h3>
+                        <p className="text-sm text-[#777775]">
+                          You scored <strong className="text-[#2F353B] font-bold">{score} / {activeQuestions.length}</strong> ({Math.round((score / activeQuestions.length) * 100)}%).
                         </p>
 
                         {(score / activeQuestions.length) >= 0.7 ? (
-                          <div className="bg-teal-deep/10 border border-teal-deep/30 rounded-2xl p-4 max-w-md mx-auto space-y-2">
-                            <span className="font-mono text-xs text-teal-deep font-bold uppercase tracking-wider block">Passing Grade Reached!</span>
-                            <p className="text-xs text-text-primary">
-                              You unlocked the <strong className="text-marigold">{PART_BADGES[coursePart].badge}</strong>!
+                          <div className="bg-[#7D927D]/10 border border-[#7D927D]/30 rounded-2xl p-4 max-w-md mx-auto space-y-2">
+                            <span className="font-mono text-xs text-[#7D927D] font-bold uppercase tracking-wider block">Passing Grade Reached!</span>
+                            <p className="text-xs text-[#2F353B]">
+                              You unlocked the <strong className="text-[#7D927D]">{PART_BADGES[coursePart].badge}</strong>!
                             </p>
                           </div>
                         ) : (
-                          <p className="text-xs text-terracotta font-semibold">
+                          <p className="text-xs text-[#C4796B] font-semibold">
                             You need at least 70% to claim rewards and unlock the badge. Try again!
                           </p>
                         )}
@@ -1277,14 +1277,14 @@ const EXAM_QUESTIONS_PART8: ExamQuestion[] = [
                         <div className="flex justify-center gap-3 pt-2">
                           <button
                             onClick={resetQuiz}
-                            className="px-4 py-2 rounded-xl bg-paper/10 border border-pencil/20 text-xs font-bold text-pencil hover:text-text-primary cursor-pointer"
+                            className="px-4 py-2.5 rounded-full bg-[#F9F7F2] border border-[#7D927D]/20 text-xs font-bold text-[#777775] hover:text-[#2F353B] cursor-pointer"
                           >
                             Retake Exam
                           </button>
                           {(score / activeQuestions.length) >= 0.7 && !rewardClaimed && (
                             <button
                               onClick={claimQuizRewards}
-                              className="px-5 py-2.5 rounded-xl bg-marigold text-bg-base font-bold text-xs shadow-sm hover:bg-marigold/90 cursor-pointer"
+                              className="px-6 py-2.5 rounded-full bg-[#7D927D] text-white font-bold text-xs shadow-sm hover:bg-[#6B806B] cursor-pointer"
                             >
                               Claim Rewards 🪙
                             </button>
