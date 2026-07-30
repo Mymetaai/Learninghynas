@@ -4,9 +4,11 @@ import { useStatsStore } from '../state/statsStore';
 import { useShopStore } from '../state/shopStore';
 import { ONE_PIECE_CARDS, type OnePieceCard } from '../content/onePieceCards';
 import { DEMON_SLAYER_CARDS, type DemonSlayerCard } from '../content/demonSlayerCards';
+import GachaCard from '../components/GachaCard';
+import PackOpeningOverlay from '../components/PackOpeningOverlay';
+import { GACHA_CARDS, getRandomGachaCard, type GachaCardData } from '../data/gachaData';
 import {
   ShoppingBag,
-    Lock,
   Coins,
   X,
   Trophy,
@@ -76,7 +78,6 @@ const DEMON_SLAYER_HOTSPOTS = {
 };
 
 const DRAW_COST = 20;
-const DUP_REFUND = 5;
 
 interface ShopInventory {
   streak_freeze: number;
@@ -129,7 +130,6 @@ const SHOP_CATEGORIES = [
 const ShopScreen: FC = () => {
   const coins = useStatsStore((s) => s.coins);
   const spendCoins = useStatsStore((s) => s.spendCoins);
-  const collectCard = useStatsStore((s) => s.collectCard);
   const collectAllCards = useStatsStore((s) => s.collectAllCards);
   const collectedCardIds = useStatsStore((s) => s.collectedCardIds);
   
@@ -237,22 +237,42 @@ const ShopScreen: FC = () => {
     setChestReward({ title: rewardTitle, detail: rewardDetail });
   };
 
-  // Gacha states
-  const [isDrawing, setIsDrawing] = useState(false);
-  const [drawnCard, setDrawnCard] = useState<OnePieceCard | null>(null);
-  const [drawResult, setDrawResult] = useState<'new' | 'duplicate' | null>(null);
+  // ── PACK OPENING OVERLAY STATE ───────────────────────────────────────────
+  const [isPackDrawing, setIsPackDrawing] = useState<boolean>(false);
+  const [drawnPackCard, setDrawnPackCard] = useState<GachaCardData | null>(null);
+  const [unlockedGachaIds, setUnlockedGachaIds] = useState<string[]>(() => [
+    'op-luffy', 'op-zoro', 'ds-tanjiro', 'ds-nezuko', 'ds-zenitsu'
+  ]);
+  const [gachaFilterRank, setGachaFilterRank] = useState<'all' | 'SSR' | 'SS' | 'S' | 'Epic' | 'Rare' | 'Common'>('all');
+
+  const handleDrawPackCard = () => {
+    if (coins < DRAW_COST) {
+      alert("Not enough Kitsune Coins! Complete practice quizzes to earn more coins.");
+      return;
+    }
+    spendCoins(DRAW_COST);
+    playThunderSound(true);
+    spawnBolt();
+    spawnParticles(12);
+
+    const card = getRandomGachaCard();
+    setDrawnPackCard(card);
+    setIsPackDrawing(true);
+    if (!unlockedGachaIds.includes(card.id)) {
+      setUnlockedGachaIds(prev => [...prev, card.id]);
+    }
+  };
   
   // Series selector state
   const [selectedSeries, setSelectedSeries] = useState<'one-piece' | 'demon-slayer'>('one-piece');
 
   // Modal states
   const [selectedCard, setSelectedCard] = useState<OnePieceCard | DemonSlayerCard | null>(null);
-  const [filterRarity, setFilterRarity] = useState<'all' | 'common' | 'rare' | 'epic' | 'legendary'>('all');
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
   const [selectedHotspot, setSelectedHotspot] = useState<'series' | 'faction' | 'rarity' | 'portrait' | 'name' | 'bounty' | 'attack' | null>(null);
 
   // Cinematic states
-  const [summonPhase, setSummonPhase] = useState<'s-altar' | 's-transition' | 's-rise' | 's-begin' | 's-intensity' | 's-reveal'>('s-altar');
+  const summonPhase = 's-altar';
   const [lightningFlash, setLightningFlash] = useState(false);
   const [lightningBolts, setLightningBolts] = useState<{ id: number; path: string }[]>([]);
   const [gachaParticles, setGachaParticles] = useState<{ id: number; gold: boolean; left: number; drift: number; duration: number }[]>([]);
@@ -353,101 +373,6 @@ const ShopScreen: FC = () => {
 
     return { total, collectedCount, rate, legendaryCount, epicCount };
   }, [collectedCardIds, selectedSeries]);
-
-  const filteredCards = useMemo(() => {
-    const currentPool = selectedSeries === 'one-piece' ? ONE_PIECE_CARDS : DEMON_SLAYER_CARDS;
-    if (filterRarity === 'all') return currentPool;
-    return currentPool.filter(c => c.rarity === filterRarity);
-  }, [filterRarity, selectedSeries]);
-
-  // Main summon / draw action
-  const handleDraw = () => {
-    if (coins < DRAW_COST) {
-      alert("Not enough coins! Practice vocabulary or complete daily quests to earn more.");
-      return;
-    }
-
-    setIsDrawing(true);
-    setDrawnCard(null);
-    setDrawResult(null);
-
-    // Deduct coins
-    spendCoins(DRAW_COST);
-
-    // Roll card
-    const rand = Math.random() * 100;
-    let rarity: 'common' | 'rare' | 'epic' | 'legendary';
-    if (rand < 5) {
-      rarity = 'legendary';
-    } else if (rand < 25) {
-      rarity = 'epic';
-    } else if (rand < 60) {
-      rarity = 'rare';
-    } else {
-      rarity = 'common';
-    }
-
-    const currentPool = selectedSeries === 'one-piece' ? ONE_PIECE_CARDS : DEMON_SLAYER_CARDS;
-    const pool = currentPool.filter(c => c.rarity === rarity);
-    const chosenCard = pool[Math.floor(Math.random() * pool.length)];
-
-    // STEP 1 — transition
-    setSummonPhase('s-transition');
-
-    // STEP 2 — altar rises (900ms)
-    setTimeout(() => {
-      setSummonPhase('s-rise');
-    }, 900);
-
-    // STEP 3 — summoning begins (2300ms)
-    setTimeout(() => {
-      setSummonPhase('s-begin');
-      playThunderSound(false);
-      let count = 0;
-      const boltLoop = setInterval(() => {
-        spawnBolt();
-        spawnParticles(4);
-        count++;
-        if (count >= 5) clearInterval(boltLoop);
-      }, 360);
-    }, 2300);
-
-    // STEP 4 — building intensity (4100ms)
-    setTimeout(() => {
-      setSummonPhase('s-intensity');
-      playThunderSound(false);
-      let count = 0;
-      const boltLoop = setInterval(() => {
-        spawnBolt();
-        spawnParticles(8);
-        count++;
-        if (count >= 7) clearInterval(boltLoop);
-      }, 180);
-    }, 4100);
-
-    // STEP 5 — reveal (5900ms)
-    setTimeout(() => {
-      setSummonPhase('s-reveal');
-      playThunderSound(true);
-      spawnBolt();
-      spawnBolt();
-      spawnParticles(15);
-      
-      setDrawnCard(chosenCard);
-      setIsDrawing(false);
-      
-      // Determine if new or duplicate
-      const isNew = !collectedCardIds.includes(chosenCard.id);
-      if (isNew) {
-        collectCard(chosenCard.id);
-        setDrawResult('new');
-      } else {
-        setDrawResult('duplicate');
-        // Refund duplicate coins
-        addRewards(0, DUP_REFUND);
-      }
-    }, 5900);
-  };
 
   const claimCheatCoins = () => {
     addRewards(0, 100); // Add 100 cheat coins for convenience
@@ -893,91 +818,14 @@ const ShopScreen: FC = () => {
                     </div>
 
                     <button
-                      onClick={handleDraw}
-                      disabled={isDrawing || coins < DRAW_COST}
-                      className="w-full py-3.5 px-6 rounded-full bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] font-body text-xs font-bold border-2 border-[#2C1E11] shadow-[0_4px_0_#5C524E] hover:-translate-y-0.5 hover:shadow-[0_6px_0_#5C524E] active:translate-y-0.5 active:shadow-[0_2px_0_#5C524E] transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed uppercase"
+                      onClick={handleDrawPackCard}
+                      disabled={coins < DRAW_COST}
+                      className="w-full py-3.5 px-6 rounded-full bg-[#7D927D] hover:bg-[#6B826B] text-white font-body text-xs font-bold border-2 border-[#2F353B] shadow-[0_4px_0_#2F353B] hover:-translate-y-0.5 active:translate-y-0.5 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed uppercase"
                     >
-                      ✦ SUMMON CARD ({DRAW_COST} COINS)
+                      ✦ DRAW x1 ({DRAW_COST} COINS)
                     </button>
                   </div>
                 </>
-              )}
-
-              {/* STEP 1-4 ANIMATIONS & REVEALED HEROIC CARD */}
-              {summonPhase !== 's-altar' && (
-                <div className="flex flex-col items-center justify-center w-full z-10 relative my-2">
-                  <div className="card-stage-active flex flex-col items-center justify-center w-full">
-                    <div className={`card-gacha-animated ${summonPhase} flex justify-center`}>
-                      {drawnCard && (
-                        <div className={`card-revealed-inner bg-white border-4 border-white rounded-[28px] p-5 shadow-2xl flex flex-col items-center justify-between text-center transition-all duration-500 w-[320px] sm:w-[360px] min-h-[480px] sm:min-h-[520px] max-h-[560px] ${
-                          drawnCard.rarity === 'legendary' ? 'shadow-[0_0_45px_rgba(245,158,11,0.7)] border-amber-300' :
-                          drawnCard.rarity === 'epic' ? 'shadow-[0_0_40px_rgba(168,85,247,0.7)] border-purple-300' :
-                          drawnCard.rarity === 'rare' ? 'shadow-[0_0_30px_rgba(59,130,246,0.6)] border-blue-300' :
-                          'shadow-[0_8px_24px_rgba(92,82,78,0.3)] border-white'
-                        }`}>
-                          <div className="flex justify-between items-center w-full">
-                            <span className="font-hud text-[10px] uppercase font-bold text-accent-action tracking-wider">
-                              {selectedSeries === 'one-piece' ? '🏴‍☠️ ONE PIECE' : '⚔️ DEMON SLAYER'}
-                            </span>
-                            <span className={`font-hud text-[10px] uppercase px-3 py-1 rounded-full font-bold border ${
-                              drawnCard.rarity === 'legendary' ? 'bg-amber-100 text-amber-800 border-amber-300' :
-                              drawnCard.rarity === 'epic' ? 'bg-purple-100 text-purple-800 border-purple-300' :
-                              drawnCard.rarity === 'rare' ? 'bg-blue-100 text-blue-800 border-blue-300' :
-                              'bg-gray-100 text-gray-700 border-gray-300'
-                            }`}>
-                              {drawnCard.rarity}
-                            </span>
-                          </div>
-
-                          <div className={`my-3.5 h-60 sm:h-64 w-full rounded-2xl bg-gradient-to-tr ${drawnCard.color} flex items-center justify-center text-7xl shadow-inner relative overflow-hidden select-none`}>
-                            <div className="absolute inset-0 animate-shimmer pointer-events-none z-10 opacity-30" />
-                            {imageErrors[drawnCard.id] ? (
-                              drawnCard.emoji
-                            ) : (
-                              <img
-                                src={drawnCard.imageUrl}
-                                alt={drawnCard.name}
-                                onError={() => setImageErrors((prev) => ({ ...prev, [drawnCard.id]: true }))}
-                                className="h-full w-full object-cover object-top relative z-5"
-                              />
-                            )}
-                          </div>
-
-                          <div className="w-full text-left space-y-1 px-1">
-                            <h3 className="font-display text-lg sm:text-xl font-extrabold text-text-primary truncate">{drawnCard.name}</h3>
-                            <p className="font-body text-xs text-text-secondary truncate italic">"{drawnCard.description}"</p>
-                          </div>
-
-                          <div className="w-full border-t-2 border-text-primary/15 pt-3 grid grid-cols-2 gap-2 font-hud text-xs text-accent-action font-bold">
-                            <div className="flex flex-col text-left">
-                              <span className="text-text-secondary text-[8px] uppercase tracking-wider">Power / Bounty</span>
-                              <span className="truncate text-sm text-text-primary">{drawnCard.bounty}</span>
-                            </div>
-                            <div className="flex flex-col text-right">
-                              <span className="text-text-secondary text-[8px] uppercase tracking-wider">Special Move</span>
-                              <span className="truncate text-sm text-accent-action" title={drawnCard.specialMove}>{drawnCard.specialMove}</span>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-
-                    </div>
-                  </div>
-
-                  {summonPhase === 's-reveal' && (
-                    <div className="reveal-panel-custom mt-6 flex flex-col items-center gap-3 z-20">
-                      <p className="text-base sm:text-lg font-bold text-text-primary font-display bg-white/95 backdrop-blur-md px-6 py-2.5 rounded-full border-2 border-text-primary shadow-[0_4px_0_#5C524E]">
-                        {drawResult === 'new' ? '✨ NEW CARD UNLOCKED! ✨' : `Duplicate! (Refunded +${DUP_REFUND} Coins)`}
-                      </p>
-                      <button
-                        onClick={() => setSummonPhase('s-altar')}
-                        className="px-8 py-3 rounded-full bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] font-bold border-2 border-[#2C1E11] shadow-[0_4px_0_#5C524E] hover:-translate-y-0.5 hover:shadow-[0_6px_0_#5C524E] active:translate-y-0.5 active:shadow-[0_2px_0_#5C524E] transition-all cursor-pointer text-xs font-hud uppercase font-bold"
-                      >
-                        Okay
-                      </button>
-                    </div>
-                  )}
-                </div>
               )}
             </div>
 
@@ -989,26 +837,29 @@ const ShopScreen: FC = () => {
               <StatBox label="Epics Found" value={stats.epicCount} color="text-purple-600" />
             </div>
 
-            {/* Card Binder Section */}
+            {/* Your Collection (Gacha Cards Grid) */}
             <div className="bg-bg-elevated border-2 border-text-primary rounded-[28px] p-6 shadow-[0_4px_0_#5C524E]">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b-2 border-text-primary/20 pb-4">
                 <div>
-                  <h2 className="font-display text-2xl font-bold text-text-primary flex items-center gap-2">
+                  <h2 className="font-serif text-2xl font-bold text-text-primary flex items-center gap-2">
                     <Trophy className="text-accent-action h-6 w-6" />
-                    Card Album
+                    Your Collection
                   </h2>
-                  <p className="text-text-secondary text-xs mt-1">Review your collected anime character cards and study active hotspots</p>
+                  <p className="font-sans text-xs text-text-secondary mt-1">
+                    Demon Slayer & One Piece card collection ({unlockedGachaIds.length}/{GACHA_CARDS.length} unlocked)
+                  </p>
                 </div>
 
+                {/* Rank Filter Pills */}
                 <div className="flex flex-wrap gap-2">
-                  {(['all', 'common', 'rare', 'epic', 'legendary'] as const).map((r) => (
+                  {(['all', 'SSR', 'SS', 'S', 'Epic', 'Rare', 'Common'] as const).map((r) => (
                     <button
                       key={r}
-                      onClick={() => setFilterRarity(r)}
-                      className={`px-4 py-1.5 rounded-full font-hud text-[10px] uppercase font-bold transition-all cursor-pointer border-2 ${
-                        filterRarity === r
-                          ? 'bg-accent-action text-text-primary border-text-primary shadow-[0_2px_0_#5C524E]'
-                          : 'bg-bg-elevated text-text-secondary border-structural hover:border-text-primary'
+                      onClick={() => setGachaFilterRank(r)}
+                      className={`px-3 py-1 rounded-full font-sans text-[10px] font-bold transition-all cursor-pointer border ${
+                        gachaFilterRank === r
+                          ? 'bg-[#7D927D] text-white border-[#2F353B]'
+                          : 'bg-bg-base text-text-secondary border-structural hover:border-text-primary'
                       }`}
                     >
                       {r}
@@ -1017,57 +868,23 @@ const ShopScreen: FC = () => {
                 </div>
               </div>
 
-              {filteredCards.length === 0 ? (
-                <p className="text-center text-text-secondary text-xs py-8">No cards matching this rarity filter.</p>
-              ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                  {filteredCards.map((card) => {
-                    const isCollected = collectedCardIds.includes(card.id);
-                    const cardStyle = isCollected
-                      ? card.rarity === 'legendary'
-                        ? 'border-2 border-amber-400 shadow-[0_0_18px_rgba(251,191,36,0.6)] bg-white hover:scale-105 transition-all duration-300 holographic-sheen cursor-pointer rounded-[24px]'
-                        : card.rarity === 'epic'
-                        ? 'border-2 border-purple-400 shadow-[0_0_18px_rgba(192,132,252,0.6)] bg-white hover:scale-105 transition-all duration-300 holographic-sheen cursor-pointer rounded-[24px]'
-                        : card.rarity === 'rare'
-                        ? 'border-2 border-blue-400 shadow-[0_0_14px_rgba(96,165,250,0.5)] bg-white hover:scale-105 transition-all duration-300 holographic-sheen cursor-pointer rounded-[24px]'
-                        : 'border-2 border-[#5C524E] shadow-[0_4px_0_#5C524E] bg-white hover:scale-105 transition-all duration-300 holographic-sheen cursor-pointer rounded-[24px]'
-                      : 'bg-[#FAF6F0]/40 border-2 border-[#8F8683]/40 opacity-40 select-none rounded-[24px]';
-
-                    return (
-                      <div
-                        key={card.id}
-                        onClick={() => isCollected && setSelectedCard(card)}
-                        className={`relative p-3.5 flex flex-col items-center justify-between text-center binder-card ${cardStyle}`}
-                      >
-                        <div className={`h-28 w-full rounded-[18px] bg-gradient-to-tr ${isCollected ? card.color : 'from-structural to-structural/50'} flex items-center justify-center text-4xl shadow-inner relative overflow-hidden`}>
-                          {!isCollected && <Lock className="text-text-secondary/70 h-6 w-6 absolute z-10" />}
-                          {isCollected && (
-                            imageErrors[card.id] ? (
-                              card.emoji
-                            ) : (
-                              <img
-                                src={card.imageUrl}
-                                alt={card.name}
-                                onError={() => setImageErrors((prev) => ({ ...prev, [card.id]: true }))}
-                                className="h-full w-full object-cover object-top"
-                              />
-                            )
-                          )}
-                        </div>
-                        <h4 className="font-display text-xs font-bold text-text-primary mt-2.5 truncate w-full">{card.name}</h4>
-                        <span className={`font-hud text-[9px] uppercase tracking-wider font-bold mt-1 px-2 py-0.5 rounded-full border ${
-                          card.rarity === 'legendary' ? 'bg-amber-100 text-amber-800 border-amber-300' :
-                          card.rarity === 'epic' ? 'bg-purple-100 text-purple-800 border-purple-300' :
-                          card.rarity === 'rare' ? 'bg-blue-100 text-blue-800 border-blue-300' :
-                          'bg-gray-100 text-gray-700 border-gray-300'
-                        }`}>
-                          {card.rarity}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
+              {/* Grid of Gacha Cards */}
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                {GACHA_CARDS.filter((c) => gachaFilterRank === 'all' || c.rank === gachaFilterRank).map((card) => {
+                  const isUnlocked = unlockedGachaIds.includes(card.id);
+                  return (
+                    <GachaCard
+                      key={card.id}
+                      card={card}
+                      isUnlocked={isUnlocked}
+                      onClick={() => {
+                        setDrawnPackCard(card);
+                        setIsPackDrawing(true);
+                      }}
+                    />
+                  );
+                })}
+              </div>
             </div>
           </>
         )}
@@ -1744,6 +1561,13 @@ const ShopScreen: FC = () => {
           background: rgba(243, 201, 105, 0.08);
         }
       `}</style>
+
+      {/* 3D Pack Opening Overlay */}
+      <PackOpeningOverlay
+        isOpen={isPackDrawing}
+        drawnCard={drawnPackCard}
+        onClose={() => setIsPackDrawing(false)}
+      />
     </div>
   );
 };
