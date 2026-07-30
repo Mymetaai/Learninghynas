@@ -243,7 +243,7 @@ const ShopScreen: FC = () => {
   const [unlockedGachaIds, setUnlockedGachaIds] = useState<string[]>(() => [
     'op-luffy', 'op-zoro', 'ds-tanjiro', 'ds-nezuko', 'ds-zenitsu'
   ]);
-  const [gachaFilterRank, setGachaFilterRank] = useState<'all' | 'SSR' | 'SS' | 'S' | 'Epic' | 'Rare' | 'Common'>('all');
+  const [gachaFilterRank, setGachaFilterRank] = useState<'all' | 'UR' | 'SSR' | 'SR' | 'Rare' | 'Common'>('all');
 
   const handleDrawPackCard = () => {
     if (coins < DRAW_COST) {
@@ -852,7 +852,7 @@ const ShopScreen: FC = () => {
 
                 {/* Rank Filter Pills */}
                 <div className="flex flex-wrap gap-2">
-                  {(['all', 'SSR', 'SS', 'S', 'Epic', 'Rare', 'Common'] as const).map((r) => (
+                  {(['all', 'UR', 'SSR', 'SR', 'Rare', 'Common'] as const).map((r) => (
                     <button
                       key={r}
                       onClick={() => setGachaFilterRank(r)}
@@ -869,7 +869,7 @@ const ShopScreen: FC = () => {
               </div>
 
               {/* Grid of Gacha Cards */}
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
                 {GACHA_CARDS.filter((c) => gachaFilterRank === 'all' || c.rank === gachaFilterRank).map((card) => {
                   const isUnlocked = unlockedGachaIds.includes(card.id);
                   return (
