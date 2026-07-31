@@ -135,14 +135,15 @@ const BossBattleScreen = () => {
 
   const triggerVictory = useCallback(() => {
     setGameState('victory');
+    const coinReward = sentinelId ? (sentinelBoss ? sentinelBoss.coinReward : 50) : 100;
+    addRewards(0, coinReward);
+    addCoins(coinReward);
     if (sentinelId) {
-      addRewards(0, sentinelBoss ? sentinelBoss.coinReward : 50);
       defeatSentinel(sentinelId);
     } else {
-      addRewards(0, 100);
       defeatGuardian(world.id);
     }
-  }, [addRewards, defeatGuardian, defeatSentinel, world.id, sentinelId, sentinelBoss]);
+  }, [addRewards, addCoins, defeatGuardian, defeatSentinel, world.id, sentinelId, sentinelBoss]);
 
   const handleAnswerStart = useCallback(() => {
     setIsAnswered(true);

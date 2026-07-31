@@ -130,7 +130,6 @@ const SHOP_CATEGORIES = [
 
 const ShopScreen: FC = () => {
   const localCoins = useStatsStore((s) => s.coins);
-  const spendCoins = useStatsStore((s) => s.spendCoins);
   const collectAllCards = useStatsStore((s) => s.collectAllCards);
   const collectedCardIds = useStatsStore((s) => s.collectedCardIds);
   
