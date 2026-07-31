@@ -61,9 +61,9 @@ const DailyQuestScreen: FC = () => {
   // ── Active play view ────────────────────────────────────────────────────
   if (activeQuest) {
     return (
-      <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base px-4 py-6">
+      <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base px-4 py-2 sm:py-4">
         <Confetti fire={confetti} />
-        <div className="mx-auto max-w-lg">
+        <div className="mx-auto max-w-lg pt-3 sm:pt-6">
           <MicroQuestPlayer
             microQuest={activeQuest}
             alreadyDone={isMicroQuestDone(activeQuest.id)}

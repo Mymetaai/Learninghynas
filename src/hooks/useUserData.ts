@@ -19,7 +19,7 @@ export function useUserData() {
   const [userData, setUserData] = useState<UserProgressData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  // Sync to Zustand stats store so legacy HUD and shop components stay synchronized
+  // Sync to Zustand stats store
   const syncToLocalStore = useCallback((data: UserProgressData) => {
     useStatsStore.setState((state) => ({
       ...state,
@@ -33,7 +33,7 @@ export function useUserData() {
     if (!isUserLoaded) return;
 
     if (!isSignedIn || !user) {
-      // Fallback for unauthenticated guest session using Zustand statsStore defaults
+      // Fallback for unauthenticated guest session using Zustand statsStore
       const localStats = useStatsStore.getState();
       const fallback: UserProgressData = {
         user_id: 'guest',
@@ -113,64 +113,68 @@ export function useUserData() {
     fetchUserData();
   }, [fetchUserData]);
 
+  // Subscribe to Zustand useStatsStore so ANY task completion anywhere updates userData & Supabase
+  useEffect(() => {
+    if (!isUserLoaded) return;
+
+    const unsubscribe = useStatsStore.subscribe((state) => {
+      setUserData((prev) => {
+        if (!prev) return prev;
+        if (prev.xp === state.xp && prev.kitsune_coins === state.coins && prev.streak_days === state.streak) {
+          return prev;
+        }
+
+        const newLevel = Math.max(1, Math.floor((state.xp || 0) / 600) + 1);
+        const updated: UserProgressData = {
+          ...prev,
+          xp: state.xp,
+          kitsune_coins: state.coins,
+          streak_days: state.streak,
+          level: newLevel,
+        };
+
+        if (isSignedIn && user?.id) {
+          getToken({ template: 'supabase' })
+            .then((token) => {
+              const client = supabaseClient(token);
+              client
+                .from('user_progress')
+                .upsert(updated, { onConflict: 'user_id' })
+                .then(({ error }) => {
+                  if (error) console.warn('[useUserData] Background sync error:', error.message);
+                });
+            })
+            .catch(() => {
+              const client = supabaseClient(null);
+              client
+                .from('user_progress')
+                .upsert(updated, { onConflict: 'user_id' })
+                .then(() => {})
+                .catch(() => {});
+            });
+        }
+
+        return updated;
+      });
+    });
+
+    return () => unsubscribe();
+  }, [isUserLoaded, isSignedIn, user, getToken]);
+
   // Mutation helper: updateCoins
   const updateCoins = useCallback(
     async (newCoins: number) => {
-      if (!userData) return;
-      const updated = { ...userData, kitsune_coins: newCoins };
-      setUserData(updated);
-      syncToLocalStore(updated);
-
-      if (isSignedIn && user) {
-        try {
-          let token: string | null = null;
-          try {
-            token = await getToken({ template: 'supabase' }).catch(() => null);
-          } catch {
-            token = await getToken().catch(() => null);
-          }
-          const client = supabaseClient(token);
-          await client
-            .from('user_progress')
-            .update({ kitsune_coins: newCoins })
-            .eq('user_id', user.id);
-        } catch (e) {
-          console.warn('[useUserData] updateCoins error:', e);
-        }
-      }
+      useStatsStore.setState((state) => ({ ...state, coins: newCoins }));
     },
-    [userData, isSignedIn, user, getToken, syncToLocalStore]
+    []
   );
 
   // Mutation helper: updateXP
   const updateXP = useCallback(
     async (additionalXp: number) => {
-      if (!userData) return;
-      const newXp = (userData.xp || 0) + additionalXp;
-      const newLevel = Math.max(1, Math.floor(newXp / 600) + 1);
-      const updated = { ...userData, xp: newXp, level: newLevel };
-      setUserData(updated);
-      syncToLocalStore(updated);
-
-      if (isSignedIn && user) {
-        try {
-          let token: string | null = null;
-          try {
-            token = await getToken({ template: 'supabase' }).catch(() => null);
-          } catch {
-            token = await getToken().catch(() => null);
-          }
-          const client = supabaseClient(token);
-          await client
-            .from('user_progress')
-            .update({ xp: newXp, level: newLevel })
-            .eq('user_id', user.id);
-        } catch (e) {
-          console.warn('[useUserData] updateXP error:', e);
-        }
-      }
+      useStatsStore.getState().addRewards(additionalXp, 0);
     },
-    [userData, isSignedIn, user, getToken, syncToLocalStore]
+    []
   );
 
   return {

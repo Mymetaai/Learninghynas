@@ -12,7 +12,7 @@ export default function LearnScreen() {
   return (
     <div className="min-h-screen bg-bg-base text-text-primary pb-12">
       {/* Top Sub-navigation Bar for Learn View */}
-      <div className="sticky top-14 z-30 bg-bg-base/90 backdrop-blur-md border-b border-structural py-2.5 px-4 mb-6">
+      <div className="sticky top-[92px] z-30 bg-bg-base/95 backdrop-blur-md border-b border-structural py-2.5 px-4 mb-6 shadow-xs">
         <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-3">
           <button
             onClick={() => setActiveSubView('dashboard')}
