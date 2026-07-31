@@ -79,18 +79,18 @@ export const syncLocalStoresToSupabase = async (userId?: string | null): Promise
   }
 };
 
-/** Legacy Sync Helper Functions for store compatibility */
-export const syncUserStats = async (_arg1?: any, _arg2?: any, _arg3?: any, _arg4?: any): Promise<boolean> => {
-  const uid = typeof _arg1 === 'string' ? _arg1 : activeUserId;
+/** Legacy Sync Helper Functions for store compatibility (accepts variadic arguments) */
+export const syncUserStats = async (..._args: any[]): Promise<boolean> => {
+  const uid = typeof _args[0] === 'string' ? _args[0] : activeUserId;
   return syncLocalStoresToSupabase(uid);
 };
 
-export const syncLearnedVocab = async (_arg1?: any, _arg2?: any): Promise<boolean> => {
-  const uid = typeof _arg1 === 'string' ? _arg1 : activeUserId;
+export const syncLearnedVocab = async (..._args: any[]): Promise<boolean> => {
+  const uid = typeof _args[0] === 'string' ? _args[0] : activeUserId;
   return syncLocalStoresToSupabase(uid);
 };
 
-export const syncImmersionMessages = async (_arg1?: any, _arg2?: any): Promise<boolean> => {
-  const uid = typeof _arg1 === 'string' ? _arg1 : activeUserId;
+export const syncImmersionMessages = async (..._args: any[]): Promise<boolean> => {
+  const uid = typeof _args[0] === 'string' ? _args[0] : activeUserId;
   return syncLocalStoresToSupabase(uid);
 };
