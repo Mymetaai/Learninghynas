@@ -1,6 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
 import { useStatsStore } from '../state/statsStore';
-import { useAuthStore } from '../state/authStore';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://szctbtxwzffnvnoqugyy.supabase.co';
 const supabaseAnonKey =
@@ -50,15 +49,15 @@ export const setCurrentUserId = (userId: string | null): void => {
 /**
  * Global store sync helper. Reads local Zustand state and updates Supabase.
  */
-export const syncLocalStoresToSupabase = async (userId: string): Promise<boolean> => {
-  if (!userId) return false;
+export const syncLocalStoresToSupabase = async (userId?: string | null): Promise<boolean> => {
+  const targetId = userId || activeUserId;
+  if (!targetId) return false;
 
   try {
     const stats = useStatsStore.getState();
-    const auth = useAuthStore.getState();
 
     const payload = {
-      user_id: userId,
+      user_id: targetId,
       xp: stats.xp || 0,
       level: Math.max(1, Math.floor((stats.xp || 0) / 600) + 1),
       kitsune_coins: stats.coins || 500,
@@ -81,14 +80,17 @@ export const syncLocalStoresToSupabase = async (userId: string): Promise<boolean
 };
 
 /** Legacy Sync Helper Functions for store compatibility */
-export const syncUserStats = async (userId: string, xp?: number, coins?: number, streak?: number) => {
-  return syncLocalStoresToSupabase(userId);
+export const syncUserStats = async (_arg1?: any, _arg2?: any, _arg3?: any, _arg4?: any): Promise<boolean> => {
+  const uid = typeof _arg1 === 'string' ? _arg1 : activeUserId;
+  return syncLocalStoresToSupabase(uid);
 };
 
-export const syncLearnedVocab = async (userId: string, vocab: string[]) => {
-  return syncLocalStoresToSupabase(userId);
+export const syncLearnedVocab = async (_arg1?: any, _arg2?: any): Promise<boolean> => {
+  const uid = typeof _arg1 === 'string' ? _arg1 : activeUserId;
+  return syncLocalStoresToSupabase(uid);
 };
 
-export const syncImmersionMessages = async (userId: string, messages: any[]) => {
-  return syncLocalStoresToSupabase(userId);
+export const syncImmersionMessages = async (_arg1?: any, _arg2?: any): Promise<boolean> => {
+  const uid = typeof _arg1 === 'string' ? _arg1 : activeUserId;
+  return syncLocalStoresToSupabase(uid);
 };
