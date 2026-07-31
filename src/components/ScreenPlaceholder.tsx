@@ -14,13 +14,13 @@ interface ScreenPlaceholderProps {
 const ScreenPlaceholder: FC<ScreenPlaceholderProps> = ({ title, builtIn, description }) => {
   return (
     <div className="flex min-h-[calc(100vh-3.5rem)] items-center justify-center px-6 py-10">
-      <div className="w-full max-w-md rounded-2xl border border-pencil/30 bg-paper p-8 text-center shadow-sm">
-        <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-pencil">
+      <div className="w-full max-w-md rounded-2xl border border-[#7D927D]/30 bg-white p-8 text-center shadow-sm">
+        <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#777775]">
           Placeholder · built in {builtIn}
         </p>
-        <h1 className="mt-3 font-serif text-3xl font-bold text-ink">{title}</h1>
+        <h1 className="mt-3 font-serif text-3xl font-bold text-[#2F353B]">{title}</h1>
         {description ? (
-          <p className="mt-3 font-sans text-sm leading-relaxed text-pencil">{description}</p>
+          <p className="mt-3 font-sans text-sm leading-relaxed text-[#777775]">{description}</p>
         ) : null}
       </div>
     </div>

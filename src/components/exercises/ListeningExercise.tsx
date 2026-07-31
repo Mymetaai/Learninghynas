@@ -1,9 +1,7 @@
-// STEP 8 — Listening exercise.
-// Shows a pronunciation guide (simulated audio — real audio comes later) and
-// asks the user to pick the correct word from options. Uses the `context`
-// field for an additional hint.
+// Listening exercise with Serene Lexicon solid high-contrast pop & shake validation.
 import { useState, useMemo, type FC } from 'react';
 import { motion } from 'framer-motion';
+import { CheckCircle2, XCircle, Volume2 } from 'lucide-react';
 
 interface ListeningExerciseProps {
   prompt: string;
@@ -41,79 +39,117 @@ const ListeningExercise: FC<ListeningExerciseProps> = ({
     onAnswer(option === answer);
   };
 
+  const handleSpeak = () => {
+    setRevealed(true);
+    if ('speechSynthesis' in window) {
+      const synth = window.speechSynthesis;
+      synth.cancel();
+      const utterance = new SpeechSynthesisUtterance(prompt);
+      utterance.lang = 'es-ES';
+      utterance.rate = 0.9;
+      synth.speak(utterance);
+    }
+  };
+
   return (
     <div>
       {context && (
-        <p className="mb-2 font-sans text-[10px] text-accent-action font-semibold">{context}</p>
+        <p className="mb-2 font-sans text-[10px] font-mono uppercase tracking-wider text-[#7D927D] font-bold">{context}</p>
       )}
 
-      {/* Audio playback stub — pronunciation card */}
-      <div className="mb-4 rounded-xl border border-structural bg-bg-elevated-2 p-4 text-center">
+      {/* Audio playback card */}
+      <div className="mb-5 rounded-2xl border border-structural bg-bg-elevated-2 p-5 text-center shadow-sm">
         <button
           type="button"
-          onClick={() => setRevealed(true)}
-          className="flex mx-auto h-12 w-12 items-center justify-center rounded-full border border-structural bg-bg-elevated text-text-primary transition-all hover:bg-accent-action/25 cursor-pointer"
+          onClick={handleSpeak}
+          className="flex mx-auto h-14 w-14 items-center justify-center rounded-full border border-[#7D927D] bg-[#7D927D] text-white transition-all hover:bg-[#6B826B] shadow-md cursor-pointer active:scale-95"
           aria-label="Play pronunciation"
         >
-          🔊
+          <Volume2 className="h-6 w-6" />
         </button>
-        <p className="mt-2 font-sans text-sm text-text-secondary">
-          {revealed ? prompt : 'Tap to hear pronunciation'}
+        <p className="mt-2.5 font-sans text-xs font-semibold text-[#777775]">
+          {revealed ? 'Escuchando:' : 'Tap speaker icon to listen to Spanish audio'}
         </p>
         {revealed && (
           <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="mt-1 font-target text-[18px] tracking-[0.015em] font-semibold text-accent-action"
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-2 font-target text-xl font-bold text-[#7D927D]"
           >
             {prompt}
           </motion.p>
         )}
       </div>
 
-      <p className="mb-3 font-sans text-base text-text-primary">Which word is it?</p>
+      <p className="mb-3 font-sans text-sm font-bold text-[#2F353B]">Which word is it?</p>
 
-      <div className="space-y-2">
+      <div className="space-y-3">
         {shuffledOptions.map((option) => {
-          let classes =
-            'w-full rounded-xl border border-structural bg-bg-elevated px-4 py-3 font-sans text-sm text-text-primary text-left transition-all';
+          const isCorrect = option === answer;
+          const isSelected = option === selected;
+          const isWrong = isSelected && !isCorrect;
+
+          let btnStyles = 'w-full rounded-xl border px-4 py-3.5 font-sans text-sm font-semibold transition-all cursor-pointer shadow-sm flex items-center justify-between ';
 
           if (answered) {
-            if (option === answer) {
-              classes =
-                'w-full rounded-xl border border-success/60 bg-success/10 px-4 py-3 font-sans text-sm font-bold text-success text-left';
-            } else if (option === selected && option !== answer) {
-              classes =
-                'w-full rounded-xl border border-error/60 bg-error/10 px-4 py-3 font-sans text-sm text-error text-left';
+            if (isCorrect) {
+              btnStyles += 'bg-[#7D927D] text-white border-[#7D927D] shadow-md';
+            } else if (isWrong) {
+              btnStyles += 'bg-[#C4796B] text-white border-[#C4796B] shadow-md';
             } else {
-              classes += ' opacity-40';
+              btnStyles += 'bg-white border-[#7D927D]/20 text-[#2F353B] opacity-40 cursor-not-allowed';
             }
           } else {
-            classes += ' hover:bg-structural hover:border-text-secondary/40';
+            btnStyles += 'bg-white border-[#7D927D]/20 text-[#2F353B] hover:bg-[#F9F7F2] hover:border-[#7D927D]/50';
           }
+
+          const animationVariant = answered
+            ? isCorrect
+              ? { scale: [1, 1.05, 1] }
+              : isWrong
+                ? { x: [0, -12, 12, -8, 8, -4, 4, 0] }
+                : undefined
+            : undefined;
+
+          const transitionSpec = answered
+            ? isCorrect
+              ? { type: 'spring', stiffness: 300 }
+              : isWrong
+                ? { duration: 0.4 }
+                : undefined
+            : undefined;
 
           return (
             <motion.button
               key={option}
               type="button"
+              animate={animationVariant}
+              transition={transitionSpec}
               whileTap={answered ? undefined : { scale: 0.98 }}
               onClick={() => handleSelect(option)}
-              className={classes}
+              className={btnStyles}
+              disabled={answered}
             >
-              {option}
+              <span>{option}</span>
+              {answered && (
+                <span>
+                  {isCorrect && <CheckCircle2 className="h-5 w-5 text-white shrink-0 ml-2" />}
+                  {isWrong && <XCircle className="h-5 w-5 text-white shrink-0 ml-2" />}
+                </span>
+              )}
             </motion.button>
           );
         })}
       </div>
-
       {answered && selected !== answer && (
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-3 font-sans text-sm text-success"
+          className="mt-3 p-3 rounded-xl bg-[#7D927D]/10 border border-[#7D927D]/30 font-sans text-xs text-[#2F353B] flex items-center gap-2"
         >
-          ✓ Correct answer: <span className="font-semibold">{answer}</span>
-        </motion.p>
+          <CheckCircle2 className="h-4 w-4 text-[#7D927D] shrink-0" />
+          <span>Correct answer: <strong className="text-[#7D927D] font-bold">{answer}</strong></span>
+        </motion.div>
       )}
     </div>
   );

@@ -252,7 +252,7 @@ const FillInBlanksQuiz: FC = () => {
   const isCompleted = correctCount === currentCategory.questions.length;
 
   return (
-    <section className="glass-surface border border-pencil/20 rounded-2xl p-6 shadow-sm flex flex-col h-full bg-paper/5">
+    <section className="bg-white/90 backdrop-blur-sm border border-[#7D927D]/20 rounded-2xl p-6 shadow-sm flex flex-col h-full bg-white/5">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
@@ -314,11 +314,11 @@ const FillInBlanksQuiz: FC = () => {
                   onKeyDown={(e) => e.key === 'Enter' && handleCheckAnswer(q)}
                   placeholder="type here..."
                   disabled={status === 'correct'}
-                  className={`w-32 text-center font-target rounded-xl px-3 py-1.5 text-sm transition-all duration-200 ${
+                  className={`w-36 text-center font-target rounded-xl px-3 py-1.5 text-sm transition-all duration-200 ${
                     status === 'correct'
-                      ? 'border border-success bg-success/10 text-success font-bold shadow-sm'
+                      ? 'border-2 border-[#7D927D] bg-[#7D927D] text-white font-bold shadow-md scale-105'
                       : status === 'incorrect'
-                      ? 'border border-error bg-error/10 text-error animate-shake shadow-sm'
+                      ? 'border-2 border-[#C4796B] bg-[#C4796B] text-white font-bold shadow-md animate-shake'
                       : 'recessed-input'
                   }`}
                 />
@@ -328,13 +328,18 @@ const FillInBlanksQuiz: FC = () => {
                 {status && (
                   <motion.span
                     initial={{ scale: 0.5, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
+                    animate={
+                      status === 'correct'
+                        ? { scale: [1, 1.2, 1], opacity: 1 }
+                        : { x: [0, -8, 8, -4, 4, 0], opacity: 1 }
+                    }
+                    transition={status === 'correct' ? { type: 'spring', stiffness: 300 } : { duration: 0.4 }}
                     className="ml-1"
                   >
                     {status === 'correct' ? (
-                      <Check className="h-4 w-4 text-success" />
+                      <Check className="h-5 w-5 text-[#7D927D] font-bold" />
                     ) : (
-                      <X className="h-4 w-4 text-error" />
+                      <X className="h-5 w-5 text-[#C4796B] font-bold" />
                     )}
                   </motion.span>
                 )}
@@ -359,10 +364,10 @@ const FillInBlanksQuiz: FC = () => {
                   <button
                     onClick={() => handleCheckAnswer(q)}
                     disabled={!hasAnswer}
-                    className={`px-3 py-1 rounded-lg font-mono text-[10px] uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                    className={`px-4 py-1.5 rounded-xl font-mono text-[10px] font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
                       hasAnswer
-                        ? 'bg-[var(--accent-action)]/15 border border-[var(--accent-action)]/30 text-[var(--accent-action)] hover:bg-[var(--accent-action)]/25'
-                        : 'bg-pencil/5 border border-pencil/10 text-pencil/40 cursor-not-allowed'
+                        ? 'bg-[#7D927D] border border-[#7D927D] text-white hover:bg-[#6B826B] shadow-sm'
+                        : 'bg-[#777775]/5 border border-[#7D927D]/10 text-[#777775]/40 cursor-not-allowed'
                     }`}
                   >
                     Check
@@ -380,7 +385,7 @@ const FillInBlanksQuiz: FC = () => {
                     className="overflow-hidden bg-[var(--bg-elevated-2)] border border-structural/40 rounded-xl mt-1.5 p-3 text-xs font-sans text-[var(--text-secondary)]"
                   >
                     <div className="flex gap-1.5">
-                      <Sparkles className="h-3.5 w-3.5 text-marigold shrink-0 mt-0.5" />
+                      <Sparkles className="h-3.5 w-3.5 text-[#7D927D] shrink-0 mt-0.5" />
                       <div>
                         <p>{q.hint}</p>
                         {status === 'incorrect' && (

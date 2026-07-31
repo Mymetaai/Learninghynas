@@ -318,13 +318,13 @@ const PracticeScreen: FC = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ type: 'spring', damping: 20 }}
-              className="rounded-2xl border border-pencil/20 bg-paper/5 p-8 text-center shadow-sm"
+              className="rounded-2xl border border-[#7D927D]/20 bg-white/5 p-8 text-center shadow-sm"
             >
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: 'spring', damping: 15 }}
-                className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-marigold/60 bg-marigold/10 text-3xl"
+                className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-[#7D927D]/60 bg-[#7D927D]/10 text-3xl"
               >
                 🎉
               </motion.div>
@@ -332,32 +332,32 @@ const PracticeScreen: FC = () => {
               <h2 className="font-serif text-2xl font-bold text-text-primary">
                 {quest ? 'Quest Complete!' : 'Session Complete!'}
               </h2>
-              <p className="mt-1 font-sans text-sm text-pencil">
+              <p className="mt-1 font-sans text-sm text-[#777775]">
                 {quest ? quest.title : TILE_CONFIG[sessionResult.mode].title}
               </p>
 
               <div className="mt-6 flex items-center justify-center gap-6">
                 <div>
-                  <p className="font-mono text-3xl font-semibold tabular-nums text-teal-deep">
+                  <p className="font-mono text-3xl font-semibold tabular-nums text-[#7D927D]">
                     {sessionResult.total > 0
                       ? Math.round((sessionResult.correct / sessionResult.total) * 100)
                       : 0}%
                   </p>
-                  <p className="font-sans text-xs text-pencil">accuracy</p>
+                  <p className="font-sans text-xs text-[#777775]">accuracy</p>
                 </div>
-                <div className="h-8 w-px bg-pencil/20" />
+                <div className="h-8 w-px bg-[#777775]/20" />
                 <div>
-                  <p className="font-mono text-3xl font-semibold tabular-nums text-marigold">
+                  <p className="font-mono text-3xl font-semibold tabular-nums text-[#7D927D]">
                     +{sessionResult.xp}
                   </p>
-                  <p className="font-sans text-xs text-pencil">XP earned</p>
+                  <p className="font-sans text-xs text-[#777775]">XP earned</p>
                 </div>
-                <div className="h-8 w-px bg-pencil/20" />
+                <div className="h-8 w-px bg-[#777775]/20" />
                 <div>
-                  <p className="font-mono text-3xl font-semibold tabular-nums text-marigold">
+                  <p className="font-mono text-3xl font-semibold tabular-nums text-[#7D927D]">
                     +{sessionResult.coins}
                   </p>
-                  <p className="font-sans text-xs text-pencil">coins</p>
+                  <p className="font-sans text-xs text-[#777775]">coins</p>
                 </div>
               </div>
 
@@ -368,7 +368,7 @@ const PracticeScreen: FC = () => {
                 transition={{ delay: 0.4 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleBackToHub}
-                className="mt-6 w-full rounded-xl bg-terracotta px-4 py-3 font-serif text-base font-semibold text-text-primary shadow-sm transition-colors hover:bg-terracotta/90 cursor-pointer border-none"
+                className="mt-6 w-full rounded-xl bg-[#7D927D] px-4 py-3 font-serif text-base font-semibold text-text-primary shadow-sm transition-colors hover:bg-[#7D927D]/90 cursor-pointer border-none"
               >
                 {quest ? 'Back to Adventure Map' : 'Back to Training Grounds'}
               </motion.button>
@@ -382,12 +382,12 @@ const PracticeScreen: FC = () => {
       return (
         <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base px-4 py-6">
           <div className="mx-auto max-w-lg text-center">
-            <p className="font-sans text-sm text-pencil mt-12">
+            <p className="font-sans text-sm text-[#777775] mt-12">
               No exercises available for this session right now.
             </p>
             <button
               onClick={handleBackToHub}
-              className="mt-4 font-mono text-xs text-terracotta hover:text-terracotta/80 cursor-pointer bg-transparent border-none"
+              className="mt-4 font-mono text-xs text-[#7D927D] hover:text-[#6B826B] cursor-pointer bg-transparent border-none"
             >
               ← Back to Training Grounds
             </button>
@@ -401,7 +401,7 @@ const PracticeScreen: FC = () => {
         <div className="mx-auto max-w-lg mb-4">
           <button
             onClick={handleBackToHub}
-            className="flex items-center gap-1.5 font-mono text-[11px] text-pencil hover:text-text-primary transition-colors cursor-pointer bg-transparent border-none"
+            className="flex items-center gap-1.5 font-mono text-[11px] text-[#777775] hover:text-text-primary transition-colors cursor-pointer bg-transparent border-none"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             {quest ? 'Back to Adventure Map' : 'Back to Training Grounds'}
@@ -430,15 +430,15 @@ const PracticeScreen: FC = () => {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-1">
-            <Sparkles className="h-5 w-5 text-marigold" />
-            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-pencil">
+            <Sparkles className="h-5 w-5 text-[#7D927D]" />
+            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#777775]">
               Training Grounds (Parts 1–7)
             </p>
           </div>
           <h1 className="font-serif text-3xl font-bold text-text-primary">
             Interactive Practice Drills 💪
           </h1>
-          <p className="mt-2 font-sans text-sm text-pencil">
+          <p className="mt-2 font-sans text-sm text-[#777775]">
             Sharpen your Spanish skills across all 30 lessons (Parts 1 to 7). Select a drill mode below!
           </p>
         </div>
@@ -455,8 +455,8 @@ const PracticeScreen: FC = () => {
             <DrillTile
               mode="grammar-blitz"
               icon={<Zap className="h-6 w-6" />}
-              iconColor="text-marigold"
-              iconBg="bg-marigold/10 border-marigold/20"
+              iconColor="text-[#7D927D]"
+              iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
               title="Grammar Blitz"
               subtitle="Rapid-fire grammar rules across Parts 1–7"
               ctaLabel="Start Grammar Blitz"
@@ -468,8 +468,8 @@ const PracticeScreen: FC = () => {
             <DrillTile
               mode="conjugation"
               icon={<Flame className="h-6 w-6" />}
-              iconColor="text-terracotta"
-              iconBg="bg-terracotta/10 border-terracotta/20"
+              iconColor="text-[#7D927D]"
+              iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
               title="Conjugation Blitz"
               subtitle="-AR, -ER, -IR, Ser, Estar, Ir, Yo-Go & Preterite"
               ctaLabel="Start Conjugation"
@@ -481,8 +481,8 @@ const PracticeScreen: FC = () => {
             <DrillTile
               mode="listening-reps"
               icon={<Headphones className="h-6 w-6" />}
-              iconColor="text-teal-deep"
-              iconBg="bg-teal-deep/10 border-teal-deep/20"
+              iconColor="text-[#7D927D]"
+              iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
               title="Listening Reps"
               subtitle={`${listeningCount} audio listening clips across Lessons 1–30`}
               ctaLabel="Start Listening"
@@ -494,8 +494,8 @@ const PracticeScreen: FC = () => {
             <DrillTile
               mode="speaking-reps"
               icon={<Mic className="h-6 w-6" />}
-              iconColor="text-marigold"
-              iconBg="bg-marigold/10 border-marigold/20"
+              iconColor="text-[#7D927D]"
+              iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
               title="Speaking Reps"
               subtitle="Practice spoken phrases aloud across Parts 1–7"
               ctaLabel="Start Speaking"
@@ -507,8 +507,8 @@ const PracticeScreen: FC = () => {
             <DrillTile
               mode="vocab-drill"
               icon={<BookOpen className="h-6 w-6" />}
-              iconColor="text-teal-deep"
-              iconBg="bg-teal-deep/10 border-teal-deep/20"
+              iconColor="text-[#7D927D]"
+              iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
               title="Vocab Drill"
               subtitle={`${vocabCount} vocabulary words from Parts 1–7`}
               ctaLabel="Drill Vocab"
@@ -520,8 +520,8 @@ const PracticeScreen: FC = () => {
             <DrillTile
               mode="weak-spots"
               icon={<Target className="h-6 w-6" />}
-              iconColor="text-terracotta"
-              iconBg="bg-terracotta/10 border-terracotta/20"
+              iconColor="text-[#7D927D]"
+              iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
               title="Weak Spots"
               subtitle={mistakeCount > 0 ? `${mistakeCount} active mistake(s) to review` : 'Review target vocabulary'}
               ctaLabel="Start Review"
@@ -533,8 +533,8 @@ const PracticeScreen: FC = () => {
             <DrillTile
               mode="flashcards"
               icon={<Sparkles className="h-6 w-6" />}
-              iconColor="text-marigold"
-              iconBg="bg-marigold/10 border-marigold/20"
+              iconColor="text-[#7D927D]"
+              iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
               title="Auto Flashcards"
               subtitle="Hands-free auto-play flashcard deck player"
               ctaLabel="Start Flashcards"
@@ -545,14 +545,14 @@ const PracticeScreen: FC = () => {
         </div>
 
         {/* Quick stats footer */}
-        <div className="mt-8 flex items-center justify-center gap-6 font-mono text-[11px] text-pencil">
+        <div className="mt-8 flex items-center justify-center gap-6 font-mono text-[11px] text-[#777775]">
           <span className="flex items-center gap-1.5">
-            <CheckCircle2 className="h-3.5 w-3.5 text-teal-deep" />
+            <CheckCircle2 className="h-3.5 w-3.5 text-[#7D927D]" />
             {useTrainingStore.getState().trainingSessionsCompleted} sessions completed
           </span>
-          <span className="h-3 w-px bg-pencil/30" />
+          <span className="h-3 w-px bg-[#777775]/30" />
           <span className="flex items-center gap-1.5">
-            <Target className="h-3.5 w-3.5 text-terracotta" />
+            <Target className="h-3.5 w-3.5 text-[#7D927D]" />
             {mistakeCount} active weak spots
           </span>
         </div>
@@ -611,12 +611,12 @@ const DrillTile: FC<DrillTileProps> = ({
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05, duration: 0.3 }}
-      className={`relative bg-paper/5 border border-pencil/20 rounded-2xl p-5 shadow-sm flex flex-col justify-between min-h-[210px] transition-all duration-200 group ${
-        comingSoon ? 'opacity-70' : 'hover:border-pencil/40 hover:bg-paper/[0.07]'
+      className={`relative bg-white/5 border border-[#7D927D]/20 rounded-2xl p-5 shadow-sm flex flex-col justify-between min-h-[210px] transition-all duration-200 group ${
+        comingSoon ? 'opacity-70' : 'hover:border-[#7D927D]/40 hover:bg-white/[0.07]'
       }`}
     >
       {comingSoon && (
-        <div className="absolute top-3 right-3 bg-marigold/15 border border-marigold/30 text-marigold font-mono text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-full">
+        <div className="absolute top-3 right-3 bg-[#7D927D]/15 border border-[#7D927D]/30 text-[#7D927D] font-mono text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-full">
           Coming Soon
         </div>
       )}
@@ -627,7 +627,7 @@ const DrillTile: FC<DrillTileProps> = ({
         </div>
         <h3 className="font-serif text-lg font-bold text-text-primary">{title}</h3>
 
-        <p className="mt-1 font-sans text-xs text-pencil min-h-[2em]">
+        <p className="mt-1 font-sans text-xs text-[#777775] min-h-[2em]">
           {hasData ? subtitle : emptyState ?? ''}
         </p>
       </div>
@@ -638,8 +638,8 @@ const DrillTile: FC<DrillTileProps> = ({
         disabled={disabled}
         className={`mt-4 w-full rounded-xl py-2.5 font-mono text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer border-none ${
           disabled
-            ? 'bg-pencil/10 border border-pencil/20 text-pencil/50 cursor-not-allowed'
-            : 'bg-terracotta/15 border border-terracotta/30 text-terracotta hover:bg-terracotta/25 hover:border-terracotta/50 active:scale-[0.98]'
+            ? 'bg-[#777775]/10 border border-[#7D927D]/20 text-[#777775]/50 cursor-not-allowed'
+            : 'bg-[#7D927D]/15 border border-[#7D927D]/30 text-[#7D927D] hover:bg-[#7D927D]/25 hover:border-[#7D927D]/50 active:scale-[0.98]'
         }`}
       >
         {ctaLabel}

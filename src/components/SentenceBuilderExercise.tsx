@@ -299,8 +299,8 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
               className={`px-4 py-2.5 rounded-xl border font-semibold text-sm ${
                 isSubmitted
                   ? token.order === exercise.tokens[index].order
-                    ? 'bg-teal-500/20 border-teal-500/50 text-teal-800'
-                    : 'bg-[#F5A991]/20 border-[#F5A991]/50 text-[#2C1E11]'
+                    ? 'bg-[#7D927D] text-white border-[#7D927D]'
+                    : 'bg-[#C4796B] text-white border-[#C4796B]'
                   : `${ROLE_COLORS[token.role]} cursor-pointer`
               }`}
               onClick={() => handleRemoveToken(token)}
@@ -317,7 +317,7 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
           {!isSubmitted && showHints && (
             <button
               onClick={handleShowSolution}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold border border-info/30 bg-info/10 text-info hover:bg-info/20 transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold border border-[#7D927D]/30 bg-[#7D927D]/10 text-[#7D927D] hover:bg-[#7D927D]/20 transition-colors cursor-pointer"
             >
               <Lightbulb className="h-3 w-3" />
               Show Solution
@@ -341,7 +341,7 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
               disabled={!allPlaced}
               className={`px-6 py-2.5 rounded-xl font-bold text-sm transition-all shadow-sm flex items-center gap-2 ${
                 allPlaced
-                  ? 'bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border border-[#2C1E11] shadow-sm cursor-pointer'
+                  ? 'bg-[#7D927D] text-white hover:bg-[#6B826B] border border-[#7D927D] shadow-sm cursor-pointer'
                   : 'bg-bg-elevated border border-structural text-text-tertiary cursor-not-allowed'
               }`}
             >
@@ -351,7 +351,7 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
           {isSubmitted && onNext && (
             <button
               onClick={onNext}
-              className="px-6 py-2.5 rounded-xl font-bold text-sm bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border border-[#2C1E11] shadow-sm transition-all cursor-pointer"
+              className="px-6 py-2.5 rounded-xl font-bold text-sm bg-[#7D927D] text-white hover:bg-[#6B826B] border border-[#7D927D] shadow-sm transition-all cursor-pointer"
             >
               Next Exercise
             </button>
@@ -366,17 +366,17 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className={`rounded-2xl p-5 border ${
+            className={`rounded-2xl p-5 border text-white font-bold ${
               isCorrect
-                ? 'bg-teal-500/10 border-teal-500/30'
-                : 'bg-[#F5A991]/10 border-[#F5A991]/30'
+                ? 'bg-[#7D927D] border-[#7D927D]'
+                : 'bg-[#C4796B] border-[#C4796B]'
             }`}
           >
             <div className="flex items-start gap-3">
               {isCorrect ? (
-                <CheckCircle2 className="h-5 w-5 text-teal-600 shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-5 w-5 text-white shrink-0 mt-0.5" />
               ) : (
-                <XCircle className="h-5 w-5 text-[#F5A991] shrink-0 mt-0.5" />
+                <XCircle className="h-5 w-5 text-white shrink-0 mt-0.5" />
               )}
               <div className="flex-1">
                 <p className="font-bold text-sm mb-2">

@@ -145,7 +145,7 @@ const ExerciseRenderer: FC<{
       );
     default:
       return (
-        <p className="font-sans text-sm text-pencil">
+        <p className="font-sans text-sm text-[#777775]">
           Unknown exercise type: {type}
         </p>
       );

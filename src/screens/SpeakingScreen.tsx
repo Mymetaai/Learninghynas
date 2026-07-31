@@ -337,7 +337,7 @@ const SpeakingScreen: FC = () => {
       <div className="mx-auto max-w-6xl">
         {/* ═══ Header ═══ */}
         <div className="mb-6">
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-pencil">
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#777775]">
             Desafío de Pronunciación
           </p>
           <div className="flex items-center justify-between mt-1">
@@ -349,13 +349,13 @@ const SpeakingScreen: FC = () => {
                 <span className="font-serif text-lg font-bold text-accent-action">
                   {sessionStreak}
                 </span>
-                <span className="font-sans text-[10px] text-pencil uppercase tracking-wider">
+                <span className="font-sans text-[10px] text-[#777775] uppercase tracking-wider">
                   Streak
                 </span>
               </div>
             )}
           </div>
-          <p className="text-pencil text-xs mt-1 max-w-xl">
+          <p className="text-[#777775] text-xs mt-1 max-w-xl">
             Master Spanish pronunciation from simple greetings to academic discourse. Select your
             CEFR level, listen to native speech, and record yourself for instant feedback.
           </p>
@@ -451,7 +451,7 @@ const SpeakingScreen: FC = () => {
           {/* ─── Left Column: Exercise Sidebar ─── */}
           <section className="lg:col-span-4 space-y-3">
             <div className="flex items-center justify-between px-1">
-              <h2 className="font-mono text-[10px] uppercase tracking-wider text-pencil">
+              <h2 className="font-mono text-[10px] uppercase tracking-wider text-[#777775]">
                 Speaking Exercises
               </h2>
               <span
@@ -527,14 +527,14 @@ const SpeakingScreen: FC = () => {
           </section>
 
           {/* ─── Right Column: Speaking Arena ─── */}
-          <section className="lg:col-span-8 glass-surface rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col justify-between min-h-[520px]">
+          <section className="lg:col-span-8 bg-white/90 backdrop-blur-sm rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col justify-between min-h-[520px]">
             {/* Active Challenge Display */}
             <div
               key={phraseKey}
-              className="text-center py-5 bg-paper/[0.02] border border-pencil/10 rounded-xl p-5 fade-slide-in"
+              className="text-center py-5 bg-white/[0.02] border border-[#7D927D]/10 rounded-xl p-5 fade-slide-in"
             >
               <div className="flex items-center justify-center gap-2 mb-3">
-                <span className="font-mono text-[9px] uppercase tracking-widest text-pencil">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-[#777775]">
                   Spanish Phrase to Speak
                 </span>
                 {speedMode && isRecording && speedTimer !== null && (
@@ -574,7 +574,7 @@ const SpeakingScreen: FC = () => {
 
               {/* Hover-to-reveal translation */}
               <div className="mt-3 relative inline-block group cursor-help">
-                <p className="font-sans text-sm text-pencil/90 italic blur-reveal">
+                <p className="font-sans text-sm text-[#777775]/90 italic blur-reveal">
                   "{getTranslation(activeChallenge.translation)}"
                 </p>
                 <span className="absolute inset-0 flex items-center justify-center font-sans text-[10px] text-text-tertiary/70 pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
@@ -586,7 +586,7 @@ const SpeakingScreen: FC = () => {
               {/* TTS play button */}
               <button
                 onClick={playTTS}
-                className="mt-4 mx-auto flex items-center gap-2 bg-teal-deep/10 border border-teal-deep/20 hover:bg-teal-deep/20 text-teal-deep font-mono text-xs px-4 py-2 rounded-xl transition-all cursor-pointer hover:scale-105"
+                className="mt-4 mx-auto flex items-center gap-2 bg-[#7D927D]/10 border border-[#7D927D]/20 hover:bg-[#7D927D]/20 text-[#7D927D] font-mono text-xs px-4 py-2 rounded-xl transition-all cursor-pointer hover:scale-105"
                 title="Listen to native voice pronunciation"
               >
                 <Volume2 className="h-4.5 w-4.5" />
@@ -595,7 +595,7 @@ const SpeakingScreen: FC = () => {
             </div>
 
             {/* Pronunciation Tip Box */}
-            <div className="my-4 p-4 rounded-xl border border-marigold/20 bg-marigold/5 flex items-start gap-3 fade-slide-in"
+            <div className="my-4 p-4 rounded-xl border border-[#7D927D]/20 bg-[#7D927D]/5 flex items-start gap-3 fade-slide-in"
               style={{ animationDelay: '0.15s' }}
             >
               <HelpCircle className="h-5 w-5 text-info shrink-0 mt-0.5" />
@@ -687,10 +687,10 @@ const SpeakingScreen: FC = () => {
                       feedbackWords.map((item, idx) => (
                         <span
                           key={idx}
-                          className={`relative font-semibold word-pop-item ${
+                          className={`relative font-bold word-pop-item px-1.5 py-0.5 rounded ${
                             item.correct
-                              ? 'text-success'
-                              : 'text-error underline decoration-wavy decoration-error/70'
+                              ? 'bg-[#7D927D] text-white shadow-xs'
+                              : 'bg-[#C4796B] text-white underline decoration-wavy decoration-white/70 shadow-xs'
                           }`}
                           style={{ animationDelay: `${idx * 0.06}s` }}
                           title={item.correct ? 'Correct pronunciation' : 'Mispronounced / Not heard'}
@@ -724,7 +724,7 @@ const SpeakingScreen: FC = () => {
                             cx="28"
                             cy="28"
                             r="23"
-                            className={`fill-none ${score >= 80 ? 'stroke-success' : 'stroke-error'}`}
+                            className={`fill-none ${score >= 80 ? 'stroke-[#7D927D]' : 'stroke-[#C4796B]'}`}
                             strokeWidth="4"
                             strokeDasharray="144.5"
                             strokeDashoffset={144.5 - (144.5 * score) / 100}

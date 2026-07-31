@@ -173,20 +173,20 @@ const DailyQuestScreen: FC = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="rounded-xl border border-teal-deep/40 bg-teal-deep/10 p-4 text-center"
+              className="rounded-xl border border-[#7D927D]/40 bg-[#7D927D]/10 p-4 text-center"
             >
-              <Trophy size={20} className="mx-auto mb-1 text-teal-deep" />
-              <p className="font-serif text-sm font-bold text-teal-deep">
+              <Trophy size={20} className="mx-auto mb-1 text-[#7D927D]" />
+              <p className="font-serif text-sm font-bold text-[#7D927D]">
                 Daily bonus claimed! +75 XP, +30 coins
               </p>
-              <p className="font-sans text-xs text-pencil">
+              <p className="font-sans text-xs text-[#777775]">
                 Come back tomorrow for 5 fresh micro-quests.
               </p>
             </motion.div>
           ) : (
-            <div className="rounded-xl border border-dashed border-pencil/25 bg-paper/5 p-4 text-center">
+            <div className="rounded-xl border border-dashed border-[#7D927D]/25 bg-white/5 p-4 text-center">
               <Sparkles size={16} className="mx-auto mb-1 text-amber-400" />
-              <p className="font-sans text-xs text-pencil">
+              <p className="font-sans text-xs text-[#777775]">
                 Complete all {microQuests.length} micro-quests to auto-claim the
                 daily bonus (+75 XP, +30 coins).
               </p>
@@ -483,13 +483,13 @@ interface DashStatProps {
 }
 
 const DashStat: FC<DashStatProps> = ({ icon, label, value }) => (
-  <div className="flex items-center gap-2 rounded-lg border border-pencil/15 bg-bg-base/40 px-3 py-2">
+  <div className="flex items-center gap-2 rounded-lg border border-[#7D927D]/15 bg-bg-base/40 px-3 py-2">
     {icon}
     <div>
       <p className="font-mono text-base font-bold leading-none text-text-primary tabular-nums">
         {value}
       </p>
-      <p className="text-[9px] uppercase tracking-wide text-pencil">{label}</p>
+      <p className="text-[9px] uppercase tracking-wide text-[#777775]">{label}</p>
     </div>
   </div>
 );

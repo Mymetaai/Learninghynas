@@ -214,7 +214,7 @@ const Stat: FC<StatProps> = ({ label, value, className, title, icon }) => (
   >
     {icon}
     <span className="font-semibold tabular-nums">{value}</span>
-    <span className="hidden text-pencil/80 sm:inline">{label}</span>
+    <span className="hidden text-[#777775]/80 sm:inline">{label}</span>
   </span>
 );
 

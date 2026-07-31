@@ -256,11 +256,11 @@ const ChibiPet: FC = () => {
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                   placeholder="Ask Yuki..."
-                  className="flex-1 bg-[#F4F9F4] border border-[#A0B392] rounded-xl px-3 py-2 text-xs text-[#2C1E11] font-semibold focus:outline-none focus:border-[#F5A991] placeholder:text-[#8F8683] shadow-inner"
+                  className="flex-1 bg-[#F9F7F2] border border-structural rounded-xl px-3 py-2 text-xs text-[#2F353B] font-semibold focus:outline-none focus:border-[#7D927D] placeholder:text-[#777775] shadow-inner"
                 />
                 <button 
                   onClick={handleSend}
-                  className="h-9 w-9 rounded-xl bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border border-[#2C1E11] shadow-sm flex items-center justify-center transition-all cursor-pointer shrink-0"
+                  className="h-9 w-9 rounded-xl bg-[#7D927D] text-white hover:bg-[#6B826B] border border-[#7D927D] shadow-sm flex items-center justify-center transition-all cursor-pointer shrink-0"
                 >
                   <Send className="h-4 w-4" />
                 </button>

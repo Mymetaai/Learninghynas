@@ -54,11 +54,11 @@ const QuestCompletionScreen: FC = () => {
             className="relative flex h-24 w-24 items-center justify-center"
           >
             {/* Outer ring */}
-            <div className="absolute inset-0 rounded-full border border-terracotta bg-terracotta/20" />
+            <div className="absolute inset-0 rounded-full border border-[#7D927D] bg-[#7D927D]/20" />
             {/* Inner circle */}
-            <div className="absolute inset-2 rounded-full border border-marigold bg-terracotta" />
+            <div className="absolute inset-2 rounded-full border border-[#7D927D] bg-[#7D927D]" />
             {/* Seal mark */}
-            <span className="relative font-serif text-4xl text-marigold">✓</span>
+            <span className="relative font-serif text-4xl text-[#7D927D]">✓</span>
           </motion.div>
         </div>
 
@@ -69,7 +69,7 @@ const QuestCompletionScreen: FC = () => {
           transition={{ delay: 0.3 }}
           className="text-center"
         >
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-marigold">
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#7D927D]">
             Quest Complete
           </p>
           <h1 className="mt-2 font-serif text-3xl font-bold text-text-primary">
@@ -82,21 +82,21 @@ const QuestCompletionScreen: FC = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.5, type: 'spring', damping: 20 }}
-          className="mt-8 flex items-center justify-center gap-8 rounded-xl border border-pencil/20 bg-paper/5 p-6"
+          className="mt-8 flex items-center justify-center gap-8 rounded-xl border border-[#7D927D]/20 bg-white/5 p-6"
         >
           <Counter
             icon="✨"
             value={quest.rewards.xp}
             label="XP Earned"
-            color="text-marigold"
+            color="text-[#7D927D]"
             delay={0.6}
           />
-          <div className="h-12 w-px bg-pencil/20" />
+          <div className="h-12 w-px bg-[#777775]/20" />
           <Counter
             icon="🪙"
             value={quest.rewards.coins}
             label="Coins"
-            color="text-marigold"
+            color="text-[#7D927D]"
             delay={0.8}
           />
         </motion.div>
@@ -109,7 +109,7 @@ const QuestCompletionScreen: FC = () => {
             transition={{ delay: 1.0 }}
             className="mt-8"
           >
-            <p className="mb-3 text-center font-mono text-[10px] uppercase tracking-[0.25em] text-pencil">
+            <p className="mb-3 text-center font-mono text-[10px] uppercase tracking-[0.25em] text-[#777775]">
               {quest.vocabulary.length} New Words Learned
             </p>
             <div className="space-y-2">
@@ -119,18 +119,18 @@ const QuestCompletionScreen: FC = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 1.2 + i * 0.08 }}
-                  className="flex items-center gap-3 rounded-lg border border-pencil/20 bg-paper/5 p-3"
+                  className="flex items-center gap-3 rounded-lg border border-[#7D927D]/20 bg-white/5 p-3"
                 >
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-marigold/20 font-serif text-sm text-marigold">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#7D927D]/20 font-serif text-sm text-[#7D927D]">
                     {vocab.word.charAt(0).toUpperCase()}
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className="font-serif text-sm font-semibold text-text-primary">
                       {vocab.word}
                     </p>
-                    <p className="font-sans text-xs text-pencil">{vocab.meaning}</p>
+                    <p className="font-sans text-xs text-[#777775]">{vocab.meaning}</p>
                   </div>
-                  <p className="font-mono text-[10px] text-terracotta">
+                  <p className="font-mono text-[10px] text-[#7D927D]">
                     {vocab.pronunciation}
                   </p>
                 </motion.div>
@@ -147,7 +147,7 @@ const QuestCompletionScreen: FC = () => {
           transition={{ delay: 1.4 + quest.vocabulary.length * 0.08 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => navigate('/map')}
-          className="mt-8 w-full rounded-xl bg-terracotta px-4 py-3 font-serif text-base font-semibold text-text-primary shadow-sm transition-colors hover:bg-terracotta/90"
+          className="mt-8 w-full rounded-xl bg-[#7D927D] px-4 py-3 font-serif text-base font-semibold text-text-primary shadow-sm transition-colors hover:bg-[#7D927D]/90"
         >
           Continue to Map →
         </motion.button>
@@ -195,7 +195,7 @@ const Counter: FC<CounterProps> = ({ icon, value, label, color, delay }) => {
       <span className={`font-mono text-3xl font-bold tabular-nums ${color}`}>
         +{display}
       </span>
-      <span className="font-sans text-[10px] text-pencil">{label}</span>
+      <span className="font-sans text-[10px] text-[#777775]">{label}</span>
     </div>
   );
 };

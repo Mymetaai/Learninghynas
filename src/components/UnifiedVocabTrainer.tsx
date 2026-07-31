@@ -122,7 +122,7 @@ const UnifiedVocabTrainer: FC = () => {
 
   if (!current) {
     return (
-      <div className="flex flex-col items-center justify-center p-8 text-center glass-surface border border-pencil/20 rounded-2xl bg-paper/5">
+      <div className="flex flex-col items-center justify-center p-8 text-center bg-white/90 backdrop-blur-sm border border-[#7D927D]/20 rounded-2xl bg-white/5">
         <p className="font-sans text-sm text-text-secondary">
           No vocabulary words found for this category.
         </p>
@@ -233,7 +233,7 @@ const UnifiedVocabTrainer: FC = () => {
                 className={`relative px-4 py-1.5 rounded-lg text-xs font-mono tracking-widest uppercase transition-all duration-200 cursor-pointer ${
                   isActive
                     ? 'text-white shadow-sm font-semibold'
-                    : 'bg-paper/5 border border-structural hover:bg-paper/10 text-text-secondary'
+                    : 'bg-white/5 border border-structural hover:bg-white/10 text-text-secondary'
                 }`}
               >
                 {isActive && (
@@ -265,7 +265,7 @@ const UnifiedVocabTrainer: FC = () => {
                 className={`px-4 py-1.5 rounded-full text-xs font-mono tracking-wide whitespace-nowrap transition-all duration-200 cursor-pointer ${
                   isActive
                     ? 'bg-accent-action text-white shadow-sm'
-                    : 'bg-paper/5 border border-structural hover:bg-paper/10 text-text-secondary'
+                    : 'bg-white/5 border border-structural hover:bg-white/10 text-text-secondary'
                 }`}
               >
                 {cat}
@@ -276,7 +276,7 @@ const UnifiedVocabTrainer: FC = () => {
       </div>
 
       {/* 2. Unified Header: Deck Progress Bar & Controls */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-xl border border-structural/50 bg-paper/5">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-xl border border-structural/50 bg-white/5">
         {/* Progress Tracker */}
         <div className="flex-1 w-full">
           <div className="flex justify-between items-center mb-1.5">
@@ -302,7 +302,7 @@ const UnifiedVocabTrainer: FC = () => {
           <button
             onClick={shuffleDeck}
             title="Shuffle Deck"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-structural/60 bg-paper/5 font-mono text-[10px] uppercase tracking-wider text-text-secondary hover:text-text-primary hover:border-text-primary transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-structural/60 bg-white/5 font-mono text-[10px] uppercase tracking-wider text-text-secondary hover:text-text-primary hover:border-text-primary transition-all cursor-pointer"
           >
             <Shuffle className="h-3.5 w-3.5" />
             Shuffle
@@ -310,7 +310,7 @@ const UnifiedVocabTrainer: FC = () => {
           <button
             onClick={resetDeck}
             title="Reset Deck Progress"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-structural/60 bg-paper/5 font-mono text-[10px] uppercase tracking-wider text-text-secondary hover:text-text-primary hover:border-text-primary transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-structural/60 bg-white/5 font-mono text-[10px] uppercase tracking-wider text-text-secondary hover:text-text-primary hover:border-text-primary transition-all cursor-pointer"
           >
             <RefreshCw className="h-3 w-3" />
             Reset
@@ -327,7 +327,7 @@ const UnifiedVocabTrainer: FC = () => {
           </p>
         </div>
 
-        <section className="w-full min-h-[18rem] glass-surface border border-pencil/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between bg-paper/5 transition-all duration-300">
+        <section className="w-full min-h-[18rem] bg-white/90 backdrop-blur-sm border border-[#7D927D]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between bg-white/5 transition-all duration-300">
           <div>
             <h3 className="font-serif text-lg font-bold text-text-primary mb-1">
               Fill in the Blank
@@ -337,7 +337,7 @@ const UnifiedVocabTrainer: FC = () => {
             </p>
 
             {/* The Sentence Prompt */}
-            <div className="my-6 p-4 rounded-xl border border-structural/35 bg-paper/5 min-h-[4rem] flex items-center justify-center">
+            <div className="my-6 p-4 rounded-xl border border-structural/35 bg-white/5 min-h-[4rem] flex items-center justify-center">
               {renderQuestion()}
             </div>
 
@@ -353,22 +353,22 @@ const UnifiedVocabTrainer: FC = () => {
                   onKeyDown={handleKeyPress}
                   placeholder="Type Spanish here..."
                   disabled={status === 'correct'}
-                  className={`flex-1 bg-paper/10 border font-target rounded-xl px-4 py-2.5 text-base focus:outline-none transition-all duration-200 ${
+                  className={`flex-1 font-target rounded-xl px-4 py-2.5 text-base focus:outline-none transition-all duration-200 ${
                     status === 'correct'
-                      ? 'border-success bg-success/5 text-success font-bold'
+                      ? 'border-2 border-[#7D927D] bg-[#7D927D] text-white font-bold shadow-md scale-[1.01]'
                       : status === 'incorrect'
-                      ? 'border-error bg-error/5 text-error animate-shake'
-                      : 'border-structural focus:border-accent-action/50 focus:shadow-[0_0_8px_rgba(230,72,51,0.1)] text-text-primary'
+                      ? 'border-2 border-[#C4796B] bg-[#C4796B] text-white font-bold shadow-md animate-shake'
+                      : 'border-structural border bg-white focus:border-[#7D927D] text-[#2F353B]'
                   }`}
                 />
                 {status !== 'correct' && (
                   <button
                     onClick={handleCheck}
                     disabled={!userAnswer.trim()}
-                    className={`px-4 rounded-xl font-mono text-[11px] uppercase tracking-widest transition-all duration-200 cursor-pointer ${
+                    className={`px-5 rounded-xl font-mono text-xs font-bold uppercase tracking-widest transition-all duration-200 cursor-pointer ${
                       userAnswer.trim()
-                        ? 'bg-accent-action text-white hover:bg-accent-action-hover shadow-sm'
-                        : 'bg-structural/30 text-text-tertiary cursor-not-allowed'
+                        ? 'bg-[#7D927D] text-white hover:bg-[#6B826B] shadow-sm'
+                        : 'bg-structural/30 text-[#777775]/50 cursor-not-allowed'
                     }`}
                   >
                     Check
@@ -377,9 +377,9 @@ const UnifiedVocabTrainer: FC = () => {
                 {(status === 'correct' || status === 'revealed') && (
                   <button
                     onClick={advance}
-                    className="px-4 bg-success text-white hover:bg-success/90 rounded-xl font-mono text-[11px] uppercase tracking-widest transition-all duration-200 flex items-center gap-1 cursor-pointer"
+                    className="px-5 bg-[#7D927D] text-white hover:bg-[#6B826B] rounded-xl font-mono text-xs font-bold uppercase tracking-widest transition-all duration-200 flex items-center gap-1 cursor-pointer shadow-sm"
                   >
-                    Next <ArrowRight className="h-3.5 w-3.5" />
+                    Next <ArrowRight className="h-4 w-4" />
                   </button>
                 )}
               </div>
@@ -391,9 +391,9 @@ const UnifiedVocabTrainer: FC = () => {
                     initial={{ opacity: 0, y: -4 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="text-xs text-error font-medium mt-1 pl-1 flex items-center gap-1"
+                    className="text-xs text-[#C4796B] font-bold mt-1 pl-1 flex items-center gap-1"
                   >
-                    <X className="h-3.5 w-3.5" /> Incorrect, try again! Or click "Reveal Answer" below.
+                    <X className="h-4 w-4 text-[#C4796B]" /> Incorrect, try again! Or click "Reveal Answer" below.
                   </motion.p>
                 )}
                 {status === 'correct' && (
@@ -401,9 +401,9 @@ const UnifiedVocabTrainer: FC = () => {
                     initial={{ opacity: 0, y: -4 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="text-xs text-success font-medium mt-1 pl-1 flex items-center gap-1"
+                    className="text-xs text-[#7D927D] font-bold mt-1 pl-1 flex items-center gap-1"
                   >
-                    <Check className="h-3.5 w-3.5" /> Correct! Moving to next card...
+                    <Check className="h-4 w-4 text-[#7D927D]" /> Correct! Moving to next card...
                   </motion.p>
                 )}
               </AnimatePresence>
@@ -438,10 +438,10 @@ const UnifiedVocabTrainer: FC = () => {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: 'auto', opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  className="overflow-hidden rounded-xl border border-structural/40 bg-paper/5 p-3 text-xs font-sans text-text-secondary"
+                  className="overflow-hidden rounded-xl border border-structural/40 bg-white/5 p-3 text-xs font-sans text-text-secondary"
                 >
                   <div className="flex gap-2">
-                    <Sparkles className="h-4 w-4 text-marigold shrink-0 mt-0.5" />
+                    <Sparkles className="h-4 w-4 text-[#7D927D] shrink-0 mt-0.5" />
                     <div>
                       <p>{getHintContent()}</p>
                       {status === 'incorrect' && (

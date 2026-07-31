@@ -177,7 +177,7 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
         <div className="flex items-center gap-2">
           <button
             onClick={onBack}
-            className="p-1.5 rounded-lg hover:bg-paper/10 text-text-secondary hover:text-text-primary transition-colors cursor-pointer"
+            className="p-1.5 rounded-lg hover:bg-white/10 text-text-secondary hover:text-text-primary transition-colors cursor-pointer"
             aria-label="Go back"
           >
             <ArrowLeft className="h-4 w-4" />
@@ -195,7 +195,7 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
                   className={`px-3 py-1 rounded-full text-xs font-mono tracking-wide cursor-pointer transition-all ${
                     isSel
                       ? 'bg-accent-action text-white shadow-sm font-semibold'
-                      : 'bg-paper/5 border border-structural hover:bg-paper/10 text-text-secondary'
+                      : 'bg-white/5 border border-structural hover:bg-white/10 text-text-secondary'
                   }`}
                   aria-label={`Filter by ${lvl} level`}
                   aria-pressed={isSel}
@@ -209,7 +209,7 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
 
         <button
           onClick={() => initializeDeck(selectedLevel)}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-structural bg-paper/5 font-mono text-[10px] uppercase tracking-wider text-text-secondary hover:text-text-primary transition-all cursor-pointer"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-structural bg-white/5 font-mono text-[10px] uppercase tracking-wider text-text-secondary hover:text-text-primary transition-all cursor-pointer"
           aria-label="Reshuffle deck"
         >
           <Shuffle className="h-3.5 w-3.5" />
@@ -218,7 +218,7 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
       </div>
 
       {/* ── Header bar with progress ── */}
-      <div className="w-full px-4 py-3 rounded-xl border border-structural/40 bg-paper/5">
+      <div className="w-full px-4 py-3 rounded-xl border border-structural/40 bg-white/5">
         <div className="flex justify-between items-center mb-2">
           <div className="flex flex-col gap-1">
             <span className="font-mono text-[10px] text-text-secondary uppercase tracking-[0.15em] leading-none">
@@ -276,7 +276,7 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
           <button
             onClick={handleManualPrev}
             disabled={history.length === 0}
-            className={`p-3 rounded-full border border-structural bg-paper/5 transition-all shadow-sm active:scale-95 ${
+            className={`p-3 rounded-full border border-structural bg-white/5 transition-all shadow-sm active:scale-95 ${
               history.length === 0
                 ? 'opacity-30 cursor-not-allowed text-text-secondary/50'
                 : 'text-text-secondary hover:text-text-primary hover:border-text-primary cursor-pointer'
@@ -288,9 +288,7 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
 
           <button
             onClick={() => setIsPaused((prev) => !prev)}
-            className={`p-4 rounded-full text-white shadow-sm transition-all cursor-pointer active:scale-95 flex items-center justify-center ${
-              isPaused ? 'bg-accent-action hover:bg-accent-action-hover' : 'bg-success hover:bg-success/90'
-            }`}
+            className="p-4 rounded-full text-white shadow-sm transition-all cursor-pointer active:scale-95 flex items-center justify-center bg-[#7D927D] hover:bg-[#6B826B]"
             aria-label={isPaused ? 'Resume auto-play' : 'Pause auto-play'}
           >
             {isPaused ? <Play className="h-6 w-6 fill-white" /> : <Pause className="h-6 w-6 fill-white" />}
@@ -298,7 +296,7 @@ const AutoFlashcardsPlayer: FC<AutoFlashcardsPlayerProps> = ({ onBack }) => {
 
           <button
             onClick={handleManualNext}
-            className="p-3 rounded-full border border-structural bg-paper/5 text-text-secondary hover:text-text-primary hover:border-text-primary transition-all cursor-pointer shadow-sm active:scale-95"
+            className="p-3 rounded-full border border-structural bg-white/5 text-text-secondary hover:text-text-primary hover:border-text-primary transition-all cursor-pointer shadow-sm active:scale-95"
             aria-label="Next card"
           >
             <ChevronRight className="h-5 w-5" />

@@ -58,7 +58,7 @@ export const DEMON_SLAYER_CARDS: DemonSlayerCard[] = [
     bounty: 'Upper Moon Two (Legendary)',
     description: 'The charismatic cult leader demon holding the Upper Moon Two position. Wields dual golden fans and generates deadly freezing ice powder.',
     specialMove: 'Blood Demon Art: Crystalline Divine Bodhisattva',
-    color: 'from-slate-300 via-rose-300 to-amber-200 text-ink',
+    color: 'from-slate-300 via-rose-300 to-amber-200 text-[#2F353B]',
     glowColor: 'shadow-[0_0_25px_rgba(224,242,254,0.8)] border-sky-200'
   },
   {
@@ -118,7 +118,7 @@ export const DEMON_SLAYER_CARDS: DemonSlayerCard[] = [
     bounty: 'Thunder Breathing User (Legendary)',
     description: 'A cowardly Demon Slayer who only fights when unconscious. When asleep, he becomes lightning fast and deadly.',
     specialMove: 'Thunderclap and Flash: Six Fold',
-    color: 'from-amber-400 via-yellow-300 to-amber-700 text-ink',
+    color: 'from-amber-400 via-yellow-300 to-amber-700 text-[#2F353B]',
     glowColor: 'shadow-[0_0_25px_rgba(251,191,36,0.8)] border-yellow-400'
   },
   {

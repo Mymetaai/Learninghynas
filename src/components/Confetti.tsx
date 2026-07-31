@@ -17,14 +17,14 @@ interface Particle {
 }
 
 const COLORS = [
-  '#C15032', // terracotta
-  '#F4A300', // marigold
-  '#1C5C5C', // teal-deep
-  '#5BA199', // teal-light
-  '#E94F37', // red
-  '#F2C14E', // yellow
-  '#3A6EA5', // blue
-  '#8E44AD', // purple
+  '#7D927D', // sage green (primary accent)
+  '#6B826B', // darker sage
+  '#D4A574', // warm gold (streak-warm)
+  '#C4796B', // muted terracotta (error/warm accent)
+  '#F9F7F2', // warm off-white
+  '#2F353B', // dark slate
+  '#A8BFA8', // light sage
+  '#D4DCD4', // structural sage
 ];
 
 interface ConfettiProps {

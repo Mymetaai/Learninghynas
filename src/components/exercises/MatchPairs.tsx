@@ -4,6 +4,7 @@
 // Answer format: "hola↔hello|adiós↔goodbye" → parse into pairs.
 import { useState, useMemo, type FC } from 'react';
 import { motion } from 'framer-motion';
+import { CheckCircle2, XCircle } from 'lucide-react';
 
 interface MatchPairsProps {
   prompt: string;
@@ -138,7 +139,7 @@ const MatchPairs: FC<MatchPairsProps> = ({
 
       <div className="flex gap-4">
         {/* Left column */}
-        <div className="flex-1 space-y-2">
+        <div className="flex-1 space-y-2.5">
           {leftItems.map((item) => {
             const matched = isLeftMatched(item);
             const selected = selectedLeft === item && !matched;
@@ -146,24 +147,27 @@ const MatchPairs: FC<MatchPairsProps> = ({
               <motion.button
                 key={item}
                 type="button"
+                animate={matched ? { scale: [1, 1.05, 1] } : undefined}
+                transition={matched ? { type: 'spring', stiffness: 300 } : undefined}
                 whileTap={!matched ? { scale: 0.97 } : undefined}
                 onClick={() => !matched && setSelectedLeft(item)}
-                className={`w-full rounded-xl border px-3 py-2.5 font-sans text-sm text-left transition-colors border-none cursor-pointer ${
+                className={`w-full rounded-xl border px-4 py-3 font-sans text-sm font-semibold text-left transition-all cursor-pointer shadow-sm flex items-center justify-between ${
                   matched
-                    ? 'border border-success/60 bg-success/10 text-success font-bold'
+                    ? 'bg-[#7D927D] text-white border-[#7D927D] shadow-md'
                     : selected
-                      ? 'border border-accent-action bg-accent-action/20 text-accent-action font-bold'
-                      : 'border border-structural bg-bg-elevated text-text-primary hover:border-text-secondary/40 hover:bg-bg-elevated-2'
+                      ? 'bg-[#7D927D]/15 border-[#7D927D] text-[#7D927D] font-bold shadow-sm'
+                      : 'bg-white border-[#7D927D]/20 text-[#2F353B] hover:bg-[#F9F7F2] hover:border-[#7D927D]/50'
                 }`}
               >
-                {item}
+                <span>{item}</span>
+                {matched && <CheckCircle2 className="h-4 w-4 text-white shrink-0 ml-1" />}
               </motion.button>
             );
           })}
         </div>
 
         {/* Right column */}
-        <div className="flex-1 space-y-2">
+        <div className="flex-1 space-y-2.5">
           {rightItems.map((item, index) => {
             const matched = isRightMatchedByIndex(index);
             const isWrong = wrongRight === item && !matched;
@@ -171,19 +175,35 @@ const MatchPairs: FC<MatchPairsProps> = ({
               <motion.button
                 key={`${item}-${index}`}
                 type="button"
-                animate={isWrong ? { x: [-4, 4, -4, 4, 0] } : {}}
-                transition={{ duration: 0.4 }}
+                animate={
+                  matched
+                    ? { scale: [1, 1.05, 1] }
+                    : isWrong
+                      ? { x: [0, -12, 12, -8, 8, -4, 4, 0] }
+                      : {}
+                }
+                transition={
+                  matched
+                    ? { type: 'spring', stiffness: 300 }
+                    : isWrong
+                      ? { duration: 0.4 }
+                      : undefined
+                }
                 whileTap={!matched && selectedLeft ? { scale: 0.97 } : undefined}
                 onClick={() => !matched && selectedLeft && handleRightTap(item, index)}
-                className={`w-full rounded-xl border px-3 py-2.5 font-sans text-sm text-left transition-colors border-none cursor-pointer ${
+                className={`w-full rounded-xl border px-4 py-3 font-sans text-sm font-semibold text-left transition-all cursor-pointer shadow-sm flex items-center justify-between ${
                   matched
-                    ? 'border border-success/60 bg-success/10 text-success font-bold'
-                    : selectedLeft
-                      ? 'border border-structural bg-bg-elevated text-text-primary hover:border-text-secondary/40 hover:bg-bg-elevated-2'
-                      : 'border border-structural bg-bg-elevated text-text-secondary/60 opacity-60'
+                    ? 'bg-[#7D927D] text-white border-[#7D927D] shadow-md'
+                    : isWrong
+                      ? 'bg-[#C4796B] text-white border-[#C4796B] shadow-md'
+                      : selectedLeft
+                        ? 'bg-white border-[#7D927D]/40 text-[#2F353B] hover:bg-[#F9F7F2] hover:border-[#7D927D]'
+                        : 'bg-white/60 border-[#7D927D]/20 text-[#777775] opacity-60'
                 }`}
               >
-                {item}
+                <span>{item}</span>
+                {matched && <CheckCircle2 className="h-4 w-4 text-white shrink-0 ml-1" />}
+                {isWrong && <XCircle className="h-4 w-4 text-white shrink-0 ml-1" />}
               </motion.button>
             );
           })}
@@ -191,13 +211,14 @@ const MatchPairs: FC<MatchPairsProps> = ({
       </div>
 
       {completed && (
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-3 font-sans text-sm text-success font-semibold"
+          className="mt-4 p-3.5 rounded-xl bg-[#7D927D] text-white font-sans text-sm font-bold flex items-center gap-2 shadow-md"
         >
-          ✓ All pairs matched!
-        </motion.p>
+          <CheckCircle2 className="h-5 w-5 text-white shrink-0" />
+          <span>✅ All pairs matched successfully!</span>
+        </motion.div>
       )}
     </div>
   );

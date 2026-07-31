@@ -1,7 +1,7 @@
-// STEP 8 — Multiple Choice exercise.
-// Shows a prompt and 4 option buttons. User taps one, gets feedback.
+// Multiple Choice exercise with Serene Lexicon solid high-contrast feedback.
 import { useState, useMemo, type FC } from 'react';
 import { motion } from 'framer-motion';
+import { CheckCircle2, XCircle } from 'lucide-react';
 
 interface MultipleChoiceProps {
   prompt: string;
@@ -41,50 +41,77 @@ const MultipleChoice: FC<MultipleChoiceProps> = ({
   return (
     <div>
       {context && (
-        <p className="mb-2 font-sans text-[10px] text-text-secondary">{context}</p>
+        <p className="mb-2 font-sans text-[10px] font-mono uppercase tracking-wider text-[#777775]">{context}</p>
       )}
-      <p className="mb-4 font-sans text-base text-text-primary">{prompt}</p>
-      <div className="space-y-2">
+      <p className="mb-4 font-sans text-base font-bold text-[#2F353B] leading-relaxed">{prompt}</p>
+      <div className="space-y-3">
         {shuffledOptions.map((option) => {
-          let classes =
-            'w-full rounded-xl border border-structural bg-bg-elevated-2 px-4 py-3 font-sans text-sm text-text-primary text-left transition-all';
+          const isCorrect = option === answer;
+          const isSelected = option === selected;
+          const isWrong = isSelected && !isCorrect;
+
+          let btnStyles = 'w-full rounded-xl border px-4 py-3.5 font-sans text-sm font-semibold transition-all cursor-pointer shadow-sm flex items-center justify-between ';
 
           if (answered) {
-            if (option === answer) {
-              classes =
-                'w-full rounded-xl border border-success/60 bg-success/10 px-4 py-3 font-sans text-sm font-bold text-success text-left';
-            } else if (option === selected && option !== answer) {
-              classes =
-                'w-full rounded-xl border border-error/60 bg-error/10 px-4 py-3 font-sans text-sm text-error text-left';
+            if (isCorrect) {
+              btnStyles += 'bg-[#7D927D] text-white border-[#7D927D] shadow-md';
+            } else if (isWrong) {
+              btnStyles += 'bg-[#C4796B] text-white border-[#C4796B] shadow-md';
             } else {
-              classes +=
-                ' opacity-40';
+              btnStyles += 'bg-white border-[#7D927D]/20 text-[#2F353B] opacity-40 cursor-not-allowed';
             }
           } else {
-            classes += ' hover:bg-structural hover:border-text-secondary/40';
+            btnStyles += 'bg-white border-[#7D927D]/20 text-[#2F353B] hover:bg-[#F9F7F2] hover:border-[#7D927D]/50';
           }
+
+          // Animation spec: bounce pop for correct, shake for incorrect
+          const animationVariant = answered
+            ? isCorrect
+              ? { scale: [1, 1.05, 1] }
+              : isWrong
+                ? { x: [0, -12, 12, -8, 8, -4, 4, 0] }
+                : undefined
+            : undefined;
+
+          const transitionSpec = answered
+            ? isCorrect
+              ? { type: 'spring', stiffness: 300 }
+              : isWrong
+                ? { duration: 0.4 }
+                : undefined
+            : undefined;
 
           return (
             <motion.button
               key={option}
               type="button"
+              animate={animationVariant}
+              transition={transitionSpec}
               whileTap={answered ? undefined : { scale: 0.98 }}
               onClick={() => handleSelect(option)}
-              className={classes}
+              className={btnStyles}
+              disabled={answered}
             >
-              {option}
+              <span>{option}</span>
+              {answered && (
+                <span>
+                  {isCorrect && <CheckCircle2 className="h-5 w-5 text-white shrink-0 ml-2" />}
+                  {isWrong && <XCircle className="h-5 w-5 text-white shrink-0 ml-2" />}
+                </span>
+              )}
             </motion.button>
           );
         })}
       </div>
       {answered && selected !== answer && (
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-3 font-sans text-sm text-success"
+          className="mt-3 p-3 rounded-xl bg-[#7D927D]/10 border border-[#7D927D]/30 font-sans text-xs text-[#2F353B] flex items-center gap-2"
         >
-          ✓ Correct answer: <span className="font-semibold">{answer}</span>
-        </motion.p>
+          <CheckCircle2 className="h-4 w-4 text-[#7D927D] shrink-0" />
+          <span>Correct answer: <strong className="text-[#7D927D] font-bold">{answer}</strong></span>
+        </motion.div>
       )}
     </div>
   );

@@ -246,7 +246,7 @@ const BossBattleScreen = () => {
             </p>
             <button
               onClick={() => setGameState('playing')}
-              className="w-full py-3 bg-accent-action text-bg-elevated font-semibold rounded-xl hover:bg-accent-action-hover shadow-sm cursor-pointer border-none transition-colors"
+              className="w-full py-3 bg-[#7D927D] text-white font-bold rounded-xl hover:bg-[#6B826B] shadow-sm cursor-pointer border-none transition-colors"
             >
               Enter Duel
             </button>

@@ -206,36 +206,36 @@ const ConversationScreen: FC = () => {
           </div>
 
           {/* Mode Switcher Tabs */}
-          <div className="flex items-center gap-1.5 bg-bg-elevated p-1.5 rounded-2xl border border-structural shadow-sm overflow-x-auto">
+          <div className="flex items-center gap-1 bg-bg-elevated p-1.5 rounded-full border border-structural shadow-sm overflow-x-auto max-w-full">
             <button
               onClick={() => setTabMode('scenarios')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer shrink-0 ${
                 tabMode === 'scenarios'
                   ? 'bg-[#7D927D] text-white shadow-sm'
                   : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
               }`}
             >
-              <Compass className="h-4 w-4" /> Escenarios Reales (15 Temas)
+              <Compass className="h-3.5 w-3.5" /> Escenarios Reales
             </button>
             <button
               onClick={() => setTabMode('classic')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer shrink-0 ${
                 tabMode === 'classic'
                   ? 'bg-[#7D927D] text-white shadow-sm'
                   : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
               }`}
             >
-              <BookOpen className="h-4 w-4" /> Amigos por Carta
+              <BookOpen className="h-3.5 w-3.5" /> Amigos por Carta
             </button>
             <button
               onClick={() => setTabMode('immersion')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer shrink-0 ${
                 tabMode === 'immersion'
                   ? 'bg-[#7D927D] text-white shadow-sm'
                   : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
               }`}
             >
-              <Flame className="h-4 w-4" /> Active Immersion
+              <Flame className="h-3.5 w-3.5" /> Active Immersion
             </button>
           </div>
         </div>

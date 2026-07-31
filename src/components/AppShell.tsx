@@ -9,11 +9,11 @@ import ChibiPet from './ChibiPet';
 const AppShell: FC = () => {
   return (
     <div className="flex min-h-screen flex-col bg-bg-base">
-      {/* Ambient blobs — gives backdrop-filter something to refract */}
+      {/* Ambient blobs — subtle Serene Lexicon sage/cream depth */}
       <div className="ambient-blob-container" aria-hidden="true">
-        <div className="ambient-blob ambient-blob--terracotta" />
-        <div className="ambient-blob ambient-blob--teal" />
-        <div className="ambient-blob ambient-blob--marigold" />
+        <div className="ambient-blob ambient-blob--sage" />
+        <div className="ambient-blob ambient-blob--cream" />
+        <div className="ambient-blob ambient-blob--sage-light" />
       </div>
       <HUD />
       <main className="flex-1 overflow-y-auto">

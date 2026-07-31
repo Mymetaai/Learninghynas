@@ -393,7 +393,7 @@ const ShopScreen: FC = () => {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 bg-bg-elevated p-6 rounded-2xl border border-text-primary shadow-sm">
           <div>
             <h1 className="font-serif text-3xl font-bold text-text-primary flex items-center gap-2">
-              <ShoppingBag className="text-[#F5A991] h-8 w-8" />
+              <ShoppingBag className="text-[#7D927D] h-8 w-8" />
               Gacha Shrine
             </h1>
             <p className="text-text-secondary text-xs mt-1">
@@ -403,7 +403,7 @@ const ShopScreen: FC = () => {
 
           <div className="flex items-center gap-3">
             {/* Coins indicator */}
-            <div className="flex items-center gap-2 bg-[#F5A991] text-[#2C1E11] border border-[#2C1E11] rounded-full px-5 py-2 shadow-sm">
+            <div className="flex items-center gap-2 bg-[#7D927D] text-[#2C1E11] border border-[#2C1E11] rounded-full px-5 py-2 shadow-sm">
               <Coins className="h-5 w-5 text-[#2C1E11]" />
               <div className="flex flex-col">
                 <span className="font-mono text-lg font-bold leading-none">
@@ -944,7 +944,7 @@ const ShopScreen: FC = () => {
                 >
                   <div className="w-full flex items-center justify-between border-b border-white/10 pb-1.5 text-[8px] font-mono font-semibold text-text-secondary/80">
                     <span>Card Registry</span>
-                    <span className="text-ink px-2 py-0.5 rounded-full"
+                    <span className="text-[#2F353B] px-2 py-0.5 rounded-full"
                           style={{ backgroundColor: selectedCard.rarity === 'legendary' ? '#f3c969' :
                                                      selectedCard.rarity === 'epic' ? '#b388ff' :
                                                      selectedCard.rarity === 'rare' ? '#5fb6ff' : '#bfb6a8' }}>
@@ -1593,10 +1593,10 @@ interface StatBoxProps {
 }
 
 const StatBox: FC<StatBoxProps> = ({ label, value, color = "text-text-primary", icon }) => (
-  <div className="bg-paper/5 border border-pencil/20 rounded-xl p-4 text-center flex flex-col justify-center items-center shadow-sm">
-    {icon && <div className="text-pencil/70 mb-1">{icon}</div>}
+  <div className="bg-white/5 border border-[#7D927D]/20 rounded-xl p-4 text-center flex flex-col justify-center items-center shadow-sm">
+    {icon && <div className="text-[#777775]/70 mb-1">{icon}</div>}
     <div className={`text-xl font-bold font-mono leading-none ${color}`}>{value}</div>
-    <div className="text-[9px] uppercase tracking-wider text-pencil mt-1.5 leading-none">{label}</div>
+    <div className="text-[9px] uppercase tracking-wider text-[#777775] mt-1.5 leading-none">{label}</div>
   </div>
 );
 

@@ -22,7 +22,7 @@ export const ONE_PIECE_CARDS: OnePieceCard[] = [
     bounty: '3,000,000,000 Belly',
     description: 'The warrior of liberation. His ridiculous power allows him to fight in whatever way he can imagine, bringing smiles to people.',
     specialMove: 'Gomu Gomu no Bajrang Gun',
-    color: 'from-amber-400 via-yellow-200 to-white text-ink',
+    color: 'from-amber-400 via-yellow-200 to-white text-[#2F353B]',
     glowColor: 'shadow-[0_0_25px_rgba(251,191,36,0.8)] border-yellow-400'
   },
   {

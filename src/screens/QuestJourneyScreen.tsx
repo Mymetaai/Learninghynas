@@ -16,14 +16,14 @@ import {
 } from 'lucide-react';
 
 const LEVEL_COLORS = [
-  'from-teal-deep/80 to-teal-deep',
+  'from-[#7D927D]/80 to-[#6B826B]',
   'from-emerald-500/80 to-emerald-600',
   'from-green-500/80 to-green-600',
   'from-lime-500/80 to-lime-600',
   'from-yellow-500/80 to-yellow-600',
   'from-amber-500/80 to-amber-600',
   'from-orange-500/80 to-orange-600',
-  'from-terracotta/80 to-terracotta',
+  'from-[#7D927D]/80 to-[#7D927D]',
   'from-accent-action/80 to-accent-action',
   'from-rose-500/80 to-rose-600',
   'from-pink-500/80 to-pink-600',
@@ -74,15 +74,15 @@ const QuestJourneyScreen: FC = () => {
   return (
     <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary font-sans">
       {/* Hero header */}
-      <div className="relative overflow-hidden border-b border-pencil/20 bg-gradient-to-br from-terracotta/20 via-ink to-teal-deep/20 px-4 py-8">
+      <div className="relative overflow-hidden border-b border-[#7D927D]/20 bg-gradient-to-br from-[#7D927D]/20 via-[#F9F7F2] to-[#7D927D]/20 px-4 py-8">
         <div className="mx-auto max-w-4xl">
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-terracotta">
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#7D927D]">
             El Viaje del Conocimiento
           </p>
           <h1 className="mt-1 font-serif text-3xl font-bold text-text-primary">
             Quest Journey
           </h1>
-          <p className="mt-2 font-sans text-sm text-pencil">
+          <p className="mt-2 font-sans text-sm text-[#777775]">
             Learn Spanish level by level — 24 chapters from your textbook, each
             packed with vocabulary, grammar, and exercises.
           </p>
@@ -113,9 +113,9 @@ const QuestJourneyScreen: FC = () => {
           </div>
 
           {/* Progress bar */}
-          <div className="mt-4 h-2 w-full rounded-full bg-pencil/20">
+          <div className="mt-4 h-2 w-full rounded-full bg-[#777775]/20">
             <div
-              className="h-2 rounded-full bg-gradient-to-r from-terracotta to-amber-400 transition-all duration-500"
+              className="h-2 rounded-full bg-gradient-to-r from-[#7D927D] to-amber-400 transition-all duration-500"
               style={{
                 width: `${(completedCount / TOTAL_BOOK_LEVELS) * 100}%`,
               }}
@@ -191,15 +191,15 @@ const LevelCard: FC<LevelCardProps> = ({
       onClick={() => unlocked && onPlay(questId)}
       className={`group relative flex flex-col overflow-hidden rounded-xl border transition-all duration-200 ${
         completed
-          ? 'border-teal-deep/40 bg-teal-deep/5 hover:bg-teal-deep/10'
+          ? 'border-[#7D927D]/40 bg-[#7D927D]/5 hover:bg-[#7D927D]/10'
           : unlocked
-          ? 'border-pencil/30 bg-paper hover:border-terracotta/40 hover:shadow-sm'
-          : 'cursor-not-allowed border-pencil/10 bg-bg-base/50 opacity-50'
+          ? 'border-[#7D927D]/30 bg-white hover:border-[#7D927D]/40 hover:shadow-sm'
+          : 'cursor-not-allowed border-[#7D927D]/10 bg-bg-base/50 opacity-50'
       }`}
     >
       {/* Gradient accent bar */}
       <div
-        className={`h-1.5 w-full bg-gradient-to-r ${completed ? 'from-teal-deep to-emerald-400' : color}`}
+        className={`h-1.5 w-full bg-gradient-to-r ${completed ? 'from-[#7D927D] to-emerald-400' : color}`}
       />
 
       <div className="flex flex-1 flex-col p-4">
@@ -208,10 +208,10 @@ const LevelCard: FC<LevelCardProps> = ({
           <span
             className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider ${
               completed
-                ? 'bg-teal-deep/15 text-teal-deep'
+                ? 'bg-[#7D927D]/15 text-[#7D927D]'
                 : unlocked
-                ? 'bg-terracotta/10 text-terracotta'
-                : 'bg-pencil/10 text-pencil'
+                ? 'bg-[#7D927D]/10 text-[#7D927D]'
+                : 'bg-[#777775]/10 text-[#777775]'
             }`}
           >
             {completed ? (
@@ -229,34 +229,34 @@ const LevelCard: FC<LevelCardProps> = ({
           {unlocked && (
             <ChevronRight
               size={16}
-              className="text-pencil transition-transform group-hover:translate-x-1"
+              className="text-[#777775] transition-transform group-hover:translate-x-1"
             />
           )}
         </div>
 
         {/* Title */}
-        <h3 className="mt-2 font-serif text-sm font-bold text-ink leading-tight">
+        <h3 className="mt-2 font-serif text-sm font-bold text-[#2F353B] leading-tight">
           {title.replace(`Level ${level}: `, '')}
         </h3>
-        <p className="mt-1 font-sans text-[11px] text-pencil leading-snug">
+        <p className="mt-1 font-sans text-[11px] text-[#777775] leading-snug">
           {subtitle}
         </p>
 
         {/* Vocab preview chips */}
         {unlocked && vocabCount > 0 && (
           <div className="mt-2 flex flex-wrap gap-1">
-            <span className="inline-flex items-center gap-0.5 rounded-md bg-bg-base/5 px-1.5 py-0.5 text-[9px] text-pencil">
+            <span className="inline-flex items-center gap-0.5 rounded-md bg-bg-base/5 px-1.5 py-0.5 text-[9px] text-[#777775]">
               📖 {vocabCount} words
             </span>
-            <span className="inline-flex items-center gap-0.5 rounded-md bg-bg-base/5 px-1.5 py-0.5 text-[9px] text-pencil">
+            <span className="inline-flex items-center gap-0.5 rounded-md bg-bg-base/5 px-1.5 py-0.5 text-[9px] text-[#777775]">
               ✏️ {exerciseCount} exercises
             </span>
           </div>
         )}
 
         {/* Rewards */}
-        <div className="mt-auto flex items-center gap-3 pt-3 border-t border-pencil/10">
-          <span className="flex items-center gap-1 text-[10px] text-terracotta">
+        <div className="mt-auto flex items-center gap-3 pt-3 border-t border-[#7D927D]/10">
+          <span className="flex items-center gap-1 text-[10px] text-[#7D927D]">
             <Zap size={10} /> {xp} XP
           </span>
           <span className="flex items-center gap-1 text-[10px] text-amber-400">
@@ -281,16 +281,16 @@ const StatBadge: FC<StatBadgeProps> = ({ icon, label, value, accent }) => (
   <div
     className={`flex items-center gap-2 rounded-lg border px-3 py-1.5 ${
       accent
-        ? 'border-terracotta/30 bg-terracotta/10'
-        : 'border-pencil/15 bg-bg-base/40'
+        ? 'border-[#7D927D]/30 bg-[#7D927D]/10'
+        : 'border-[#7D927D]/15 bg-bg-base/40'
     }`}
   >
-    <span className={accent ? 'text-terracotta' : 'text-pencil'}>{icon}</span>
+    <span className={accent ? 'text-[#7D927D]' : 'text-[#777775]'}>{icon}</span>
     <div>
       <p className="font-mono text-xs font-bold leading-none text-text-primary">
         {value}
       </p>
-      <p className="text-[9px] text-pencil">{label}</p>
+      <p className="text-[9px] text-[#777775]">{label}</p>
     </div>
   </div>
 );

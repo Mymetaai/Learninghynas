@@ -78,7 +78,7 @@ const SectionTitle: FC<{
     className="mb-12 text-center"
   >
     {label && (
-      <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.3em] text-marigold">
+      <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.3em] text-[#7D927D]">
         {label}
       </p>
     )}
@@ -86,7 +86,7 @@ const SectionTitle: FC<{
       {title}
     </h2>
     {subtitle && (
-      <p className="mx-auto mt-3 max-w-2xl font-sans text-base text-pencil">
+      <p className="mx-auto mt-3 max-w-2xl font-sans text-base text-[#777775]">
         {subtitle}
       </p>
     )}
@@ -120,11 +120,11 @@ const HeroSection: FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="mx-auto mt-6 max-w-3xl font-sans text-lg text-pencil sm:text-xl"
+          className="mx-auto mt-6 max-w-3xl font-sans text-lg text-[#777775] sm:text-xl"
         >
           The only platform that combines anime-powered engagement with AI
           conversation practice — at{' '}
-          <span className="font-semibold text-marigold">zero tutor cost</span>.
+          <span className="font-semibold text-[#7D927D]">zero tutor cost</span>.
         </motion.p>
 
         {/* Stat Badges */}
@@ -141,7 +141,7 @@ const HeroSection: FC = () => {
               custom={i + 2}
               className="glass-nav-capsule flex items-center gap-2 px-5 py-2.5 font-mono text-xs text-text-primary"
             >
-              <span className="text-marigold">{badge.icon}</span>
+              <span className="text-[#7D927D]">{badge.icon}</span>
               {badge.label}
             </motion.div>
           ))}
@@ -182,9 +182,9 @@ const problems = [
     tag: 'Babbel',
     description:
       'Structured but boring. No gamification, no adaptive weak-spot tracking. 70% abandon within 30 days.',
-    color: 'text-pencil',
-    bg: 'bg-pencil/10',
-    border: 'border-pencil/20',
+    color: 'text-[#777775]',
+    bg: 'bg-[#777775]/10',
+    border: 'border-[#7D927D]/20',
   },
 ];
 
@@ -208,7 +208,7 @@ const ProblemSection: FC = () => (
           key={p.tag}
           variants={fadeUp}
           custom={i}
-          className={`glass-surface rounded-2xl p-6 ${p.border} border`}
+          className={`bg-white/90 backdrop-blur-sm rounded-2xl p-6 ${p.border} border`}
         >
           <div
             className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl ${p.bg} ${p.color}`}
@@ -223,7 +223,7 @@ const ProblemSection: FC = () => (
           >
             {p.tag}
           </span>
-          <p className="mt-3 font-sans text-sm leading-relaxed text-pencil">
+          <p className="mt-3 font-sans text-sm leading-relaxed text-[#777775]">
             {p.description}
           </p>
         </motion.div>
@@ -309,10 +309,10 @@ const CellValue: FC<{ value: string; highlight?: boolean }> = ({
         highlight
           ? 'font-semibold text-text-primary'
           : isCross
-            ? 'text-terracotta/80'
+            ? 'text-[#C4796B]/80'
             : isCheck
-              ? 'text-teal-deep'
-              : 'text-pencil'
+              ? 'text-[#7D927D]'
+              : 'text-[#777775]'
       }`}
     >
       {value}
@@ -333,28 +333,28 @@ const ComparisonSection: FC = () => (
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.6 }}
-      className="glass-surface overflow-hidden rounded-2xl"
+      className="bg-white/90 backdrop-blur-sm overflow-hidden rounded-2xl"
     >
       {/* Desktop / wide table */}
       <div className="hidden overflow-x-auto lg:block">
         <table className="w-full border-collapse text-left">
           <thead>
-            <tr className="border-b border-pencil/20">
-              <th className="px-6 py-4 font-serif text-sm font-bold text-pencil">
+            <tr className="border-b border-[#7D927D]/20">
+              <th className="px-6 py-4 font-serif text-sm font-bold text-[#777775]">
                 Feature
               </th>
-              <th className="px-4 py-4 font-serif text-sm font-bold text-pencil">
+              <th className="px-4 py-4 font-serif text-sm font-bold text-[#777775]">
                 Duolingo 🦉
               </th>
-              <th className="px-4 py-4 font-serif text-sm font-bold text-pencil">
+              <th className="px-4 py-4 font-serif text-sm font-bold text-[#777775]">
                 Preply 👥
               </th>
-              <th className="px-4 py-4 font-serif text-sm font-bold text-pencil">
+              <th className="px-4 py-4 font-serif text-sm font-bold text-[#777775]">
                 Babbel 📘
               </th>
-              <th className="relative px-4 py-4 font-serif text-sm font-bold text-marigold">
+              <th className="relative px-4 py-4 font-serif text-sm font-bold text-[#7D927D]">
                 {/* Glow column indicator */}
-                <span className="absolute inset-0 -z-10 bg-marigold/[0.04]" />
+                <span className="absolute inset-0 -z-10 bg-[#7D927D]/[0.04]" />
                 TheLearningHyena 🐆
               </th>
             </tr>
@@ -363,8 +363,8 @@ const ComparisonSection: FC = () => (
             {comparisonRows.map((row, i) => (
               <tr
                 key={row.feature}
-                className={`border-b border-pencil/10 ${
-                  i % 2 === 0 ? 'bg-paper/[0.02]' : ''
+                className={`border-b border-[#7D927D]/10 ${
+                  i % 2 === 0 ? 'bg-white/[0.02]' : ''
                 }`}
               >
                 <td className="px-6 py-4 font-serif text-sm font-semibold text-text-primary">
@@ -380,7 +380,7 @@ const ComparisonSection: FC = () => (
                   <CellValue value={row.babbel} />
                 </td>
                 <td className="relative px-4 py-4">
-                  <span className="absolute inset-0 -z-10 bg-marigold/[0.04]" />
+                  <span className="absolute inset-0 -z-10 bg-[#7D927D]/[0.04]" />
                   <CellValue
                     value={row.hyena}
                     highlight={row.hyenaHighlight}
@@ -397,32 +397,32 @@ const ComparisonSection: FC = () => (
         {comparisonRows.map((row) => (
           <div
             key={row.feature}
-            className="rounded-xl border border-pencil/15 bg-paper/[0.03] p-4"
+            className="rounded-xl border border-[#7D927D]/15 bg-white/[0.03] p-4"
           >
             <p className="mb-3 font-serif text-sm font-bold text-text-primary">
               {row.feature}
             </p>
             <div className="grid grid-cols-2 gap-2 text-xs">
               <div>
-                <span className="font-mono text-[10px] text-pencil/60">
+                <span className="font-mono text-[10px] text-[#777775]/60">
                   🦉 Duolingo
                 </span>
-                <p className="mt-0.5 text-pencil">{row.duolingo}</p>
+                <p className="mt-0.5 text-[#777775]">{row.duolingo}</p>
               </div>
               <div>
-                <span className="font-mono text-[10px] text-pencil/60">
+                <span className="font-mono text-[10px] text-[#777775]/60">
                   👥 Preply
                 </span>
-                <p className="mt-0.5 text-pencil">{row.preply}</p>
+                <p className="mt-0.5 text-[#777775]">{row.preply}</p>
               </div>
               <div>
-                <span className="font-mono text-[10px] text-pencil/60">
+                <span className="font-mono text-[10px] text-[#777775]/60">
                   📘 Babbel
                 </span>
-                <p className="mt-0.5 text-pencil">{row.babbel}</p>
+                <p className="mt-0.5 text-[#777775]">{row.babbel}</p>
               </div>
-              <div className="rounded-lg bg-marigold/10 p-2">
-                <span className="font-mono text-[10px] text-marigold">
+              <div className="rounded-lg bg-[#7D927D]/10 p-2">
+                <span className="font-mono text-[10px] text-[#7D927D]">
                   🐆 Hyena
                 </span>
                 <p className="mt-0.5 font-semibold text-text-primary">{row.hyena}</p>
@@ -495,7 +495,7 @@ const SolutionSection: FC = () => (
         >
           <motion.div
             variants={cardHover}
-            className={`glass-surface cursor-default rounded-2xl border border-pencil/15 p-6 transition-colors ${s.borderGlow}`}
+            className={`bg-white/90 backdrop-blur-sm cursor-default rounded-2xl border border-[#7D927D]/15 p-6 transition-colors ${s.borderGlow}`}
           >
             <div
               className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl ${s.bg} ${s.accentColor}`}
@@ -505,7 +505,7 @@ const SolutionSection: FC = () => (
             <h3 className="font-serif text-lg font-bold text-text-primary">
               {s.title}
             </h3>
-            <p className="mt-3 font-sans text-sm leading-relaxed text-pencil">
+            <p className="mt-3 font-sans text-sm leading-relaxed text-[#777775]">
               {s.description}
             </p>
           </motion.div>
@@ -525,8 +525,8 @@ const institutionBenefits = [
     title: 'Custom Syllabus Integration',
     description:
       'Upload your own curriculum. Exercises, stories, and AI conversations align with your class modules.',
-    color: 'text-teal-deep',
-    bg: 'bg-teal-deep/10',
+    color: 'text-[#7D927D]',
+    bg: 'bg-[#7D927D]/10',
   },
   {
     icon: <BarChart3 size={28} />,
@@ -566,7 +566,7 @@ const InstitutionsSection: FC = () => (
           key={b.title}
           variants={fadeUp}
           custom={i}
-          className="glass-surface rounded-2xl border border-pencil/15 p-6"
+          className="bg-white/90 backdrop-blur-sm rounded-2xl border border-[#7D927D]/15 p-6"
         >
           <div
             className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl ${b.bg} ${b.color}`}
@@ -574,12 +574,12 @@ const InstitutionsSection: FC = () => (
             {b.icon}
           </div>
           <div className="flex items-center gap-2">
-            <School size={14} className="text-pencil/60" />
+            <School size={14} className="text-[#777775]/60" />
             <h3 className="font-serif text-lg font-bold text-text-primary">
               {b.title}
             </h3>
           </div>
-          <p className="mt-3 font-sans text-sm leading-relaxed text-pencil">
+          <p className="mt-3 font-sans text-sm leading-relaxed text-[#777775]">
             {b.description}
           </p>
         </motion.div>
@@ -605,7 +605,7 @@ const ROICalculator: FC = () => {
     '$' + n.toLocaleString('en-US');
 
   return (
-    <Section className="bg-paper/[0.02]">
+    <Section className="bg-white/[0.02]">
       <SectionTitle
         label="ROI Calculator"
         title="Calculate Your Savings"
@@ -617,7 +617,7 @@ const ROICalculator: FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6 }}
-        className="glass-surface mx-auto max-w-3xl rounded-2xl p-6 sm:p-8"
+        className="bg-white/90 backdrop-blur-sm mx-auto max-w-3xl rounded-2xl p-6 sm:p-8"
       >
         {/* Sliders */}
         <div className="space-y-8">
@@ -627,7 +627,7 @@ const ROICalculator: FC = () => {
               <label className="font-serif text-sm font-semibold text-text-primary">
                 Number of Students
               </label>
-              <span className="font-mono text-lg tabular-nums text-marigold">
+              <span className="font-mono text-lg tabular-nums text-[#7D927D]">
                 {students}
               </span>
             </div>
@@ -806,11 +806,11 @@ const CTASection: FC = () => (
 const WhyUsScreen: FC = () => {
   return (
     <div className="min-h-screen bg-bg-base">
-      {/* Ambient background blobs for depth */}
+      {/* Ambient background blobs — Serene Lexicon sage depth */}
       <div className="ambient-blob-container" aria-hidden>
-        <div className="ambient-blob ambient-blob--terracotta" />
-        <div className="ambient-blob ambient-blob--teal" />
-        <div className="ambient-blob ambient-blob--marigold" />
+        <div className="ambient-blob ambient-blob--sage" />
+        <div className="ambient-blob ambient-blob--cream" />
+        <div className="ambient-blob ambient-blob--sage-light" />
       </div>
 
       <HeroSection />

@@ -484,20 +484,20 @@ const BasicEspanolScreen: FC = () => {
     <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary relative overflow-x-hidden font-sans pb-16">
       
       {/* Background Decorative Gradient Blobs */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-terracotta/5 rounded-full filter blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-marigold/5 rounded-full filter blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#7D927D]/5 rounded-full filter blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-[#7D927D]/5 rounded-full filter blur-[100px] pointer-events-none" />
 
       {/* Main Responsive Grid Layout */}
       <div className="max-w-[90rem] mx-auto grid grid-cols-1 lg:grid-cols-[22rem_1fr] min-h-[calc(100vh-3.5rem)]">
         
         {/* DESKTOP SIDEBAR */}
-        <aside className="hidden lg:flex flex-col justify-between border-r border-pencil/15 bg-bg-base/40 backdrop-blur-md p-5 sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto z-20">
+        <aside className="hidden lg:flex flex-col justify-between border-r border-[#7D927D]/15 bg-bg-base/40 backdrop-blur-md p-5 sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto z-20">
           <div className="space-y-5">
             
             {/* Title / Logo */}
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <Compass className="h-5 w-5 text-marigold" />
+                <Compass className="h-5 w-5 text-[#7D927D]" />
                 <span className="font-mono text-[9px] tracking-[0.25em] uppercase text-[#777775]">
                   Spanish Course (Parts 1-8)
                 </span>
@@ -509,10 +509,10 @@ const BasicEspanolScreen: FC = () => {
             </div>
 
             {/* Course Part Selector Dropdown Menu */}
-            <div className="space-y-1.5 bg-paper/5 border border-pencil/15 p-3 rounded-2xl">
-              <label htmlFor="course-part-select-desktop" className="text-[10px] font-mono uppercase tracking-wider text-marigold font-bold flex items-center justify-between">
+            <div className="space-y-1.5 bg-white/5 border border-[#7D927D]/15 p-3 rounded-2xl">
+              <label htmlFor="course-part-select-desktop" className="text-[10px] font-mono uppercase tracking-wider text-[#7D927D] font-bold flex items-center justify-between">
                 <span>Select Course Part:</span>
-                <ChevronDown className="h-3.5 w-3.5 text-marigold" />
+                <ChevronDown className="h-3.5 w-3.5 text-[#7D927D]" />
               </label>
               <select
                 id="course-part-select-desktop"
@@ -523,7 +523,7 @@ const BasicEspanolScreen: FC = () => {
                   const list = p === 'part1' ? part1SectionsList : p === 'part2' ? part2SectionsList : p === 'part3' ? part3SectionsList : p === 'part4' ? part4SectionsList : p === 'part5' ? part5SectionsList : p === 'part6' ? part6SectionsList : p === 'part7' ? part7SectionsList : part8SectionsList;
                   setActiveSection(list[0].id as ActiveSection);
                 }}
-                className="w-full bg-bg-elevated text-text-primary text-xs font-bold py-2.5 px-3 rounded-xl border border-pencil/20 focus:outline-none focus:border-terracotta cursor-pointer transition-all shadow-sm"
+                className="w-full bg-bg-elevated text-text-primary text-xs font-bold py-2.5 px-3 rounded-xl border border-[#7D927D]/20 focus:outline-none focus:border-[#7D927D] cursor-pointer transition-all shadow-sm"
               >
                 {PART_OPTIONS.map((opt) => (
                   <option key={opt.id} value={opt.id} className="bg-bg-elevated text-text-primary py-2 font-semibold">
@@ -531,17 +531,17 @@ const BasicEspanolScreen: FC = () => {
                   </option>
                 ))}
               </select>
-              <p className="text-[10px] text-pencil/80 italic mt-1">
+              <p className="text-[10px] text-[#777775]/80 italic mt-1">
                 {PART_OPTIONS.find(o => o.id === coursePart)?.desc}
               </p>
             </div>
 
             {/* Earned Badge Display */}
             {earnedBadges[coursePart] && (
-              <div className="bg-marigold/10 border border-marigold/30 rounded-xl p-2.5 flex items-center gap-2.5">
-                <Trophy className="h-4 w-4 text-marigold shrink-0" />
+              <div className="bg-[#7D927D]/10 border border-[#7D927D]/30 rounded-xl p-2.5 flex items-center gap-2.5">
+                <Trophy className="h-4 w-4 text-[#7D927D] shrink-0" />
                 <div>
-                  <span className="text-[9px] font-mono uppercase tracking-wider text-marigold block font-bold">Badge Unlocked</span>
+                  <span className="text-[9px] font-mono uppercase tracking-wider text-[#7D927D] block font-bold">Badge Unlocked</span>
                   <span className="text-xs font-bold text-text-primary">{PART_BADGES[coursePart].badge}</span>
                 </div>
               </div>
@@ -549,7 +549,7 @@ const BasicEspanolScreen: FC = () => {
 
             {/* Section List / Lessons */}
             <nav className="space-y-1">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-pencil font-bold block mb-2 px-1">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#777775] font-bold block mb-2 px-1">
                 Modules & Master Exam
               </span>
               {sectionsList.map((sec) => {
@@ -564,19 +564,19 @@ const BasicEspanolScreen: FC = () => {
                     onClick={() => setActiveSection(sec.id as ActiveSection)}
                     className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl border text-left cursor-pointer transition-all duration-200 ${
                       isActive
-                        ? 'bg-terracotta/15 border-terracotta/40 text-text-primary shadow-sm'
-                        : 'bg-transparent border-transparent text-pencil hover:text-text-primary hover:bg-paper/5'
+                        ? 'bg-[#7D927D]/15 border-[#7D927D]/40 text-text-primary shadow-sm'
+                        : 'bg-transparent border-transparent text-[#777775] hover:text-text-primary hover:bg-white/5'
                     }`}
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
-                      <IconComponent className={`h-4 w-4 shrink-0 ${isActive ? 'text-terracotta' : 'text-pencil'}`} />
+                      <IconComponent className={`h-4 w-4 shrink-0 ${isActive ? 'text-[#7D927D]' : 'text-[#777775]'}`} />
                       <div className="truncate">
                         <span className="text-xs font-semibold block truncate">{sec.title}</span>
-                        <span className="text-[10px] text-pencil/70 block truncate">{sec.sub}</span>
+                        <span className="text-[10px] text-[#777775]/70 block truncate">{sec.sub}</span>
                       </div>
                     </div>
                     {isCompleted && (
-                      <Check className="h-3.5 w-3.5 text-teal-deep shrink-0 ml-2" />
+                      <Check className="h-3.5 w-3.5 text-[#7D927D] shrink-0 ml-2" />
                     )}
                   </button>
                 );
@@ -585,29 +585,29 @@ const BasicEspanolScreen: FC = () => {
           </div>
 
           {/* Part Progress Bar */}
-          <div className="pt-4 border-t border-pencil/15 space-y-2">
-            <div className="flex justify-between items-center text-xs text-pencil">
+          <div className="pt-4 border-t border-[#7D927D]/15 space-y-2">
+            <div className="flex justify-between items-center text-xs text-[#777775]">
               <span>{PART_OPTIONS.find(o => o.id === coursePart)?.label.split(':')[0]} Progress</span>
               <span className="font-bold text-text-primary">{progressPercent}%</span>
             </div>
-            <div className="w-full bg-paper/10 h-2 rounded-full overflow-hidden">
-              <div className="bg-terracotta h-full transition-all duration-500" style={{ width: `${progressPercent}%` }} />
+            <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+              <div className="bg-[#7D927D] h-full transition-all duration-500" style={{ width: `${progressPercent}%` }} />
             </div>
           </div>
         </aside>
 
         {/* MOBILE HEADER & DRAWER */}
-        <div className="lg:hidden p-4 border-b border-pencil/15 bg-bg-base/80 backdrop-blur-md sticky top-14 z-30 flex items-center justify-between">
+        <div className="lg:hidden p-4 border-b border-[#7D927D]/15 bg-bg-base/80 backdrop-blur-md sticky top-14 z-30 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Compass className="h-5 w-5 text-terracotta" />
+            <Compass className="h-5 w-5 text-[#7D927D]" />
             <div>
               <h2 className="font-serif text-sm font-bold text-text-primary">Básico Español</h2>
-              <span className="text-[10px] text-pencil">{PART_OPTIONS.find(o => o.id === coursePart)?.label.split(':')[0]}</span>
+              <span className="text-[10px] text-[#777775]">{PART_OPTIONS.find(o => o.id === coursePart)?.label.split(':')[0]}</span>
             </div>
           </div>
           <button
             onClick={() => setMobileSidebarOpen(true)}
-            className="p-2 rounded-xl bg-paper/10 border border-pencil/15 text-text-primary flex items-center gap-1 text-xs font-semibold"
+            className="p-2 rounded-xl bg-white/10 border border-[#7D927D]/15 text-text-primary flex items-center gap-1 text-xs font-semibold"
           >
             <Menu className="h-4 w-4" />
             <span>Menu</span>
@@ -630,7 +630,7 @@ const BasicEspanolScreen: FC = () => {
                 animate={{ x: 0 }}
                 exit={{ x: '-100%' }}
                 transition={{ type: 'spring', damping: 25, stiffness: 250 }}
-                className="fixed top-0 left-0 bottom-0 w-80 bg-bg-base border-r border-pencil/15 p-5 z-50 overflow-y-auto flex flex-col justify-between lg:hidden"
+                className="fixed top-0 left-0 bottom-0 w-80 bg-bg-base border-r border-[#7D927D]/15 p-5 z-50 overflow-y-auto flex flex-col justify-between lg:hidden"
               >
                 <div className="space-y-5">
                   <div className="flex items-center justify-between">
@@ -640,17 +640,17 @@ const BasicEspanolScreen: FC = () => {
                     </div>
                     <button
                       onClick={() => setMobileSidebarOpen(false)}
-                      className="p-1.5 rounded-lg bg-paper/5 border border-pencil/10 text-pencil hover:text-text-primary"
+                      className="p-1.5 rounded-lg bg-white/5 border border-[#7D927D]/10 text-[#777775] hover:text-text-primary"
                     >
                       <X className="h-5 w-5" />
                     </button>
                   </div>
 
                   {/* Course Part Selector Dropdown (Mobile) */}
-                  <div className="space-y-1.5 bg-paper/5 border border-pencil/15 p-3 rounded-2xl">
-                    <label htmlFor="course-part-select-mobile" className="text-[10px] font-mono uppercase tracking-wider text-marigold font-bold flex items-center justify-between">
+                  <div className="space-y-1.5 bg-white/5 border border-[#7D927D]/15 p-3 rounded-2xl">
+                    <label htmlFor="course-part-select-mobile" className="text-[10px] font-mono uppercase tracking-wider text-[#7D927D] font-bold flex items-center justify-between">
                       <span>Select Course Part:</span>
-                      <ChevronDown className="h-3.5 w-3.5 text-marigold" />
+                      <ChevronDown className="h-3.5 w-3.5 text-[#7D927D]" />
                     </label>
                     <select
                       id="course-part-select-mobile"
@@ -662,7 +662,7 @@ const BasicEspanolScreen: FC = () => {
                         setActiveSection(list[0].id as ActiveSection);
                         setMobileSidebarOpen(false);
                       }}
-                      className="w-full bg-bg-elevated text-text-primary text-xs font-bold py-2.5 px-3 rounded-xl border border-pencil/20 focus:outline-none focus:border-terracotta cursor-pointer"
+                      className="w-full bg-bg-elevated text-text-primary text-xs font-bold py-2.5 px-3 rounded-xl border border-[#7D927D]/20 focus:outline-none focus:border-[#7D927D] cursor-pointer"
                     >
                       {PART_OPTIONS.map((opt) => (
                         <option key={opt.id} value={opt.id} className="bg-bg-elevated text-text-primary py-2 font-semibold">
@@ -688,16 +688,16 @@ const BasicEspanolScreen: FC = () => {
                           }}
                           className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl border text-left cursor-pointer ${
                             isActive
-                              ? 'bg-terracotta/15 border-terracotta/40 text-text-primary'
-                              : 'bg-transparent border-transparent text-pencil hover:text-text-primary'
+                              ? 'bg-[#7D927D]/15 border-[#7D927D]/40 text-text-primary'
+                              : 'bg-transparent border-transparent text-[#777775] hover:text-text-primary'
                           }`}
                         >
                           <div className="flex items-center gap-2.5">
-                            <IconComponent className="h-4 w-4 text-terracotta" />
+                            <IconComponent className="h-4 w-4 text-[#7D927D]" />
                             <span className="text-xs font-semibold">{sec.title}</span>
                           </div>
                           {isCompleted && (
-                            <Check className="h-3.5 w-3.5 text-teal-deep" />
+                            <Check className="h-3.5 w-3.5 text-[#7D927D]" />
                           )}
                         </button>
                       );
@@ -705,13 +705,13 @@ const BasicEspanolScreen: FC = () => {
                   </nav>
                 </div>
 
-                <div className="pt-4 border-t border-pencil/15 space-y-2">
-                  <div className="flex justify-between items-center text-xs text-pencil">
+                <div className="pt-4 border-t border-[#7D927D]/15 space-y-2">
+                  <div className="flex justify-between items-center text-xs text-[#777775]">
                     <span>Part Progress</span>
                     <span>{progressPercent}%</span>
                   </div>
-                  <div className="w-full bg-paper/10 h-1.5 rounded-full overflow-hidden">
-                    <div className="bg-terracotta h-full" style={{ width: `${progressPercent}%` }} />
+                  <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                    <div className="bg-[#7D927D] h-full" style={{ width: `${progressPercent}%` }} />
                   </div>
                 </div>
               </motion.div>
@@ -752,7 +752,7 @@ const BasicEspanolScreen: FC = () => {
 
                   <div className="space-y-4">
                     <h3 className="font-serif text-lg font-bold text-text-primary flex items-center gap-2">
-                      <BookOpenCheck className="h-5 w-5 text-terracotta" />
+                      <BookOpenCheck className="h-5 w-5 text-[#7D927D]" />
                       Curriculum Parts Index
                     </h3>
                     
@@ -1010,12 +1010,14 @@ const BasicEspanolScreen: FC = () => {
                             const isSelected = userPracticeAnswers[activeSection] === opt;
                             const isCorrect = opt === currentLessonData.quickPractice.correctAnswer;
                             
-                            let btnStyle = 'bg-white border-[#7D927D]/20 text-[#2F353B] hover:border-[#7D927D]';
+                            let btnStyle = 'bg-white border-[#7D927D]/20 text-[#2F353B] hover:bg-[#F9F7F2] hover:border-[#7D927D]/50';
                             if (userPracticeAnswers[activeSection]) {
                               if (isCorrect) {
-                                btnStyle = 'bg-[#7D927D]/20 border-[#7D927D] text-[#7D927D] font-bold';
+                                btnStyle = 'bg-[#7D927D] border-[#7D927D] text-white font-bold shadow-md scale-[1.02]';
                               } else if (isSelected) {
-                                btnStyle = 'bg-[#C4796B]/20 border-[#C4796B] text-[#C4796B] font-bold';
+                                btnStyle = 'bg-[#C4796B] border-[#C4796B] text-white font-bold shadow-md animate-shake';
+                              } else {
+                                btnStyle = 'bg-white border-[#7D927D]/20 text-[#2F353B] opacity-40';
                               }
                             }
 
@@ -1023,9 +1025,11 @@ const BasicEspanolScreen: FC = () => {
                               <button
                                 key={opt}
                                 onClick={() => setUserPracticeAnswers(prev => ({ ...prev, [activeSection]: opt }))}
-                                className={`p-3.5 rounded-xl border text-left text-xs font-semibold transition-all cursor-pointer shadow-sm ${btnStyle}`}
+                                className={`p-3.5 rounded-xl border text-left text-xs font-semibold transition-all cursor-pointer shadow-sm flex items-center justify-between ${btnStyle}`}
                               >
-                                {opt}
+                                <span>{opt}</span>
+                                {userPracticeAnswers[activeSection] && isCorrect && <Check className="h-4 w-4 text-white shrink-0 ml-2" />}
+                                {userPracticeAnswers[activeSection] && isSelected && !isCorrect && <X className="h-4 w-4 text-white shrink-0 ml-2" />}
                               </button>
                             );
                           })}
@@ -1038,7 +1042,7 @@ const BasicEspanolScreen: FC = () => {
                                 <CheckCircle2 className="h-4 w-4" /> Correct! {currentLessonData.quickPractice.explanation}
                               </span>
                             ) : (
-                              <span className="text-terracotta font-bold block">
+                              <span className="text-[#7D927D] font-bold block">
                                 Incorrect. {currentLessonData.quickPractice.explanation}
                               </span>
                             )}
@@ -1212,12 +1216,14 @@ const BasicEspanolScreen: FC = () => {
                               const isSelected = selectedAnswer === option;
                               const isCorrect = option === activeQuestions[currentQuestionIndex].correctAnswer;
                               
-                              let btnStyle = 'bg-white border-[#7D927D]/20 text-[#2F353B] hover:border-[#7D927D]';
+                              let btnStyle = 'bg-white border-[#7D927D]/20 text-[#2F353B] hover:bg-[#F9F7F2] hover:border-[#7D927D]/50';
                               if (selectedAnswer !== null) {
                                 if (isCorrect) {
-                                  btnStyle = 'bg-[#7D927D]/20 border-[#7D927D] text-[#7D927D] font-bold';
+                                  btnStyle = 'bg-[#7D927D] border-[#7D927D] text-white font-bold shadow-md scale-[1.02]';
                                 } else if (isSelected) {
-                                  btnStyle = 'bg-[#C4796B]/20 border-[#C4796B] text-[#C4796B] font-bold';
+                                  btnStyle = 'bg-[#C4796B] border-[#C4796B] text-white font-bold shadow-md animate-shake';
+                                } else {
+                                  btnStyle = 'bg-white border-[#7D927D]/20 text-[#2F353B] opacity-40';
                                 }
                               }
 
@@ -1225,9 +1231,11 @@ const BasicEspanolScreen: FC = () => {
                                 <button
                                   key={option}
                                   onClick={() => handleAnswerClick(option)}
-                                  className={`p-3.5 rounded-xl border text-left text-xs font-semibold transition-all cursor-pointer shadow-sm ${btnStyle}`}
+                                  className={`p-3.5 rounded-xl border text-left text-xs font-semibold transition-all cursor-pointer shadow-sm flex items-center justify-between ${btnStyle}`}
                                 >
-                                  {option}
+                                  <span>{option}</span>
+                                  {selectedAnswer !== null && isCorrect && <Check className="h-4 w-4 text-white shrink-0 ml-2" />}
+                                  {selectedAnswer !== null && isSelected && !isCorrect && <X className="h-4 w-4 text-white shrink-0 ml-2" />}
                                 </button>
                               );
                             })}

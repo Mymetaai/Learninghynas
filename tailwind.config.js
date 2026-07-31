@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 //
-// STEP 1 — Design tokens for "The Wayfarer's Notebook".
+// Serene Lexicon Design System — TheLearningHyena
 // All visual identity lives here; do not scatter hardcoded colors/fonts
-// across components.
+// across components. Use canonical hex values (#7D927D, #2F353B, etc.) in code.
 //
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
