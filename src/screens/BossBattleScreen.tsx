@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Trophy, Coins, Flame, ArrowLeft } from 'lucide-react';
 import { useStatsStore } from '../state/statsStore';
 import { useProgressStore } from '../state/progressStore';
+import { useUserData } from '../hooks/useUserData';
 import { getWorld } from '../content';
 import ExerciseCard from '../components/exercises/ExerciseCard';
 import Kitsune3D from '../components/Kitsune3D';
@@ -58,6 +59,7 @@ const BossBattleScreen = () => {
   const addRewards = useStatsStore((s) => s.addRewards);
   const defeatGuardian = useProgressStore((s) => s.defeatGuardian);
   const defeatSentinel = useProgressStore((s) => s.defeatSentinel);
+  const { addCoins } = useUserData();
 
   // Gameplay State
   const [gameState, setGameState] = useState<'intro' | 'playing' | 'victory' | 'defeat'>('intro');

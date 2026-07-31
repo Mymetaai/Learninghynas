@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import { getQuest } from '../content';
 import { useProgressStore } from '../state/progressStore';
 import { useStatsStore } from '../state/statsStore';
+import { useUserData } from '../hooks/useUserData';
 import ScreenPlaceholder from '../components/ScreenPlaceholder';
 
 const QuestCompletionScreen: FC = () => {
@@ -19,12 +20,15 @@ const QuestCompletionScreen: FC = () => {
   const completeQuest = useProgressStore((s) => s.completeQuest);
   const grantQuestRewards = useStatsStore((s) => s.grantQuestRewards);
   const learnVocab = useStatsStore((s) => s.learnVocab);
+  const { addXP, addCoins } = useUserData();
 
   // Grant rewards + mark complete exactly once on mount.
   useEffect(() => {
     if (!quest) return;
     completeQuest(questId);
     grantQuestRewards(questId, quest.rewards.xp, quest.rewards.coins);
+    addXP(quest.rewards.xp);
+    addCoins(quest.rewards.coins);
     learnVocab(
       quest.vocabulary.map((v) => v.word),
       questId,

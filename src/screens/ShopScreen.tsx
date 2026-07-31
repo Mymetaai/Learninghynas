@@ -2,6 +2,7 @@ import { useState, useMemo, type FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStatsStore } from '../state/statsStore';
 import { useShopStore } from '../state/shopStore';
+import { useUserData } from '../hooks/useUserData';
 import { ONE_PIECE_CARDS, type OnePieceCard } from '../content/onePieceCards';
 import { DEMON_SLAYER_CARDS, type DemonSlayerCard } from '../content/demonSlayerCards';
 import GachaCard from '../components/GachaCard';
@@ -128,11 +129,15 @@ const SHOP_CATEGORIES = [
 ];
 
 const ShopScreen: FC = () => {
-  const coins = useStatsStore((s) => s.coins);
+  const localCoins = useStatsStore((s) => s.coins);
   const spendCoins = useStatsStore((s) => s.spendCoins);
   const collectAllCards = useStatsStore((s) => s.collectAllCards);
   const collectedCardIds = useStatsStore((s) => s.collectedCardIds);
   
+  // Hook for Clerk + Supabase live user data mutations
+  const { userData, spendCoins: userSpendCoins, addCoins: userAddCoins } = useUserData();
+  const coins = userData?.kitsune_coins ?? localCoins;
+
   // Add direct reward cheat button for testing
   const addRewards = useStatsStore((s) => s.addRewards);
 
@@ -175,9 +180,9 @@ const ShopScreen: FC = () => {
     saveInventory(newInv);
   };
 
-  const handleBuyItem = (item: any) => {
-    if (coins < item.price) return;
-    spendCoins(item.price);
+  const handleBuyItem = async (item: any) => {
+    const success = await userSpendCoins(item.price);
+    if (!success) return;
 
     if (item.consumableKey) {
       addConsumable(item.consumableKey, 1);
@@ -191,18 +196,18 @@ const ShopScreen: FC = () => {
     setPurchaseCelebration({ name: item.name, cost: item.price, desc: item.effect });
   };
 
-  const handleBuyFeatured = () => {
+  const handleBuyFeatured = async () => {
     const price = 720;
-    if (coins < price) return;
-    spendCoins(price);
+    const success = await userSpendCoins(price);
+    if (!success) return;
     addAura('aura_golden');
     setPurchaseCelebration({ name: 'Golden Nine-Tail Aura', cost: price, desc: 'Volumetric golden aura effect for your Kitsune companion' });
   };
 
-  const handleOpenChest = () => {
+  const handleOpenChest = async () => {
     const price = 200;
-    if (coins < price) return;
-    spendCoins(price);
+    const success = await userSpendCoins(price);
+    if (!success) return;
 
     const rand = Math.random() * 100;
     let rewardTitle = '';
@@ -210,7 +215,7 @@ const ShopScreen: FC = () => {
 
     if (rand < 40) {
       const refund = 50 + Math.floor(Math.random() * 101);
-      addRewards(0, refund);
+      userAddCoins(refund);
       rewardTitle = refund + ' KC Refund';
       rewardDetail = 'You opened the chest and found a refund of ' + refund + ' Kitsune Coins inside!';
     } else if (rand < 65) {
@@ -246,12 +251,12 @@ const ShopScreen: FC = () => {
   const [gachaFilterRank, setGachaFilterRank] = useState<'all' | 'UR' | 'SSR' | 'SR' | 'R' | 'C' | 'Rare' | 'Common'>('all');
   const [selectedSetFilter, setSelectedSetFilter] = useState<'all' | 'Demon Slayer' | 'One Piece'>('all');
 
-  const handleDrawPackCard = () => {
-    if (coins < DRAW_COST) {
+  const handleDrawPackCard = async () => {
+    const success = await userSpendCoins(DRAW_COST);
+    if (!success) {
       alert("Not enough Kitsune Coins! Complete practice quizzes to earn more coins.");
       return;
     }
-    spendCoins(DRAW_COST);
     playThunderSound(true);
     spawnBolt();
     spawnParticles(12);

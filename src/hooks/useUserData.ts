@@ -158,7 +158,98 @@ export function useUserData() {
     return () => unsubscribe();
   }, [isUserLoaded, isSignedIn, user, getToken]);
 
-  // Mutation helper: updateCoins
+  // ── Dedicated Mutation Functions ──────────────────────────────────────────
+
+  /** Add XP to current user with Optimistic UI & Supabase UPDATE mutation */
+  const addXP = useCallback(
+    async (amount: number) => {
+      if (amount <= 0) return;
+
+      const currentXp = userData?.xp ?? useStatsStore.getState().xp;
+      const newXp = currentXp + amount;
+      const newLevel = Math.max(1, Math.floor(newXp / 600) + 1);
+
+      // Optimistic UI Update
+      setUserData((prev) => (prev ? { ...prev, xp: newXp, level: newLevel } : prev));
+      useStatsStore.setState((s) => ({ ...s, xp: newXp }));
+
+      if (isSignedIn && user?.id) {
+        try {
+          const token = await getToken({ template: 'supabase' }).catch(() => null);
+          const client = supabaseClient(token);
+          await client
+            .from('user_progress')
+            .update({ xp: newXp, level: newLevel })
+            .eq('user_id', user.id);
+        } catch (e) {
+          console.warn('[useUserData] addXP update error:', e);
+        }
+      }
+    },
+    [userData, isSignedIn, user, getToken]
+  );
+
+  /** Add Kitsune Coins to current user with Optimistic UI & Supabase UPDATE mutation */
+  const addCoins = useCallback(
+    async (amount: number) => {
+      if (amount <= 0) return;
+
+      const currentCoins = userData?.kitsune_coins ?? useStatsStore.getState().coins;
+      const newCoins = currentCoins + amount;
+
+      // Optimistic UI Update
+      setUserData((prev) => (prev ? { ...prev, kitsune_coins: newCoins } : prev));
+      useStatsStore.setState((s) => ({ ...s, coins: newCoins }));
+
+      if (isSignedIn && user?.id) {
+        try {
+          const token = await getToken({ template: 'supabase' }).catch(() => null);
+          const client = supabaseClient(token);
+          await client
+            .from('user_progress')
+            .update({ kitsune_coins: newCoins })
+            .eq('user_id', user.id);
+        } catch (e) {
+          console.warn('[useUserData] addCoins update error:', e);
+        }
+      }
+    },
+    [userData, isSignedIn, user, getToken]
+  );
+
+  /** Spend Kitsune Coins with validation, Optimistic UI & Supabase UPDATE mutation */
+  const spendCoins = useCallback(
+    async (amount: number): Promise<boolean> => {
+      const currentCoins = userData?.kitsune_coins ?? useStatsStore.getState().coins;
+      if (currentCoins < amount) {
+        return false;
+      }
+
+      const newCoins = currentCoins - amount;
+
+      // Optimistic UI Update
+      setUserData((prev) => (prev ? { ...prev, kitsune_coins: newCoins } : prev));
+      useStatsStore.setState((s) => ({ ...s, coins: newCoins }));
+
+      if (isSignedIn && user?.id) {
+        try {
+          const token = await getToken({ template: 'supabase' }).catch(() => null);
+          const client = supabaseClient(token);
+          await client
+            .from('user_progress')
+            .update({ kitsune_coins: newCoins })
+            .eq('user_id', user.id);
+        } catch (e) {
+          console.warn('[useUserData] spendCoins update error:', e);
+        }
+      }
+
+      return true;
+    },
+    [userData, isSignedIn, user, getToken]
+  );
+
+  // Legacy compatibility helpers
   const updateCoins = useCallback(
     async (newCoins: number) => {
       useStatsStore.setState((state) => ({ ...state, coins: newCoins }));
@@ -166,17 +257,19 @@ export function useUserData() {
     []
   );
 
-  // Mutation helper: updateXP
   const updateXP = useCallback(
     async (additionalXp: number) => {
-      useStatsStore.getState().addRewards(additionalXp, 0);
+      addXP(additionalXp);
     },
-    []
+    [addXP]
   );
 
   return {
     userData,
     isLoading,
+    addXP,
+    addCoins,
+    spendCoins,
     updateCoins,
     updateXP,
     refetch: fetchUserData,
