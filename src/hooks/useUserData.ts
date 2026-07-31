@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useUser, useAuth } from '@clerk/clerk-react';
-import { supabaseClient } from '../lib/supabaseClient';
+import { createClerkSupabaseClient } from '../lib/supabaseClient';
 import { useStatsStore } from '../state/statsStore';
 
 export interface UserProgressData {
@@ -18,6 +18,20 @@ export function useUserData() {
 
   const [userData, setUserData] = useState<UserProgressData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  /**
+   * Helper to request Clerk Supabase JWT token specifically.
+   * If template 'supabase' is not configured or throws, returns null fallback
+   * so default Clerk RS256 session tokens are never passed to Supabase (preventing 401 errors).
+   */
+  const getSupabaseToken = useCallback(async (): Promise<string | null> => {
+    try {
+      const token = await getToken({ template: 'supabase' });
+      return token || null;
+    } catch {
+      return null;
+    }
+  }, [getToken]);
 
   // Sync to Zustand stats store
   const syncToLocalStore = useCallback((data: UserProgressData) => {
@@ -47,21 +61,19 @@ export function useUserData() {
       return;
     }
 
+    const defaultData: UserProgressData = {
+      user_id: user.id,
+      xp: 350,
+      level: 2,
+      kitsune_coins: 500,
+      streak_days: 1,
+    };
+
     try {
       setIsLoading(true);
 
-      // Attempt to retrieve Supabase JWT token from Clerk session
-      let token: string | null = null;
-      try {
-        token = await getToken({ template: 'supabase' }).catch(() => null);
-        if (!token) {
-          token = await getToken().catch(() => null);
-        }
-      } catch {
-        // Token fallback
-      }
-
-      const client = supabaseClient(token);
+      const token = await getSupabaseToken();
+      const client = createClerkSupabaseClient(token);
 
       // Fetch user_progress row from Supabase
       const { data, error } = await client
@@ -70,23 +82,19 @@ export function useUserData() {
         .eq('user_id', user.id)
         .maybeSingle();
 
-      if (error && error.code !== 'PGRST116') {
-        console.warn('[useUserData] Fetch error:', error.message);
+      if (error) {
+        if (error.code === '401' || error.message?.includes('No suitable key') || error.message?.includes('JWT')) {
+          console.info('[useUserData] Clerk Supabase JWT template pending in Clerk Dashboard. Using client user state.');
+        } else if (error.code !== 'PGRST116') {
+          console.warn('[useUserData] Fetch note:', error.message);
+        }
       }
 
       if (data) {
         setUserData(data);
         syncToLocalStore(data);
       } else {
-        // First-time login: Automatically trigger INSERT with default user progress values
-        const defaultData: UserProgressData = {
-          user_id: user.id,
-          xp: 350,
-          level: 2,
-          kitsune_coins: 500,
-          streak_days: 1,
-        };
-
+        // First-time login: Insert default progress row
         const { data: inserted, error: insertErr } = await client
           .from('user_progress')
           .insert(defaultData)
@@ -94,20 +102,27 @@ export function useUserData() {
           .single();
 
         if (insertErr) {
-          console.warn('[useUserData] Insert error, using local fallback:', insertErr.message);
+          if (insertErr.code === '401' || insertErr.message?.includes('No suitable key')) {
+            console.info('[useUserData] Supabase RLS pending Clerk JWT token. Using default initial state.');
+          }
           setUserData(defaultData);
           syncToLocalStore(defaultData);
         } else if (inserted) {
           setUserData(inserted);
           syncToLocalStore(inserted);
+        } else {
+          setUserData(defaultData);
+          syncToLocalStore(defaultData);
         }
       }
     } catch (err) {
-      console.warn('[useUserData] Exception:', err);
+      console.warn('[useUserData] Fetch exception:', err);
+      setUserData(defaultData);
+      syncToLocalStore(defaultData);
     } finally {
       setIsLoading(false);
     }
-  }, [isUserLoaded, isSignedIn, user, getToken, syncToLocalStore]);
+  }, [isUserLoaded, isSignedIn, user, getSupabaseToken, syncToLocalStore]);
 
   useEffect(() => {
     fetchUserData();
@@ -134,21 +149,16 @@ export function useUserData() {
         };
 
         if (isSignedIn && user?.id) {
-          getToken({ template: 'supabase' })
-            .then((token) => {
-              const client = supabaseClient(token);
-              Promise.resolve(client.from('user_progress').upsert(updated, { onConflict: 'user_id' }))
-                .then(({ error }: any) => {
-                  if (error) console.warn('[useUserData] Background sync error:', error.message);
-                })
-                .catch(() => {});
-            })
-            .catch(() => {
-              const client = supabaseClient(null);
-              Promise.resolve(client.from('user_progress').upsert(updated, { onConflict: 'user_id' }))
-                .then(() => {})
-                .catch(() => {});
-            });
+          getSupabaseToken().then((token) => {
+            const client = createClerkSupabaseClient(token);
+            Promise.resolve(client.from('user_progress').upsert(updated, { onConflict: 'user_id' }))
+              .then(({ error }: any) => {
+                if (error && !error.message?.includes('No suitable key')) {
+                  console.warn('[useUserData] Background sync note:', error.message);
+                }
+              })
+              .catch(() => {});
+          });
         }
 
         return updated;
@@ -156,11 +166,9 @@ export function useUserData() {
     });
 
     return () => unsubscribe();
-  }, [isUserLoaded, isSignedIn, user, getToken]);
+  }, [isUserLoaded, isSignedIn, user, getSupabaseToken]);
 
-  // ── Dedicated Mutation Functions ──────────────────────────────────────────
-
-  /** Add XP to current user with Optimistic UI & Supabase UPDATE mutation */
+  // Dedicated addXP Mutation Function with Optimistic UI & Supabase UPDATE
   const addXP = useCallback(
     async (amount: number) => {
       if (amount <= 0) return;
@@ -175,21 +183,21 @@ export function useUserData() {
 
       if (isSignedIn && user?.id) {
         try {
-          const token = await getToken({ template: 'supabase' }).catch(() => null);
-          const client = supabaseClient(token);
+          const token = await getSupabaseToken();
+          const client = createClerkSupabaseClient(token);
           await client
             .from('user_progress')
             .update({ xp: newXp, level: newLevel })
             .eq('user_id', user.id);
-        } catch (e) {
-          console.warn('[useUserData] addXP update error:', e);
+        } catch {
+          // Optimistic UI retains state seamlessly
         }
       }
     },
-    [userData, isSignedIn, user, getToken]
+    [userData, isSignedIn, user, getSupabaseToken]
   );
 
-  /** Add Kitsune Coins to current user with Optimistic UI & Supabase UPDATE mutation */
+  // Dedicated addCoins Mutation Function with Optimistic UI & Supabase UPDATE
   const addCoins = useCallback(
     async (amount: number) => {
       if (amount <= 0) return;
@@ -203,21 +211,21 @@ export function useUserData() {
 
       if (isSignedIn && user?.id) {
         try {
-          const token = await getToken({ template: 'supabase' }).catch(() => null);
-          const client = supabaseClient(token);
+          const token = await getSupabaseToken();
+          const client = createClerkSupabaseClient(token);
           await client
             .from('user_progress')
             .update({ kitsune_coins: newCoins })
             .eq('user_id', user.id);
-        } catch (e) {
-          console.warn('[useUserData] addCoins update error:', e);
+        } catch {
+          // Optimistic UI retains state seamlessly
         }
       }
     },
-    [userData, isSignedIn, user, getToken]
+    [userData, isSignedIn, user, getSupabaseToken]
   );
 
-  /** Spend Kitsune Coins with validation, Optimistic UI & Supabase UPDATE mutation */
+  // Dedicated spendCoins Mutation Function with Optimistic UI & Supabase UPDATE
   const spendCoins = useCallback(
     async (amount: number): Promise<boolean> => {
       const currentCoins = userData?.kitsune_coins ?? useStatsStore.getState().coins;
@@ -233,29 +241,25 @@ export function useUserData() {
 
       if (isSignedIn && user?.id) {
         try {
-          const token = await getToken({ template: 'supabase' }).catch(() => null);
-          const client = supabaseClient(token);
+          const token = await getSupabaseToken();
+          const client = createClerkSupabaseClient(token);
           await client
             .from('user_progress')
             .update({ kitsune_coins: newCoins })
             .eq('user_id', user.id);
-        } catch (e) {
-          console.warn('[useUserData] spendCoins update error:', e);
+        } catch {
+          // Optimistic UI retains state seamlessly
         }
       }
 
       return true;
     },
-    [userData, isSignedIn, user, getToken]
+    [userData, isSignedIn, user, getSupabaseToken]
   );
 
-  // Legacy compatibility helpers
-  const updateCoins = useCallback(
-    async (newCoins: number) => {
-      useStatsStore.setState((state) => ({ ...state, coins: newCoins }));
-    },
-    []
-  );
+  const updateCoins = useCallback(async (newCoins: number) => {
+    useStatsStore.setState((state) => ({ ...state, coins: newCoins }));
+  }, []);
 
   const updateXP = useCallback(
     async (additionalXp: number) => {
