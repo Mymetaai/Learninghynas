@@ -137,18 +137,15 @@ export function useUserData() {
           getToken({ template: 'supabase' })
             .then((token) => {
               const client = supabaseClient(token);
-              client
-                .from('user_progress')
-                .upsert(updated, { onConflict: 'user_id' })
-                .then(({ error }) => {
+              Promise.resolve(client.from('user_progress').upsert(updated, { onConflict: 'user_id' }))
+                .then(({ error }: any) => {
                   if (error) console.warn('[useUserData] Background sync error:', error.message);
-                });
+                })
+                .catch(() => {});
             })
             .catch(() => {
               const client = supabaseClient(null);
-              client
-                .from('user_progress')
-                .upsert(updated, { onConflict: 'user_id' })
+              Promise.resolve(client.from('user_progress').upsert(updated, { onConflict: 'user_id' }))
                 .then(() => {})
                 .catch(() => {});
             });
