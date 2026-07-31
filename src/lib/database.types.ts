@@ -12,6 +12,32 @@ export type Database = {
   };
   public: {
     Tables: {
+      user_progress: {
+        Row: {
+          user_id: string;
+          xp: number;
+          level: number;
+          kitsune_coins: number;
+          streak_days: number;
+          created_at: string;
+        };
+        Insert: {
+          user_id: string;
+          xp?: number;
+          level?: number;
+          kitsune_coins?: number;
+          streak_days?: number;
+          created_at?: string;
+        };
+        Update: {
+          user_id?: string;
+          xp?: number;
+          level?: number;
+          kitsune_coins?: number;
+          streak_days?: number;
+          created_at?: string;
+        };
+      };
       immersion_chat_messages: {
         Row: {
           created_at: string;

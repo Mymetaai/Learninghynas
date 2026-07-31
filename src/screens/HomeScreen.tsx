@@ -1,5 +1,7 @@
 import { useState, useMemo, useEffect, type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '@clerk/clerk-react';
+import { useUserData } from '../hooks/useUserData';
 import {
   Lightbulb,
   AlertTriangle,
@@ -12,6 +14,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { vaultInsights } from '../data/vaultInsightsData';
+import AppleActivityCard from '../components/AppleActivityCard';
 
 // ── 1. MOCK DATA STORE (Simulated API Response) ─────────────────────────────
 
@@ -134,9 +137,20 @@ const renderLessonIcon = (iconType: string) => {
 
 const HomeScreen: FC = () => {
   const navigate = useNavigate();
+  const { user } = useUser();
+  const { userData: liveUserData, isLoading } = useUserData();
 
-  // Component State (Simulating live data fetched from API)
+  // Component State
   const [userData] = useState<MockUserData>(initialMockUserData);
+
+  // User details derived from Clerk & Supabase user_progress
+  const displayName = user?.firstName || user?.fullName || 'Traveler';
+  const userAvatar = user?.imageUrl;
+  const currentXp = liveUserData?.xp ?? 350;
+  const levelNumber = liveUserData?.level ?? 2;
+  const maxXp = levelNumber * 600;
+  const levelBadge = levelNumber >= 3 ? 'C1' : levelNumber === 2 ? 'B2' : 'A1';
+  const levelName = levelNumber >= 3 ? 'Advanced' : levelNumber === 2 ? 'Intermediate' : 'Beginner';
 
   // Vault Insights Randomized Shuffle State (95 items from vaultInsightsData)
   const [insightIndex, setInsightIndex] = useState<number>(() =>
@@ -145,7 +159,7 @@ const HomeScreen: FC = () => {
   const [fadeState, setFadeState] = useState<'fade-in' | 'fade-out'>('fade-in');
   const [isInsightHovered, setIsInsightHovered] = useState<boolean>(false);
 
-  // Interval timer for 3.5s randomized shuffle (no-repeat logic + hover pause + 300ms fade)
+  // Interval timer for 3.5s randomized shuffle
   useEffect(() => {
     if (isInsightHovered) return;
 
@@ -170,12 +184,6 @@ const HomeScreen: FC = () => {
 
   const currentInsight = vaultInsights[insightIndex] || vaultInsights[0];
 
-  // Dynamic Progress Calculation
-  const progressPercentage = useMemo(() => {
-    const { currentXp, maxXp } = userData.userProgress;
-    return Math.min(Math.round((currentXp / maxXp) * 100), 100);
-  }, [userData.userProgress]);
-
   // Dynamic Goal Circumference: Circumference = 2 * PI * 18 = 113.1
   const goalDashOffset = useMemo(() => {
     const circumference = 113.1;
@@ -183,16 +191,40 @@ const HomeScreen: FC = () => {
     return circumference - (circumference * percentage) / 100;
   }, [userData.userProgress.dailyGoalPercentage]);
 
-  // Dynamic Level Ring Circumference: Circumference = 2 * PI * 60 = 377
-  const levelDashOffset = useMemo(() => {
-    const circumference = 377;
-    return circumference - (circumference * progressPercentage) / 100;
-  }, [progressPercentage]);
-
   // Dynamic Max Weekly Minutes for relative bar height
   const maxWeeklyMinutes = useMemo(() => {
     return Math.max(...userData.weeklyActivity.map((d) => d.minutes), 45);
   }, [userData.weeklyActivity]);
+
+  // ── SKELETON LOADER (Serene Lexicon Style) ──────────────────────────────────
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-[#F9F7F2] text-[#2F353B] font-sans p-4 sm:p-6 lg:p-8">
+        <div className="mx-auto max-w-6xl space-y-8 animate-pulse">
+          {/* Header Skeleton */}
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-2 border-b border-[#777775]/20">
+            <div className="space-y-2">
+              <div className="h-8 w-56 bg-white rounded-xl border border-[#777775]/10" />
+              <div className="h-4 w-72 bg-white/70 rounded-lg border border-[#777775]/10" />
+            </div>
+            <div className="h-14 w-44 bg-white rounded-2xl border border-[#777775]/20" />
+          </div>
+
+          {/* Dashboard Skeleton Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <div className="lg:col-span-5 h-[420px] bg-white rounded-2xl border border-[#777775]/20 p-6 flex flex-col justify-between" />
+            <div className="lg:col-span-7 flex flex-col gap-6">
+              <div className="h-44 bg-white rounded-2xl border border-[#777775]/20 p-6" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="h-44 bg-white rounded-2xl border border-[#777775]/20 p-6" />
+                <div className="h-44 bg-[#2F353B]/10 rounded-2xl border border-[#777775]/20 p-6" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#F9F7F2] text-[#2F353B] font-sans p-4 sm:p-6 lg:p-8">
@@ -200,13 +232,22 @@ const HomeScreen: FC = () => {
         
         {/* ── HERO HEADER SECTION ─────────────────────────────────── */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-2 border-b border-[#777775]/20">
-          <div>
-            <h1 className="font-serif text-3xl md:text-4xl font-bold text-[#2F353B]">
-              Your Journey
-            </h1>
-            <p className="font-sans text-xs md:text-sm text-[#777775] mt-1 max-w-xl leading-relaxed">
-              The path to fluency is paved with consistency. Track your growth and master new patterns today.
-            </p>
+          <div className="flex items-center gap-4">
+            {userAvatar && (
+              <img
+                src={userAvatar}
+                alt={displayName}
+                className="w-12 h-12 rounded-full border-2 border-[#7D927D]/40 shadow-sm object-cover shrink-0"
+              />
+            )}
+            <div>
+              <h1 className="font-serif text-3xl md:text-4xl font-bold text-[#2F353B]">
+                Welcome, {displayName}
+              </h1>
+              <p className="font-sans text-xs md:text-sm text-[#777775] mt-1 max-w-xl leading-relaxed">
+                The path to fluency is paved with consistency. Track your growth and master new patterns today.
+              </p>
+            </div>
           </div>
 
           {/* Right Aligned Daily Goal Widget */}
@@ -246,142 +287,138 @@ const HomeScreen: FC = () => {
           </div>
         </div>
 
-        {/* ── TOP GRID LAYOUT (3 Columns, 2 Rows) ──────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* ── MAIN DASHBOARD GRID ───────────────────────────────────── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
-          {/* Left Column (Spans 2 Rows): Course Level Card */}
-          <div className="md:row-span-2 bg-white border border-[#777775]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between h-full min-h-[360px]">
-            <div className="border-b border-[#777775]/15 pb-3">
-              <h2 className="font-serif text-lg font-bold text-[#2F353B]">Course Level</h2>
-              <p className="font-sans text-xs text-[#777775] mt-0.5">CEFR Assessment Standard</p>
+          {/* Left: Course Level Activity Rings (5 of 12 cols) */}
+          <div className="lg:col-span-5">
+            <AppleActivityCard
+              level={levelBadge}
+              levelName={levelName}
+              xpData={{
+                label: "XP PROGRESS",
+                sublabel: `Level ${levelNumber} Journey`,
+                current: currentXp,
+                target: maxXp,
+                unit: "XP",
+                color: "#C4796B",
+                endColor: "#E09385",
+              }}
+              modulesData={{
+                label: "COURSE MASTERY",
+                sublabel: "Modules Completed",
+                current: 18,
+                target: 24,
+                unit: "MODS",
+                color: "#7D927D",
+                endColor: "#9BB39B",
+              }}
+              vocabData={{
+                label: "VOCAB MASTERED",
+                sublabel: "B2 Lexicon Set",
+                current: 42,
+                target: 60,
+                unit: "WORDS",
+                color: "#4A7B9D",
+                endColor: "#679ABF",
+              }}
+            />
+          </div>
+
+          {/* Right: Weekly Activity + small widgets (7 of 12 cols) */}
+          <div className="lg:col-span-7 flex flex-col gap-6">
+            
+            {/* Weekly Activity */}
+            <div className="bg-white border border-[#777775]/20 rounded-2xl p-6 shadow-sm">
+              <div className="flex items-center justify-between border-b border-[#777775]/15 pb-3 mb-4">
+                <div>
+                  <h2 className="font-serif text-lg font-bold text-[#2F353B]">Weekly Activity</h2>
+                  <p className="font-sans text-xs text-[#777775] mt-0.5">Study minutes tracked this week</p>
+                </div>
+                <span className="font-sans text-[11px] font-semibold text-[#7D927D] bg-[#F9F7F2] border border-[#777775]/20 px-3 py-1 rounded-full shrink-0">
+                  Avg 30m / day
+                </span>
+              </div>
+              <div className="flex items-end justify-between gap-3 h-28">
+                {userData.weeklyActivity.map((d) => {
+                  const heightPercent = Math.round((d.minutes / maxWeeklyMinutes) * 100);
+                  return (
+                    <div key={d.day} className="flex-1 flex flex-col items-center gap-1.5 group cursor-pointer">
+                      <span className="font-mono text-[10px] text-[#777775] opacity-0 group-hover:opacity-100 transition-opacity">
+                        {d.minutes}m
+                      </span>
+                      <div
+                        className="w-full bg-[#7D927D] rounded-t-md group-hover:bg-[#6B826B] transition-colors duration-200"
+                        style={{ height: `${Math.max(heightPercent, 8)}%` }}
+                        title={`${d.day}: ${d.minutes} mins`}
+                      />
+                      <span className="font-sans text-[11px] text-[#777775] group-hover:text-[#2F353B] font-medium transition-colors">
+                        {d.day}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
 
-            {/* Centerpiece: Large Thin Circular Ring */}
-            <div className="flex flex-col items-center justify-center py-6 my-auto">
-              <div className="relative flex items-center justify-center">
-                <svg width="140" height="140" className="transform -rotate-90">
-                  <circle
-                    cx="70"
-                    cy="70"
-                    r="60"
-                    className="stroke-[#F9F7F2] fill-none"
-                    strokeWidth="5"
-                  />
-                  <circle
-                    cx="70"
-                    cy="70"
-                    r="60"
-                    className="stroke-[#7D927D] fill-none"
-                    strokeWidth="5"
-                    strokeDasharray="377"
-                    strokeDashoffset={levelDashOffset}
-                    strokeLinecap="round"
-                  />
-                </svg>
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                  <span className="font-serif text-3xl font-bold text-[#2F353B]">
-                    {userData.userProgress.level}
-                  </span>
-                  <span className="font-sans text-xs text-[#777775] mt-0.5">
-                    {userData.userProgress.levelName}
+            {/* Lexicon Growth + Vault Insights side-by-side */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              
+              {/* Lexicon Growth */}
+              <div className="bg-white border border-[#777775]/20 rounded-2xl p-5 shadow-sm flex flex-col gap-3">
+                <div className="border-b border-[#777775]/15 pb-2.5">
+                  <h2 className="font-serif text-base font-bold text-[#2F353B]">Lexicon Growth</h2>
+                  <p className="font-sans text-[11px] text-[#777775] mt-0.5">Mastered vocabulary by tier</p>
+                </div>
+                <div className="space-y-2">
+                  {userData.lexiconStats.map((item) => (
+                    <div key={item.level} className="flex items-center justify-between text-xs font-sans p-2 rounded-lg bg-[#F9F7F2]/60 border border-[#777775]/10">
+                      <span className="text-[#2F353B] font-medium">{item.level}</span>
+                      <span className="text-[#7D927D] font-mono font-semibold">{item.words} words</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="border-t border-[#777775]/15 pt-2.5">
+                  <span className="font-sans text-[11px] text-[#777775]">
+                    Total: <strong className="text-[#2F353B]">26 Words</strong> mastered
                   </span>
                 </div>
               </div>
-            </div>
 
-            {/* Bottom: Thin Linear Progress Bar */}
-            <div className="space-y-2 border-t border-[#777775]/15 pt-4">
-              <div className="w-full h-2 bg-[#F9F7F2] rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-[#7D927D] rounded-full transition-all duration-500" 
-                  style={{ width: `${progressPercentage}%` }} 
-                />
-              </div>
-              <div className="flex items-center justify-between font-sans text-xs text-[#777775] font-medium">
-                <span>{userData.userProgress.currentXp} XP</span>
-                <span>{userData.userProgress.maxXp} XP</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Top Right (Spans 2 Columns): Weekly Activity Card */}
-          <div className="md:col-span-2 bg-white border border-[#777775]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between min-h-[200px]">
-            <div className="flex items-center justify-between border-b border-[#777775]/15 pb-3">
-              <h2 className="font-serif text-lg font-bold text-[#2F353B]">Weekly Activity</h2>
-              <span className="font-sans text-xs text-[#777775]">Average 30m / day</span>
-            </div>
-
-            {/* Flat Bar Chart Dynamically Mapped */}
-            <div className="flex items-end justify-between gap-3 h-28 pt-4">
-              {userData.weeklyActivity.map((d) => {
-                const heightPercent = Math.round((d.minutes / maxWeeklyMinutes) * 100);
-                return (
-                  <div key={d.day} className="flex-1 flex flex-col items-center gap-2 group cursor-pointer">
-                    <div 
-                      className="w-full bg-[#7D927D] rounded-t-md hover:opacity-90 transition-all duration-300"
-                      style={{ height: `${Math.max(heightPercent, 10)}%` }}
-                      title={`${d.day}: ${d.minutes} mins`}
-                    />
-                    <span className="font-sans text-xs text-[#777775] group-hover:text-[#2F353B] transition-colors">
-                      {d.day}
+              {/* Vault Insights */}
+              <div
+                onMouseEnter={() => setIsInsightHovered(true)}
+                onMouseLeave={() => setIsInsightHovered(false)}
+                className="bg-[#2F353B] border border-[#777775]/20 rounded-2xl p-5 shadow-sm relative overflow-hidden flex flex-col justify-between text-white group transition-all"
+              >
+                <div className="absolute -right-4 -bottom-4 opacity-10 pointer-events-none">
+                  <Lightbulb className="w-28 h-28 text-white" />
+                </div>
+                <div className={`transition-opacity duration-300 ${fadeState === 'fade-in' ? 'opacity-100' : 'opacity-0'}`}>
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="font-sans text-[10px] uppercase tracking-widest font-bold text-[#7D927D]">
+                      {currentInsight.tag}
+                    </span>
+                    <span className="font-sans text-[9px] font-medium text-white/70 bg-white/10 px-2 py-0.5 rounded-full border border-white/10 shrink-0">
+                      {currentInsight.category}
                     </span>
                   </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Bottom Middle: Lexicon Growth Card */}
-          <div className="bg-white border border-[#777775]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between min-h-[170px]">
-            <div className="border-b border-[#777775]/15 pb-3">
-              <h2 className="font-serif text-base font-bold text-[#2F353B]">Lexicon Growth</h2>
-            </div>
-            
-            {/* Dynamic Lexicon List Mapping */}
-            <div className="space-y-2.5 py-2">
-              {userData.lexiconStats.map((item) => (
-                <div key={item.level} className="flex items-center justify-between text-xs font-sans">
-                  <span className="text-[#2F353B] font-medium">{item.level}</span>
-                  <span className="text-[#777775] font-semibold">{item.words} words</span>
+                  <p className="font-serif italic text-sm text-white/95 leading-relaxed min-h-[52px]">
+                    &ldquo;{currentInsight.quote}&rdquo;
+                  </p>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Bottom Right: Whimsical Vault Insights Widget */}
-          <div
-            onMouseEnter={() => setIsInsightHovered(true)}
-            onMouseLeave={() => setIsInsightHovered(false)}
-            className="bg-[#2F353B] border border-[#777775]/20 rounded-2xl p-6 shadow-sm relative overflow-hidden flex flex-col justify-between text-white min-h-[180px] group transition-all"
-          >
-            <div className="absolute -right-4 -bottom-4 opacity-10 pointer-events-none">
-              <Lightbulb className="w-32 h-32 text-white" />
-            </div>
-
-            <div className={`transition-opacity duration-300 ${fadeState === 'fade-in' ? 'opacity-100' : 'opacity-0'}`}>
-              <div className="flex items-center justify-between gap-2 mb-2">
-                <span className="font-sans text-[10px] uppercase tracking-widest font-bold text-[#7D927D]">
-                  {currentInsight.tag}
-                </span>
-                <span className="font-sans text-[9px] font-medium text-white/70 bg-white/10 px-2 py-0.5 rounded-full border border-white/10 shrink-0">
-                  {currentInsight.category}
-                </span>
-              </div>
-              <p className="font-serif italic text-sm text-white/95 leading-relaxed min-h-[56px]">
-                &ldquo;{currentInsight.quote}&rdquo;
-              </p>
-            </div>
-
-            <div className="flex items-center justify-between pt-3 border-t border-white/10 mt-2">
-              <span className="text-[10px] font-sans text-white/60">
-                Vault Insight #{insightIndex + 1}
-              </span>
-              <div
-                className="flex items-center gap-1.5 text-[#7D927D]"
-                title={isInsightHovered ? "Paused on hover" : "Vault shuffling insights..."}
-              >
-                <Sparkles className={`w-3.5 h-3.5 ${isInsightHovered ? '' : 'animate-pulse'}`} />
-                <span className="text-[9px] font-mono text-white/40">95 INSIGHTS</span>
+                <div className="flex items-center justify-between pt-2.5 border-t border-white/10 mt-2">
+                  <span className="text-[10px] font-sans text-white/60">
+                    Vault Insight #{insightIndex + 1}
+                  </span>
+                  <div
+                    className="flex items-center gap-1.5 text-[#7D927D]"
+                    title={isInsightHovered ? "Paused on hover" : "Vault shuffling insights..."}
+                  >
+                    <Sparkles className={`w-3.5 h-3.5 ${isInsightHovered ? '' : 'animate-pulse'}`} />
+                    <span className="text-[9px] font-mono text-white/40">95 INSIGHTS</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { NAV_TABS } from '../app/routes';
 import { useStatsStore } from '../state/statsStore';
 import { useSettingsStore } from '../state/settingsStore';
+import { useUserData } from '../hooks/useUserData';
 import {
   SignedIn,
   SignedOut,
@@ -11,9 +12,14 @@ import {
 } from '@clerk/clerk-react';
 
 const HUD: FC = () => {
-  const xp = useStatsStore((s) => s.xp);
-  const coins = useStatsStore((s) => s.coins);
-  const streak = useStatsStore((s) => s.streak);
+  const { userData } = useUserData();
+  const statsXp = useStatsStore((s) => s.xp);
+  const statsCoins = useStatsStore((s) => s.coins);
+  const statsStreak = useStatsStore((s) => s.streak);
+
+  const xp = userData?.xp ?? statsXp;
+  const coins = userData?.kitsune_coins ?? statsCoins;
+  const streak = userData?.streak_days ?? statsStreak;
   const { language, setLanguage } = useSettingsStore();
 
   // ── Edge-Hover Auto-Scrolling ─────────────────────────────────────────

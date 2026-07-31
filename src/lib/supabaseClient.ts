@@ -1,5 +1,4 @@
 import { createClient } from '@supabase/supabase-js';
-import type { Database } from './database.types';
 import { useStatsStore } from '../state/statsStore';
 import { useActiveImmersionStore } from '../state/activeImmersionStore';
 import { useAuthStore } from '../state/authStore';
@@ -9,9 +8,28 @@ const supabaseAnonKey =
   import.meta.env.VITE_SUPABASE_ANON_KEY ||
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN6Y3RidHh3emZmbnZub3F1Z3l5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ3MzYxMjksImV4cCI6MjEwMDMxMjEyOX0.Ktql4HSI2FFTGb5h-ixdz8PIXbNlkVTE7kRxQJWzPAo';
 
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
+export const supabase = createClient<any>(supabaseUrl, supabaseAnonKey, {
   auth: { persistSession: true, autoRefreshToken: true },
 });
+
+/**
+ * Creates or returns a Supabase client configured with the active Clerk session JWT
+ * in the Authorization global header for Row Level Security (RLS).
+ */
+export const supabaseClient = (clerkToken?: string | null) => {
+  if (!clerkToken) {
+    return supabase;
+  }
+
+  return createClient<any>(supabaseUrl, supabaseAnonKey, {
+    global: {
+      headers: {
+        Authorization: `Bearer ${clerkToken}`,
+      },
+    },
+    auth: { persistSession: false },
+  });
+};
 
 let activeUserId: string | null = null;
 
