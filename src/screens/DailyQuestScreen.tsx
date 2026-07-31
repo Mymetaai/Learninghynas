@@ -23,7 +23,11 @@ import type { Exercise } from '../content/types';
 import ExerciseCard from '../components/exercises/ExerciseCard';
 import Confetti from '../components/Confetti';
 
-const DailyQuestScreen: FC = () => {
+interface DailyQuestScreenProps {
+  onActiveQuestChange?: (active: boolean) => void;
+}
+
+const DailyQuestScreen: FC<DailyQuestScreenProps> = ({ onActiveQuestChange }) => {
   const getTodaysMicroQuests = useDailyQuestStore((s) => s.getTodaysMicroQuests);
   const isMicroQuestDone = useDailyQuestStore((s) => s.isMicroQuestDone);
   const completeMicroQuest = useDailyQuestStore((s) => s.completeMicroQuest);
@@ -36,7 +40,15 @@ const DailyQuestScreen: FC = () => {
   const microQuests = useMemo(() => getTodaysMicroQuests(), [getTodaysMicroQuests]);
 
   // Which micro-quest is currently being played (null = list view).
-  const [activeQuest, setActiveQuest] = useState<MicroQuest | null>(null);
+  const [activeQuest, setActiveQuestState] = useState<MicroQuest | null>(null);
+
+  const setActiveQuest = useCallback(
+    (quest: MicroQuest | null) => {
+      setActiveQuestState(quest);
+      onActiveQuestChange?.(!!quest);
+    },
+    [onActiveQuestChange]
+  );
 
   // Confetti trigger
   const [confetti, setConfetti] = useState(false);
@@ -55,15 +67,15 @@ const DailyQuestScreen: FC = () => {
       window.setTimeout(() => setConfetti(false), 2700);
       window.setTimeout(() => setActiveQuest(null), 2900);
     },
-    [completeMicroQuest],
+    [completeMicroQuest, setActiveQuest],
   );
 
   // ── Active play view ────────────────────────────────────────────────────
   if (activeQuest) {
     return (
-      <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base px-4 py-2 sm:py-4">
+      <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base px-4 py-4 sm:py-6">
         <Confetti fire={confetti} />
-        <div className="mx-auto max-w-lg pt-3 sm:pt-6">
+        <div className="mx-auto max-w-lg pt-8 sm:pt-12">
           <MicroQuestPlayer
             microQuest={activeQuest}
             alreadyDone={isMicroQuestDone(activeQuest.id)}
