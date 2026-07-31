@@ -199,26 +199,24 @@ const HomeScreen: FC = () => {
   // ── SKELETON LOADER (Serene Lexicon Style) ──────────────────────────────────
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#F9F7F2] text-[#2F353B] font-sans p-4 sm:p-6 lg:p-8">
-        <div className="mx-auto max-w-6xl space-y-8 animate-pulse">
-          {/* Header Skeleton */}
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-2 border-b border-[#777775]/20">
-            <div className="space-y-2">
-              <div className="h-8 w-56 bg-white rounded-xl border border-[#777775]/10" />
-              <div className="h-4 w-72 bg-white/70 rounded-lg border border-[#777775]/10" />
-            </div>
-            <div className="h-14 w-44 bg-white rounded-2xl border border-[#777775]/20" />
+      <div className="w-full text-[#2F353B] font-sans py-2 space-y-8 animate-pulse">
+        {/* Header Skeleton */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-2 border-b border-[#777775]/20">
+          <div className="space-y-2">
+            <div className="h-8 w-56 bg-white rounded-xl border border-[#777775]/10" />
+            <div className="h-4 w-72 bg-white/70 rounded-lg border border-[#777775]/10" />
           </div>
+          <div className="h-14 w-44 bg-white rounded-2xl border border-[#777775]/20" />
+        </div>
 
-          {/* Dashboard Skeleton Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-            <div className="lg:col-span-5 h-[420px] bg-white rounded-2xl border border-[#777775]/20 p-6 flex flex-col justify-between" />
-            <div className="lg:col-span-7 flex flex-col gap-6">
+        {/* Dashboard Skeleton Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div className="lg:col-span-5 h-[420px] bg-white rounded-2xl border border-[#777775]/20 p-6 flex flex-col justify-between" />
+          <div className="lg:col-span-7 flex flex-col gap-6">
+            <div className="h-44 bg-white rounded-2xl border border-[#777775]/20 p-6" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="h-44 bg-white rounded-2xl border border-[#777775]/20 p-6" />
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="h-44 bg-white rounded-2xl border border-[#777775]/20 p-6" />
-                <div className="h-44 bg-[#2F353B]/10 rounded-2xl border border-[#777775]/20 p-6" />
-              </div>
+              <div className="h-44 bg-[#2F353B]/10 rounded-2xl border border-[#777775]/20 p-6" />
             </div>
           </div>
         </div>
@@ -227,8 +225,7 @@ const HomeScreen: FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#F9F7F2] text-[#2F353B] font-sans p-4 sm:p-6 lg:p-8">
-      <div className="mx-auto max-w-6xl space-y-8">
+    <div className="w-full text-[#2F353B] font-sans space-y-8 py-2">
         
         {/* ── HERO HEADER SECTION ─────────────────────────────────── */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-2 border-b border-[#777775]/20">
@@ -519,7 +516,6 @@ const HomeScreen: FC = () => {
           </div>
         </div>
 
-      </div>
     </div>
   );
 };
