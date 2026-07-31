@@ -1,6 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
 import { useStatsStore } from '../state/statsStore';
-import { useActiveImmersionStore } from '../state/activeImmersionStore';
 import { useAuthStore } from '../state/authStore';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://szctbtxwzffnvnoqugyy.supabase.co';
@@ -56,7 +55,6 @@ export const syncLocalStoresToSupabase = async (userId: string): Promise<boolean
 
   try {
     const stats = useStatsStore.getState();
-    const immersion = useActiveImmersionStore.getState();
     const auth = useAuthStore.getState();
 
     const payload = {
@@ -66,11 +64,6 @@ export const syncLocalStoresToSupabase = async (userId: string): Promise<boolean
       kitsune_coins: stats.coins || 500,
       streak_days: stats.streak || 0,
       learned_vocab: stats.learnedVocab || [],
-      immersion_history: immersion.completedLogs || [],
-      auth_profile: {
-        theme: auth.themePreference || 'light',
-        sound: auth.soundEnabled ?? true,
-      },
       updated_at: new Date().toISOString(),
     };
 
@@ -85,4 +78,17 @@ export const syncLocalStoresToSupabase = async (userId: string): Promise<boolean
     console.warn('[Supabase Sync] Exception during sync:', err);
     return false;
   }
+};
+
+/** Legacy Sync Helper Functions for store compatibility */
+export const syncUserStats = async (userId: string, xp?: number, coins?: number, streak?: number) => {
+  return syncLocalStoresToSupabase(userId);
+};
+
+export const syncLearnedVocab = async (userId: string, vocab: string[]) => {
+  return syncLocalStoresToSupabase(userId);
+};
+
+export const syncImmersionMessages = async (userId: string, messages: any[]) => {
+  return syncLocalStoresToSupabase(userId);
 };
