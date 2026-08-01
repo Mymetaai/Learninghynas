@@ -111,9 +111,26 @@ export function useUserData() {
       }
 
       if (data) {
-        setUserData(data);
-        saveStoredUserData(user.id, data);
-        syncToLocalStore(data);
+        const bestXp = Math.max(data.xp || 0, initialData.xp || 0, localStats.xp || 0);
+        const bestCoins = Math.max(data.kitsune_coins || 0, initialData.kitsune_coins || 0, localStats.coins || 0);
+        const bestStreak = Math.max(data.streak_days || 0, initialData.streak_days || 0, localStats.streak || 0);
+        const bestLevel = Math.max(1, Math.floor(bestXp / 600) + 1);
+
+        const merged: UserProgressData = {
+          user_id: user.id,
+          xp: bestXp,
+          level: bestLevel,
+          kitsune_coins: bestCoins,
+          streak_days: bestStreak,
+        };
+
+        setUserData(merged);
+        saveStoredUserData(user.id, merged);
+        syncToLocalStore(merged);
+
+        if (bestXp > (data.xp || 0) || bestCoins > (data.kitsune_coins || 0)) {
+          client.from('user_progress').upsert(merged, { onConflict: 'user_id' }).then(() => {}).catch(() => {});
+        }
       } else {
         // First-time or missing row: Upsert initialData
         const { data: inserted, error: insertErr } = await client

@@ -51,6 +51,23 @@ export const setCurrentUserId = (userId: string | null, tokenGetter?: (() => Pro
 };
 
 /**
+ * LocalStorage helpers for per-user progress caching
+ */
+export const getStoredUserData = (userId: string): any => {
+  try {
+    const raw = localStorage.getItem(`wayfarer_user_progress_${userId}`);
+    if (raw) return JSON.parse(raw);
+  } catch {}
+  return null;
+};
+
+export const saveStoredUserData = (userId: string, data: any): void => {
+  try {
+    localStorage.setItem(`wayfarer_user_progress_${userId}`, JSON.stringify(data));
+  } catch {}
+};
+
+/**
  * Global store sync helper. Reads local Zustand state and updates Supabase using Clerk Auth JWT token.
  */
 export const syncLocalStoresToSupabase = async (userId?: string | null, token?: string | null): Promise<boolean> => {
@@ -64,9 +81,11 @@ export const syncLocalStoresToSupabase = async (userId?: string | null, token?: 
       user_id: targetId,
       xp: stats.xp || 0,
       level: Math.max(1, Math.floor((stats.xp || 0) / 600) + 1),
-      kitsune_coins: stats.coins || 500,
+      kitsune_coins: typeof stats.coins === 'number' ? stats.coins : 100,
       streak_days: stats.streak || 0,
     };
+
+    saveStoredUserData(targetId, payload);
 
     let authToken = token;
     if (!authToken && activeClerkTokenGetter) {
