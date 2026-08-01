@@ -53,6 +53,7 @@ interface ActiveImmersionStore {
   resetSession: (mode: ImmersionMode, topic: string) => void;
   addLearnedWord: (sessionKey: string, word: string, meaning: string) => void;
   clearSessionError: (mode: ImmersionMode, topic: string) => void;
+  resetAllImmersionSessions: () => void;
 }
 
 const WELCOME_MESSAGES: Record<ImmersionMode, (topic: string) => { text: string; translation: string }> = {
@@ -479,6 +480,16 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
           });
         }
       },
+
+      resetAllImmersionSessions: () =>
+        set({
+          activeMode: null,
+          selectedTopic: null,
+          selectedAccent: null,
+          selectedLevel: 'beginner',
+          sessions: {},
+          isTyping: false,
+        }),
     }),
     {
       name: 'wayfarer-active-immersion',

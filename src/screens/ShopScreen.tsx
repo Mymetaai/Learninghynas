@@ -762,7 +762,7 @@ const ShopScreen: FC = () => {
                     <div className="w-56 sm:w-64 aspect-[2.5/3.5] rounded-2xl overflow-hidden border-2 border-[#D4AF37] ring-1 ring-[#D4AF37]/50 shadow-xl relative group transition-transform hover:scale-105 cursor-pointer bg-[#111111]">
                       {/* High-Fidelity Stitch Pack Image */}
                       <img
-                        src={selectedSeries === 'one-piece' ? '/cards/op_pack.png' : '/cards/ds_pack.png'}
+                        src={selectedSeries === 'one-piece' ? '/cards/op_pack_clean.jpg' : '/cards/ds_pack_clean.jpg'}
                         alt={selectedSeries === 'one-piece' ? 'One Piece Pack' : 'Demon Slayer Pack'}
                         className="w-full h-full object-cover"
                       />

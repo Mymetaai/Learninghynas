@@ -48,7 +48,7 @@ export const PackOpeningOverlay: FC<PackOpeningOverlayProps> = ({ isOpen, drawnC
   const glowColor = getRarityGlowColor(drawnCard.rank);
   const isHighRarity = drawnCard.rank === 'UR' || drawnCard.rank === 'SSR';
   const isDs = drawnCard.anime === 'Demon Slayer';
-  const packImage = isDs ? '/cards/ds_pack.png' : '/cards/op_pack.png';
+  const packImage = isDs ? '/cards/ds_pack_clean.jpg' : '/cards/op_pack_clean.jpg';
 
   return (
     <AnimatePresence>

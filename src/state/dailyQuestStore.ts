@@ -111,6 +111,8 @@ export interface DailyQuestState {
   claimDailyBonus: () => void;
   /** Is this micro-quest already done today? */
   isMicroQuestDone: (id: string) => boolean;
+  /** Reset daily quest progress */
+  resetDailyQuests: () => void;
 }
 
 const QUESTS_PER_DAY = 5;
@@ -170,6 +172,15 @@ export const useDailyQuestStore = create<DailyQuestState>()(
       },
 
       isMicroQuestDone: (id) => get().completedMicroQuestIds.includes(id),
+
+      resetDailyQuests: () =>
+        set({
+          activeDate: todayKey(),
+          completedMicroQuestIds: [],
+          totalCorrect: 0,
+          totalAnswered: 0,
+          dailyBonusClaimed: false,
+        }),
     }),
     {
       name: 'wayfarer-daily-quest',

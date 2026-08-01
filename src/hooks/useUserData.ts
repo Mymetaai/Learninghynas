@@ -4,6 +4,11 @@ import { createClerkSupabaseClient, setCurrentUserId } from '../lib/supabaseClie
 import { useStatsStore } from '../state/statsStore';
 import { useProgressStore } from '../state/progressStore';
 import { useQuestStore } from '../state/questStore';
+import { useDailyQuestStore } from '../state/dailyQuestStore';
+import { useShopStore } from '../state/shopStore';
+import { useTrainingStore } from '../state/trainingStore';
+import { useScenarioStore } from '../state/scenarioStore';
+import { useActiveImmersionStore } from '../state/activeImmersionStore';
 
 export interface UserProgressData {
   user_id: string;
@@ -312,12 +317,33 @@ export function useUserData() {
       streak_days: 1,
     };
 
-    // 1. Reset all Zustand stores
+    // 1. Reset ALL Zustand stores across the entire app
     useStatsStore.getState().reset();
     useProgressStore.getState().reset();
     useQuestStore.getState().resetQuestProgress();
+    useDailyQuestStore.getState().resetDailyQuests();
+    useShopStore.getState().resetShopInventory();
+    useTrainingStore.getState().clearAllMistakes();
+    useScenarioStore.getState().resetAllScenarios();
+    useActiveImmersionStore.getState().resetAllImmersionSessions();
 
-    // 2. Clear & update per-user localStorage
+    // 2. Clear all store persistence keys from localStorage
+    const keysToRemove = [
+      'wayfarer-daily-quest',
+      'wayfarer-progress',
+      'hyena-quest-store',
+      'hyena-shop-store',
+      'wayfarer-stats-store',
+      'wayfarer-active-immersion',
+      'wayfarer-training-store',
+      'wayfarer-scenarios',
+    ];
+    keysToRemove.forEach((key) => {
+      try {
+        localStorage.removeItem(key);
+      } catch {}
+    });
+
     if (user?.id) {
       saveStoredUserData(user.id, freshData);
     }

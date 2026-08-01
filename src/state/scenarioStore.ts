@@ -34,6 +34,7 @@ interface ScenarioStore {
   restartScenario: (scenario: Scenario) => void;
   addLearnedWord: (scenarioId: string, word: string, meaning: string) => void;
   clearError: (scenarioId: string) => void;
+  resetAllScenarios: () => void;
 }
 
 const initializeScenarioSession = (scenario: Scenario): ScenarioConversationState => ({
@@ -294,6 +295,13 @@ export const useScenarioStore = create<ScenarioStore>()(
           useStatsStore.getState().learnVocab([word.toLowerCase()], scenarioId);
         }
       },
+
+      resetAllScenarios: () =>
+        set({
+          activeScenarioId: null,
+          conversations: {},
+          isTyping: false,
+        }),
     }),
     {
       name: 'wayfarer-scenarios',
