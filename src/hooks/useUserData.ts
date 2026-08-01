@@ -129,7 +129,7 @@ export function useUserData() {
         syncToLocalStore(merged);
 
         if (bestXp > (data.xp || 0) || bestCoins > (data.kitsune_coins || 0)) {
-          client.from('user_progress').upsert(merged, { onConflict: 'user_id' }).then(() => {}).catch(() => {});
+          Promise.resolve(client.from('user_progress').upsert(merged, { onConflict: 'user_id' })).catch(() => {});
         }
       } else {
         // First-time or missing row: Upsert initialData
@@ -186,11 +186,13 @@ export function useUserData() {
 
         getSupabaseToken().then((token) => {
           const client = createClerkSupabaseClient(token);
-          client.from('user_progress').upsert(updated, { onConflict: 'user_id' }).then(({ error }: any) => {
-            if (error && !error.message?.includes('No suitable key')) {
-              console.warn('[useUserData] Background upsert note:', error.message);
-            }
-          }).catch(() => {});
+          Promise.resolve(client.from('user_progress').upsert(updated, { onConflict: 'user_id' }))
+            .then(({ error }: any) => {
+              if (error && !error.message?.includes('No suitable key')) {
+                console.warn('[useUserData] Background upsert note:', error.message);
+              }
+            })
+            .catch(() => {});
         });
 
         return updated;
