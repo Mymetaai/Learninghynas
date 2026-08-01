@@ -7,6 +7,7 @@ import {
   Lightbulb,
   AlertTriangle,
   RotateCw,
+  RotateCcw,
   Repeat,
   Wand2,
   Clock,
@@ -139,11 +140,12 @@ const renderLessonIcon = (iconType: string) => {
 const HomeScreen: FC = () => {
   const navigate = useNavigate();
   const { user } = useUser();
-  const { userData: liveUserData, isLoading } = useUserData();
+  const { userData: liveUserData, isLoading, resetAllUserProgress } = useUserData();
   const statsXp = useStatsStore((s) => s.xp);
 
   // Component State
   const [userData] = useState<MockUserData>(initialMockUserData);
+  const [showResetModal, setShowResetModal] = useState(false);
 
   // User details derived from Clerk & Supabase user_progress
   const displayName = user?.firstName || user?.fullName || 'Traveler';
@@ -259,39 +261,50 @@ const HomeScreen: FC = () => {
             </div>
           </div>
 
-          {/* Right Aligned Daily Goal Widget */}
-          <div className="flex items-center gap-3 bg-white border border-[#777775]/20 rounded-2xl px-5 py-3 shadow-sm">
-            <div className="relative shrink-0 flex items-center justify-center">
-              <svg width="44" height="44" className="transform -rotate-90">
-                <circle
-                  cx="22"
-                  cy="22"
-                  r="18"
-                  className="stroke-[#F9F7F2] fill-none"
-                  strokeWidth="4"
-                />
-                <circle
-                  cx="22"
-                  cy="22"
-                  r="18"
-                  className="stroke-[#7D927D] fill-none"
-                  strokeWidth="4"
-                  strokeDasharray="113.1"
-                  strokeDashoffset={goalDashOffset}
-                  strokeLinecap="round"
-                />
-              </svg>
-              <span className="absolute font-sans text-[10px] font-bold text-[#2F353B]">
-                {userData.userProgress.dailyGoalPercentage}%
-              </span>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-sans text-[10px] uppercase tracking-wider text-[#777775] font-semibold">
-                DAILY GOAL
-              </span>
-              <span className="font-sans text-xs font-bold text-[#2F353B]">
-                {userData.userProgress.dailyGoalPercentage}% Complete
-              </span>
+          {/* Right Aligned Widgets & Reset Button */}
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              onClick={() => setShowResetModal(true)}
+              className="flex items-center gap-1.5 px-3.5 py-2.5 text-xs font-semibold text-rose-600 bg-rose-50/80 hover:bg-rose-100 border border-rose-200/80 rounded-2xl transition-all shadow-sm shrink-0 cursor-pointer"
+              title="Reset XP and Coins to restart your journey"
+            >
+              <RotateCcw size={14} />
+              <span>Reset Progress</span>
+            </button>
+
+            <div className="flex items-center gap-3 bg-white border border-[#777775]/20 rounded-2xl px-5 py-3 shadow-sm">
+              <div className="relative shrink-0 flex items-center justify-center">
+                <svg width="44" height="44" className="transform -rotate-90">
+                  <circle
+                    cx="22"
+                    cy="22"
+                    r="18"
+                    className="stroke-[#F9F7F2] fill-none"
+                    strokeWidth="4"
+                  />
+                  <circle
+                    cx="22"
+                    cy="22"
+                    r="18"
+                    className="stroke-[#7D927D] fill-none"
+                    strokeWidth="4"
+                    strokeDasharray="113.1"
+                    strokeDashoffset={goalDashOffset}
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <span className="absolute font-sans text-[10px] font-bold text-[#2F353B]">
+                  {userData.userProgress.dailyGoalPercentage}%
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-sans text-[10px] uppercase tracking-wider text-[#777775] font-semibold">
+                  DAILY GOAL
+                </span>
+                <span className="font-sans text-xs font-bold text-[#2F353B]">
+                  {userData.userProgress.dailyGoalPercentage}% Complete
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -527,6 +540,42 @@ const HomeScreen: FC = () => {
             ))}
           </div>
         </div>
+
+        {/* ── RESET PROGRESS CONFIRMATION MODAL ──────────────────────── */}
+        {showResetModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+            <div className="bg-white max-w-md w-full rounded-2xl p-6 border border-[#777775]/20 shadow-xl space-y-4 text-center">
+              <div className="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto">
+                <RotateCcw size={24} />
+              </div>
+              <h3 className="font-serif text-xl font-bold text-[#2F353B]">
+                Restart Your Journey?
+              </h3>
+              <p className="text-xs text-[#777775] leading-relaxed">
+                Are you sure you want to reset your progress? This will reset your XP to 0, coins to 100, and unlock status so you can collect rewards and practice all over again with full enthusiasm!
+              </p>
+              <div className="flex items-center gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setShowResetModal(false)}
+                  className="flex-1 py-2.5 px-4 rounded-xl border border-[#777775]/20 text-xs font-semibold text-[#2F353B] hover:bg-gray-50 transition-colors cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    await resetAllUserProgress();
+                    setShowResetModal(false);
+                  }}
+                  className="flex-1 py-2.5 px-4 rounded-xl bg-rose-600 hover:bg-rose-700 text-xs font-semibold text-white transition-colors shadow-sm cursor-pointer"
+                >
+                  Reset Everything
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
     </div>
   );

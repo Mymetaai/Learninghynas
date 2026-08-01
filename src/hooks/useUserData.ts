@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { useUser, useAuth } from '@clerk/clerk-react';
 import { createClerkSupabaseClient, setCurrentUserId } from '../lib/supabaseClient';
 import { useStatsStore } from '../state/statsStore';
+import { useProgressStore } from '../state/progressStore';
+import { useQuestStore } from '../state/questStore';
 
 export interface UserProgressData {
   user_id: string;
@@ -300,6 +302,41 @@ export function useUserData() {
     [userData, isSignedIn, user, getSupabaseToken]
   );
 
+  const resetAllUserProgress = useCallback(async () => {
+    const targetUserId = user?.id || 'guest';
+    const freshData: UserProgressData = {
+      user_id: targetUserId,
+      xp: 0,
+      level: 1,
+      kitsune_coins: 100,
+      streak_days: 1,
+    };
+
+    // 1. Reset all Zustand stores
+    useStatsStore.getState().reset();
+    useProgressStore.getState().reset();
+    useQuestStore.getState().resetQuestProgress();
+
+    // 2. Clear & update per-user localStorage
+    if (user?.id) {
+      saveStoredUserData(user.id, freshData);
+    }
+
+    // 3. Reset React state
+    setUserData(freshData);
+
+    // 4. Upsert fresh 0 XP row to Supabase
+    if (isSignedIn && user?.id) {
+      try {
+        const token = await getSupabaseToken();
+        const client = createClerkSupabaseClient(token);
+        await client.from('user_progress').upsert(freshData, { onConflict: 'user_id' });
+      } catch (err) {
+        console.warn('[useUserData] Reset note:', err);
+      }
+    }
+  }, [user, isSignedIn, getSupabaseToken]);
+
   const updateCoins = useCallback(async (newCoins: number) => {
     useStatsStore.setState((state) => ({ ...state, coins: newCoins }));
   }, []);
@@ -319,6 +356,7 @@ export function useUserData() {
     spendCoins,
     updateCoins,
     updateXP,
+    resetAllUserProgress,
     refetch: fetchUserData,
   };
 }

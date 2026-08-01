@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   User,
@@ -6,6 +6,7 @@ import {
   Sparkles,
   Flame,
   Trophy,
+  RotateCcw,
 } from 'lucide-react';
 import { useUser, SignOutButton } from '@clerk/clerk-react';
 import { useStatsStore } from '../state/statsStore';
@@ -13,7 +14,8 @@ import { useUserData } from '../hooks/useUserData';
 
 const ProfileScreen: React.FC = () => {
   const { user, isLoaded, isSignedIn } = useUser();
-  const { userData: liveUserData } = useUserData();
+  const { userData: liveUserData, resetAllUserProgress } = useUserData();
+  const [showResetModal, setShowResetModal] = useState(false);
   const statsXp = useStatsStore((s) => s.xp);
   const statsCoins = useStatsStore((s) => s.coins);
   const statsStreak = useStatsStore((s) => s.streak);
@@ -66,14 +68,23 @@ const ProfileScreen: React.FC = () => {
             </p>
           </div>
 
-          {/* Clerk Sign Out button if signed in */}
-          {isSignedIn && (
-            <SignOutButton>
-              <button className="flex items-center justify-center gap-1.5 rounded-full border border-structural bg-bg-elevated px-4 py-2 font-sans text-xs font-semibold text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2 transition-all shadow-sm self-center border-none cursor-pointer">
-                Sign Out
-              </button>
-            </SignOutButton>
-          )}
+          {/* Account action buttons */}
+          <div className="flex items-center gap-2 self-center">
+            <button
+              onClick={() => setShowResetModal(true)}
+              className="flex items-center justify-center gap-1.5 rounded-full border border-rose-200 bg-rose-50 px-4 py-2 font-sans text-xs font-semibold text-rose-600 hover:bg-rose-100 transition-all shadow-sm cursor-pointer"
+            >
+              <RotateCcw className="h-3.5 w-3.5" /> Reset Progress
+            </button>
+
+            {isSignedIn && (
+              <SignOutButton>
+                <button className="flex items-center justify-center gap-1.5 rounded-full border border-structural bg-bg-elevated px-4 py-2 font-sans text-xs font-semibold text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2 transition-all shadow-sm border-none cursor-pointer">
+                  Sign Out
+                </button>
+              </SignOutButton>
+            )}
+          </div>
         </div>
       </motion.div>
 
@@ -146,6 +157,42 @@ const ProfileScreen: React.FC = () => {
           ))}
         </div>
       </motion.div>
+
+      {/* Reset confirmation modal */}
+      {showResetModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+          <div className="bg-white max-w-md w-full rounded-2xl p-6 border border-[#777775]/20 shadow-xl space-y-4 text-center">
+            <div className="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto">
+              <RotateCcw size={24} />
+            </div>
+            <h3 className="font-serif text-xl font-bold text-[#2F353B]">
+              Restart Your Journey?
+            </h3>
+            <p className="text-xs text-[#777775] leading-relaxed">
+              Are you sure you want to reset your progress? This will reset your XP to 0, coins to 100, and unlock status so you can collect rewards and practice all over again with full enthusiasm!
+            </p>
+            <div className="flex items-center gap-3 pt-2">
+              <button
+                type="button"
+                onClick={() => setShowResetModal(false)}
+                className="flex-1 py-2.5 px-4 rounded-xl border border-[#777775]/20 text-xs font-semibold text-[#2F353B] hover:bg-gray-50 transition-colors cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={async () => {
+                  await resetAllUserProgress();
+                  setShowResetModal(false);
+                }}
+                className="flex-1 py-2.5 px-4 rounded-xl bg-rose-600 hover:bg-rose-700 text-xs font-semibold text-white transition-colors shadow-sm cursor-pointer"
+              >
+                Reset Everything
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
