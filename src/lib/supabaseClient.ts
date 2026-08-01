@@ -128,3 +128,43 @@ export const syncImmersionMessages = async (..._args: any[]): Promise<boolean> =
   return syncLocalStoresToSupabase(uid);
 };
 
+export const syncUserEntitlements = async (entitlements: any, userId?: string | null): Promise<boolean> => {
+  const targetId = userId || activeUserId;
+  if (!targetId || !entitlements) return false;
+
+  try {
+    const payload = {
+      user_id: targetId,
+      streak_freeze: entitlements.consumables?.streak_freeze || 0,
+      hint_token: entitlements.consumables?.hint_token || 0,
+      boss_retry: entitlements.consumables?.boss_retry || 0,
+      owned_cards: entitlements.ownedCards || [],
+      unlocked_themes: entitlements.unlockedThemes || ['theme_parchment'],
+      unlocked_auras: entitlements.unlockedAuras || [],
+      unlocked_packs: entitlements.unlockedPacks || [],
+      active_theme: entitlements.activeThemeId || 'theme_parchment',
+      active_aura: entitlements.activeAuraId || null,
+      updated_at: new Date().toISOString(),
+    };
+
+    let authToken: string | null = null;
+    if (activeClerkTokenGetter) {
+      try {
+        authToken = await activeClerkTokenGetter();
+      } catch {}
+    }
+
+    const client = createClerkSupabaseClient(authToken);
+    const { error } = await client.from('user_entitlements').upsert(payload, { onConflict: 'user_id' });
+
+    if (error && !error.message?.includes('No suitable key') && error.code !== '401') {
+      console.warn('[Supabase Entitlements] Note during sync:', error.message);
+    }
+    return true;
+  } catch (err) {
+    console.warn('[Supabase Entitlements] Exception during sync:', err);
+    return false;
+  }
+};
+
+

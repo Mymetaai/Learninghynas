@@ -1,15 +1,21 @@
 import { useEffect, useRef, type FC } from 'react';
 import * as THREE from 'three';
+import { useEntitlementStore } from '../state/entitlementStore';
+import { getCatalogItem } from '../data/shopCatalog';
 
 interface Kitsune3DProps {
   direction: 'left' | 'right';
   mode: 'idle' | 'walk' | 'wag';
+  auraId?: string | null;
 }
 
-const Kitsune3D: FC<Kitsune3DProps> = ({ direction, mode }) => {
+const Kitsune3D: FC<Kitsune3DProps> = ({ direction, mode, auraId: propAuraId }) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const modeRef = useRef(mode);
   const directionRef = useRef(direction);
+
+  const activeAuraId = useEntitlementStore((s) => s.activeAuraId);
+  const currentAuraId = propAuraId !== undefined ? propAuraId : activeAuraId;
 
   useEffect(() => {
     modeRef.current = mode;
@@ -72,6 +78,34 @@ const Kitsune3D: FC<Kitsune3DProps> = ({ direction, mode }) => {
     const rim = new THREE.DirectionalLight(0xaeefff, 0.9);
     rim.position.set(-2, 5, -6);
     scene.add(rim);
+
+    // ---------- Aura Particle System ----------
+    let auraParticlePoints: THREE.Points | null = null;
+    const auraItem = currentAuraId ? getCatalogItem(currentAuraId) : null;
+
+    if (auraItem && auraItem.auraEffect) {
+      const particleCount = 40;
+      const particleGeo = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
+      for (let i = 0; i < particleCount; i++) {
+        const radius = 1.2 + Math.random() * 0.8;
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.random() * Math.PI;
+        positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+        positions[i * 3 + 1] = 0.5 + Math.random() * 1.5;
+        positions[i * 3 + 2] = radius * Math.sin(phi) * Math.sin(theta);
+      }
+      particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      const particleMat = new THREE.PointsMaterial({
+        color: new THREE.Color(auraItem.auraEffect.particleColor),
+        size: 0.15,
+        transparent: true,
+        opacity: auraItem.auraEffect.glowIntensity * 0.8,
+        blending: THREE.AdditiveBlending,
+      });
+      auraParticlePoints = new THREE.Points(particleGeo, particleMat);
+      scene.add(auraParticlePoints);
+    }
 
     // ---------- Ground / Shadow Blob ----------
     const aoGeo = new THREE.CircleGeometry(1.4, 32);
@@ -412,6 +446,12 @@ const Kitsune3D: FC<Kitsune3DProps> = ({ direction, mode }) => {
           seg.rotation.z = wave;
         });
       });
+
+      // aura particles rotation
+      if (auraParticlePoints) {
+        auraParticlePoints.rotation.y = t * 0.8;
+        auraParticlePoints.position.y = Math.sin(t * 1.5) * 0.08;
+      }
 
       renderer.render(scene, camera);
     };

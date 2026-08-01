@@ -1,10 +1,13 @@
 // Training store — tracks exercise mistakes for the "Weak Spots" drill mode
 // and provides the same data to the Home Dashboard's "AI Study Insights" card.
+// Also manages FSRS (Free Spaced Repetition Scheduler) cards for vocabulary.
 // Persisted to localStorage via Zustand `persist`, matching existing stores.
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { useStatsStore } from './statsStore';
 import { getCurrentUserId, syncUserStats } from '../lib/supabaseClient';
+import { Rating, getDefaultCard, scheduleCard, getCardsDue, getCardsByState } from '../lib/fsrs';
+import type { VocabCardState } from '../lib/fsrs';
 
 export interface MistakeEntry {
   /** The word or prompt the student got wrong. */
@@ -21,9 +24,13 @@ export interface MistakeEntry {
   reviewedCorrectly: number;
 }
 
+export type SRSCard = VocabCardState
+
 interface TrainingState {
   /** Recorded mistakes from exercises. */
   mistakes: MistakeEntry[];
+  /** FSRS cards for spaced repetition vocabulary review. */
+  srsCards: SRSCard[];
   /** Total training-session XP earned (display only). */
   trainingSessionsCompleted: number;
 
@@ -40,10 +47,19 @@ interface TrainingState {
    * statsStore.addRewards() — no parallel XP system.
    */
   grantTrainingRewards: (correct: number, total: number) => { xp: number; coins: number };
+  /** Get or create an SRS card for a vocabulary word. */
+  getOrCreateSRSCard: (wordId: string, word: string, translation: string, level: string, category: string) => SRSCard;
+  /** Review an SRS card with a rating (Again/Hard/Good/Easy). */
+  reviewSRSCard: (wordId: string, rating: Rating) => void;
+  /** Get all cards due for review. */
+  getDueSRSCards: () => SRSCard[];
+  /** Get SRS cards by state (New, Learning, Review, Relearning). */
+  getSRSCardsByState: (state: number) => SRSCard[];
 }
 
 const DEFAULT_STATE = {
   mistakes: [] as MistakeEntry[],
+  srsCards: [] as SRSCard[],
   trainingSessionsCompleted: 0,
 };
 
@@ -100,11 +116,44 @@ export const useTrainingStore = create<TrainingState>()(
         if (uid) syncUserStats(uid, useStatsStore.getState()).catch(() => {});
         return { xp, coins };
       },
+
+      // SRS methods
+      getOrCreateSRSCard: (wordId, word, translation, level, category) => {
+        const state = get();
+        const existingCard = state.srsCards.find((c) => c.wordId === wordId);
+        if (existingCard) return existingCard;
+        const newCard = getDefaultCard(wordId, word, translation, level, category);
+        set((s) => ({ srsCards: [...s.srsCards, newCard] }));
+        return newCard;
+      },
+
+      reviewSRSCard: (wordId, rating) => {
+        set((state) => {
+          const cardIndex = state.srsCards.findIndex((c) => c.wordId === wordId);
+          if (cardIndex === -1) return state;
+          const card = state.srsCards[cardIndex];
+          const { card: updatedCard } = scheduleCard(card, rating);
+          const updatedCards = [...state.srsCards];
+          updatedCards[cardIndex] = updatedCard;
+          return { srsCards: updatedCards };
+        });
+      },
+
+      getDueSRSCards: () => {
+        const state = get();
+        return getCardsDue(state.srsCards);
+      },
+
+      getSRSCardsByState: (srsState) => {
+        const state = get();
+        return getCardsByState(state.srsCards, srsState);
+      },
     }),
     {
       name: 'wayfarer-training',
       partialize: (state) => ({
         mistakes: state.mistakes,
+        srsCards: state.srsCards,
         trainingSessionsCompleted: state.trainingSessionsCompleted,
       }),
     },

@@ -5,7 +5,7 @@ import { useStatsStore } from '../state/statsStore';
 import { useProgressStore } from '../state/progressStore';
 import { useQuestStore } from '../state/questStore';
 import { useDailyQuestStore } from '../state/dailyQuestStore';
-import { useShopStore } from '../state/shopStore';
+import { useEntitlementStore } from '../state/entitlementStore';
 import { useTrainingStore } from '../state/trainingStore';
 import { useScenarioStore } from '../state/scenarioStore';
 import { useActiveImmersionStore } from '../state/activeImmersionStore';
@@ -322,7 +322,7 @@ export function useUserData() {
     useProgressStore.getState().reset();
     useQuestStore.getState().resetQuestProgress();
     useDailyQuestStore.getState().resetDailyQuests();
-    useShopStore.getState().resetShopInventory();
+    useEntitlementStore.getState().resetEntitlements();
     useTrainingStore.getState().clearAllMistakes();
     useScenarioStore.getState().resetAllScenarios();
     useActiveImmersionStore.getState().resetAllImmersionSessions();
@@ -331,8 +331,7 @@ export function useUserData() {
     const keysToRemove = [
       'wayfarer-daily-quest',
       'wayfarer-progress',
-      'hyena-quest-store',
-      'hyena-shop-store',
+      'wayfarer-canonical-entitlements',
       'wayfarer-stats-store',
       'wayfarer-active-immersion',
       'wayfarer-training-store',

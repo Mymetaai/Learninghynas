@@ -1,6 +1,7 @@
 export * from './authStore';
 export * from './companionStore';
 export * from './dailyQuestStore';
+export * from './entitlementStore';
 export * from './progressStore';
 export * from './questStore';
 export * from './settingsStore';

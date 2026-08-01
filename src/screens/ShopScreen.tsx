@@ -503,7 +503,7 @@ const ShopScreen: FC = () => {
               {SHOP_CATEGORIES.map((cat) => (
                 <div key={cat.id} className="bg-bg-elevated border border-structural rounded-2xl p-5 shadow-sm flex flex-col justify-between">
                   <div>
-                    <h3 className="font-serif text-base font-bold text-text-primary border-b border-structural pb-2 mb-2">
+                    <h3 className="font-sans text-base font-bold text-text-primary border-b border-structural pb-2 mb-2">
                       {cat.label}
                     </h3>
                     <p className="text-text-secondary text-xs mb-4 leading-relaxed">
@@ -534,7 +534,7 @@ const ShopScreen: FC = () => {
                                   </span>
                                 )}
                               </div>
-                              <h4 className="font-serif text-sm font-bold text-text-primary mt-1.5">{item.name}</h4>
+                              <h4 className="font-sans text-sm font-bold text-text-primary mt-1.5">{item.name}</h4>
                               <p className="font-sans text-[11px] text-text-secondary mt-0.5">{item.effect}</p>
                             </div>
                             
