@@ -31,6 +31,7 @@ export const supabase = createClerkSupabaseClient(null);
 export const supabaseClient = createClerkSupabaseClient;
 
 let activeUserId: string | null = null;
+let activeClerkTokenGetter: (() => Promise<string | null>) | null = null;
 
 /**
  * Helper returning active auth.uid() or null if offline/unauthenticated.
@@ -42,14 +43,17 @@ export const getCurrentUserId = (): string | null => {
 /**
  * Sets active auth.uid() context for store sync.
  */
-export const setCurrentUserId = (userId: string | null): void => {
+export const setCurrentUserId = (userId: string | null, tokenGetter?: (() => Promise<string | null>) | null): void => {
   activeUserId = userId;
+  if (tokenGetter !== undefined) {
+    activeClerkTokenGetter = tokenGetter;
+  }
 };
 
 /**
- * Global store sync helper. Reads local Zustand state and updates Supabase.
+ * Global store sync helper. Reads local Zustand state and updates Supabase using Clerk Auth JWT token.
  */
-export const syncLocalStoresToSupabase = async (userId?: string | null): Promise<boolean> => {
+export const syncLocalStoresToSupabase = async (userId?: string | null, token?: string | null): Promise<boolean> => {
   const targetId = userId || activeUserId;
   if (!targetId) return false;
 
@@ -62,14 +66,24 @@ export const syncLocalStoresToSupabase = async (userId?: string | null): Promise
       level: Math.max(1, Math.floor((stats.xp || 0) / 600) + 1),
       kitsune_coins: stats.coins || 500,
       streak_days: stats.streak || 0,
-      learned_vocab: stats.learnedVocab || [],
-      updated_at: new Date().toISOString(),
     };
 
-    const { error } = await supabase.from('user_progress').upsert(payload, { onConflict: 'user_id' });
+    let authToken = token;
+    if (!authToken && activeClerkTokenGetter) {
+      try {
+        authToken = await activeClerkTokenGetter();
+      } catch {
+        authToken = null;
+      }
+    }
+
+    const client = createClerkSupabaseClient(authToken);
+    const { error } = await client.from('user_progress').upsert(payload, { onConflict: 'user_id' });
 
     if (error) {
-      console.warn('[Supabase Sync] Note during store sync:', error.message);
+      if (!error.message?.includes('No suitable key') && error.code !== '401') {
+        console.warn('[Supabase Sync] Note during store sync:', error.message);
+      }
       return false;
     }
     return true;
@@ -94,3 +108,4 @@ export const syncImmersionMessages = async (..._args: any[]): Promise<boolean> =
   const uid = typeof _args[0] === 'string' ? _args[0] : activeUserId;
   return syncLocalStoresToSupabase(uid);
 };
+

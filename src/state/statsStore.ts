@@ -248,23 +248,6 @@ export const useStatsStore = create<StatsState>()(
 );
 
 if (typeof window !== 'undefined') {
-  // Clear any old mock stats from localStorage and reset store immediately
-  try {
-    const raw = localStorage.getItem('wayfarer-stats');
-    if (raw) {
-      const parsed = JSON.parse(raw);
-      if (parsed?.state && (parsed.state.xp > 10000 || parsed.state.coins > 1000 || parsed.state.streak > 10)) {
-        parsed.state.xp = 0;
-        parsed.state.coins = 100;
-        parsed.state.streak = 1;
-        localStorage.setItem('wayfarer-stats', JSON.stringify(parsed));
-        useStatsStore.getState().reset();
-      }
-    }
-  } catch (e) {
-    console.warn("Failed to reset stats:", e);
-  }
-
   useStatsStore.subscribe((state) => {
     const uid = getCurrentUserId();
     if (uid) {

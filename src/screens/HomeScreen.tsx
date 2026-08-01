@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect, type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
 import { useUserData } from '../hooks/useUserData';
+import { useStatsStore } from '../state/statsStore';
 import {
   Lightbulb,
   AlertTriangle,
@@ -61,7 +62,7 @@ export interface MockUserData {
 
 export const initialMockUserData: MockUserData = {
   userProgress: {
-    currentXp: 350,
+    currentXp: 0,
     maxXp: 1200,
     level: 'B2',
     levelName: 'Intermediate',
@@ -139,6 +140,7 @@ const HomeScreen: FC = () => {
   const navigate = useNavigate();
   const { user } = useUser();
   const { userData: liveUserData, isLoading } = useUserData();
+  const statsXp = useStatsStore((s) => s.xp);
 
   // Component State
   const [userData] = useState<MockUserData>(initialMockUserData);
@@ -146,7 +148,7 @@ const HomeScreen: FC = () => {
   // User details derived from Clerk & Supabase user_progress
   const displayName = user?.firstName || user?.fullName || 'Traveler';
   const userAvatar = user?.imageUrl;
-  const currentXp = liveUserData?.xp ?? 350;
+  const currentXp = Math.max(liveUserData?.xp ?? 0, statsXp ?? 0);
   const levelNumber = liveUserData?.level ?? 2;
   const maxXp = levelNumber * 600;
   const levelBadge = levelNumber >= 3 ? 'C1' : levelNumber === 2 ? 'B2' : 'A1';

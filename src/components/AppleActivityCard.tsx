@@ -28,7 +28,7 @@ export interface AppleActivityCardProps {
 const defaultXpData: ActivityRingData = {
   label: "XP PROGRESS",
   sublabel: "Level 14 Journey",
-  current: 350,
+  current: 0,
   target: 1200,
   unit: "XP",
   color: "#C4796B",

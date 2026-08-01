@@ -9,12 +9,18 @@ import {
 } from 'lucide-react';
 import { useUser, SignOutButton } from '@clerk/clerk-react';
 import { useStatsStore } from '../state/statsStore';
+import { useUserData } from '../hooks/useUserData';
 
 const ProfileScreen: React.FC = () => {
   const { user, isLoaded, isSignedIn } = useUser();
-  const xp = useStatsStore((s) => s.xp);
-  const coins = useStatsStore((s) => s.coins);
-  const streak = useStatsStore((s) => s.streak);
+  const { userData: liveUserData } = useUserData();
+  const statsXp = useStatsStore((s) => s.xp);
+  const statsCoins = useStatsStore((s) => s.coins);
+  const statsStreak = useStatsStore((s) => s.streak);
+
+  const xp = Math.max(liveUserData?.xp ?? 0, statsXp ?? 0);
+  const coins = Math.max(liveUserData?.kitsune_coins ?? 0, statsCoins ?? 0);
+  const streak = Math.max(liveUserData?.streak_days ?? 0, statsStreak ?? 0);
 
   // Achievements list
   const achievements = [

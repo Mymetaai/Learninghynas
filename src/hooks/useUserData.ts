@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useUser, useAuth } from '@clerk/clerk-react';
-import { createClerkSupabaseClient } from '../lib/supabaseClient';
+import { createClerkSupabaseClient, setCurrentUserId } from '../lib/supabaseClient';
 import { useStatsStore } from '../state/statsStore';
 
 export interface UserProgressData {
@@ -11,6 +11,20 @@ export interface UserProgressData {
   streak_days: number;
   created_at?: string;
 }
+
+const getStoredUserData = (userId: string): UserProgressData | null => {
+  try {
+    const raw = localStorage.getItem(`wayfarer_user_progress_${userId}`);
+    if (raw) return JSON.parse(raw);
+  } catch {}
+  return null;
+};
+
+const saveStoredUserData = (userId: string, data: UserProgressData) => {
+  try {
+    localStorage.setItem(`wayfarer_user_progress_${userId}`, JSON.stringify(data));
+  } catch {}
+};
 
 export function useUserData() {
   const { user, isLoaded: isUserLoaded, isSignedIn } = useUser();
@@ -47,13 +61,13 @@ export function useUserData() {
     if (!isUserLoaded) return;
 
     if (!isSignedIn || !user) {
-      // Fallback for unauthenticated guest session using Zustand statsStore
+      setCurrentUserId(null, null);
       const localStats = useStatsStore.getState();
       const fallback: UserProgressData = {
         user_id: 'guest',
-        xp: localStats.xp || 350,
-        level: Math.max(1, Math.floor((localStats.xp || 350) / 600) + 1),
-        kitsune_coins: localStats.coins || 500,
+        xp: localStats.xp || 0,
+        level: Math.max(1, Math.floor((localStats.xp || 0) / 600) + 1),
+        kitsune_coins: localStats.coins || 100,
         streak_days: localStats.streak || 1,
       };
       setUserData(fallback);
@@ -61,13 +75,23 @@ export function useUserData() {
       return;
     }
 
-    const defaultData: UserProgressData = {
+    // Set global active user context & token getter for Zustand syncs
+    setCurrentUserId(user.id, getSupabaseToken);
+
+    // 1. Load user-specific storage for this Clerk User ID
+    const savedLocal = getStoredUserData(user.id);
+    const localStats = useStatsStore.getState();
+
+    const initialData: UserProgressData = savedLocal || {
       user_id: user.id,
-      xp: 350,
-      level: 2,
-      kitsune_coins: 500,
-      streak_days: 1,
+      xp: typeof localStats.xp === 'number' && localStats.xp > 0 ? localStats.xp : 0,
+      level: Math.max(1, Math.floor((localStats.xp || 0) / 600) + 1),
+      kitsune_coins: typeof localStats.coins === 'number' && localStats.coins > 0 ? localStats.coins : 100,
+      streak_days: localStats.streak || 1,
     };
+
+    setUserData(initialData);
+    syncToLocalStore(initialData);
 
     try {
       setIsLoading(true);
@@ -82,43 +106,33 @@ export function useUserData() {
         .eq('user_id', user.id)
         .maybeSingle();
 
-      if (error) {
-        if (error.code === '401' || error.message?.includes('No suitable key') || error.message?.includes('JWT')) {
-          console.info('[useUserData] Clerk Supabase JWT template pending in Clerk Dashboard. Using client user state.');
-        } else if (error.code !== 'PGRST116') {
-          console.warn('[useUserData] Fetch note:', error.message);
-        }
+      if (error && error.code !== 'PGRST116') {
+        console.warn('[useUserData] Fetch note:', error.message);
       }
 
       if (data) {
         setUserData(data);
+        saveStoredUserData(user.id, data);
         syncToLocalStore(data);
       } else {
-        // First-time login: Insert default progress row
+        // First-time or missing row: Upsert initialData
         const { data: inserted, error: insertErr } = await client
           .from('user_progress')
-          .insert(defaultData)
+          .upsert(initialData, { onConflict: 'user_id' })
           .select('*')
           .single();
 
-        if (insertErr) {
-          if (insertErr.code === '401' || insertErr.message?.includes('No suitable key')) {
-            console.info('[useUserData] Supabase RLS pending Clerk JWT token. Using default initial state.');
-          }
-          setUserData(defaultData);
-          syncToLocalStore(defaultData);
-        } else if (inserted) {
+        if (inserted) {
           setUserData(inserted);
+          saveStoredUserData(user.id, inserted);
           syncToLocalStore(inserted);
         } else {
-          setUserData(defaultData);
-          syncToLocalStore(defaultData);
+          if (insertErr) console.warn('[useUserData] Upsert note:', insertErr.message);
+          saveStoredUserData(user.id, initialData);
         }
       }
     } catch (err) {
       console.warn('[useUserData] Fetch exception:', err);
-      setUserData(defaultData);
-      syncToLocalStore(defaultData);
     } finally {
       setIsLoading(false);
     }
@@ -128,38 +142,39 @@ export function useUserData() {
     fetchUserData();
   }, [fetchUserData]);
 
-  // Subscribe to Zustand useStatsStore so ANY task completion anywhere updates userData & Supabase
+  // Subscribe to Zustand useStatsStore so ANY task completion anywhere updates userData & Supabase & LocalStorage
   useEffect(() => {
-    if (!isUserLoaded) return;
+    if (!isUserLoaded || !isSignedIn || !user?.id) return;
 
     const unsubscribe = useStatsStore.subscribe((state) => {
       setUserData((prev) => {
-        if (!prev) return prev;
-        if (prev.xp === state.xp && prev.kitsune_coins === state.coins && prev.streak_days === state.streak) {
+        const currentXp = state.xp;
+        const currentCoins = state.coins;
+        const currentStreak = state.streak;
+
+        if (prev && prev.xp === currentXp && prev.kitsune_coins === currentCoins && prev.streak_days === currentStreak) {
           return prev;
         }
 
-        const newLevel = Math.max(1, Math.floor((state.xp || 0) / 600) + 1);
+        const newLevel = Math.max(1, Math.floor((currentXp || 0) / 600) + 1);
         const updated: UserProgressData = {
-          ...prev,
-          xp: state.xp,
-          kitsune_coins: state.coins,
-          streak_days: state.streak,
+          user_id: user.id,
+          xp: currentXp,
+          kitsune_coins: currentCoins,
+          streak_days: currentStreak,
           level: newLevel,
         };
 
-        if (isSignedIn && user?.id) {
-          getSupabaseToken().then((token) => {
-            const client = createClerkSupabaseClient(token);
-            Promise.resolve(client.from('user_progress').upsert(updated, { onConflict: 'user_id' }))
-              .then(({ error }: any) => {
-                if (error && !error.message?.includes('No suitable key')) {
-                  console.warn('[useUserData] Background sync note:', error.message);
-                }
-              })
-              .catch(() => {});
-          });
-        }
+        saveStoredUserData(user.id, updated);
+
+        getSupabaseToken().then((token) => {
+          const client = createClerkSupabaseClient(token);
+          client.from('user_progress').upsert(updated, { onConflict: 'user_id' }).then(({ error }: any) => {
+            if (error && !error.message?.includes('No suitable key')) {
+              console.warn('[useUserData] Background upsert note:', error.message);
+            }
+          }).catch(() => {});
+        });
 
         return updated;
       });
@@ -168,7 +183,7 @@ export function useUserData() {
     return () => unsubscribe();
   }, [isUserLoaded, isSignedIn, user, getSupabaseToken]);
 
-  // Dedicated addXP Mutation Function with Optimistic UI & Supabase UPDATE
+  // Dedicated addXP Mutation Function with Optimistic UI & Supabase UPSERT
   const addXP = useCallback(
     async (amount: number) => {
       if (amount <= 0) return;
@@ -177,27 +192,30 @@ export function useUserData() {
       const newXp = currentXp + amount;
       const newLevel = Math.max(1, Math.floor(newXp / 600) + 1);
 
-      // Optimistic UI Update
-      setUserData((prev) => (prev ? { ...prev, xp: newXp, level: newLevel } : prev));
       useStatsStore.setState((s) => ({ ...s, xp: newXp }));
 
       if (isSignedIn && user?.id) {
+        const updatedData: UserProgressData = {
+          user_id: user.id,
+          xp: newXp,
+          level: newLevel,
+          kitsune_coins: userData?.kitsune_coins ?? useStatsStore.getState().coins,
+          streak_days: userData?.streak_days ?? useStatsStore.getState().streak,
+        };
+        setUserData(updatedData);
+        saveStoredUserData(user.id, updatedData);
+
         try {
           const token = await getSupabaseToken();
           const client = createClerkSupabaseClient(token);
-          await client
-            .from('user_progress')
-            .update({ xp: newXp, level: newLevel })
-            .eq('user_id', user.id);
-        } catch {
-          // Optimistic UI retains state seamlessly
-        }
+          await client.from('user_progress').upsert(updatedData, { onConflict: 'user_id' });
+        } catch {}
       }
     },
     [userData, isSignedIn, user, getSupabaseToken]
   );
 
-  // Dedicated addCoins Mutation Function with Optimistic UI & Supabase UPDATE
+  // Dedicated addCoins Mutation Function with Optimistic UI & Supabase UPSERT
   const addCoins = useCallback(
     async (amount: number) => {
       if (amount <= 0) return;
@@ -205,27 +223,30 @@ export function useUserData() {
       const currentCoins = userData?.kitsune_coins ?? useStatsStore.getState().coins;
       const newCoins = currentCoins + amount;
 
-      // Optimistic UI Update
-      setUserData((prev) => (prev ? { ...prev, kitsune_coins: newCoins } : prev));
       useStatsStore.setState((s) => ({ ...s, coins: newCoins }));
 
       if (isSignedIn && user?.id) {
+        const updatedData: UserProgressData = {
+          user_id: user.id,
+          xp: userData?.xp ?? useStatsStore.getState().xp,
+          level: userData?.level ?? Math.max(1, Math.floor((userData?.xp || 0) / 600) + 1),
+          kitsune_coins: newCoins,
+          streak_days: userData?.streak_days ?? useStatsStore.getState().streak,
+        };
+        setUserData(updatedData);
+        saveStoredUserData(user.id, updatedData);
+
         try {
           const token = await getSupabaseToken();
           const client = createClerkSupabaseClient(token);
-          await client
-            .from('user_progress')
-            .update({ kitsune_coins: newCoins })
-            .eq('user_id', user.id);
-        } catch {
-          // Optimistic UI retains state seamlessly
-        }
+          await client.from('user_progress').upsert(updatedData, { onConflict: 'user_id' });
+        } catch {}
       }
     },
     [userData, isSignedIn, user, getSupabaseToken]
   );
 
-  // Dedicated spendCoins Mutation Function with Optimistic UI & Supabase UPDATE
+  // Dedicated spendCoins Mutation Function with Optimistic UI & Supabase UPSERT
   const spendCoins = useCallback(
     async (amount: number): Promise<boolean> => {
       const currentCoins = userData?.kitsune_coins ?? useStatsStore.getState().coins;
@@ -235,21 +256,24 @@ export function useUserData() {
 
       const newCoins = currentCoins - amount;
 
-      // Optimistic UI Update
-      setUserData((prev) => (prev ? { ...prev, kitsune_coins: newCoins } : prev));
       useStatsStore.setState((s) => ({ ...s, coins: newCoins }));
 
       if (isSignedIn && user?.id) {
+        const updatedData: UserProgressData = {
+          user_id: user.id,
+          xp: userData?.xp ?? useStatsStore.getState().xp,
+          level: userData?.level ?? Math.max(1, Math.floor((userData?.xp || 0) / 600) + 1),
+          kitsune_coins: newCoins,
+          streak_days: userData?.streak_days ?? useStatsStore.getState().streak,
+        };
+        setUserData(updatedData);
+        saveStoredUserData(user.id, updatedData);
+
         try {
           const token = await getSupabaseToken();
           const client = createClerkSupabaseClient(token);
-          await client
-            .from('user_progress')
-            .update({ kitsune_coins: newCoins })
-            .eq('user_id', user.id);
-        } catch {
-          // Optimistic UI retains state seamlessly
-        }
+          await client.from('user_progress').upsert(updatedData, { onConflict: 'user_id' });
+        } catch {}
       }
 
       return true;
@@ -279,3 +303,4 @@ export function useUserData() {
     refetch: fetchUserData,
   };
 }
+

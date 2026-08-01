@@ -17,9 +17,9 @@ const HUD: FC = () => {
   const statsCoins = useStatsStore((s) => s.coins);
   const statsStreak = useStatsStore((s) => s.streak);
 
-  const xp = userData?.xp ?? statsXp;
-  const coins = userData?.kitsune_coins ?? statsCoins;
-  const streak = userData?.streak_days ?? statsStreak;
+  const xp = Math.max(userData?.xp ?? 0, statsXp ?? 0);
+  const coins = Math.max(userData?.kitsune_coins ?? 0, statsCoins ?? 0);
+  const streak = Math.max(userData?.streak_days ?? 0, statsStreak ?? 0);
   const { language, setLanguage } = useSettingsStore();
 
   // ── Edge-Hover Auto-Scrolling ─────────────────────────────────────────
