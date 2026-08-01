@@ -149,10 +149,20 @@ const HomeScreen: FC = () => {
   const displayName = user?.firstName || user?.fullName || 'Traveler';
   const userAvatar = user?.imageUrl;
   const currentXp = Math.max(liveUserData?.xp ?? 0, statsXp ?? 0);
-  const levelNumber = liveUserData?.level ?? 2;
+  const levelNumber = Math.max(1, Math.floor(currentXp / 600) + 1);
   const maxXp = levelNumber * 600;
-  const levelBadge = levelNumber >= 3 ? 'C1' : levelNumber === 2 ? 'B2' : 'A1';
-  const levelName = levelNumber >= 3 ? 'Advanced' : levelNumber === 2 ? 'Intermediate' : 'Beginner';
+
+  const levelBadge =
+    levelNumber >= 5 ? 'C1' :
+    levelNumber === 4 ? 'B2' :
+    levelNumber === 3 ? 'B1' :
+    levelNumber === 2 ? 'A2' : 'A1';
+
+  const levelName =
+    levelNumber >= 5 ? 'Advanced' :
+    levelNumber === 4 ? 'Upper Intermediate' :
+    levelNumber === 3 ? 'Intermediate' :
+    levelNumber === 2 ? 'Elementary' : 'Beginner';
 
   // Vault Insights Randomized Shuffle State (95 items from vaultInsightsData)
   const [insightIndex, setInsightIndex] = useState<number>(() =>
