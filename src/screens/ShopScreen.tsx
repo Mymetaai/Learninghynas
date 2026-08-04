@@ -86,6 +86,7 @@ const DEMON_SLAYER_HOTSPOTS = {
 const DRAW_COST = 20;
 
 export const THEMES_LIST = [
+  { id: 'default', name: 'Original Serene Sage (Default)', price: 0, category: 'Original', color: '#7D927D', bg: '#FAF6F0', desc: 'The original serene sage & warm cream default app theme.' },
   { id: 'madrid-midnight', name: 'Madrid Midnight', price: 150, category: 'Dark Mode', color: '#1D4ED8', bg: '#121214', desc: 'Sleek dark mode inspired by Madrid nights.' },
   { id: 'ibiza-sunset', name: 'Ibiza Sunset', price: 150, category: 'Gradient', color: '#F43F5E', bg: '#FAF9F6', desc: 'Warm pink-rose sunrise & sunset glow.' },
   { id: 'andalusia-olive', name: 'Andalusia Olive', price: 150, category: 'Minimalist', color: '#606C38', bg: '#FEFAE0', desc: 'Warm earthy olive green & terracotta tones.' },
@@ -157,6 +158,11 @@ const ShopScreen: FC = () => {
   };
 
   const handleBuyThemeItem = async (theme: typeof THEMES_LIST[0]) => {
+    if (theme.id === 'default' || theme.price === 0) {
+      shopStore.setActiveTheme('');
+      setPurchaseCelebration({ name: 'Original Serene Sage', cost: 0, desc: 'Restored the original default app theme!' });
+      return;
+    }
     const isOwned = shopStore.hasTheme(theme.id);
     if (isOwned) {
       shopStore.setActiveTheme(theme.id);
@@ -826,8 +832,10 @@ const ShopScreen: FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {THEMES_LIST.map((t) => {
-                const isOwned = shopStore.hasTheme(t.id);
-                const isActive = shopStore.inventory?.activeThemeId === t.id;
+                const isOwned = t.id === 'default' || t.price === 0 || shopStore.hasTheme(t.id);
+                const isActive = t.id === 'default'
+                  ? !shopStore.inventory?.activeThemeId || shopStore.inventory?.activeThemeId === 'default' || shopStore.inventory?.activeThemeId === ''
+                  : shopStore.inventory?.activeThemeId === t.id;
 
                 return (
                   <div
