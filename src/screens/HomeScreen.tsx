@@ -360,45 +360,54 @@ const HomeScreen: FC = () => {
             
             {/* Weekly Activity */}
             <div className="bg-white border border-[#777775]/20 rounded-2xl p-6 shadow-sm">
-              <div className="flex items-center justify-between border-b border-[#777775]/15 pb-3 mb-4">
+              <div className="flex items-center justify-between border-b border-[#777775]/15 pb-4 mb-5">
                 <div>
                   <h2 className="font-serif text-lg font-bold text-[#2F353B]">Weekly Activity</h2>
                   <p className="font-sans text-xs text-[#777775] mt-0.5">Study minutes tracked this week</p>
                 </div>
-                <span className="font-sans text-[11px] font-semibold text-[#7D927D] bg-[#F9F7F2] border border-[#777775]/20 px-3 py-1 rounded-full shrink-0">
+                <span className="font-sans text-[11px] font-bold text-[#5E735E] bg-[#F2EFE9] border border-[#7D927D]/30 px-3 py-1.5 rounded-full shrink-0 shadow-2xs">
                   Avg {avgDailyMinutes}m / day
                 </span>
               </div>
-              <div className="flex items-end justify-between gap-3 h-28 pt-4">
+              
+              <div className="flex items-end justify-between gap-3 h-36 pt-2">
                 {weeklyActivity.map((d) => {
                   const hasActivity = d.minutes > 0;
                   const calculatedPct = Math.round((d.minutes / maxWeeklyMinutes) * 100);
-                  const barHeight = hasActivity ? Math.max(calculatedPct, 25) : 6;
+                  // Ensure active days get a tall, clearly readable bar (minimum 35% height)
+                  const barHeight = hasActivity ? Math.max(calculatedPct, 35) : 8;
                   const todayDayName = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][(new Date().getDay() + 6) % 7];
                   const isToday = d.day === todayDayName;
 
                   return (
-                    <div key={d.day} className="flex-1 flex flex-col items-center gap-1.5 group cursor-pointer h-full justify-end">
-                      <span className={`font-mono text-[10px] font-bold transition-all ${
-                        hasActivity ? 'text-[#2F353B] opacity-100' : 'text-[#777775] opacity-0 group-hover:opacity-100'
+                    <div key={d.day} className="flex-1 flex flex-col items-center gap-2 group cursor-pointer h-full justify-end">
+                      {/* Minutes badge above bar */}
+                      <span className={`font-mono text-[10px] transition-all duration-300 ${
+                        hasActivity
+                          ? 'font-black text-white bg-[#5E735E] px-2 py-0.5 rounded-md shadow-sm border border-white/30 scale-105'
+                          : 'font-semibold text-[#777775]/60 group-hover:text-[#2F353B]'
                       }`}>
                         {d.minutes}m
                       </span>
-                      <div className="w-full bg-[#F9F7F2] rounded-md overflow-hidden flex flex-col justify-end p-0.5 border border-[#777775]/10 h-full">
+
+                      {/* Bar Track Container */}
+                      <div className="w-full h-24 bg-[#F5F2EC] rounded-xl overflow-hidden flex flex-col justify-end p-1 border border-[#777775]/15 shadow-inner">
                         <div
-                          className={`w-full rounded-sm transition-all duration-500 ${
+                          className={`w-full transition-all duration-500 rounded-lg ${
                             hasActivity
-                              ? 'bg-gradient-to-t from-[#5E735E] to-[#7D927D] shadow-sm'
-                              : 'bg-[#777775]/15'
+                              ? 'bg-gradient-to-t from-[#435443] via-[#5E735E] to-[#7D927D] shadow-md border-t border-white/40'
+                              : 'bg-[#777775]/20 rounded-md'
                           }`}
                           style={{ height: `${barHeight}%` }}
                           title={`${d.day}: ${d.minutes} mins`}
                         />
                       </div>
-                      <span className={`font-sans text-[11px] transition-colors ${
+
+                      {/* Day Label */}
+                      <span className={`font-sans text-[11px] transition-all ${
                         isToday
-                          ? 'font-extrabold text-[#7D927D] underline underline-offset-4'
-                          : 'text-[#777775] group-hover:text-[#2F353B] font-medium'
+                          ? 'font-extrabold text-[#435443] bg-[#7D927D]/20 border border-[#7D927D]/40 px-2 py-0.5 rounded-md'
+                          : 'text-[#777775] font-semibold group-hover:text-[#2F353B]'
                       }`}>
                         {d.day}
                       </span>
