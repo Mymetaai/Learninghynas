@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect, type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
 import { useUserData } from '../hooks/useUserData';
-import { useStatsStore } from '../state/statsStore';
+import { useStatsStore, DEFAULT_WEEKLY_ACTIVITY, type WeeklyActivityItem } from '../state/statsStore';
 import {
   Lightbulb,
   AlertTriangle,
@@ -28,10 +28,6 @@ export interface UserProgressData {
   dailyGoalPercentage: number;
 }
 
-export interface WeeklyActivityItem {
-  day: string;
-  minutes: number;
-}
 
 export interface LexiconStatItem {
   level: string;
@@ -205,10 +201,22 @@ const HomeScreen: FC = () => {
     return circumference - (circumference * percentage) / 100;
   }, [userData.userProgress.dailyGoalPercentage]);
 
-  // Dynamic Max Weekly Minutes for relative bar height
-  const maxWeeklyMinutes = useMemo(() => {
-    return Math.max(...userData.weeklyActivity.map((d) => d.minutes), 45);
-  }, [userData.weeklyActivity]);
+  const weeklyActivity = useStatsStore((s) => s.weeklyActivity) || DEFAULT_WEEKLY_ACTIVITY;
+
+  const totalWeeklyMinutes = useMemo(
+    () => weeklyActivity.reduce((acc, curr) => acc + curr.minutes, 0),
+    [weeklyActivity]
+  );
+
+  const avgDailyMinutes = useMemo(
+    () => Math.round(totalWeeklyMinutes / 7),
+    [totalWeeklyMinutes]
+  );
+
+  const maxWeeklyMinutes = useMemo(
+    () => Math.max(...weeklyActivity.map((d) => d.minutes), 30),
+    [weeklyActivity]
+  );
 
   // ── SKELETON LOADER (Serene Lexicon Style) ──────────────────────────────────
   if (isLoading) {
@@ -358,11 +366,11 @@ const HomeScreen: FC = () => {
                   <p className="font-sans text-xs text-[#777775] mt-0.5">Study minutes tracked this week</p>
                 </div>
                 <span className="font-sans text-[11px] font-semibold text-[#7D927D] bg-[#F9F7F2] border border-[#777775]/20 px-3 py-1 rounded-full shrink-0">
-                  Avg 30m / day
+                  Avg {avgDailyMinutes}m / day
                 </span>
               </div>
               <div className="flex items-end justify-between gap-3 h-28">
-                {userData.weeklyActivity.map((d) => {
+                {weeklyActivity.map((d) => {
                   const heightPercent = Math.round((d.minutes / maxWeeklyMinutes) * 100);
                   return (
                     <div key={d.day} className="flex-1 flex flex-col items-center gap-1.5 group cursor-pointer">

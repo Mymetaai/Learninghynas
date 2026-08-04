@@ -20,6 +20,7 @@ export type Database = {
           kitsune_coins: number;
           streak_days: number;
           created_at: string;
+          weekly_activity?: Json | null;
         };
         Insert: {
           user_id: string;
@@ -28,6 +29,7 @@ export type Database = {
           kitsune_coins?: number;
           streak_days?: number;
           created_at?: string;
+          weekly_activity?: Json | null;
         };
         Update: {
           user_id?: string;
@@ -36,6 +38,7 @@ export type Database = {
           kitsune_coins?: number;
           streak_days?: number;
           created_at?: string;
+          weekly_activity?: Json | null;
         };
       };
       immersion_chat_messages: {

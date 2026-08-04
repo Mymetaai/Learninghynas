@@ -7,6 +7,31 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { getCurrentUserId, syncUserStats, syncLearnedVocab } from '../lib/supabaseClient';
 
+export interface WeeklyActivityItem {
+  day: 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' | 'Sat' | 'Sun';
+  minutes: number;
+}
+
+/** Returns yyyy-mm-dd string for local Monday of the given date. */
+export const getMondayKey = (d: Date = new Date()): string => {
+  const dayIndex = (d.getDay() + 6) % 7;
+  const monday = new Date(d.getFullYear(), d.getMonth(), d.getDate() - dayIndex);
+  const y = monday.getFullYear();
+  const m = String(monday.getMonth() + 1).padStart(2, '0');
+  const day = String(monday.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+};
+
+export const DEFAULT_WEEKLY_ACTIVITY: WeeklyActivityItem[] = [
+  { day: 'Mon', minutes: 0 },
+  { day: 'Tue', minutes: 0 },
+  { day: 'Wed', minutes: 0 },
+  { day: 'Thu', minutes: 0 },
+  { day: 'Fri', minutes: 0 },
+  { day: 'Sat', minutes: 0 },
+  { day: 'Sun', minutes: 0 },
+];
+
 interface LearnedVocabEntry {
   /** The Spanish word, e.g. "hola". */
   word: string;
@@ -37,6 +62,12 @@ interface StatsState {
   earnedBadges: Record<string, boolean>;
   /** Completed syllabus lesson checklist. */
   completedLessons: Record<string, boolean>;
+  /** Active study minutes per day for the current week (Mon-Sun). */
+  weeklyActivity: WeeklyActivityItem[];
+  /** Sub-minute active study seconds accumulator. */
+  activeSeconds: number;
+  /** ISO date string (yyyy-mm-dd) of Monday for current tracked week. */
+  weekStartDate: string;
 
   /** Grant XP and coins for completing a quest (idempotent per quest). */
   grantQuestRewards: (questId: string, xp: number, coins: number) => void;
@@ -54,6 +85,8 @@ interface StatsState {
   claimExamReward: (examId: string, xp: number, coins: number, coursePart: string) => boolean;
   /** Toggle lesson completion state. */
   toggleLessonComplete: (lessonKey: string) => void;
+  /** Tick active study time by adding elapsed seconds. */
+  tickActiveStudyTime: (secondsElapsed: number) => void;
   /** Reset all stats to zero (fresh account / testing). */
   reset: () => void;
 }
@@ -94,6 +127,9 @@ const DEFAULT_STATE = {
     part8: false,
   } as Record<string, boolean>,
   completedLessons: {} as Record<string, boolean>,
+  weeklyActivity: DEFAULT_WEEKLY_ACTIVITY,
+  activeSeconds: 0,
+  weekStartDate: getMondayKey(),
 };
 
 export const useStatsStore = create<StatsState>()(
@@ -220,8 +256,49 @@ export const useStatsStore = create<StatsState>()(
         if (uid) syncUserStats(uid, get()).catch(() => {});
       },
 
+      tickActiveStudyTime: (secondsElapsed) => {
+        set((state) => {
+          const currentMondayKey = getMondayKey();
+          const isRollover = state.weekStartDate !== currentMondayKey;
+
+          let weeklyActivity = isRollover
+            ? DEFAULT_WEEKLY_ACTIVITY.map((item) => ({ ...item }))
+            : (state.weeklyActivity || DEFAULT_WEEKLY_ACTIVITY).map((item) => ({ ...item }));
+
+          if (weeklyActivity.length !== 7) {
+            weeklyActivity = DEFAULT_WEEKLY_ACTIVITY.map((item) => ({ ...item }));
+          }
+
+          const currentActiveSec = isRollover ? 0 : (state.activeSeconds || 0);
+          const totalSeconds = currentActiveSec + secondsElapsed;
+          const addedMinutes = Math.floor(totalSeconds / 60);
+          const remainingSeconds = totalSeconds % 60;
+
+          const dayIndex = (new Date().getDay() + 6) % 7;
+
+          if (addedMinutes > 0) {
+            weeklyActivity[dayIndex] = {
+              ...weeklyActivity[dayIndex],
+              minutes: (weeklyActivity[dayIndex]?.minutes || 0) + addedMinutes,
+            };
+          }
+
+          return {
+            weeklyActivity,
+            activeSeconds: remainingSeconds,
+            weekStartDate: currentMondayKey,
+          };
+        });
+      },
+
       reset: () => {
-        set({ ...DEFAULT_STATE, lastActiveDate: todayKey() });
+        set({
+          ...DEFAULT_STATE,
+          weeklyActivity: DEFAULT_WEEKLY_ACTIVITY.map((item) => ({ ...item })),
+          activeSeconds: 0,
+          weekStartDate: getMondayKey(),
+          lastActiveDate: todayKey(),
+        });
         const uid = getCurrentUserId();
         if (uid) {
           syncUserStats(uid, get()).catch(() => {});
@@ -242,6 +319,9 @@ export const useStatsStore = create<StatsState>()(
         claimedExamIds: state.claimedExamIds,
         earnedBadges: state.earnedBadges,
         completedLessons: state.completedLessons,
+        weeklyActivity: state.weeklyActivity,
+        activeSeconds: state.activeSeconds,
+        weekStartDate: state.weekStartDate,
       }),
     },
   ),

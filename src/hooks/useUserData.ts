@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useUser, useAuth } from '@clerk/clerk-react';
 import { createClerkSupabaseClient, setCurrentUserId } from '../lib/supabaseClient';
-import { useStatsStore } from '../state/statsStore';
+import { useStatsStore, type WeeklyActivityItem } from '../state/statsStore';
 import { useProgressStore } from '../state/progressStore';
 import { useQuestStore } from '../state/questStore';
 import { useDailyQuestStore } from '../state/dailyQuestStore';
@@ -17,6 +17,7 @@ export interface UserProgressData {
   kitsune_coins: number;
   streak_days: number;
   created_at?: string;
+  weekly_activity?: WeeklyActivityItem[];
 }
 
 const getStoredUserData = (userId: string): UserProgressData | null => {
@@ -61,6 +62,7 @@ export function useUserData() {
       xp: data.xp,
       coins: data.kitsune_coins,
       streak: data.streak_days,
+      ...(data.weekly_activity ? { weeklyActivity: data.weekly_activity } : {}),
     }));
   }, []);
 
@@ -76,6 +78,7 @@ export function useUserData() {
         level: Math.max(1, Math.floor((localStats.xp || 0) / 600) + 1),
         kitsune_coins: localStats.coins || 100,
         streak_days: localStats.streak || 1,
+        weekly_activity: localStats.weeklyActivity || [],
       };
       setUserData(fallback);
       setIsLoading(false);
@@ -95,6 +98,7 @@ export function useUserData() {
       level: Math.max(1, Math.floor((localStats.xp || 0) / 600) + 1),
       kitsune_coins: typeof localStats.coins === 'number' && localStats.coins > 0 ? localStats.coins : 100,
       streak_days: localStats.streak || 1,
+      weekly_activity: localStats.weeklyActivity || [],
     };
 
     setUserData(initialData);
@@ -123,12 +127,21 @@ export function useUserData() {
         const bestStreak = Math.max(data.streak_days || 0, initialData.streak_days || 0, localStats.streak || 0);
         const bestLevel = Math.max(1, Math.floor(bestXp / 600) + 1);
 
+        const supabaseWeekly = (data.weekly_activity as unknown as WeeklyActivityItem[]) || [];
+        const storeWeekly = localStats.weeklyActivity || [];
+        const mergedWeekly = (Array.isArray(supabaseWeekly) && supabaseWeekly.length === 7 && supabaseWeekly.some((d) => d.minutes > 0))
+          ? supabaseWeekly
+          : (Array.isArray(storeWeekly) && storeWeekly.length === 7)
+          ? storeWeekly
+          : initialData.weekly_activity || [];
+
         const merged: UserProgressData = {
           user_id: user.id,
           xp: bestXp,
           level: bestLevel,
           kitsune_coins: bestCoins,
           streak_days: bestStreak,
+          weekly_activity: mergedWeekly,
         };
 
         setUserData(merged);
@@ -175,8 +188,15 @@ export function useUserData() {
         const currentXp = state.xp;
         const currentCoins = state.coins;
         const currentStreak = state.streak;
+        const currentWeekly = state.weeklyActivity;
 
-        if (prev && prev.xp === currentXp && prev.kitsune_coins === currentCoins && prev.streak_days === currentStreak) {
+        if (
+          prev &&
+          prev.xp === currentXp &&
+          prev.kitsune_coins === currentCoins &&
+          prev.streak_days === currentStreak &&
+          JSON.stringify(prev.weekly_activity) === JSON.stringify(currentWeekly)
+        ) {
           return prev;
         }
 
@@ -187,6 +207,7 @@ export function useUserData() {
           kitsune_coins: currentCoins,
           streak_days: currentStreak,
           level: newLevel,
+          weekly_activity: currentWeekly,
         };
 
         saveStoredUserData(user.id, updated);
@@ -227,6 +248,7 @@ export function useUserData() {
           level: newLevel,
           kitsune_coins: userData?.kitsune_coins ?? useStatsStore.getState().coins,
           streak_days: userData?.streak_days ?? useStatsStore.getState().streak,
+          weekly_activity: userData?.weekly_activity ?? useStatsStore.getState().weeklyActivity,
         };
         setUserData(updatedData);
         saveStoredUserData(user.id, updatedData);
@@ -258,6 +280,7 @@ export function useUserData() {
           level: userData?.level ?? Math.max(1, Math.floor((userData?.xp || 0) / 600) + 1),
           kitsune_coins: newCoins,
           streak_days: userData?.streak_days ?? useStatsStore.getState().streak,
+          weekly_activity: userData?.weekly_activity ?? useStatsStore.getState().weeklyActivity,
         };
         setUserData(updatedData);
         saveStoredUserData(user.id, updatedData);
@@ -291,6 +314,7 @@ export function useUserData() {
           level: userData?.level ?? Math.max(1, Math.floor((userData?.xp || 0) / 600) + 1),
           kitsune_coins: newCoins,
           streak_days: userData?.streak_days ?? useStatsStore.getState().streak,
+          weekly_activity: userData?.weekly_activity ?? useStatsStore.getState().weeklyActivity,
         };
         setUserData(updatedData);
         saveStoredUserData(user.id, updatedData);
@@ -315,6 +339,7 @@ export function useUserData() {
       level: 1,
       kitsune_coins: 100,
       streak_days: 1,
+      weekly_activity: useStatsStore.getState().weeklyActivity,
     };
 
     // 1. Reset ALL Zustand stores across the entire app

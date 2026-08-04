@@ -83,6 +83,7 @@ export const syncLocalStoresToSupabase = async (userId?: string | null, token?: 
       level: Math.max(1, Math.floor((stats.xp || 0) / 600) + 1),
       kitsune_coins: typeof stats.coins === 'number' ? stats.coins : 100,
       streak_days: stats.streak || 0,
+      weekly_activity: stats.weeklyActivity || [],
     };
 
     saveStoredUserData(targetId, payload);

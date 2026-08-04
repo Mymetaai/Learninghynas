@@ -5,8 +5,11 @@ import type { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 import HUD from './HUD';
 import ChibiPet from './ChibiPet';
+import { useActiveStudyTimer } from '../hooks/useActiveStudyTimer';
 
 const AppShell: FC = () => {
+  useActiveStudyTimer();
+
   return (
     <div className="flex min-h-screen flex-col bg-bg-base">
       {/* Ambient blobs — subtle Serene Lexicon sage/cream depth */}

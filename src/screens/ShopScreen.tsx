@@ -1,7 +1,6 @@
 import { useState, useMemo, type FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStatsStore } from '../state/statsStore';
-import { useShopStore } from '../state/shopStore';
 import { useUserData } from '../hooks/useUserData';
 import { ONE_PIECE_CARDS, type OnePieceCard } from '../content/onePieceCards';
 import { DEMON_SLAYER_CARDS, type DemonSlayerCard } from '../content/demonSlayerCards';
@@ -80,166 +79,21 @@ const DEMON_SLAYER_HOTSPOTS = {
 
 const DRAW_COST = 20;
 
-interface ShopInventory {
-  streak_freeze: number;
-  hint_token: number;
-  boss_retry: number;
-  auras: string[];
-  themes: string[];
-}
-
-const initialInventory: ShopInventory = {
-  streak_freeze: 0,
-  hint_token: 0,
-  boss_retry: 0,
-  auras: [],
-  themes: [],
-};
-
-const SHOP_CATEGORIES = [
-  {
-    id: "power_ups",
-    label: "Power-Ups",
-    description: "Consumable boosts that help with lessons and streaks.",
-    items: [
-      { id: "streak_freeze", name: "Streak Freeze", price: 80, effect: "Protects your streak for one missed day", icon: "🔥", consumableKey: "streak_freeze" as const },
-      { id: "hint_token", name: "Hint Token", price: 30, effect: "Reveals one letter/word in a quiz question", icon: "💡", consumableKey: "hint_token" as const },
-      { id: "boss_retry", name: "Guardian Retry Token", price: 100, effect: "Immediately retry a failed Guardian Battle", icon: "🛡️", consumableKey: "boss_retry" as const },
-    ]
-  },
-  {
-    id: "yuki_auras",
-    label: "Yuki's Auras",
-    description: "Cosmetic tail-flame colors for your Yuki companion.",
-    items: [
-      { id: "aura_sakura", name: "Sakura Bloom Aura", price: 150, effect: "Pink petal tail-glow effect for Yuki", icon: "🌸", auraId: "aura_sakura" },
-      { id: "aura_ocean", name: "Ocean Mist Aura", price: 150, effect: "Blue wave tail-glow effect for Yuki", icon: "🌊", auraId: "aura_ocean" },
-      { id: "aura_shadow", name: "Shadow Flame Aura", price: 400, effect: "Purple void tail-glow effect for Yuki", icon: "💜", auraId: "aura_shadow" },
-    ]
-  },
-  {
-    id: "themes",
-    label: "App Themes",
-    description: "Recolor the whole app interface.",
-    items: [
-      { id: "theme_midnight", name: "Midnight Kitsune Theme", price: 300, effect: "Deep dark indigo UI theme override", icon: "🌌", themeId: "theme_midnight" },
-      { id: "theme_sakura", name: "Sakura Season Theme", price: 300, effect: "Soft pastel pink UI theme override", icon: "🌸", themeId: "theme_sakura" },
-    ]
-  }
-];
-
 const ShopScreen: FC = () => {
   const localCoins = useStatsStore((s) => s.coins);
   const collectAllCards = useStatsStore((s) => s.collectAllCards);
   const collectedCardIds = useStatsStore((s) => s.collectedCardIds);
   
   // Hook for Clerk + Supabase live user data mutations
-  const { userData, spendCoins: userSpendCoins, addCoins: userAddCoins } = useUserData();
+  const { userData, spendCoins: userSpendCoins } = useUserData();
   const coins = userData?.kitsune_coins ?? localCoins;
 
   // Add direct reward cheat button for testing
   const addRewards = useStatsStore((s) => s.addRewards);
 
-  // Kitsune Shop tabs & state
-  const [activeTab, setActiveTab] = useState<'kitsune' | 'anime-gacha'>('kitsune');
-  const [inventory, setInventory] = useState<ShopInventory>(() => {
-    const saved = localStorage.getItem('wayfarer_shop_inventory');
-    if (saved) {
-      try {
-        return JSON.parse(saved);
-      } catch (e) {
-        console.error(e);
-      }
-    }
-    return initialInventory;
-  });
   const [chestReward, setChestReward] = useState<{ title: string; detail: string } | null>(null);
   const [purchaseCelebration, setPurchaseCelebration] = useState<{ name: string; cost: number; desc?: string } | null>(null);
   const [showCoinTips, setShowCoinTips] = useState(false);
-
-  const saveInventory = (newInv: ShopInventory) => {
-    setInventory(newInv);
-    localStorage.setItem('wayfarer_shop_inventory', JSON.stringify(newInv));
-  };
-
-  const addAura = (auraId: string) => {
-    if (inventory.auras.includes(auraId)) return;
-    const newInv = { ...inventory, auras: [...inventory.auras, auraId] };
-    saveInventory(newInv);
-  };
-
-  const addTheme = (themeId: string) => {
-    if (inventory.themes.includes(themeId)) return;
-    const newInv = { ...inventory, themes: [...inventory.themes, themeId] };
-    saveInventory(newInv);
-  };
-
-  const addConsumable = (key: 'streak_freeze' | 'hint_token' | 'boss_retry', amount: number) => {
-    const newInv = { ...inventory, [key]: (inventory[key] || 0) + amount };
-    saveInventory(newInv);
-  };
-
-  const handleBuyItem = async (item: any) => {
-    const success = await userSpendCoins(item.price);
-    if (!success) return;
-
-    if (item.consumableKey) {
-      addConsumable(item.consumableKey, 1);
-      useShopStore.getState().buyPowerUp(item.consumableKey, 0);
-    } else if (item.auraId) {
-      addAura(item.auraId);
-    } else if (item.themeId) {
-      addTheme(item.themeId);
-    }
-
-    setPurchaseCelebration({ name: item.name, cost: item.price, desc: item.effect });
-  };
-
-  const handleBuyFeatured = async () => {
-    const price = 720;
-    const success = await userSpendCoins(price);
-    if (!success) return;
-    addAura('aura_golden');
-    setPurchaseCelebration({ name: 'Golden Nine-Tail Aura', cost: price, desc: 'Volumetric golden aura effect for your Kitsune companion' });
-  };
-
-  const handleOpenChest = async () => {
-    const price = 200;
-    const success = await userSpendCoins(price);
-    if (!success) return;
-
-    const rand = Math.random() * 100;
-    let rewardTitle = '';
-    let rewardDetail = '';
-
-    if (rand < 40) {
-      const refund = 50 + Math.floor(Math.random() * 101);
-      userAddCoins(refund);
-      rewardTitle = refund + ' KC Refund';
-      rewardDetail = 'You opened the chest and found a refund of ' + refund + ' Kitsune Coins inside!';
-    } else if (rand < 65) {
-      const auras = ['Sakura Bloom Aura', 'Ocean Mist Aura'];
-      const chosen = auras[Math.floor(Math.random() * auras.length)];
-      const auraId = chosen.indexOf('Sakura') !== -1 ? 'aura_sakura' : 'aura_ocean';
-      addAura(auraId);
-      rewardTitle = chosen;
-      rewardDetail = 'You unlocked the cosmetic ' + chosen + ' for Yuki!';
-    } else if (rand < 85) {
-      addConsumable('hint_token', 2);
-      rewardTitle = '2x Hint Tokens';
-      rewardDetail = 'You found 2 consumable Hint Tokens to reveal difficult quiz letters!';
-    } else if (rand < 95) {
-      addAura('aura_shadow');
-      rewardTitle = 'Shadow Flame Aura';
-      rewardDetail = 'A rare cosmic purple tail-glow effect for Yuki!';
-    } else {
-      addAura('aura_golden');
-      rewardTitle = 'Golden Nine-Tail Aura';
-      rewardDetail = 'JACKPOT! You obtained the legendary Golden Nine-Tail Aura!';
-    }
-
-    setChestReward({ title: rewardTitle, detail: rewardDetail });
-  };
 
   // ── PACK OPENING OVERLAY STATE ───────────────────────────────────────────
   const [isPackDrawing, setIsPackDrawing] = useState<boolean>(false);
@@ -437,244 +291,8 @@ const ShopScreen: FC = () => {
           </div>
         </div>
 
-        {/* ── TAB SWITCHER ───────────────────────────────────────────── */}
-        <div className="flex justify-center gap-4 mb-6">
-          <button
-            onClick={() => setActiveTab('kitsune')}
-            className={`px-6 py-2.5 rounded-full font-sans text-xs font-bold border transition-all cursor-pointer ${
-              activeTab === 'kitsune'
-                ? 'bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border-[#2C1E11] shadow-sm'
-                : 'bg-bg-elevated text-text-secondary border-structural hover:border-text-primary'
-            }`}
-          >
-            🦊 Kitsune Store
-          </button>
-          <button
-            onClick={() => setActiveTab('anime-gacha')}
-            className={`px-6 py-2.5 rounded-full font-sans text-xs font-bold border transition-all cursor-pointer ${
-              activeTab === 'anime-gacha'
-                ? 'bg-[#F5A991] text-[#2C1E11] hover:bg-[#EAA088] border-[#2C1E11] shadow-sm'
-                : 'bg-bg-elevated text-text-secondary border-structural hover:border-text-primary'
-            }`}
-          >
-            ✦ Summoning Altar & Card Album
-          </button>
-        </div>
-
-        {/* ── TAB CONTENT: KITSUNE SHOP ──────────────────────────────── */}
-        {activeTab === 'kitsune' ? (
-          <div className="space-y-6">
-            
-            {/* Featured Daily Deal */}
-            <div className="relative overflow-hidden rounded-2xl border border-accent-action bg-bg-elevated p-5 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              <div className="absolute top-0 right-0 bg-accent-action text-white font-mono text-[9px] uppercase tracking-widest px-3 py-1 rounded-bl-xl font-bold">
-                Featured Deal • 24h Left
-              </div>
-              <div className="space-y-1">
-                <span className="font-mono text-[9px] uppercase tracking-wider text-accent-action font-bold bg-accent-action/10 px-2 py-0.5 rounded">
-                  Daily Special
-                </span>
-                <h3 className="font-serif text-lg font-bold text-text-primary mt-2">Golden Nine-tail Aura</h3>
-                <p className="font-sans text-xs text-text-secondary">Volumetric golden aura effect for your Kitsune companion, Yuki.</p>
-                <div className="flex items-center gap-2 mt-1.5">
-                  <span className="font-mono text-base font-bold text-accent-action">720 KC</span>
-                  <span className="font-mono text-xs text-text-secondary/65 line-through">900 KC</span>
-                </div>
-              </div>
-              <button
-                onClick={handleBuyFeatured}
-                disabled={coins < 720 || inventory.auras.includes('aura_golden')}
-                className={`px-6 py-3 rounded-xl font-sans text-xs font-bold shadow-sm transition-all border-none ${
-                  inventory.auras.includes('aura_golden')
-                    ? 'bg-success/15 text-success cursor-default'
-                    : coins >= 720
-                      ? 'bg-accent-action hover:bg-accent-action-hover text-white cursor-pointer hover:scale-103'
-                      : 'bg-structural/35 text-text-secondary/65 cursor-not-allowed'
-                }`}
-              >
-                {inventory.auras.includes('aura_golden') ? 'Owned' : 'Buy Deal'}
-              </button>
-            </div>
-
-            {/* Main Item Categories Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              
-              {/* Render Standard Categories */}
-              {SHOP_CATEGORIES.map((cat) => (
-                <div key={cat.id} className="bg-bg-elevated border border-structural rounded-2xl p-5 shadow-sm flex flex-col justify-between">
-                  <div>
-                    <h3 className="font-sans text-base font-bold text-text-primary border-b border-structural pb-2 mb-2">
-                      {cat.label}
-                    </h3>
-                    <p className="text-text-secondary text-xs mb-4 leading-relaxed">
-                      {cat.description}
-                    </p>
-                    
-                    <div className="space-y-4">
-                      {cat.items.map((item: any) => {
-                        const isOwned = (item.auraId && inventory.auras.includes(item.auraId)) || 
-                                        (item.themeId && inventory.themes.includes(item.themeId));
-                        const consumableKey = item.consumableKey as 'streak_freeze' | 'hint_token' | 'boss_retry' | undefined;
-                        const quantity = consumableKey ? inventory[consumableKey] || 0 : 0;
-                        const affordable = coins >= item.price;
-
-                        return (
-                          <div key={item.id} className="border border-structural bg-bg-base/15 rounded-xl p-3 flex flex-col justify-between">
-                            <div>
-                              <div className="flex justify-between items-start">
-                                <span className="text-xl" role="img" aria-label={item.name}>{item.icon}</span>
-                                {consumableKey && quantity > 0 && (
-                                  <span className="font-mono text-[9px] uppercase tracking-wider text-success font-bold bg-success/10 px-2 py-0.5 rounded">
-                                    Owned: {quantity}
-                                  </span>
-                                )}
-                                {isOwned && (
-                                  <span className="font-mono text-[9px] uppercase tracking-wider text-success font-bold bg-success/10 px-2 py-0.5 rounded">
-                                    Owned
-                                  </span>
-                                )}
-                              </div>
-                              <h4 className="font-sans text-sm font-bold text-text-primary mt-1.5">{item.name}</h4>
-                              <p className="font-sans text-[11px] text-text-secondary mt-0.5">{item.effect}</p>
-                            </div>
-                            
-                            <div className="mt-3 pt-2 border-t border-structural/20 flex items-center justify-between">
-                              <span className="font-mono text-xs font-bold text-accent-action">{item.price} KC</span>
-                              <button
-                                onClick={() => handleBuyItem(item)}
-                                disabled={isOwned || !affordable}
-                                className={`px-3 py-1.5 rounded-lg font-sans text-[11px] font-bold border-none transition-all ${
-                                  isOwned
-                                    ? 'bg-success/10 text-success cursor-default'
-                                    : affordable
-                                      ? 'bg-accent-action hover:bg-accent-action-hover text-white cursor-pointer hover:scale-103'
-                                      : 'bg-structural/35 text-text-secondary/65 cursor-not-allowed'
-                                }`}
-                              >
-                                {isOwned ? 'Owned' : 'Buy'}
-                              </button>
-                            </div>
-
-                            {/* Almost There Progress Bar */}
-                            {!isOwned && !affordable && (
-                              (() => {
-                                const pct = Math.round((coins / item.price) * 100);
-                                const needed = item.price - coins;
-                                return (
-                                  <div className="mt-2 pt-2 border-t border-structural/10">
-                                    <div className="flex justify-between text-[9px] font-sans font-semibold text-text-secondary">
-                                      <span>Almost there! ({pct}%)</span>
-                                      <span>Need {needed} KC</span>
-                                    </div>
-                                    <div className="w-full h-1 bg-structural/30 rounded-full overflow-hidden mt-1">
-                                      <div className="h-full bg-accent-action rounded-full" style={{ width: `${pct}%` }} />
-                                    </div>
-                                  </div>
-                                );
-                              })()
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-              ))}
-
-              {/* Mystery Kitsune Chest Box (Categorized on its own) */}
-              <div className="bg-bg-elevated border border-accent-action/30 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
-                <div>
-                  <h3 className="font-serif text-base font-bold text-text-primary border-b border-structural pb-2 mb-2">
-                    Mystery Chest
-                  </h3>
-                  <p className="text-text-secondary text-xs mb-4 leading-relaxed">
-                    Weighted random reward. The engagement centerpiece of the shop!
-                  </p>
-                  
-                  <div className="border border-dashed border-accent-action/25 bg-accent-action/5 rounded-xl p-4 text-center space-y-3">
-                    <span className="text-4xl block animate-bounce" role="img" aria-label="Chest">🎁</span>
-                    <div>
-                      <h4 className="font-serif text-sm font-bold text-text-primary">Kitsune Chest</h4>
-                      <p className="font-sans text-[11px] text-text-secondary mt-1">Random aura, refunds, or hint tokens! Jackpot rate: 5%</p>
-                    </div>
-
-                    <div className="border-t border-structural/25 pt-2 text-[10px] text-text-secondary/70 font-mono text-left space-y-1">
-                      <div className="flex justify-between">
-                        <span>Pouch Refund (50-150 KC):</span>
-                        <span className="font-semibold text-text-primary">40%</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Common Aura:</span>
-                        <span className="font-semibold text-text-primary">25%</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>2x Hint Tokens:</span>
-                        <span className="font-semibold text-text-primary">20%</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Rare Aura:</span>
-                        <span className="font-semibold text-text-primary">10%</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Epic Aura (Jackpot):</span>
-                        <span className="font-semibold text-text-primary">5%</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-4 pt-3 border-t border-structural/20 flex items-center justify-between">
-                  <span className="font-mono text-xs font-bold text-accent-action">200 KC</span>
-                  <button
-                    onClick={handleOpenChest}
-                    disabled={coins < 200}
-                    className={`px-4 py-2 rounded-xl font-sans text-xs font-bold border-none transition-all shadow-sm ${
-                      coins >= 200
-                        ? 'bg-accent-action hover:bg-accent-action-hover text-white cursor-pointer hover:scale-103'
-                        : 'bg-structural/35 text-text-secondary/65 cursor-not-allowed'
-                    }`}
-                  >
-                    Open Chest
-                  </button>
-                </div>
-
-                {/* Almost There Progress Bar for Chest */}
-                {coins < 200 && (
-                  (() => {
-                    const pct = Math.round((coins / 200) * 100);
-                    const needed = 200 - coins;
-                    return (
-                      <div className="mt-2 pt-2 border-t border-structural/10">
-                        <div className="flex justify-between text-[9px] font-sans font-semibold text-text-secondary">
-                          <span>Almost there! ({pct}%)</span>
-                          <span>Need {needed} KC</span>
-                        </div>
-                        <div className="w-full h-1 bg-structural/30 rounded-full overflow-hidden mt-1">
-                          <div className="h-full bg-accent-action rounded-full" style={{ width: `${pct}%` }} />
-                        </div>
-                      </div>
-                    );
-                  })()
-                )}
-              </div>
-
-            </div>
-
-            {/* Help / Tip Link */}
-            <p className="text-center font-sans text-xs text-text-secondary pt-4">
-              Need more coins?{' '}
-              <button
-                onClick={() => setShowCoinTips(true)}
-                className="text-accent-action font-semibold hover:underline bg-transparent border-none cursor-pointer p-0"
-              >
-                How do I earn coins faster? ↗
-              </button>
-            </p>
-          </div>
-        ) : (
-          /* ── TAB CONTENT: ORIGINAL ANIME GACHA ALTAR ────────────────── */
-          <>
-            {/* Series Dropdown Selector inside the Gacha Altar tab */}
+        {/* ── GACHA SHRINE & CARD ALBUM DISPLAY ───────────────────── */}
+        {/* Series Dropdown Selector inside the Gacha Altar */}
             <div className="mb-4 flex items-center gap-2">
               <span className="text-[10px] uppercase font-mono text-text-secondary tracking-wider font-bold">Set:</span>
               <select
@@ -903,8 +521,6 @@ const ShopScreen: FC = () => {
                   ))}
               </div>
             </div>
-          </>
-        )}
 
       </div>
 
