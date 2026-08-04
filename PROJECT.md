@@ -1,30 +1,47 @@
-# Project: Multi-Agent Educational Content & Observability Pipeline
+# Project: Spanish Learning Web Application Gamification & Theme System
 
 ## Architecture
-Multi-agent content processing and exercise generation pipeline for Spanish learning web application with Langfuse observability.
+- **Frontend Framework**: React + TypeScript + Vite
+- **Styling**: Tailwind CSS + Custom CSS Variables (`data-theme` attribute on `document.documentElement`)
+- **State Management**: Zustand stores (`statsStore.ts`, `shopStore.ts`) persisted to `localStorage`
+- **Backend Sync**: Supabase client (`supabaseClient.ts`, `useUserData.ts`) syncing user progress, inventory, themes, and stats
+- **Audio Engine**: Custom Web Audio API synthesizer (`audioFeedback.ts`) supporting 4 theme packs
 
-- **Extractor Agent**: Reads PDF workbooks from `Spanish Syllabus/` using `marker-pdf` and `chonkie`, generating CEFR-tagged (A1-C1) lesson chunks.
-- **Generator Agent**: Leverages DSPy + Instructor + Gemini (`google-genai` / `litellm`) to generate structured vocabulary, MCQs, fill-in-the-blanks, matching exercises validated against Pydantic schemas mapped to Supabase DB tables (`user_stats`, `learned_vocabulary`, `immersion_chat_messages`).
-- **QA/Validator Agent**: Linguistic & CEFR validation, confidence scoring (<0.85 quarantine/retry threshold), schema verification.
-- **Mixer Agent**: Merges original syllabus content with AI exercises, distributing and shuffling across 8 web app features (Basic Español, Quest Journey, Stories, Training Grounds, AI Companion, Voice Arena, Today's Quest, Shop) while leaving Adventure Map strictly untouched.
-- **Langfuse Layer**: Complete trace logging, latencies, token usages, and quality metrics across all steps.
+## Feature Inventory
+Every feature from user requirements (R1 - R6) is assigned to a milestone:
+| # | Feature | Description | Milestone | Source |
+|---|---------|-------------|-----------|--------|
+| 1 | Streak Freeze & Streak Repair System | Functional streak_freeze & streak_repair items; protect daily streak on missed days; buy streak repair | M1 | ORIGINAL_REQUEST §R1 |
+| 2 | Anime Gacha Booster Packs | 4 pack tiers (Common, Rare, Epic, Legendary), 3D flip animation, battle stats, One Piece & Demon Slayer power effects, card collection inventory | M2 | ORIGINAL_REQUEST §R2 |
+| 3 | Hint Tokens in Quizzes | Integrate hint token consumption across ExerciseCard, SentenceBuilderExercise, PracticeScreen; eliminate wrong choices / highlight word hints | M3 | ORIGINAL_REQUEST §R3 |
+| 4 | Sound Pack Themes | 4 unlockable sound packs (Anime Hero, Castilian Coach, Latin Salsa, Chibi Yuki); Web Audio synth feedback for correct/incorrect/success | M4 | ORIGINAL_REQUEST §R4 |
+| 5 | 10-Theme UI Override System | 10 custom data-themes in index.css (madrid-midnight, ibiza-sunset, andalusia-olive, caribbean-coral, barcelona-gaudi, fiesta-neon, matador-crimson, siesta-mint, tulum-teal, aztec-gold); preview, buy, equip, persist | M5 | ORIGINAL_REQUEST §R5 |
+| 6 | Supabase Migration, Build & Push | Migration SQL for themes/inventory/hints; zero TypeScript errors on npm run build; git commit and push to main | M6 | ORIGINAL_REQUEST §R6 |
 
 ## Milestones
 | # | Name | Scope | Dependencies | Status |
 |---|------|-------|-------------|--------|
-| 1 | Exploration & Architecture | Workspace audit, PDF analysis, Pydantic/Supabase mapping, Langfuse setup | None | DONE |
-| 2 | Extraction & Generation | marker-pdf + chonkie extraction, DSPy + Instructor generation, Pydantic schemas | M1 | DONE |
-| 3 | QA/Validation & Tracing | Spanish linguistic QA, CEFR validation, retry fallback, Langfuse observability | M2 | DONE |
-| 4 | Content Mixing & 8-Feature Distribution | Content merger, shuffling across 8 features, Adventure Map protection | M3 | DONE |
-| 5 | System Build & Forensic Verification | npm run build, full end-to-end verification, Challenger & Forensic Audit | M4 | DONE |
-
-## Code Layout
-- `Spanish Syllabus/`: Source PDF workbooks
-- `src/`: React + TypeScript frontend codebase
-- `src/content/`: Application content stores and feature data files
-- `.agents/`: Agent metadata and execution logs
+| 1 | M1: Streak Freeze & Streak Repair System | Extend statsStore & shopStore for freeze/repair, streak protection logic, purchase actions | none | PLANNED |
+| 2 | M2: Anime Gacha Booster Packs | Gacha Altar UI, 4 pack tiers, 3D flip card opening overlay, battle stats, One Piece & Demon Slayer special effects, card inventory | M1 | PLANNED |
+| 3 | M3: Hint Tokens in Quizzes & Exercises | Add hint token count to statsStore, "Use Hint Token" button in ExerciseCard & SentenceBuilderExercise, option elimination logic | M1 | PLANNED |
+| 4 | M4: Voice & Audio Sound Pack Themes | Audio engine (audioFeedback.ts), 4 sound packs, Web Audio synthesis, shop purchase/equip UI | M1 | PLANNED |
+| 5 | M5: 10-Theme UI Override System | 10 CSS theme definitions in index.css, DOM data-theme binding in AppShell, theme shop UI, persistence | M1 | PLANNED |
+| 6 | M6: Supabase Migration, Build & Git Push | Migration SQL schema updates, npm run build verification, git commit and push to main branch | M1, M2, M3, M4, M5 | PLANNED |
 
 ## Interface Contracts
-- **PDF Lesson Chunk**: `{ lesson_id: string, cefr_level: 'A1'|'A2'|'B1'|'B2'|'C1', title: string, raw_text: string, chunks: Array<{ chunk_id: string, text: string, keywords: string[] }> }`
-- **Exercise Schema**: Pydantic validated exercises mapped to Supabase (`learned_vocabulary`, `immersion_chat_messages`, `user_stats`)
-- **QA Result**: `{ item_id: string, confidence_score: number, passed: boolean, errors: string[], fallback_triggered: boolean }`
+### shopStore ↔ statsStore
+- `shopStore`: Manages shop catalog items (Streak Freeze, Streak Repair, Hint Tokens, Gacha Packs, Sound Packs, UI Themes), prices, purchase verification.
+- `statsStore`: Single source of truth for user currency (`coins`), streak state (`streak`, `streakFreezeCount`, `streakRepairCount`), hint tokens (`hintTokens`), unlocked gacha cards (`collectedCardIds`), equipped sound pack (`equippedSoundPack`), equipped UI theme (`equippedTheme`).
+
+## Code Layout
+- `src/state/statsStore.ts`: User stats store (coins, streak, inventory, themes, audio)
+- `src/state/shopStore.ts`: Shop catalog & booster pack definitions
+- `src/utils/audioFeedback.ts`: Sound pack manager & Web Audio API synthesizer
+- `src/screens/ShopScreen.tsx`: Gamified Shop UI, Gacha Altar, Booster Packs, Sound Packs, Theme Store
+- `src/screens/PracticeScreen.tsx`: Quiz session container
+- `src/components/ExerciseCard.tsx`: Multiple choice exercise card with Hint Token integration
+- `src/components/SentenceBuilderExercise.tsx`: Sentence builder exercise with Hint Token integration
+- `src/components/PackOpeningOverlay.tsx`: 3D card flip & gacha pack opening modal
+- `src/components/GachaCard.tsx`: 3D holographic card component with battle stats & power animations
+- `src/index.css`: 10 CSS theme definitions using `[data-theme="..."]`
+- `supabase/migrations/`: Database schema migration files

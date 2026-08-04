@@ -4,7 +4,9 @@
 
 import { useState, type FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, X, HelpCircle, RefreshCw, Award, Sparkles } from 'lucide-react';
+import { Check, X, RefreshCw, Award, Sparkles, Lightbulb } from 'lucide-react';
+import { audioFeedback } from '../utils/audioFeedback';
+import { useShopStore } from '../state/shopStore';
 
 interface Question {
   id: string;
@@ -216,14 +218,32 @@ const FillInBlanksQuiz: FC = () => {
     const normCorrect = normalize(q.correctAnswer);
 
     const isMatch = normUser === normCorrect;
+    audioFeedback.playFeedback(isMatch ? 'correct' : 'incorrect');
+
     setResults((prev) => ({
       ...prev,
       [q.id]: isMatch ? 'correct' : 'incorrect',
     }));
   };
 
-  const handleToggleHint = (id: string) => {
-    setShowHints((prev) => ({ ...prev, [id]: !prev[id] }));
+  const handleUseHintToken = (q: Question) => {
+    const shopStore = useShopStore.getState();
+    const hasToken = (shopStore.inventory?.consumables?.hint_token || 0) > 0;
+    
+    if (hasToken) {
+      const used = shopStore.usePowerUpItem('hint_token');
+      if (used) {
+        setShowHints((prev) => ({ ...prev, [q.id]: true }));
+        // Fill first letter as a hint
+        if (q.correctAnswer && q.correctAnswer.length > 0) {
+          setAnswers((prev) => ({ ...prev, [q.id]: q.correctAnswer.slice(0, 2) }));
+        }
+        return;
+      }
+    }
+
+    // Toggle free hint if no token owned
+    setShowHints((prev) => ({ ...prev, [q.id]: !prev[q.id] }));
   };
 
   const handleResetQuiz = () => {
@@ -353,11 +373,15 @@ const FillInBlanksQuiz: FC = () => {
               {/* Hint & Check Controls */}
               <div className="flex items-center justify-between mt-1">
                 <button
-                  onClick={() => handleToggleHint(q.id)}
-                  className="flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-[var(--text-tertiary)] hover:text-[var(--accent-action)] transition-colors cursor-pointer"
+                  onClick={() => handleUseHintToken(q)}
+                  className="flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-[var(--accent-action)] hover:opacity-80 transition-colors cursor-pointer bg-[var(--bg-elevated-2)] px-2.5 py-1 rounded-lg border border-[#7D927D]/20 shadow-2xs"
                 >
-                  <HelpCircle className="h-3.5 w-3.5" />
-                  {showHints[q.id] ? 'Hide Hint' : 'Need Hint?'}
+                  <Lightbulb className="h-3.5 w-3.5 text-[#7D927D]" />
+                  {showHints[q.id]
+                    ? 'Hide Hint'
+                    : (useShopStore.getState().inventory?.consumables?.hint_token || 0) > 0
+                    ? `Use Hint Token (${useShopStore.getState().inventory.consumables.hint_token})`
+                    : 'Need Hint?'}
                 </button>
 
                 {status !== 'correct' && (

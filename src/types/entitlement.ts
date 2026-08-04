@@ -44,6 +44,8 @@ export interface UserEntitlements {
   unlockedPacks: string[];
   activeThemeId: string;
   activeAuraId: string | null;
+  unlockedSoundPacks?: string[];
+  activeSoundPackId?: string;
 }
 
 export type ShopInventory = UserEntitlements;

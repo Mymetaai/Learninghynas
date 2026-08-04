@@ -28,6 +28,159 @@
   --streak-warm: #D4A574;    /* Warm Gold tone for streaks */
 }
 
+/* =========================================
+   🌅 CULTURAL & REGIONAL AESTHETICS & THEMES
+========================================= */
+
+/* Madrid Midnight (Sleek Dark Mode) */
+[data-theme="madrid-midnight"] {
+  --bg-base: #121214;
+  --bg-elevated: #1E1E24;
+  --bg-elevated-2: #2A2A35;
+  --structural: #374151;
+  --text-primary: #F9FAFB;
+  --text-secondary: #9CA3AF;
+  --accent-action: #1D4ED8;
+  --accent-action-hover: #1E40AF;
+  --accent-mint: #F59E0B;
+}
+
+/* Ibiza Sunset (Trendy Gradient) */
+[data-theme="ibiza-sunset"] {
+  --bg-base: #FAF9F6;
+  --bg-elevated: #FFFFFF;
+  --bg-elevated-2: #FFF1F2;
+  --structural: #FECDD3;
+  --text-primary: #1F2937;
+  --text-secondary: #6B7280;
+  --accent-action: #F43F5E;
+  --accent-action-hover: #E11D48;
+  --accent-mint: #F97316;
+}
+
+/* Andalusia Olive (Warm Minimalist) */
+[data-theme="andalusia-olive"] {
+  --bg-base: #FEFAE0;
+  --bg-elevated: #FFFFFF;
+  --bg-elevated-2: #F4F1DE;
+  --structural: #DDA15E;
+  --text-primary: #283618;
+  --text-secondary: #606C38;
+  --accent-action: #606C38;
+  --accent-action-hover: #283618;
+  --accent-mint: #DDA15E;
+}
+
+/* Caribbean Coral (High-Energy Tropical) */
+[data-theme="caribbean-coral"] {
+  --bg-base: #F7FFF7;
+  --bg-elevated: #FFFFFF;
+  --bg-elevated-2: #E6F8F6;
+  --structural: #A3E4D7;
+  --text-primary: #2F353B;
+  --text-secondary: #64748B;
+  --accent-action: #4ECDC4;
+  --accent-action-hover: #36B3A9;
+  --accent-mint: #FF6B6B;
+}
+
+/* Barcelona Gaudi (Creative Mosaic) */
+[data-theme="barcelona-gaudi"] {
+  --bg-base: #FAFAFA;
+  --bg-elevated: #FFFFFF;
+  --bg-elevated-2: #EBF7F5;
+  --structural: #A8DADC;
+  --text-primary: #264653;
+  --text-secondary: #2A9D8F;
+  --accent-action: #2A9D8F;
+  --accent-action-hover: #218377;
+  --accent-mint: #E76F51;
+}
+
+/* Fiesta Neon (Cyberpunk-Lite) */
+[data-theme="fiesta-neon"] {
+  --bg-base: #0B0F19;
+  --bg-elevated: #151C2C;
+  --bg-elevated-2: #1E293B;
+  --structural: #334155;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --accent-action: #00F5D4;
+  --accent-action-hover: #00D6B9;
+  --accent-mint: #7B2CBF;
+}
+
+/* Matador Crimson (Bold & Dynamic) */
+[data-theme="matador-crimson"] {
+  --bg-base: #F9FAFB;
+  --bg-elevated: #FFFFFF;
+  --bg-elevated-2: #FEE2E2;
+  --structural: #FCA5A5;
+  --text-primary: #111827;
+  --text-secondary: #4B5563;
+  --accent-action: #DC2626;
+  --accent-action-hover: #B91C1C;
+  --accent-mint: #991B1B;
+}
+
+/* Siesta Mint (Chill Study Vibe) */
+[data-theme="siesta-mint"] {
+  --bg-base: #F4FBF7;
+  --bg-elevated: #FFFFFF;
+  --bg-elevated-2: #E8F8F0;
+  --structural: #A8E6CF;
+  --text-primary: #374151;
+  --text-secondary: #6B7280;
+  --accent-action: #2E8B57;
+  --accent-action-hover: #236B43;
+  --accent-mint: #FFD3B6;
+}
+
+/* Tulum Teal (Fresh & Coastal) */
+[data-theme="tulum-teal"] {
+  --bg-base: #F0F8FF;
+  --bg-elevated: #FFFFFF;
+  --bg-elevated-2: #E0F2F1;
+  --structural: #80CBC4;
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --accent-action: #008080;
+  --accent-action-hover: #006666;
+  --accent-mint: #FFB6C1;
+}
+
+/* Aztec Gold (Premium Gamified) */
+[data-theme="aztec-gold"] {
+  --bg-base: #0F172A;
+  --bg-elevated: #1E293B;
+  --bg-elevated-2: #334155;
+  --structural: #475569;
+  --text-primary: #F1F5F9;
+  --text-secondary: #CBD5E1;
+  --accent-action: #D97706;
+  --accent-action-hover: #B45309;
+  --accent-mint: #10B981;
+}
+
+.theme-container {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+}
+
+.theme-button {
+  background-color: var(--accent-action);
+  color: var(--bg-base);
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.theme-button:hover {
+  background-color: var(--accent-action-hover);
+}
+
+.theme-text-highlight {
+  color: var(--accent-action);
+}
+
 /* ── Serene Lexicon — Flat Card Utilities ────────────────────────────── */
 .squircle-28 {
   border-radius: 16px;

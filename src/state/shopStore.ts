@@ -18,6 +18,9 @@ export interface ShopState {
   buyConsumable: (itemId: string) => boolean;
   buyAura: (itemId: string) => boolean;
   buyTheme: (itemId: string) => boolean;
+  setActiveTheme: (themeId: string) => void;
+  buySoundPack: (packId: string, cost: number) => boolean;
+  setActiveSoundPack: (packId: string) => void;
   drawCardBooster: (franchise: 'one_piece' | 'demon_slayer', availableCardIds: string[], cost?: number) => { cardId: string; isDuplicate: boolean } | null;
   unlockBonusPack: (packId: string, cost: number) => boolean;
   hasCard: (cardId: string) => boolean;
@@ -91,11 +94,16 @@ export const useShopStore = create<ShopState>()(
 
       buyTheme: (itemId) => {
         const item = findCatalogItem(itemId);
-        if (!item || item.type !== 'theme') return false;
+        const price = item ? item.priceInCoins : 200;
         const stats = useStatsStore.getState();
-        if (stats.coins < item.priceInCoins) return false;
-        const success = stats.spendCoins(item.priceInCoins);
+        if (stats.coins < price) return false;
+        const success = stats.spendCoins(price);
         if (!success) return false;
+        
+        if (typeof document !== 'undefined') {
+          document.documentElement.setAttribute('data-theme', itemId);
+        }
+
         set((state) => ({
           inventory: {
             ...state.inventory,
@@ -104,6 +112,46 @@ export const useShopStore = create<ShopState>()(
           },
         }));
         return true;
+      },
+
+      setActiveTheme: (themeId) => {
+        if (typeof document !== 'undefined') {
+          if (themeId) {
+            document.documentElement.setAttribute('data-theme', themeId);
+          } else {
+            document.documentElement.removeAttribute('data-theme');
+          }
+        }
+        set((state) => ({
+          inventory: {
+            ...state.inventory,
+            activeThemeId: themeId,
+          },
+        }));
+      },
+
+      buySoundPack: (packId, cost) => {
+        const stats = useStatsStore.getState();
+        if (stats.coins < cost) return false;
+        const success = stats.spendCoins(cost);
+        if (!success) return false;
+        set((state) => ({
+          inventory: {
+            ...state.inventory,
+            unlockedSoundPacks: [...new Set([...(state.inventory.unlockedSoundPacks || []), packId])],
+            activeSoundPackId: packId,
+          },
+        }));
+        return true;
+      },
+
+      setActiveSoundPack: (packId) => {
+        set((state) => ({
+          inventory: {
+            ...state.inventory,
+            activeSoundPackId: packId,
+          },
+        }));
       },
 
       drawCardBooster: (franchise, availableCardIds, cost = DRAW_COST) => {
