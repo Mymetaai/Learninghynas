@@ -214,7 +214,7 @@ const HomeScreen: FC = () => {
   );
 
   const maxWeeklyMinutes = useMemo(
-    () => Math.max(...weeklyActivity.map((d) => d.minutes), 30),
+    () => Math.max(...weeklyActivity.map((d) => d.minutes), 15),
     [weeklyActivity]
   );
 
@@ -369,20 +369,37 @@ const HomeScreen: FC = () => {
                   Avg {avgDailyMinutes}m / day
                 </span>
               </div>
-              <div className="flex items-end justify-between gap-3 h-28">
+              <div className="flex items-end justify-between gap-3 h-28 pt-4">
                 {weeklyActivity.map((d) => {
-                  const heightPercent = Math.round((d.minutes / maxWeeklyMinutes) * 100);
+                  const hasActivity = d.minutes > 0;
+                  const calculatedPct = Math.round((d.minutes / maxWeeklyMinutes) * 100);
+                  const barHeight = hasActivity ? Math.max(calculatedPct, 25) : 6;
+                  const todayDayName = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][(new Date().getDay() + 6) % 7];
+                  const isToday = d.day === todayDayName;
+
                   return (
-                    <div key={d.day} className="flex-1 flex flex-col items-center gap-1.5 group cursor-pointer">
-                      <span className="font-mono text-[10px] text-[#777775] opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div key={d.day} className="flex-1 flex flex-col items-center gap-1.5 group cursor-pointer h-full justify-end">
+                      <span className={`font-mono text-[10px] font-bold transition-all ${
+                        hasActivity ? 'text-[#2F353B] opacity-100' : 'text-[#777775] opacity-0 group-hover:opacity-100'
+                      }`}>
                         {d.minutes}m
                       </span>
-                      <div
-                        className="w-full bg-[#7D927D] rounded-t-md group-hover:bg-[#6B826B] transition-colors duration-200"
-                        style={{ height: `${Math.max(heightPercent, 8)}%` }}
-                        title={`${d.day}: ${d.minutes} mins`}
-                      />
-                      <span className="font-sans text-[11px] text-[#777775] group-hover:text-[#2F353B] font-medium transition-colors">
+                      <div className="w-full bg-[#F9F7F2] rounded-md overflow-hidden flex flex-col justify-end p-0.5 border border-[#777775]/10 h-full">
+                        <div
+                          className={`w-full rounded-sm transition-all duration-500 ${
+                            hasActivity
+                              ? 'bg-gradient-to-t from-[#5E735E] to-[#7D927D] shadow-sm'
+                              : 'bg-[#777775]/15'
+                          }`}
+                          style={{ height: `${barHeight}%` }}
+                          title={`${d.day}: ${d.minutes} mins`}
+                        />
+                      </div>
+                      <span className={`font-sans text-[11px] transition-colors ${
+                        isToday
+                          ? 'font-extrabold text-[#7D927D] underline underline-offset-4'
+                          : 'text-[#777775] group-hover:text-[#2F353B] font-medium'
+                      }`}>
                         {d.day}
                       </span>
                     </div>
