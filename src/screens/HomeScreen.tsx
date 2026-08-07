@@ -247,23 +247,23 @@ const HomeScreen: FC = () => {
   }
 
   return (
-    <div className="w-full text-slate-100 font-sans space-y-8 py-2">
+    <div className="w-full text-text-primary font-sans space-y-8 py-2">
         
         {/* ── HERO HEADER SECTION ─────────────────────────────────── */}
-        <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 shadow-2xl rounded-3xl p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div className="bg-bg-elevated border border-structural shadow-sm rounded-3xl p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div className="flex items-center gap-4">
             {userAvatar && (
               <img
                 src={userAvatar}
                 alt={displayName}
-                className="w-14 h-14 rounded-full border-2 border-amber-500/60 shadow-lg shadow-amber-500/20 object-cover shrink-0"
+                className="w-14 h-14 rounded-full border-2 border-accent-mint shadow-sm object-cover shrink-0"
               />
             )}
             <div>
-              <h1 className="font-serif text-3xl md:text-4xl font-bold text-[#F8FAFC]">
+              <h1 className="font-serif text-3xl md:text-4xl font-bold text-text-primary">
                 Welcome, {displayName}
               </h1>
-              <p className="font-sans text-xs md:text-sm text-[#94A3B8] mt-1 max-w-xl leading-relaxed">
+              <p className="font-sans text-xs md:text-sm text-text-secondary mt-1 max-w-xl leading-relaxed">
                 The path to fluency is paved with consistency. Track your growth and master new patterns today.
               </p>
             </div>
@@ -273,43 +273,43 @@ const HomeScreen: FC = () => {
           <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={() => setShowResetModal(true)}
-              className="flex items-center gap-1.5 px-3.5 py-2.5 text-xs font-semibold text-rose-400 bg-rose-950/40 hover:bg-rose-900/60 border border-rose-800/60 rounded-2xl transition-all shadow-sm shrink-0 cursor-pointer"
+              className="flex items-center gap-1.5 px-3.5 py-2.5 text-xs font-semibold text-error bg-error/10 hover:bg-error/20 border border-error/30 rounded-2xl transition-all shadow-sm shrink-0 cursor-pointer"
               title="Reset XP and Coins to restart your journey"
             >
               <RotateCcw size={14} />
               <span>Reset Progress</span>
             </button>
 
-            <div className="flex items-center gap-3.5 bg-slate-800/80 border border-slate-700/80 rounded-2xl px-5 py-3 shadow-md">
+            <div className="flex items-center gap-3.5 bg-bg-elevated-2 border border-structural rounded-2xl px-5 py-3 shadow-xs">
               <div className="relative shrink-0 flex items-center justify-center">
                 <svg width="44" height="44" className="transform -rotate-90">
                   <circle
                     cx="22"
                     cy="22"
                     r="18"
-                    className="stroke-slate-700 fill-none"
+                    className="stroke-structural fill-none"
                     strokeWidth="4"
                   />
                   <circle
                     cx="22"
                     cy="22"
                     r="18"
-                    className="stroke-[#D97706] fill-none drop-shadow-[0_0_6px_rgba(217,119,6,0.6)]"
+                    className="stroke-accent-mint fill-none"
                     strokeWidth="4"
                     strokeDasharray="113.1"
                     strokeDashoffset={goalDashOffset}
                     strokeLinecap="round"
                   />
                 </svg>
-                <span className="absolute font-sans text-[10px] font-bold text-[#F8FAFC]">
+                <span className="absolute font-sans text-[10px] font-bold text-text-primary">
                   {userData.userProgress.dailyGoalPercentage}%
                 </span>
               </div>
               <div className="flex flex-col">
-                <span className="font-sans text-[10px] uppercase tracking-wider text-amber-400/90 font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-wider text-text-secondary font-semibold">
                   DAILY GOAL
                 </span>
-                <span className="font-sans text-xs font-bold text-[#F8FAFC]">
+                <span className="font-sans text-xs font-bold text-text-primary">
                   {userData.userProgress.dailyGoalPercentage}% Complete
                 </span>
               </div>
@@ -357,15 +357,14 @@ const HomeScreen: FC = () => {
 
           {/* Right: Weekly Activity + small widgets (7 of 12 cols) */}
           <div className="lg:col-span-7 flex flex-col gap-6">
-            
             {/* Weekly Activity */}
-            <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 shadow-2xl rounded-3xl p-6">
-              <div className="flex items-center justify-between border-b border-slate-700/80 pb-4 mb-5">
+            <div className="bg-bg-elevated border border-structural shadow-sm rounded-3xl p-6">
+              <div className="flex items-center justify-between border-b border-structural pb-4 mb-5">
                 <div>
-                  <h2 className="font-serif text-lg font-bold text-[#F8FAFC]">Weekly Activity</h2>
-                  <p className="font-sans text-xs text-[#94A3B8] mt-0.5">Study minutes tracked this week</p>
+                  <h2 className="font-serif text-lg font-bold text-text-primary">Weekly Activity</h2>
+                  <p className="font-sans text-xs text-text-secondary mt-0.5">Study minutes tracked this week</p>
                 </div>
-                <span className="font-sans text-[11px] font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 px-3 py-1.5 rounded-full shrink-0 shadow-sm">
+                <span className="font-sans text-[11px] font-bold text-accent-mint bg-accent-mint/10 border border-accent-mint/30 px-3 py-1.5 rounded-full shrink-0 shadow-xs">
                   Avg {avgDailyMinutes}m / day
                 </span>
               </div>
@@ -374,7 +373,6 @@ const HomeScreen: FC = () => {
                 {weeklyActivity.map((d) => {
                   const hasActivity = d.minutes > 0;
                   const calculatedPct = Math.round((d.minutes / maxWeeklyMinutes) * 100);
-                  // Ensure active days get a tall, clearly readable bar (minimum 35% height)
                   const barHeight = hasActivity ? Math.max(calculatedPct, 35) : 8;
                   const todayDayName = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][(new Date().getDay() + 6) % 7];
                   const isToday = d.day === todayDayName;
@@ -384,19 +382,19 @@ const HomeScreen: FC = () => {
                       {/* Minutes badge above bar */}
                       <span className={`font-mono text-[10px] transition-all duration-300 ${
                         hasActivity
-                          ? 'font-black text-amber-300 bg-amber-500/20 border border-amber-500/40 shadow-[0_0_8px_rgba(245,158,11,0.2)] px-2 py-0.5 rounded-md scale-105'
-                          : 'font-semibold text-slate-500 group-hover:text-slate-300'
+                          ? 'font-bold text-text-primary bg-accent-mint/20 border border-accent-mint/40 px-2 py-0.5 rounded-md scale-105'
+                          : 'font-semibold text-text-tertiary group-hover:text-text-secondary'
                       }`}>
                         {d.minutes}m
                       </span>
 
                       {/* Bar Track Container */}
-                      <div className="w-full h-24 bg-slate-800/80 border border-slate-700/60 rounded-xl overflow-hidden flex flex-col justify-end p-1 shadow-inner">
+                      <div className="w-full h-24 bg-bg-elevated-2 border border-structural rounded-xl overflow-hidden flex flex-col justify-end p-1 shadow-inner">
                         <div
                           className={`w-full transition-all duration-500 rounded-lg ${
                             hasActivity
-                              ? 'bg-gradient-to-t from-amber-500 via-amber-600 to-emerald-500 shadow-[0_0_12px_rgba(245,158,11,0.3)] border-t border-amber-300/40'
-                              : 'bg-slate-700/40 rounded-md'
+                              ? 'bg-accent-mint shadow-xs'
+                              : 'bg-structural/40 rounded-md'
                           }`}
                           style={{ height: `${barHeight}%` }}
                           title={`${d.day}: ${d.minutes} mins`}
@@ -406,8 +404,8 @@ const HomeScreen: FC = () => {
                       {/* Day Label */}
                       <span className={`font-sans text-[11px] transition-all ${
                         isToday
-                          ? 'font-extrabold text-amber-300 bg-amber-500/20 border border-amber-500/40 px-2 py-0.5 rounded-md'
-                          : 'text-[#94A3B8] font-semibold group-hover:text-[#F8FAFC]'
+                          ? 'font-extrabold text-accent-mint bg-accent-mint/10 border border-accent-mint/30 px-2 py-0.5 rounded-md'
+                          : 'text-text-secondary font-semibold group-hover:text-text-primary'
                       }`}>
                         {d.day}
                       </span>
@@ -421,24 +419,24 @@ const HomeScreen: FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               
               {/* Lexicon Growth */}
-              <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 text-slate-100 shadow-2xl rounded-3xl p-5 flex flex-col gap-3">
-                <div className="border-b border-slate-700/80 pb-2.5">
-                  <h2 className="font-serif text-base font-bold text-[#F8FAFC]">Lexicon Growth</h2>
-                  <p className="font-sans text-[11px] text-[#94A3B8] mt-0.5">Mastered vocabulary by tier</p>
+              <div className="bg-bg-elevated border border-structural text-text-primary shadow-sm rounded-3xl p-5 flex flex-col gap-3">
+                <div className="border-b border-structural pb-2.5">
+                  <h2 className="font-serif text-base font-bold text-text-primary">Lexicon Growth</h2>
+                  <p className="font-sans text-[11px] text-text-secondary mt-0.5">Mastered vocabulary by tier</p>
                 </div>
                 <div className="space-y-2">
                   {userData.lexiconStats.map((item) => (
-                    <div key={item.level} className="flex items-center justify-between text-xs font-sans p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/80 text-slate-100">
-                      <span className="text-[#F8FAFC] font-medium">{item.level}</span>
-                      <span className="bg-slate-800/80 text-emerald-400 font-mono font-semibold border border-emerald-500/30 px-2.5 py-0.5 rounded-lg text-[11px]">
+                    <div key={item.level} className="flex items-center justify-between text-xs font-sans p-2.5 rounded-xl bg-bg-elevated-2 border border-structural text-text-primary">
+                      <span className="text-text-primary font-medium">{item.level}</span>
+                      <span className="bg-bg-elevated text-accent-mint font-mono font-semibold border border-accent-mint/30 px-2.5 py-0.5 rounded-lg text-[11px]">
                         {item.words} words
                       </span>
                     </div>
                   ))}
                 </div>
-                <div className="border-t border-slate-700/80 pt-2.5">
-                  <span className="font-sans text-[11px] text-[#94A3B8]">
-                    Total: <strong className="text-[#F8FAFC]">26 Words</strong> mastered
+                <div className="border-t border-structural pt-2.5">
+                  <span className="font-sans text-[11px] text-text-secondary">
+                    Total: <strong className="text-text-primary">26 Words</strong> mastered
                   </span>
                 </div>
               </div>
@@ -447,34 +445,34 @@ const HomeScreen: FC = () => {
               <div
                 onMouseEnter={() => setIsInsightHovered(true)}
                 onMouseLeave={() => setIsInsightHovered(false)}
-                className="bg-slate-900/90 backdrop-blur-xl border border-slate-700/80 shadow-2xl rounded-3xl p-5 relative overflow-hidden flex flex-col justify-between text-slate-100 group transition-all"
+                className="bg-bg-elevated border border-structural shadow-sm rounded-3xl p-5 relative overflow-hidden flex flex-col justify-between text-text-primary group transition-all"
               >
-                <div className="absolute -right-4 -bottom-4 opacity-10 pointer-events-none text-amber-500">
-                  <Lightbulb className="w-28 h-28 text-amber-500" />
+                <div className="absolute -right-4 -bottom-4 opacity-10 pointer-events-none text-accent-mint">
+                  <Lightbulb className="w-28 h-28 text-accent-mint" />
                 </div>
                 <div className={`transition-opacity duration-300 ${fadeState === 'fade-in' ? 'opacity-100' : 'opacity-0'}`}>
                   <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="font-sans text-[10px] uppercase tracking-widest font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2.5 py-0.5 rounded-full">
+                    <span className="font-sans text-[10px] uppercase tracking-widest font-bold text-accent-mint bg-accent-mint/10 border border-accent-mint/30 px-2.5 py-0.5 rounded-full">
                       {currentInsight.tag}
                     </span>
-                    <span className="font-sans text-[9px] font-medium text-slate-300 bg-slate-800/80 border border-slate-700 px-2 py-0.5 rounded-full shrink-0">
+                    <span className="font-sans text-[9px] font-medium text-text-secondary bg-bg-elevated-2 border border-structural px-2 py-0.5 rounded-full shrink-0">
                       {currentInsight.category}
                     </span>
                   </div>
-                  <p className="font-serif italic text-sm text-amber-200/95 leading-relaxed min-h-[52px]">
+                  <p className="font-serif italic text-sm text-text-primary leading-relaxed min-h-[52px]">
                     &ldquo;{currentInsight.quote}&rdquo;
                   </p>
                 </div>
-                <div className="flex items-center justify-between pt-2.5 border-t border-slate-700/80 mt-2">
-                  <span className="text-[10px] font-sans text-[#94A3B8]">
+                <div className="flex items-center justify-between pt-2.5 border-t border-structural mt-2">
+                  <span className="text-[10px] font-sans text-text-secondary">
                     Vault Insight #{insightIndex + 1}
                   </span>
                   <div
-                    className="flex items-center gap-1.5 text-amber-400"
+                    className="flex items-center gap-1.5 text-accent-mint"
                     title={isInsightHovered ? "Paused on hover" : "Vault shuffling insights..."}
                   >
                     <Sparkles className={`w-3.5 h-3.5 ${isInsightHovered ? '' : 'animate-pulse'}`} />
-                    <span className="text-[9px] font-mono text-amber-400/60">95 INSIGHTS</span>
+                    <span className="text-[9px] font-mono text-text-secondary">95 INSIGHTS</span>
                   </div>
                 </div>
               </div>
@@ -485,12 +483,12 @@ const HomeScreen: FC = () => {
         {/* ── 3. MIDDLE SECTION: RECOMMENDED NEXT LESSONS ────────────── */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="font-serif text-2xl font-bold text-[#F8FAFC]">
+            <h2 className="font-serif text-2xl font-bold text-text-primary">
               Recommended next lessons
             </h2>
             <button
               onClick={() => navigate('/library')}
-              className="font-sans text-xs font-semibold text-amber-400 hover:text-amber-300 hover:underline cursor-pointer bg-transparent border-none p-0"
+              className="font-sans text-xs font-semibold text-accent-mint hover:underline cursor-pointer bg-transparent border-none p-0"
             >
               View curriculum &gt;
             </button>
@@ -501,18 +499,18 @@ const HomeScreen: FC = () => {
             {userData.recommendedLessons.map((lesson, idx) => (
               <div
                 key={lesson.id}
-                className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 hover:border-amber-500/50 rounded-3xl overflow-hidden shadow-2xl flex flex-col justify-between transition-all duration-300 hover:shadow-amber-500/10"
+                className="bg-bg-elevated border border-structural hover:border-accent-mint/50 rounded-3xl overflow-hidden shadow-sm flex flex-col justify-between transition-all duration-300 hover:shadow-md"
               >
                 {/* Top half */}
-                <div className="bg-slate-800/60 p-6 flex flex-col justify-between h-32 border-b border-slate-700/60 relative">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-amber-400/90 font-bold">
+                <div className="bg-bg-elevated-2 p-6 flex flex-col justify-between h-32 border-b border-structural relative">
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-text-secondary font-bold">
                     {lesson.tag}
                   </span>
                   <div className="flex items-center justify-center my-auto">
-                    <div className={`p-3 rounded-2xl border shadow-lg ${
+                    <div className={`p-3 rounded-2xl border shadow-xs ${
                       idx % 2 === 0
-                        ? 'bg-amber-500/10 border-amber-500/30 text-amber-400 shadow-amber-500/10'
-                        : 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400 shadow-emerald-500/10'
+                        ? 'bg-accent-mint/10 border-accent-mint/30 text-accent-mint'
+                        : 'bg-accent-action/10 border-accent-action/30 text-accent-action'
                     }`}>
                       {renderLessonIcon(lesson.iconType)}
                     </div>
@@ -522,16 +520,16 @@ const HomeScreen: FC = () => {
                 {/* Bottom half */}
                 <div className="p-5 flex flex-col justify-between flex-1 space-y-4">
                   <div>
-                    <h3 className="font-serif text-base font-bold text-[#F8FAFC]">
+                    <h3 className="font-serif text-base font-bold text-text-primary">
                       {lesson.title}
                     </h3>
-                    <p className="font-sans text-xs text-[#94A3B8] mt-1 line-clamp-2 leading-relaxed">
+                    <p className="font-sans text-xs text-text-secondary mt-1 line-clamp-2 leading-relaxed">
                       {lesson.description}
                     </p>
                   </div>
                   <button
                     onClick={() => navigate('/training')}
-                    className="w-full bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-slate-950 font-bold shadow-lg shadow-amber-500/20 rounded-full py-2.5 font-sans text-xs transition-all cursor-pointer border-none flex items-center justify-center gap-1"
+                    className="w-full bg-[#7D927D] hover:bg-[#6B826B] text-white font-bold shadow-xs rounded-full py-2.5 font-sans text-xs transition-all cursor-pointer border-none flex items-center justify-center gap-1"
                   >
                     <span>Start Lesson &gt;</span>
                   </button>
@@ -544,10 +542,10 @@ const HomeScreen: FC = () => {
         {/* ── 4. BOTTOM SECTION: RECENT SLIP-UPS ─────────────────────── */}
         <div className="space-y-4 pt-2">
           <div className="flex items-center gap-2">
-            <h2 className="font-serif text-xl font-bold text-[#F8FAFC]">
+            <h2 className="font-serif text-xl font-bold text-text-primary">
               Recent Slip-ups
             </h2>
-            <AlertTriangle className="h-4 w-4 text-amber-400" />
+            <AlertTriangle className="h-4 w-4 text-accent-mint" />
           </div>
 
           {/* Dynamic 2-Column Grid Mapping */}
@@ -555,17 +553,17 @@ const HomeScreen: FC = () => {
             {userData.slipUps.map((item) => (
               <div
                 key={item.id}
-                className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 hover:border-amber-500/50 rounded-2xl p-5 shadow-2xl flex items-center justify-between gap-4 transition-all duration-300"
+                className="bg-bg-elevated border border-structural hover:border-accent-mint/50 rounded-2xl p-5 shadow-sm flex items-center justify-between gap-4 transition-all duration-300"
               >
                 <div className="flex items-start gap-3 min-w-0">
-                  <div className="h-9 w-9 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0 mt-0.5 shadow-sm">
+                  <div className="h-9 w-9 rounded-xl bg-accent-mint/10 border border-accent-mint/30 flex items-center justify-center text-accent-mint shrink-0 mt-0.5 shadow-xs">
                     <Repeat className="h-4 w-4" />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="font-serif text-sm font-bold text-[#F8FAFC] truncate">
+                    <h4 className="font-serif text-sm font-bold text-text-primary truncate">
                       {item.phrase}
                     </h4>
-                    <p className="font-sans text-xs text-[#94A3B8] mt-0.5 leading-relaxed">
+                    <p className="font-sans text-xs text-text-secondary mt-0.5 leading-relaxed">
                       {item.explanation}
                     </p>
                   </div>
@@ -573,7 +571,7 @@ const HomeScreen: FC = () => {
 
                 <button
                   onClick={() => navigate('/training')}
-                  className="p-2.5 rounded-xl text-amber-400 hover:text-amber-300 hover:bg-slate-800/80 border border-slate-700/60 transition-colors cursor-pointer shrink-0"
+                  className="p-2.5 rounded-xl text-accent-mint hover:bg-bg-elevated-2 border border-structural transition-colors cursor-pointer shrink-0"
                   title="Review phrase"
                 >
                   <RotateCw className="h-4 w-4" />
@@ -585,22 +583,22 @@ const HomeScreen: FC = () => {
 
         {/* ── RESET PROGRESS CONFIRMATION MODAL ──────────────────────── */}
         {showResetModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4 animate-in fade-in duration-200">
-            <div className="bg-slate-900 max-w-md w-full rounded-3xl p-6 border border-slate-700/80 shadow-2xl space-y-4 text-center text-slate-100">
-              <div className="w-12 h-12 rounded-2xl bg-rose-950/60 border border-rose-800/60 text-rose-400 flex items-center justify-center mx-auto shadow-md">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+            <div className="bg-bg-elevated max-w-md w-full rounded-3xl p-6 border border-structural shadow-xl space-y-4 text-center text-text-primary">
+              <div className="w-12 h-12 rounded-2xl bg-error/10 border border-error/30 text-error flex items-center justify-center mx-auto shadow-xs">
                 <RotateCcw size={24} />
               </div>
-              <h3 className="font-serif text-xl font-bold text-[#F8FAFC]">
+              <h3 className="font-serif text-xl font-bold text-text-primary">
                 Restart Your Journey?
               </h3>
-              <p className="text-xs text-[#94A3B8] leading-relaxed">
+              <p className="text-xs text-text-secondary leading-relaxed">
                 Are you sure you want to reset your progress? This will reset your XP to 0, coins to 100, and unlock status so you can collect rewards and practice all over again with full enthusiasm!
               </p>
               <div className="flex items-center gap-3 pt-2">
                 <button
                   type="button"
                   onClick={() => setShowResetModal(false)}
-                  className="flex-1 py-2.5 px-4 rounded-xl border border-slate-700 text-xs font-semibold text-[#F8FAFC] bg-slate-800 hover:bg-slate-700 transition-colors cursor-pointer"
+                  className="flex-1 py-2.5 px-4 rounded-xl border border-structural text-xs font-semibold text-text-primary bg-bg-elevated-2 hover:bg-bg-elevated transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -610,7 +608,7 @@ const HomeScreen: FC = () => {
                     await resetAllUserProgress();
                     setShowResetModal(false);
                   }}
-                  className="flex-1 py-2.5 px-4 rounded-xl bg-rose-600 hover:bg-rose-500 text-xs font-bold text-white transition-colors shadow-lg shadow-rose-950/50 cursor-pointer border-none"
+                  className="flex-1 py-2.5 px-4 rounded-xl bg-error hover:bg-error/90 text-xs font-bold text-white transition-colors shadow-xs cursor-pointer border-none"
                 >
                   Reset Everything
                 </button>
