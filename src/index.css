@@ -430,20 +430,19 @@
    SERENE LEXICON — Flat Design System
    ══════════════════════════════════════════════════════════════════════════ */
 
-/* ── Executive Dark Glassmorphism Surfaces & Utility Overhaul ─────── */
-.clay-card,
-.clay-card-interactive,
-.glass-surface,
-.nav-glass,
-.glass-nav-capsule,
-.ios-glass-panel,
-.ios-glass-card,
-.ios-glass-inner-panel {
-  background: rgba(30, 41, 59, 0.7) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
+.nav-glass {
+  background: var(--bg-elevated);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--structural);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.glass-nav-capsule {
+  background: var(--bg-elevated);
+  border: 1px solid var(--structural);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 /* ── Sliding Tab Indicator ────────────────────────────────────── */

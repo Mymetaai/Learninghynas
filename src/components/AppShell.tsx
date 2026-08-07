@@ -20,11 +20,11 @@ const AppShell: FC = () => {
 
   return (
     <div className="flex min-h-screen flex-col bg-bg-base">
-      {/* Ambient blobs — executive dark slate & warm amber gradient blobs */}
+      {/* Ambient blobs — soft terracotta, serene teal, and warm marigold blobs */}
       <div className="ambient-blob-container" aria-hidden="true">
-        <div className="ambient-blob ambient-blob--slate" />
-        <div className="ambient-blob ambient-blob--amber" />
-        <div className="ambient-blob ambient-blob--slate-dark" />
+        <div className="ambient-blob ambient-blob--terracotta" />
+        <div className="ambient-blob ambient-blob--teal" />
+        <div className="ambient-blob ambient-blob--marigold" />
       </div>
       <HUD />
       <main className="flex-1 overflow-y-auto">
