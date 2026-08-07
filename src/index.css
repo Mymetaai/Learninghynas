@@ -5,27 +5,27 @@
 @tailwind utilities;
 
 :root {
-  /* ── Executive Dark Glassmorphism Design System ─────────────────── */
-  --bg-base: #0F172A;
-  --bg-elevated: rgba(30, 41, 59, 0.7);
-  --bg-elevated-2: rgba(51, 65, 85, 0.7);
-  --structural: rgba(255, 255, 255, 0.1);
+  /* ── Original Serene Sage Design System (Default) ─────────────────── */
+  --bg-base: #FAF6F0;
+  --bg-elevated: #FFFFFF;
+  --bg-elevated-2: #F2ECE4;
+  --structural: #E5DDD3;
 
-  --text-primary: #F8FAFC;
-  --text-secondary: #94A3B8;
-  --text-tertiary: #64748B;
+  --text-primary: #2C221B;
+  --text-secondary: #70655B;
+  --text-tertiary: #9C9186;
 
-  --accent-action: #D97706;
-  --accent-action-hover: #B45309;
+  --accent-action: #F5A991;
+  --accent-action-hover: #E89277;
 
-  --accent-mint: #10B981;
+  --accent-mint: #7D927D;
   --accent-lavender: #E8E4DF;
 
-  --success: #10B981;
-  --error: #EF4444;
+  --success: #6B8E70;
+  --error: #D96B6B;
 
-  --info: #38BDF8;
-  --streak-warm: #D97706;
+  --info: #7B9EA8;
+  --streak-warm: #E07A5F;
 }
 
 /* =========================================
