@@ -13,6 +13,7 @@ import type { PanInfo } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 import AppShell from './components/AppShell';
 import DynamicText from './components/DynamicText';
+import { useSettingsStore, LOGO_VARIANTS } from './state/settingsStore';
 import { ROUTES } from './app/routes';
 import './screens/LampLogin.css';
 
@@ -80,6 +81,8 @@ const playSwitchSound = () => {
 // ============================================================================
 const LampLanding: FC = () => {
   const prefersReducedMotion = useReducedMotion();
+  const { logoVariant } = useSettingsStore();
+  const activeLogo = LOGO_VARIANTS[logoVariant] || LOGO_VARIANTS.executive;
 
   const [isOn, setIsOn] = useState(false);
   const [hasToggled, setHasToggled] = useState(false);
@@ -272,12 +275,19 @@ const LampLanding: FC = () => {
               style={{ maxWidth: '400px' }}
             >
               <DynamicText />
-              <h1
-                className="font-serif text-3xl font-bold text-white tracking-wide mt-1"
-                style={{ fontFamily: "'Fraunces', 'Playfair Display', ui-serif, Georgia, serif" }}
-              >
-                TheLearningHyena
-              </h1>
+              <div className="flex items-center justify-center gap-3 mt-1">
+                <img
+                  src={activeLogo.src}
+                  alt={activeLogo.label}
+                  className="border-2 border-amber-500/50 shadow-lg rounded-xl h-12 w-12 object-cover"
+                />
+                <h1
+                  className="font-serif text-3xl font-bold text-white tracking-wide"
+                  style={{ fontFamily: "'Fraunces', 'Playfair Display', ui-serif, Georgia, serif" }}
+                >
+                  TheLearningHyena
+                </h1>
+              </div>
               <p
                 className="font-serif italic text-lg mt-2"
                 style={{ color: '#7D927D', fontFamily: "'Fraunces', 'Playfair Display', ui-serif, Georgia, serif" }}

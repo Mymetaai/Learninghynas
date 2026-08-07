@@ -2,6 +2,7 @@ import { useState, useEffect, type FC, type ReactNode } from 'react';
 import { SignedIn, SignedOut, SignInButton } from '@clerk/clerk-react';
 import { Loader2 } from 'lucide-react';
 import DynamicText from './DynamicText';
+import { useSettingsStore, LOGO_VARIANTS } from '../state/settingsStore';
 
 interface LandingEntryProps {
   children?: ReactNode;
@@ -10,6 +11,8 @@ interface LandingEntryProps {
 export const LandingEntry: FC<LandingEntryProps> = ({ children }) => {
   const [isLampOn, setIsLampOn] = useState<boolean>(false);
   const [showDashboard, setShowDashboard] = useState<boolean>(false);
+  const { logoVariant } = useSettingsStore();
+  const activeLogo = LOGO_VARIANTS[logoVariant] || LOGO_VARIANTS.executive;
 
   return (
     <div className="min-h-screen font-sans">
@@ -65,9 +68,16 @@ export const LandingEntry: FC<LandingEntryProps> = ({ children }) => {
           {/* THE TRIGGER: PULL THE CORD TO SIGN IN */}
           <div className="relative z-20 text-center space-y-3">
             <DynamicText />
-            <h2 className="font-serif text-3xl font-bold text-white tracking-wide">
-              TheLearningHyena
-            </h2>
+            <div className="flex items-center justify-center gap-3">
+              <img
+                src={activeLogo.src}
+                alt={activeLogo.label}
+                className="border-2 border-amber-500/50 shadow-lg rounded-xl h-12 w-12 object-cover"
+              />
+              <h2 className="font-serif text-3xl font-bold text-white tracking-wide">
+                TheLearningHyena
+              </h2>
+            </div>
             <p className="font-serif italic text-lg text-[#7D927D]">
               The Unearthly Vault
             </p>

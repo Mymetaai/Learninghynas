@@ -36,17 +36,14 @@ export default {
 
       // ── Font families (Serene Lexicon system) ────────────────────────
       fontFamily: {
-        // PRIMARY — use these in all new code:
-        // font-serif  → Titles, headings. Playfair Display.
-        serif: ['"Playfair Display"', 'ui-serif', 'Georgia', 'serif'],
-        // font-sans   → Body text, UI copy. Inter.
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        // font-mono   → HUD/data: XP, timers, counters. JetBrains Mono.
+        serif: ['"Fraunces"', '"Playfair Display"', 'ui-serif', 'serif'],
+        sans: ['Inter', 'Outfit', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        outfit: ['Outfit', 'sans-serif'],
+        fraunces: ['"Fraunces"', 'serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
-        // font-target → Spanish / target-language text. Atkinson Hyperlegible Next.
         target: ['"Atkinson Hyperlegible Next"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
 
-        // LEGACY aliases (backward-compat, will be removed later):
+        // LEGACY aliases
         display: ['"Playfair Display"', 'ui-serif', 'Georgia', 'serif'],
         body: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         hud: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],

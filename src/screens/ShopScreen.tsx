@@ -86,17 +86,17 @@ const DEMON_SLAYER_HOTSPOTS = {
 const DRAW_COST = 20;
 
 export const THEMES_LIST = [
-  { id: 'default', name: 'Original Serene Sage (Default)', price: 0, category: 'Original', color: '#7D927D', bg: '#FAF6F0', desc: 'The original serene sage & warm cream default app theme.' },
-  { id: 'madrid-midnight', name: 'Madrid Midnight', price: 150, category: 'Dark Mode', color: '#1D4ED8', bg: '#121214', desc: 'Sleek dark mode inspired by Madrid nights.' },
-  { id: 'ibiza-sunset', name: 'Ibiza Sunset', price: 150, category: 'Gradient', color: '#F43F5E', bg: '#FAF9F6', desc: 'Warm pink-rose sunrise & sunset glow.' },
-  { id: 'andalusia-olive', name: 'Andalusia Olive', price: 150, category: 'Minimalist', color: '#606C38', bg: '#FEFAE0', desc: 'Warm earthy olive green & terracotta tones.' },
-  { id: 'caribbean-coral', name: 'Caribbean Coral', price: 200, category: 'Tropical', color: '#4ECDC4', bg: '#F7FFF7', desc: 'High-energy tropical teal & coral aesthetics.' },
-  { id: 'barcelona-gaudi', name: 'Barcelona Gaudi', price: 200, category: 'Mosaic', color: '#2A9D8F', bg: '#FAFAFA', desc: 'Creative architectural mosaic palette.' },
-  { id: 'fiesta-neon', name: 'Fiesta Neon', price: 250, category: 'Cyberpunk', color: '#00F5D4', bg: '#0B0F19', desc: 'Cyberpunk neon electric glow.' },
-  { id: 'matador-crimson', name: 'Matador Crimson', price: 250, category: 'Dynamic', color: '#DC2626', bg: '#F9FAFB', desc: 'Bold crimson & deep graphite accents.' },
-  { id: 'siesta-mint', name: 'Siesta Mint', price: 150, category: 'Chill', color: '#2E8B57', bg: '#F4FBF7', desc: 'Chill pastel mint study environment.' },
-  { id: 'tulum-teal', name: 'Tulum Teal', price: 200, category: 'Coastal', color: '#008080', bg: '#F0F8FF', desc: 'Fresh coastal aqua & seafoam tones.' },
-  { id: 'aztec-gold', name: 'Aztec Gold', price: 300, category: 'Premium', color: '#D97706', bg: '#0F172A', desc: 'Regal golden amber & emerald dark theme.' },
+  { id: 'default', name: 'Original Serene Sage (Default)', price: 0, category: 'Original', color: '#7D927D', accent2: '#9BB39B', bg: '#FAF6F0', desc: 'The original serene sage & warm cream default app theme.' },
+  { id: 'madrid-midnight', name: 'Madrid Midnight', price: 150, category: 'Executive Dark', color: '#1D4ED8', accent2: '#F59E0B', bg: '#121214', desc: 'Midnight dark background (#121214), Midnight Blue accent (#1D4ED8), Warm Amber accent (#F59E0B).' },
+  { id: 'ibiza-sunset', name: 'Ibiza Sunset', price: 150, category: 'Gradient', color: '#F43F5E', accent2: '#FB7185', bg: '#FAF9F6', desc: 'Warm pink-rose sunrise & sunset glow.' },
+  { id: 'andalusia-olive', name: 'Andalusia Olive', price: 150, category: 'Minimalist', color: '#606C38', accent2: '#D4A373', bg: '#FEFAE0', desc: 'Warm earthy olive green & terracotta tones.' },
+  { id: 'caribbean-coral', name: 'Caribbean Coral', price: 200, category: 'Tropical', color: '#4ECDC4', accent2: '#FF6B6B', bg: '#F7FFF7', desc: 'High-energy tropical teal & coral aesthetics.' },
+  { id: 'barcelona-gaudi', name: 'Barcelona Gaudi', price: 200, category: 'Mosaic', color: '#2A9D8F', accent2: '#E76F51', bg: '#FAFAFA', desc: 'Creative architectural mosaic palette.' },
+  { id: 'fiesta-neon', name: 'Fiesta Neon', price: 250, category: 'Cyberpunk', color: '#00F5D4', accent2: '#7B2CBF', bg: '#0B0F19', desc: 'Cyberpunk neon electric glow.' },
+  { id: 'matador-crimson', name: 'Matador Crimson', price: 250, category: 'Dynamic', color: '#DC2626', accent2: '#991B1B', bg: '#F9FAFB', desc: 'Bold crimson & deep graphite accents.' },
+  { id: 'siesta-mint', name: 'Siesta Mint', price: 150, category: 'Chill', color: '#2E8B57', accent2: '#3CB371', bg: '#F4FBF7', desc: 'Chill pastel mint study environment.' },
+  { id: 'tulum-teal', name: 'Tulum Teal', price: 200, category: 'Coastal', color: '#008080', accent2: '#20B2AA', bg: '#F0F8FF', desc: 'Fresh coastal aqua & seafoam tones.' },
+  { id: 'aztec-gold', name: 'Aztec Gold', price: 300, category: 'Premium Executive', color: '#D97706', accent2: '#10B981', bg: '#0F172A', desc: 'Deep Midnight Slate background (#0F172A), Emerald Gold accent (#D97706), Emerald Green accent (#10B981).' },
 ];
 
 export const SOUND_PACKS_LIST = [
@@ -349,26 +349,26 @@ const ShopScreen: FC = () => {
       <div className="mx-auto max-w-5xl">
         
         {/* ── HEADER ────────────────────────────────────────────────── */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 bg-bg-elevated p-6 rounded-2xl border border-text-primary shadow-sm">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 shadow-2xl text-slate-100 p-6 rounded-2xl">
           <div>
-            <h1 className="font-serif text-3xl font-bold text-text-primary flex items-center gap-2">
-              <ShoppingBag className="text-[#7D927D] h-8 w-8" />
+            <h1 className="font-serif text-3xl font-bold text-slate-100 flex items-center gap-2">
+              <ShoppingBag className="text-amber-500 h-8 w-8" />
               Gacha Shrine
             </h1>
-            <p className="text-text-secondary text-xs mt-1">
+            <p className="text-slate-300 text-xs mt-1">
               Spend your hard-earned Kitsune Coins at the Gacha Shrine on boosts, companion auras, and card summonings!
             </p>
           </div>
 
           <div className="flex items-center gap-3">
             {/* Coins indicator */}
-            <div className="flex items-center gap-2 bg-[#7D927D] text-[#2C1E11] border border-[#2C1E11] rounded-full px-5 py-2 shadow-sm">
-              <Coins className="h-5 w-5 text-[#2C1E11]" />
+            <div className="flex items-center gap-2 bg-gradient-to-r from-amber-950/60 to-slate-900/90 text-amber-400 border border-amber-500/40 rounded-full px-5 py-2 shadow-lg backdrop-blur-md">
+              <Coins className="h-5 w-5 text-amber-400" />
               <div className="flex flex-col">
                 <span className="font-mono text-lg font-bold leading-none">
                   {coins} KC
                 </span>
-                <span className="font-sans text-[9px] uppercase tracking-wider text-[#2C1E11] font-bold">
+                <span className="font-sans text-[9px] uppercase tracking-wider text-amber-500/80 font-bold">
                   Balance
                 </span>
               </div>
@@ -377,14 +377,14 @@ const ShopScreen: FC = () => {
             {/* Dev Coin Booster */}
             <button
               onClick={claimCheatCoins}
-              className="bg-bg-elevated hover:bg-bg-elevated-2 border border-text-primary text-text-primary font-sans text-xs font-bold px-3 py-2 rounded-full shadow-sm transition-all cursor-pointer"
+              className="bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-slate-200 font-sans text-xs font-bold px-3.5 py-2 rounded-full shadow-sm transition-all cursor-pointer"
               title="Get free coins for quick testing"
             >
               +100 KC
             </button>
             <button
               onClick={handleUnlockAll}
-              className="bg-accent-mint hover:bg-accent-mint/90 border border-text-primary text-text-primary font-sans text-xs font-bold px-3 py-2 rounded-full shadow-sm transition-all cursor-pointer"
+              className="bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-amber-400 font-sans text-xs font-bold px-3.5 py-2 rounded-full shadow-sm transition-all cursor-pointer"
               title="Unlock all collectible cards"
             >
               Unlock All
@@ -398,8 +398,8 @@ const ShopScreen: FC = () => {
             onClick={() => setActiveShopTab('gacha')}
             className={`px-5 py-2.5 rounded-xl font-sans text-xs font-bold transition-all border cursor-pointer ${
               activeShopTab === 'gacha'
-                ? 'bg-[#7D927D] text-white border-[#7D927D] shadow-sm'
-                : 'bg-bg-elevated text-text-secondary border-structural hover:border-text-primary'
+                ? 'bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 font-bold shadow-lg shadow-amber-500/20 border-amber-500'
+                : 'bg-slate-800/80 text-slate-300 border border-slate-700 hover:border-slate-500'
             }`}
           >
             ✦ Summoning Altar & Cards
@@ -409,8 +409,8 @@ const ShopScreen: FC = () => {
             onClick={() => setActiveShopTab('powerups')}
             className={`px-5 py-2.5 rounded-xl font-sans text-xs font-bold transition-all border cursor-pointer ${
               activeShopTab === 'powerups'
-                ? 'bg-[#7D927D] text-white border-[#7D927D] shadow-sm'
-                : 'bg-bg-elevated text-text-secondary border-structural hover:border-text-primary'
+                ? 'bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 font-bold shadow-lg shadow-amber-500/20 border-amber-500'
+                : 'bg-slate-800/80 text-slate-300 border border-slate-700 hover:border-slate-500'
             }`}
           >
             🔥 Streak Protection & Boosts
@@ -420,8 +420,8 @@ const ShopScreen: FC = () => {
             onClick={() => setActiveShopTab('themes')}
             className={`px-5 py-2.5 rounded-xl font-sans text-xs font-bold transition-all border cursor-pointer ${
               activeShopTab === 'themes'
-                ? 'bg-[#7D927D] text-white border-[#7D927D] shadow-sm'
-                : 'bg-bg-elevated text-text-secondary border-structural hover:border-text-primary'
+                ? 'bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 font-bold shadow-lg shadow-amber-500/20 border-amber-500'
+                : 'bg-slate-800/80 text-slate-300 border border-slate-700 hover:border-slate-500'
             }`}
           >
             🎨 UI Themes (10 Themes)
@@ -431,8 +431,8 @@ const ShopScreen: FC = () => {
             onClick={() => setActiveShopTab('soundpacks')}
             className={`px-5 py-2.5 rounded-xl font-sans text-xs font-bold transition-all border cursor-pointer ${
               activeShopTab === 'soundpacks'
-                ? 'bg-[#7D927D] text-white border-[#7D927D] shadow-sm'
-                : 'bg-bg-elevated text-text-secondary border-structural hover:border-text-primary'
+                ? 'bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 font-bold shadow-lg shadow-amber-500/20 border-amber-500'
+                : 'bg-slate-800/80 text-slate-300 border border-slate-700 hover:border-slate-500'
             }`}
           >
             🎙️ Voice & Sound Packs
@@ -444,7 +444,7 @@ const ShopScreen: FC = () => {
           <>
             {/* Series Dropdown Selector inside the Gacha Altar */}
             <div className="mb-4 flex items-center gap-2">
-              <span className="text-[10px] uppercase font-mono text-text-secondary tracking-wider font-bold">Set:</span>
+              <span className="text-[10px] uppercase font-mono text-slate-400 tracking-wider font-bold">Set:</span>
               <select
                 value={selectedSeries}
                 onChange={(e) => {
@@ -452,15 +452,15 @@ const ShopScreen: FC = () => {
                   setSelectedCard(null);
                   setSelectedHotspot(null);
                 }}
-                className="bg-bg-elevated hover:bg-bg-elevated/80 border border-structural text-text-primary font-mono text-xs rounded-xl px-3 py-1.5 focus:outline-none transition-all cursor-pointer font-bold"
+                className="bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-100 font-mono text-xs rounded-xl px-3 py-1.5 focus:outline-none transition-all cursor-pointer font-bold"
               >
                 <option value="one-piece">🏴‍☠️ One Piece Set</option>
                 <option value="demon-slayer">⚔️ Demon Slayer Set</option>
               </select>
             </div>
 
-            <div className={`gacha-stage-panel stage rounded-2xl p-6 mb-8 flex flex-col md:flex-row items-center justify-center gap-8 shadow-sm relative overflow-hidden transition-all duration-700 ${summonPhase} ${
-              summonPhase !== 's-altar' ? 'bg-gradient-to-b from-white via-[#FAF6F0] to-[#E6E1F7]/40 border border-text-primary min-h-[620px]' : 'bg-gradient-to-b from-white via-[#FAF6F0] to-[#FAF6F0] border border-text-primary min-h-[460px]'
+            <div className={`gacha-stage-panel stage rounded-2xl p-6 mb-8 flex flex-col md:flex-row items-center justify-center gap-8 shadow-2xl relative overflow-hidden transition-all duration-700 ${summonPhase} ${
+              summonPhase !== 's-altar' ? 'bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 min-h-[620px]' : 'bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 min-h-[460px]'
             }`}>
               {/* Grain overlay */}
               <div className="grain-overlay pointer-events-none absolute inset-0 z-5 opacity-[0.02]" />
@@ -527,7 +527,7 @@ const ShopScreen: FC = () => {
               {summonPhase === 's-altar' && (
                 <>
                   <div className="card-static-wrap z-10 relative flex items-center justify-center">
-                    <div className="w-56 sm:w-64 aspect-[2.5/3.5] rounded-2xl overflow-hidden border-2 border-[#D4AF37] ring-1 ring-[#D4AF37]/50 shadow-xl relative group transition-transform hover:scale-105 cursor-pointer bg-[#111111]">
+                    <div className="w-56 sm:w-64 aspect-[2.5/3.5] rounded-2xl overflow-hidden border-2 border-amber-500/80 ring-2 ring-amber-500/30 shadow-2xl relative group transition-transform hover:scale-105 cursor-pointer bg-slate-950">
                       {/* High-Fidelity Stitch Pack Image */}
                       <img
                         src={selectedSeries === 'one-piece' ? '/cards/op_pack_clean.jpg' : '/cards/ds_pack_clean.jpg'}
@@ -535,8 +535,8 @@ const ShopScreen: FC = () => {
                         className="w-full h-full object-cover"
                       />
                       {/* Metallic Foil Reflection Sheen */}
-                      <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-amber-200/20 pointer-events-none" />
-                      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-md text-[#FFFDF5] border border-[#D4AF37]/60 font-mono text-[10px] font-bold px-3 py-1 rounded-full whitespace-nowrap shadow-md">
+                      <div className="absolute inset-0 bg-gradient-to-tr from-black/60 via-transparent to-amber-200/20 pointer-events-none" />
+                      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-slate-950/90 backdrop-blur-md text-amber-400 border border-amber-500/60 font-mono text-[10px] font-bold px-3 py-1 rounded-full whitespace-nowrap shadow-md">
                         Cost: {DRAW_COST} KC
                       </div>
                     </div>
@@ -544,20 +544,20 @@ const ShopScreen: FC = () => {
 
                   <div className="flex-1 max-w-sm space-y-5 z-10 relative">
                     <div>
-                      <h2 className="font-serif text-2xl font-bold text-text-primary">Summoning Altar</h2>
-                      <p className="text-text-secondary text-xs mt-1 leading-relaxed">
+                      <h2 className="font-serif text-2xl font-bold text-slate-100">Summoning Altar</h2>
+                      <p className="text-slate-300 text-xs mt-1 leading-relaxed">
                         Unlock {selectedSeries === 'one-piece' ? ONE_PIECE_CARDS.length : DEMON_SLAYER_CARDS.length} mystical cards from this set.
                       </p>
                       
-                      <div className="mt-3.5 p-3.5 bg-bg-elevated/70 border border-text-primary rounded-2xl flex items-start gap-2.5 shadow-sm">
+                      <div className="mt-3.5 p-3.5 bg-slate-800/80 border border-slate-700/80 rounded-2xl flex items-start gap-2.5 shadow-sm">
                         <span className="text-xl select-none mt-0.5">
                           {selectedSeries === 'one-piece' ? '🏴‍☠️' : '⚔️'}
                         </span>
                         <div>
-                          <h4 className="font-mono text-[10px] uppercase font-bold text-accent-action tracking-wider leading-none">
+                          <h4 className="font-mono text-[10px] uppercase font-bold text-amber-400 tracking-wider leading-none">
                             {selectedSeries === 'one-piece' ? 'Pirate King Lore' : 'Corps Motto'}
                           </h4>
-                          <p className="text-xs italic text-text-primary leading-relaxed mt-1">
+                          <p className="text-xs italic text-slate-200 leading-relaxed mt-1">
                             {selectedSeries === 'one-piece'
                               ? '"Inherited Will, the Destiny of Age, and the Dreams of People. As long as people continue to pursue Freedom, these things will never cease to be!"'
                               : '"No matter how many people you lose, set your heart ablaze and surpass your limits!"'}
@@ -566,29 +566,29 @@ const ShopScreen: FC = () => {
                       </div>
                     </div>
 
-                    <div className="space-y-2 border-y border-text-primary/20 py-3.5 font-mono text-xs text-text-secondary">
+                    <div className="space-y-2 border-y border-slate-700/60 py-3.5 font-mono text-xs text-slate-300">
                       <div className="flex justify-between">
                         <span>Legendary Drop Rate:</span>
-                        <span className="text-[#C4796B] font-bold">5%</span>
+                        <span className="text-amber-400 font-bold">5%</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Epic Drop Rate:</span>
-                        <span className="text-[#7D927D] font-bold">20%</span>
+                        <span className="text-purple-400 font-bold">20%</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Rare Drop Rate:</span>
-                        <span className="text-[#5A7D8B] font-bold">35%</span>
+                        <span className="text-sky-400 font-bold">35%</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Common Drop Rate:</span>
-                        <span className="text-text-primary font-bold">40%</span>
+                        <span className="text-slate-200 font-bold">40%</span>
                       </div>
                     </div>
 
                     <button
                       onClick={handleDrawPackCard}
                       disabled={coins < DRAW_COST}
-                      className="w-full py-3.5 px-6 rounded-full bg-[#7D927D] hover:bg-[#6B826B] text-white font-sans text-xs font-bold border border-[#2F353B] shadow-sm hover:-translate-y-0.5 active:translate-y-0.5 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed uppercase"
+                      className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 font-bold shadow-lg shadow-amber-500/20 hover:brightness-110 active:scale-98 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed uppercase text-xs border-none"
                     >
                       ✦ DRAW x1 ({DRAW_COST} COINS)
                     </button>
@@ -599,21 +599,21 @@ const ShopScreen: FC = () => {
 
             {/* Stats Dashboard */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-              <StatBox label="Owned Cards" value={stats.collectedCount} color="text-text-primary" />
-              <StatBox label="Completion Rate" value={`${stats.rate}%`} color="text-accent-mint" />
-              <StatBox label="Legendaries Found" value={stats.legendaryCount} color="text-[#C4796B]" />
-              <StatBox label="Epics Found" value={stats.epicCount} color="text-[#7D927D]" />
+              <StatBox label="Owned Cards" value={stats.collectedCount} color="text-slate-100" />
+              <StatBox label="Completion Rate" value={`${stats.rate}%`} color="text-emerald-400" />
+              <StatBox label="Legendaries Found" value={stats.legendaryCount} color="text-amber-400" />
+              <StatBox label="Epics Found" value={stats.epicCount} color="text-purple-400" />
             </div>
 
             {/* Your Collection (Gacha Cards Grid) */}
-            <div className="bg-bg-elevated border border-text-primary/20 rounded-2xl p-6 shadow-sm">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b border-text-primary/20 pb-4">
+            <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 rounded-2xl p-6 shadow-2xl text-slate-100">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b border-slate-700/60 pb-4">
                 <div>
-                  <h2 className="font-serif text-2xl font-bold text-text-primary flex items-center gap-2">
-                    <Trophy className="text-accent-action h-6 w-6" />
+                  <h2 className="font-serif text-2xl font-bold text-slate-100 flex items-center gap-2">
+                    <Trophy className="text-amber-500 h-6 w-6" />
                     Your Collection
                   </h2>
-                  <p className="font-sans text-xs text-text-secondary mt-1">
+                  <p className="font-sans text-xs text-slate-300 mt-1">
                     Demon Slayer & One Piece card collection ({unlockedGachaIds.length}/{GACHA_CARDS.length} unlocked)
                   </p>
                 </div>
@@ -623,7 +623,7 @@ const ShopScreen: FC = () => {
                   <select
                     value={selectedSetFilter}
                     onChange={(e) => setSelectedSetFilter(e.target.value as 'all' | 'Demon Slayer' | 'One Piece')}
-                    className="bg-[#F9F7F2] border border-[#7D927D]/20 text-[#2F353B] font-mono text-xs rounded-xl px-3 py-1.5 focus:outline-none cursor-pointer font-bold shadow-sm"
+                    className="bg-slate-800/80 border border-slate-700 text-slate-100 font-mono text-xs rounded-xl px-3 py-1.5 focus:outline-none cursor-pointer font-bold shadow-sm"
                   >
                     <option value="all">All Sets</option>
                     <option value="Demon Slayer">Demon Slayer</option>
@@ -637,8 +637,8 @@ const ShopScreen: FC = () => {
                         onClick={() => setGachaFilterRank(r as any)}
                         className={`px-3 py-1 rounded-full font-sans text-[10px] font-bold transition-all cursor-pointer border ${
                           gachaFilterRank === r || (gachaFilterRank === 'Rare' && r === 'R') || (gachaFilterRank === 'Common' && r === 'C')
-                            ? 'bg-[#7D927D] text-white border-[#2F353B]'
-                            : 'bg-bg-base text-text-secondary border-structural hover:border-text-primary'
+                            ? 'bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 font-bold shadow-lg shadow-amber-500/20 border-amber-500'
+                            : 'bg-slate-800/80 text-slate-300 border border-slate-700 hover:border-slate-500'
                         }`}
                       >
                         {r}
@@ -678,28 +678,28 @@ const ShopScreen: FC = () => {
         {activeShopTab === 'powerups' && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             {/* Streak Freeze */}
-            <div className="bg-bg-elevated border border-structural rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+            <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 shadow-2xl text-slate-100 rounded-2xl p-6 flex flex-col justify-between space-y-4">
               <div className="flex items-start justify-between">
                 <div>
                   <span className="text-3xl" role="img" aria-label="Streak Freeze">🧊</span>
-                  <h3 className="font-serif text-lg font-bold text-text-primary mt-2">Streak Freeze</h3>
-                  <p className="font-sans text-xs text-text-secondary mt-1 leading-relaxed">
+                  <h3 className="font-serif text-lg font-bold text-slate-100 mt-2">Streak Freeze</h3>
+                  <p className="font-sans text-xs text-slate-300 mt-1 leading-relaxed">
                     Equip a freeze shield that automatically preserves your active study streak if you miss a day.
                   </p>
                 </div>
-                <span className="font-mono text-xs font-bold text-accent-action bg-accent-action/10 px-3 py-1 rounded-full">
+                <span className="font-mono text-xs font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-full">
                   80 KC
                 </span>
               </div>
-              <div className="flex items-center justify-between border-t border-structural/20 pt-4">
-                <span className="font-mono text-xs text-text-secondary">
-                  Owned: <strong>{shopStore.inventory?.consumables?.streak_freeze || 0}</strong>
+              <div className="flex items-center justify-between border-t border-slate-700/60 pt-4">
+                <span className="font-mono text-xs text-slate-400">
+                  Owned: <strong className="text-slate-200">{shopStore.inventory?.consumables?.streak_freeze || 0}</strong>
                 </span>
                 <button
                   onClick={handleBuyStreakFreeze}
                   disabled={coins < 80}
                   className={`px-4 py-2 rounded-xl font-sans text-xs font-bold border-none transition-all cursor-pointer ${
-                    coins >= 80 ? 'bg-[#7D927D] hover:bg-[#6B826B] text-white' : 'bg-structural/30 text-text-secondary cursor-not-allowed'
+                    coins >= 80 ? 'bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 shadow-lg shadow-amber-500/20 hover:brightness-110' : 'bg-slate-800/50 text-slate-500 border border-slate-700/50 cursor-not-allowed'
                   }`}
                 >
                   Buy Streak Freeze
@@ -708,28 +708,28 @@ const ShopScreen: FC = () => {
             </div>
 
             {/* Streak Repair */}
-            <div className="bg-bg-elevated border border-accent-action/30 rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+            <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 shadow-2xl text-slate-100 rounded-2xl p-6 flex flex-col justify-between space-y-4">
               <div className="flex items-start justify-between">
                 <div>
                   <span className="text-3xl" role="img" aria-label="Streak Repair">🔥</span>
-                  <h3 className="font-serif text-lg font-bold text-text-primary mt-2">Streak Repair</h3>
-                  <p className="font-sans text-xs text-text-secondary mt-1 leading-relaxed">
+                  <h3 className="font-serif text-lg font-bold text-slate-100 mt-2">Streak Repair</h3>
+                  <p className="font-sans text-xs text-slate-300 mt-1 leading-relaxed">
                     Restore +1 lost day to your study streak when life got busy. Keep your streak flame burning bright!
                   </p>
                 </div>
-                <span className="font-mono text-xs font-bold text-accent-action bg-accent-action/10 px-3 py-1 rounded-full">
+                <span className="font-mono text-xs font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-full">
                   120 KC
                 </span>
               </div>
-              <div className="flex items-center justify-between border-t border-structural/20 pt-4">
-                <span className="font-mono text-xs text-text-secondary">
-                  Current Streak: <strong>{useStatsStore.getState().streak} Days</strong>
+              <div className="flex items-center justify-between border-t border-slate-700/60 pt-4">
+                <span className="font-mono text-xs text-slate-400">
+                  Current Streak: <strong className="text-slate-200">{useStatsStore.getState().streak} Days</strong>
                 </span>
                 <button
                   onClick={handleBuyStreakRepair}
                   disabled={coins < 120}
                   className={`px-4 py-2 rounded-xl font-sans text-xs font-bold border-none transition-all cursor-pointer ${
-                    coins >= 120 ? 'bg-[#7D927D] hover:bg-[#6B826B] text-white' : 'bg-structural/30 text-text-secondary cursor-not-allowed'
+                    coins >= 120 ? 'bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 shadow-lg shadow-amber-500/20 hover:brightness-110' : 'bg-slate-800/50 text-slate-500 border border-slate-700/50 cursor-not-allowed'
                   }`}
                 >
                   Buy Streak Repair
@@ -738,28 +738,28 @@ const ShopScreen: FC = () => {
             </div>
 
             {/* Hint Tokens Pack */}
-            <div className="bg-bg-elevated border border-structural rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+            <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 shadow-2xl text-slate-100 rounded-2xl p-6 flex flex-col justify-between space-y-4">
               <div className="flex items-start justify-between">
                 <div>
                   <span className="text-3xl" role="img" aria-label="Hint Tokens">💡</span>
-                  <h3 className="font-serif text-lg font-bold text-text-primary mt-2">3x Hint Tokens Pack</h3>
-                  <p className="font-sans text-xs text-text-secondary mt-1 leading-relaxed">
+                  <h3 className="font-serif text-lg font-bold text-slate-100 mt-2">3x Hint Tokens Pack</h3>
+                  <p className="font-sans text-xs text-slate-300 mt-1 leading-relaxed">
                     Consumable tokens that eliminate wrong choices or reveal word hints during grammar and vocabulary quizzes.
                   </p>
                 </div>
-                <span className="font-mono text-xs font-bold text-accent-action bg-accent-action/10 px-3 py-1 rounded-full">
+                <span className="font-mono text-xs font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-full">
                   80 KC
                 </span>
               </div>
-              <div className="flex items-center justify-between border-t border-structural/20 pt-4">
-                <span className="font-mono text-xs text-text-secondary">
-                  Owned: <strong>{shopStore.inventory?.consumables?.hint_token || 0} Tokens</strong>
+              <div className="flex items-center justify-between border-t border-slate-700/60 pt-4">
+                <span className="font-mono text-xs text-slate-400">
+                  Owned: <strong className="text-slate-200">{shopStore.inventory?.consumables?.hint_token || 0} Tokens</strong>
                 </span>
                 <button
                   onClick={handleBuyHintTokens}
                   disabled={coins < 80}
                   className={`px-4 py-2 rounded-xl font-sans text-xs font-bold border-none transition-all cursor-pointer ${
-                    coins >= 80 ? 'bg-[#7D927D] hover:bg-[#6B826B] text-white' : 'bg-structural/30 text-text-secondary cursor-not-allowed'
+                    coins >= 80 ? 'bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 shadow-lg shadow-amber-500/20 hover:brightness-110' : 'bg-slate-800/50 text-slate-500 border border-slate-700/50 cursor-not-allowed'
                   }`}
                 >
                   Buy 3x Pack
@@ -768,22 +768,22 @@ const ShopScreen: FC = () => {
             </div>
 
             {/* Guardian Retry Token */}
-            <div className="bg-bg-elevated border border-structural rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+            <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 shadow-2xl text-slate-100 rounded-2xl p-6 flex flex-col justify-between space-y-4">
               <div className="flex items-start justify-between">
                 <div>
                   <span className="text-3xl" role="img" aria-label="Guardian Retry">🛡️</span>
-                  <h3 className="font-serif text-lg font-bold text-text-primary mt-2">Guardian Retry Token</h3>
-                  <p className="font-sans text-xs text-text-secondary mt-1 leading-relaxed">
+                  <h3 className="font-serif text-lg font-bold text-slate-100 mt-2">Guardian Retry Token</h3>
+                  <p className="font-sans text-xs text-slate-300 mt-1 leading-relaxed">
                     Immediately retry a failed Region Guardian Boss Battle without waiting.
                   </p>
                 </div>
-                <span className="font-mono text-xs font-bold text-accent-action bg-accent-action/10 px-3 py-1 rounded-full">
+                <span className="font-mono text-xs font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-full">
                   100 KC
                 </span>
               </div>
-              <div className="flex items-center justify-between border-t border-structural/20 pt-4">
-                <span className="font-mono text-xs text-text-secondary">
-                  Owned: <strong>{shopStore.inventory?.consumables?.boss_retry || 0} Tokens</strong>
+              <div className="flex items-center justify-between border-t border-slate-700/60 pt-4">
+                <span className="font-mono text-xs text-slate-400">
+                  Owned: <strong className="text-slate-200">{shopStore.inventory?.consumables?.boss_retry || 0} Tokens</strong>
                 </span>
                 <button
                   onClick={async () => {
@@ -797,7 +797,7 @@ const ShopScreen: FC = () => {
                   }}
                   disabled={coins < 100}
                   className={`px-4 py-2 rounded-xl font-sans text-xs font-bold border-none transition-all cursor-pointer ${
-                    coins >= 100 ? 'bg-[#7D927D] hover:bg-[#6B826B] text-white' : 'bg-structural/30 text-text-secondary cursor-not-allowed'
+                    coins >= 100 ? 'bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 shadow-lg shadow-amber-500/20 hover:brightness-110' : 'bg-slate-800/50 text-slate-500 border border-slate-700/50 cursor-not-allowed'
                   }`}
                 >
                   Buy Retry Token
@@ -810,20 +810,20 @@ const ShopScreen: FC = () => {
         {/* ── TAB 3: UI THEMES (10 THEMES) ────────────────────────── */}
         {activeShopTab === 'themes' && (
           <div className="space-y-6 mb-8">
-            <div className="bg-bg-elevated border border-structural rounded-2xl p-6 shadow-sm flex items-center justify-between">
+            <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 shadow-2xl text-slate-100 rounded-2xl p-6 flex items-center justify-between">
               <div>
-                <h2 className="font-serif text-xl font-bold text-text-primary flex items-center gap-2">
-                  <Palette className="h-6 w-6 text-[#7D927D]" />
+                <h2 className="font-serif text-xl font-bold text-slate-100 flex items-center gap-2">
+                  <Palette className="h-6 w-6 text-amber-500" />
                   Visual Theme Overrides (10 Aesthetic Styles)
                 </h2>
-                <p className="text-xs text-text-secondary mt-1">
+                <p className="text-xs text-slate-300 mt-1">
                   Customize the entire application color scheme! Equipped themes change the site data-theme dynamically.
                 </p>
               </div>
               {shopStore.inventory?.activeThemeId && (
                 <button
                   onClick={() => shopStore.setActiveTheme('')}
-                  className="px-3 py-1.5 rounded-lg border border-structural text-xs font-bold text-text-secondary hover:text-text-primary cursor-pointer"
+                  className="px-3 py-1.5 rounded-lg border border-slate-700 bg-slate-800/80 text-xs font-bold text-slate-300 hover:text-slate-100 hover:border-slate-500 cursor-pointer transition-all"
                 >
                   Reset Default
                 </button>
@@ -837,53 +837,100 @@ const ShopScreen: FC = () => {
                   ? !shopStore.inventory?.activeThemeId || shopStore.inventory?.activeThemeId === 'default' || shopStore.inventory?.activeThemeId === ''
                   : shopStore.inventory?.activeThemeId === t.id;
 
+                const isAztecGold = t.id === 'aztec-gold';
+                const isMadridMidnight = t.id === 'madrid-midnight';
+
                 return (
                   <div
                     key={t.id}
-                    className={`bg-bg-elevated border rounded-2xl p-5 shadow-sm flex flex-col justify-between space-y-4 transition-all ${
-                      isActive ? 'border-[#7D927D] ring-2 ring-[#7D927D]/30' : 'border-structural'
+                    className={`rounded-2xl p-5 shadow-2xl flex flex-col justify-between space-y-4 transition-all relative overflow-hidden ${
+                      isAztecGold
+                        ? 'bg-[#0F172A]/90 backdrop-blur-xl border border-amber-500/60 ring-1 ring-amber-500/40 shadow-amber-500/10 text-slate-100'
+                        : isMadridMidnight
+                        ? 'bg-[#121214]/90 backdrop-blur-xl border border-blue-600/60 ring-1 ring-blue-500/40 shadow-blue-600/10 text-slate-100'
+                        : `bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 text-slate-100 ${
+                            isActive ? 'border-amber-500 ring-2 ring-amber-500/30' : ''
+                          }`
                     }`}
                   >
                     <div>
                       <div className="flex justify-between items-start">
-                        <span className="font-mono text-[10px] uppercase tracking-wider text-accent-action font-bold bg-accent-action/10 px-2 py-0.5 rounded">
+                        <span
+                          className={`font-mono text-[10px] uppercase tracking-wider font-bold px-2.5 py-0.5 rounded ${
+                            isAztecGold
+                              ? 'text-amber-400 bg-amber-500/20 border border-amber-500/40 shadow-sm'
+                              : isMadridMidnight
+                              ? 'text-blue-400 bg-blue-500/20 border border-blue-500/40 shadow-sm'
+                              : 'text-amber-400 bg-amber-500/10 border border-amber-500/20'
+                          }`}
+                        >
                           {t.category}
                         </span>
                         {isActive && (
-                          <span className="font-mono text-[10px] uppercase tracking-wider text-success font-bold bg-success/10 px-2 py-0.5 rounded flex items-center gap-1">
+                          <span className="font-mono text-[10px] uppercase tracking-wider text-emerald-400 font-bold bg-emerald-500/20 border border-emerald-500/40 px-2 py-0.5 rounded flex items-center gap-1">
                             <CheckCircle2 className="h-3 w-3" /> Active
                           </span>
                         )}
                       </div>
 
-                      <h3 className="font-serif text-lg font-bold text-text-primary mt-2">{t.name}</h3>
-                      <p className="font-sans text-xs text-text-secondary mt-1 leading-relaxed">{t.desc}</p>
+                      <h3 className="font-serif text-lg font-bold text-slate-100 mt-2">{t.name}</h3>
+                      <p className="font-sans text-xs text-slate-300 mt-1 leading-relaxed">{t.desc}</p>
 
                       {/* Color Swatch Preview */}
-                      <div className="flex items-center gap-2 mt-3 p-2.5 rounded-xl border border-structural/30" style={{ backgroundColor: t.bg }}>
-                        <div className="w-5 h-5 rounded-full border border-white/50 shadow-xs" style={{ backgroundColor: t.color }} />
-                        <span className="font-mono text-[11px] font-bold" style={{ color: t.color }}>
-                          Preview Color
-                        </span>
-                      </div>
+                      {isAztecGold ? (
+                        <div className="flex items-center justify-between mt-3 p-3 rounded-xl border border-amber-500/40 bg-[#0F172A] shadow-inner">
+                          <div className="flex items-center gap-2">
+                            <div className="w-5 h-5 rounded-full border border-amber-400 shadow-sm" style={{ backgroundColor: '#D97706' }} title="Emerald Gold (#D97706)" />
+                            <div className="w-5 h-5 rounded-full border border-emerald-400 shadow-sm" style={{ backgroundColor: '#10B981' }} title="Emerald Green (#10B981)" />
+                            <span className="font-mono text-[11px] font-bold text-amber-300 ml-1">
+                              Emerald Gold & Green
+                            </span>
+                          </div>
+                          <span className="font-mono text-[9px] text-slate-400 font-semibold">#0F172A</span>
+                        </div>
+                      ) : isMadridMidnight ? (
+                        <div className="flex items-center justify-between mt-3 p-3 rounded-xl border border-blue-500/40 bg-[#121214] shadow-inner">
+                          <div className="flex items-center gap-2">
+                            <div className="w-5 h-5 rounded-full border border-blue-400 shadow-sm" style={{ backgroundColor: '#1D4ED8' }} title="Midnight Blue (#1D4ED8)" />
+                            <div className="w-5 h-5 rounded-full border border-amber-400 shadow-sm" style={{ backgroundColor: '#F59E0B' }} title="Warm Amber (#F59E0B)" />
+                            <span className="font-mono text-[11px] font-bold text-blue-300 ml-1">
+                              Midnight Blue & Amber
+                            </span>
+                          </div>
+                          <span className="font-mono text-[9px] text-slate-400 font-semibold">#121214</span>
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-between mt-3 p-3 rounded-xl border border-slate-700/60 shadow-inner" style={{ backgroundColor: t.bg }}>
+                          <div className="flex items-center gap-2">
+                            <div className="w-5 h-5 rounded-full border border-white/40 shadow-sm" style={{ backgroundColor: t.color }} />
+                            {t.accent2 && (
+                              <div className="w-4 h-4 rounded-full border border-white/30 shadow-sm -ml-1.5" style={{ backgroundColor: t.accent2 }} />
+                            )}
+                            <span className="font-mono text-[11px] font-bold" style={{ color: t.color }}>
+                              Preview Swatch
+                            </span>
+                          </div>
+                          <span className="font-mono text-[9px] text-slate-400 font-semibold">{t.bg}</span>
+                        </div>
+                      )}
                     </div>
 
-                    <div className="flex items-center justify-between border-t border-structural/20 pt-3">
-                      <span className="font-mono text-xs font-bold text-accent-action">
+                    <div className="flex items-center justify-between border-t border-slate-700/60 pt-3">
+                      <span className="font-mono text-xs font-bold text-amber-400">
                         {isOwned ? 'Unlocked' : `${t.price} KC`}
                       </span>
 
                       <button
                         onClick={() => handleBuyThemeItem(t)}
                         disabled={!isOwned && coins < t.price}
-                        className={`px-4 py-2 rounded-xl font-sans text-xs font-bold border-none transition-all cursor-pointer ${
+                        className={`px-4 py-2 rounded-xl font-sans text-xs font-bold transition-all ${
                           isActive
-                            ? 'bg-success/20 text-success cursor-default'
+                            ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 cursor-default'
                             : isOwned
-                            ? 'bg-[#7D927D] hover:bg-[#6B826B] text-white'
+                            ? 'bg-slate-700 hover:bg-slate-600 text-slate-100 border border-slate-600 cursor-pointer'
                             : coins >= t.price
-                            ? 'bg-accent-action hover:bg-accent-action-hover text-white'
-                            : 'bg-structural/30 text-text-secondary cursor-not-allowed'
+                            ? 'bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 shadow-lg shadow-amber-500/20 hover:brightness-110 cursor-pointer border-none'
+                            : 'bg-slate-800/50 text-slate-500 border border-slate-700/50 cursor-not-allowed'
                         }`}
                       >
                         {isActive ? 'Equipped' : isOwned ? 'Equip Theme' : 'Buy Theme'}
@@ -899,12 +946,12 @@ const ShopScreen: FC = () => {
         {/* ── TAB 4: VOICE & SOUND PACKS (OmniVoice Inspired) ───── */}
         {activeShopTab === 'soundpacks' && (
           <div className="space-y-6 mb-8">
-            <div className="bg-bg-elevated border border-structural rounded-2xl p-6 shadow-sm">
-              <h2 className="font-serif text-xl font-bold text-text-primary flex items-center gap-2">
-                <Volume2 className="h-6 w-6 text-[#7D927D]" />
+            <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 shadow-2xl text-slate-100 rounded-2xl p-6">
+              <h2 className="font-serif text-xl font-bold text-slate-100 flex items-center gap-2">
+                <Volume2 className="h-6 w-6 text-amber-500" />
                 Companion Voice & Sound Feedback Packs
               </h2>
-              <p className="text-xs text-text-secondary mt-1 leading-relaxed">
+              <p className="text-xs text-slate-300 mt-1 leading-relaxed">
                 Unlock custom audio feedback packs for quiz success and failure sound effects, powered by Web Audio synthesis!
               </p>
             </div>
@@ -917,16 +964,16 @@ const ShopScreen: FC = () => {
                 return (
                   <div
                     key={sp.id}
-                    className={`bg-bg-elevated border rounded-2xl p-5 shadow-sm flex flex-col justify-between space-y-4 transition-all ${
-                      isActive ? 'border-[#7D927D] ring-2 ring-[#7D927D]/30' : 'border-structural'
+                    className={`bg-slate-900/80 backdrop-blur-xl border rounded-2xl p-5 shadow-2xl text-slate-100 flex flex-col justify-between space-y-4 transition-all ${
+                      isActive ? 'border-amber-500 ring-2 ring-amber-500/30' : 'border-slate-700/80'
                     }`}
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex gap-3 items-center">
                         <span className="text-3xl" role="img" aria-label={sp.name}>{sp.icon}</span>
                         <div>
-                          <h3 className="font-serif text-base font-bold text-text-primary">{sp.name}</h3>
-                          <p className="font-sans text-xs text-text-secondary mt-0.5">{sp.desc}</p>
+                          <h3 className="font-serif text-base font-bold text-slate-100">{sp.name}</h3>
+                          <p className="font-sans text-xs text-slate-300 mt-0.5">{sp.desc}</p>
                         </div>
                       </div>
                       <button
@@ -936,29 +983,29 @@ const ShopScreen: FC = () => {
                           }));
                           audioFeedback.playFeedback('correct');
                         }}
-                        className="p-2 rounded-xl bg-bg-elevated-2 border border-structural text-accent-action hover:opacity-80 transition-all cursor-pointer"
+                        className="p-2 rounded-xl bg-slate-800/80 border border-slate-700 text-amber-400 hover:bg-slate-700 transition-all cursor-pointer"
                         title="Test Sample Sound"
                       >
                         <Play className="h-4 w-4" />
                       </button>
                     </div>
 
-                    <div className="flex items-center justify-between border-t border-structural/20 pt-3">
-                      <span className="font-mono text-xs font-bold text-accent-action">
+                    <div className="flex items-center justify-between border-t border-slate-700/60 pt-3">
+                      <span className="font-mono text-xs font-bold text-amber-400">
                         {sp.price === 0 ? 'Free' : isOwned ? 'Unlocked' : `${sp.price} KC`}
                       </span>
 
                       <button
                         onClick={() => handleBuySoundPackItem(sp)}
                         disabled={!isOwned && coins < sp.price}
-                        className={`px-4 py-2 rounded-xl font-sans text-xs font-bold border-none transition-all cursor-pointer ${
+                        className={`px-4 py-2 rounded-xl font-sans text-xs font-bold transition-all ${
                           isActive
-                            ? 'bg-success/20 text-success cursor-default'
+                            ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 cursor-default'
                             : isOwned
-                            ? 'bg-[#7D927D] hover:bg-[#6B826B] text-white'
+                            ? 'bg-slate-700 hover:bg-slate-600 text-slate-100 border border-slate-600 cursor-pointer'
                             : coins >= sp.price
-                            ? 'bg-accent-action hover:bg-accent-action-hover text-white'
-                            : 'bg-structural/30 text-text-secondary cursor-not-allowed'
+                            ? 'bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 shadow-lg shadow-amber-500/20 hover:brightness-110 cursor-pointer border-none'
+                            : 'bg-slate-800/50 text-slate-500 border border-slate-700/50 cursor-not-allowed'
                         }`}
                       >
                         {isActive ? 'Equipped' : isOwned ? 'Equip Sound Pack' : 'Buy Pack'}
@@ -995,7 +1042,7 @@ const ShopScreen: FC = () => {
                   setSelectedCard(null);
                   setSelectedHotspot(null);
                 }}
-                className="absolute top-4 right-4 bg-transparent border-none text-text-secondary hover:text-text-primary cursor-pointer focus:outline-none"
+                className="absolute top-4 right-4 bg-transparent border-none text-slate-400 hover:text-slate-100 cursor-pointer focus:outline-none"
               >
                 <X size={20} />
               </button>
@@ -1011,9 +1058,9 @@ const ShopScreen: FC = () => {
                     WebkitBackdropFilter: 'blur(30px)',
                   }}
                 >
-                  <div className="w-full flex items-center justify-between border-b border-white/10 pb-1.5 text-[8px] font-mono font-semibold text-text-secondary/80">
+                  <div className="w-full flex items-center justify-between border-b border-white/10 pb-1.5 text-[8px] font-mono font-semibold text-slate-300">
                     <span>Card Registry</span>
-                    <span className="text-[#2F353B] px-2 py-0.5 rounded-full"
+                    <span className="text-slate-950 font-bold px-2 py-0.5 rounded-full"
                           style={{ backgroundColor: selectedCard.rarity === 'legendary' ? '#f3c969' :
                                                      selectedCard.rarity === 'epic' ? '#b388ff' :
                                                      selectedCard.rarity === 'rare' ? '#5fb6ff' : '#bfb6a8' }}>
@@ -1036,10 +1083,10 @@ const ShopScreen: FC = () => {
 
                   <div className="text-left space-y-1">
                     <h3 className="font-serif text-sm font-bold text-white truncate">{selectedCard.name}</h3>
-                    <p className="font-sans text-[10px] text-text-secondary italic line-clamp-2">"{selectedCard.description}"</p>
+                    <p className="font-sans text-[10px] text-slate-300 italic line-clamp-2">"{selectedCard.description}"</p>
                   </div>
 
-                  <div className="w-full border-t border-white/10 pt-1.5 grid grid-cols-2 gap-2 font-mono text-[8px] text-[#ff7a3c] font-semibold">
+                  <div className="w-full border-t border-white/10 pt-1.5 grid grid-cols-2 gap-2 font-mono text-[8px] text-amber-400 font-semibold">
                     <div className="flex flex-col text-left">
                       <span className="text-white/40 text-[7px] uppercase tracking-wider">Power</span>
                       <span className="truncate">{selectedCard.bounty}</span>
@@ -1054,8 +1101,8 @@ const ShopScreen: FC = () => {
 
               <div className="flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-serif text-lg font-bold text-text-primary">Card Hotspot Analyzer</h3>
-                  <p className="text-xs text-text-secondary mt-1">Tap a section header below to analyze its design mechanics and gameplay synergy details.</p>
+                  <h3 className="font-serif text-lg font-bold text-slate-100">Card Hotspot Analyzer</h3>
+                  <p className="text-xs text-slate-300 mt-1">Tap a section header below to analyze its design mechanics and gameplay synergy details.</p>
                   
                   <div className="mt-4 grid grid-cols-2 gap-2">
                     {Object.entries(activeHotspots).map(([key, value]) => (
@@ -1064,8 +1111,8 @@ const ShopScreen: FC = () => {
                         onClick={() => setSelectedHotspot(key as any)}
                         className={`text-left p-2.5 rounded-xl text-[11px] font-semibold transition-all cursor-pointer ${
                           selectedHotspot === key
-                            ? 'ios-glass-button-active'
-                            : 'ios-glass-button text-text-secondary hover:text-text-primary'
+                            ? 'bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 font-bold shadow-md'
+                            : 'bg-slate-800/80 text-slate-300 border border-slate-700 hover:border-slate-500'
                         }`}
                       >
                         {value.title}
@@ -1074,20 +1121,20 @@ const ShopScreen: FC = () => {
                   </div>
 
                   {selectedHotspot && (
-                    <div className="mt-4 p-3 ios-glass-inner-panel rounded-2xl">
-                      <h4 className="font-serif text-xs font-bold text-text-primary flex items-center gap-1.5">
-                        <Info size={13} className="text-accent-action" />
+                    <div className="mt-4 p-3 bg-slate-800/80 border border-slate-700 rounded-2xl">
+                      <h4 className="font-serif text-xs font-bold text-slate-100 flex items-center gap-1.5">
+                        <Info size={13} className="text-amber-400" />
                         {activeHotspots[selectedHotspot].title}
                       </h4>
-                      <p className="text-xs text-text-secondary mt-1 leading-relaxed">
+                      <p className="text-xs text-slate-300 mt-1 leading-relaxed">
                         {activeHotspots[selectedHotspot].explanation}
                       </p>
                     </div>
                   )}
                 </div>
 
-                <div className="border-t border-structural pt-3 mt-4 flex items-center justify-between">
-                  <span className="font-mono text-[9px] uppercase tracking-wider text-text-secondary">
+                <div className="border-t border-slate-700/60 pt-3 mt-4 flex items-center justify-between">
+                  <span className="font-mono text-[9px] uppercase tracking-wider text-slate-400">
                     Card ID: {selectedCard.id}
                   </span>
                   <button
@@ -1095,7 +1142,7 @@ const ShopScreen: FC = () => {
                       setSelectedCard(null);
                       setSelectedHotspot(null);
                     }}
-                    className="bg-accent-action hover:bg-accent-action-hover text-white font-sans text-xs font-semibold px-4 py-2 rounded-xl transition-colors cursor-pointer border-none"
+                    className="bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 font-bold font-sans text-xs px-4 py-2 rounded-xl transition-all cursor-pointer border-none shadow-md"
                   >
                     Close Entry
                   </button>
@@ -1113,28 +1160,28 @@ const ShopScreen: FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/25 backdrop-blur-xl z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-slate-950/80 backdrop-blur-2xl z-50 flex items-center justify-center p-4"
           >
             <motion.div
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="ios-glass-panel rounded-2xl max-w-sm w-full p-6 text-center shadow-sm relative space-y-4"
+              className="bg-slate-900/90 border border-slate-700/80 rounded-2xl max-w-sm w-full p-6 text-center shadow-2xl relative space-y-4 text-slate-100"
             >
               <span className="text-5xl block animate-bounce" role="img" aria-label="Gift">🎁</span>
               <div>
-                <h3 className="font-serif text-lg font-bold text-text-primary">Chest Opened!</h3>
-                <p className="font-sans text-xs text-text-secondary mt-1">Here is the random reward you pulled:</p>
+                <h3 className="font-serif text-lg font-bold text-slate-100">Chest Opened!</h3>
+                <p className="font-sans text-xs text-slate-300 mt-1">Here is the random reward you pulled:</p>
               </div>
 
-              <div className="ios-glass-inner-panel rounded-2xl p-4">
-                <h4 className="font-serif text-base font-extrabold text-accent-action">{chestReward.title}</h4>
-                <p className="font-sans text-xs text-text-secondary mt-1.5 leading-relaxed">{chestReward.detail}</p>
+              <div className="bg-slate-800/80 border border-slate-700 rounded-2xl p-4">
+                <h4 className="font-serif text-base font-extrabold text-amber-400">{chestReward.title}</h4>
+                <p className="font-sans text-xs text-slate-300 mt-1.5 leading-relaxed">{chestReward.detail}</p>
               </div>
 
               <button
                 onClick={() => setChestReward(null)}
-                className="w-full bg-accent-action hover:bg-accent-action-hover text-white font-sans text-xs font-bold py-2.5 rounded-xl border-none cursor-pointer hover:scale-103 transition-transform"
+                className="w-full bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 font-sans text-xs font-bold py-2.5 rounded-xl border-none cursor-pointer hover:scale-103 transition-transform shadow-lg shadow-amber-500/20"
               >
                 Claim Reward
               </button>
@@ -1150,31 +1197,31 @@ const ShopScreen: FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/25 backdrop-blur-xl z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-slate-950/80 backdrop-blur-2xl z-50 flex items-center justify-center p-4"
           >
             <motion.div
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="ios-glass-panel rounded-2xl max-w-sm w-full p-6 text-center shadow-sm space-y-4"
+              className="bg-slate-900/90 border border-slate-700/80 rounded-2xl max-w-sm w-full p-6 text-center shadow-2xl space-y-4 text-slate-100"
             >
               <span className="text-5xl block animate-pulse" role="img" aria-label="Celebration">🎉</span>
               <div>
-                <h3 className="font-serif text-lg font-bold text-text-primary">Purchase Successful!</h3>
-                <p className="font-sans text-xs text-text-secondary mt-1">Thank you for your purchase!</p>
+                <h3 className="font-serif text-lg font-bold text-slate-100">Purchase Successful!</h3>
+                <p className="font-sans text-xs text-slate-300 mt-1">Thank you for your purchase!</p>
               </div>
 
-              <div className="ios-glass-inner-panel rounded-2xl p-4">
-                <h4 className="font-serif text-sm font-extrabold text-success">{purchaseCelebration.name}</h4>
-                <p className="font-sans text-[11px] text-text-secondary mt-1">Cost: {purchaseCelebration.cost} KC</p>
+              <div className="bg-slate-800/80 border border-slate-700 rounded-2xl p-4">
+                <h4 className="font-serif text-sm font-extrabold text-emerald-400">{purchaseCelebration.name}</h4>
+                <p className="font-sans text-[11px] text-slate-300 mt-1">Cost: {purchaseCelebration.cost} KC</p>
                 {purchaseCelebration.desc && (
-                  <p className="font-sans text-xs text-text-secondary/90 italic mt-2 border-t border-structural/20 pt-2">{purchaseCelebration.desc}</p>
+                  <p className="font-sans text-xs text-slate-300/90 italic mt-2 border-t border-slate-700/60 pt-2">{purchaseCelebration.desc}</p>
                 )}
               </div>
 
               <button
                 onClick={() => setPurchaseCelebration(null)}
-                className="w-full bg-success hover:bg-success-hover text-white font-sans text-xs font-bold py-2.5 rounded-xl border-none cursor-pointer hover:scale-103 transition-transform"
+                className="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-slate-950 font-sans text-xs font-bold py-2.5 rounded-xl border-none cursor-pointer hover:scale-103 transition-transform shadow-lg shadow-emerald-500/20"
               >
                 Continue
               </button>
@@ -1190,51 +1237,51 @@ const ShopScreen: FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/25 backdrop-blur-xl z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-slate-950/80 backdrop-blur-2xl z-50 flex items-center justify-center p-4"
           >
             <motion.div
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="ios-glass-panel rounded-2xl max-w-md w-full p-6 shadow-sm relative space-y-4"
+              className="bg-slate-900/90 border border-slate-700/80 rounded-2xl max-w-md w-full p-6 shadow-2xl relative space-y-4 text-slate-100"
             >
               <button
                 onClick={() => setShowCoinTips(false)}
-                className="absolute top-4 right-4 bg-transparent border-none text-text-secondary hover:text-text-primary cursor-pointer focus:outline-none"
+                className="absolute top-4 right-4 bg-transparent border-none text-slate-400 hover:text-slate-100 cursor-pointer focus:outline-none"
               >
                 <X size={18} />
               </button>
 
-              <h3 className="font-serif text-lg font-bold text-text-primary border-b border-white/20 pb-2">
+              <h3 className="font-serif text-lg font-bold text-slate-100 border-b border-slate-700/60 pb-2">
                 💰 How to Earn Kitsune Coins Faster
               </h3>
 
-              <div className="space-y-3.5 font-sans text-xs text-text-secondary leading-relaxed">
+              <div className="space-y-3.5 font-sans text-xs text-slate-300 leading-relaxed">
                 <div className="flex gap-2.5 items-start">
                   <span className="text-base select-none">📅</span>
                   <div>
-                    <h4 className="font-bold text-text-primary">Daily Streaks</h4>
+                    <h4 className="font-bold text-slate-100">Daily Streaks</h4>
                     <p>Maintain your daily log streak! The higher your streak, the higher your coin multiplier becomes when doing general activities.</p>
                   </div>
                 </div>
                 <div className="flex gap-2.5 items-start">
                   <span className="text-base select-none">📋</span>
                   <div>
-                    <h4 className="font-bold text-text-primary">Daily Quest Board</h4>
+                    <h4 className="font-bold text-slate-100">Daily Quest Board</h4>
                     <p>Complete your daily rotating quest (visible on the Adventure tab) to secure huge bonus payments like +30 KC.</p>
                   </div>
                 </div>
                 <div className="flex gap-2.5 items-start">
                   <span className="text-base select-none">📖</span>
                   <div>
-                    <h4 className="font-bold text-text-primary">Mastering Vocabulary</h4>
+                    <h4 className="font-bold text-slate-100">Mastering Vocabulary</h4>
                     <p>Learn and review new words in the dictionary. Reviewing weak words awards random coin drops!</p>
                   </div>
                 </div>
                 <div className="flex gap-2.5 items-start">
                   <span className="text-base select-none">⚔️</span>
                   <div>
-                    <h4 className="font-bold text-text-primary">Guardian Battles</h4>
+                    <h4 className="font-bold text-slate-100">Guardian Battles</h4>
                     <p>Beating a region guardian boss fight awards a large lump sum of coins and secures your kitsune tails!</p>
                   </div>
                 </div>
@@ -1242,7 +1289,7 @@ const ShopScreen: FC = () => {
 
               <button
                 onClick={() => setShowCoinTips(false)}
-                className="w-full bg-accent-action hover:bg-accent-action-hover text-white font-sans text-xs font-bold py-2.5 rounded-xl border-none cursor-pointer mt-4"
+                className="w-full bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 font-sans text-xs font-bold py-2.5 rounded-xl border-none cursor-pointer mt-4 shadow-lg shadow-amber-500/20"
               >
                 Understood
               </button>
@@ -1252,53 +1299,59 @@ const ShopScreen: FC = () => {
       </AnimatePresence>
 
       <style>{`
-        /* iOS 27 Glassmorphism Styles */
+        /* Executive Dark Glassmorphism Styles */
         .ios-glass-panel {
-          background: rgba(255, 255, 255, 0.45) !important;
-          backdrop-filter: blur(40px) saturate(210%) !important;
-          -webkit-backdrop-filter: blur(40px) saturate(210%) !important;
-          border: 1px solid rgba(255, 255, 255, 0.45) !important;
+          background: rgba(15, 23, 42, 0.85) !important;
+          backdrop-filter: blur(24px) saturate(180%) !important;
+          -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+          border: 1px solid rgba(51, 65, 85, 0.8) !important;
           box-shadow: 
-            0 12px 40px rgba(31, 38, 135, 0.08),
-            0 1px 0 rgba(255, 255, 255, 0.5) inset,
-            0 -1px 0 rgba(0, 0, 0, 0.05) inset !important;
+            0 12px 40px rgba(0, 0, 0, 0.45),
+            0 1px 0 rgba(255, 255, 255, 0.1) inset,
+            0 -1px 0 rgba(0, 0, 0, 0.5) inset !important;
+          color: #F8FAFC !important;
         }
 
         .ios-glass-card {
-          background: rgba(255, 255, 255, 0.35) !important;
-          backdrop-filter: blur(20px) saturate(180%) !important;
-          -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-          border: 1px solid rgba(255, 255, 255, 0.4) !important;
+          background: rgba(30, 41, 59, 0.8) !important;
+          backdrop-filter: blur(16px) saturate(180%) !important;
+          -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+          border: 1px solid rgba(51, 65, 85, 0.8) !important;
           box-shadow: 
-            0 8px 32px 0 rgba(31, 38, 135, 0.06),
-            0 1px 0 rgba(255, 255, 255, 0.4) inset !important;
+            0 8px 32px 0 rgba(0, 0, 0, 0.35),
+            0 1px 0 rgba(255, 255, 255, 0.1) inset !important;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          color: #F8FAFC !important;
         }
 
         .ios-glass-button {
-          background: rgba(255, 255, 255, 0.3) !important;
-          border: 1px solid rgba(255, 255, 255, 0.35) !important;
+          background: rgba(30, 41, 59, 0.8) !important;
+          border: 1px solid rgba(51, 65, 85, 0.8) !important;
           backdrop-filter: blur(10px) !important;
           -webkit-backdrop-filter: blur(10px) !important;
+          color: #CBD5E1 !important;
           transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .ios-glass-button:hover {
-          background: rgba(255, 255, 255, 0.55) !important;
-          border-color: rgba(255, 255, 255, 0.5) !important;
+          background: rgba(51, 65, 85, 0.9) !important;
+          border-color: rgba(148, 163, 184, 0.6) !important;
+          color: #F8FAFC !important;
           transform: translateY(-1px);
         }
         .ios-glass-button-active {
-          background: var(--accent-action, #ff7a3c) !important;
-          border-color: var(--accent-action, #ff7a3c) !important;
-          color: white !important;
-          box-shadow: 0 4px 12px rgba(255, 122, 60, 0.25) !important;
+          background: linear-gradient(135deg, #D97706, #F59E0B) !important;
+          border-color: #F59E0B !important;
+          color: #020617 !important;
+          font-weight: 700 !important;
+          box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35) !important;
         }
 
         .ios-glass-inner-panel {
-          background: rgba(255, 255, 255, 0.25) !important;
-          backdrop-filter: blur(10px) !important;
-          -webkit-backdrop-filter: blur(10px) !important;
-          border: 1px solid rgba(255, 255, 255, 0.2) !important;
+          background: rgba(15, 23, 42, 0.7) !important;
+          backdrop-filter: blur(12px) !important;
+          -webkit-backdrop-filter: blur(12px) !important;
+          border: 1px solid rgba(51, 65, 85, 0.6) !important;
+          color: #F8FAFC !important;
         }
 
         /* ── CSS STYLES FOR GACHA COMPONENT ─────────────────────────── */
@@ -1308,23 +1361,20 @@ const ShopScreen: FC = () => {
         }
         
         .vignette-overlay {
-          background: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.85));
+          background: radial-gradient(circle at center, transparent 40%, rgba(15, 23, 42, 0.85));
         }
 
-        .stage.s-transition { background: #0c0814; }
-        .stage.s-rise { background: #0c0814; }
-        .stage.s-begin { background: #0c0814; }
-        .stage.s-intensity { background: #12091f; }
-        .vignette-overlay {
-          background: radial-gradient(circle at center, transparent 40%, rgba(250, 246, 240, 0.4));
-        }
+        .stage.s-transition { background: #0F172A; }
+        .stage.s-rise { background: #0F172A; }
+        .stage.s-begin { background: #0F172A; }
+        .stage.s-intensity { background: #020617; }
 
         .stage.s-transition,
         .stage.s-rise,
         .stage.s-begin,
         .stage.s-intensity,
         .stage.s-reveal {
-          background: radial-gradient(circle at 50% 40%, #FFFFFF 0%, #FAF6F0 60%, rgba(217, 188, 242, 0.3) 100%) !important;
+          background: radial-gradient(circle at 50% 40%, #1E293B 0%, #0F172A 60%, #020617 100%) !important;
         }
 
         .glyph-wrap {
@@ -1661,11 +1711,11 @@ interface StatBoxProps {
   icon?: React.ReactNode;
 }
 
-const StatBox: FC<StatBoxProps> = ({ label, value, color = "text-text-primary", icon }) => (
-  <div className="bg-white/5 border border-[#7D927D]/20 rounded-xl p-4 text-center flex flex-col justify-center items-center shadow-sm">
-    {icon && <div className="text-[#777775]/70 mb-1">{icon}</div>}
+const StatBox: FC<StatBoxProps> = ({ label, value, color = "text-slate-100", icon }) => (
+  <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 rounded-xl p-4 text-center flex flex-col justify-center items-center shadow-2xl text-slate-100">
+    {icon && <div className="text-slate-400 mb-1">{icon}</div>}
     <div className={`text-xl font-bold font-mono leading-none ${color}`}>{value}</div>
-    <div className="text-[9px] uppercase tracking-wider text-[#777775] mt-1.5 leading-none">{label}</div>
+    <div className="text-[9px] uppercase tracking-wider text-slate-400 mt-1.5 leading-none">{label}</div>
   </div>
 );
 

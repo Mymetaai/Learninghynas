@@ -1,5 +1,6 @@
 import { useState, type FC } from 'react';
 import { motion } from 'framer-motion';
+import { useSettingsStore, LOGO_VARIANTS } from '../state/settingsStore';
 import {
   Zap,
   DollarSign,
@@ -98,6 +99,9 @@ const SectionTitle: FC<{
    ═══════════════════════════════════════════════════════════════════════════ */
 
 const HeroSection: FC = () => {
+  const { logoVariant } = useSettingsStore();
+  const activeLogo = LOGO_VARIANTS[logoVariant] || LOGO_VARIANTS.executive;
+
   const statBadges = [
     { icon: <DollarSign size={16} />, label: 'Zero Tutor Cost' },
     { icon: <Clock size={16} />, label: '24/7 AI Practice' },
@@ -111,8 +115,13 @@ const HeroSection: FC = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="font-serif text-4xl font-bold sm:text-5xl lg:text-6xl"
+          className="font-serif text-4xl font-bold sm:text-5xl lg:text-6xl flex items-center justify-center gap-3 sm:gap-4 flex-wrap"
         >
+          <img
+            src={activeLogo.src}
+            alt={activeLogo.label}
+            className="border-2 border-amber-500/50 shadow-lg rounded-xl h-12 w-12 sm:h-14 sm:w-14 object-cover shrink-0"
+          />
           <span className="glitter-text">Why TheLearningHyena?</span>
         </motion.h1>
 
@@ -320,120 +329,137 @@ const CellValue: FC<{ value: string; highlight?: boolean }> = ({
   );
 };
 
-const ComparisonSection: FC = () => (
-  <Section>
-    <SectionTitle
-      label="Side-by-Side"
-      title="How We Stack Up"
-      subtitle="Feature-by-feature, TheLearningHyena outperforms every alternative."
-    />
+const ComparisonSection: FC = () => {
+  const { logoVariant } = useSettingsStore();
+  const activeLogo = LOGO_VARIANTS[logoVariant] || LOGO_VARIANTS.executive;
 
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.6 }}
-      className="bg-white/90 backdrop-blur-sm overflow-hidden rounded-2xl"
-    >
-      {/* Desktop / wide table */}
-      <div className="hidden overflow-x-auto lg:block">
-        <table className="w-full border-collapse text-left">
-          <thead>
-            <tr className="border-b border-[#7D927D]/20">
-              <th className="px-6 py-4 font-serif text-sm font-bold text-[#777775]">
-                Feature
-              </th>
-              <th className="px-4 py-4 font-serif text-sm font-bold text-[#777775]">
-                Duolingo 🦉
-              </th>
-              <th className="px-4 py-4 font-serif text-sm font-bold text-[#777775]">
-                Preply 👥
-              </th>
-              <th className="px-4 py-4 font-serif text-sm font-bold text-[#777775]">
-                Babbel 📘
-              </th>
-              <th className="relative px-4 py-4 font-serif text-sm font-bold text-[#7D927D]">
-                {/* Glow column indicator */}
-                <span className="absolute inset-0 -z-10 bg-[#7D927D]/[0.04]" />
-                TheLearningHyena 🐆
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {comparisonRows.map((row, i) => (
-              <tr
-                key={row.feature}
-                className={`border-b border-[#7D927D]/10 ${
-                  i % 2 === 0 ? 'bg-white/[0.02]' : ''
-                }`}
-              >
-                <td className="px-6 py-4 font-serif text-sm font-semibold text-text-primary">
-                  {row.feature}
-                </td>
-                <td className="px-4 py-4">
-                  <CellValue value={row.duolingo} />
-                </td>
-                <td className="px-4 py-4">
-                  <CellValue value={row.preply} />
-                </td>
-                <td className="px-4 py-4">
-                  <CellValue value={row.babbel} />
-                </td>
-                <td className="relative px-4 py-4">
+  return (
+    <Section>
+      <SectionTitle
+        label="Side-by-Side"
+        title="How We Stack Up"
+        subtitle="Feature-by-feature, TheLearningHyena outperforms every alternative."
+      />
+
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.6 }}
+        className="bg-white/90 backdrop-blur-sm overflow-hidden rounded-2xl"
+      >
+        {/* Desktop / wide table */}
+        <div className="hidden overflow-x-auto lg:block">
+          <table className="w-full border-collapse text-left">
+            <thead>
+              <tr className="border-b border-[#7D927D]/20">
+                <th className="px-6 py-4 font-serif text-sm font-bold text-[#777775]">
+                  Feature
+                </th>
+                <th className="px-4 py-4 font-serif text-sm font-bold text-[#777775]">
+                  Duolingo 🦉
+                </th>
+                <th className="px-4 py-4 font-serif text-sm font-bold text-[#777775]">
+                  Preply 👥
+                </th>
+                <th className="px-4 py-4 font-serif text-sm font-bold text-[#777775]">
+                  Babbel 📘
+                </th>
+                <th className="relative px-4 py-4 font-serif text-sm font-bold text-[#7D927D]">
+                  {/* Glow column indicator */}
                   <span className="absolute inset-0 -z-10 bg-[#7D927D]/[0.04]" />
-                  <CellValue
-                    value={row.hyena}
-                    highlight={row.hyenaHighlight}
-                  />
-                </td>
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={activeLogo.src}
+                      alt={activeLogo.label}
+                      className="border border-amber-500/50 shadow-xs rounded-lg h-6 w-6 object-cover shrink-0"
+                    />
+                    <span>TheLearningHyena</span>
+                  </div>
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {comparisonRows.map((row, i) => (
+                <tr
+                  key={row.feature}
+                  className={`border-b border-[#7D927D]/10 ${
+                    i % 2 === 0 ? 'bg-white/[0.02]' : ''
+                  }`}
+                >
+                  <td className="px-6 py-4 font-serif text-sm font-semibold text-text-primary">
+                    {row.feature}
+                  </td>
+                  <td className="px-4 py-4">
+                    <CellValue value={row.duolingo} />
+                  </td>
+                  <td className="px-4 py-4">
+                    <CellValue value={row.preply} />
+                  </td>
+                  <td className="px-4 py-4">
+                    <CellValue value={row.babbel} />
+                  </td>
+                  <td className="relative px-4 py-4">
+                    <span className="absolute inset-0 -z-10 bg-[#7D927D]/[0.04]" />
+                    <CellValue
+                      value={row.hyena}
+                      highlight={row.hyenaHighlight}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
-      {/* Mobile stacked cards */}
-      <div className="space-y-4 p-4 lg:hidden">
-        {comparisonRows.map((row) => (
-          <div
-            key={row.feature}
-            className="rounded-xl border border-[#7D927D]/15 bg-white/[0.03] p-4"
-          >
-            <p className="mb-3 font-serif text-sm font-bold text-text-primary">
-              {row.feature}
-            </p>
-            <div className="grid grid-cols-2 gap-2 text-xs">
-              <div>
-                <span className="font-mono text-[10px] text-[#777775]/60">
-                  🦉 Duolingo
-                </span>
-                <p className="mt-0.5 text-[#777775]">{row.duolingo}</p>
-              </div>
-              <div>
-                <span className="font-mono text-[10px] text-[#777775]/60">
-                  👥 Preply
-                </span>
-                <p className="mt-0.5 text-[#777775]">{row.preply}</p>
-              </div>
-              <div>
-                <span className="font-mono text-[10px] text-[#777775]/60">
-                  📘 Babbel
-                </span>
-                <p className="mt-0.5 text-[#777775]">{row.babbel}</p>
-              </div>
-              <div className="rounded-lg bg-[#7D927D]/10 p-2">
-                <span className="font-mono text-[10px] text-[#7D927D]">
-                  🐆 Hyena
-                </span>
-                <p className="mt-0.5 font-semibold text-text-primary">{row.hyena}</p>
+        {/* Mobile stacked cards */}
+        <div className="space-y-4 p-4 lg:hidden">
+          {comparisonRows.map((row) => (
+            <div
+              key={row.feature}
+              className="rounded-xl border border-[#7D927D]/15 bg-white/[0.03] p-4"
+            >
+              <p className="mb-3 font-serif text-sm font-bold text-text-primary">
+                {row.feature}
+              </p>
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                <div>
+                  <span className="font-mono text-[10px] text-[#777775]/60">
+                    🦉 Duolingo
+                  </span>
+                  <p className="mt-0.5 text-[#777775]">{row.duolingo}</p>
+                </div>
+                <div>
+                  <span className="font-mono text-[10px] text-[#777775]/60">
+                    👥 Preply
+                  </span>
+                  <p className="mt-0.5 text-[#777775]">{row.preply}</p>
+                </div>
+                <div>
+                  <span className="font-mono text-[10px] text-[#777775]/60">
+                    📘 Babbel
+                  </span>
+                  <p className="mt-0.5 text-[#777775]">{row.babbel}</p>
+                </div>
+                <div className="rounded-lg bg-[#7D927D]/10 p-2">
+                  <span className="font-mono text-[10px] text-[#7D927D] flex items-center gap-1">
+                    <img
+                      src={activeLogo.src}
+                      alt={activeLogo.label}
+                      className="border border-amber-500/50 rounded h-4 w-4 object-cover shrink-0"
+                    />
+                    <span>Hyena</span>
+                  </span>
+                  <p className="mt-0.5 font-semibold text-text-primary">{row.hyena}</p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </motion.div>
-  </Section>
-);
+          ))}
+        </div>
+      </motion.div>
+    </Section>
+  );
+};
 
 /* ═══════════════════════════════════════════════════════════════════════════
    4. OUR SOLUTION SECTION

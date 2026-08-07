@@ -1,31 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600&family=Atkinson+Hyperlegible+Next:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400..700;1,400..700&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:ital,wght@0,400..800;1,400..800&family=Outfit:wght@400..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* ── Serene Lexicon Design System ─────────────────────────────────── */
-  --bg-base: #F9F7F2;        /* Warm Off-White canvas */
-  --bg-elevated: #FFFFFF;    /* Pure White for cards */
-  --bg-elevated-2: #F1EDE6;  /* Warm neutral highlight */
-  --structural: #D4DCD4;     /* Light Sage border tint (≈ #7D927D at 20% on white) */
+  /* ── Executive Dark Glassmorphism Design System ─────────────────── */
+  --bg-base: #0F172A;
+  --bg-elevated: rgba(30, 41, 59, 0.7);
+  --bg-elevated-2: rgba(51, 65, 85, 0.7);
+  --structural: rgba(255, 255, 255, 0.1);
 
-  --text-primary: #2F353B;   /* Dark Slate / Charcoal */
-  --text-secondary: #777775; /* Medium Gray */
-  --text-tertiary: #A0A0A0;  /* Light Gray placeholder text */
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-tertiary: #64748B;
 
-  --accent-action: #7D927D;  /* Muted Sage Green — primary accent */
-  --accent-action-hover: #6B826B; /* Darker Sage hover state */
+  --accent-action: #D97706;
+  --accent-action-hover: #B45309;
 
-  --accent-mint: #7D927D;    /* Sage Green (matches primary) */
-  --accent-lavender: #E8E4DF;/* Warm neutral accent */
+  --accent-mint: #10B981;
+  --accent-lavender: #E8E4DF;
 
-  --success: #7D927D;        /* Sage Green success */
-  --error: #C4796B;          /* Muted Terracotta — never bright red */
+  --success: #10B981;
+  --error: #EF4444;
 
-  --info: #2F353B;           /* Dark Slate informational */
-  --streak-warm: #D4A574;    /* Warm Gold tone for streaks */
+  --info: #38BDF8;
+  --streak-warm: #D97706;
 }
 
 /* =========================================
@@ -34,15 +34,20 @@
 
 /* Madrid Midnight (Sleek Dark Mode) */
 [data-theme="madrid-midnight"] {
-  --bg-base: #121214;
-  --bg-elevated: #1E1E24;
-  --bg-elevated-2: #2A2A35;
-  --structural: #374151;
-  --text-primary: #F9FAFB;
-  --text-secondary: #9CA3AF;
-  --accent-action: #1D4ED8;
-  --accent-action-hover: #1E40AF;
-  --accent-mint: #F59E0B;
+  --bg-base: #0F172A;
+  --bg-elevated: rgba(30, 41, 59, 0.7);
+  --bg-elevated-2: rgba(51, 65, 85, 0.7);
+  --structural: rgba(255, 255, 255, 0.1);
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-tertiary: #64748B;
+  --accent-action: #D97706;
+  --accent-action-hover: #B45309;
+  --accent-mint: #10B981;
+  --success: #10B981;
+  --error: #EF4444;
+  --info: #38BDF8;
+  --streak-warm: #D97706;
 }
 
 /* Ibiza Sunset (Trendy Gradient) */
@@ -152,14 +157,19 @@
 /* Aztec Gold (Premium Gamified) */
 [data-theme="aztec-gold"] {
   --bg-base: #0F172A;
-  --bg-elevated: #1E293B;
-  --bg-elevated-2: #334155;
-  --structural: #475569;
-  --text-primary: #F1F5F9;
-  --text-secondary: #CBD5E1;
+  --bg-elevated: rgba(30, 41, 59, 0.7);
+  --bg-elevated-2: rgba(51, 65, 85, 0.7);
+  --structural: rgba(255, 255, 255, 0.1);
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-tertiary: #64748B;
   --accent-action: #D97706;
   --accent-action-hover: #B45309;
   --accent-mint: #10B981;
+  --success: #10B981;
+  --error: #EF4444;
+  --info: #38BDF8;
+  --streak-warm: #D97706;
 }
 
 .theme-container {
@@ -308,7 +318,7 @@
 */
 @layer base {
   html {
-    color-scheme: light;
+    color-scheme: dark;
   }
   body {
     background-color: var(--bg-base);
@@ -420,35 +430,20 @@
    SERENE LEXICON — Flat Design System
    ══════════════════════════════════════════════════════════════════════════ */
 
-/* ── Clean Surface — simple white card material ─────────────────── */
-.glass-surface {
-  background: var(--bg-elevated);
-  border: 1px solid rgba(125, 146, 125, 0.15);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-  position: relative;
-}
-
-/* Clean nav bar header */
-.nav-glass {
-  background: var(--bg-elevated);
-  border-bottom: 1px solid rgba(125, 146, 125, 0.15);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
-  position: relative;
-}
-
-/* Remove specular highlight pseudo-elements */
-.glass-surface::before, .nav-glass::before {
-  content: '';
-  display: none;
-}
-
-/* ── Flat Nav Capsule — pill-shaped container for tabs ─────────────── */
-.glass-nav-capsule {
-  background: var(--bg-elevated);
-  border: 1px solid rgba(125, 146, 125, 0.15);
-  border-radius: 999px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-  position: relative;
+/* ── Executive Dark Glassmorphism Surfaces & Utility Overhaul ─────── */
+.clay-card,
+.clay-card-interactive,
+.glass-surface,
+.nav-glass,
+.glass-nav-capsule,
+.ios-glass-panel,
+.ios-glass-card,
+.ios-glass-inner-panel {
+  background: rgba(30, 41, 59, 0.7) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
 }
 
 /* ── Sliding Tab Indicator ────────────────────────────────────── */
@@ -487,10 +482,34 @@
   will-change: transform;
 }
 
+.ambient-blob--slate {
+  width: 380px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(30, 41, 59, 0.4) 0%, transparent 70%);
+  top: -60px;
+  left: 10%;
+}
+
+.ambient-blob--amber {
+  width: 320px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(217, 119, 6, 0.15) 0%, transparent 70%);
+  top: -40px;
+  right: 15%;
+}
+
+.ambient-blob--slate-dark {
+  width: 300px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(15, 23, 42, 0.5) 0%, transparent 70%);
+  top: -30px;
+  left: 50%;
+}
+
 .ambient-blob--terracotta {
   width: 320px;
   height: 280px;
-  background: radial-gradient(circle, rgba(91, 143, 168, 0.12) 0%, transparent 70%); /* Map to --info */
+  background: radial-gradient(circle, rgba(91, 143, 168, 0.12) 0%, transparent 70%);
   top: -60px;
   left: 15%;
 }
@@ -498,7 +517,7 @@
 .ambient-blob--teal {
   width: 380px;
   height: 300px;
-  background: radial-gradient(circle, rgba(44, 62, 80, 0.15) 0%, transparent 70%); /* Map to --structural */
+  background: radial-gradient(circle, rgba(44, 62, 80, 0.15) 0%, transparent 70%);
   top: -40px;
   right: 10%;
 }
@@ -506,7 +525,7 @@
 .ambient-blob--marigold {
   width: 260px;
   height: 220px;
-  background: radial-gradient(circle, rgba(245, 166, 35, 0.08) 0%, transparent 70%); /* Map to --accent-action */
+  background: radial-gradient(circle, rgba(245, 166, 35, 0.08) 0%, transparent 70%);
   top: -30px;
   left: 55%;
 }
