@@ -2,7 +2,7 @@ import { useRef, useCallback, useEffect, type FC } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { NAV_TABS } from '../app/routes';
 import { useStatsStore } from '../state/statsStore';
-import { useSettingsStore, LOGO_VARIANTS, type LogoVariant } from '../state/settingsStore';
+import { useSettingsStore } from '../state/settingsStore';
 import { useUserData } from '../hooks/useUserData';
 import {
   SignedIn,
@@ -20,8 +20,7 @@ const HUD: FC = () => {
   const xp = Math.max(userData?.xp ?? 0, statsXp ?? 0);
   const coins = Math.max(userData?.kitsune_coins ?? 0, statsCoins ?? 0);
   const streak = Math.max(userData?.streak_days ?? 0, statsStreak ?? 0);
-  const { language, setLanguage, logoVariant, setLogoVariant } = useSettingsStore();
-  const activeLogo = LOGO_VARIANTS[logoVariant] || LOGO_VARIANTS.executive;
+  const { language, setLanguage } = useSettingsStore();
 
   // ── Edge-Hover Auto-Scrolling ─────────────────────────────────────────
   const navScrollRef = useRef<HTMLDivElement>(null);
@@ -84,12 +83,7 @@ const HUD: FC = () => {
             className="flex items-center gap-2 shrink-0 whitespace-nowrap transition-opacity hover:opacity-80"
             aria-label="Go to Home"
           >
-            <img
-              src={activeLogo.src}
-              alt={activeLogo.label}
-              className="border-2 border-amber-500/60 shadow-md ring-1 ring-white/10 rounded-xl h-9 w-9 object-cover transition-all hover:border-amber-400 hover:scale-105 shrink-0"
-            />
-            <span className="hidden font-serif text-sm font-semibold text-text-primary md:inline">
+            <span className="font-serif text-base font-bold text-text-primary tracking-tight">
               TheLearningHyena
             </span>
           </Link>
@@ -139,18 +133,6 @@ const HUD: FC = () => {
             >
               📜
             </Link>
-
-            <select
-              value={logoVariant}
-              onChange={(e) => setLogoVariant(e.target.value as LogoVariant)}
-              className="h-8 rounded-md border border-slate-700 bg-slate-800/80 text-[11px] font-sans text-slate-200 px-2 transition-colors hover:border-slate-500 focus:border-amber-500 focus:outline-none cursor-pointer"
-              aria-label="Select Logo Style"
-              title="Select Logo Style"
-            >
-              <option value="executive">Executive Emblem</option>
-              <option value="uploaded">Uploaded Mascot</option>
-              <option value="chibi">Cute Chibi</option>
-            </select>
 
             <select
               value={language}
