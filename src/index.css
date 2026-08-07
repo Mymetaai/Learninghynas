@@ -5,27 +5,27 @@
 @tailwind utilities;
 
 :root {
-  /* ── Original Serene Sage Design System (Default) ─────────────────── */
-  --bg-base: #FAF6F0;
-  --bg-elevated: #FFFFFF;
-  --bg-elevated-2: #F2ECE4;
-  --structural: #E5DDD3;
+  /* ── Executive Dark Glassmorphism Design System ─────────────────── */
+  --bg-base: #0F172A;
+  --bg-elevated: rgba(30, 41, 59, 0.7);
+  --bg-elevated-2: rgba(51, 65, 85, 0.7);
+  --structural: rgba(255, 255, 255, 0.1);
 
-  --text-primary: #2C221B;
-  --text-secondary: #70655B;
-  --text-tertiary: #9C9186;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-tertiary: #64748B;
 
-  --accent-action: #F5A991;
-  --accent-action-hover: #E89277;
+  --accent-action: #D97706;
+  --accent-action-hover: #B45309;
 
-  --accent-mint: #7D927D;
+  --accent-mint: #10B981;
   --accent-lavender: #E8E4DF;
 
-  --success: #6B8E70;
-  --error: #D96B6B;
+  --success: #10B981;
+  --error: #EF4444;
 
-  --info: #7B9EA8;
-  --streak-warm: #E07A5F;
+  --info: #38BDF8;
+  --streak-warm: #D97706;
 }
 
 /* =========================================
@@ -430,19 +430,20 @@
    SERENE LEXICON — Flat Design System
    ══════════════════════════════════════════════════════════════════════════ */
 
-.nav-glass {
-  background: var(--bg-elevated);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--structural);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-}
-
-.glass-nav-capsule {
-  background: var(--bg-elevated);
-  border: 1px solid var(--structural);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+/* ── Executive Dark Glassmorphism Surfaces & Utility Overhaul ─────── */
+.clay-card,
+.clay-card-interactive,
+.glass-surface,
+.nav-glass,
+.glass-nav-capsule,
+.ios-glass-panel,
+.ios-glass-card,
+.ios-glass-inner-panel {
+  background: rgba(30, 41, 59, 0.7) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
 }
 
 /* ── Sliding Tab Indicator ────────────────────────────────────── */

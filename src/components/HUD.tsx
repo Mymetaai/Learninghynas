@@ -87,7 +87,7 @@ const HUD: FC = () => {
             <img
               src={activeLogo.src}
               alt={activeLogo.label}
-              className="border-2 border-[#7D927D]/60 shadow-xs rounded-xl h-9 w-9 object-cover transition-all hover:border-[#7D927D] hover:scale-105 shrink-0"
+              className="border-2 border-amber-500/60 shadow-md ring-1 ring-white/10 rounded-xl h-9 w-9 object-cover transition-all hover:border-amber-400 hover:scale-105 shrink-0"
             />
             <span className="hidden font-serif text-sm font-semibold text-text-primary md:inline">
               TheLearningHyena
@@ -143,7 +143,7 @@ const HUD: FC = () => {
             <select
               value={logoVariant}
               onChange={(e) => setLogoVariant(e.target.value as LogoVariant)}
-              className="h-8 rounded-md border border-structural bg-bg-elevated text-[11px] font-sans text-text-primary px-2 transition-colors hover:border-text-secondary focus:border-text-secondary focus:outline-none cursor-pointer"
+              className="h-8 rounded-md border border-slate-700 bg-slate-800/80 text-[11px] font-sans text-slate-200 px-2 transition-colors hover:border-slate-500 focus:border-amber-500 focus:outline-none cursor-pointer"
               aria-label="Select Logo Style"
               title="Select Logo Style"
             >
