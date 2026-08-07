@@ -13,6 +13,7 @@ import type { PanInfo } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 import AppShell from './components/AppShell';
 import DynamicText from './components/DynamicText';
+import ShimmerText from './components/ShimmerText';
 import { ROUTES } from './app/routes';
 import './screens/LampLogin.css';
 
@@ -280,12 +281,7 @@ const LampLanding: FC = () => {
                   TheLearningHyena
                 </h1>
               </div>
-              <p
-                className="font-serif italic text-lg mt-2"
-                style={{ color: '#7D927D', fontFamily: "'Fraunces', 'Playfair Display', ui-serif, Georgia, serif" }}
-              >
-                The Unearthly Vault
-              </p>
+              <ShimmerText text="The Unearthly Vault" />
               <p
                 className="font-sans text-xs mt-4 leading-relaxed"
                 style={{ color: '#777775' }}

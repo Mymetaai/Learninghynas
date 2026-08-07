@@ -2,6 +2,7 @@ import { useState, useEffect, type FC, type ReactNode } from 'react';
 import { SignedIn, SignedOut, SignInButton } from '@clerk/clerk-react';
 import { Loader2 } from 'lucide-react';
 import DynamicText from './DynamicText';
+import ShimmerText from './ShimmerText';
 
 interface LandingEntryProps {
   children?: ReactNode;
@@ -70,9 +71,7 @@ export const LandingEntry: FC<LandingEntryProps> = ({ children }) => {
                 TheLearningHyena
               </h2>
             </div>
-            <p className="font-serif italic text-lg text-[#7D927D]">
-              The Unearthly Vault
-            </p>
+            <ShimmerText text="The Unearthly Vault" />
             <p className="font-sans text-xs text-[#777775] max-w-sm mx-auto leading-relaxed">
               Pull the glowing cord to unlock the unearthly vault. Ancient Spanish secrets and mystical adventures await in the dark...
             </p>
