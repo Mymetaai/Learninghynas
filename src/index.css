@@ -5,27 +5,27 @@
 @tailwind utilities;
 
 :root {
-  /* ── Executive Dark Glassmorphism Design System ─────────────────── */
-  --bg-base: #0F172A;
-  --bg-elevated: rgba(30, 41, 59, 0.7);
-  --bg-elevated-2: rgba(51, 65, 85, 0.7);
-  --structural: rgba(255, 255, 255, 0.1);
+  /* ── Serene Lexicon — Wabi-Sabi Warm Minimalist Design System ─────── */
+  --bg-base: #FAF6F0;        /* Warm Cream base */
+  --bg-elevated: #FFFFFF;    /* Pure White cards */
+  --bg-elevated-2: #F3EDE4;  /* Soft Warm Parchment */
+  --structural: #E8E0D5;     /* Structural Warm Sand divider */
 
-  --text-primary: #F8FAFC;
-  --text-secondary: #94A3B8;
-  --text-tertiary: #64748B;
+  --text-primary: #2C1E11;   /* Deep Warm Espresso text */
+  --text-secondary: #777775; /* Warm Muted Sage/Charcoal subtext */
+  --text-tertiary: #A3A3A0;  /* Subtle Sand text */
 
-  --accent-action: #D97706;
-  --accent-action-hover: #B45309;
+  --accent-action: #7D927D;  /* Sage Green primary action button */
+  --accent-action-hover: #6B826B;
 
-  --accent-mint: #10B981;
+  --accent-mint: #5E735E;    /* Deep Forest Sage accent */
   --accent-lavender: #E8E4DF;
 
-  --success: #10B981;
-  --error: #EF4444;
+  --success: #7D927D;
+  --error: #C4796B;          /* Soft Terracotta error */
 
-  --info: #38BDF8;
-  --streak-warm: #D97706;
+  --info: #2F353B;
+  --streak-warm: #D4A574;
 }
 
 /* =========================================
@@ -318,7 +318,7 @@
 */
 @layer base {
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
   body {
     background-color: var(--bg-base);
@@ -430,20 +430,35 @@
    SERENE LEXICON — Flat Design System
    ══════════════════════════════════════════════════════════════════════════ */
 
-/* ── Executive Dark Glassmorphism Surfaces & Utility Overhaul ─────── */
-.clay-card,
-.clay-card-interactive,
-.glass-surface,
-.nav-glass,
-.glass-nav-capsule,
+/* ── Serene Lexicon — Glass Surface Utilities ───────────────────── */
+.glass-surface {
+  background: var(--bg-elevated);
+  border: 1px solid rgba(125, 146, 125, 0.15);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  position: relative;
+}
+
+.nav-glass {
+  background: var(--bg-elevated);
+  border-bottom: 1px solid rgba(125, 146, 125, 0.15);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  position: relative;
+}
+
+.glass-nav-capsule {
+  background: var(--bg-elevated);
+  border: 1px solid rgba(125, 146, 125, 0.15);
+  border-radius: 999px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  position: relative;
+}
+
 .ios-glass-panel,
 .ios-glass-card,
 .ios-glass-inner-panel {
-  background: rgba(30, 41, 59, 0.7) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
+  background: var(--bg-elevated);
+  border: 1px solid var(--structural);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
 /* ── Sliding Tab Indicator ────────────────────────────────────── */
@@ -463,7 +478,7 @@
   z-index: 0;
 }
 
-/* ── Serene Lexicon — Subtle Background Accents ─────────────────── */
+/* ── Serene Lexicon — Ambient Background Blobs ─────────────────── */
 .ambient-blob-container {
   position: fixed;
   top: 0;
@@ -482,26 +497,26 @@
   will-change: transform;
 }
 
-.ambient-blob--slate {
+.ambient-blob--sage {
   width: 380px;
   height: 320px;
-  background: radial-gradient(circle, rgba(30, 41, 59, 0.4) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(125, 146, 125, 0.15) 0%, transparent 70%);
   top: -60px;
   left: 10%;
 }
 
-.ambient-blob--amber {
+.ambient-blob--cream {
   width: 320px;
   height: 280px;
-  background: radial-gradient(circle, rgba(217, 119, 6, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(243, 237, 228, 0.6) 0%, transparent 70%);
   top: -40px;
   right: 15%;
 }
 
-.ambient-blob--slate-dark {
+.ambient-blob--sage-light {
   width: 300px;
   height: 260px;
-  background: radial-gradient(circle, rgba(15, 23, 42, 0.5) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(94, 115, 94, 0.12) 0%, transparent 70%);
   top: -30px;
   left: 50%;
 }

@@ -247,23 +247,23 @@ const HomeScreen: FC = () => {
   }
 
   return (
-    <div className="w-full text-slate-100 font-sans space-y-8 py-2">
+    <div className="w-full text-text-primary font-sans space-y-8 py-2">
         
         {/* ── HERO HEADER SECTION ─────────────────────────────────── */}
-        <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 shadow-2xl rounded-3xl p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div className="bg-bg-elevated/90 backdrop-blur-xl border border-structural/40 shadow-sm rounded-3xl p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div className="flex items-center gap-4">
             {userAvatar && (
               <img
                 src={userAvatar}
                 alt={displayName}
-                className="w-14 h-14 rounded-full border-2 border-amber-500/60 shadow-lg shadow-amber-500/20 object-cover shrink-0"
+                className="w-14 h-14 rounded-full border-2 border-[#7D927D]/60 shadow-md object-cover shrink-0"
               />
             )}
             <div>
-              <h1 className="font-serif text-3xl md:text-4xl font-bold text-[#F8FAFC]">
+              <h1 className="font-serif text-3xl md:text-4xl font-bold text-text-primary">
                 Welcome, {displayName}
               </h1>
-              <p className="font-sans text-xs md:text-sm text-[#94A3B8] mt-1 max-w-xl leading-relaxed">
+              <p className="font-sans text-xs md:text-sm text-text-secondary mt-1 max-w-xl leading-relaxed">
                 The path to fluency is paved with consistency. Track your growth and master new patterns today.
               </p>
             </div>
@@ -273,43 +273,43 @@ const HomeScreen: FC = () => {
           <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={() => setShowResetModal(true)}
-              className="flex items-center gap-1.5 px-3.5 py-2.5 text-xs font-semibold text-rose-400 bg-rose-950/40 hover:bg-rose-900/60 border border-rose-800/60 rounded-2xl transition-all shadow-sm shrink-0 cursor-pointer"
+              className="flex items-center gap-1.5 px-3.5 py-2.5 text-xs font-semibold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 rounded-2xl transition-all shadow-xs shrink-0 cursor-pointer"
               title="Reset XP and Coins to restart your journey"
             >
               <RotateCcw size={14} />
               <span>Reset Progress</span>
             </button>
 
-            <div className="flex items-center gap-3.5 bg-slate-800/80 border border-slate-700/80 rounded-2xl px-5 py-3 shadow-md">
+            <div className="flex items-center gap-3.5 bg-bg-elevated-2 border border-structural/40 rounded-2xl px-5 py-3 shadow-xs">
               <div className="relative shrink-0 flex items-center justify-center">
                 <svg width="44" height="44" className="transform -rotate-90">
                   <circle
                     cx="22"
                     cy="22"
                     r="18"
-                    className="stroke-slate-700 fill-none"
+                    className="stroke-structural fill-none"
                     strokeWidth="4"
                   />
                   <circle
                     cx="22"
                     cy="22"
                     r="18"
-                    className="stroke-[#D97706] fill-none drop-shadow-[0_0_6px_rgba(217,119,6,0.6)]"
+                    className="stroke-[#7D927D] fill-none"
                     strokeWidth="4"
                     strokeDasharray="113.1"
                     strokeDashoffset={goalDashOffset}
                     strokeLinecap="round"
                   />
                 </svg>
-                <span className="absolute font-sans text-[10px] font-bold text-[#F8FAFC]">
+                <span className="absolute font-sans text-[10px] font-bold text-text-primary">
                   {userData.userProgress.dailyGoalPercentage}%
                 </span>
               </div>
               <div className="flex flex-col">
-                <span className="font-sans text-[10px] uppercase tracking-wider text-amber-400/90 font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-wider text-[#7D927D] font-bold">
                   DAILY GOAL
                 </span>
-                <span className="font-sans text-xs font-bold text-[#F8FAFC]">
+                <span className="font-sans text-xs font-bold text-text-primary">
                   {userData.userProgress.dailyGoalPercentage}% Complete
                 </span>
               </div>
@@ -359,13 +359,13 @@ const HomeScreen: FC = () => {
           <div className="lg:col-span-7 flex flex-col gap-6">
             
             {/* Weekly Activity */}
-            <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 shadow-2xl rounded-3xl p-6">
-              <div className="flex items-center justify-between border-b border-slate-700/80 pb-4 mb-5">
+            <div className="bg-bg-elevated/90 backdrop-blur-xl border border-structural/40 shadow-sm rounded-3xl p-6">
+              <div className="flex items-center justify-between border-b border-structural/40 pb-4 mb-5">
                 <div>
-                  <h2 className="font-serif text-lg font-bold text-[#F8FAFC]">Weekly Activity</h2>
-                  <p className="font-sans text-xs text-[#94A3B8] mt-0.5">Study minutes tracked this week</p>
+                  <h2 className="font-serif text-lg font-bold text-text-primary">Weekly Activity</h2>
+                  <p className="font-sans text-xs text-text-secondary mt-0.5">Study minutes tracked this week</p>
                 </div>
-                <span className="font-sans text-[11px] font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 px-3 py-1.5 rounded-full shrink-0 shadow-sm">
+                <span className="font-sans text-[11px] font-bold text-[#5E735E] bg-[#7D927D]/15 border border-[#7D927D]/30 px-3 py-1.5 rounded-full shrink-0 shadow-xs">
                   Avg {avgDailyMinutes}m / day
                 </span>
               </div>
@@ -384,19 +384,19 @@ const HomeScreen: FC = () => {
                       {/* Minutes badge above bar */}
                       <span className={`font-mono text-[10px] transition-all duration-300 ${
                         hasActivity
-                          ? 'font-black text-amber-300 bg-amber-500/20 border border-amber-500/40 shadow-[0_0_8px_rgba(245,158,11,0.2)] px-2 py-0.5 rounded-md scale-105'
-                          : 'font-semibold text-slate-500 group-hover:text-slate-300'
+                          ? 'font-black text-[#2C1E11] bg-[#7D927D]/25 border border-[#7D927D]/50 px-2 py-0.5 rounded-md scale-105'
+                          : 'font-semibold text-text-tertiary group-hover:text-text-secondary'
                       }`}>
                         {d.minutes}m
                       </span>
 
                       {/* Bar Track Container */}
-                      <div className="w-full h-24 bg-slate-800/80 border border-slate-700/60 rounded-xl overflow-hidden flex flex-col justify-end p-1 shadow-inner">
+                      <div className="w-full h-24 bg-bg-elevated-2 border border-structural/40 rounded-xl overflow-hidden flex flex-col justify-end p-1 shadow-inner">
                         <div
                           className={`w-full transition-all duration-500 rounded-lg ${
                             hasActivity
-                              ? 'bg-gradient-to-t from-amber-500 via-amber-600 to-emerald-500 shadow-[0_0_12px_rgba(245,158,11,0.3)] border-t border-amber-300/40'
-                              : 'bg-slate-700/40 rounded-md'
+                              ? 'bg-gradient-to-t from-[#5E735E] to-[#7D927D] border-t border-[#95AC95]'
+                              : 'bg-structural/30 rounded-md'
                           }`}
                           style={{ height: `${barHeight}%` }}
                           title={`${d.day}: ${d.minutes} mins`}
@@ -406,8 +406,8 @@ const HomeScreen: FC = () => {
                       {/* Day Label */}
                       <span className={`font-sans text-[11px] transition-all ${
                         isToday
-                          ? 'font-extrabold text-amber-300 bg-amber-500/20 border border-amber-500/40 px-2 py-0.5 rounded-md'
-                          : 'text-[#94A3B8] font-semibold group-hover:text-[#F8FAFC]'
+                          ? 'font-extrabold text-[#5E735E] bg-[#7D927D]/20 border border-[#7D927D]/40 px-2 py-0.5 rounded-md'
+                          : 'text-text-secondary font-semibold group-hover:text-text-primary'
                       }`}>
                         {d.day}
                       </span>
@@ -421,24 +421,24 @@ const HomeScreen: FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               
               {/* Lexicon Growth */}
-              <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 text-slate-100 shadow-2xl rounded-3xl p-5 flex flex-col gap-3">
-                <div className="border-b border-slate-700/80 pb-2.5">
-                  <h2 className="font-serif text-base font-bold text-[#F8FAFC]">Lexicon Growth</h2>
-                  <p className="font-sans text-[11px] text-[#94A3B8] mt-0.5">Mastered vocabulary by tier</p>
+              <div className="bg-bg-elevated/90 backdrop-blur-xl border border-structural/40 text-text-primary shadow-sm rounded-3xl p-5 flex flex-col gap-3">
+                <div className="border-b border-structural/40 pb-2.5">
+                  <h2 className="font-serif text-base font-bold text-text-primary">Lexicon Growth</h2>
+                  <p className="font-sans text-[11px] text-text-secondary mt-0.5">Mastered vocabulary by tier</p>
                 </div>
                 <div className="space-y-2">
                   {userData.lexiconStats.map((item) => (
-                    <div key={item.level} className="flex items-center justify-between text-xs font-sans p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/80 text-slate-100">
-                      <span className="text-[#F8FAFC] font-medium">{item.level}</span>
-                      <span className="bg-slate-800/80 text-emerald-400 font-mono font-semibold border border-emerald-500/30 px-2.5 py-0.5 rounded-lg text-[11px]">
+                    <div key={item.level} className="flex items-center justify-between text-xs font-sans p-2.5 rounded-xl bg-bg-elevated-2 border border-structural/40 text-text-primary">
+                      <span className="text-text-primary font-medium">{item.level}</span>
+                      <span className="bg-[#7D927D]/15 text-[#5E735E] font-mono font-semibold border border-[#7D927D]/30 px-2.5 py-0.5 rounded-lg text-[11px]">
                         {item.words} words
                       </span>
                     </div>
                   ))}
                 </div>
-                <div className="border-t border-slate-700/80 pt-2.5">
-                  <span className="font-sans text-[11px] text-[#94A3B8]">
-                    Total: <strong className="text-[#F8FAFC]">26 Words</strong> mastered
+                <div className="border-t border-structural/40 pt-2.5">
+                  <span className="font-sans text-[11px] text-text-secondary">
+                    Total: <strong className="text-text-primary">26 Words</strong> mastered
                   </span>
                 </div>
               </div>
@@ -447,34 +447,34 @@ const HomeScreen: FC = () => {
               <div
                 onMouseEnter={() => setIsInsightHovered(true)}
                 onMouseLeave={() => setIsInsightHovered(false)}
-                className="bg-slate-900/90 backdrop-blur-xl border border-slate-700/80 shadow-2xl rounded-3xl p-5 relative overflow-hidden flex flex-col justify-between text-slate-100 group transition-all"
+                className="bg-bg-elevated/90 backdrop-blur-xl border border-structural/40 shadow-sm rounded-3xl p-5 relative overflow-hidden flex flex-col justify-between text-text-primary group transition-all"
               >
-                <div className="absolute -right-4 -bottom-4 opacity-10 pointer-events-none text-amber-500">
-                  <Lightbulb className="w-28 h-28 text-amber-500" />
+                <div className="absolute -right-4 -bottom-4 opacity-10 pointer-events-none text-[#7D927D]">
+                  <Lightbulb className="w-28 h-28 text-[#7D927D]" />
                 </div>
                 <div className={`transition-opacity duration-300 ${fadeState === 'fade-in' ? 'opacity-100' : 'opacity-0'}`}>
                   <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="font-sans text-[10px] uppercase tracking-widest font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2.5 py-0.5 rounded-full">
+                    <span className="font-sans text-[10px] uppercase tracking-widest font-bold text-[#5E735E] bg-[#7D927D]/15 border border-[#7D927D]/30 px-2.5 py-0.5 rounded-full">
                       {currentInsight.tag}
                     </span>
-                    <span className="font-sans text-[9px] font-medium text-slate-300 bg-slate-800/80 border border-slate-700 px-2 py-0.5 rounded-full shrink-0">
+                    <span className="font-sans text-[9px] font-medium text-text-secondary bg-bg-elevated-2 border border-structural/40 px-2 py-0.5 rounded-full shrink-0">
                       {currentInsight.category}
                     </span>
                   </div>
-                  <p className="font-serif italic text-sm text-amber-200/95 leading-relaxed min-h-[52px]">
+                  <p className="font-serif italic text-sm text-[#2C1E11] leading-relaxed min-h-[52px]">
                     &ldquo;{currentInsight.quote}&rdquo;
                   </p>
                 </div>
-                <div className="flex items-center justify-between pt-2.5 border-t border-slate-700/80 mt-2">
-                  <span className="text-[10px] font-sans text-[#94A3B8]">
+                <div className="flex items-center justify-between pt-2.5 border-t border-structural/40 mt-2">
+                  <span className="text-[10px] font-sans text-text-secondary">
                     Vault Insight #{insightIndex + 1}
                   </span>
                   <div
-                    className="flex items-center gap-1.5 text-amber-400"
+                    className="flex items-center gap-1.5 text-[#5E735E]"
                     title={isInsightHovered ? "Paused on hover" : "Vault shuffling insights..."}
                   >
                     <Sparkles className={`w-3.5 h-3.5 ${isInsightHovered ? '' : 'animate-pulse'}`} />
-                    <span className="text-[9px] font-mono text-amber-400/60">95 INSIGHTS</span>
+                    <span className="text-[9px] font-mono text-[#5E735E]/80">95 INSIGHTS</span>
                   </div>
                 </div>
               </div>
@@ -485,12 +485,12 @@ const HomeScreen: FC = () => {
         {/* ── 3. MIDDLE SECTION: RECOMMENDED NEXT LESSONS ────────────── */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="font-serif text-2xl font-bold text-[#F8FAFC]">
+            <h2 className="font-serif text-2xl font-bold text-text-primary">
               Recommended next lessons
             </h2>
             <button
               onClick={() => navigate('/library')}
-              className="font-sans text-xs font-semibold text-amber-400 hover:text-amber-300 hover:underline cursor-pointer bg-transparent border-none p-0"
+              className="font-sans text-xs font-semibold text-[#5E735E] hover:underline cursor-pointer bg-transparent border-none p-0"
             >
               View curriculum &gt;
             </button>
@@ -501,18 +501,18 @@ const HomeScreen: FC = () => {
             {userData.recommendedLessons.map((lesson, idx) => (
               <div
                 key={lesson.id}
-                className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 hover:border-amber-500/50 rounded-3xl overflow-hidden shadow-2xl flex flex-col justify-between transition-all duration-300 hover:shadow-amber-500/10"
+                className="bg-bg-elevated/90 backdrop-blur-xl border border-structural/40 hover:border-[#7D927D]/50 rounded-3xl overflow-hidden shadow-sm flex flex-col justify-between transition-all duration-300"
               >
                 {/* Top half */}
-                <div className="bg-slate-800/60 p-6 flex flex-col justify-between h-32 border-b border-slate-700/60 relative">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-amber-400/90 font-bold">
+                <div className="bg-bg-elevated-2 p-6 flex flex-col justify-between h-32 border-b border-structural/40 relative">
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-[#5E735E] font-bold">
                     {lesson.tag}
                   </span>
                   <div className="flex items-center justify-center my-auto">
-                    <div className={`p-3 rounded-2xl border shadow-lg ${
+                    <div className={`p-3 rounded-2xl border shadow-xs ${
                       idx % 2 === 0
-                        ? 'bg-amber-500/10 border-amber-500/30 text-amber-400 shadow-amber-500/10'
-                        : 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400 shadow-emerald-500/10'
+                        ? 'bg-[#7D927D]/15 border-[#7D927D]/30 text-[#5E735E]'
+                        : 'bg-[#5E735E]/15 border-[#5E735E]/30 text-[#2C1E11]'
                     }`}>
                       {renderLessonIcon(lesson.iconType)}
                     </div>
@@ -522,16 +522,16 @@ const HomeScreen: FC = () => {
                 {/* Bottom half */}
                 <div className="p-5 flex flex-col justify-between flex-1 space-y-4">
                   <div>
-                    <h3 className="font-serif text-base font-bold text-[#F8FAFC]">
+                    <h3 className="font-serif text-base font-bold text-text-primary">
                       {lesson.title}
                     </h3>
-                    <p className="font-sans text-xs text-[#94A3B8] mt-1 line-clamp-2 leading-relaxed">
+                    <p className="font-sans text-xs text-text-secondary mt-1 line-clamp-2 leading-relaxed">
                       {lesson.description}
                     </p>
                   </div>
                   <button
                     onClick={() => navigate('/training')}
-                    className="w-full bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-slate-950 font-bold shadow-lg shadow-amber-500/20 rounded-full py-2.5 font-sans text-xs transition-all cursor-pointer border-none flex items-center justify-center gap-1"
+                    className="w-full bg-[#7D927D] hover:bg-[#6B826B] text-white font-bold rounded-full py-2.5 font-sans text-xs transition-all cursor-pointer border-none flex items-center justify-center gap-1 shadow-xs"
                   >
                     <span>Start Lesson &gt;</span>
                   </button>
@@ -544,10 +544,10 @@ const HomeScreen: FC = () => {
         {/* ── 4. BOTTOM SECTION: RECENT SLIP-UPS ─────────────────────── */}
         <div className="space-y-4 pt-2">
           <div className="flex items-center gap-2">
-            <h2 className="font-serif text-xl font-bold text-[#F8FAFC]">
+            <h2 className="font-serif text-xl font-bold text-text-primary">
               Recent Slip-ups
             </h2>
-            <AlertTriangle className="h-4 w-4 text-amber-400" />
+            <AlertTriangle className="h-4 w-4 text-[#C4796B]" />
           </div>
 
           {/* Dynamic 2-Column Grid Mapping */}
@@ -555,17 +555,17 @@ const HomeScreen: FC = () => {
             {userData.slipUps.map((item) => (
               <div
                 key={item.id}
-                className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 hover:border-amber-500/50 rounded-2xl p-5 shadow-2xl flex items-center justify-between gap-4 transition-all duration-300"
+                className="bg-bg-elevated/90 backdrop-blur-xl border border-structural/40 hover:border-[#7D927D]/50 rounded-2xl p-5 shadow-xs flex items-center justify-between gap-4 transition-all duration-300"
               >
                 <div className="flex items-start gap-3 min-w-0">
-                  <div className="h-9 w-9 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0 mt-0.5 shadow-sm">
+                  <div className="h-9 w-9 rounded-xl bg-[#C4796B]/15 border border-[#C4796B]/30 flex items-center justify-center text-[#C4796B] shrink-0 mt-0.5 shadow-xs">
                     <Repeat className="h-4 w-4" />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="font-serif text-sm font-bold text-[#F8FAFC] truncate">
+                    <h4 className="font-serif text-sm font-bold text-text-primary truncate">
                       {item.phrase}
                     </h4>
-                    <p className="font-sans text-xs text-[#94A3B8] mt-0.5 leading-relaxed">
+                    <p className="font-sans text-xs text-text-secondary mt-0.5 leading-relaxed">
                       {item.explanation}
                     </p>
                   </div>
@@ -573,7 +573,7 @@ const HomeScreen: FC = () => {
 
                 <button
                   onClick={() => navigate('/training')}
-                  className="p-2.5 rounded-xl text-amber-400 hover:text-amber-300 hover:bg-slate-800/80 border border-slate-700/60 transition-colors cursor-pointer shrink-0"
+                  className="p-2.5 rounded-xl text-[#7D927D] hover:bg-bg-elevated-2 border border-structural/40 transition-colors cursor-pointer shrink-0"
                   title="Review phrase"
                 >
                   <RotateCw className="h-4 w-4" />

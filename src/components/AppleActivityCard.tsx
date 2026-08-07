@@ -96,25 +96,25 @@ export default function AppleActivityCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={cn(
-        "relative w-full bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 shadow-2xl rounded-3xl p-6 flex flex-col gap-5 text-slate-100 transition-all duration-300 hover:shadow-amber-500/10",
+        "relative w-full bg-bg-elevated/90 backdrop-blur-xl border border-structural/40 shadow-sm rounded-3xl p-6 flex flex-col gap-5 text-text-primary transition-all duration-300",
         className
       )}
     >
       {/* ── Header ──────────────────────────────────────────────── */}
-      <div className="flex items-center justify-between border-b border-slate-700/80 pb-4">
+      <div className="flex items-center justify-between border-b border-structural/40 pb-4">
         <div>
-          <h2 className="font-serif text-lg font-bold text-[#F8FAFC]">
+          <h2 className="font-serif text-lg font-bold text-text-primary">
             {title}
           </h2>
           {subtitle && (
-            <p className="font-sans text-xs text-[#94A3B8] mt-0.5">
+            <p className="font-sans text-xs text-text-secondary mt-0.5">
               {subtitle}
             </p>
           )}
         </div>
-        <div className="flex items-center gap-2 px-3 py-1 bg-slate-800/80 border border-slate-700 rounded-full shrink-0">
-          <span className="w-2 h-2 rounded-full bg-[#10B981] shadow-[0_0_8px_#10B981] animate-pulse" />
-          <span className="font-mono text-[11px] font-semibold text-[#F8FAFC]">
+        <div className="flex items-center gap-2 px-3 py-1 bg-bg-elevated-2 border border-structural/40 rounded-full shrink-0">
+          <span className="w-2 h-2 rounded-full bg-[#7D927D] shadow-[0_0_8px_#7D927D] animate-pulse" />
+          <span className="font-mono text-[11px] font-semibold text-text-primary">
             {level}
           </span>
         </div>
@@ -156,13 +156,13 @@ export default function AppleActivityCard({
 
               return (
                 <g key={ring.id}>
-                  {/* Dark Slate Track */}
+                  {/* Subtle Track */}
                   <circle
                     cx={CENTER}
                     cy={CENTER}
                     r={ring.radius}
                     fill="none"
-                    stroke="#1E293B"
+                    stroke="var(--structural)"
                     strokeWidth={STROKE}
                   />
                   {/* High-Contrast Progress Circle */}
@@ -196,10 +196,10 @@ export default function AppleActivityCard({
             transition={{ duration: 0.5, delay: 0.4 }}
             className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
           >
-            <span className="font-serif text-4xl font-bold text-[#F8FAFC] leading-none drop-shadow-[0_0_12px_rgba(217,119,6,0.35)]">
+            <span className="font-serif text-4xl font-bold text-text-primary leading-none">
               {level}
             </span>
-            <span className="font-sans text-[11px] font-semibold text-[#94A3B8] mt-1.5 uppercase tracking-widest">
+            <span className="font-sans text-[11px] font-semibold text-text-secondary mt-1.5 uppercase tracking-widest">
               {levelName}
             </span>
           </motion.div>
@@ -217,7 +217,7 @@ export default function AppleActivityCard({
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: 0.3 + idx * 0.08 }}
-              className="flex items-center gap-3 p-3 rounded-2xl bg-slate-800/80 border border-slate-700 hover:bg-slate-800 transition-colors"
+              className="flex items-center gap-3 p-3 rounded-2xl bg-bg-elevated-2 border border-structural/40 transition-colors"
             >
               {/* Glowing accent dot */}
               <span
@@ -227,11 +227,11 @@ export default function AppleActivityCard({
 
               {/* Labels */}
               <div className="flex flex-col min-w-0 flex-1">
-                <span className="font-sans text-[11px] font-bold text-[#F8FAFC] tracking-wide uppercase truncate">
+                <span className="font-sans text-[11px] font-bold text-text-primary tracking-wide uppercase truncate">
                   {ring.label}
                 </span>
                 {ring.sublabel && (
-                  <span className="font-sans text-[10px] text-[#94A3B8] truncate">
+                  <span className="font-sans text-[10px] text-text-secondary truncate">
                     {ring.sublabel}
                   </span>
                 )}
@@ -239,9 +239,9 @@ export default function AppleActivityCard({
 
               {/* Value */}
               <div className="text-right shrink-0">
-                <span className="font-mono text-xs font-bold text-[#F8FAFC]">
+                <span className="font-mono text-xs font-bold text-text-primary">
                   {ring.current}
-                  <span className="text-[#94A3B8] font-normal text-[10px]">
+                  <span className="text-text-secondary font-normal text-[10px]">
                     /{ring.target}
                   </span>
                 </span>
