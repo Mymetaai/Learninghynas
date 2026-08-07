@@ -479,5 +479,30 @@ export const vaultInsights: VaultInsight[] = [
     tag: "MYSTICAL ETYMOLOGY",
     quote: "The word 'Destino' comes from Latin 'destinare', meaning to make firm or establish by divine decree. 🔮",
     category: "Destiny Words"
+  },
+  {
+    tag: "UNTRANSLATABLE",
+    quote: "'Querencia' is the place where you draw strength from, where you feel most authentically yourself. 🌌",
+    category: "Cosmic Emotions"
+  },
+  {
+    tag: "ANCIENT ECHOES",
+    quote: "Spanish flamenco 'cante jondo' (deep song) preserves vocal patterns from pre-Roman Iberian chanting traditions. 🎶",
+    category: "Musical Heritage"
+  },
+  {
+    tag: "GRAMMAR MAGIC",
+    quote: "Spanish uses 'se me olvidó' (it forgot itself from me) instead of 'I forgot', externalizing blame from the speaker. 🙊",
+    category: "Emotional Grammar"
+  },
+  {
+    tag: "FOLKLORE KNOWLEDGE",
+    quote: "'La Siguanaba' of Central American folklore is a shape-shifting spirit who appears as a beautiful woman near rivers at night. 🌙",
+    category: "Celestial Myths"
+  },
+  {
+    tag: "MYSTICAL ETYMOLOGY",
+    quote: "The word 'Oleaje' (the rhythmic swell of ocean waves) connects to Latin 'olea' and the ancient Mediterranean. 🌊",
+    category: "Ocean Whispers"
   }
 ];

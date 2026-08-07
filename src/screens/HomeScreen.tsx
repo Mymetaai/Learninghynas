@@ -138,6 +138,8 @@ const HomeScreen: FC = () => {
   const { user } = useUser();
   const { userData: liveUserData, isLoading, resetAllUserProgress } = useUserData();
   const statsXp = useStatsStore((s) => s.xp);
+  const learnedVocab = useStatsStore((s) => s.learnedVocab);
+  const completedLessons = useStatsStore((s) => s.completedLessons);
 
   // Component State
   const [userData] = useState<MockUserData>(initialMockUserData);
@@ -161,6 +163,44 @@ const HomeScreen: FC = () => {
     levelNumber === 4 ? 'Upper Intermediate' :
     levelNumber === 3 ? 'Intermediate' :
     levelNumber === 2 ? 'Elementary' : 'Beginner';
+
+  // ── Live Dashboard Metrics (derived from statsStore) ──
+  const vocabCount = learnedVocab.length;
+  const completedLessonCount = Object.values(completedLessons).filter(Boolean).length;
+  const totalLessons = 37;
+
+  // Categorize learned vocab by level tiers based on questId/lesson progression
+  const liveLexiconStats = useMemo(() => {
+    // Map words to difficulty tiers based on when they were learned
+    const beginner = learnedVocab.filter((v) => {
+      const num = parseInt(v.questId.replace(/\D/g, ''), 10);
+      return !isNaN(num) && num <= 10;
+    }).length;
+    const basic = learnedVocab.filter((v) => {
+      const num = parseInt(v.questId.replace(/\D/g, ''), 10);
+      return !isNaN(num) && num > 10 && num <= 20;
+    }).length;
+    const intermediate = learnedVocab.filter((v) => {
+      const num = parseInt(v.questId.replace(/\D/g, ''), 10);
+      return !isNaN(num) && num > 20 && num <= 30;
+    }).length;
+    const advanced = learnedVocab.filter((v) => {
+      const num = parseInt(v.questId.replace(/\D/g, ''), 10);
+      return !isNaN(num) && num > 30;
+    }).length;
+
+    const stats: { level: string; words: number }[] = [];
+    if (beginner > 0) stats.push({ level: 'Beginner (A1)', words: beginner });
+    if (basic > 0) stats.push({ level: 'Basic (A2)', words: basic });
+    if (intermediate > 0) stats.push({ level: 'Intermediate (B1)', words: intermediate });
+    if (advanced > 0) stats.push({ level: 'Advanced (B2+)', words: advanced });
+
+    // If no vocab learned yet, show encouraging placeholder
+    if (stats.length === 0) {
+      stats.push({ level: 'Getting Started', words: 0 });
+    }
+    return stats;
+  }, [learnedVocab]);
 
   // Vault Insights Randomized Shuffle State (95 items from vaultInsightsData)
   const [insightIndex, setInsightIndex] = useState<number>(() =>
@@ -337,17 +377,17 @@ const HomeScreen: FC = () => {
               modulesData={{
                 label: "COURSE MASTERY",
                 sublabel: "Modules Completed",
-                current: 18,
-                target: 24,
+                current: completedLessonCount,
+                target: totalLessons,
                 unit: "MODS",
                 color: "#10B981",
                 endColor: "#34D399",
               }}
               vocabData={{
                 label: "VOCAB MASTERED",
-                sublabel: "B2 Lexicon Set",
-                current: 42,
-                target: 60,
+                sublabel: `${levelBadge} Lexicon Set`,
+                current: vocabCount,
+                target: Math.max(vocabCount + 10, 60),
                 unit: "WORDS",
                 color: "#0EA5E9",
                 endColor: "#38BDF8",
@@ -427,7 +467,7 @@ const HomeScreen: FC = () => {
                   <p className="font-sans text-[11px] text-text-secondary mt-0.5">Mastered vocabulary by tier</p>
                 </div>
                 <div className="space-y-2">
-                  {userData.lexiconStats.map((item) => (
+                  {liveLexiconStats.map((item) => (
                     <div key={item.level} className="flex items-center justify-between text-xs font-sans p-2.5 rounded-xl bg-bg-elevated-2 border border-structural/40 text-text-primary">
                       <span className="text-text-primary font-medium">{item.level}</span>
                       <span className="bg-[#7D927D]/15 text-[#5E735E] font-mono font-semibold border border-[#7D927D]/30 px-2.5 py-0.5 rounded-lg text-[11px]">
@@ -438,7 +478,7 @@ const HomeScreen: FC = () => {
                 </div>
                 <div className="border-t border-structural/40 pt-2.5">
                   <span className="font-sans text-[11px] text-text-secondary">
-                    Total: <strong className="text-text-primary">26 Words</strong> mastered
+                    Total: <strong className="text-text-primary">{vocabCount} Words</strong> mastered
                   </span>
                 </div>
               </div>
@@ -474,7 +514,7 @@ const HomeScreen: FC = () => {
                     title={isInsightHovered ? "Paused on hover" : "Vault shuffling insights..."}
                   >
                     <Sparkles className={`w-3.5 h-3.5 ${isInsightHovered ? '' : 'animate-pulse'}`} />
-                    <span className="text-[9px] font-mono text-[#5E735E]/80">95 INSIGHTS</span>
+                    <span className="text-[9px] font-mono text-[#5E735E]/80">100 INSIGHTS</span>
                   </div>
                 </div>
               </div>
