@@ -7,6 +7,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { getCurrentUserId, syncUserStats, syncLearnedVocab } from '../lib/supabaseClient';
 import { useDailyQuestStore } from './dailyQuestStore';
+import { useEntitlementStore } from './entitlementStore';
 
 export interface WeeklyActivityItem {
   day: 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' | 'Sat' | 'Sun';
@@ -88,6 +89,8 @@ interface StatsState {
   toggleLessonComplete: (lessonKey: string) => void;
   /** Tick active study time by adding elapsed seconds. */
   tickActiveStudyTime: (secondsElapsed: number) => void;
+  /** Passively check if streak has broken due to missed days without activity. */
+  checkPassiveStreakStatus: () => void;
   /** Reset all stats to zero (fresh account / testing). */
   reset: () => void;
 }
@@ -108,10 +111,40 @@ const dayDiff = (a: string, b: string): number => {
   return Math.round((db.getTime() - da.getTime()) / 86_400_000);
 };
 
+/** Helper to compute updated streak upon activity */
+const calculateStreakOnActivity = (currentStreak: number, lastActiveDate: string): { newStreak: number; newLastActiveDate: string } => {
+  const today = todayKey();
+  if (!lastActiveDate) {
+    return { newStreak: 1, newLastActiveDate: today };
+  }
+  if (lastActiveDate === today) {
+    return { newStreak: Math.max(1, currentStreak), newLastActiveDate: today };
+  }
+  const diff = dayDiff(lastActiveDate, today);
+  if (diff === 1) {
+    return { newStreak: Math.max(1, currentStreak) + 1, newLastActiveDate: today };
+  }
+  if (diff > 1) {
+    try {
+      const entitlements = useEntitlementStore.getState();
+      if (entitlements.consumables?.streak_freeze > 0) {
+        useEntitlementStore.setState((s) => ({
+          ...s,
+          consumables: { ...s.consumables, streak_freeze: Math.max(0, s.consumables.streak_freeze - 1) },
+        }));
+        const preserved = diff === 2 ? Math.max(1, currentStreak) + 1 : 1;
+        return { newStreak: preserved, newLastActiveDate: today };
+      }
+    } catch {}
+    return { newStreak: 1, newLastActiveDate: today };
+  }
+  return { newStreak: Math.max(1, currentStreak), newLastActiveDate: today };
+};
+
 const DEFAULT_STATE = {
   xp: 0,
   coins: 100,
-  streak: 1,
+  streak: 0,
   lastActiveDate: '',
   learnedVocab: [] as LearnedVocabEntry[],
   collectedCardIds: [] as string[],
@@ -138,43 +171,58 @@ export const useStatsStore = create<StatsState>()(
     (set, get) => ({
       ...DEFAULT_STATE,
 
+      checkPassiveStreakStatus: () => {
+        const state = get();
+        const today = todayKey();
+        const prev = state.lastActiveDate;
+        if (!prev || prev === today) return;
+
+        const diff = dayDiff(prev, today);
+        if (diff > 1) {
+          try {
+            const entitlements = useEntitlementStore.getState();
+            if (entitlements.consumables?.streak_freeze > 0) {
+              useEntitlementStore.setState((s) => ({
+                ...s,
+                consumables: { ...s.consumables, streak_freeze: Math.max(0, s.consumables.streak_freeze - 1) },
+              }));
+              const yesterday = new Date();
+              yesterday.setDate(yesterday.getDate() - 1);
+              const yKey = `${yesterday.getFullYear()}-${String(yesterday.getMonth() + 1).padStart(2, '0')}-${String(yesterday.getDate()).padStart(2, '0')}`;
+              set({ lastActiveDate: yKey });
+              return;
+            }
+          } catch {}
+          set({ streak: 0 });
+        }
+      },
+
       grantQuestRewards: (questId, xp, coins) => {
-        // Idempotent: if this quest already granted rewards, skip.
         const state = get();
         if (state.claimedQuestRewards.includes(questId)) return;
 
-        // Update streak based on today's activity.
-        const today = todayKey();
-        const prev = state.lastActiveDate;
-        let newStreak = state.streak;
-        if (prev !== today) {
-          newStreak = prev && dayDiff(prev, today) === 1 ? newStreak + 1 : 1;
-        }
+        const { newStreak, newLastActiveDate } = calculateStreakOnActivity(state.streak, state.lastActiveDate);
 
         set((s) => ({
           xp: s.xp + xp,
           coins: s.coins + coins,
           streak: newStreak,
-          lastActiveDate: today,
+          lastActiveDate: newLastActiveDate,
           claimedQuestRewards: [...s.claimedQuestRewards, questId],
         }));
         const uid = getCurrentUserId();
         if (uid) syncUserStats(uid, get()).catch(() => {});
       },
-      
-      addRewards: (xp, coins) => {
-        const today = todayKey();
-        const prev = get().lastActiveDate;
-        let newStreak = get().streak;
-        if (prev !== today) {
-          newStreak = prev && dayDiff(prev, today) === 1 ? newStreak + 1 : 1;
-        }
 
-        set((state) => ({
-          xp: state.xp + xp,
-          coins: state.coins + coins,
+      addRewards: (xp, coins) => {
+        const state = get();
+        const { newStreak, newLastActiveDate } = calculateStreakOnActivity(state.streak, state.lastActiveDate);
+
+        set((s) => ({
+          xp: s.xp + xp,
+          coins: s.coins + coins,
           streak: newStreak,
-          lastActiveDate: today,
+          lastActiveDate: newLastActiveDate,
         }));
         const uid = getCurrentUserId();
         if (uid) syncUserStats(uid, get()).catch(() => {});
@@ -229,18 +277,13 @@ export const useStatsStore = create<StatsState>()(
           return false;
         }
 
-        const today = todayKey();
-        const prev = state.lastActiveDate;
-        let newStreak = state.streak;
-        if (prev !== today) {
-          newStreak = prev && dayDiff(prev, today) === 1 ? newStreak + 1 : 1;
-        }
+        const { newStreak, newLastActiveDate } = calculateStreakOnActivity(state.streak, state.lastActiveDate);
 
         set((s) => ({
           xp: s.xp + xp,
           coins: s.coins + coins,
           streak: newStreak,
-          lastActiveDate: today,
+          lastActiveDate: newLastActiveDate,
           claimedExamIds: Array.from(new Set([...s.claimedExamIds, examId, coursePart])),
           earnedBadges: { ...s.earnedBadges, [coursePart]: true },
         }));
@@ -300,10 +343,13 @@ export const useStatsStore = create<StatsState>()(
       reset: () => {
         set({
           ...DEFAULT_STATE,
+          xp: 0,
+          coins: 100,
+          streak: 0,
+          lastActiveDate: '',
           weeklyActivity: DEFAULT_WEEKLY_ACTIVITY.map((item) => ({ ...item })),
           activeSeconds: 0,
           weekStartDate: getMondayKey(),
-          lastActiveDate: todayKey(),
         });
         const uid = getCurrentUserId();
         if (uid) {

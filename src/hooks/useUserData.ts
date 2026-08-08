@@ -88,6 +88,9 @@ export function useUserData() {
     // Set global active user context & token getter for Zustand syncs
     setCurrentUserId(user.id, getSupabaseToken);
 
+    // Check passive streak status (handles missed days / streak freezes)
+    useStatsStore.getState().checkPassiveStreakStatus();
+
     // 1. Load user-specific storage for this Clerk User ID
     const savedLocal = getStoredUserData(user.id);
     const localStats = useStatsStore.getState();
@@ -97,7 +100,7 @@ export function useUserData() {
       xp: typeof localStats.xp === 'number' && localStats.xp > 0 ? localStats.xp : 0,
       level: Math.max(1, Math.floor((localStats.xp || 0) / 600) + 1),
       kitsune_coins: typeof localStats.coins === 'number' && localStats.coins > 0 ? localStats.coins : 100,
-      streak_days: localStats.streak || 1,
+      streak_days: typeof localStats.streak === 'number' ? localStats.streak : 0,
       weekly_activity: localStats.weeklyActivity || [],
     };
 
@@ -124,7 +127,8 @@ export function useUserData() {
       if (data) {
         const bestXp = Math.max(data.xp || 0, initialData.xp || 0, localStats.xp || 0);
         const bestCoins = Math.max(data.kitsune_coins || 0, initialData.kitsune_coins || 0, localStats.coins || 0);
-        const bestStreak = Math.max(data.streak_days || 0, initialData.streak_days || 0, localStats.streak || 0);
+        // Use live localStats.streak if lastActiveDate is set or after reset; fallback to remote data
+        const currentStreak = typeof localStats.streak === 'number' ? localStats.streak : (data.streak_days || 0);
         const bestLevel = Math.max(1, Math.floor(bestXp / 600) + 1);
 
         const supabaseWeekly = (data.weekly_activity as unknown as WeeklyActivityItem[]) || [];
@@ -140,7 +144,7 @@ export function useUserData() {
           xp: bestXp,
           level: bestLevel,
           kitsune_coins: bestCoins,
-          streak_days: bestStreak,
+          streak_days: currentStreak,
           weekly_activity: mergedWeekly,
         };
 
@@ -338,7 +342,7 @@ export function useUserData() {
       xp: 0,
       level: 1,
       kitsune_coins: 100,
-      streak_days: 1,
+      streak_days: 0,
       weekly_activity: useStatsStore.getState().weeklyActivity,
     };
 
@@ -354,11 +358,12 @@ export function useUserData() {
 
     // 2. Clear all store persistence keys from localStorage
     const keysToRemove = [
+      'wayfarer-stats',
+      'wayfarer-stats-store',
       'wayfarer-daily-quest',
       'wayfarer-daily-quest-store',
       'wayfarer-progress',
       'wayfarer-canonical-entitlements',
-      'wayfarer-stats-store',
       'wayfarer-active-immersion',
       'wayfarer-training-store',
       'wayfarer-scenarios',
