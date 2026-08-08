@@ -6,6 +6,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { getCurrentUserId, syncUserStats, syncLearnedVocab } from '../lib/supabaseClient';
+import { useDailyQuestStore } from './dailyQuestStore';
 
 export interface WeeklyActivityItem {
   day: 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' | 'Sat' | 'Sun';
@@ -188,6 +189,7 @@ export const useStatsStore = create<StatsState>()(
             .map((word) => ({ word, questId, date }));
           return { learnedVocab: [...state.learnedVocab, ...newEntries] };
         });
+        useDailyQuestStore.getState().updateTaskProgress('vocab_review', words.length);
         const uid = getCurrentUserId();
         if (uid) {
           syncLearnedVocab(uid, get().learnedVocab).catch(() => {});
@@ -248,10 +250,14 @@ export const useStatsStore = create<StatsState>()(
       },
 
       toggleLessonComplete: (lessonKey) => {
+        const isNowComplete = !get().completedLessons[lessonKey];
         set((s) => {
-          const next = { ...s.completedLessons, [lessonKey]: !s.completedLessons[lessonKey] };
+          const next = { ...s.completedLessons, [lessonKey]: isNowComplete };
           return { completedLessons: next };
         });
+        if (isNowComplete) {
+          useDailyQuestStore.getState().updateTaskProgress('lesson_progress', 1);
+        }
         const uid = getCurrentUserId();
         if (uid) syncUserStats(uid, get()).catch(() => {});
       },

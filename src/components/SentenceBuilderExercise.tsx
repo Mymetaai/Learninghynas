@@ -8,6 +8,7 @@ import {
   ArrowLeft,
   Shuffle,
 } from 'lucide-react';
+import { useDailyQuestStore } from '../state/dailyQuestStore';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -161,6 +162,10 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
 
     setIsCorrect(correctOrder);
     setIsSubmitted(true);
+
+    if (correctOrder) {
+      useDailyQuestStore.getState().updateTaskProgress('sentence_builder', 1);
+    }
 
     const timeSpent = Date.now() - timeStarted;
     onCompleted(correctOrder, timeSpent);

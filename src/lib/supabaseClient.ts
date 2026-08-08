@@ -168,4 +168,72 @@ export const syncUserEntitlements = async (entitlements: any, userId?: string | 
   }
 };
 
+/**
+ * Fetch today's daily quest for user from Supabase daily_quests table.
+ */
+export const fetchTodayDailyQuest = async (userId?: string | null, questDate?: string): Promise<any | null> => {
+  const targetId = userId || activeUserId;
+  if (!targetId) return null;
+
+  try {
+    let authToken: string | null = null;
+    if (activeClerkTokenGetter) {
+      try {
+        authToken = await activeClerkTokenGetter();
+      } catch {}
+    }
+
+    const todayStr = questDate || new Date().toISOString().split('T')[0];
+    const client = createClerkSupabaseClient(authToken);
+    const { data, error } = await client
+      .from('daily_quests')
+      .select('*')
+      .eq('user_id', targetId)
+      .eq('quest_date', todayStr)
+      .maybeSingle();
+
+    if (error && error.code !== 'PGRST116') {
+      console.warn('[Supabase DailyQuest] Fetch error:', error.message);
+    }
+    return data;
+  } catch (err) {
+    console.warn('[Supabase DailyQuest] Fetch exception:', err);
+    return null;
+  }
+};
+
+/**
+ * Upsert daily quest record to Supabase daily_quests table.
+ */
+export const syncDailyQuest = async (dailyQuestPayload: any, userId?: string | null): Promise<boolean> => {
+  const targetId = userId || activeUserId || dailyQuestPayload?.user_id;
+  if (!targetId || !dailyQuestPayload) return false;
+
+  try {
+    let authToken: string | null = null;
+    if (activeClerkTokenGetter) {
+      try {
+        authToken = await activeClerkTokenGetter();
+      } catch {}
+    }
+
+    const payload = {
+      ...dailyQuestPayload,
+      user_id: targetId,
+      updated_at: new Date().toISOString(),
+    };
+
+    const client = createClerkSupabaseClient(authToken);
+    const { error } = await client.from('daily_quests').upsert(payload, { onConflict: 'user_id,quest_date' });
+
+    if (error && !error.message?.includes('No suitable key') && error.code !== '401') {
+      console.warn('[Supabase DailyQuest] Sync note:', error.message);
+    }
+    return true;
+  } catch (err) {
+    console.warn('[Supabase DailyQuest] Sync exception:', err);
+    return false;
+  }
+};
+
 

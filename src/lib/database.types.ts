@@ -95,6 +95,45 @@ export type Database = {
         };
         Relationships: [];
       };
+      daily_quests: {
+        Row: {
+          id: string;
+          user_id: string;
+          quest_date: string;
+          tasks: Json;
+          total_xp_reward: number;
+          completed_task_ids: string[];
+          all_completed: boolean;
+          generated_at: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          quest_date: string;
+          tasks: Json;
+          total_xp_reward?: number;
+          completed_task_ids?: string[];
+          all_completed?: boolean;
+          generated_at?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          quest_date?: string;
+          tasks?: Json;
+          total_xp_reward?: number;
+          completed_task_ids?: string[];
+          all_completed?: boolean;
+          generated_at?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
       learned_vocabulary: {
         Row: {
           created_at: string;
@@ -106,6 +145,9 @@ export type Database = {
           updated_at: string;
           user_id: string;
           word: string;
+          last_reviewed_at?: string | null;
+          review_count?: number;
+          next_review_date?: string | null;
         };
         Insert: {
           created_at?: string;
@@ -117,6 +159,9 @@ export type Database = {
           updated_at?: string;
           user_id: string;
           word: string;
+          last_reviewed_at?: string | null;
+          review_count?: number;
+          next_review_date?: string | null;
         };
         Update: {
           created_at?: string;
@@ -128,6 +173,9 @@ export type Database = {
           updated_at?: string;
           user_id?: string;
           word?: string;
+          last_reviewed_at?: string | null;
+          review_count?: number;
+          next_review_date?: string | null;
         };
         Relationships: [];
       };

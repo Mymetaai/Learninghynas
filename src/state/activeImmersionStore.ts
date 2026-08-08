@@ -9,6 +9,7 @@ import {
   type GeminiErrorDetails,
 } from '../utils/geminiService';
 import { useStatsStore } from './statsStore';
+import { useDailyQuestStore } from './dailyQuestStore';
 import { getCurrentUserId, syncImmersionMessages, syncLearnedVocab } from '../lib/supabaseClient';
 
 export type { ImmersionMode, ActiveImmersionResponse };
@@ -226,6 +227,7 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
 
         // Award rewards (+10 XP, +5 Coins)
         useStatsStore.getState().addRewards(10, 5);
+        useDailyQuestStore.getState().updateTaskProgress('ai_companion', 1);
 
         // Maintain full message history (up to 20 turns)
         const history = updatedMessages.slice(-20).map((m) => ({

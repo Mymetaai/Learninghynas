@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { feynmanConcepts, type FeynmanConcept } from '../data/feynmanConceptsData';
 import { useStatsStore } from '../state/statsStore';
+import { useDailyQuestStore } from '../state/dailyQuestStore';
 
 type CEFRLevel = 'A1' | 'A2' | 'B1' | 'B2' | 'C1';
 
@@ -132,6 +133,7 @@ export default function FeynmanDrill({ onComplete, className = '' }: FeynmanDril
     if (isSuccess) {
       // Award XP & Coins
       addRewards(25, 10);
+      useDailyQuestStore.getState().updateTaskProgress('ai_companion', 1);
       setShowIdealExample(true);
       onComplete?.();
     }
