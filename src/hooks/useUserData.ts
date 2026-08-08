@@ -355,6 +355,7 @@ export function useUserData() {
     // 2. Clear all store persistence keys from localStorage
     const keysToRemove = [
       'wayfarer-daily-quest',
+      'wayfarer-daily-quest-store',
       'wayfarer-progress',
       'wayfarer-canonical-entitlements',
       'wayfarer-stats-store',
@@ -362,6 +363,9 @@ export function useUserData() {
       'wayfarer-training-store',
       'wayfarer-scenarios',
     ];
+    if (user?.id) {
+      keysToRemove.push(`wayfarer_user_progress_${user.id}`);
+    }
     keysToRemove.forEach((key) => {
       try {
         localStorage.removeItem(key);
@@ -375,12 +379,20 @@ export function useUserData() {
     // 3. Reset React state
     setUserData(freshData);
 
-    // 4. Upsert fresh 0 XP row to Supabase
+    // 4. Wipe all user rows across Supabase tables and upsert fresh 0 XP row
     if (isSignedIn && user?.id) {
       try {
         const token = await getSupabaseToken();
         const client = createClerkSupabaseClient(token);
-        await client.from('user_progress').upsert(freshData, { onConflict: 'user_id' });
+
+        await Promise.allSettled([
+          client.from('daily_quests').delete().eq('user_id', user.id),
+          client.from('user_stats').delete().eq('user_id', user.id),
+          client.from('learned_vocabulary').delete().eq('user_id', user.id),
+          client.from('immersion_chat_messages').delete().eq('user_id', user.id),
+          client.from('user_entitlements').delete().eq('user_id', user.id),
+          client.from('user_progress').upsert(freshData, { onConflict: 'user_id' }),
+        ]);
       } catch (err) {
         console.warn('[useUserData] Reset note:', err);
       }

@@ -15,6 +15,8 @@ import {
   Brain,
   ArrowRight,
   Target,
+  RotateCcw,
+  AlertTriangle,
 } from 'lucide-react';
 import { useDailyQuestStore, type QuestTask, type QuestTaskType } from '../state/dailyQuestStore';
 import { useStatsStore } from '../state/statsStore';
@@ -43,7 +45,7 @@ const TASK_BADGES: Record<QuestTaskType, { label: string; color: string }> = {
 
 const DailyQuestScreen: FC<DailyQuestScreenProps> = () => {
   const navigate = useNavigate();
-  const { userData } = useUserData();
+  const { userData, resetAllUserProgress } = useUserData();
   const { streak, coins, xp } = useStatsStore();
 
   const loadTodayQuest = useDailyQuestStore((s) => s.loadTodayQuest);
@@ -52,6 +54,16 @@ const DailyQuestScreen: FC<DailyQuestScreenProps> = () => {
   const isLoading = useDailyQuestStore((s) => s.isLoading);
 
   const [confetti, setConfetti] = useState(false);
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
+  const [isResetting, setIsResetting] = useState(false);
+
+  const handleConfirmReset = async () => {
+    setIsResetting(true);
+    await resetAllUserProgress();
+    await loadTodayQuest(userData?.user_id || null);
+    setIsResetting(false);
+    setShowResetConfirm(false);
+  };
 
   useEffect(() => {
     loadTodayQuest(userData?.user_id || null);
@@ -93,9 +105,19 @@ const DailyQuestScreen: FC<DailyQuestScreenProps> = () => {
             <h1 className="font-serif text-3xl font-bold text-text-primary">
               Today's Quest
             </h1>
-            <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-[#7D927D]/15 text-[#5E735E] border border-[#7D927D]/30 self-start sm:self-auto">
-              Level {userLevel} • {currentQuest?.quest_date || 'Today'}
-            </span>
+            <div className="flex items-center gap-2 self-start sm:self-auto">
+              <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-[#7D927D]/15 text-[#5E735E] border border-[#7D927D]/30">
+                Level {userLevel} • {currentQuest?.quest_date || 'Today'}
+              </span>
+              <button
+                onClick={() => setShowResetConfirm(true)}
+                className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-streak-warm/15 text-streak-warm border border-streak-warm/30 hover:bg-streak-warm/25 transition-all cursor-pointer flex items-center gap-1"
+                title="Reset All Progress & Quests"
+              >
+                <RotateCcw className="h-3 w-3" />
+                <span>Reset All</span>
+              </button>
+            </div>
           </div>
 
           <p className="mt-2 font-sans text-sm text-text-secondary">
@@ -209,6 +231,62 @@ const DailyQuestScreen: FC<DailyQuestScreenProps> = () => {
           )}
         </div>
       </div>
+
+      {/* Reset Progress Confirmation Modal */}
+      <AnimatePresence>
+        {showResetConfirm && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="w-full max-w-md rounded-2xl border border-structural bg-bg-elevated p-6 shadow-xl space-y-4"
+            >
+              <div className="flex items-center gap-3 text-streak-warm">
+                <div className="p-2.5 rounded-xl bg-streak-warm/15 border border-streak-warm/30">
+                  <AlertTriangle className="h-6 w-6" />
+                </div>
+                <div>
+                  <h3 className="font-serif text-lg font-bold text-text-primary">
+                    Reset All Progress & Quests?
+                  </h3>
+                  <p className="font-mono text-xs text-text-tertiary">
+                    This action is permanent and cannot be undone.
+                  </p>
+                </div>
+              </div>
+
+              <p className="font-sans text-xs text-text-secondary leading-relaxed">
+                Pressing reset will wipe your daily quests, XP, level, coins, learned vocabulary, immersion messages, and lesson progress from <strong>Supabase</strong>, <strong>Zustand stores</strong>, and <strong>local storage</strong> across the entire app.
+              </p>
+
+              <div className="flex items-center justify-end gap-3 pt-2">
+                <button
+                  onClick={() => setShowResetConfirm(false)}
+                  disabled={isResetting}
+                  className="px-4 py-2 rounded-xl font-mono text-xs font-bold border border-structural bg-bg-base hover:bg-bg-elevated-2 text-text-primary transition-colors cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleConfirmReset}
+                  disabled={isResetting}
+                  className="px-5 py-2 rounded-xl font-mono text-xs font-bold bg-streak-warm text-white hover:bg-streak-warm/90 transition-colors shadow-xs cursor-pointer flex items-center gap-1.5"
+                >
+                  {isResetting ? (
+                    <span>Resetting...</span>
+                  ) : (
+                    <>
+                      <RotateCcw className="h-3.5 w-3.5" />
+                      <span>Confirm Reset All</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
