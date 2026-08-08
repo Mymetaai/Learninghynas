@@ -979,13 +979,13 @@ const BasicEspanolScreen: FC = () => {
                       </div>
                       <div className="grid grid-cols-1 gap-3">
                         {currentLessonData.exampleSentences.map((ex, sIdx) => (
-                          <div key={sIdx} className="bg-[#F9F7F2] p-4.5 rounded-2xl border border-[#7D927D]/20 space-y-1.5 text-xs">
-                            <div className="flex justify-between items-start">
-                              <span className="font-bold text-[#2F353B] text-sm">{ex.spanish}</span>
-                              <span className="text-[10px] font-mono text-[#7D927D] uppercase font-bold">Example {sIdx + 1}</span>
+                          <div key={sIdx} className="bg-[#F9F7F2] p-5 rounded-2xl border border-[#7D927D]/20 space-y-2 text-xs">
+                            <div className="flex justify-between items-center gap-4">
+                              <span className="font-bold text-[#2F353B] text-sm leading-snug">{ex.spanish}</span>
+                              <span className="text-[10px] font-mono text-[#7D927D] uppercase font-bold whitespace-nowrap shrink-0 bg-[#7D927D]/10 px-2 py-0.5 rounded-md">Example {sIdx + 1}</span>
                             </div>
-                            <p className="text-[#777775] font-semibold">{ex.english}</p>
-                            <p className="text-[11px] text-[#777775]/80 italic pt-1 border-t border-[#7D927D]/15">Grammar breakdown: {ex.breakdown}</p>
+                            <p className="text-[#777775] font-semibold text-[13px]">{ex.english}</p>
+                            <p className="text-[11px] text-[#777775]/80 italic pt-2 border-t border-[#7D927D]/15">Grammar breakdown: {ex.breakdown}</p>
                           </div>
                         ))}
                       </div>
