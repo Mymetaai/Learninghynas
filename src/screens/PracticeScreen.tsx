@@ -16,7 +16,8 @@ import {
   Sparkles,
   CheckCircle2,
   Zap,
-  Flame
+  Flame,
+  Brain
 } from 'lucide-react';
 import { useStatsStore } from '../state/statsStore';
 import { useTrainingStore } from '../state/trainingStore';
@@ -26,6 +27,7 @@ import type { Exercise } from '../content/types';
 import ExerciseEngine from '../components/exercises/ExerciseEngine';
 import UnifiedVocabTrainer from '../components/UnifiedVocabTrainer';
 import AutoFlashcardsPlayer from '../components/AutoFlashcardsPlayer';
+import FeynmanDrill from '../components/FeynmanDrill';
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -36,6 +38,7 @@ type DrillMode =
   | 'speaking-reps'
   | 'grammar-blitz'
   | 'conjugation'
+  | 'feynman'
   | 'quest'
   | 'flashcards';
 
@@ -378,6 +381,25 @@ const PracticeScreen: FC = () => {
       );
     }
 
+    if (activeMode === 'feynman') {
+      return (
+        <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base px-4 py-6">
+          <div className="mx-auto max-w-4xl mb-4">
+            <button
+              onClick={handleBackToHub}
+              className="flex items-center gap-1.5 font-mono text-[11px] text-[#777775] hover:text-text-primary transition-colors cursor-pointer bg-transparent border-none"
+            >
+              <ArrowLeft className="h-3.5 w-3.5" />
+              Back to Training Grounds
+            </button>
+          </div>
+          <div className="mx-auto max-w-4xl">
+            <FeynmanDrill />
+          </div>
+        </div>
+      );
+    }
+
     if (sessionExercises.length === 0) {
       return (
         <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base px-4 py-6">
@@ -541,6 +563,19 @@ const PracticeScreen: FC = () => {
               onStart={() => handleStartSession('flashcards')}
               index={6}
             />
+
+            {/* 8. Teach the Chibi (Feynman Drill) */}
+            <DrillTile
+              mode="feynman"
+              icon={<Brain className="h-6 w-6" />}
+              iconColor="text-[#7D927D]"
+              iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
+              title="Teach the Chibi"
+              subtitle="Feynman Technique: Explain 100 concepts (A1–C1) to mascot"
+              ctaLabel="Start Teaching"
+              onStart={() => handleStartSession('feynman')}
+              index={7}
+            />
           </AnimatePresence>
         </div>
 
@@ -570,6 +605,7 @@ const TILE_CONFIG: Record<DrillMode, { title: string }> = {
   'speaking-reps': { title: 'Speaking Reps' },
   'grammar-blitz': { title: 'Grammar Blitz (Parts 1–7)' },
   'conjugation': { title: 'Conjugation Blitz' },
+  'feynman': { title: 'Teach the Chibi (Feynman Technique)' },
   'quest': { title: 'Quest Quiz' },
   'flashcards': { title: 'Auto Flashcards' },
 };
