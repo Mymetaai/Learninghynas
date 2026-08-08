@@ -28,7 +28,7 @@ export const CURRICULUM_ITEMS: CurriculumItem[] = [
     id: 'part1',
     part: 'PART 1',
     icon: BookOpen,
-    title: 'Part 1: Greetings & -AR Verbs (Lessons 1-4)',
+    title: 'Part 1: Greetings & -AR Verbs',
     description: 'Pronunciation, Articles, SER & -AR Verbs',
     color: '#7D927D'
   },
@@ -36,7 +36,7 @@ export const CURRICULUM_ITEMS: CurriculumItem[] = [
     id: 'part2',
     part: 'PART 2',
     icon: MessageCircle,
-    title: 'Part 2: Estar, IR & Numbers (Lessons 5-8)',
+    title: 'Part 2: Estar, IR & Numbers',
     description: 'Indefinite Articles, ESTAR, -ER/-IR Verbs & IR',
     color: '#F5A991'
   },
@@ -44,7 +44,7 @@ export const CURRICULUM_ITEMS: CurriculumItem[] = [
     id: 'part3',
     part: 'PART 3',
     icon: Calendar,
-    title: 'Part 3: Dates, Time, Tener & Hacer (Lessons 9-12)',
+    title: 'Part 3: Dates, Time, Tener & Hacer',
     description: 'Calendar, Telling Time, Tener Idioms & Weather',
     color: '#7D927D'
   },
@@ -52,7 +52,7 @@ export const CURRICULUM_ITEMS: CurriculumItem[] = [
     id: 'part4',
     part: 'PART 4',
     icon: Sparkles,
-    title: 'Part 4: Stem Changers & Progressive (Lessons 13-16)',
+    title: 'Part 4: Stem Changers & Progressive',
     description: 'Boot Verbs, Yo-Go Verbs & Present Progressive',
     color: '#F5A991'
   },
@@ -60,7 +60,7 @@ export const CURRICULUM_ITEMS: CurriculumItem[] = [
     id: 'part5',
     part: 'PART 5',
     icon: CheckCircle,
-    title: 'Part 5: Pronouns & Affirmatives (Lessons 17-21)',
+    title: 'Part 5: Pronouns & Affirmatives',
     description: 'Possessives, Demonstratives, DOPs, IOPs & Gustar',
     color: '#7D927D'
   },
@@ -68,7 +68,7 @@ export const CURRICULUM_ITEMS: CurriculumItem[] = [
     id: 'part6',
     part: 'PART 6',
     icon: Repeat,
-    title: 'Part 6: Double Objects & Preterite (Lessons 22-26)',
+    title: 'Part 6: Double Objects & Preterite',
     description: 'Double Objects, Reflexives, Commands & Preterite',
     color: '#F5A991'
   },
@@ -76,7 +76,7 @@ export const CURRICULUM_ITEMS: CurriculumItem[] = [
     id: 'part7',
     part: 'PART 7',
     icon: Scale,
-    title: 'Part 7: Imperfect & Comparisons (Lessons 27-30)',
+    title: 'Part 7: Imperfect & Comparisons',
     description: 'Imperfect Tense, Preterite vs Imperfect & Superlatives',
     color: '#7D927D'
   },
@@ -84,7 +84,7 @@ export const CURRICULUM_ITEMS: CurriculumItem[] = [
     id: 'part8',
     part: 'PART 8',
     icon: GraduationCap,
-    title: 'Part 8: C1 Advanced Mastery (Lessons 31-37)',
+    title: 'Part 8: C1 Advanced Mastery',
     description: 'Idioms, Register Shifts, Academic Debate, Subjunctive & Regional Variants',
     color: '#F5A991'
   }
