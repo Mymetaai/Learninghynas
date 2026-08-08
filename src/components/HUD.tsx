@@ -83,6 +83,11 @@ const HUD: FC = () => {
             className="flex items-center gap-2 shrink-0 whitespace-nowrap transition-opacity hover:opacity-80"
             aria-label="Go to Home"
           >
+            <img
+              src="/hyena-logo-marigold.png"
+              alt="TheLearningHyena Logo"
+              className="h-7 w-7 object-contain shrink-0"
+            />
             <span className="font-serif text-base font-bold text-text-primary tracking-tight">
               TheLearningHyena
             </span>

@@ -11,8 +11,8 @@ export interface LogoOption {
 }
 
 export const LOGO_VARIANTS: Record<LogoVariant, LogoOption> = {
-  executive: { label: 'Executive Emblem', src: '/adult-hyena-logo.jpg' },
-  uploaded: { label: 'Uploaded Mascot', src: '/uploaded-hyena-logo.png' },
+  executive: { label: 'Marigold Hyena Emblem', src: '/hyena-logo-marigold.png' },
+  uploaded: { label: 'Marigold Hyena Emblem', src: '/hyena-logo-marigold.png' },
   chibi: { label: 'Cute Chibi', src: '/ai-hyena-logo.jpg' },
 };
 
