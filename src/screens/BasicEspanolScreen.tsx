@@ -58,14 +58,14 @@ interface ExamQuestion {
 }
 
 const PART_OPTIONS: { id: CoursePart; label: string; desc: string }[] = [
-  { id: 'part1', label: 'Part 1: Greetings & -AR Verbs (Lessons 1-4)', desc: 'Pronunciation, Articles, SER & -AR Verbs' },
-  { id: 'part2', label: 'Part 2: Estar, Ir & Numbers (Lessons 5-8)', desc: 'Indefinite Articles, ESTAR, -ER/-IR Verbs & IR' },
-  { id: 'part3', label: 'Part 3: Dates, Time, Tener & Hacer (Lessons 9-12)', desc: 'Calendar, Telling Time, Tener Idioms & Weather' },
-  { id: 'part4', label: 'Part 4: Stem Changers & Progressive (Lessons 13-16)', desc: 'Boot Verbs, Yo-Go Verbs & Present Progressive' },
-  { id: 'part5', label: 'Part 5: Pronouns & Affirmatives (Lessons 17-21)', desc: 'Possessives, Demonstratives, DOPs, IOPs & Gustar' },
-  { id: 'part6', label: 'Part 6: Double Objects & Preterite (Lessons 22-26)', desc: 'Double Objects, Reflexives, Commands & Preterite' },
-  { id: 'part7', label: 'Part 7: Imperfect & Comparisons (Lessons 27-30)', desc: 'Imperfect Tense, Preterite vs Imperfect & Superlatives' },
-  { id: 'part8', label: 'Part 8: C1 Advanced Mastery (Lessons 31-37)', desc: 'Idioms, Register Shifts, Academic Debate, Subjunctive & Regional Variants' },
+  { id: 'part1', label: 'Part 1: Greetings & -AR Verbs', desc: 'Pronunciation, Articles, SER & -AR Verbs' },
+  { id: 'part2', label: 'Part 2: Estar, Ir & Numbers', desc: 'Indefinite Articles, ESTAR, -ER/-IR Verbs & IR' },
+  { id: 'part3', label: 'Part 3: Dates, Time, Tener & Hacer', desc: 'Calendar, Telling Time, Tener Idioms & Weather' },
+  { id: 'part4', label: 'Part 4: Stem Changers & Progressive', desc: 'Boot Verbs, Yo-Go Verbs & Present Progressive' },
+  { id: 'part5', label: 'Part 5: Pronouns & Affirmatives', desc: 'Possessives, Demonstratives, DOPs, IOPs & Gustar' },
+  { id: 'part6', label: 'Part 6: Double Objects & Preterite', desc: 'Double Objects, Reflexives, Commands & Preterite' },
+  { id: 'part7', label: 'Part 7: Imperfect & Comparisons', desc: 'Imperfect Tense, Preterite vs Imperfect & Superlatives' },
+  { id: 'part8', label: 'Part 8: C1 Advanced Mastery', desc: 'Idioms, Register Shifts, Academic Debate, Subjunctive & Regional Variants' },
 ];
 
 const PART_BADGES: Record<CoursePart, { title: string; badge: string; xp: number; coins: number }> = {
