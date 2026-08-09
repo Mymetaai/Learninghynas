@@ -291,6 +291,26 @@ const DailyQuestScreen: FC<DailyQuestScreenProps> = () => {
   );
 };
 
+/* ── Task Route Resolver ──────────────────────────────────────────────────── */
+
+const resolveTaskRoute = (task: QuestTask): string => {
+  switch (task.type) {
+    case 'vocab_review':
+      return '/practice';
+    case 'sentence_builder':
+    case 'lesson_progress':
+      return '/basic-espanol';
+    case 'ai_companion':
+      if (task.description.includes('Active Immersion') || task.description.includes('Escenarios')) {
+        return '/companion';
+      }
+      return '/practice';
+    case 'streak_maintain':
+    default:
+      return task.action_route && task.action_route !== '/learn' ? task.action_route : '/basic-espanol';
+  }
+};
+
 /* ── Task Card Component ─────────────────────────────────────────────────── */
 
 interface TaskCardProps {
@@ -303,39 +323,41 @@ const TaskCard: FC<TaskCardProps> = ({ task, index, onNavigate }) => {
   const badge = TASK_BADGES[task.type] || { label: 'Misión', color: 'bg-structural/30 text-text-primary' };
   const icon = TASK_ICONS[task.type] || <Star className="h-5 w-5 text-accent-action" />;
   const pct = Math.round((task.current_count / task.target_count) * 100);
+  const targetRoute = resolveTaskRoute(task);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.08 }}
-      className={`rounded-2xl border p-4.5 transition-all shadow-xs relative overflow-hidden ${
+      className={`rounded-2xl border p-5 sm:p-6 transition-all shadow-xs relative overflow-hidden flex flex-col justify-between gap-4 ${
         task.completed
           ? 'bg-[#7D927D]/10 border-[#7D927D]/30 opacity-90'
-          : 'bg-bg-elevated border-structural hover:border-[#7D927D]/40'
+          : 'bg-bg-elevated/90 backdrop-blur-md border-structural/60 hover:border-[#7D927D]/50'
       }`}
     >
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex items-start gap-3.5">
-          <div className={`p-2.5 rounded-xl shrink-0 border ${task.completed ? 'bg-[#7D927D]/20 border-[#7D927D]/40 text-[#5E735E]' : 'bg-bg-base border-structural'}`}>
+      <div className="flex items-start justify-between gap-4">
+        {/* Left side: Icon + Content */}
+        <div className="flex items-start gap-3.5 min-w-0 flex-1">
+          <div className={`p-3 rounded-2xl shrink-0 border shadow-xs ${task.completed ? 'bg-[#7D927D]/20 border-[#7D927D]/40 text-[#5E735E]' : 'bg-bg-base border-structural/60'}`}>
             {task.completed ? <CheckCircle2 className="h-5 w-5 text-[#5E735E]" /> : icon}
           </div>
 
-          <div className="space-y-1">
+          <div className="space-y-1.5 min-w-0 flex-1">
             <div className="flex items-center gap-2 flex-wrap">
-              <span className={`font-mono text-[10px] uppercase font-bold px-2 py-0.5 rounded-md border ${badge.color}`}>
+              <span className={`font-mono text-[10px] uppercase tracking-wider font-bold px-2.5 py-0.5 rounded-md border ${badge.color}`}>
                 {badge.label}
               </span>
               {task.completed && (
-                <span className="font-mono text-[10px] font-bold text-[#5E735E]">
+                <span className="font-mono text-[10px] font-bold text-[#5E735E] bg-[#7D927D]/15 px-2 py-0.5 rounded-md border border-[#7D927D]/30">
                   Completed ✓
                 </span>
               )}
             </div>
 
-            <p className="font-sans text-xs sm:text-sm font-bold text-text-primary leading-snug">
+            <h3 className="font-sans text-sm sm:text-base font-bold text-text-primary leading-snug">
               {task.description}
-            </p>
+            </h3>
 
             <div className="flex items-center gap-2 font-mono text-[11px] text-text-tertiary pt-0.5">
               <span>Progress: {task.current_count} / {task.target_count}</span>
@@ -343,27 +365,30 @@ const TaskCard: FC<TaskCardProps> = ({ task, index, onNavigate }) => {
           </div>
         </div>
 
-        <div className="flex flex-col items-end gap-2 shrink-0">
-          <span className="font-mono text-xs font-bold px-2.5 py-1 rounded-full bg-[#D4A574]/15 text-[#8B6E4E] border border-[#D4A574]/30">
+        {/* Right side: XP Reward + Go Button */}
+        <div className="flex flex-col items-end justify-between gap-3 shrink-0">
+          <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-[#D4A574]/15 text-[#8B6E4E] border border-[#D4A574]/30 shadow-xs">
             +{task.xp_reward} XP
           </span>
 
-          {!task.completed && task.action_route && (
-            <button
-              onClick={() => onNavigate(task.action_route!)}
-              className="font-mono text-[11px] font-bold text-[#5E735E] hover:text-[#4A5E4A] bg-[#7D927D]/10 hover:bg-[#7D927D]/20 border border-[#7D927D]/30 px-3 py-1.5 rounded-xl transition-all cursor-pointer flex items-center gap-1"
-            >
-              <span>Go</span>
-              <ArrowRight className="h-3 w-3" />
-            </button>
-          )}
+          <button
+            onClick={() => onNavigate(targetRoute)}
+            className={`font-mono text-xs font-bold px-4 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 shadow-xs border ${
+              task.completed
+                ? 'bg-bg-base border-structural/40 text-text-tertiary hover:bg-bg-elevated-2'
+                : 'bg-[#7D927D] hover:bg-[#6B826B] text-white border-transparent shadow-sm'
+            }`}
+          >
+            <span>{task.completed ? 'Review' : 'Go'}</span>
+            <ArrowRight className="h-3.5 w-3.5" />
+          </button>
         </div>
       </div>
 
       {/* Task Progress Bar */}
-      <div className="mt-3.5 h-1.5 w-full rounded-full bg-structural/30 overflow-hidden">
+      <div className="h-2 w-full rounded-full bg-structural/30 overflow-hidden">
         <div
-          className={`h-1.5 rounded-full transition-all duration-500 ${task.completed ? 'bg-[#5E735E]' : 'bg-gradient-to-r from-[#7D927D] to-[#D4A574]'}`}
+          className={`h-2 rounded-full transition-all duration-500 ${task.completed ? 'bg-[#5E735E]' : 'bg-gradient-to-r from-[#7D927D] to-[#D4A574]'}`}
           style={{ width: `${Math.min(100, pct)}%` }}
         />
       </div>

@@ -123,7 +123,7 @@ export function generateDailyQuest(
     current_count: 0,
     xp_reward: Math.round(baseTaskXP * 1.3),
     completed: false,
-    action_route: '/learn',
+    action_route: '/basic-espanol',
   });
 
   // 4. Lesson Progress Task
@@ -138,14 +138,14 @@ export function generateDailyQuest(
     current_count: 0,
     xp_reward: Math.round(baseTaskXP * 1.5),
     completed: false,
-    action_route: '/learn',
+    action_route: '/basic-espanol',
   });
 
   // 5. AI Companion / Feynman Drill Task (rotates)
   const aiModes = [
-    { title: 'Practice 1 conversation in Active Immersion AI', route: '/ai-immersion' },
+    { title: 'Practice 1 conversation in Active Immersion AI', route: '/companion' },
     { title: 'Teach the Chibi mascot 1 concept using Feynman Technique', route: '/practice' },
-    { title: 'Complete 1 Escenarios Reales dialogue with Yuki', route: '/scenarios' },
+    { title: 'Complete 1 Escenarios Reales dialogue with Yuki', route: '/companion' },
   ];
   const selectedAiMode = aiModes[seed % aiModes.length];
 
