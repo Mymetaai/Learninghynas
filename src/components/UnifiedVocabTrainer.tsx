@@ -4,28 +4,47 @@ import { Check, X, HelpCircle, RefreshCw, Sparkles, Shuffle, ArrowRight } from '
 import { useVocabDeck } from '../hooks/useVocabDeck';
 import { getVocabCategories, getVocabByLevelAndCategory } from '../data/vocab';
 import type { VocabItem } from '../content/types';
+import { useTrainingStore } from '../state/trainingStore';
+import { useStatsStore } from '../state/statsStore';
+import { Rating } from '../lib/fsrs';
 
 const CEFR_LEVELS: VocabItem['level'][] = ['A1', 'A2', 'B1', 'B2', 'C1'];
 
 const UnifiedVocabTrainer: FC = () => {
-  const [activeLevel, setActiveLevel] = useState<VocabItem['level']>('A1');
+  const lastActiveLevel = useTrainingStore((s) => s.lastActiveLevel) as VocabItem['level'] || 'A1';
+  const lastActiveCategory = useTrainingStore((s) => s.lastActiveCategory) || '';
+  const categoryProgressIndex = useTrainingStore((s) => s.categoryProgressIndex) || {};
+  const saveVocabProgress = useTrainingStore((s) => s.saveVocabProgress);
+  const reviewSRSCard = useTrainingStore((s) => s.reviewSRSCard);
+
+  const [activeLevel, setActiveLevel] = useState<VocabItem['level']>(lastActiveLevel);
   
   // Dynamically load categories for selected level
   const categories = useMemo(() => getVocabCategories(activeLevel), [activeLevel]);
-  const [activeCategory, setActiveCategory] = useState<string>('');
+  const [activeCategory, setActiveCategory] = useState<string>(
+    categories.includes(lastActiveCategory) ? lastActiveCategory : ''
+  );
 
   // Sync category selection when level changes
   useEffect(() => {
     if (categories.length > 0) {
-      setActiveCategory(categories[0]);
+      if (!categories.includes(activeCategory)) {
+        setActiveCategory(categories[0]);
+      }
     }
-  }, [categories]);
+  }, [categories, activeCategory]);
 
   // Load items based on level & category
   const deckItems = useMemo(() => {
     if (!activeCategory) return [];
     return getVocabByLevelAndCategory(activeLevel, activeCategory);
   }, [activeLevel, activeCategory]);
+
+  // Derive saved index for this category
+  const savedIndex = useMemo(() => {
+    const key = `${activeLevel}-${activeCategory}`;
+    return categoryProgressIndex[key] || 0;
+  }, [activeLevel, activeCategory, categoryProgressIndex]);
 
   const {
     current,
@@ -36,7 +55,7 @@ const UnifiedVocabTrainer: FC = () => {
     reveal,
     shuffle: shuffleDeck,
     reset: resetDeck,
-  } = useVocabDeck(deckItems);
+  } = useVocabDeck(deckItems, savedIndex);
 
   const [userAnswer, setUserAnswer] = useState('');
   const [showHint, setShowHint] = useState(false);
@@ -78,8 +97,8 @@ const UnifiedVocabTrainer: FC = () => {
     const relativeX = e.clientX - rect.left;
     const width = rect.width;
     
-    const edgeSize = 100; // Trigger distance in pixels from left/right edge
-    const maxSpeed = 7;   // Maximum speed of scrolling
+    const edgeSize = 100;
+    const maxSpeed = 7;
     
     if (relativeX < edgeSize) {
       setScrollDir('left');
@@ -100,25 +119,25 @@ const UnifiedVocabTrainer: FC = () => {
     setScrollSpeed(0);
   };
 
-  // Reset answer/hint states on item change
+  // Handle checking the user's input and persisting progress on correct
   useEffect(() => {
-    setUserAnswer('');
-    setShowHint(false);
-    // Focus input automatically if not on mobile/tablet or just generally for UX
-    setTimeout(() => {
-      inputRef.current?.focus();
-    }, 50);
-  }, [current]);
+    if (status === 'correct' && current) {
+      // 1. Record learned word in statsStore & trigger dailyQuestStore 'vocab_review' increment
+      useStatsStore.getState().learnVocab([current.es], 'vocab_trainer');
 
-  // Handle auto-advance on correct answer
-  useEffect(() => {
-    if (status === 'correct') {
+      // 2. Update SRS scheduler card
+      reviewSRSCard(current.id, Rating.Good);
+
+      // 3. Save deck index and mastered status in trainingStore
+      const nextIndex = (index + 1) % Math.max(1, deck.length);
+      saveVocabProgress(activeLevel, activeCategory, nextIndex, current.id);
+
       const timer = setTimeout(() => {
         advance();
       }, 1200);
       return () => clearTimeout(timer);
     }
-  }, [status, advance]);
+  }, [status, current, index, deck.length, activeLevel, activeCategory, advance, reviewSRSCard, saveVocabProgress]);
 
   if (!current) {
     return (

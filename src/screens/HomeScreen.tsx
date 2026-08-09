@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
 import { useUserData } from '../hooks/useUserData';
 import { useStatsStore, DEFAULT_WEEKLY_ACTIVITY, type WeeklyActivityItem } from '../state/statsStore';
+import { useDailyQuestStore } from '../state/dailyQuestStore';
 import {
   Lightbulb,
   AlertTriangle,
@@ -13,7 +14,8 @@ import {
   Clock,
   Plane,
   BookOpen,
-  Sparkles
+  Sparkles,
+  Target
 } from 'lucide-react';
 import { vaultInsights } from '../data/vaultInsightsData';
 import AppleActivityCard from '../components/AppleActivityCard';
@@ -201,6 +203,18 @@ const HomeScreen: FC = () => {
     }
     return stats;
   }, [learnedVocab]);
+
+  const currentQuest = useDailyQuestStore((s) => s.currentQuest);
+  const pendingQuestTask = useMemo(() => {
+    return currentQuest?.tasks.find((t) => !t.completed);
+  }, [currentQuest]);
+
+  const nextUncompletedLessonNum = useMemo(() => {
+    for (let i = 1; i <= 37; i++) {
+      if (!completedLessons[`lesson${i}`]) return i;
+    }
+    return 1;
+  }, [completedLessons]);
 
   // Vault Insights Randomized Shuffle State (95 items from vaultInsightsData)
   const [insightIndex, setInsightIndex] = useState<number>(() =>
@@ -591,8 +605,37 @@ const HomeScreen: FC = () => {
           </div>
         </div>
 
-        {/* ── 3. MIDDLE SECTION: RECOMMENDED NEXT LESSONS ────────────── */}
-        <div className="space-y-4">
+        {/* ── 3. MIDDLE SECTION: RECOMMENDED NEXT LESSONS & CONTINUITY HERO ────────────── */}
+        <div className="space-y-6">
+          {/* Dynamic "Next Up For You" Hero Card */}
+          <div className="bg-gradient-to-r from-[#7D927D]/20 via-[#5E735E]/15 to-transparent border border-[#7D927D]/40 rounded-3xl p-6 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden">
+            <div className="flex items-start gap-4">
+              <div className="p-3.5 bg-[#7D927D]/20 border border-[#7D927D]/40 text-[#5E735E] rounded-2xl shrink-0 shadow-xs">
+                <Target className="h-7 w-7 text-[#5E735E]" />
+              </div>
+              <div>
+                <span className="font-mono text-[10px] uppercase tracking-widest font-bold text-[#5E735E] bg-[#7D927D]/15 border border-[#7D927D]/30 px-2.5 py-0.5 rounded-full">
+                  NEXT RECOMMENDED STEP FOR YOU
+                </span>
+                <h3 className="font-serif text-xl font-bold text-text-primary mt-1.5">
+                  {pendingQuestTask
+                    ? pendingQuestTask.description
+                    : `Continue Lesson ${nextUncompletedLessonNum} in Basic Español`}
+                </h3>
+                <p className="font-sans text-xs text-text-secondary mt-1 max-w-xl leading-relaxed">
+                  Connected to your personal history ({vocabCount} vocabulary words mastered, {completedLessonCount} lessons done). Pick up right where you left off!
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => navigate(pendingQuestTask?.action_route || '/practice')}
+              className="bg-[#7D927D] hover:bg-[#6B826B] text-white font-bold px-6 py-3 rounded-2xl font-sans text-xs transition-all shadow-md cursor-pointer border-none shrink-0 flex items-center gap-2"
+            >
+              <span>Resume Activity &gt;</span>
+              <Sparkles className="h-4 w-4" />
+            </button>
+          </div>
+
           <div className="flex items-center justify-between">
             <h2 className="font-serif text-2xl font-bold text-text-primary">
               Recommended next lessons

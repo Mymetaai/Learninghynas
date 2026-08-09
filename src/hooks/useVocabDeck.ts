@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react';
 import type { VocabItem } from '../content/types';
 
-export function useVocabDeck(items: VocabItem[]) {
+export function useVocabDeck(items: VocabItem[], initialIndex: number = 0) {
   const [deck, setDeck] = useState<VocabItem[]>(items);
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(initialIndex);
   const [status, setStatus] = useState<'idle' | 'revealed' | 'correct' | 'incorrect'>('idle');
 
-  // Sync deck when items change (e.g. category/level filter changes)
+  // Sync deck when items or initialIndex change (e.g. category/level filter changes)
   useEffect(() => {
     setDeck(items);
-    setIndex(0);
+    const validIdx = items.length > 0 ? Math.min(initialIndex, items.length - 1) : 0;
+    setIndex(validIdx >= 0 ? validIdx : 0);
     setStatus('idle');
-  }, [items]);
+  }, [items, initialIndex]);
 
   const current = deck[index] || null;
 

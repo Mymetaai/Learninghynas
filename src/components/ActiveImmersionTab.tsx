@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, type FC } from 'react';
 import { useActiveImmersionStore } from '../state/activeImmersionStore';
+import { useDailyQuestStore } from '../state/dailyQuestStore';
 import type { ImmersionMode } from '../utils/geminiService';
 import { isGeminiAvailable } from '../utils/geminiService';
 import SpanishVirtualKeyboard from './SpanishVirtualKeyboard';
@@ -127,6 +128,7 @@ const ActiveImmersionTab: FC = () => {
 
   const handleSend = (text: string) => {
     if (!text.trim() || isTyping || !activeMode || !selectedTopic) return;
+    useDailyQuestStore.getState().updateTaskProgress('ai_companion', 1);
     sendMessage(activeMode, selectedTopic, text.trim(), selectedAccent);
     setInputText('');
   };

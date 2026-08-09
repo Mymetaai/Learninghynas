@@ -34,6 +34,15 @@ interface TrainingState {
   /** Total training-session XP earned (display only). */
   trainingSessionsCompleted: number;
 
+  /** Last active level chosen in UnifiedVocabTrainer. */
+  lastActiveLevel: string;
+  /** Last active category chosen in UnifiedVocabTrainer. */
+  lastActiveCategory: string;
+  /** Saved card index per level-category key (e.g. 'A1-Saludos': 4). */
+  categoryProgressIndex: Record<string, number>;
+  /** Track mastered word IDs. */
+  masteredWordIds: Record<string, boolean>;
+
   /** Record a mistake (deduped by word — updates existing if already tracked). */
   recordMistake: (entry: Omit<MistakeEntry, 'reviewedCorrectly'>) => void;
   /** Mark a mistake-word as reviewed correctly once. Removes after 2 correct reviews. */
@@ -42,6 +51,8 @@ interface TrainingState {
   clearAllMistakes: () => void;
   /** Increment sessions completed count. */
   completeTrainingSession: () => void;
+  /** Save current level, category, and card index in training store. */
+  saveVocabProgress: (level: string, category: string, cardIndex: number, wordId?: string) => void;
   /**
    * Award XP + coins for a training session. Delegates to the existing
    * statsStore.addRewards() — no parallel XP system.
@@ -61,6 +72,10 @@ const DEFAULT_STATE = {
   mistakes: [] as MistakeEntry[],
   srsCards: [] as SRSCard[],
   trainingSessionsCompleted: 0,
+  lastActiveLevel: 'A1',
+  lastActiveCategory: 'Saludos',
+  categoryProgressIndex: {} as Record<string, number>,
+  masteredWordIds: {} as Record<string, boolean>,
 };
 
 export const useTrainingStore = create<TrainingState>()(
@@ -104,6 +119,23 @@ export const useTrainingStore = create<TrainingState>()(
 
       completeTrainingSession: () =>
         set((s) => ({ trainingSessionsCompleted: s.trainingSessionsCompleted + 1 })),
+
+      saveVocabProgress: (level, category, cardIndex, wordId) => {
+        set((state) => {
+          const key = `${level}-${category}`;
+          const updatedIndexMap = { ...state.categoryProgressIndex, [key]: cardIndex };
+          const updatedMastered = wordId
+            ? { ...state.masteredWordIds, [wordId]: true }
+            : state.masteredWordIds;
+
+          return {
+            lastActiveLevel: level,
+            lastActiveCategory: category,
+            categoryProgressIndex: updatedIndexMap,
+            masteredWordIds: updatedMastered,
+          };
+        });
+      },
 
       grantTrainingRewards: (correct, total) => {
         const percentage = total > 0 ? correct / total : 0;
@@ -155,6 +187,10 @@ export const useTrainingStore = create<TrainingState>()(
         mistakes: state.mistakes,
         srsCards: state.srsCards,
         trainingSessionsCompleted: state.trainingSessionsCompleted,
+        lastActiveLevel: state.lastActiveLevel,
+        lastActiveCategory: state.lastActiveCategory,
+        categoryProgressIndex: state.categoryProgressIndex,
+        masteredWordIds: state.masteredWordIds,
       }),
     },
   ),

@@ -5,6 +5,7 @@ import Kitsune3D from './Kitsune3D';
 import { isGeminiAvailable, getYukiGeminiResponse, extractTextFromAnyResponse, type YukiHistoryTurn } from '../utils/geminiService';
 import { useStatsStore } from '../state/statsStore';
 import { useProgressStore } from '../state/progressStore';
+import { useDailyQuestStore } from '../state/dailyQuestStore';
 import SpanishVirtualKeyboard from './SpanishVirtualKeyboard';
 
 interface Message {
@@ -101,6 +102,7 @@ const ChibiPet: FC = () => {
       if (res.success) {
         const rawResponse = res.data.text;
         const responseText = extractTextFromAnyResponse(rawResponse);
+        useDailyQuestStore.getState().updateTaskProgress('ai_companion', 1);
         setMessages((prev) => [
           ...prev,
           { sender: 'pet', text: responseText, timestamp: new Date() }
