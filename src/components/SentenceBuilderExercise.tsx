@@ -9,6 +9,7 @@ import {
   Shuffle,
 } from 'lucide-react';
 import { useDailyQuestStore } from '../state/dailyQuestStore';
+import Confetti from './Confetti';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -43,12 +44,12 @@ export interface SentenceBuilderExerciseProps {
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 const ROLE_COLORS: Record<TokenRole, string> = {
-  Subject: 'bg-blue-500/10 border-blue-500/30 text-blue-800',
-  Verb: 'bg-green-500/10 border-green-500/30 text-green-800',
-  Object: 'bg-purple-500/10 border-purple-500/30 text-purple-800',
-  Place: 'bg-orange-500/10 border-orange-500/30 text-orange-800',
-  Time: 'bg-pink-500/10 border-pink-500/30 text-pink-800',
-  Other: 'bg-gray-500/10 border-gray-500/30 text-gray-800',
+  Subject: 'bg-sky-500/10 border-sky-500/30 text-sky-900',
+  Verb: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-900',
+  Object: 'bg-purple-500/10 border-purple-500/30 text-purple-900',
+  Place: 'bg-amber-500/10 border-amber-500/30 text-amber-900',
+  Time: 'bg-rose-500/10 border-rose-500/30 text-rose-900',
+  Other: 'bg-slate-500/10 border-slate-500/30 text-slate-900',
 };
 
 const ROLE_LABELS: Record<TokenRole, string> = {
@@ -76,6 +77,7 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [_showSolution, setShowSolution] = useState(false);
+  const [fireConfetti, setFireConfetti] = useState(false);
   const [timeStarted] = useState(Date.now());
   const [draggedToken, setDraggedToken] = useState<Token | null>(null);
   const dropZoneRef = useRef<HTMLDivElement>(null);
@@ -93,6 +95,7 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
     setIsSubmitted(false);
     setIsCorrect(false);
     setShowSolution(false);
+    setFireConfetti(false);
   }, [exercise]);
 
   // ─── Event Handlers ────────────────────────────────────────────────────────
@@ -139,6 +142,7 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
       setIsSubmitted(false);
       setIsCorrect(false);
       setShowSolution(false);
+      setFireConfetti(false);
     } else {
       // Shuffle remaining tokens
       setShuffledTokens((prev) => {
@@ -164,6 +168,8 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
     setIsSubmitted(true);
 
     if (correctOrder) {
+      setFireConfetti(true);
+      setTimeout(() => setFireConfetti(false), 3000);
       useDailyQuestStore.getState().updateTaskProgress('sentence_builder', 1);
     }
 
@@ -188,6 +194,7 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
     setIsSubmitted(false);
     setIsCorrect(false);
     setShowSolution(false);
+    setFireConfetti(false);
   };
 
   // ─── Render ────────────────────────────────────────────────────────────────
@@ -195,7 +202,9 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
   const allPlaced = placedTokens.length === exercise.tokens.length;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative">
+      <Confetti fire={fireConfetti} />
+
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -304,8 +313,8 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
               className={`px-4 py-2.5 rounded-xl border font-semibold text-sm ${
                 isSubmitted
                   ? token.order === exercise.tokens[index].order
-                    ? 'bg-[#7D927D] text-white border-[#7D927D]'
-                    : 'bg-[#C4796B] text-white border-[#C4796B]'
+                    ? 'bg-[#7D927D]/20 text-[#5E735E] border-[#7D927D]/50 font-bold shadow-xs'
+                    : 'bg-[#C4796B]/20 text-[#C4796B] border-[#C4796B]/50 font-bold shadow-xs'
                   : `${ROLE_COLORS[token.role]} cursor-pointer`
               }`}
               onClick={() => handleRemoveToken(token)}
@@ -368,79 +377,94 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
       <AnimatePresence>
         {isSubmitted && (
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 12, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10 }}
-            className={`rounded-2xl p-5 border text-white font-bold ${
+            className={`rounded-2xl p-6 border shadow-sm backdrop-blur-md transition-all ${
               isCorrect
-                ? 'bg-[#7D927D] border-[#7D927D]'
-                : 'bg-[#C4796B] border-[#C4796B]'
+                ? 'bg-[#7D927D]/12 border-[#7D927D]/40 text-text-primary'
+                : 'bg-[#C4796B]/12 border-[#C4796B]/40 text-text-primary'
             }`}
           >
-            <div className="flex items-start gap-3">
-              {isCorrect ? (
-                <CheckCircle2 className="h-5 w-5 text-white shrink-0 mt-0.5" />
-              ) : (
-                <XCircle className="h-5 w-5 text-white shrink-0 mt-0.5" />
-              )}
-              <div className="flex-1">
-                <p className="font-bold text-sm mb-2">
-                  {isCorrect
-                    ? '✅ Correct! Well done!'
-                    : '❌ Not quite right. Let\'s review.'}
-                </p>
+            {/* Header Badge */}
+            <div className="flex items-center justify-between gap-3 mb-4 border-b border-structural/30 pb-3">
+              <div className="flex items-center gap-2">
+                <span
+                  className={`font-mono text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5 shadow-xs ${
+                    isCorrect
+                      ? 'bg-[#7D927D] text-white border border-[#5E735E]'
+                      : 'bg-[#C4796B] text-white border border-[#A8584A]'
+                  }`}
+                >
+                  {isCorrect ? (
+                    <>
+                      <CheckCircle2 className="h-3.5 w-3.5 text-white" />
+                      <span>Correct! Well done!</span>
+                    </>
+                  ) : (
+                    <>
+                      <XCircle className="h-3.5 w-3.5 text-white" />
+                      <span>Not quite right. Let&apos;s review.</span>
+                    </>
+                  )}
+                </span>
+              </div>
+              <span className="font-mono text-[10px] uppercase font-bold text-text-tertiary">
+                {exercise.cefrLevel} Pattern
+              </span>
+            </div>
 
-                {/* Token Breakdown */}
-                <div className="space-y-2 mt-3">
-                  <p className="text-xs font-mono uppercase tracking-wider text-text-tertiary">
-                    Sentence Breakdown
-                  </p>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    {exercise.tokens.map((token) => (
-                      <div
-                        key={token.order}
-                        className={`p-2 rounded-lg border text-xs ${
-                          ROLE_COLORS[token.role]
-                        }`}
-                      >
-                        <span className="font-bold">{token.text}</span>
-                        <span className="block text-[10px] text-text-tertiary">
-                          {ROLE_LABELS[token.role]}
-                        </span>
-                      </div>
-                    ))}
+            {/* Token Breakdown Grid */}
+            <div className="space-y-2">
+              <p className="text-[11px] font-mono uppercase tracking-wider font-bold text-[#5E735E]">
+                Sentence Breakdown
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                {exercise.tokens.map((token) => (
+                  <div
+                    key={token.order}
+                    className={`p-3 rounded-xl border flex flex-col justify-between shadow-2xs transition-all ${
+                      ROLE_COLORS[token.role]
+                    }`}
+                  >
+                    <span className="font-bold text-sm leading-tight text-text-primary">
+                      {token.text}
+                    </span>
+                    <span className="block text-[10px] font-mono font-bold uppercase tracking-wider text-text-secondary mt-1.5">
+                      {ROLE_LABELS[token.role]}
+                    </span>
                   </div>
-                </div>
-
-                {/* Correct Sentence */}
-                <div className="mt-3 pt-3 border-t border-structural/50">
-                  <p className="text-xs text-text-tertiary mb-1">
-                    Correct sentence:
-                  </p>
-                  <p className="font-semibold text-sm text-text-primary">
-                    {exercise.spanishSentence}
-                  </p>
-                  <p className="text-xs text-text-secondary mt-1">
-                    {exercise.englishTranslation}
-                  </p>
-                </div>
-
-                {!isCorrect && (
-                  <div className="mt-3 p-3 bg-bg-elevated-2 rounded-lg border border-structural">
-                    <p className="text-xs text-text-secondary">
-                      <strong>Tip:</strong> Remember the word order pattern:{' '}
-                      {exercise.cefrLevel === 'A1'
-                        ? 'Subject + Verb + Object'
-                        : exercise.cefrLevel === 'A2'
-                        ? 'Subject + Verb + Object + Place'
-                        : exercise.cefrLevel === 'B1'
-                        ? 'Subject + Verb + Object + Place + Time'
-                        : 'Place before Time in Spanish!'}
-                    </p>
-                  </div>
-                )}
+                ))}
               </div>
             </div>
+
+            {/* Correct Sentence Display */}
+            <div className="mt-4 pt-3.5 border-t border-structural/40">
+              <p className="text-[11px] font-mono uppercase tracking-wider font-bold text-text-tertiary mb-1">
+                Correct sentence:
+              </p>
+              <p className="font-serif text-lg font-bold text-text-primary">
+                {exercise.spanishSentence}
+              </p>
+              <p className="font-sans text-xs text-text-secondary mt-0.5 font-medium">
+                {exercise.englishTranslation}
+              </p>
+            </div>
+
+            {!isCorrect && (
+              <div className="mt-4 p-3.5 bg-bg-elevated-2/90 rounded-xl border border-structural/50 shadow-xs">
+                <p className="text-xs text-text-secondary leading-relaxed">
+                  <strong className="text-text-primary font-bold">Tip:</strong> Remember the word order pattern:{' '}
+                  {exercise.cefrLevel === 'A1'
+                    ? 'Subject + Verb + Object'
+                    : exercise.cefrLevel === 'A2'
+                    ? 'Subject + Verb + Object + Place'
+                    : exercise.cefrLevel === 'B1'
+                    ? 'Subject + Verb + Object + Place + Time'
+                    : 'Place before Time in Spanish!'}
+                </p>
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
