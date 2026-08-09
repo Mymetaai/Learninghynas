@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, type FC } from 'react';
 import { useActiveImmersionStore } from '../state/activeImmersionStore';
 import type { ImmersionMode } from '../utils/geminiService';
 import { isGeminiAvailable } from '../utils/geminiService';
+import SpanishVirtualKeyboard from './SpanishVirtualKeyboard';
 import {
   Send,
   Languages,
@@ -102,6 +103,7 @@ const ActiveImmersionTab: FC = () => {
   const [revealedTranslations, setRevealedTranslations] = useState<Set<string>>(new Set());
   const [showLearnedWordsModal, setShowLearnedWordsModal] = useState(false);
   const feedRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // Session key & data
   const sessionKey = activeMode && selectedTopic ? `${activeMode}-${selectedTopic}` : null;
@@ -588,6 +590,14 @@ const ActiveImmersionTab: FC = () => {
           </div>
         )}
 
+        {/* Virtual Spanish Keyboard */}
+        <div className="pb-1">
+          <SpanishVirtualKeyboard 
+            onInsert={(text) => setInputText(text)} 
+            inputRef={inputRef}
+          />
+        </div>
+
         {/* Input Form */}
         <form
           onSubmit={(e) => {
@@ -597,6 +607,7 @@ const ActiveImmersionTab: FC = () => {
           className="flex gap-3"
         >
           <input
+            ref={inputRef}
             type="text"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}

@@ -5,6 +5,7 @@ import { useEffect, type FC } from 'react';
 import { Outlet } from 'react-router-dom';
 import HUD from './HUD';
 import ChibiPet from './ChibiPet';
+import GlobalSpanishKeyboard from './GlobalSpanishKeyboard';
 import { useActiveStudyTimer } from '../hooks/useActiveStudyTimer';
 import { useShopStore } from '../state/shopStore';
 
@@ -31,6 +32,7 @@ const AppShell: FC = () => {
         <Outlet />
       </main>
       <ChibiPet />
+      <GlobalSpanishKeyboard />
     </div>
   );
 };

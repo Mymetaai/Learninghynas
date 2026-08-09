@@ -2,9 +2,10 @@ import { useState, useEffect, useRef, type FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, X } from 'lucide-react';
 import Kitsune3D from './Kitsune3D';
-import { isGeminiAvailable, getYukiGeminiResponse, type YukiHistoryTurn } from '../utils/geminiService';
+import { isGeminiAvailable, getYukiGeminiResponse, extractTextFromAnyResponse, type YukiHistoryTurn } from '../utils/geminiService';
 import { useStatsStore } from '../state/statsStore';
 import { useProgressStore } from '../state/progressStore';
+import SpanishVirtualKeyboard from './SpanishVirtualKeyboard';
 
 interface Message {
   sender: 'user' | 'pet';
@@ -32,6 +33,7 @@ const ChibiPet: FC = () => {
   const [direction] = useState<'left' | 'right'>('left');
 
   const chatEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // Auto-scroll to bottom of chat
   useEffect(() => {
@@ -61,10 +63,10 @@ const ChibiPet: FC = () => {
     return () => clearInterval(interval);
   }, [isOpen]);
 
-  const handleSend = async () => {
-    if (!inputValue.trim()) return;
+  const handleSendText = async (textToSend: string) => {
+    if (!textToSend.trim()) return;
 
-    const userMsg = inputValue.trim();
+    const userMsg = textToSend.trim();
     setInputValue('');
     setApiError(null);
 
@@ -97,7 +99,8 @@ const ChibiPet: FC = () => {
       setIsTyping(false);
 
       if (res.success) {
-        const responseText = res.data.text;
+        const rawResponse = res.data.text;
+        const responseText = extractTextFromAnyResponse(rawResponse);
         setMessages((prev) => [
           ...prev,
           { sender: 'pet', text: responseText, timestamp: new Date() }
@@ -137,6 +140,8 @@ const ChibiPet: FC = () => {
     }
   };
 
+  const handleSend = () => handleSendText(inputValue);
+
   return (
     <div 
       className="fixed bottom-0 left-0 right-0 z-50 pointer-events-none"
@@ -168,7 +173,7 @@ const ChibiPet: FC = () => {
                   <div className="min-w-0">
                     <div className="flex items-center gap-1.5">
                       <h3 className="font-serif text-xs font-bold text-slate-100 truncate">
-                        Yuki — Executive AI Companion / Senior Language Advisor
+                        Yuki — Senior Language Advisor
                       </h3>
                     </div>
                     <div className="flex items-center gap-1.5 mt-0.5">
@@ -219,7 +224,7 @@ const ChibiPet: FC = () => {
                     <div className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-xs font-sans whitespace-pre-line ${
                       msg.sender === 'user' 
                         ? 'bg-amber-600/90 text-amber-50 border border-amber-500/50 shadow-md font-semibold rounded-tr-none' 
-                        : 'bg-slate-800/90 border border-slate-700 text-slate-100 shadow-md rounded-tl-none'
+                        : 'bg-slate-800/90 border border-slate-700 text-slate-100 shadow-md rounded-tl-none leading-relaxed'
                     }`}>
                       {msg.text}
                     </div>
@@ -240,28 +245,38 @@ const ChibiPet: FC = () => {
               {/* Suggested quick buttons */}
               <div className="px-3 py-2 flex gap-2 overflow-x-auto bg-slate-900/80 border-t border-slate-800 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 <button 
-                  onClick={() => { setInputValue('Ser vs Estar nuances'); }}
+                  onClick={() => handleSendText('Ser vs Estar nuances')}
                   className="text-[10px] font-sans bg-amber-600/90 hover:bg-amber-500 border border-amber-500/50 text-white px-3 py-1 rounded-full cursor-pointer shrink-0 transition-all font-semibold shadow-sm"
                 >
                   Ser vs Estar
                 </button>
                 <button 
-                  onClick={() => { setInputValue('Executive daily strategy'); }}
+                  onClick={() => handleSendText('Executive daily strategy')}
                   className="text-[10px] font-sans bg-amber-600/90 hover:bg-amber-500 border border-amber-500/50 text-white px-3 py-1 rounded-full cursor-pointer shrink-0 transition-all font-semibold shadow-sm"
                 >
                   Daily Strategy
                 </button>
                 <button 
-                  onClick={() => { setInputValue('Fluency assessment insights'); }}
+                  onClick={() => handleSendText('Fluency assessment insights')}
                   className="text-[10px] font-sans bg-amber-600/90 hover:bg-amber-500 border border-amber-500/50 text-white px-3 py-1 rounded-full cursor-pointer shrink-0 transition-all font-semibold shadow-sm"
                 >
                   Fluency Insights
                 </button>
               </div>
 
+              {/* Virtual Spanish Keyboard */}
+              <div className="px-3 pt-2 bg-slate-900/90 border-t border-slate-800/80">
+                <SpanishVirtualKeyboard 
+                  onInsert={(text) => setInputValue(text)} 
+                  inputRef={inputRef}
+                  compact
+                />
+              </div>
+
               {/* Input Footer */}
               <div className="p-3 border-t border-slate-800 bg-slate-900/90 flex items-center gap-2">
                 <input 
+                  ref={inputRef}
                   type="text" 
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}

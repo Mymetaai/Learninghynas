@@ -3,6 +3,7 @@
 // in a text input. Compares case-insensitively with trimmed whitespace.
 import { useState, useRef, useEffect, type FC } from 'react';
 import { motion } from 'framer-motion';
+import SpanishVirtualKeyboard from '../SpanishVirtualKeyboard';
 
 interface TranslationInputProps {
   prompt: string;
@@ -48,6 +49,12 @@ const TranslationInput: FC<TranslationInputProps> = ({
         {directionLabel}
       </p>
       <p className="mb-4 font-serif text-xl font-bold text-text-primary">{prompt}</p>
+
+      {!submitted && (
+        <div className="mb-2">
+          <SpanishVirtualKeyboard onInsert={(text) => setInput(text)} inputRef={inputRef} />
+        </div>
+      )}
 
       <div className="flex gap-2">
         <input

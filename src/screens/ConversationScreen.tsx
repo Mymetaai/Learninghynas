@@ -9,6 +9,7 @@ import { useSettingsStore } from '../state/settingsStore';
 import { translateToHinglish, translateWordToHinglish } from '../utils/hinglish';
 import { isGeminiAvailable } from '../utils/geminiService';
 import ActiveImmersionTab from '../components/ActiveImmersionTab';
+import SpanishVirtualKeyboard from '../components/SpanishVirtualKeyboard';
 import { 
   Send, 
   Languages, 
@@ -66,6 +67,8 @@ const ConversationScreen: FC = () => {
   } | null>(null);
 
   const feedRef = useRef<HTMLDivElement>(null);
+  const scenarioInputRef = useRef<HTMLInputElement>(null);
+  const classicInputRef = useRef<HTMLInputElement>(null);
 
   // Active Scenario object & active conversation
   const activeScenario = SCENARIOS.find((s) => s.id === activeScenarioId);
@@ -556,6 +559,14 @@ const ConversationScreen: FC = () => {
                     })()
                   )}
 
+                  {/* Virtual Spanish Keyboard */}
+                  <div className="pb-1">
+                    <SpanishVirtualKeyboard 
+                      onInsert={(text) => setInputText(text)} 
+                      inputRef={scenarioInputRef}
+                    />
+                  </div>
+
                   {/* Input Form */}
                   <form 
                     onSubmit={(e) => {
@@ -565,6 +576,7 @@ const ConversationScreen: FC = () => {
                     className="flex gap-3"
                   >
                     <input
+                      ref={scenarioInputRef}
                       type="text"
                       value={inputText}
                       onChange={(e) => setInputText(e.target.value)}
@@ -774,7 +786,13 @@ const ConversationScreen: FC = () => {
                 )}
               </div>
 
-              <div className="bg-bg-elevated-2 border-t border-structural p-4">
+              <div className="bg-bg-elevated-2 border-t border-structural p-4 space-y-3">
+                <div className="pb-1">
+                  <SpanishVirtualKeyboard 
+                    onInsert={(text) => setInputText(text)} 
+                    inputRef={classicInputRef}
+                  />
+                </div>
                 <form 
                   onSubmit={(e) => {
                     e.preventDefault();
@@ -783,6 +801,7 @@ const ConversationScreen: FC = () => {
                   className="flex gap-3"
                 >
                   <input
+                    ref={classicInputRef}
                     type="text"
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}

@@ -168,6 +168,77 @@ function parseApiError(err: any): GeminiErrorDetails {
   };
 }
 
+/**
+ * Intelligently extracts plain text content from any raw model output string,
+ * handling valid JSON, truncated JSON (missing closing quotes/braces), and plain text.
+ */
+export function extractTextFromAnyResponse(rawText: string): string {
+  if (!rawText || !rawText.trim()) return '';
+
+  let cleaned = rawText
+    .replace(/^```json\s*/i, '')
+    .replace(/^```\s*/i, '')
+    .replace(/\s*```$/i, '')
+    .trim();
+
+  // 1. Try standard JSON parsing if it looks like JSON
+  if (cleaned.startsWith('{')) {
+    try {
+      let toParse = cleaned;
+      if (!toParse.endsWith('}')) {
+        if (toParse.includes('"') && (toParse.match(/"/g)?.length || 0) % 2 !== 0) {
+          toParse += '"';
+        }
+        toParse += '}';
+      }
+      const parsed = JSON.parse(toParse);
+      if (parsed && typeof parsed === 'object') {
+        const val = parsed.text || parsed.reply || parsed.response || parsed.message || parsed.content || parsed.answer;
+        if (typeof val === 'string' && val.trim()) {
+          return val.trim();
+        }
+      }
+    } catch (_) {
+      // Fall through to regex extraction
+    }
+  }
+
+  // 2. Regex extraction for common JSON key patterns (handles complete and truncated JSON strings)
+  const keyPattern = /"(?:text|reply|response|message|content|answer)"\s*:\s*"(.*)/i;
+  const match = cleaned.match(keyPattern);
+  if (match && match[1]) {
+    let extracted = match[1];
+    const endQuoteIdx = extracted.lastIndexOf('"');
+    if (endQuoteIdx !== -1 && endQuoteIdx > 0) {
+      const afterQuote = extracted.substring(endQuoteIdx + 1).trim();
+      if (afterQuote === '' || afterQuote.startsWith(',') || afterQuote.startsWith('}')) {
+        extracted = extracted.substring(0, endQuoteIdx);
+      }
+    }
+    extracted = extracted
+      .replace(/\\n/g, '\n')
+      .replace(/\\"/g, '"')
+      .replace(/\\\\/g, '\\')
+      .trim();
+
+    if (extracted) {
+      return extracted;
+    }
+  }
+
+  // 3. Fallback: if it starts with JSON object syntax, strip JSON structural boilerplate
+  if (cleaned.startsWith('{')) {
+    cleaned = cleaned
+      .replace(/^{\s*"(?:text|reply|response|message|content|answer)"\s*:\s*"/i, '')
+      .replace(/"\s*}\s*$/, '')
+      .replace(/\\n/g, '\n')
+      .replace(/\\"/g, '"')
+      .trim();
+  }
+
+  return cleaned;
+}
+
 function extractFieldsFromRawText(rawText: string): {
   text: string;
   translation: string;
@@ -175,10 +246,9 @@ function extractFieldsFromRawText(rawText: string): {
 } {
   if (!rawText) return { text: '', translation: '', quickReplies: [] };
 
-  const textMatch = rawText.match(/"text"\s*:\s*"([^"\\]*(?:\\.[^"\\]*)*)"/i);
-  const transMatch = rawText.match(/"translation"\s*:\s*"([^"\\]*(?:\\.[^"\\]*)*)"/i);
+  const extractedText = extractTextFromAnyResponse(rawText);
 
-  let extractedText = textMatch ? textMatch[1].replace(/\\n/g, '\n').replace(/\\"/g, '"') : '';
+  const transMatch = rawText.match(/"translation"\s*:\s*"([^"\\]*(?:\\.[^"\\]*)*)"/i);
   let extractedTranslation = transMatch ? transMatch[1].replace(/\\n/g, '\n').replace(/\\"/g, '"') : '';
 
   if (extractedText && extractedText.trim()) {
@@ -192,16 +262,8 @@ function extractFieldsFromRawText(rawText: string): {
     };
   }
 
-  const cleanedText = rawText
-    .replace(/^```json\s*/i, '')
-    .replace(/^```\s*/i, '')
-    .replace(/\s*```$/i, '')
-    .replace(/[{}[\]]/g, '')
-    .replace(/"(text|translation|quickReplies|signOff|newVocabWords)":/gi, '')
-    .trim();
-
   return {
-    text: cleanedText || '¡Hola! Continuemos practicando.',
+    text: '¡Hola! Continuemos practicando.',
     translation: 'English translation of the message.',
     quickReplies: [
       { text: '¡Sí, continuemos!', translation: "Yes, let's continue!" },
@@ -229,8 +291,13 @@ function safeParseJsonResponse<T>(rawText: string, fallbackGenerator: (raw: stri
 
   try {
     const res = JSON.parse(cleaned) as any;
-    if (res && typeof res === 'object' && (res.text || res.translation)) {
-      return res as T;
+    if (res && typeof res === 'object') {
+      if (!res.text && (res.reply || res.response || res.message || res.content || res.answer)) {
+        res.text = res.reply || res.response || res.message || res.content || res.answer;
+      }
+      if (res.text || res.translation) {
+        return res as T;
+      }
     }
   } catch (_) {}
 
@@ -239,8 +306,13 @@ function safeParseJsonResponse<T>(rawText: string, fallbackGenerator: (raw: stri
       .replace(/[\u0000-\u001F]+/g, ' ')
       .replace(/(?<=:\s*"[^"]*)\n(?=[^"]*")/g, '\\n');
     const res = JSON.parse(sanitized) as any;
-    if (res && typeof res === 'object' && (res.text || res.translation)) {
-      return res as T;
+    if (res && typeof res === 'object') {
+      if (!res.text && (res.reply || res.response || res.message || res.content || res.answer)) {
+        res.text = res.reply || res.response || res.message || res.content || res.answer;
+      }
+      if (res.text || res.translation) {
+        return res as T;
+      }
     }
   } catch (_) {}
 
@@ -419,7 +491,7 @@ You MUST respond with valid JSON only. No markdown, no code fences, no extra tex
 - Never break character or mention you are an AI
 - The "text" field should ALWAYS be in Spanish and must NEVER contain markdown symbols (no asterisks *, **, or hash symbols #). Write in clean, plain text.
 - The "translation" field should ALWAYS be the English translation of the "text" field (no markdown).
-- Keep the main letter body in "text" crisp and concise (under 80 words, max 2-3 short paragraphs).`;
+- Keep the main letter body in "text" well-structured, warm, complete, and engaging (100-200 words). Never cut off mid-sentence.`;
 }
 
 /**
@@ -451,7 +523,7 @@ export async function getCompanionGeminiResponse(
     ? `${conversationContext}\n\nStudent: ${userMessage}`
     : `Student: ${userMessage}`;
 
-  const res = await callGeminiApi(systemPrompt, fullPrompt, 0.8, 1024, 'application/json');
+  const res = await callGeminiApi(systemPrompt, fullPrompt, 0.8, 2048, 'application/json');
   if (!res.success) {
     return res;
   }
@@ -521,27 +593,27 @@ export interface YukiResponseData {
 export type YukiHistoryEntry = YukiHistoryTurn | { role: 'user' | 'yuki'; text: string };
 
 function buildYukiFallbackSystemPrompt(userContext?: string): string {
-  return `You are Yuki, a 3D Nine-Tailed Kitsune spirit guide in "TheLearningHyena" Spanish learning academy, who also acts as a knowledgeable, encouraging Spanish professor.
-Your role is to guide students, answer their questions about Spanish grammar, vocabulary, and app features, and motivate them to study.
+  return `You are Yuki, a 3D Nine-Tailed Kitsune spirit guide in "TheLearningHyena" Spanish learning academy, who also acts as a senior executive Spanish language advisor and professor.
+Your role is to guide students, answer their questions about Spanish grammar, vocabulary, fluency assessment insights, and immersion strategy, and motivate them to reach mastery.
 
 ${userContext ? `## Live Student App Context (Use to personalize replies naturally)\n${userContext}\n` : ''}
 
 ## Master Pedagogical & Response Rules (CRITICAL - DO NOT VIOLATE)
 1. **Analyze What the Student Says**: Carefully analyze the student's message, word choice, grammar, length, and confidence level.
-2. **Answer Questions Directly FIRST**: If the student asks any question (e.g., "what is soy and tu", "what does X mean", "how do I say Y"), ALWAYS answer their question directly, accurately, and immediately in the first sentence before adding anything else.
-3. **Quote-Then-Respond**: Start your response by restating or quoting what the student wrote (e.g. "Regarding your question about 'soy and tu'...") so they know you are directly analyzing their exact message.
-4. **Anti-Generic-Reply Guard**: NEVER give a generic canned reply that could apply to any prompt. Every single reply MUST contain at least one direct reference to the specific words or question the user wrote.
+2. **Answer Questions Directly FIRST**: If the student asks any question (e.g., "what is soy and tu", "fluency assessment insights", "ser vs estar", "daily strategy"), ALWAYS answer their question directly, accurately, and thoroughly in the first sentence.
+3. **Quote-Then-Respond**: Start your response by restating or quoting what the student wrote (e.g. "Regarding your request for fluency assessment insights...") so they know you are directly analyzing their exact message.
+4. **Anti-Generic-Reply Guard**: NEVER give a generic canned reply. Every single reply MUST contain direct references to the specific topic or question the user wrote.
 5. **Memory Anchor**: Use the provided conversation history to maintain full continuity. Remember earlier topics, names, and questions.
 6. **Adapt Difficulty**:
    - If the student writes simple sentences or basic questions → explain simply and clearly.
    - If the student writes fluent Spanish → reply with native-level vocabulary.
 7. **Personality & Tone**:
-   - Enthusiastic, warm, loyal Kitsune spirit guide & Spanish professor.
+   - Executive, enthusiastic, warm, loyal Kitsune spirit guide & senior Spanish professor.
    - Occasional anime/kitsune expressions like "Dattebayo!", "Minna-san!", or references to your nine tails wagging, spirit energy, or chakra.
    - Use emojis (🦊, ✨, 🪙, ⚔️, 🧭, 📊, 📖).
-8. **Strict Formatting**:
-   - NEVER use markdown formatting (no asterisks *, **, or hash symbols #). Write in clean, plain text.
-   - Keep replies crisp and concise (under 90 words, max 2 short paragraphs).`;
+8. **Strict Formatting & Thorough Response**:
+   - Provide detailed, professional, high-value explanations for strategy, insights, grammar questions, or fluency assessments (120-220 words, 2-3 clear paragraphs). Never cut off mid-sentence.
+   - Do NOT use markdown formatting symbols (no asterisks *, **, or hash symbols #). Write in clean, plain text.`;
 }
 
 export async function getYukiGeminiResponse(
@@ -589,7 +661,7 @@ export async function getYukiGeminiResponse(
     parts: [{ text: latestPrompt }],
   });
 
-  const res = await callGeminiApi(systemInstruction, formattedContents, 0.8);
+  const res = await callGeminiApi(systemInstruction, formattedContents, 0.8, 2048, 'application/json');
   if (!res.success) {
     return res;
   }
@@ -604,10 +676,20 @@ export async function getYukiGeminiResponse(
       .replace(/\s*```$/i, '')
       .trim();
 
-    if (cleanedJsonStr.startsWith('{') && cleanedJsonStr.endsWith('}')) {
-      const parsed = JSON.parse(cleanedJsonStr);
-      if (parsed && typeof parsed.text === 'string') {
-        rawText = parsed.text;
+    if (cleanedJsonStr.startsWith('{')) {
+      let toParse = cleanedJsonStr;
+      if (!toParse.endsWith('}')) {
+        if (toParse.includes('"') && (toParse.match(/"/g)?.length || 0) % 2 !== 0) {
+          toParse += '"';
+        }
+        toParse += '}';
+      }
+      const parsed = JSON.parse(toParse);
+      if (parsed && typeof parsed === 'object') {
+        const val = parsed.text || parsed.reply || parsed.response || parsed.message || parsed.content || parsed.answer;
+        if (typeof val === 'string' && val.trim()) {
+          rawText = val;
+        }
         if (typeof parsed.animationHint === 'string') {
           animationHint = parsed.animationHint;
         }
@@ -617,7 +699,7 @@ export async function getYukiGeminiResponse(
     // Plain text response
   }
 
-  const cleanedText = rawText
+  const cleanedText = extractTextFromAnyResponse(rawText)
     .replace(/\*\*?/g, '')
     .replace(/__?/g, '')
     .replace(/#+\s*/g, '')
@@ -680,7 +762,7 @@ You MUST respond with valid JSON ONLY (no markdown code blocks, no backticks, no
 }
 
 ## Strict Formatting Rule:
-Do NOT use markdown symbols (no asterisks *, no bold **, no headings #) in the "text" or "translation" fields. Write in clean plain text. Keep the response crisp (under 90 words).`;
+Do NOT use markdown symbols (no asterisks *, no bold **, no headings #) in the "text" or "translation" fields. Write in clean plain text. Keep the response complete, natural, and engaging (100-180 words). Never cut off mid-sentence.`;
 }
 
 /**
@@ -706,7 +788,7 @@ export async function getScenarioGeminiResponse(
     ? `${conversationContext}\n\nStudent: ${userMessage}`
     : `Student: ${userMessage}`;
 
-  const res = await callGeminiApi(systemPrompt, fullPrompt, 0.7, 1024, 'application/json');
+  const res = await callGeminiApi(systemPrompt, fullPrompt, 0.7, 2048, 'application/json');
   if (!res.success) {
     return res;
   }
@@ -887,9 +969,7 @@ export async function getActiveImmersionResponse(
   const temperature =
     mode === 'daily' || mode === 'vocabulary' ? 0.7 : 0.85;
 
-  // Structured modes generate large multi-item content (7-day plans, vocab groups)
-  // so they need a much higher token limit to avoid truncated JSON.
-  const maxTokens = mode === 'daily' || mode === 'vocabulary' ? 8192 : 1024;
+  const maxTokens = 4096;
 
   const res = await callGeminiApi(systemPrompt, fullPrompt, temperature, maxTokens, 'application/json');
   if (!res.success) {
