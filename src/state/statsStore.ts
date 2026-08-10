@@ -175,9 +175,25 @@ export const useStatsStore = create<StatsState>()(
         const state = get();
         const today = todayKey();
         const prev = state.lastActiveDate;
-        if (!prev || prev === today) return;
+        
+        if (!prev) {
+          set({ streak: 1, lastActiveDate: today });
+          const uid = getCurrentUserId();
+          if (uid) syncUserStats(uid, get()).catch(() => {});
+          return;
+        }
+        if (prev === today) return;
 
         const diff = dayDiff(prev, today);
+        if (diff === 1) {
+          // Consecutive day login: automatically increment streak & record active date
+          const nextStreak = Math.max(1, state.streak + 1);
+          set({ streak: nextStreak, lastActiveDate: today });
+          const uid = getCurrentUserId();
+          if (uid) syncUserStats(uid, get()).catch(() => {});
+          return;
+        }
+
         if (diff > 1) {
           try {
             const entitlements = useEntitlementStore.getState();
@@ -194,6 +210,8 @@ export const useStatsStore = create<StatsState>()(
             }
           } catch {}
           set({ streak: 0 });
+          const uid = getCurrentUserId();
+          if (uid) syncUserStats(uid, get()).catch(() => {});
         }
       },
 
