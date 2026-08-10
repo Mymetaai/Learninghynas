@@ -9,6 +9,9 @@ import { useEntitlementStore } from '../state/entitlementStore';
 import { useTrainingStore } from '../state/trainingStore';
 import { useScenarioStore } from '../state/scenarioStore';
 import { useActiveImmersionStore } from '../state/activeImmersionStore';
+import { useStoryProgressStore } from '../state/storyProgressStore';
+import { useShopStore } from '../state/shopStore';
+import { useCompanionStore } from '../state/companionStore';
 
 export interface UserProgressData {
   user_id: string;
@@ -337,14 +340,6 @@ export function useUserData() {
 
   const resetAllUserProgress = useCallback(async () => {
     const targetUserId = user?.id || 'guest';
-    const freshData: UserProgressData = {
-      user_id: targetUserId,
-      xp: 0,
-      level: 1,
-      kitsune_coins: 100,
-      streak_days: 0,
-      weekly_activity: useStatsStore.getState().weeklyActivity,
-    };
 
     // 1. Reset ALL Zustand stores across the entire app
     useStatsStore.getState().reset();
@@ -355,6 +350,18 @@ export function useUserData() {
     useTrainingStore.getState().clearAllMistakes();
     useScenarioStore.getState().resetAllScenarios();
     useActiveImmersionStore.getState().resetAllImmersionSessions();
+    useStoryProgressStore.getState().resetStoryProgress();
+    useShopStore.getState().resetShopInventory();
+    useCompanionStore.getState().resetConversations();
+
+    const freshData: UserProgressData = {
+      user_id: targetUserId,
+      xp: 0,
+      level: 1,
+      kitsune_coins: 100,
+      streak_days: 0,
+      weekly_activity: useStatsStore.getState().weeklyActivity,
+    };
 
     // 2. Clear all store persistence keys from localStorage
     const keysToRemove = [
@@ -365,8 +372,13 @@ export function useUserData() {
       'wayfarer-progress',
       'wayfarer-canonical-entitlements',
       'wayfarer-active-immersion',
+      'wayfarer-training',
       'wayfarer-training-store',
       'wayfarer-scenarios',
+      'wayfarer-story-progress',
+      'hyena-quest-store',
+      'hyena-shop-store',
+      'wayfarer-companions',
     ];
     if (user?.id) {
       keysToRemove.push(`wayfarer_user_progress_${user.id}`);

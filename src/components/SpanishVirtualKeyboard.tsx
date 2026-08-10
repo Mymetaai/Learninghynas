@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Keyboard, ArrowUp } from 'lucide-react';
+import { Keyboard, ArrowUp, ChevronDown } from 'lucide-react';
 
 export interface SpanishVirtualKeyboardProps {
   onInsert: (char: string) => void;
@@ -93,6 +93,16 @@ export const SpanishVirtualKeyboard: React.FC<SpanishVirtualKeyboardProps> = ({
                 {char}
               </button>
             ))}
+
+            {/* Minimize Button */}
+            <button
+              type="button"
+              onClick={() => setIsOpen(false)}
+              className="p-1 rounded-lg text-slate-400 border border-slate-700 hover:text-white hover:bg-slate-700/80 transition-all cursor-pointer select-none flex items-center justify-center shrink-0"
+              title="Minimizar Teclado"
+            >
+              <ChevronDown className="h-3 w-3" />
+            </button>
           </>
         )}
       </div>

@@ -1,13 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Keyboard, ArrowUp } from 'lucide-react';
+import { Keyboard, ArrowUp, ChevronDown, ChevronUp } from 'lucide-react';
 
 const LOWERCASE_CHARS = ['á', 'é', 'í', 'ó', 'ú', 'ñ', 'ü', '¿', '¡'];
 const UPPERCASE_CHARS = ['Á', 'É', 'Í', 'Ó', 'Ú', 'Ñ', 'Ü', '¿', '¡'];
 
 export const GlobalSpanishKeyboard: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(() => {
+    try {
+      const saved = localStorage.getItem('wayfarer-keyboard-open');
+      return saved !== null ? JSON.parse(saved) : true;
+    } catch {
+      return true;
+    }
+  });
   const [isUppercase, setIsUppercase] = useState(false);
   const lastActiveElementRef = useRef<HTMLInputElement | HTMLTextAreaElement | null>(null);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('wayfarer-keyboard-open', JSON.stringify(isOpen));
+    } catch {}
+  }, [isOpen]);
 
   // Track last focused input/textarea across the document
   useEffect(() => {
@@ -77,21 +90,25 @@ export const GlobalSpanishKeyboard: React.FC = () => {
   const charList = isUppercase ? UPPERCASE_CHARS : LOWERCASE_CHARS;
 
   return (
-    <aside aria-label="Global Spanish Keyboard" className="fixed bottom-4 left-4 z-40 flex flex-col items-start gap-1 select-none font-sans">
-      <div className="flex items-center gap-1.5 p-1.5 bg-slate-900/95 backdrop-blur-xl rounded-2xl border border-amber-500/40 shadow-2xl transition-all">
-        {/* Main Toggle Button */}
+    <aside
+      aria-label="Global Spanish Keyboard"
+      className="fixed bottom-4 left-4 z-40 flex flex-col items-start gap-1 select-none font-sans"
+    >
+      <div className="flex items-center gap-1.5 p-1.5 bg-slate-900/95 backdrop-blur-xl rounded-2xl border border-amber-500/40 shadow-2xl transition-all duration-200">
+        {/* Main Toggle / Minimized Button */}
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer ${
             isOpen
               ? 'bg-amber-600 text-white shadow-sm border border-amber-400/40'
-              : 'bg-slate-800 text-slate-200 border border-slate-700 hover:text-white hover:border-amber-500/50'
+              : 'bg-slate-950/90 text-amber-300 border border-amber-500/50 hover:bg-slate-900 hover:text-white hover:scale-105 shadow-lg'
           }`}
-          title={isOpen ? 'Collapse Spanish Keyboard' : 'Open Global Spanish Keyboard'}
+          title={isOpen ? 'Minimize Spanish Keyboard' : 'Expand Spanish Accent Keyboard'}
         >
           <Keyboard className="h-4 w-4 text-amber-300" />
           <span>⌨️ Teclado Español</span>
+          {!isOpen && <ChevronUp className="h-3.5 w-3.5 text-amber-400 ml-0.5 animate-pulse" />}
         </button>
 
         {isOpen && (
@@ -112,7 +129,7 @@ export const GlobalSpanishKeyboard: React.FC = () => {
             </button>
 
             {/* Accent Character Pills */}
-            <div className="flex items-center gap-1 overflow-x-auto max-w-[calc(100vw-180px)] sm:max-w-none py-0.5 px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="flex items-center gap-1 overflow-x-auto max-w-[calc(100vw-230px)] sm:max-w-none py-0.5 px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {charList.map((char) => (
                 <button
                   key={char}
@@ -127,6 +144,16 @@ export const GlobalSpanishKeyboard: React.FC = () => {
                 </button>
               ))}
             </div>
+
+            {/* Dedicated Minimize / Collapse Button */}
+            <button
+              type="button"
+              onClick={() => setIsOpen(false)}
+              className="p-1.5 ml-0.5 rounded-xl bg-slate-800/90 text-slate-400 border border-slate-700 hover:text-white hover:bg-slate-700/80 transition-all cursor-pointer flex items-center justify-center shrink-0"
+              title="Minimize Keyboard (Minimizar)"
+            >
+              <ChevronDown className="h-4 w-4" />
+            </button>
           </>
         )}
       </div>

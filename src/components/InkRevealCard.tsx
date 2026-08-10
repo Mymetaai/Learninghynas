@@ -5,6 +5,7 @@
 // that was in Step 6.
 import { type FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { WordPopupMemory } from './StoryScreenEnrichment/WordPopupMemory';
 
 interface InkRevealCardProps {
   /** The Spanish word. */
@@ -13,6 +14,8 @@ interface InkRevealCardProps {
   pronunciation: string;
   /** English meaning. */
   meaning: string;
+  /** Optional title of current story to compare encounters. */
+  currentStoryTitle?: string;
   /** Whether the card is visible. */
   visible: boolean;
   /** Callback to dismiss the card. */
@@ -23,6 +26,7 @@ const InkRevealCard: FC<InkRevealCardProps> = ({
   word,
   pronunciation,
   meaning,
+  currentStoryTitle,
   visible,
   onClose,
 }) => {
@@ -103,6 +107,9 @@ const InkRevealCard: FC<InkRevealCardProps> = ({
               >
                 {meaning}
               </motion.p>
+
+              {/* Word Popup Memory Line */}
+              <WordPopupMemory word={word} currentStoryTitle={currentStoryTitle} />
 
               {/* Close button */}
               <motion.button
