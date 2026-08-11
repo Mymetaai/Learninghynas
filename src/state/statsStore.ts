@@ -176,13 +176,27 @@ export const useStatsStore = create<StatsState>()(
         const today = todayKey();
         const prev = state.lastActiveDate;
         
+        const hasActiveHistory =
+          (state.weeklyActivity && state.weeklyActivity.some((d) => d.minutes > 0)) ||
+          (state.learnedVocab && state.learnedVocab.length > 0) ||
+          state.xp > 0;
+
         if (!prev) {
-          set({ streak: 1, lastActiveDate: today });
+          const initialStreak = hasActiveHistory ? Math.max(1, state.streak) : 1;
+          set({ streak: initialStreak, lastActiveDate: today });
           const uid = getCurrentUserId();
           if (uid) syncUserStats(uid, get()).catch(() => {});
           return;
         }
-        if (prev === today) return;
+
+        if (prev === today) {
+          if (state.streak === 0 && hasActiveHistory) {
+            set({ streak: 1 });
+            const uid = getCurrentUserId();
+            if (uid) syncUserStats(uid, get()).catch(() => {});
+          }
+          return;
+        }
 
         const diff = dayDiff(prev, today);
         if (diff === 1) {
@@ -209,7 +223,7 @@ export const useStatsStore = create<StatsState>()(
               return;
             }
           } catch {}
-          set({ streak: 0 });
+          set({ streak: hasActiveHistory ? 1 : 0 });
           const uid = getCurrentUserId();
           if (uid) syncUserStats(uid, get()).catch(() => {});
         }
@@ -248,12 +262,18 @@ export const useStatsStore = create<StatsState>()(
 
       learnVocab: (words, questId) => {
         const date = todayKey();
+        const { newStreak, newLastActiveDate } = calculateStreakOnActivity(get().streak, get().lastActiveDate);
+
         set((state) => {
           const existingWords = new Set(state.learnedVocab.map((v) => v.word));
           const newEntries = words
             .filter((w) => !existingWords.has(w))
             .map((word) => ({ word, questId, date }));
-          return { learnedVocab: [...state.learnedVocab, ...newEntries] };
+          return {
+            learnedVocab: [...state.learnedVocab, ...newEntries],
+            streak: Math.max(1, newStreak),
+            lastActiveDate: newLastActiveDate,
+          };
         });
         useDailyQuestStore.getState().updateTaskProgress('vocab_review', words.length);
         const uid = getCurrentUserId();
@@ -312,9 +332,13 @@ export const useStatsStore = create<StatsState>()(
 
       toggleLessonComplete: (lessonKey) => {
         const isNowComplete = !get().completedLessons[lessonKey];
+        const { newStreak, newLastActiveDate } = calculateStreakOnActivity(get().streak, get().lastActiveDate);
         set((s) => {
           const next = { ...s.completedLessons, [lessonKey]: isNowComplete };
-          return { completedLessons: next };
+          return {
+            completedLessons: next,
+            ...(isNowComplete ? { streak: Math.max(1, newStreak), lastActiveDate: newLastActiveDate } : {}),
+          };
         });
         if (isNowComplete) {
           useDailyQuestStore.getState().updateTaskProgress('lesson_progress', 1);
@@ -350,10 +374,14 @@ export const useStatsStore = create<StatsState>()(
             };
           }
 
+          const { newStreak, newLastActiveDate } = calculateStreakOnActivity(state.streak, state.lastActiveDate);
+
           return {
             weeklyActivity,
             activeSeconds: remainingSeconds,
             weekStartDate: currentMondayKey,
+            streak: Math.max(1, newStreak),
+            lastActiveDate: newLastActiveDate,
           };
         });
       },

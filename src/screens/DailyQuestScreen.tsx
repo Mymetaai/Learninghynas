@@ -46,7 +46,9 @@ const TASK_BADGES: Record<QuestTaskType, { label: string; color: string }> = {
 const DailyQuestScreen: FC<DailyQuestScreenProps> = () => {
   const navigate = useNavigate();
   const { userData, resetAllUserProgress } = useUserData();
-  const { streak, coins, xp } = useStatsStore();
+  const { streak: rawStreak, coins, xp, weeklyActivity } = useStatsStore();
+  const hasActiveHistory = xp > 0 || (weeklyActivity && weeklyActivity.some((d) => d.minutes > 0));
+  const streak = hasActiveHistory ? Math.max(1, rawStreak) : rawStreak;
 
   const loadTodayQuest = useDailyQuestStore((s) => s.loadTodayQuest);
   const currentQuest = useDailyQuestStore((s) => s.currentQuest);

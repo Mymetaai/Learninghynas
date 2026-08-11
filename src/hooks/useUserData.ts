@@ -60,13 +60,24 @@ export function useUserData() {
 
   // Sync to Zustand stats store
   const syncToLocalStore = useCallback((data: UserProgressData) => {
-    useStatsStore.setState((state) => ({
-      ...state,
-      xp: data.xp,
-      coins: data.kitsune_coins,
-      streak: data.streak_days,
-      ...(data.weekly_activity ? { weeklyActivity: data.weekly_activity } : {}),
-    }));
+    useStatsStore.setState((state) => {
+      const hasActive =
+        (data.weekly_activity && data.weekly_activity.some((d) => d.minutes > 0)) ||
+        (state.weeklyActivity && state.weeklyActivity.some((d) => d.minutes > 0)) ||
+        (state.learnedVocab && state.learnedVocab.length > 0) ||
+        (data.xp && data.xp > 0) ||
+        (state.xp && state.xp > 0);
+
+      const targetStreak = Math.max(data.streak_days || 0, state.streak || 0, hasActive ? 1 : 0);
+
+      return {
+        ...state,
+        xp: Math.max(data.xp || 0, state.xp || 0),
+        coins: Math.max(data.kitsune_coins || 0, state.coins || 0),
+        streak: targetStreak,
+        ...(data.weekly_activity ? { weeklyActivity: data.weekly_activity } : {}),
+      };
+    });
   }, []);
 
   const fetchUserData = useCallback(async () => {
@@ -98,12 +109,23 @@ export function useUserData() {
     const savedLocal = getStoredUserData(user.id);
     const localStats = useStatsStore.getState();
 
+    const hasLocalActiveHistory =
+      (localStats.weeklyActivity && localStats.weeklyActivity.some((d) => d.minutes > 0)) ||
+      (localStats.learnedVocab && localStats.learnedVocab.length > 0) ||
+      (localStats.xp && localStats.xp > 0);
+
+    const initialStreak = Math.max(
+      localStats.streak || 0,
+      savedLocal?.streak_days || 0,
+      hasLocalActiveHistory ? 1 : 0
+    );
+
     const initialData: UserProgressData = savedLocal || {
       user_id: user.id,
       xp: typeof localStats.xp === 'number' && localStats.xp > 0 ? localStats.xp : 0,
       level: Math.max(1, Math.floor((localStats.xp || 0) / 600) + 1),
       kitsune_coins: typeof localStats.coins === 'number' && localStats.coins > 0 ? localStats.coins : 100,
-      streak_days: typeof localStats.streak === 'number' ? localStats.streak : 0,
+      streak_days: initialStreak,
       weekly_activity: localStats.weeklyActivity || [],
     };
 
@@ -130,9 +152,6 @@ export function useUserData() {
       if (data) {
         const bestXp = Math.max(data.xp || 0, initialData.xp || 0, localStats.xp || 0);
         const bestCoins = Math.max(data.kitsune_coins || 0, initialData.kitsune_coins || 0, localStats.coins || 0);
-        // Use live localStats.streak if lastActiveDate is set or after reset; fallback to remote data
-        const currentStreak = typeof localStats.streak === 'number' ? localStats.streak : (data.streak_days || 0);
-        const bestLevel = Math.max(1, Math.floor(bestXp / 600) + 1);
 
         const supabaseWeekly = (data.weekly_activity as unknown as WeeklyActivityItem[]) || [];
         const storeWeekly = localStats.weeklyActivity || [];
@@ -141,6 +160,15 @@ export function useUserData() {
           : (Array.isArray(storeWeekly) && storeWeekly.length === 7)
           ? storeWeekly
           : initialData.weekly_activity || [];
+
+        const hasAnyActiveHistory =
+          bestXp > 0 ||
+          (mergedWeekly && mergedWeekly.some((d) => d.minutes > 0)) ||
+          (localStats.learnedVocab && localStats.learnedVocab.length > 0);
+
+        const rawStreak = Math.max(data.streak_days || 0, initialData.streak_days || 0, localStats.streak || 0);
+        const currentStreak = hasAnyActiveHistory ? Math.max(1, rawStreak) : rawStreak;
+        const bestLevel = Math.max(1, Math.floor(bestXp / 600) + 1);
 
         const merged: UserProgressData = {
           user_id: user.id,
