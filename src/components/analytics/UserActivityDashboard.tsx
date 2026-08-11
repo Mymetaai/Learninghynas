@@ -143,12 +143,12 @@ export const UserActivityDashboard: React.FC = () => {
         </div>
 
         {/* Pill toggle with animated indicator */}
-        <div className="flex items-center gap-1 bg-bg-elevated-2 border border-structural/40 p-1 rounded-2xl shrink-0 self-start sm:self-auto relative">
+        <div className="flex items-center gap-1 bg-bg-elevated-2 border border-structural/40 p-1 rounded-2xl shrink-0 w-full sm:w-auto justify-between sm:justify-start relative">
           {tabs.map((t) => (
             <button
               key={t.id}
               onClick={() => setActiveTab(t.id)}
-              className={`relative z-10 px-2.5 py-1 text-[11px] font-sans font-bold rounded-xl transition-colors cursor-pointer border-none ${
+              className={`relative z-10 flex-1 sm:flex-none px-3.5 sm:px-2.5 py-1.5 sm:py-1 text-xs sm:text-[11px] font-sans font-bold rounded-xl transition-colors cursor-pointer border-none text-center ${
                 activeTab === t.id
                   ? 'text-white'
                   : 'text-text-secondary hover:text-text-primary bg-transparent'
@@ -168,32 +168,32 @@ export const UserActivityDashboard: React.FC = () => {
       </div>
 
       {/* ── Summary Stats Row ── */}
-      <div className="flex items-center gap-2 mb-5 relative z-10">
-        <div className="flex-1 bg-gradient-to-r from-[#7D927D]/10 to-transparent border border-[#7D927D]/20 rounded-xl px-3 py-2">
-          <p className="font-mono text-[9px] uppercase tracking-widest text-text-tertiary">
+      <div className="flex items-center gap-1.5 sm:gap-2 mb-5 relative z-10">
+        <div className="flex-1 bg-gradient-to-r from-[#7D927D]/10 to-transparent border border-[#7D927D]/20 rounded-xl px-2 sm:px-3 py-2 text-center sm:text-left">
+          <p className="font-mono text-[8px] sm:text-[9px] uppercase tracking-wider text-text-tertiary">
             {summaryLabel}
           </p>
-          <p className="font-serif text-base font-bold text-text-primary">
+          <p className="font-serif text-sm sm:text-base font-bold text-text-primary">
             {summaryMinutes}
-            <span className="text-xs font-sans text-text-secondary ml-0.5">min</span>
+            <span className="text-[10px] sm:text-xs font-sans text-text-secondary ml-0.5">min</span>
           </p>
         </div>
-        <div className="flex-1 bg-gradient-to-r from-[#D4A574]/10 to-transparent border border-[#D4A574]/20 rounded-xl px-3 py-2">
-          <p className="font-mono text-[9px] uppercase tracking-widest text-text-tertiary">
+        <div className="flex-1 bg-gradient-to-r from-[#D4A574]/10 to-transparent border border-[#D4A574]/20 rounded-xl px-2 sm:px-3 py-2 text-center sm:text-left">
+          <p className="font-mono text-[8px] sm:text-[9px] uppercase tracking-wider text-text-tertiary">
             Best Session
           </p>
-          <p className="font-serif text-base font-bold text-text-primary">
+          <p className="font-serif text-sm sm:text-base font-bold text-text-primary">
             {bestSession}
-            <span className="text-xs font-sans text-text-secondary ml-0.5">min</span>
+            <span className="text-[10px] sm:text-xs font-sans text-text-secondary ml-0.5">min</span>
           </p>
         </div>
-        <div className="flex-1 bg-gradient-to-r from-[#5E735E]/10 to-transparent border border-[#5E735E]/20 rounded-xl px-3 py-2">
-          <p className="font-mono text-[9px] uppercase tracking-widest text-text-tertiary">
+        <div className="flex-1 bg-gradient-to-r from-[#5E735E]/10 to-transparent border border-[#5E735E]/20 rounded-xl px-2 sm:px-3 py-2 text-center sm:text-left">
+          <p className="font-mono text-[8px] sm:text-[9px] uppercase tracking-wider text-text-tertiary">
             Active Days
           </p>
-          <p className="font-serif text-base font-bold text-text-primary">
+          <p className="font-serif text-sm sm:text-base font-bold text-text-primary">
             {activeDays}
-            <span className="text-xs font-sans text-text-secondary ml-0.5">days</span>
+            <span className="text-[10px] sm:text-xs font-sans text-text-secondary ml-0.5">days</span>
           </p>
         </div>
       </div>
@@ -336,41 +336,57 @@ interface ThirtyDayBarChartProps {
 }
 
 const ThirtyDayBarChart: React.FC<ThirtyDayBarChartProps> = ({ data, maxMinutes }) => {
-  return (
-    <div className="flex items-end justify-between gap-1 h-44 relative z-10 pt-2 overflow-x-auto">
-      {data.map((d, i) => {
-        const hasActivity = d.minutes > 0;
-        const pct = Math.round((d.minutes / maxMinutes) * 100);
-        const barHeight = hasActivity ? Math.max(pct, 15) : 4;
-        const isToday = i === 29;
+  const [selectedDay, setSelectedDay] = useState<{ date: string; minutes: number } | null>(null);
 
-        return (
-          <div
-            key={d.date}
-            className="flex-1 flex flex-col items-center gap-1 group cursor-pointer h-full justify-end min-w-[8px]"
-            title={`${d.date}: ${d.minutes} study minutes`}
-          >
+  return (
+    <div className="space-y-2">
+      {selectedDay && (
+        <div className="bg-[#7D927D]/15 border border-[#7D927D]/30 rounded-xl px-3 py-1.5 text-center font-sans text-xs text-[#5E735E] font-bold animate-in fade-in duration-200 flex items-center justify-between">
+          <span>{selectedDay.date}</span>
+          <span>{selectedDay.minutes} min logged</span>
+        </div>
+      )}
+      <div className="flex items-end justify-between gap-1 h-44 relative z-10 pt-2 overflow-x-auto">
+        {data.map((d, i) => {
+          const hasActivity = d.minutes > 0;
+          const pct = Math.round((d.minutes / maxMinutes) * 100);
+          const barHeight = hasActivity ? Math.max(pct, 15) : 4;
+          const isToday = i === 29;
+          const isSelected = selectedDay?.date === d.date;
+
+          return (
             <div
-              className={`w-full flex-1 rounded-lg overflow-hidden flex flex-col justify-end relative ${
-                isToday ? 'ring-1 ring-[#7D927D]' : ''
-              }`}
+              key={d.date}
+              onClick={() => setSelectedDay(isSelected ? null : { date: d.date, minutes: d.minutes })}
+              className="flex-1 flex flex-col items-center gap-1 group cursor-pointer h-full justify-end min-w-[8px] select-none"
+              title={`${d.date}: ${d.minutes} study minutes`}
             >
-              <div className="absolute inset-0 bg-structural/20 rounded-lg" />
               <div
-                className={`relative w-full rounded-lg transition-all duration-500 ${
-                  hasActivity
-                    ? 'bg-gradient-to-t from-[#4A5E4A] to-[#7D927D]'
-                    : 'bg-transparent'
+                className={`w-full flex-1 rounded-lg overflow-hidden flex flex-col justify-end relative ${
+                  isSelected
+                    ? 'ring-2 ring-[#5E735E]'
+                    : isToday
+                      ? 'ring-1 ring-[#7D927D]'
+                      : ''
                 }`}
-                style={{ height: `${barHeight}%` }}
-              />
+              >
+                <div className="absolute inset-0 bg-structural/20 rounded-lg" />
+                <div
+                  className={`relative w-full rounded-lg transition-all duration-500 ${
+                    hasActivity
+                      ? 'bg-gradient-to-t from-[#4A5E4A] to-[#7D927D]'
+                      : 'bg-transparent'
+                  }`}
+                  style={{ height: `${barHeight}%` }}
+                />
+              </div>
+              <span className="font-mono text-[8px] text-text-tertiary">
+                {i % 5 === 0 ? d.date.slice(8) : ''}
+              </span>
             </div>
-            <span className="font-mono text-[8px] text-text-tertiary">
-              {i % 5 === 0 ? d.date.slice(8) : ''}
-            </span>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };
@@ -382,15 +398,26 @@ interface AllTimeHeatmapProps {
 }
 
 const AllTimeHeatmap: React.FC<AllTimeHeatmapProps> = ({ data, totalMinutes }) => {
+  const [selectedCell, setSelectedCell] = useState<{ date: string; minutes: number } | null>(null);
+
   return (
     <div className="space-y-3 relative z-10 py-2">
       <div className="flex items-center justify-between text-xs font-sans text-text-secondary">
         <span>30-Day Activity Contribution Grid</span>
         <span className="font-mono font-bold text-[#5E735E]">{totalMinutes} total minutes</span>
       </div>
-      <div className="grid grid-cols-10 gap-2 p-3 bg-bg-elevated-2 border border-structural/40 rounded-2xl">
+
+      {selectedCell && (
+        <div className="bg-[#7D927D]/15 border border-[#7D927D]/30 rounded-xl px-3 py-1.5 text-center font-sans text-xs text-[#5E735E] font-bold animate-in fade-in duration-200 flex items-center justify-between">
+          <span>{selectedCell.date}</span>
+          <span>{selectedCell.minutes} study minutes</span>
+        </div>
+      )}
+
+      <div className="grid grid-cols-6 sm:grid-cols-10 gap-1.5 sm:gap-2 p-2.5 sm:p-3 bg-bg-elevated-2 border border-structural/40 rounded-2xl">
         {data.map((d) => {
           const mins = d.minutes;
+          const isSelected = selectedCell?.date === d.date;
           const bgClass =
             mins > 30
               ? 'bg-[#5E735E] border-[#4A5E4A] text-white'
@@ -403,10 +430,13 @@ const AllTimeHeatmap: React.FC<AllTimeHeatmapProps> = ({ data, totalMinutes }) =
           return (
             <div
               key={d.date}
-              className={`h-7 rounded-lg border flex items-center justify-center transition-all cursor-pointer ${bgClass}`}
+              onClick={() => setSelectedCell(isSelected ? null : { date: d.date, minutes: d.minutes })}
+              className={`h-9 sm:h-7 rounded-lg border flex items-center justify-center transition-all cursor-pointer select-none active:scale-95 ${bgClass} ${
+                isSelected ? 'ring-2 ring-[#5E735E] shadow-sm' : ''
+              }`}
               title={`${d.date}: ${d.minutes} mins recorded`}
             >
-              <span className="font-mono text-[9px] font-bold">
+              <span className="font-mono text-[10px] sm:text-[9px] font-bold">
                 {d.date.slice(8)}
               </span>
             </div>

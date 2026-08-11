@@ -28,7 +28,7 @@ const AppShell: FC = () => {
         <div className="ambient-blob ambient-blob--sage-light" />
       </div>
       <HUD />
-      <main className="flex-1 overflow-y-auto">
+      <main className="flex-1 overflow-y-auto pb-20 sm:pb-4">
         <Outlet />
       </main>
       <ChibiPet />

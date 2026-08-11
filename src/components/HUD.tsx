@@ -10,6 +10,7 @@ import {
   SignInButton,
   UserButton
 } from '@clerk/clerk-react';
+import { Home, Swords, BookOpen, ShoppingBag, ScrollText, User } from 'lucide-react';
 
 const HUD: FC = () => {
   const { userData } = useUserData();
@@ -78,7 +79,7 @@ const HUD: FC = () => {
     <header className="nav-glass sticky top-0 z-40">
       <div className="relative z-10 mx-auto max-w-6xl w-full px-2 sm:px-4">
         {/* Row 1 — Brand + stats + Clerk Auth */}
-        <div className="flex h-14 items-center justify-between gap-2 sm:gap-4 px-2 sm:px-4">
+        <div className="flex h-14 items-center justify-between gap-1.5 sm:gap-4 px-1 sm:px-4">
           {/* Brand / home link */}
           <Link
             to="/"
@@ -90,13 +91,13 @@ const HUD: FC = () => {
               alt="TheLearningHyena Logo"
               className="h-7 w-7 object-contain shrink-0"
             />
-            <span className="font-serif text-base font-bold text-text-primary tracking-tight">
+            <span className="hidden sm:inline font-serif text-base font-bold text-text-primary tracking-tight">
               TheLearningHyena
             </span>
           </Link>
 
           {/* Stats cluster + Clerk Auth Buttons */}
-          <div className="flex items-center gap-2 font-sans text-xs sm:gap-4 sm:text-sm">
+          <div className="flex items-center gap-1.5 font-sans text-xs sm:gap-4 sm:text-sm">
             <Stat
               label="XP"
               value={xp}
@@ -134,7 +135,7 @@ const HUD: FC = () => {
             />
             <Link
               to="/daily"
-              className="flex h-8 w-8 items-center justify-center rounded-md border border-structural text-text-primary transition-colors hover:border-text-secondary hover:bg-bg-elevated-2"
+              className="hidden xs:flex h-8 w-8 items-center justify-center rounded-md border border-structural text-text-primary transition-colors hover:border-text-secondary hover:bg-bg-elevated-2 shrink-0"
               aria-label="Daily Quests"
               title="Daily Quests"
             >
@@ -144,7 +145,7 @@ const HUD: FC = () => {
             <select
               value={language}
               onChange={(e) => setLanguage(e.target.value as any)}
-              className="h-8 rounded-md border border-structural bg-bg-elevated text-[11px] font-sans text-text-primary px-2 transition-colors hover:border-text-secondary focus:border-text-secondary focus:outline-none cursor-pointer"
+              className="h-8 rounded-md border border-structural bg-bg-elevated text-[10px] sm:text-[11px] font-sans text-text-primary px-1.5 transition-colors hover:border-text-secondary focus:border-text-secondary focus:outline-none cursor-pointer shrink-0"
               aria-label="Select translation language"
               title="Select Translation Language"
             >
@@ -155,7 +156,7 @@ const HUD: FC = () => {
             {/* Clerk Auth Integration: Logged Out State */}
             <SignedOut>
               <SignInButton mode="modal">
-                <button className="bg-[#7D927D] hover:bg-[#6B826B] text-white font-sans text-xs font-semibold px-4 py-2 rounded-full shadow-sm cursor-pointer border-none transition-all">
+                <button className="bg-[#7D927D] hover:bg-[#6B826B] text-white font-sans text-[11px] sm:text-xs font-semibold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-sm cursor-pointer border-none transition-all shrink-0">
                   Sign In
                 </button>
               </SignInButton>
@@ -166,7 +167,7 @@ const HUD: FC = () => {
               <UserButton
                 appearance={{
                   elements: {
-                    avatarBox: "h-8 w-8 rounded-full border border-[#7D927D]/30 shadow-sm"
+                    avatarBox: "h-7 w-7 sm:h-8 sm:w-8 rounded-full border border-[#7D927D]/30 shadow-sm"
                   }
                 }}
               />
@@ -176,20 +177,20 @@ const HUD: FC = () => {
         </div>
 
         {/* Row 2 — Navigation tabs in a glass capsule */}
-        <nav aria-label="Main navigation" className="px-3 pb-2 pt-0.5">
+        <nav aria-label="Main navigation" className="px-1 sm:px-3 pb-2 pt-0.5">
           <div className="glass-nav-capsule">
             <div
               ref={navScrollRef}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
-              className="relative flex gap-2 overflow-x-auto justify-center px-3 py-1.5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+              className="relative flex gap-1.5 sm:gap-2 overflow-x-auto justify-start md:justify-center px-2 sm:px-3 py-1.5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
             >
               {NAV_TABS.map((tab) => (
                 <NavLink
                   key={tab.id}
                   to={tab.path}
                   className={({ isActive }) =>
-                    `relative z-10 whitespace-nowrap rounded-full px-4 py-2 font-sans text-xs font-semibold transition-all duration-200 ${
+                    `relative z-10 whitespace-nowrap rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 font-sans text-xs font-semibold transition-all duration-200 ${
                       isActive
                         ? 'bg-[#7D927D] text-white shadow-sm'
                         : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
@@ -202,6 +203,36 @@ const HUD: FC = () => {
             </div>
           </div>
         </nav>
+
+        {/* Mobile Bottom Navigation Bar (Thumb Friendly) */}
+        <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-bg-elevated/95 backdrop-blur-xl border-t border-structural/40 shadow-lg px-2 py-1 flex justify-around items-center">
+          {[
+            { to: '/learn', label: 'Learn', icon: Home },
+            { to: '/practice', label: 'Practice', icon: Swords },
+            { to: '/library', label: 'Library', icon: BookOpen },
+            { to: '/shop', label: 'Shrine', icon: ShoppingBag },
+            { to: '/daily', label: 'Quests', icon: ScrollText },
+            { to: '/profile', label: 'Profile', icon: User },
+          ].map((item) => {
+            const Icon = item.icon;
+            return (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className={({ isActive }) =>
+                  `flex flex-col items-center gap-0.5 py-1 px-2.5 rounded-xl transition-colors ${
+                    isActive
+                      ? 'text-[#5E735E] font-bold'
+                      : 'text-text-secondary hover:text-text-primary'
+                  }`
+                }
+              >
+                <Icon className="h-5 w-5" />
+                <span className="text-[10px] font-sans font-medium">{item.label}</span>
+              </NavLink>
+            );
+          })}
+        </div>
       </div>
     </header>
   );

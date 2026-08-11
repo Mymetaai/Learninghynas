@@ -104,6 +104,12 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
     setDraggedToken(token);
   };
 
+  const handleSelectToken = (token: Token) => {
+    if (isSubmitted) return;
+    setPlacedTokens((prev) => [...prev, token]);
+    setShuffledTokens((prev) => prev.filter((t) => t.order !== token.order));
+  };
+
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
   };
@@ -280,7 +286,8 @@ const SentenceBuilderExercise: FC<SentenceBuilderExerciseProps> = ({
               layoutId={`token-${exercise.id}-${token.order}`}
               draggable={!isSubmitted}
               onDragStart={() => handleDragStart(token)}
-              className={`px-4 py-2.5 rounded-xl border font-semibold text-sm cursor-grab transition-all hover:scale-105 ${
+              onClick={() => handleSelectToken(token)}
+              className={`px-4 py-2.5 rounded-xl border font-semibold text-sm cursor-pointer select-none transition-all hover:scale-105 ${
                 ROLE_COLORS[token.role]
               }`}
             >
