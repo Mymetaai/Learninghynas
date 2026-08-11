@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect, type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
 import { useUserData } from '../hooks/useUserData';
-import { useStatsStore, DEFAULT_WEEKLY_ACTIVITY, type WeeklyActivityItem } from '../state/statsStore';
+import { useStatsStore, type WeeklyActivityItem } from '../state/statsStore';
 import { useDailyQuestStore } from '../state/dailyQuestStore';
 import {
   Lightbulb,
@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { vaultInsights } from '../data/vaultInsightsData';
 import AppleActivityCard from '../components/AppleActivityCard';
+import { UserActivityDashboard } from '../components/analytics/UserActivityDashboard';
 
 // ── 1. MOCK DATA STORE (Simulated API Response) ─────────────────────────────
 
@@ -255,22 +256,7 @@ const HomeScreen: FC = () => {
     return circumference - (circumference * percentage) / 100;
   }, [userData.userProgress.dailyGoalPercentage]);
 
-  const weeklyActivity = useStatsStore((s) => s.weeklyActivity) || DEFAULT_WEEKLY_ACTIVITY;
 
-  const totalWeeklyMinutes = useMemo(
-    () => weeklyActivity.reduce((acc, curr) => acc + curr.minutes, 0),
-    [weeklyActivity]
-  );
-
-  const avgDailyMinutes = useMemo(
-    () => Math.round(totalWeeklyMinutes / 7),
-    [totalWeeklyMinutes]
-  );
-
-  const maxWeeklyMinutes = useMemo(
-    () => Math.max(...weeklyActivity.map((d) => d.minutes), 15),
-    [weeklyActivity]
-  );
 
   // ── SKELETON LOADER (Executive Dark Glass Style) ──────────────────────────
   if (isLoading) {
@@ -412,133 +398,8 @@ const HomeScreen: FC = () => {
           {/* Right: Weekly Activity + small widgets (7 of 12 cols) */}
           <div className="lg:col-span-7 flex flex-col gap-6">
             
-            {/* Weekly Activity — Dynamic Aesthetic */}
-            <div className="bg-bg-elevated/90 backdrop-blur-xl border border-structural/40 shadow-sm rounded-3xl p-6 relative overflow-hidden">
-              {/* Subtle ambient glow behind chart */}
-              <div className="absolute -top-16 -right-16 w-48 h-48 bg-[#7D927D]/8 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute -bottom-12 -left-12 w-36 h-36 bg-[#D4A574]/6 rounded-full blur-3xl pointer-events-none" />
-
-              {/* Header */}
-              <div className="flex items-center justify-between pb-4 mb-1 relative z-10">
-                <div>
-                  <h2 className="font-serif text-lg font-bold text-text-primary flex items-center gap-2">
-                    Weekly Activity
-                    <span className="inline-flex h-2 w-2 rounded-full bg-[#5E735E] animate-pulse" />
-                  </h2>
-                  <p className="font-sans text-xs text-text-secondary mt-0.5">Study minutes tracked this week</p>
-                </div>
-                <span className="font-sans text-[11px] font-bold text-[#5E735E] bg-[#7D927D]/15 border border-[#7D927D]/30 px-3 py-1.5 rounded-full shrink-0 shadow-xs backdrop-blur-sm">
-                  Avg {avgDailyMinutes}m / day
-                </span>
-              </div>
-
-              {/* Summary Stats Row */}
-              <div className="flex items-center gap-2 mb-5 relative z-10">
-                <div className="flex-1 bg-gradient-to-r from-[#7D927D]/10 to-transparent border border-[#7D927D]/20 rounded-xl px-3 py-2">
-                  <p className="font-mono text-[9px] uppercase tracking-widest text-text-tertiary">Total</p>
-                  <p className="font-serif text-base font-bold text-text-primary">{totalWeeklyMinutes}<span className="text-xs font-sans text-text-secondary ml-0.5">min</span></p>
-                </div>
-                <div className="flex-1 bg-gradient-to-r from-[#D4A574]/10 to-transparent border border-[#D4A574]/20 rounded-xl px-3 py-2">
-                  <p className="font-mono text-[9px] uppercase tracking-widest text-text-tertiary">Best Day</p>
-                  <p className="font-serif text-base font-bold text-text-primary">
-                    {Math.max(...weeklyActivity.map(d => d.minutes))}<span className="text-xs font-sans text-text-secondary ml-0.5">min</span>
-                  </p>
-                </div>
-                <div className="flex-1 bg-gradient-to-r from-[#5E735E]/10 to-transparent border border-[#5E735E]/20 rounded-xl px-3 py-2">
-                  <p className="font-mono text-[9px] uppercase tracking-widest text-text-tertiary">Active</p>
-                  <p className="font-serif text-base font-bold text-text-primary">
-                    {weeklyActivity.filter(d => d.minutes > 0).length}<span className="text-xs font-sans text-text-secondary ml-0.5">days</span>
-                  </p>
-                </div>
-              </div>
-              
-              {/* Chart Area */}
-              <div className="flex items-end justify-between gap-2 sm:gap-3 h-44 relative z-10">
-                {weeklyActivity.map((d, i) => {
-                  const hasActivity = d.minutes > 0;
-                  const calculatedPct = Math.round((d.minutes / maxWeeklyMinutes) * 100);
-                  const barHeight = hasActivity ? Math.max(calculatedPct, 20) : 6;
-                  const todayDayName = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][(new Date().getDay() + 6) % 7];
-                  const isToday = d.day === todayDayName;
-                  const isBestDay = d.minutes === Math.max(...weeklyActivity.map(x => x.minutes)) && d.minutes > 0;
-
-                  return (
-                    <div
-                      key={d.day}
-                      className="flex-1 flex flex-col items-center gap-1.5 group cursor-pointer h-full justify-end"
-                      style={{ animationDelay: `${i * 80}ms` }}
-                    >
-                      {/* Minutes label — appears on hover or when active */}
-                      <div className={`transition-all duration-300 transform ${
-                        hasActivity
-                          ? 'opacity-100 translate-y-0'
-                          : 'opacity-0 group-hover:opacity-70 translate-y-1 group-hover:translate-y-0'
-                      }`}>
-                        <span className={`font-mono text-[10px] font-bold px-1.5 py-0.5 rounded-md transition-all ${
-                          isBestDay
-                            ? 'text-[#D4A574] bg-[#D4A574]/15 border border-[#D4A574]/30'
-                            : hasActivity
-                              ? 'text-[#5E735E] bg-[#7D927D]/15 border border-[#7D927D]/25'
-                              : 'text-text-tertiary'
-                        }`}>
-                          {d.minutes}m
-                        </span>
-                      </div>
-
-                      {/* Bar Column */}
-                      <div className={`w-full flex-1 rounded-2xl overflow-hidden flex flex-col justify-end relative transition-all duration-300 ${
-                        isToday
-                          ? 'ring-2 ring-[#7D927D]/40 ring-offset-1 ring-offset-bg-elevated'
-                          : ''
-                      }`}>
-                        {/* Track background */}
-                        <div className="absolute inset-0 bg-gradient-to-b from-[#F5F0E8]/60 to-[#EDE8DF]/80 border border-structural/30 rounded-2xl" />
-                        
-                        {/* Filled bar with gradient */}
-                        <div
-                          className={`relative w-full rounded-2xl transition-all duration-700 ease-out group-hover:scale-x-105 ${
-                            hasActivity
-                              ? isBestDay
-                                ? 'bg-gradient-to-t from-[#8B6E4E] via-[#D4A574] to-[#E8C9A0] shadow-[0_-4px_20px_rgba(212,165,116,0.3)]'
-                                : 'bg-gradient-to-t from-[#4A5E4A] via-[#5E735E] to-[#7D927D] shadow-[0_-4px_20px_rgba(125,146,125,0.25)]'
-                              : 'bg-structural/20'
-                          }`}
-                          style={{
-                            height: `${barHeight}%`,
-                            transitionDelay: `${i * 60}ms`,
-                          }}
-                        >
-                          {/* Shine effect on active bars */}
-                          {hasActivity && (
-                            <div className="absolute inset-0 rounded-2xl overflow-hidden">
-                              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[2px] bg-white/40 rounded-full" />
-                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.07] to-transparent" />
-                            </div>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Day Label */}
-                      <div className="flex flex-col items-center gap-0.5">
-                        <span className={`font-sans text-[11px] transition-all duration-300 ${
-                          isToday
-                            ? 'font-extrabold text-[#5E735E]'
-                            : hasActivity
-                              ? 'font-semibold text-text-primary group-hover:text-[#5E735E]'
-                              : 'text-text-tertiary font-medium group-hover:text-text-secondary'
-                        }`}>
-                          {d.day}
-                        </span>
-                        {/* Today dot indicator */}
-                        {isToday && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#5E735E] animate-pulse shadow-[0_0_6px_rgba(94,115,94,0.5)]" />
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+            {/* Weekly Activity — Dynamic Aesthetic (Reusable Component) */}
+            <UserActivityDashboard />
 
             {/* Lexicon Growth + Vault Insights side-by-side */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">

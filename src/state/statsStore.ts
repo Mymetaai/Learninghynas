@@ -43,7 +43,16 @@ interface LearnedVocabEntry {
   date: string;
 }
 
+export interface DailyActivityRecord {
+  date: string; // YYYY-MM-DD
+  minutes: number;
+  xpEarned: number;
+  lessonsCompleted: number;
+}
+
 interface StatsState {
+  /** Reset all progress locally and clear persisted storage. */
+  resetAllProgress: () => void;
   /** Total experience points. */
   xp: number;
   /** Spendable coins. */
@@ -66,6 +75,8 @@ interface StatsState {
   completedLessons: Record<string, boolean>;
   /** Active study minutes per day for the current week (Mon-Sun). */
   weeklyActivity: WeeklyActivityItem[];
+  /** All-time daily activity history log keyed by YYYY-MM-DD. */
+  dailyHistory: Record<string, DailyActivityRecord>;
   /** Sub-minute active study seconds accumulator. */
   activeSeconds: number;
   /** ISO date string (yyyy-mm-dd) of Monday for current tracked week. */
@@ -96,7 +107,7 @@ interface StatsState {
 }
 
 /** Today's date as yyyy-mm-dd, local time. */
-const todayKey = (): string => {
+export const todayKey = (): string => {
   const d = new Date();
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, '0');
@@ -105,10 +116,45 @@ const todayKey = (): string => {
 };
 
 /** Difference in whole days between two yyyy-mm-dd strings. */
-const dayDiff = (a: string, b: string): number => {
+export const dayDiff = (a: string, b: string): number => {
   const da = new Date(a + 'T00:00:00');
   const db = new Date(b + 'T00:00:00');
   return Math.round((db.getTime() - da.getTime()) / 86_400_000);
+};
+
+/** Helper to record or update today's all-time activity log */
+const updateDailyHistoryLog = (
+  history: Record<string, DailyActivityRecord> = {},
+  addedMinutes: number = 0,
+  addedXp: number = 0,
+  addedLessons: number = 0
+): Record<string, DailyActivityRecord> => {
+  const today = todayKey();
+  const existing = history[today] || { date: today, minutes: 0, xpEarned: 0, lessonsCompleted: 0 };
+  return {
+    ...history,
+    [today]: {
+      date: today,
+      minutes: existing.minutes + addedMinutes,
+      xpEarned: existing.xpEarned + addedXp,
+      lessonsCompleted: existing.lessonsCompleted + addedLessons,
+    },
+  };
+};
+
+/** Calculate consecutive active days leading up to today from weeklyActivity */
+export const calculateConsecutiveStreakFromWeekly = (weeklyActivity: WeeklyActivityItem[]): number => {
+  if (!weeklyActivity || weeklyActivity.length !== 7) return 0;
+  const todayIndex = (new Date().getDay() + 6) % 7;
+  let count = 0;
+  for (let i = todayIndex; i >= 0; i--) {
+    if (weeklyActivity[i] && weeklyActivity[i].minutes > 0) {
+      count++;
+    } else {
+      break;
+    }
+  }
+  return count;
 };
 
 /** Helper to compute updated streak upon activity */
@@ -162,6 +208,7 @@ const DEFAULT_STATE = {
   } as Record<string, boolean>,
   completedLessons: {} as Record<string, boolean>,
   weeklyActivity: DEFAULT_WEEKLY_ACTIVITY,
+  dailyHistory: {} as Record<string, DailyActivityRecord>,
   activeSeconds: 0,
   weekStartDate: getMondayKey(),
 };
@@ -181,17 +228,19 @@ export const useStatsStore = create<StatsState>()(
           (state.learnedVocab && state.learnedVocab.length > 0) ||
           state.xp > 0;
 
+        const consecutiveWeekly = calculateConsecutiveStreakFromWeekly(state.weeklyActivity);
+        const bestCurrentStreak = Math.max(state.streak, consecutiveWeekly, hasActiveHistory ? 1 : 0);
+
         if (!prev) {
-          const initialStreak = hasActiveHistory ? Math.max(1, state.streak) : 1;
-          set({ streak: initialStreak, lastActiveDate: today });
+          set({ streak: bestCurrentStreak, lastActiveDate: today });
           const uid = getCurrentUserId();
           if (uid) syncUserStats(uid, get()).catch(() => {});
           return;
         }
 
         if (prev === today) {
-          if (state.streak === 0 && hasActiveHistory) {
-            set({ streak: 1 });
+          if (state.streak < bestCurrentStreak) {
+            set({ streak: bestCurrentStreak });
             const uid = getCurrentUserId();
             if (uid) syncUserStats(uid, get()).catch(() => {});
           }
@@ -201,7 +250,7 @@ export const useStatsStore = create<StatsState>()(
         const diff = dayDiff(prev, today);
         if (diff === 1) {
           // Consecutive day login: automatically increment streak & record active date
-          const nextStreak = Math.max(1, state.streak + 1);
+          const nextStreak = Math.max(bestCurrentStreak, state.streak + 1);
           set({ streak: nextStreak, lastActiveDate: today });
           const uid = getCurrentUserId();
           if (uid) syncUserStats(uid, get()).catch(() => {});
@@ -241,6 +290,7 @@ export const useStatsStore = create<StatsState>()(
           streak: newStreak,
           lastActiveDate: newLastActiveDate,
           claimedQuestRewards: [...s.claimedQuestRewards, questId],
+          dailyHistory: updateDailyHistoryLog(s.dailyHistory, 0, xp, 0),
         }));
         const uid = getCurrentUserId();
         if (uid) syncUserStats(uid, get()).catch(() => {});
@@ -255,6 +305,7 @@ export const useStatsStore = create<StatsState>()(
           coins: s.coins + coins,
           streak: newStreak,
           lastActiveDate: newLastActiveDate,
+          dailyHistory: updateDailyHistoryLog(s.dailyHistory, 0, xp, 0),
         }));
         const uid = getCurrentUserId();
         if (uid) syncUserStats(uid, get()).catch(() => {});
@@ -273,6 +324,7 @@ export const useStatsStore = create<StatsState>()(
             learnedVocab: [...state.learnedVocab, ...newEntries],
             streak: Math.max(1, newStreak),
             lastActiveDate: newLastActiveDate,
+            dailyHistory: updateDailyHistoryLog(state.dailyHistory, 0, 0, 0),
           };
         });
         useDailyQuestStore.getState().updateTaskProgress('vocab_review', words.length);
@@ -324,6 +376,7 @@ export const useStatsStore = create<StatsState>()(
           lastActiveDate: newLastActiveDate,
           claimedExamIds: Array.from(new Set([...s.claimedExamIds, examId, coursePart])),
           earnedBadges: { ...s.earnedBadges, [coursePart]: true },
+          dailyHistory: updateDailyHistoryLog(s.dailyHistory, 0, xp, 0),
         }));
         const uid = getCurrentUserId();
         if (uid) syncUserStats(uid, get()).catch(() => {});
@@ -338,6 +391,7 @@ export const useStatsStore = create<StatsState>()(
           return {
             completedLessons: next,
             ...(isNowComplete ? { streak: Math.max(1, newStreak), lastActiveDate: newLastActiveDate } : {}),
+            dailyHistory: updateDailyHistoryLog(s.dailyHistory, 0, 0, isNowComplete ? 1 : 0),
           };
         });
         if (isNowComplete) {
@@ -375,9 +429,11 @@ export const useStatsStore = create<StatsState>()(
           }
 
           const { newStreak, newLastActiveDate } = calculateStreakOnActivity(state.streak, state.lastActiveDate);
+          const nextDailyHistory = addedMinutes > 0 ? updateDailyHistoryLog(state.dailyHistory, addedMinutes, 0, 0) : (state.dailyHistory || {});
 
           return {
             weeklyActivity,
+            dailyHistory: nextDailyHistory,
             activeSeconds: remainingSeconds,
             weekStartDate: currentMondayKey,
             streak: Math.max(1, newStreak),
@@ -386,6 +442,31 @@ export const useStatsStore = create<StatsState>()(
         });
       },
 
+      /**
+       * Reset all progress locally and clear persisted storage.
+       * This is used by the UI "Reset Progress" flow.
+       */
+      resetAllProgress: () => {
+        // Clear Zustand persisted localStorage entry.
+        try {
+          localStorage.removeItem('wayfarer-stats');
+        } catch {}
+        // Reset store to defaults (without contacting Supabase).
+        set({
+          ...DEFAULT_STATE,
+          xp: 0,
+          coins: 100,
+          streak: 0,
+          lastActiveDate: '',
+          weeklyActivity: DEFAULT_WEEKLY_ACTIVITY.map((item) => ({ ...item })),
+          dailyHistory: {},
+          activeSeconds: 0,
+          weekStartDate: getMondayKey(),
+        });
+        // No Supabase sync – local‑first mode.
+      },
+
+      /** Existing reset kept for internal use (e.g., testing) */
       reset: () => {
         set({
           ...DEFAULT_STATE,
@@ -394,6 +475,7 @@ export const useStatsStore = create<StatsState>()(
           streak: 0,
           lastActiveDate: '',
           weeklyActivity: DEFAULT_WEEKLY_ACTIVITY.map((item) => ({ ...item })),
+          dailyHistory: {},
           activeSeconds: 0,
           weekStartDate: getMondayKey(),
         });
@@ -418,12 +500,63 @@ export const useStatsStore = create<StatsState>()(
         earnedBadges: state.earnedBadges,
         completedLessons: state.completedLessons,
         weeklyActivity: state.weeklyActivity,
+        dailyHistory: state.dailyHistory,
         activeSeconds: state.activeSeconds,
         weekStartDate: state.weekStartDate,
       }),
     },
   ),
 );
+
+/**
+ * Resets all progress locally and clears persisted storage.
+ * Uses the store's local-first resetAllProgress (no Supabase sync).
+ */
+export const resetAllProgress = () => {
+  try {
+    localStorage.removeItem('wayfarer-stats');
+  } catch {}
+  useStatsStore.getState().resetAllProgress();
+};
+
+/** Export a selector that returns prepared activity metrics for the UI.
+ *  The selector is deliberately pure – UI components can memoize it with useMemo.
+ */
+export const selectUserActivityMetrics = (state: StatsState) => {
+  // Helper to get a date string N days ago.
+  const daysAgo = (n: number): string => {
+    const d = new Date();
+    d.setDate(d.getDate() - n);
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
+  };
+
+  // 7‑day (current week) metrics – already stored in weeklyActivity.
+  const weekly = state.weeklyActivity;
+
+  // 30‑day heatmap data – aggregate dailyHistory for last 30 days.
+  const heatmap30: { date: string; minutes: number; xp: number; lessons: number }[] = [];
+  for (let i = 0; i < 30; i++) {
+    const key = daysAgo(i);
+    const rec = state.dailyHistory[key] || { minutes: 0, xpEarned: 0, lessonsCompleted: 0 };
+    heatmap30.push({ date: key, minutes: rec.minutes, xp: rec.xpEarned, lessons: rec.lessonsCompleted });
+  }
+
+  // All‑time summary.
+  const allTime = Object.values(state.dailyHistory).reduce(
+    (acc: { totalMinutes: number; totalXp: number; totalLessons: number }, rec: DailyActivityRecord) => {
+      acc.totalMinutes += rec.minutes;
+      acc.totalXp += rec.xpEarned;
+      acc.totalLessons += rec.lessonsCompleted;
+      return acc;
+    },
+    { totalMinutes: 0, totalXp: 0, totalLessons: 0 },
+  );
+
+  return { weekly, heatmap30, allTime };
+};
 
 if (typeof window !== 'undefined') {
   useStatsStore.subscribe((state) => {

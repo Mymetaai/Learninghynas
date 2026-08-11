@@ -11,6 +11,7 @@ import {
 import { useUser, SignOutButton } from '@clerk/clerk-react';
 import { useStatsStore } from '../state/statsStore';
 import { useUserData } from '../hooks/useUserData';
+import { UserActivityDashboard } from '../components/analytics/UserActivityDashboard';
 
 const ProfileScreen: React.FC = () => {
   const { user, isLoaded, isSignedIn } = useUser();
@@ -110,6 +111,16 @@ const ProfileScreen: React.FC = () => {
           </motion.div>
         ))}
       </div>
+
+      {/* Activity Analytics Dashboard (7D / 30D / All-Time) */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.15 }}
+        className="mb-8"
+      >
+        <UserActivityDashboard />
+      </motion.div>
 
       {/* Achievements Card */}
       <motion.div
