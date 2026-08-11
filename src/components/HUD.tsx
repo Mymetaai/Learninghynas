@@ -20,9 +20,7 @@ const HUD: FC = () => {
 
   const xp = typeof statsXp === 'number' ? statsXp : (userData?.xp ?? 0);
   const coins = typeof statsCoins === 'number' ? statsCoins : (userData?.kitsune_coins ?? 100);
-  const rawStreak = typeof statsStreak === 'number' && statsStreak > 0 ? statsStreak : (userData?.streak_days ?? 0);
-  const hasActiveHistory = xp > 0 || (userData?.weekly_activity && userData.weekly_activity.some((d) => d.minutes > 0));
-  const streak = hasActiveHistory ? Math.max(1, rawStreak) : rawStreak;
+  const streak = typeof statsStreak === 'number' ? statsStreak : (userData?.streak_days ?? 0);
   const { language, setLanguage } = useSettingsStore();
 
   // ── Edge-Hover Auto-Scrolling ─────────────────────────────────────────

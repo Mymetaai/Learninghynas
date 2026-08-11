@@ -142,49 +142,66 @@ const updateDailyHistoryLog = (
   };
 };
 
-/** Calculate consecutive active days leading up to today from weeklyActivity */
-export const calculateConsecutiveStreakFromWeekly = (weeklyActivity: WeeklyActivityItem[]): number => {
-  if (!weeklyActivity || weeklyActivity.length !== 7) return 0;
-  const todayIndex = (new Date().getDay() + 6) % 7;
+/** Calculate consecutive active days strictly from dailyHistory and weeklyActivity */
+export const calculateConsecutiveStreak = (
+  dailyHistory: Record<string, DailyActivityRecord> = {},
+  weeklyActivity: WeeklyActivityItem[] = []
+): number => {
+  const formatDateKey = (d: Date): string => {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
+  };
+
+  const today = new Date();
+  const todayKey = formatDateKey(today);
+
+  const hasActivityOnDate = (dateKey: string): boolean => {
+    const rec = dailyHistory[dateKey];
+    if (rec && ((rec.minutes || 0) > 0 || (rec.xpEarned || 0) > 0 || (rec.lessonsCompleted || 0) > 0)) {
+      return true;
+    }
+
+    if (weeklyActivity && weeklyActivity.length === 7) {
+      const todayDayIndex = (today.getDay() + 6) % 7;
+      const d = new Date(dateKey + 'T00:00:00');
+      const dDayIndex = (d.getDay() + 6) % 7;
+      const diffDays = Math.round((today.getTime() - d.getTime()) / 86_400_000);
+
+      if (diffDays >= 0 && diffDays <= todayDayIndex && weeklyActivity[dDayIndex]?.minutes > 0) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  const todayActive = hasActivityOnDate(todayKey);
+
+  const yesterday = new Date(today);
+  yesterday.setDate(today.getDate() - 1);
+  const yesterdayKey = formatDateKey(yesterday);
+  const yesterdayActive = hasActivityOnDate(yesterdayKey);
+
+  if (!todayActive && !yesterdayActive) {
+    return 0;
+  }
+
   let count = 0;
-  for (let i = todayIndex; i >= 0; i--) {
-    if (weeklyActivity[i] && weeklyActivity[i].minutes > 0) {
+  const curr = new Date(todayActive ? today : yesterday);
+
+  for (let i = 0; i < 365; i++) {
+    const key = formatDateKey(curr);
+    if (hasActivityOnDate(key)) {
       count++;
+      curr.setDate(curr.getDate() - 1);
     } else {
       break;
     }
   }
-  return count;
-};
 
-/** Helper to compute updated streak upon activity */
-const calculateStreakOnActivity = (currentStreak: number, lastActiveDate: string): { newStreak: number; newLastActiveDate: string } => {
-  const today = todayKey();
-  if (!lastActiveDate) {
-    return { newStreak: 1, newLastActiveDate: today };
-  }
-  if (lastActiveDate === today) {
-    return { newStreak: Math.max(1, currentStreak), newLastActiveDate: today };
-  }
-  const diff = dayDiff(lastActiveDate, today);
-  if (diff === 1) {
-    return { newStreak: Math.max(1, currentStreak) + 1, newLastActiveDate: today };
-  }
-  if (diff > 1) {
-    try {
-      const entitlements = useEntitlementStore.getState();
-      if (entitlements.consumables?.streak_freeze > 0) {
-        useEntitlementStore.setState((s) => ({
-          ...s,
-          consumables: { ...s.consumables, streak_freeze: Math.max(0, s.consumables.streak_freeze - 1) },
-        }));
-        const preserved = diff === 2 ? Math.max(1, currentStreak) + 1 : 1;
-        return { newStreak: preserved, newLastActiveDate: today };
-      }
-    } catch {}
-    return { newStreak: 1, newLastActiveDate: today };
-  }
-  return { newStreak: Math.max(1, currentStreak), newLastActiveDate: today };
+  return count;
 };
 
 const DEFAULT_STATE = {
@@ -221,76 +238,44 @@ export const useStatsStore = create<StatsState>()(
       checkPassiveStreakStatus: () => {
         const state = get();
         const today = todayKey();
-        const prev = state.lastActiveDate;
-        
-        const hasActiveHistory =
-          (state.weeklyActivity && state.weeklyActivity.some((d) => d.minutes > 0)) ||
-          (state.learnedVocab && state.learnedVocab.length > 0) ||
-          state.xp > 0;
+        const calcStreak = calculateConsecutiveStreak(state.dailyHistory, state.weeklyActivity);
 
-        const consecutiveWeekly = calculateConsecutiveStreakFromWeekly(state.weeklyActivity);
-        const bestCurrentStreak = Math.max(state.streak, consecutiveWeekly, hasActiveHistory ? 1 : 0);
-
-        if (!prev) {
-          set({ streak: bestCurrentStreak, lastActiveDate: today });
-          const uid = getCurrentUserId();
-          if (uid) syncUserStats(uid, get()).catch(() => {});
-          return;
-        }
-
-        if (prev === today) {
-          if (state.streak < bestCurrentStreak) {
-            set({ streak: bestCurrentStreak });
-            const uid = getCurrentUserId();
-            if (uid) syncUserStats(uid, get()).catch(() => {});
+        if (calcStreak === 0 && state.streak > 0 && state.lastActiveDate) {
+          const diff = dayDiff(state.lastActiveDate, today);
+          if (diff > 1) {
+            try {
+              const entitlements = useEntitlementStore.getState();
+              if (entitlements.consumables?.streak_freeze > 0) {
+                useEntitlementStore.setState((s) => ({
+                  ...s,
+                  consumables: { ...s.consumables, streak_freeze: Math.max(0, s.consumables.streak_freeze - 1) },
+                }));
+                return;
+              }
+            } catch {}
           }
-          return;
         }
 
-        const diff = dayDiff(prev, today);
-        if (diff === 1) {
-          // Consecutive day login: automatically increment streak & record active date
-          const nextStreak = Math.max(bestCurrentStreak, state.streak + 1);
-          set({ streak: nextStreak, lastActiveDate: today });
-          const uid = getCurrentUserId();
-          if (uid) syncUserStats(uid, get()).catch(() => {});
-          return;
-        }
-
-        if (diff > 1) {
-          try {
-            const entitlements = useEntitlementStore.getState();
-            if (entitlements.consumables?.streak_freeze > 0) {
-              useEntitlementStore.setState((s) => ({
-                ...s,
-                consumables: { ...s.consumables, streak_freeze: Math.max(0, s.consumables.streak_freeze - 1) },
-              }));
-              const yesterday = new Date();
-              yesterday.setDate(yesterday.getDate() - 1);
-              const yKey = `${yesterday.getFullYear()}-${String(yesterday.getMonth() + 1).padStart(2, '0')}-${String(yesterday.getDate()).padStart(2, '0')}`;
-              set({ lastActiveDate: yKey });
-              return;
-            }
-          } catch {}
-          set({ streak: hasActiveHistory ? 1 : 0 });
-          const uid = getCurrentUserId();
-          if (uid) syncUserStats(uid, get()).catch(() => {});
-        }
+        set({ streak: calcStreak, lastActiveDate: calcStreak > 0 ? today : state.lastActiveDate });
+        const uid = getCurrentUserId();
+        if (uid) syncUserStats(uid, get()).catch(() => {});
       },
 
       grantQuestRewards: (questId, xp, coins) => {
         const state = get();
         if (state.claimedQuestRewards.includes(questId)) return;
 
-        const { newStreak, newLastActiveDate } = calculateStreakOnActivity(state.streak, state.lastActiveDate);
+        const nextDailyHistory = updateDailyHistoryLog(state.dailyHistory, 0, xp, 0);
+        const newStreak = calculateConsecutiveStreak(nextDailyHistory, state.weeklyActivity);
+        const today = todayKey();
 
         set((s) => ({
           xp: s.xp + xp,
           coins: s.coins + coins,
           streak: newStreak,
-          lastActiveDate: newLastActiveDate,
+          lastActiveDate: today,
           claimedQuestRewards: [...s.claimedQuestRewards, questId],
-          dailyHistory: updateDailyHistoryLog(s.dailyHistory, 0, xp, 0),
+          dailyHistory: nextDailyHistory,
         }));
         const uid = getCurrentUserId();
         if (uid) syncUserStats(uid, get()).catch(() => {});
@@ -298,14 +283,16 @@ export const useStatsStore = create<StatsState>()(
 
       addRewards: (xp, coins) => {
         const state = get();
-        const { newStreak, newLastActiveDate } = calculateStreakOnActivity(state.streak, state.lastActiveDate);
+        const nextDailyHistory = updateDailyHistoryLog(state.dailyHistory, 0, xp, 0);
+        const newStreak = calculateConsecutiveStreak(nextDailyHistory, state.weeklyActivity);
+        const today = todayKey();
 
         set((s) => ({
           xp: s.xp + xp,
           coins: s.coins + coins,
           streak: newStreak,
-          lastActiveDate: newLastActiveDate,
-          dailyHistory: updateDailyHistoryLog(s.dailyHistory, 0, xp, 0),
+          lastActiveDate: today,
+          dailyHistory: nextDailyHistory,
         }));
         const uid = getCurrentUserId();
         if (uid) syncUserStats(uid, get()).catch(() => {});
@@ -313,18 +300,20 @@ export const useStatsStore = create<StatsState>()(
 
       learnVocab: (words, questId) => {
         const date = todayKey();
-        const { newStreak, newLastActiveDate } = calculateStreakOnActivity(get().streak, get().lastActiveDate);
+        const state = get();
+        const nextDailyHistory = updateDailyHistoryLog(state.dailyHistory, 0, 0, 0);
+        const newStreak = calculateConsecutiveStreak(nextDailyHistory, state.weeklyActivity);
 
-        set((state) => {
-          const existingWords = new Set(state.learnedVocab.map((v) => v.word));
+        set((s) => {
+          const existingWords = new Set(s.learnedVocab.map((v) => v.word));
           const newEntries = words
             .filter((w) => !existingWords.has(w))
             .map((word) => ({ word, questId, date }));
           return {
-            learnedVocab: [...state.learnedVocab, ...newEntries],
-            streak: Math.max(1, newStreak),
-            lastActiveDate: newLastActiveDate,
-            dailyHistory: updateDailyHistoryLog(state.dailyHistory, 0, 0, 0),
+            learnedVocab: [...s.learnedVocab, ...newEntries],
+            streak: newStreak,
+            lastActiveDate: date,
+            dailyHistory: nextDailyHistory,
           };
         });
         useDailyQuestStore.getState().updateTaskProgress('vocab_review', words.length);
@@ -367,16 +356,18 @@ export const useStatsStore = create<StatsState>()(
           return false;
         }
 
-        const { newStreak, newLastActiveDate } = calculateStreakOnActivity(state.streak, state.lastActiveDate);
+        const nextDailyHistory = updateDailyHistoryLog(state.dailyHistory, 0, xp, 0);
+        const newStreak = calculateConsecutiveStreak(nextDailyHistory, state.weeklyActivity);
+        const today = todayKey();
 
         set((s) => ({
           xp: s.xp + xp,
           coins: s.coins + coins,
           streak: newStreak,
-          lastActiveDate: newLastActiveDate,
+          lastActiveDate: today,
           claimedExamIds: Array.from(new Set([...s.claimedExamIds, examId, coursePart])),
           earnedBadges: { ...s.earnedBadges, [coursePart]: true },
-          dailyHistory: updateDailyHistoryLog(s.dailyHistory, 0, xp, 0),
+          dailyHistory: nextDailyHistory,
         }));
         const uid = getCurrentUserId();
         if (uid) syncUserStats(uid, get()).catch(() => {});
@@ -385,13 +376,18 @@ export const useStatsStore = create<StatsState>()(
 
       toggleLessonComplete: (lessonKey) => {
         const isNowComplete = !get().completedLessons[lessonKey];
-        const { newStreak, newLastActiveDate } = calculateStreakOnActivity(get().streak, get().lastActiveDate);
+        const state = get();
+        const nextDailyHistory = updateDailyHistoryLog(state.dailyHistory, 0, 0, isNowComplete ? 1 : 0);
+        const newStreak = calculateConsecutiveStreak(nextDailyHistory, state.weeklyActivity);
+        const today = todayKey();
+
         set((s) => {
           const next = { ...s.completedLessons, [lessonKey]: isNowComplete };
           return {
             completedLessons: next,
-            ...(isNowComplete ? { streak: Math.max(1, newStreak), lastActiveDate: newLastActiveDate } : {}),
-            dailyHistory: updateDailyHistoryLog(s.dailyHistory, 0, 0, isNowComplete ? 1 : 0),
+            streak: newStreak,
+            lastActiveDate: today,
+            dailyHistory: nextDailyHistory,
           };
         });
         if (isNowComplete) {
@@ -428,16 +424,17 @@ export const useStatsStore = create<StatsState>()(
             };
           }
 
-          const { newStreak, newLastActiveDate } = calculateStreakOnActivity(state.streak, state.lastActiveDate);
           const nextDailyHistory = addedMinutes > 0 ? updateDailyHistoryLog(state.dailyHistory, addedMinutes, 0, 0) : (state.dailyHistory || {});
+          const newStreak = calculateConsecutiveStreak(nextDailyHistory, weeklyActivity);
+          const today = todayKey();
 
           return {
             weeklyActivity,
             dailyHistory: nextDailyHistory,
             activeSeconds: remainingSeconds,
             weekStartDate: currentMondayKey,
-            streak: Math.max(1, newStreak),
-            lastActiveDate: newLastActiveDate,
+            streak: newStreak,
+            lastActiveDate: newStreak > 0 ? today : state.lastActiveDate,
           };
         });
       },

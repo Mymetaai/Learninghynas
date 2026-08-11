@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useUser, useAuth } from '@clerk/clerk-react';
 import { createClerkSupabaseClient, setCurrentUserId } from '../lib/supabaseClient';
-import { useStatsStore, type WeeklyActivityItem } from '../state/statsStore';
+import { useStatsStore, calculateConsecutiveStreak, type WeeklyActivityItem } from '../state/statsStore';
 import { useProgressStore } from '../state/progressStore';
 import { useQuestStore } from '../state/questStore';
 import { useDailyQuestStore } from '../state/dailyQuestStore';
@@ -61,14 +61,11 @@ export function useUserData() {
   // Sync to Zustand stats store
   const syncToLocalStore = useCallback((data: UserProgressData) => {
     useStatsStore.setState((state) => {
-      const hasActive =
-        (data.weekly_activity && data.weekly_activity.some((d) => d.minutes > 0)) ||
-        (state.weeklyActivity && state.weeklyActivity.some((d) => d.minutes > 0)) ||
-        (state.learnedVocab && state.learnedVocab.length > 0) ||
-        (data.xp && data.xp > 0) ||
-        (state.xp && state.xp > 0);
-
-      const targetStreak = Math.max(data.streak_days || 0, state.streak || 0, hasActive ? 1 : 0);
+      const targetStreak = Math.max(
+        data.streak_days || 0,
+        state.streak || 0,
+        calculateConsecutiveStreak(state.dailyHistory, state.weeklyActivity)
+      );
 
       return {
         ...state,
@@ -91,7 +88,7 @@ export function useUserData() {
         xp: localStats.xp || 0,
         level: Math.max(1, Math.floor((localStats.xp || 0) / 600) + 1),
         kitsune_coins: localStats.coins || 100,
-        streak_days: localStats.streak || 1,
+        streak_days: calculateConsecutiveStreak(localStats.dailyHistory, localStats.weeklyActivity),
         weekly_activity: localStats.weeklyActivity || [],
       };
       setUserData(fallback);
@@ -109,15 +106,10 @@ export function useUserData() {
     const savedLocal = getStoredUserData(user.id);
     const localStats = useStatsStore.getState();
 
-    const hasLocalActiveHistory =
-      (localStats.weeklyActivity && localStats.weeklyActivity.some((d) => d.minutes > 0)) ||
-      (localStats.learnedVocab && localStats.learnedVocab.length > 0) ||
-      (localStats.xp && localStats.xp > 0);
-
     const initialStreak = Math.max(
       localStats.streak || 0,
       savedLocal?.streak_days || 0,
-      hasLocalActiveHistory ? 1 : 0
+      calculateConsecutiveStreak(localStats.dailyHistory, localStats.weeklyActivity)
     );
 
     const initialData: UserProgressData = savedLocal || {
@@ -161,13 +153,13 @@ export function useUserData() {
           ? storeWeekly
           : initialData.weekly_activity || [];
 
-        const hasAnyActiveHistory =
-          bestXp > 0 ||
-          (mergedWeekly && mergedWeekly.some((d) => d.minutes > 0)) ||
-          (localStats.learnedVocab && localStats.learnedVocab.length > 0);
-
-        const rawStreak = Math.max(data.streak_days || 0, initialData.streak_days || 0, localStats.streak || 0);
-        const currentStreak = hasAnyActiveHistory ? Math.max(1, rawStreak) : rawStreak;
+        const calculatedStreak = calculateConsecutiveStreak(localStats.dailyHistory, mergedWeekly);
+        const currentStreak = Math.max(
+          data.streak_days || 0,
+          initialData.streak_days || 0,
+          localStats.streak || 0,
+          calculatedStreak
+        );
         const bestLevel = Math.max(1, Math.floor(bestXp / 600) + 1);
 
         const merged: UserProgressData = {
