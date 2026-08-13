@@ -1,12 +1,13 @@
 import { useState, useMemo, useEffect, useRef, type FC } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { Check, X, HelpCircle, RefreshCw, Sparkles, Shuffle, ArrowRight } from 'lucide-react';
+import { Check, X, HelpCircle, RefreshCw, Sparkles, Shuffle, ArrowRight, Award } from 'lucide-react';
 import { useVocabDeck } from '../hooks/useVocabDeck';
 import { getVocabCategories, getVocabByLevelAndCategory } from '../data/vocab';
 import type { VocabItem } from '../content/types';
 import { useTrainingStore } from '../state/trainingStore';
 import { useStatsStore } from '../state/statsStore';
 import { Rating } from '../lib/fsrs';
+import { audioFeedback } from '../utils/audioFeedback';
 
 const CEFR_LEVELS: VocabItem['level'][] = ['A1', 'A2', 'B1', 'B2', 'C1'];
 
@@ -18,6 +19,7 @@ const UnifiedVocabTrainer: FC = () => {
   const reviewSRSCard = useTrainingStore((s) => s.reviewSRSCard);
 
   const [activeLevel, setActiveLevel] = useState<VocabItem['level']>(lastActiveLevel);
+  const [completionToast, setCompletionToast] = useState<{ message: string; submessage?: string } | null>(null);
   
   // Dynamically load categories for selected level
   const categories = useMemo(() => getVocabCategories(activeLevel), [activeLevel]);
@@ -128,16 +130,88 @@ const UnifiedVocabTrainer: FC = () => {
       // 2. Update SRS scheduler card
       reviewSRSCard(current.id, Rating.Good);
 
-      // 3. Save deck index and mastered status in trainingStore
-      const nextIndex = (index + 1) % Math.max(1, deck.length);
-      saveVocabProgress(activeLevel, activeCategory, nextIndex, current.id);
+      const isLastWordInDeck = index >= deck.length - 1;
 
-      const timer = setTimeout(() => {
-        advance();
-      }, 1200);
-      return () => clearTimeout(timer);
+      if (isLastWordInDeck) {
+        // Deck/Category Completed!
+        // 1. Save current category progress as completed
+        saveVocabProgress(activeLevel, activeCategory, 0, current.id);
+
+        // 2. Award bonus completion rewards (+25 XP, +10 Coins)
+        useStatsStore.getState().addRewards(25, 10);
+        audioFeedback.playFeedback('success');
+
+        // 3. Find next category in current level
+        const currentCatIdx = categories.indexOf(activeCategory);
+        if (currentCatIdx >= 0 && currentCatIdx < categories.length - 1) {
+          const nextCat = categories[currentCatIdx + 1];
+          setCompletionToast({
+            message: `🎉 Category '${activeCategory}' Mastered! (+25 XP, +10 KC)`,
+            submessage: `Advancing to '${nextCat}'...`,
+          });
+
+          const timer = setTimeout(() => {
+            setCompletionToast(null);
+            setActiveCategory(nextCat);
+            saveVocabProgress(activeLevel, nextCat, 0);
+          }, 1800);
+          return () => clearTimeout(timer);
+        } else {
+          // Reached end of categories in current Level! Move to next Level!
+          const currentLvlIdx = CEFR_LEVELS.indexOf(activeLevel);
+          if (currentLvlIdx >= 0 && currentLvlIdx < CEFR_LEVELS.length - 1) {
+            const nextLvl = CEFR_LEVELS[currentLvlIdx + 1];
+            const nextLvlCats = getVocabCategories(nextLvl);
+            const firstNextCat = nextLvlCats.length > 0 ? nextLvlCats[0] : '';
+
+            setCompletionToast({
+              message: `🌟 Level ${activeLevel} Mastered! (+50 XP, +20 KC)`,
+              submessage: `Advancing to Level ${nextLvl} (${firstNextCat})...`,
+            });
+            useStatsStore.getState().addRewards(25, 10);
+
+            const timer = setTimeout(() => {
+              setCompletionToast(null);
+              setActiveLevel(nextLvl);
+              if (firstNextCat) {
+                setActiveCategory(firstNextCat);
+                saveVocabProgress(nextLvl, firstNextCat, 0);
+              }
+            }, 2000);
+            return () => clearTimeout(timer);
+          } else {
+            // Reached end of C1 Level deck - loop back gracefully
+            const nextIndex = 0;
+            saveVocabProgress(activeLevel, activeCategory, nextIndex, current.id);
+            const timer = setTimeout(() => {
+              advance();
+            }, 1200);
+            return () => clearTimeout(timer);
+          }
+        }
+      } else {
+        // Normal next word inside same category
+        const nextIndex = index + 1;
+        saveVocabProgress(activeLevel, activeCategory, nextIndex, current.id);
+
+        const timer = setTimeout(() => {
+          advance();
+        }, 1200);
+        return () => clearTimeout(timer);
+      }
     }
-  }, [status, current, index, deck.length, activeLevel, activeCategory, advance, reviewSRSCard, saveVocabProgress]);
+  }, [
+    status,
+    current,
+    index,
+    deck.length,
+    activeLevel,
+    activeCategory,
+    categories,
+    advance,
+    reviewSRSCard,
+    saveVocabProgress,
+  ]);
 
   if (!current) {
     return (
@@ -238,6 +312,35 @@ const UnifiedVocabTrainer: FC = () => {
 
   return (
     <div className="w-full flex flex-col gap-6">
+      {/* Category Completion Celebration Banner */}
+      <AnimatePresence>
+        {completionToast && (
+          <motion.div
+            initial={{ opacity: 0, y: -15, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -15, scale: 0.95 }}
+            className="w-full p-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg flex items-center justify-between border border-emerald-400/40"
+          >
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-white/20 rounded-lg">
+                <Award className="h-6 w-6 text-yellow-300 animate-bounce" />
+              </div>
+              <div>
+                <h4 className="font-serif font-bold text-base leading-tight">
+                  {completionToast.message}
+                </h4>
+                {completionToast.submessage && (
+                  <p className="font-mono text-xs opacity-90 mt-0.5">
+                    {completionToast.submessage}
+                  </p>
+                )}
+              </div>
+            </div>
+            <Sparkles className="h-5 w-5 text-yellow-300 animate-spin" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* 1. Level & Category Selector Tabs */}
       <div className="flex flex-col gap-4">
         {/* Level Tabs */}

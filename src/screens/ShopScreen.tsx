@@ -1,4 +1,4 @@
-import { useState, useMemo, type FC } from 'react';
+import { useState, type FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStatsStore } from '../state/statsStore';
 import { useShopStore } from '../state/shopStore';
@@ -8,7 +8,8 @@ import { ONE_PIECE_CARDS, type OnePieceCard } from '../content/onePieceCards';
 import { DEMON_SLAYER_CARDS, type DemonSlayerCard } from '../content/demonSlayerCards';
 import GachaCard from '../components/GachaCard';
 import PackOpeningOverlay from '../components/PackOpeningOverlay';
-import { gachaData, GACHA_CARDS, getRandomGachaCard, type GachaCardData } from '../data/gachaData';
+import SummoningAltar from '../components/shop/SummoningAltar';
+import { gachaData, GACHA_CARDS, type GachaCardData } from '../data/gachaData';
 import {
   ShoppingBag,
   Coins,
@@ -83,7 +84,6 @@ const DEMON_SLAYER_HOTSPOTS = {
   }
 };
 
-const DRAW_COST = 20;
 
 export const THEMES_LIST = [
   { id: 'default', name: 'Original Serene Sage (Default)', price: 0, category: 'Original', color: '#7D927D', accent2: '#9BB39B', bg: '#FAF6F0', desc: 'The original serene sage & warm cream default app theme.' },
@@ -109,7 +109,6 @@ export const SOUND_PACKS_LIST = [
 const ShopScreen: FC = () => {
   const localCoins = useStatsStore((s) => s.coins);
   const collectAllCards = useStatsStore((s) => s.collectAllCards);
-  const collectedCardIds = useStatsStore((s) => s.collectedCardIds);
   
   // Hook for Clerk + Supabase live user data mutations
   const { userData, spendCoins: userSpendCoins } = useUserData();
@@ -199,140 +198,17 @@ const ShopScreen: FC = () => {
   // ── PACK OPENING OVERLAY STATE ───────────────────────────────────────────
   const [isPackDrawing, setIsPackDrawing] = useState<boolean>(false);
   const [drawnPackCard, setDrawnPackCard] = useState<GachaCardData | null>(null);
-  const [unlockedGachaIds, setUnlockedGachaIds] = useState<string[]>(() => [
+  const [unlockedGachaIds] = useState<string[]>(() => [
     'op-luffy', 'op-zoro', 'ds-tanjiro', 'ds-nezuko', 'ds-zenitsu'
   ]);
   const [gachaFilterRank, setGachaFilterRank] = useState<'all' | 'UR' | 'SSR' | 'SR' | 'R' | 'C' | 'Rare' | 'Common'>('all');
-  const [selectedSetFilter, setSelectedSetFilter] = useState<'all' | 'Demon Slayer' | 'One Piece'>('all');
-
-  const handleDrawPackCard = async () => {
-    const success = await userSpendCoins(DRAW_COST);
-    if (!success) {
-      alert("Not enough Kitsune Coins! Complete practice quizzes to earn more coins.");
-      return;
-    }
-    playThunderSound(true);
-    spawnBolt();
-    spawnParticles(12);
-
-    const card = getRandomGachaCard();
-    setDrawnPackCard(card);
-    setIsPackDrawing(true);
-    if (!unlockedGachaIds.includes(card.id)) {
-      setUnlockedGachaIds(prev => [...prev, card.id]);
-    }
-  };
-  
-  // Series selector state
-  const [selectedSeries, setSelectedSeries] = useState<'one-piece' | 'demon-slayer'>('one-piece');
-
-  // Modal states
+  const [selectedSetFilter, setSelectedSetFilter] = useState<'all' | 'Demon Slayer' | 'One Piece'>('all');  // Modal states for Card Hotspot Analyzer
   const [selectedCard, setSelectedCard] = useState<OnePieceCard | DemonSlayerCard | null>(null);
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
   const [selectedHotspot, setSelectedHotspot] = useState<'series' | 'faction' | 'rarity' | 'portrait' | 'name' | 'bounty' | 'attack' | null>(null);
 
-  // Cinematic states
-  const summonPhase = 's-altar';
-  const [lightningFlash, setLightningFlash] = useState(false);
-  const [lightningBolts, setLightningBolts] = useState<{ id: number; path: string }[]>([]);
-  const [gachaParticles, setGachaParticles] = useState<{ id: number; gold: boolean; left: number; drift: number; duration: number }[]>([]);
-
-  const spawnBolt = () => {
-    const id = Math.random();
-    const startX = 20 + Math.random() * 60;
-    let d = `M ${startX}% 0%`;
-    let x = startX;
-    let y = 0;
-    while (y < 100) {
-      y += 10 + Math.random() * 15;
-      x += (Math.random() - 0.5) * 16;
-      d += ` L ${x}% ${y}%`;
-    }
-    setLightningBolts(prev => [...prev, { id, path: d }]);
-    setLightningFlash(true);
-    setTimeout(() => setLightningFlash(false), 150);
-    setTimeout(() => {
-      setLightningBolts(prev => prev.filter(b => b.id !== id));
-    }, 420);
-  };
-
-  const spawnParticles = (count: number) => {
-    const newParticles = Array.from({ length: count }).map(() => ({
-      id: Math.random(),
-      gold: Math.random() > 0.5,
-      left: 42 + Math.random() * 16,
-      drift: Math.random() * 120 - 60,
-      duration: 0.9 + Math.random() * 0.9
-    }));
-    setGachaParticles(prev => [...prev, ...newParticles]);
-    newParticles.forEach(p => {
-      setTimeout(() => {
-        setGachaParticles(prev => prev.filter(item => item.id !== p.id));
-      }, p.duration * 1000);
-    });
-  };
-
-  const playThunderSound = (isExplosion = false) => {
-    try {
-      const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
-      if (!AudioContextClass) return;
-      const ctx = new AudioContextClass();
-      
-      const bufferSize = ctx.sampleRate * (isExplosion ? 1.2 : 2.2);
-      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-      const data = buffer.getChannelData(0);
-      for (let i = 0; i < bufferSize; i++) {
-        data[i] = Math.random() * 2 - 1;
-      }
-      
-      const noise = ctx.createBufferSource();
-      noise.buffer = buffer;
-      
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(isExplosion ? 110 : 75, ctx.currentTime);
-      filter.frequency.exponentialRampToValueAtTime(10, ctx.currentTime + (isExplosion ? 0.8 : 1.8));
-      
-      const gain = ctx.createGain();
-      gain.gain.setValueAtTime(isExplosion ? 0.35 : 0.2, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + (isExplosion ? 1.1 : 2.1));
-      
-      noise.connect(filter);
-      filter.connect(gain);
-      gain.connect(ctx.destination);
-      noise.start();
-    } catch (err) {
-      console.warn("Audio Context blocked or failed:", err);
-    }
-  };
-
   const isDs = selectedCard?.id.startsWith('ds-');
   const activeHotspots = isDs ? DEMON_SLAYER_HOTSPOTS : ONE_PIECE_HOTSPOTS;
-
-  // Rarity distribution count
-  const stats = useMemo(() => {
-    const currentPool = selectedSeries === 'one-piece' ? ONE_PIECE_CARDS : DEMON_SLAYER_CARDS;
-    const total = currentPool.length;
-    
-    // filter collectedCardIds that belong to the current pool
-    const poolIds = currentPool.map(c => c.id);
-    const currentCollected = collectedCardIds.filter(id => poolIds.includes(id));
-    const collectedCount = currentCollected.length;
-    const rate = total > 0 ? Math.round((collectedCount / total) * 100) : 0;
-    
-    let legendaryCount = 0;
-    let epicCount = 0;
-    
-    currentCollected.forEach(id => {
-      const card = currentPool.find(c => c.id === id);
-      if (card) {
-        if (card.rarity === 'legendary') legendaryCount++;
-        if (card.rarity === 'epic') epicCount++;
-      }
-    });
-
-    return { total, collectedCount, rate, legendaryCount, epicCount };
-  }, [collectedCardIds, selectedSeries]);
 
   const claimCheatCoins = () => {
     addRewards(0, 100); // Add 100 cheat coins for convenience
@@ -442,168 +318,7 @@ const ShopScreen: FC = () => {
         {/* ── TAB 1: GACHA SHRINE ─────────────────────────────────── */}
         {activeShopTab === 'gacha' && (
           <>
-            {/* Series Dropdown Selector inside the Gacha Altar */}
-            <div className="mb-4 flex items-center gap-2">
-              <span className="text-[10px] uppercase font-mono text-slate-400 tracking-wider font-bold">Set:</span>
-              <select
-                value={selectedSeries}
-                onChange={(e) => {
-                  setSelectedSeries(e.target.value as 'one-piece' | 'demon-slayer');
-                  setSelectedCard(null);
-                  setSelectedHotspot(null);
-                }}
-                className="bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-100 font-mono text-xs rounded-xl px-3 py-1.5 focus:outline-none transition-all cursor-pointer font-bold"
-              >
-                <option value="one-piece">🏴‍☠️ One Piece Set</option>
-                <option value="demon-slayer">⚔️ Demon Slayer Set</option>
-              </select>
-            </div>
-
-            <div className={`gacha-stage-panel stage rounded-2xl p-6 mb-8 flex flex-col md:flex-row items-center justify-center gap-8 shadow-2xl relative overflow-hidden transition-all duration-700 ${summonPhase} ${
-              summonPhase !== 's-altar' ? 'bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 min-h-[620px]' : 'bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 min-h-[460px]'
-            }`}>
-              {/* Grain overlay */}
-              <div className="grain-overlay pointer-events-none absolute inset-0 z-5 opacity-[0.02]" />
-              <div className="vignette-overlay pointer-events-none absolute inset-0 z-5" />
-
-              {/* Background Summoning Circle */}
-              <div className="glyph-wrap pointer-events-none absolute z-1">
-                <svg viewBox="0 0 200 200" className="w-full h-full">
-                  <g className="glyph-ring r1" transform="translate(100,100)">
-                    <circle r="92" fill="none" stroke="#F5A991" strokeOpacity="0.6" strokeWidth="1" />
-                    <g stroke="#FBBF24" strokeOpacity="0.7" strokeWidth="1">
-                      <line x1="0" y1="-92" x2="0" y2="-82" /><line x1="0" y1="92" x2="0" y2="82" />
-                      <line x1="-92" y1="0" x2="-82" y2="0" /><line x1="92" y1="0" x2="82" y2="0" />
-                      <line x1="-65" y1="-65" x2="-58" y2="-58" /><line x1="65" y1="-65" x2="58" y2="-58" />
-                      <line x1="-65" y1="65" x2="-58" y2="58" /><line x1="65" y1="65" x2="58" y2="58" />
-                    </g>
-                  </g>
-                  <g className="glyph-ring r2" transform="translate(100,100)">
-                    <circle r="70" fill="none" stroke="#FBBF24" strokeOpacity="0.5" strokeWidth="1" strokeDasharray="2 4" />
-                  </g>
-                  <g className="glyph-ring r3" transform="translate(100,100)">
-                    <circle r="46" fill="none" stroke="#C084FC" strokeOpacity="0.6" strokeWidth="1" />
-                    <path d="M0,-46 L13,-13 L46,0 L13,13 L0,46 L-13,13 L-46,0 L-13,-13 Z" fill="none" stroke="#F5A991" strokeOpacity="0.5" strokeWidth="1" />
-                  </g>
-                </svg>
-              </div>
-
-              {/* Lightning SVG Layer */}
-              <div className="fx-layer absolute inset-0 z-4 pointer-events-none">
-                {lightningFlash && (
-                  <div className="absolute inset-0 bg-amber-200/20 z-4 pointer-events-none" />
-                )}
-                <svg viewBox="0 0 1000 1000" className="w-full h-full" preserveAspectRatio="none">
-                  {lightningBolts.map((bolt) => (
-                    <path
-                      key={bolt.id}
-                      d={bolt.path}
-                      className="bolt-path"
-                      stroke="#F5A991"
-                      strokeWidth="3.5"
-                      fill="none"
-                      filter="drop-shadow(0 0 10px #FBBF24)"
-                    />
-                  ))}
-                </svg>
-              </div>
-
-              {/* Particle Layer */}
-              <div className="particles-layer absolute inset-0 z-3 pointer-events-none overflow-hidden">
-                {gachaParticles.map((p) => (
-                  <div
-                    key={p.id}
-                    className={`gacha-particle absolute rounded-full ${p.gold ? 'gold' : ''}`}
-                    style={{
-                      left: `${p.left}%`,
-                      '--drift': `${p.drift}px`,
-                      animationDuration: `${p.duration}s`,
-                    } as React.CSSProperties}
-                  />
-                ))}
-              </div>
-
-              {/* STEP 0: INITIAL VIEW (s-altar) */}
-              {summonPhase === 's-altar' && (
-                <>
-                  <div className="card-static-wrap z-10 relative flex items-center justify-center">
-                    <div className="w-56 sm:w-64 aspect-[2.5/3.5] rounded-2xl overflow-hidden border-2 border-amber-500/80 ring-2 ring-amber-500/30 shadow-2xl relative group transition-transform hover:scale-105 cursor-pointer bg-slate-950">
-                      {/* High-Fidelity Stitch Pack Image */}
-                      <img
-                        src={selectedSeries === 'one-piece' ? '/cards/op_pack_clean.jpg' : '/cards/ds_pack_clean.jpg'}
-                        alt={selectedSeries === 'one-piece' ? 'One Piece Pack' : 'Demon Slayer Pack'}
-                        className="w-full h-full object-cover"
-                      />
-                      {/* Metallic Foil Reflection Sheen */}
-                      <div className="absolute inset-0 bg-gradient-to-tr from-black/60 via-transparent to-amber-200/20 pointer-events-none" />
-                      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-slate-950/90 backdrop-blur-md text-amber-400 border border-amber-500/60 font-mono text-[10px] font-bold px-3 py-1 rounded-full whitespace-nowrap shadow-md">
-                        Cost: {DRAW_COST} KC
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex-1 max-w-sm space-y-5 z-10 relative">
-                    <div>
-                      <h2 className="font-serif text-2xl font-bold text-slate-100">Summoning Altar</h2>
-                      <p className="text-slate-300 text-xs mt-1 leading-relaxed">
-                        Unlock {selectedSeries === 'one-piece' ? ONE_PIECE_CARDS.length : DEMON_SLAYER_CARDS.length} mystical cards from this set.
-                      </p>
-                      
-                      <div className="mt-3.5 p-3.5 bg-slate-800/80 border border-slate-700/80 rounded-2xl flex items-start gap-2.5 shadow-sm">
-                        <span className="text-xl select-none mt-0.5">
-                          {selectedSeries === 'one-piece' ? '🏴‍☠️' : '⚔️'}
-                        </span>
-                        <div>
-                          <h4 className="font-mono text-[10px] uppercase font-bold text-amber-400 tracking-wider leading-none">
-                            {selectedSeries === 'one-piece' ? 'Pirate King Lore' : 'Corps Motto'}
-                          </h4>
-                          <p className="text-xs italic text-slate-200 leading-relaxed mt-1">
-                            {selectedSeries === 'one-piece'
-                              ? '"Inherited Will, the Destiny of Age, and the Dreams of People. As long as people continue to pursue Freedom, these things will never cease to be!"'
-                              : '"No matter how many people you lose, set your heart ablaze and surpass your limits!"'}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2 border-y border-slate-700/60 py-3.5 font-mono text-xs text-slate-300">
-                      <div className="flex justify-between">
-                        <span>Legendary Drop Rate:</span>
-                        <span className="text-amber-400 font-bold">5%</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Epic Drop Rate:</span>
-                        <span className="text-purple-400 font-bold">20%</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Rare Drop Rate:</span>
-                        <span className="text-sky-400 font-bold">35%</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Common Drop Rate:</span>
-                        <span className="text-slate-200 font-bold">40%</span>
-                      </div>
-                    </div>
-
-                    <button
-                      onClick={handleDrawPackCard}
-                      disabled={coins < DRAW_COST}
-                      className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 font-bold shadow-lg shadow-amber-500/20 hover:brightness-110 active:scale-98 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed uppercase text-xs border-none"
-                    >
-                      ✦ DRAW x1 ({DRAW_COST} COINS)
-                    </button>
-                  </div>
-                </>
-              )}
-            </div>
-
-            {/* Stats Dashboard */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-              <StatBox label="Owned Cards" value={stats.collectedCount} color="text-slate-100" />
-              <StatBox label="Completion Rate" value={`${stats.rate}%`} color="text-emerald-400" />
-              <StatBox label="Legendaries Found" value={stats.legendaryCount} color="text-amber-400" />
-              <StatBox label="Epics Found" value={stats.epicCount} color="text-purple-400" />
-            </div>
+            <SummoningAltar />
 
             {/* Your Collection (Gacha Cards Grid) */}
             <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 rounded-2xl p-6 shadow-2xl text-slate-100">
@@ -1703,20 +1418,5 @@ const ShopScreen: FC = () => {
     </div>
   );
 };
-
-interface StatBoxProps {
-  label: string;
-  value: string | number;
-  color?: string;
-  icon?: React.ReactNode;
-}
-
-const StatBox: FC<StatBoxProps> = ({ label, value, color = "text-slate-100", icon }) => (
-  <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 rounded-xl p-4 text-center flex flex-col justify-center items-center shadow-2xl text-slate-100">
-    {icon && <div className="text-slate-400 mb-1">{icon}</div>}
-    <div className={`text-xl font-bold font-mono leading-none ${color}`}>{value}</div>
-    <div className="text-[9px] uppercase tracking-wider text-slate-400 mt-1.5 leading-none">{label}</div>
-  </div>
-);
 
 export default ShopScreen;
