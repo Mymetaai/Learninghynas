@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { BOOK_LEVELS, TOTAL_BOOK_LEVELS } from '../content';
 import { useProgressStore } from '../state/progressStore';
 import { useQuestStore } from '../state/questStore';
+import { useStatsStore } from '../state/statsStore';
 import {
   BookOpen,
   Lock,
@@ -110,6 +111,16 @@ const QuestJourneyScreen: FC = () => {
               value={nextLevel ? `Level ${nextLevel.idx + 1}` : 'All done!'}
               accent
             />
+            <button
+              onClick={() => {
+                useQuestStore.getState().unlockAllLevels();
+                useProgressStore.getState().unlockAll();
+                useStatsStore.getState().addRewards(500, 200);
+              }}
+              className="ml-auto flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 font-mono text-[10px] uppercase font-bold tracking-wider shadow-md hover:brightness-110 active:scale-95 transition-all cursor-pointer border-none"
+            >
+              ✦ Unlock All 24 Levels
+            </button>
           </div>
 
           {/* Progress bar */}

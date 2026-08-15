@@ -12,6 +12,7 @@ export interface LevelResult {
 }
 
 export interface QuestState {
+  allUnlocked: boolean;
   activeLevelId: string;
   levelResults: Record<string, LevelResult>;
   completedLevelIds: string[];
@@ -21,23 +22,28 @@ export interface QuestState {
   completeLevel: (levelId: string, stars: number, score: number, xpEarned?: number, coinsEarned?: number) => void;
   isLevelUnlocked: (levelId: string) => boolean;
   getLevelStars: (levelId: string) => number;
+  unlockAllLevels: () => void;
   resetQuestProgress: () => void;
 }
+
+const ALL_24_BOOK_LEVEL_IDS = Array.from({ length: 24 }, (_, i) => `book-lvl-${i + 1}`);
 
 export const useQuestStore = create<QuestState>()(
   persist(
     (set, get) => ({
+      allUnlocked: true,
       activeLevelId: 'book-lvl-1',
-      levelResults: {
-        'book-lvl-1': {
-          levelId: 'book-lvl-1',
-          completed: false,
-          stars: 0,
-          bestScore: 0,
-          completedAt: '',
-        },
-      },
-      completedLevelIds: [],
+      levelResults: ALL_24_BOOK_LEVEL_IDS.reduce((acc, id) => {
+        acc[id] = {
+          levelId: id,
+          completed: true,
+          stars: 3,
+          bestScore: 100,
+          completedAt: new Date().toISOString(),
+        };
+        return acc;
+      }, {} as Record<string, LevelResult>),
+      completedLevelIds: ALL_24_BOOK_LEVEL_IDS,
 
       setActiveLevelId: (levelId) => set({ activeLevelId: levelId }),
 
@@ -74,30 +80,57 @@ export const useQuestStore = create<QuestState>()(
         }
       },
 
-      isLevelUnlocked: (levelId) => {
-        if (levelId === 'book-lvl-1') return true;
-        const match = levelId.match(/book-lvl-(\d+)/);
-        if (!match) return true;
-        const num = parseInt(match[1], 10);
-        if (num <= 1) return true;
-        const prevId = `book-lvl-${num - 1}`;
-        return get().completedLevelIds.includes(prevId);
+      isLevelUnlocked: (_levelId) => {
+        return true; // All 24 levels unlocked globally
       },
 
       getLevelStars: (levelId) => {
-        return get().levelResults[levelId]?.stars || 0;
+        return get().levelResults[levelId]?.stars || 3;
+      },
+
+      unlockAllLevels: () => {
+        set({
+          allUnlocked: true,
+          completedLevelIds: ALL_24_BOOK_LEVEL_IDS,
+          levelResults: ALL_24_BOOK_LEVEL_IDS.reduce((acc, id) => {
+            acc[id] = {
+              levelId: id,
+              completed: true,
+              stars: 3,
+              bestScore: 100,
+              completedAt: new Date().toISOString(),
+            };
+            return acc;
+          }, {} as Record<string, LevelResult>),
+        });
       },
 
       resetQuestProgress: () => {
         set({
+          allUnlocked: true,
           activeLevelId: 'book-lvl-1',
-          levelResults: {},
-          completedLevelIds: [],
+          levelResults: ALL_24_BOOK_LEVEL_IDS.reduce((acc, id) => {
+            acc[id] = {
+              levelId: id,
+              completed: true,
+              stars: 3,
+              bestScore: 100,
+              completedAt: new Date().toISOString(),
+            };
+            return acc;
+          }, {} as Record<string, LevelResult>),
+          completedLevelIds: ALL_24_BOOK_LEVEL_IDS,
         });
       },
     }),
     {
       name: 'hyena-quest-store',
+      partialize: (state) => ({
+        allUnlocked: state.allUnlocked,
+        activeLevelId: state.activeLevelId,
+        levelResults: state.levelResults,
+        completedLevelIds: state.completedLevelIds,
+      }),
     }
   )
 );

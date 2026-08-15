@@ -7,7 +7,9 @@ import { persist } from 'zustand/middleware';
 import { ALL_WORLDS } from '../content/worlds';
 
 interface ProgressState {
-  /** Quest ids the player has completed (set, but stored as array). */
+  /** Global unlock flag (defaults to true for full access). */
+  allUnlocked: boolean;
+  /** Quest ids the player has completed. */
   completedQuestIds: string[];
   /** World ids where the guardian has been defeated. */
   defeatedGuardianWorldIds: string[];
@@ -23,16 +25,18 @@ interface ProgressState {
   isQuestUnlocked: (questId: string) => boolean;
   /** Is this world's first quest accessible (its prerequisite world beaten)? */
   isWorldUnlocked: (worldId: string) => boolean;
+  /** Unlock all quests, worlds, and guardians globally. */
+  unlockAll: () => void;
   /** Reset all progress (fresh account / testing). */
   reset: () => void;
 }
 
-
 export const useProgressStore = create<ProgressState>()(
   persist(
     (set, get) => ({
+      allUnlocked: true,
       completedQuestIds: [],
-      defeatedGuardianWorldIds: [],
+      defeatedGuardianWorldIds: ALL_WORLDS.map((w) => w.id),
       defeatedSentinelIds: [],
 
       completeQuest: (questId) =>
@@ -55,6 +59,7 @@ export const useProgressStore = create<ProgressState>()(
 
       isQuestUnlocked: (questId) => {
         const state = get();
+        if (state.allUnlocked) return true;
         for (const world of ALL_WORLDS) {
           const idx = world.quests.findIndex((q) => q.id === questId);
           if (idx !== -1) {
@@ -64,32 +69,35 @@ export const useProgressStore = create<ProgressState>()(
             return state.completedQuestIds.includes(prevQuest.id);
           }
         }
-        return false;
+        return true;
       },
 
-      isWorldUnlocked: (worldId) => {
-        const state = get();
-        const world = ALL_WORLDS.find((w) => w.id === worldId);
-        if (!world) return false;
-        if (world.unlockRequirement === 'first' || world.id === 'world-pre-a1') return true;
-
-        if (state.defeatedGuardianWorldIds.includes(world.unlockRequirement)) {
-          return true;
-        }
-        const prereqWorld = ALL_WORLDS.find((w) => w.id === world.unlockRequirement);
-        if (prereqWorld && prereqWorld.quests.length > 0) {
-          const allDone = prereqWorld.quests.every((q) => state.completedQuestIds.includes(q.id));
-          if (allDone) return true;
-        }
-        return false;
+      isWorldUnlocked: (_worldId) => {
+        return true; // All worlds unlocked globally
       },
 
-      reset: () => set({ completedQuestIds: [], defeatedGuardianWorldIds: [], defeatedSentinelIds: [] }),
+      unlockAll: () => {
+        const allQuests = ALL_WORLDS.flatMap((w) => w.quests.map((q) => q.id));
+        const allWorlds = ALL_WORLDS.map((w) => w.id);
+        set({
+          allUnlocked: true,
+          completedQuestIds: Array.from(new Set([...get().completedQuestIds, ...allQuests])),
+          defeatedGuardianWorldIds: Array.from(new Set([...get().defeatedGuardianWorldIds, ...allWorlds])),
+        });
+      },
+
+      reset: () =>
+        set({
+          allUnlocked: true,
+          completedQuestIds: [],
+          defeatedGuardianWorldIds: ALL_WORLDS.map((w) => w.id),
+          defeatedSentinelIds: [],
+        }),
     }),
     {
       name: 'wayfarer-progress',
-      // Only persist the raw data, not the functions.
       partialize: (state) => ({
+        allUnlocked: state.allUnlocked,
         completedQuestIds: state.completedQuestIds,
         defeatedGuardianWorldIds: state.defeatedGuardianWorldIds,
         defeatedSentinelIds: state.defeatedSentinelIds,
