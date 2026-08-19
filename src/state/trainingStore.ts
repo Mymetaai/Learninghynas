@@ -49,6 +49,8 @@ interface TrainingState {
   markReviewedCorrectly: (word: string) => void;
   /** Clear all mistakes (testing / reset). */
   clearAllMistakes: () => void;
+  /** Reset entire training store to clean initial state. */
+  resetTrainingStore: () => void;
   /** Increment sessions completed count. */
   completeTrainingSession: () => void;
   /** Save current level, category, and card index in training store. */
@@ -116,6 +118,8 @@ export const useTrainingStore = create<TrainingState>()(
       },
 
       clearAllMistakes: () => set({ mistakes: [] }),
+
+      resetTrainingStore: () => set(DEFAULT_STATE),
 
       completeTrainingSession: () =>
         set((s) => ({ trainingSessionsCompleted: s.trainingSessionsCompleted + 1 })),

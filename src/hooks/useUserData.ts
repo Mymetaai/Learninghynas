@@ -367,7 +367,7 @@ export function useUserData() {
     useQuestStore.getState().resetQuestProgress();
     useDailyQuestStore.getState().resetDailyQuests();
     useEntitlementStore.getState().resetEntitlements();
-    useTrainingStore.getState().clearAllMistakes();
+    useTrainingStore.getState().resetTrainingStore();
     useScenarioStore.getState().resetAllScenarios();
     useActiveImmersionStore.getState().resetAllImmersionSessions();
     useStoryProgressStore.getState().resetStoryProgress();

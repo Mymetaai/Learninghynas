@@ -2,6 +2,8 @@ import { useState, useMemo, type FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { assembleTodaySession, type SessionStep } from '../../lib/sessionDirector';
+import { createMultipleChoiceOptions } from '../../lib/distractorGenerator';
+import { useTrainingStore } from '../../state/trainingStore';
 import ExerciseEngine from '../exercises/ExerciseEngine';
 import AutoFlashcardsPlayer from '../AutoFlashcardsPlayer';
 import FeynmanDrill from '../FeynmanDrill';
@@ -38,34 +40,51 @@ export const TodayTrainingRunner: FC<TodayTrainingRunnerProps> = ({ onClose }) =
     }, 400);
   };
 
-  // Convert weakspot items to exercises
+  // Convert weakspot items to exercises with smart distractors
   const weakSpotExercises: Exercise[] = useMemo(() => {
     if (currentStep?.type !== 'weakspot') return [];
     const items = currentStep.payload?.items || [];
-    return items.map((m: any, i: number) => ({
-      id: `weak-step-${i}`,
-      type: 'multiple-choice',
-      prompt: `Review Weak Spot: Translate "${m.word}"`,
-      answer: m.correctAnswer,
-      options: [m.correctAnswer, m.wrongAnswer || 'incorrect', 'opcion 2', 'opcion 3'].sort(() => Math.random() - 0.5),
-      context: 'Weak Spot Quarantine',
-    }));
+    return items.map((m: any, i: number) => {
+      const correct = m.correctAnswer || m.word;
+      return {
+        id: `weak-step-${i}`,
+        type: 'multiple-choice',
+        prompt: `Review Weak Spot: Select the correct Spanish term for "${m.word}"`,
+        answer: correct,
+        options: createMultipleChoiceOptions(correct),
+        context: 'Weak Spot Quarantine',
+      };
+    });
   }, [currentStep]);
 
-  // Convert grammar lesson to exercises
+  // Handle weakspot session completion and mark reviewed correctly
+  const handleWeakSpotComplete = () => {
+    const items = currentStep?.payload?.items || [];
+    items.forEach((item: any) => {
+      if (item.word) {
+        useTrainingStore.getState().markReviewedCorrectly(item.word);
+      }
+    });
+    handleNextStep();
+  };
+
+  // Convert grammar lesson to exercises with smart distractors
   const grammarExercises: Exercise[] = useMemo(() => {
     if (currentStep?.type !== 'grammar_blitz') return [];
     const lesson = currentStep.payload?.lesson;
     const vocab = lesson?.vocabularyTable || [];
     if (vocab.length > 0) {
-      return vocab.slice(0, 4).map((v: any, i: number) => ({
-        id: `grammar-step-${i}`,
-        type: 'multiple-choice',
-        prompt: `Lesson ${lesson.lessonNumber}: What is the meaning of "${v.spanish}"?`,
-        answer: v.english,
-        options: [v.english, 'To run', 'Good morning', 'Tomorrow'].sort(() => Math.random() - 0.5),
-        context: lesson.title,
-      }));
+      return vocab.slice(0, 4).map((v: any, i: number) => {
+        const correct = v.spanish;
+        return {
+          id: `grammar-step-${i}`,
+          type: 'multiple-choice',
+          prompt: `Lesson ${lesson.lessonNumber}: Translate "${v.english}" to Spanish`,
+          answer: correct,
+          options: createMultipleChoiceOptions(correct),
+          context: lesson.title,
+        };
+      });
     }
     return [
       {
@@ -73,7 +92,7 @@ export const TodayTrainingRunner: FC<TodayTrainingRunnerProps> = ({ onClose }) =
         type: 'multiple-choice',
         prompt: 'Select the correct conjugation of SER for "Nosotros":',
         answer: 'somos',
-        options: ['soy', 'eres', 'es', 'somos'],
+        options: createMultipleChoiceOptions('somos'),
         context: 'Grammar Blitz',
       },
     ];
@@ -162,7 +181,7 @@ export const TodayTrainingRunner: FC<TodayTrainingRunnerProps> = ({ onClose }) =
                     exercises={weakSpotExercises}
                     questId="workout-weakspot"
                     questTitle={currentStep.title}
-                    onSessionComplete={handleNextStep}
+                    onSessionComplete={handleWeakSpotComplete}
                     trackMistakes={false}
                   />
                 ) : (
