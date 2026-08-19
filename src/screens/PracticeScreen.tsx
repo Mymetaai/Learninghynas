@@ -466,117 +466,125 @@ const PracticeScreen: FC = () => {
         </div>
 
         {/* Interactive Training Area */}
-        <div className="mb-12">
+        <div className="mb-8">
           <UnifiedVocabTrainer />
         </div>
 
-        {/* Drill Tiles Grid (6 Active Tiles) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          <AnimatePresence>
-            {/* 1. Grammar Blitz */}
-            <DrillTile
-              mode="grammar-blitz"
-              icon={<Zap className="h-6 w-6" />}
-              iconColor="text-[#7D927D]"
-              iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
-              title="Grammar Blitz"
-              subtitle="Rapid-fire grammar rules across Parts 1–7"
-              ctaLabel="Start Grammar Blitz"
-              onStart={() => handleStartSession('grammar-blitz')}
-              index={0}
-            />
+        {/* Step 3: Free Training Section Header & Grid */}
+        <div className="relative z-10 mt-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="font-serif text-xl font-bold text-text-primary">Free Training</h3>
+            <span className="font-mono text-xs text-text-secondary">Target Specific Skills</span>
+          </div>
 
-            {/* 2. Conjugation Blitz */}
-            <DrillTile
-              mode="conjugation"
-              icon={<Flame className="h-6 w-6" />}
-              iconColor="text-[#7D927D]"
-              iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
-              title="Conjugation Blitz"
-              subtitle="-AR, -ER, -IR, Ser, Estar, Ir, Yo-Go & Preterite"
-              ctaLabel="Start Conjugation"
-              onStart={() => handleStartSession('conjugation')}
-              index={1}
-            />
+          {/* Drill Tiles Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <AnimatePresence>
+              {/* 1. Grammar Blitz */}
+              <DrillTile
+                mode="grammar-blitz"
+                icon={<Zap className="h-6 w-6" />}
+                iconColor="text-[#7D927D]"
+                iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
+                title="Grammar Blitz"
+                subtitle="Rapid-fire grammar rules across Parts 1–7"
+                ctaLabel="Start Grammar Blitz"
+                onStart={() => handleStartSession('grammar-blitz')}
+                index={0}
+              />
 
-            {/* 3. Listening Reps */}
-            <DrillTile
-              mode="listening-reps"
-              icon={<Headphones className="h-6 w-6" />}
-              iconColor="text-[#7D927D]"
-              iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
-              title="Listening Reps"
-              subtitle={`${listeningCount} audio listening clips across Lessons 1–30`}
-              ctaLabel="Start Listening"
-              onStart={() => handleStartSession('listening-reps')}
-              index={2}
-            />
+              {/* 2. Conjugation Blitz */}
+              <DrillTile
+                mode="conjugation"
+                icon={<Flame className="h-6 w-6" />}
+                iconColor="text-[#7D927D]"
+                iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
+                title="Conjugation Blitz"
+                subtitle="-AR, -ER, -IR, Ser, Estar, Ir, Yo-Go & Preterite"
+                ctaLabel="Start Conjugation"
+                onStart={() => handleStartSession('conjugation')}
+                index={1}
+              />
 
-            {/* 4. Speaking Reps */}
-            <DrillTile
-              mode="speaking-reps"
-              icon={<Mic className="h-6 w-6" />}
-              iconColor="text-[#7D927D]"
-              iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
-              title="Speaking Reps"
-              subtitle="Practice spoken phrases aloud across Parts 1–7"
-              ctaLabel="Start Speaking"
-              onStart={() => handleStartSession('speaking-reps')}
-              index={3}
-            />
+              {/* 3. Listening Reps */}
+              <DrillTile
+                mode="listening-reps"
+                icon={<Headphones className="h-6 w-6" />}
+                iconColor="text-[#7D927D]"
+                iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
+                title="Listening Reps"
+                subtitle={`${listeningCount} audio listening clips across Lessons 1–30`}
+                ctaLabel="Start Listening"
+                onStart={() => handleStartSession('listening-reps')}
+                index={2}
+              />
 
-            {/* 5. Vocab Drill */}
-            <DrillTile
-              mode="vocab-drill"
-              icon={<BookOpen className="h-6 w-6" />}
-              iconColor="text-[#7D927D]"
-              iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
-              title="Vocab Drill"
-              subtitle={`${vocabCount} vocabulary words from Parts 1–7`}
-              ctaLabel="Drill Vocab"
-              onStart={() => handleStartSession('vocab-drill')}
-              index={4}
-            />
+              {/* 4. Speaking Reps */}
+              <DrillTile
+                mode="speaking-reps"
+                icon={<Mic className="h-6 w-6" />}
+                iconColor="text-[#7D927D]"
+                iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
+                title="Speaking Reps"
+                subtitle="Practice spoken phrases aloud across Parts 1–7"
+                ctaLabel="Start Speaking"
+                onStart={() => handleStartSession('speaking-reps')}
+                index={3}
+              />
 
-            {/* 6. Weak Spots */}
-            <DrillTile
-              mode="weak-spots"
-              icon={<Target className="h-6 w-6" />}
-              iconColor="text-[#7D927D]"
-              iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
-              title="Weak Spots"
-              subtitle={mistakeCount > 0 ? `${mistakeCount} active mistake(s) to review` : 'Review target vocabulary'}
-              ctaLabel="Start Review"
-              onStart={() => handleStartSession('weak-spots')}
-              index={5}
-            />
+              {/* 5. Vocab Drill */}
+              <DrillTile
+                mode="vocab-drill"
+                icon={<BookOpen className="h-6 w-6" />}
+                iconColor="text-[#7D927D]"
+                iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
+                title="Vocab Drill"
+                subtitle={`${vocabCount} vocabulary words from Parts 1–7`}
+                ctaLabel="Drill Vocab"
+                onStart={() => handleStartSession('vocab-drill')}
+                index={4}
+              />
 
-            {/* 7. Auto Flashcards */}
-            <DrillTile
-              mode="flashcards"
-              icon={<Sparkles className="h-6 w-6" />}
-              iconColor="text-[#7D927D]"
-              iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
-              title="Auto Flashcards"
-              subtitle="Hands-free auto-play flashcard deck player"
-              ctaLabel="Start Flashcards"
-              onStart={() => handleStartSession('flashcards')}
-              index={6}
-            />
+              {/* 6. Weak Spots */}
+              <DrillTile
+                mode="weak-spots"
+                icon={<Target className="h-6 w-6" />}
+                iconColor="text-[#7D927D]"
+                iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
+                title="Weak Spots"
+                subtitle={mistakeCount > 0 ? `${mistakeCount} active mistake(s) to review` : 'Review target vocabulary'}
+                ctaLabel="Start Review"
+                onStart={() => handleStartSession('weak-spots')}
+                index={5}
+              />
 
-            {/* 8. Teach the Chibi (Feynman Drill) */}
-            <DrillTile
-              mode="feynman"
-              icon={<Brain className="h-6 w-6" />}
-              iconColor="text-[#7D927D]"
-              iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
-              title="Teach the Chibi"
-              subtitle="Feynman Technique: Explain 100 concepts (A1–C1) to mascot"
-              ctaLabel="Start Teaching"
-              onStart={() => handleStartSession('feynman')}
-              index={7}
-            />
-          </AnimatePresence>
+              {/* 7. Auto Flashcards */}
+              <DrillTile
+                mode="flashcards"
+                icon={<Sparkles className="h-6 w-6" />}
+                iconColor="text-[#7D927D]"
+                iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
+                title="Auto Flashcards"
+                subtitle="Hands-free auto-play flashcard deck player"
+                ctaLabel="Start Flashcards"
+                onStart={() => handleStartSession('flashcards')}
+                index={6}
+              />
+
+              {/* 8. Teach the Chibi (Feynman Drill) */}
+              <DrillTile
+                mode="feynman"
+                icon={<Brain className="h-6 w-6" />}
+                iconColor="text-[#7D927D]"
+                iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
+                title="Teach the Chibi"
+                subtitle="Feynman Technique: Explain 100 concepts (A1–C1) to mascot"
+                ctaLabel="Start Teaching"
+                onStart={() => handleStartSession('feynman')}
+                index={7}
+              />
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* Quick stats footer */}
