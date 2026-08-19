@@ -24,65 +24,67 @@ export default function PracticeViewScreen() {
   const sessionSteps = useMemo(() => assembleTodaySession(), []);
 
   return (
-    <div className="min-h-screen bg-bg-base text-text-primary pb-12 relative overflow-hidden">
+    <div className="min-h-screen bg-bg-base text-text-primary pb-20 sm:pb-12 relative overflow-hidden">
       {/* 1. Dojo Floor Ambient Canvas (z-0 background layer) */}
       <DojoFloor />
 
       {/* Top Sub-navigation Bar for Practice View */}
       <div className="sticky top-14 z-30 bg-bg-base/90 backdrop-blur-md border-b border-structural py-2.5 px-4 mb-6">
-        <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-3">
-          <button
-            onClick={() => {
-              setShowTodayWorkout(false);
-              setActiveSubView('training');
-            }}
-            className={`px-5 py-2 rounded-full font-sans text-xs font-bold transition-all cursor-pointer ${
-              activeSubView === 'training' && !showTodayWorkout
-                ? 'bg-[#7D927D] text-white shadow-sm'
-                : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
-            }`}
-          >
-            Training Grounds
-          </button>
-          <button
-            onClick={() => {
-              setShowTodayWorkout(false);
-              setActiveSubView('voice');
-            }}
-            className={`px-5 py-2 rounded-full font-sans text-xs font-bold transition-all cursor-pointer ${
-              activeSubView === 'voice'
-                ? 'bg-[#7D927D] text-white shadow-sm'
-                : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
-            }`}
-          >
-            Voice Arena
-          </button>
-          <button
-            onClick={() => {
-              setShowTodayWorkout(false);
-              setActiveSubView('companion');
-            }}
-            className={`px-5 py-2 rounded-full font-sans text-xs font-bold transition-all cursor-pointer ${
-              activeSubView === 'companion'
-                ? 'bg-[#7D927D] text-white shadow-sm'
-                : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
-            }`}
-          >
-            AI Companion
-          </button>
-          <button
-            onClick={() => {
-              setShowTodayWorkout(false);
-              setActiveSubView('adventure-map');
-            }}
-            className={`px-5 py-2 rounded-full font-sans text-xs font-bold transition-all cursor-pointer ${
-              activeSubView === 'adventure-map'
-                ? 'bg-[#7D927D] text-white shadow-sm'
-                : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
-            }`}
-          >
-            Adventure Map
-          </button>
+        <div className="max-w-6xl mx-auto overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex items-center justify-start sm:justify-center gap-2 sm:gap-3 w-max sm:w-full mx-auto">
+            <button
+              onClick={() => {
+                setShowTodayWorkout(false);
+                setActiveSubView('training');
+              }}
+              className={`px-4 sm:px-5 py-2 rounded-full font-sans text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                activeSubView === 'training' && !showTodayWorkout
+                  ? 'bg-[#7D927D] text-white shadow-sm'
+                  : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
+              }`}
+            >
+              Training Grounds
+            </button>
+            <button
+              onClick={() => {
+                setShowTodayWorkout(false);
+                setActiveSubView('voice');
+              }}
+              className={`px-4 sm:px-5 py-2 rounded-full font-sans text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                activeSubView === 'voice'
+                  ? 'bg-[#7D927D] text-white shadow-sm'
+                  : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
+              }`}
+            >
+              Voice Arena
+            </button>
+            <button
+              onClick={() => {
+                setShowTodayWorkout(false);
+                setActiveSubView('companion');
+              }}
+              className={`px-4 sm:px-5 py-2 rounded-full font-sans text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                activeSubView === 'companion'
+                  ? 'bg-[#7D927D] text-white shadow-sm'
+                  : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
+              }`}
+            >
+              AI Companion
+            </button>
+            <button
+              onClick={() => {
+                setShowTodayWorkout(false);
+                setActiveSubView('adventure-map');
+              }}
+              className={`px-4 sm:px-5 py-2 rounded-full font-sans text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                activeSubView === 'adventure-map'
+                  ? 'bg-[#7D927D] text-white shadow-sm'
+                  : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
+              }`}
+            >
+              Adventure Map
+            </button>
+          </div>
         </div>
       </div>
 

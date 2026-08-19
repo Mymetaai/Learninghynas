@@ -203,7 +203,7 @@ const HUD: FC = () => {
         </nav>
 
         {/* Mobile Bottom Navigation Bar (Thumb Friendly) */}
-        <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-bg-elevated/95 backdrop-blur-xl border-t border-structural/40 shadow-lg px-2 py-1 flex justify-around items-center">
+        <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-bg-elevated/95 backdrop-blur-xl border-t border-structural/40 shadow-lg px-1 pt-1.5 pb-[max(0.375rem,env(safe-area-inset-bottom))] flex justify-around items-center">
           {[
             { to: '/learn', label: 'Learn', icon: Home },
             { to: '/practice', label: 'Practice', icon: Swords },
@@ -218,7 +218,7 @@ const HUD: FC = () => {
                 key={item.to}
                 to={item.to}
                 className={({ isActive }) =>
-                  `flex flex-col items-center gap-0.5 py-1 px-2.5 rounded-xl transition-colors ${
+                  `flex flex-col items-center justify-center gap-0.5 min-w-[3rem] min-h-[2.75rem] py-1 px-1.5 rounded-xl transition-colors ${
                     isActive
                       ? 'text-[#5E735E] font-bold'
                       : 'text-text-secondary hover:text-text-primary'
@@ -226,7 +226,7 @@ const HUD: FC = () => {
                 }
               >
                 <Icon className="h-5 w-5" />
-                <span className="text-[10px] font-sans font-medium">{item.label}</span>
+                <span className="text-[10px] font-sans font-medium leading-tight">{item.label}</span>
               </NavLink>
             );
           })}

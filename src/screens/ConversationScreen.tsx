@@ -189,7 +189,7 @@ const ConversationScreen: FC = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary font-sans pb-12">
+    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base text-text-primary font-sans pb-20 sm:pb-12">
       
       {/* Upper Mode Header */}
       <div className="border-b border-structural bg-bg-base/80 backdrop-blur-md px-4 py-4 sm:px-6">
