@@ -58,7 +58,7 @@ export default function PracticeViewScreen() {
       </div>
 
       {/* Sub-view Content */}
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-6xl mx-auto px-4 pt-2 sm:pt-4">
         {activeSubView === 'training' && <PracticeScreen />}
         {activeSubView === 'voice' && <SpeakingScreen />}
         {activeSubView === 'companion' && <ConversationScreen />}

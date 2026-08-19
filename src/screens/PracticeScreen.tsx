@@ -383,14 +383,14 @@ const PracticeScreen: FC = () => {
 
     if (activeMode === 'feynman') {
       return (
-        <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base px-4 py-6">
-          <div className="mx-auto max-w-4xl mb-4">
+        <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base px-4 py-4 pt-4 sm:pt-6">
+          <div className="mx-auto max-w-4xl mb-6 pb-3 border-b border-structural/40">
             <button
               onClick={handleBackToHub}
-              className="flex items-center gap-1.5 font-mono text-[11px] text-[#777775] hover:text-text-primary transition-colors cursor-pointer bg-transparent border-none"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-bg-elevated border border-structural/60 font-mono text-xs font-bold text-text-secondary hover:text-text-primary hover:border-[#7D927D] hover:bg-white/90 shadow-xs transition-all cursor-pointer"
             >
-              <ArrowLeft className="h-3.5 w-3.5" />
-              Back to Training Grounds
+              <ArrowLeft className="h-4 w-4 text-[#7D927D]" />
+              <span>Back to Training Grounds</span>
             </button>
           </div>
           <div className="mx-auto max-w-4xl">
@@ -402,14 +402,14 @@ const PracticeScreen: FC = () => {
 
     if (sessionExercises.length === 0) {
       return (
-        <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base px-4 py-6">
+        <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base px-4 py-6 pt-4 sm:pt-6">
           <div className="mx-auto max-w-lg text-center">
             <p className="font-sans text-sm text-[#777775] mt-12">
               No exercises available for this session right now.
             </p>
             <button
               onClick={handleBackToHub}
-              className="mt-4 font-mono text-xs text-[#7D927D] hover:text-[#6B826B] cursor-pointer bg-transparent border-none"
+              className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#7D927D]/15 border border-[#7D927D]/30 font-mono text-xs font-bold text-[#5E735E] hover:bg-[#7D927D]/25 transition-all cursor-pointer"
             >
               ← Back to Training Grounds
             </button>
@@ -419,16 +419,16 @@ const PracticeScreen: FC = () => {
     }
 
     return (
-      <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base px-4 py-6">
-        <div className="mx-auto max-w-lg mb-4">
+      <div className="min-h-[calc(100vh-3.5rem)] bg-bg-base px-4 py-6 pt-4 sm:pt-6">
+        <div className="mx-auto max-w-lg mb-6 pb-3 border-b border-structural/40">
           <button
             onClick={handleBackToHub}
-            className="flex items-center gap-1.5 font-mono text-[11px] text-[#777775] hover:text-text-primary transition-colors cursor-pointer bg-transparent border-none"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-bg-elevated border border-structural/60 font-mono text-xs font-bold text-text-secondary hover:text-text-primary hover:border-[#7D927D] hover:bg-white/90 shadow-xs transition-all cursor-pointer"
           >
-            <ArrowLeft className="h-3.5 w-3.5" />
-            {quest ? 'Back to Adventure Map' : 'Back to Training Grounds'}
+            <ArrowLeft className="h-4 w-4 text-[#7D927D]" />
+            <span>{quest ? 'Back to Adventure Map' : 'Back to Training Grounds'}</span>
           </button>
-          <h2 className="font-serif text-lg font-bold text-text-primary mt-2">
+          <h2 className="font-serif text-xl font-bold text-text-primary mt-3">
             {TILE_CONFIG[activeMode].title}
           </h2>
         </div>
