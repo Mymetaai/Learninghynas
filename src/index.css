@@ -478,72 +478,7 @@
   z-index: 0;
 }
 
-/* ── Serene Lexicon — Ambient Background Blobs ─────────────────── */
-.ambient-blob-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 140px;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
-}
 
-.ambient-blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  will-change: transform;
-}
-
-.ambient-blob--sage {
-  width: 380px;
-  height: 320px;
-  background: radial-gradient(circle, rgba(125, 146, 125, 0.15) 0%, transparent 70%);
-  top: -60px;
-  left: 10%;
-}
-
-.ambient-blob--cream {
-  width: 320px;
-  height: 280px;
-  background: radial-gradient(circle, rgba(243, 237, 228, 0.6) 0%, transparent 70%);
-  top: -40px;
-  right: 15%;
-}
-
-.ambient-blob--sage-light {
-  width: 300px;
-  height: 260px;
-  background: radial-gradient(circle, rgba(94, 115, 94, 0.12) 0%, transparent 70%);
-  top: -30px;
-  left: 50%;
-}
-
-.ambient-blob--terracotta {
-  width: 320px;
-  height: 280px;
-  background: radial-gradient(circle, rgba(91, 143, 168, 0.12) 0%, transparent 70%);
-  top: -60px;
-  left: 15%;
-}
-
-.ambient-blob--teal {
-  width: 380px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(44, 62, 80, 0.15) 0%, transparent 70%);
-  top: -40px;
-  right: 10%;
-}
-
-.ambient-blob--marigold {
-  width: 260px;
-  height: 220px;
-  background: radial-gradient(circle, rgba(245, 166, 35, 0.08) 0%, transparent 70%);
-  top: -30px;
-  left: 55%;
-}
 
 /* ── 3D Rotating Gold Coin ────────────────────────────────────────── */
 .coin-3d-container {

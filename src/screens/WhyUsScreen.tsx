@@ -832,13 +832,6 @@ const CTASection: FC = () => (
 const WhyUsScreen: FC = () => {
   return (
     <div className="min-h-screen bg-bg-base">
-      {/* Ambient background blobs — Serene Lexicon sage depth */}
-      <div className="ambient-blob-container" aria-hidden>
-        <div className="ambient-blob ambient-blob--sage" />
-        <div className="ambient-blob ambient-blob--cream" />
-        <div className="ambient-blob ambient-blob--sage-light" />
-      </div>
-
       <HeroSection />
       <ProblemSection />
       <ComparisonSection />

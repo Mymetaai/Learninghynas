@@ -31,7 +31,7 @@ export default function PracticeViewScreen() {
       {/* Top Sub-navigation Bar for Practice View */}
       <div className="sticky top-0 z-30 bg-bg-base/95 dark:bg-bg-base/95 backdrop-blur-md border-b border-structural/60 py-2.5 px-4">
         <div className="max-w-6xl mx-auto overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-          <div className="flex items-center justify-start sm:justify-center gap-2 sm:gap-3 w-max sm:w-full mx-auto">
+          <div className="flex items-center justify-start sm:justify-center gap-2 sm:gap-3 w-max sm:w-fit mx-auto">
             <button
               onClick={() => {
                 setShowTodayWorkout(false);

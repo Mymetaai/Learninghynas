@@ -175,8 +175,8 @@ const HUD: FC = () => {
         </div>
 
         {/* Row 2 — Navigation tabs in a glass capsule */}
-        <nav aria-label="Main navigation" className="px-1 sm:px-3 pb-2 pt-0.5">
-          <div className="glass-nav-capsule">
+        <nav aria-label="Main navigation" className="px-1 sm:px-3 pb-2 pt-0.5 flex justify-center">
+          <div className="glass-nav-capsule w-fit max-w-full mx-auto">
             <div
               ref={navScrollRef}
               onMouseMove={handleMouseMove}

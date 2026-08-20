@@ -16,7 +16,7 @@ export default function LearnScreen() {
       {!isQuestActive && (
         <div className="py-4 px-4 mb-2">
           <div className="max-w-xl mx-auto overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-            <div className="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-3 bg-white border border-[#777775]/20 rounded-full p-1.5 shadow-xs w-max sm:w-full mx-auto">
+            <div className="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-3 bg-white border border-[#777775]/20 rounded-full p-1.5 shadow-xs w-max sm:w-fit mx-auto">
               <button
                 onClick={() => setActiveSubView('dashboard')}
                 className={`px-4 sm:px-5 py-2 rounded-full font-sans text-xs font-bold transition-all cursor-pointer border-none whitespace-nowrap ${
