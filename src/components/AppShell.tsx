@@ -20,15 +20,17 @@ const AppShell: FC = () => {
   }, []);
 
   return (
-    <div className="flex min-h-screen flex-col bg-bg-base">
-      {/* Ambient blobs — subtle Serene Lexicon sage/cream depth */}
+    <div className="flex min-h-screen flex-col bg-bg-base text-text-primary relative overflow-x-hidden">
+      {/* Ambient blobs — subtle Serene Lexicon sage/cream depth strictly as background (z-0) */}
       <div className="ambient-blob-container" aria-hidden="true">
         <div className="ambient-blob ambient-blob--sage" />
         <div className="ambient-blob ambient-blob--cream" />
         <div className="ambient-blob ambient-blob--sage-light" />
       </div>
+      {/* Persistent Top Navigation / HUD (z-40) */}
       <HUD />
-      <main className="flex-1 overflow-y-auto pb-20 sm:pb-4">
+      {/* Main Screen Outlet with clean layering and clearance (z-10) */}
+      <main className="flex-1 w-full relative z-10 overflow-y-auto pb-20 sm:pb-8">
         <Outlet />
       </main>
       <ChibiPet />

@@ -1,15 +1,17 @@
-import { useState, useMemo, type FC } from 'react';
+import { useState, useMemo, useCallback, type FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { assembleTodaySession, type SessionStep } from '../../lib/sessionDirector';
 import { createMultipleChoiceOptions } from '../../lib/distractorGenerator';
 import { useTrainingStore } from '../../state/trainingStore';
+import { useStatsStore } from '../../state/statsStore';
 import ExerciseEngine from '../exercises/ExerciseEngine';
 import AutoFlashcardsPlayer from '../AutoFlashcardsPlayer';
 import FeynmanDrill from '../FeynmanDrill';
 import BeltRankStamp from './BeltRankStamp';
 import Kitsune3D from '../Kitsune3D';
 import type { Exercise } from '../../content/types';
+import type { VocabItem } from '../../lib/vocabExpansionEngine';
 
 interface TodayTrainingRunnerProps {
   onClose: () => void;
@@ -26,7 +28,7 @@ export const TodayTrainingRunner: FC<TodayTrainingRunnerProps> = ({ onClose }) =
   const isCompleted = currentStepIndex >= steps.length;
   const currentStep = steps[currentStepIndex];
 
-  const handleNextStep = () => {
+  const handleNextStep = useCallback(() => {
     setChibiState({
       mode: 'wag',
       message: '¡Excelente! Step completed! Moving forward...',
@@ -38,9 +40,9 @@ export const TodayTrainingRunner: FC<TodayTrainingRunnerProps> = ({ onClose }) =
         message: 'Keep going! Master each step!',
       });
     }, 400);
-  };
+  }, []);
 
-  // Convert weakspot items to exercises with smart distractors
+  // ── Weak Spot Exercises ──────────────────────────────────────────────
   const weakSpotExercises: Exercise[] = useMemo(() => {
     if (currentStep?.type !== 'weakspot') return [];
     const items = currentStep.payload?.items || [];
@@ -57,8 +59,7 @@ export const TodayTrainingRunner: FC<TodayTrainingRunnerProps> = ({ onClose }) =
     });
   }, [currentStep]);
 
-  // Handle weakspot session completion and mark reviewed correctly
-  const handleWeakSpotComplete = () => {
+  const handleWeakSpotComplete = useCallback(() => {
     const items = currentStep?.payload?.items || [];
     items.forEach((item: any) => {
       if (item.word) {
@@ -66,9 +67,50 @@ export const TodayTrainingRunner: FC<TodayTrainingRunnerProps> = ({ onClose }) =
       }
     });
     handleNextStep();
-  };
+  }, [currentStep, handleNextStep]);
 
-  // Convert grammar lesson to exercises with smart distractors
+  // ── New Vocabulary Exercises (with mastery dispatch) ──────────────────
+  const newVocabExercises: Exercise[] = useMemo(() => {
+    if (currentStep?.type !== 'new_vocab') return [];
+    const vocabItems: VocabItem[] = currentStep.payload?.vocabItems || [];
+    return vocabItems.map((v, i) => ({
+      id: `new-vocab-${i}`,
+      type: 'multiple-choice',
+      prompt: `New Word: Translate "${v.meaning}" to Spanish`,
+      answer: v.word,
+      options: createMultipleChoiceOptions(v.word),
+      context: `${v.level} — ${v.category || 'Vocabulary'}`,
+    }));
+  }, [currentStep]);
+
+  const handleNewVocabComplete = useCallback(() => {
+    // Graduate all new vocab items: mark mastered, register in SRS, add to learnedVocab
+    const vocabItems: VocabItem[] = currentStep?.payload?.vocabItems || [];
+    const wordsToLearn: string[] = [];
+
+    vocabItems.forEach((v) => {
+      // 1. Mark in statsStore.learnVocab
+      wordsToLearn.push(v.word);
+
+      // 2. Register in FSRS spaced repetition
+      useTrainingStore
+        .getState()
+        .getOrCreateSRSCard(v.id, v.word, v.meaning, v.level, v.category || 'General');
+
+      // 3. Mark as mastered
+      useTrainingStore.setState((s) => ({
+        masteredWordIds: { ...s.masteredWordIds, [v.word.toLowerCase()]: true },
+      }));
+    });
+
+    if (wordsToLearn.length > 0) {
+      useStatsStore.getState().learnVocab(wordsToLearn, 'dojo-workout');
+    }
+
+    handleNextStep();
+  }, [currentStep, handleNextStep]);
+
+  // ── Grammar Blitz Exercises ──────────────────────────────────────────
   const grammarExercises: Exercise[] = useMemo(() => {
     if (currentStep?.type !== 'grammar_blitz') return [];
     const lesson = currentStep.payload?.lesson;
@@ -98,6 +140,7 @@ export const TodayTrainingRunner: FC<TodayTrainingRunnerProps> = ({ onClose }) =
     ];
   }, [currentStep]);
 
+  // ── Completion ───────────────────────────────────────────────────────
   if (isCompleted) {
     return <BeltRankStamp onDone={onClose} />;
   }
@@ -174,6 +217,7 @@ export const TodayTrainingRunner: FC<TodayTrainingRunnerProps> = ({ onClose }) =
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.2 }}
           >
+            {/* WEAK SPOTS */}
             {currentStep.type === 'weakspot' && (
               <div>
                 {weakSpotExercises.length > 0 ? (
@@ -185,25 +229,36 @@ export const TodayTrainingRunner: FC<TodayTrainingRunnerProps> = ({ onClose }) =
                     trackMistakes={false}
                   />
                 ) : (
-                  <div className="p-8 text-center bg-white dark:bg-bg-elevated rounded-3xl border border-structural/40">
-                    <p className="font-sans text-sm text-text-secondary mb-4">No active weak spots found!</p>
-                    <button
-                      onClick={handleNextStep}
-                      className="px-6 py-2.5 rounded-xl bg-[#7D927D] text-white font-mono text-xs font-bold cursor-pointer"
-                    >
-                      Continue to Next Step ➔
-                    </button>
-                  </div>
+                  <EmptyStepCard onContinue={handleNextStep} message="No active weak spots found!" />
                 )}
               </div>
             )}
 
+            {/* SRS FLASHCARDS */}
             {currentStep.type === 'srs_flashcards' && (
               <div>
                 <AutoFlashcardsPlayer onBack={handleNextStep} />
               </div>
             )}
 
+            {/* NEW VOCABULARY DRILL */}
+            {currentStep.type === 'new_vocab' && (
+              <div>
+                {newVocabExercises.length > 0 ? (
+                  <ExerciseEngine
+                    exercises={newVocabExercises}
+                    questId="workout-new-vocab"
+                    questTitle={currentStep.title}
+                    onSessionComplete={handleNewVocabComplete}
+                    trackMistakes={true}
+                  />
+                ) : (
+                  <EmptyStepCard onContinue={handleNextStep} message="All vocabulary mastered for your level! 🎉" />
+                )}
+              </div>
+            )}
+
+            {/* GRAMMAR BLITZ */}
             {currentStep.type === 'grammar_blitz' && (
               <div>
                 <ExerciseEngine
@@ -216,6 +271,7 @@ export const TodayTrainingRunner: FC<TodayTrainingRunnerProps> = ({ onClose }) =
               </div>
             )}
 
+            {/* FEYNMAN CHECKPOINT */}
             {currentStep.type === 'feynman_checkpoint' && (
               <div>
                 <FeynmanDrill onComplete={handleNextStep} />
@@ -227,5 +283,18 @@ export const TodayTrainingRunner: FC<TodayTrainingRunnerProps> = ({ onClose }) =
     </div>
   );
 };
+
+/** Small reusable empty-state card for steps with no content. */
+const EmptyStepCard: FC<{ message: string; onContinue: () => void }> = ({ message, onContinue }) => (
+  <div className="p-8 text-center bg-white dark:bg-bg-elevated rounded-3xl border border-structural/40">
+    <p className="font-sans text-sm text-text-secondary mb-4">{message}</p>
+    <button
+      onClick={onContinue}
+      className="px-6 py-2.5 rounded-xl bg-[#7D927D] text-white font-mono text-xs font-bold cursor-pointer border-none"
+    >
+      Continue to Next Step ➔
+    </button>
+  </div>
+);
 
 export default TodayTrainingRunner;

@@ -491,7 +491,7 @@ const BasicEspanolScreen: FC = () => {
       <div className="max-w-[90rem] mx-auto grid grid-cols-1 lg:grid-cols-[22rem_1fr] min-h-[calc(100vh-3.5rem)]">
         
         {/* DESKTOP SIDEBAR */}
-        <aside className="hidden lg:flex flex-col justify-between border-r border-[#7D927D]/15 bg-bg-base/40 backdrop-blur-md p-5 sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto z-20">
+        <aside className="hidden lg:flex flex-col justify-between border-r border-[#7D927D]/15 bg-bg-base/40 backdrop-blur-md p-5 sticky top-0 h-[calc(100vh-3.5rem)] overflow-y-auto z-20">
           <div className="space-y-5">
             
             {/* Title / Logo */}
@@ -597,7 +597,7 @@ const BasicEspanolScreen: FC = () => {
         </aside>
 
         {/* MOBILE HEADER & DRAWER */}
-        <div className="lg:hidden p-4 border-b border-[#7D927D]/15 bg-bg-base/80 backdrop-blur-md sticky top-14 z-30 flex items-center justify-between">
+        <div className="lg:hidden p-4 border-b border-[#7D927D]/15 bg-bg-base/80 backdrop-blur-md sticky top-0 z-30 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Compass className="h-5 w-5 text-[#7D927D]" />
             <div>

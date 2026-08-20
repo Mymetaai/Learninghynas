@@ -29,7 +29,7 @@ export default function PracticeViewScreen() {
       <DojoFloor />
 
       {/* Top Sub-navigation Bar for Practice View */}
-      <div className="sticky top-14 z-30 bg-bg-base/90 backdrop-blur-md border-b border-structural py-2.5 px-4 mb-6">
+      <div className="sticky top-0 z-30 bg-bg-base/95 dark:bg-bg-base/95 backdrop-blur-md border-b border-structural/60 py-2.5 px-4">
         <div className="max-w-6xl mx-auto overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           <div className="flex items-center justify-start sm:justify-center gap-2 sm:gap-3 w-max sm:w-full mx-auto">
             <button
@@ -88,15 +88,15 @@ export default function PracticeViewScreen() {
         </div>
       </div>
 
-      {/* Sub-view Content */}
-      <div className="max-w-6xl mx-auto px-4 relative z-10 pt-2 sm:pt-4">
+      {/* Sub-view Content with clean top clearance */}
+      <div className="relative z-10 max-w-6xl mx-auto px-4 pt-6 pb-16 flex flex-col gap-6">
         {showTodayWorkout ? (
           <TodayTrainingRunner onClose={() => setShowTodayWorkout(false)} />
         ) : (
           <>
             {/* Step 2: Hero Section (Chibi Sensei Dojo Banner) */}
             {activeSubView === 'training' && (
-              <div className="mb-6">
+              <div className="w-full">
                 <div className="bg-white/80 dark:bg-bg-elevated/80 backdrop-blur-md rounded-3xl border border-[#7D927D]/20 p-6 shadow-sm flex flex-col md:flex-row items-center gap-6 relative z-10">
                   {/* Left: 3D Kitsune / Chibi Avatar */}
                   <div className="relative w-28 h-28 shrink-0 flex items-center justify-center bg-gradient-to-b from-[#7D927D]/10 to-[#D4AF37]/10 rounded-2xl border border-[#7D927D]/20 shadow-inner">

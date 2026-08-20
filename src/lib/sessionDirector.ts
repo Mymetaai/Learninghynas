@@ -1,8 +1,14 @@
 import { useTrainingStore } from '../state/trainingStore';
 import { useStatsStore } from '../state/statsStore';
 import { ALL_SYLLABUS_LESSONS } from '../data/syllabusLessonsData';
+import { getNextUnseenVocabBatch } from './vocabExpansionEngine';
 
-export type SessionStepType = 'weakspot' | 'srs_flashcards' | 'grammar_blitz' | 'feynman_checkpoint';
+export type SessionStepType =
+  | 'weakspot'
+  | 'new_vocab'
+  | 'srs_flashcards'
+  | 'grammar_blitz'
+  | 'feynman_checkpoint';
 
 export interface SessionStep {
   id: string;
@@ -19,19 +25,31 @@ export function assembleTodaySession(): SessionStep[] {
 
   const steps: SessionStep[] = [];
 
-  // 1. Weak Spots Step (Recent incorrect answers)
+  // 1. Weak Spots Step (Quarantine: pull up to 3 active mistakes)
   const activeMistakes = mistakes.filter((m) => m.reviewedCorrectly < 2);
   if (activeMistakes.length > 0) {
     steps.push({
       id: 'step-weakspots',
       type: 'weakspot',
       title: 'Weak Spots Quarantine',
-      subtitle: `Targeting ${Math.min(activeMistakes.length, 4)} recent review items`,
-      payload: { items: activeMistakes.slice(0, 4) },
+      subtitle: `Targeting ${Math.min(activeMistakes.length, 3)} recent review items`,
+      payload: { items: activeMistakes.slice(0, 3) },
     });
   }
 
-  // 2. FSRS Spaced Repetition Flashcards Step
+  // 2. New Vocabulary Expansion Step (Dynamic Ingestion: 4 fresh unseen words)
+  const newVocab = getNextUnseenVocabBatch(4);
+  if (newVocab.length > 0) {
+    steps.push({
+      id: 'step-new-vocab',
+      type: 'new_vocab',
+      title: 'New Vocabulary Expansion',
+      subtitle: `${newVocab.length} fresh ${newVocab[0]?.level || 'A1'} words to learn`,
+      payload: { vocabItems: newVocab },
+    });
+  }
+
+  // 3. FSRS Spaced Repetition Flashcards Step (Due review flashcards)
   const now = new Date();
   const dueCards = srsCards.filter((card) => !card.due || new Date(card.due) <= now);
   if (dueCards.length > 0) {
@@ -44,7 +62,7 @@ export function assembleTodaySession(): SessionStep[] {
     });
   }
 
-  // 3. Current Lesson Grammar Blitz (Sourced from 37-lesson curriculum)
+  // 4. Current Lesson Grammar Blitz (Sourced from syllabusLessonsData)
   const completedCount = Object.values(completedLessons).filter(Boolean).length;
   const currentLessonNum = Math.min(completedCount + 1, allLessons.length || 1);
   const currentLessonData =
@@ -58,7 +76,7 @@ export function assembleTodaySession(): SessionStep[] {
     payload: { lesson: currentLessonData },
   });
 
-  // 4. Feynman Teach-the-Chibi Checkpoint
+  // 5. Feynman Sensei Checkpoint (Active recall drill)
   const grammarTitle = currentLessonData?.grammarSections?.[0]?.title || 'Core Concept';
   steps.push({
     id: 'step-feynman',
