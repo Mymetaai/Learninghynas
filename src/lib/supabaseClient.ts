@@ -68,7 +68,7 @@ export const saveStoredUserData = (userId: string, data: any): void => {
 };
 
 /**
- * Global store sync helper. Reads local Zustand state and updates Supabase using Clerk Auth JWT token.
+ * Global store sync helper. Reads local Zustand state and updates Supabase tables.
  */
 export const syncLocalStoresToSupabase = async (userId?: string | null, token?: string | null): Promise<boolean> => {
   const targetId = userId || activeUserId;
@@ -77,16 +77,20 @@ export const syncLocalStoresToSupabase = async (userId?: string | null, token?: 
   try {
     const stats = useStatsStore.getState();
 
-    const payload = {
+    const progressPayload = {
       user_id: targetId,
       xp: stats.xp || 0,
       level: Math.max(1, Math.floor((stats.xp || 0) / 600) + 1),
       kitsune_coins: typeof stats.coins === 'number' ? stats.coins : 100,
       streak_days: stats.streak || 0,
       weekly_activity: stats.weeklyActivity || [],
+      daily_history: stats.dailyHistory || {},
+      active_study_minutes: Math.floor((stats.activeSeconds || 0) / 60),
+      last_active_date: stats.lastActiveDate || new Date().toISOString().split('T')[0],
+      updated_at: new Date().toISOString(),
     };
 
-    saveStoredUserData(targetId, payload);
+    saveStoredUserData(targetId, progressPayload);
 
     let authToken = token;
     if (!authToken && activeClerkTokenGetter) {
@@ -98,14 +102,33 @@ export const syncLocalStoresToSupabase = async (userId?: string | null, token?: 
     }
 
     const client = createClerkSupabaseClient(authToken);
-    const { error } = await client.from('user_progress').upsert(payload, { onConflict: 'user_id' });
 
-    if (error) {
-      if (!error.message?.includes('No suitable key') && error.code !== '401') {
-        console.warn('[Supabase Sync] Note during store sync:', error.message);
-      }
-      return false;
-    }
+    // 1. Sync to user_progress
+    const progressPromise = client
+      .from('user_progress')
+      .upsert(progressPayload, { onConflict: 'user_id' });
+
+    // 2. Sync to user_stats
+    const statsPayload = {
+      user_id: targetId,
+      streak: stats.streak || 0,
+      coins: typeof stats.coins === 'number' ? stats.coins : 100,
+      xp: stats.xp || 0,
+      level: Math.max(1, Math.floor((stats.xp || 0) / 600) + 1),
+      last_active_date: stats.lastActiveDate || null,
+      collected_card_ids: stats.collectedCardIds || [],
+      claimed_quest_rewards: stats.claimedQuestRewards || [],
+      claimed_exam_ids: stats.claimedExamIds || [],
+      earned_badges: stats.earnedBadges || {},
+      completed_lessons: stats.completedLessons || {},
+      updated_at: new Date().toISOString(),
+    };
+
+    const statsPromise = client
+      .from('user_stats')
+      .upsert(statsPayload, { onConflict: 'user_id' });
+
+    await Promise.allSettled([progressPromise, statsPromise]);
     return true;
   } catch (err) {
     console.warn('[Supabase Sync] Exception during sync:', err);
@@ -113,22 +136,85 @@ export const syncLocalStoresToSupabase = async (userId?: string | null, token?: 
   }
 };
 
-/** Legacy Sync Helper Functions for store compatibility (accepts variadic arguments) */
+/** Sync user stats across Supabase */
 export const syncUserStats = async (..._args: any[]): Promise<boolean> => {
   const uid = typeof _args[0] === 'string' ? _args[0] : activeUserId;
   return syncLocalStoresToSupabase(uid);
 };
 
+/** Sync learned vocabulary entries to Supabase */
 export const syncLearnedVocab = async (..._args: any[]): Promise<boolean> => {
-  const uid = typeof _args[0] === 'string' ? _args[0] : activeUserId;
-  return syncLocalStoresToSupabase(uid);
+  const targetId = typeof _args[0] === 'string' ? _args[0] : activeUserId;
+  const vocabList = Array.isArray(_args[1]) ? _args[1] : useStatsStore.getState().learnedVocab;
+  if (!targetId || !vocabList || vocabList.length === 0) return false;
+
+  try {
+    let authToken: string | null = null;
+    if (activeClerkTokenGetter) {
+      try {
+        authToken = await activeClerkTokenGetter();
+      } catch {}
+    }
+
+    const client = createClerkSupabaseClient(authToken);
+    const rows = vocabList.map((item: any) => ({
+      user_id: targetId,
+      word: typeof item === 'string' ? item : item.word,
+      meaning: typeof item === 'object' ? item.meaning || null : null,
+      quest_id: typeof item === 'object' ? item.questId || null : null,
+      date_learned: typeof item === 'object' && item.date ? item.date : new Date().toISOString().split('T')[0],
+      updated_at: new Date().toISOString(),
+    }));
+
+    await client.from('learned_vocabulary').upsert(rows, { onConflict: 'user_id,word' });
+    return true;
+  } catch (err) {
+    console.warn('[Supabase Vocab] Exception during sync:', err);
+    return false;
+  }
 };
 
+/** Sync immersion chat messages to Supabase */
 export const syncImmersionMessages = async (..._args: any[]): Promise<boolean> => {
-  const uid = typeof _args[0] === 'string' ? _args[0] : activeUserId;
-  return syncLocalStoresToSupabase(uid);
+  const targetId = typeof _args[0] === 'string' ? _args[0] : activeUserId;
+  const messages = Array.isArray(_args[1]) ? _args[1] : [];
+  if (!targetId || messages.length === 0) return true;
+
+  try {
+    let authToken: string | null = null;
+    if (activeClerkTokenGetter) {
+      try {
+        authToken = await activeClerkTokenGetter();
+      } catch {}
+    }
+
+    const client = createClerkSupabaseClient(authToken);
+    const rows = messages.map((m: any) => ({
+      id: m.id || `msg_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+      user_id: targetId,
+      session_key: m.sessionKey || 'default',
+      mode: m.mode || 'conversation',
+      topic: m.topic || 'General',
+      sender: m.sender || 'assistant',
+      text: m.text || '',
+      translation: m.translation || null,
+      quick_replies: m.quickReplies || [],
+      new_vocab_words: m.newVocabWords || [],
+      structured_content: m.structuredContent || null,
+      metadata: m.metadata || {},
+      timestamp: m.timestamp || new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    }));
+
+    await client.from('immersion_chat_messages').upsert(rows, { onConflict: 'id' });
+    return true;
+  } catch (err) {
+    console.warn('[Supabase Immersion] Exception during sync:', err);
+    return false;
+  }
 };
 
+/** Sync user entitlements (themes, cards, consumables) to Supabase */
 export const syncUserEntitlements = async (entitlements: any, userId?: string | null): Promise<boolean> => {
   const targetId = userId || activeUserId;
   if (!targetId || !entitlements) return false;
@@ -156,11 +242,7 @@ export const syncUserEntitlements = async (entitlements: any, userId?: string | 
     }
 
     const client = createClerkSupabaseClient(authToken);
-    const { error } = await client.from('user_entitlements').upsert(payload, { onConflict: 'user_id' });
-
-    if (error && !error.message?.includes('No suitable key') && error.code !== '401') {
-      console.warn('[Supabase Entitlements] Note during sync:', error.message);
-    }
+    await client.from('user_entitlements').upsert(payload, { onConflict: 'user_id' });
     return true;
   } catch (err) {
     console.warn('[Supabase Entitlements] Exception during sync:', err);
@@ -168,9 +250,7 @@ export const syncUserEntitlements = async (entitlements: any, userId?: string | 
   }
 };
 
-/**
- * Fetch today's daily quest for user from Supabase daily_quests table.
- */
+/** Fetch today's daily quest for user from Supabase daily_quests table */
 export const fetchTodayDailyQuest = async (userId?: string | null, questDate?: string): Promise<any | null> => {
   const targetId = userId || activeUserId;
   if (!targetId) return null;
@@ -202,9 +282,7 @@ export const fetchTodayDailyQuest = async (userId?: string | null, questDate?: s
   }
 };
 
-/**
- * Upsert daily quest record to Supabase daily_quests table.
- */
+/** Upsert daily quest record to Supabase daily_quests table */
 export const syncDailyQuest = async (dailyQuestPayload: any, userId?: string | null): Promise<boolean> => {
   const targetId = userId || activeUserId || dailyQuestPayload?.user_id;
   if (!targetId || !dailyQuestPayload) return false;
@@ -224,16 +302,10 @@ export const syncDailyQuest = async (dailyQuestPayload: any, userId?: string | n
     };
 
     const client = createClerkSupabaseClient(authToken);
-    const { error } = await client.from('daily_quests').upsert(payload, { onConflict: 'user_id,quest_date' });
-
-    if (error && !error.message?.includes('No suitable key') && error.code !== '401') {
-      console.warn('[Supabase DailyQuest] Sync note:', error.message);
-    }
+    await client.from('daily_quests').upsert(payload, { onConflict: 'user_id,quest_date' });
     return true;
   } catch (err) {
     console.warn('[Supabase DailyQuest] Sync exception:', err);
     return false;
   }
 };
-
-

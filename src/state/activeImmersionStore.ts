@@ -10,6 +10,7 @@ import {
 } from '../utils/geminiService';
 import { useStatsStore } from './statsStore';
 import { useDailyQuestStore } from './dailyQuestStore';
+import { useTrainingStore } from './trainingStore';
 import { getCurrentUserId, syncImmersionMessages, syncLearnedVocab } from '../lib/supabaseClient';
 
 export type { ImmersionMode, ActiveImmersionResponse };
@@ -31,6 +32,7 @@ export interface ImmersionChatMessage {
 export interface ImmersionSessionState {
   messages: ImmersionChatMessage[];
   learnedWords: { word: string; meaning: string }[];
+  rewardedExchanges?: number;
   error?: GeminiErrorDetails | string | null;
 }
 
@@ -225,9 +227,13 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
         });
         syncImmersionMessages().catch(() => {});
 
-        // Award rewards (+10 XP, +5 Coins)
-        useStatsStore.getState().addRewards(10, 5);
-        useDailyQuestStore.getState().updateTaskProgress('ai_companion', 1);
+        // Capped rewards (+10 XP, +5 Coins up to 5 times per session)
+        const currentRewarded = currentSession.rewardedExchanges || 0;
+        const SESSION_REWARD_CAP = 5;
+        if (currentRewarded < SESSION_REWARD_CAP) {
+          useStatsStore.getState().addRewards(10, 5);
+          useDailyQuestStore.getState().updateTaskProgress('ai_companion', 1);
+        }
 
         // Maintain full message history (up to 20 turns)
         const history = updatedMessages.slice(-20).map((m) => ({
@@ -257,6 +263,21 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
               structuredContent: geminiRes.data.structuredContent,
             };
 
+            // Structured mistake extraction: log corrections to trainingStore
+            if (geminiRes.data.corrections && Array.isArray(geminiRes.data.corrections)) {
+              geminiRes.data.corrections.forEach((c) => {
+                if (c.wrongPart && c.correctedPart) {
+                  useTrainingStore.getState().recordMistake({
+                    word: c.wrongPart,
+                    correctAnswer: c.correctedPart,
+                    wrongAnswer: c.wrongPart,
+                    exerciseType: 'translation',
+                    date: new Date().toISOString().split('T')[0],
+                  });
+                }
+              });
+            }
+
             const updatedLearned = [...currentSession.learnedWords];
             (geminiRes.data.newVocabWords || []).forEach((item) => {
               if (!updatedLearned.some((w) => w.word.toLowerCase() === item.word.toLowerCase())) {
@@ -275,6 +296,7 @@ export const useActiveImmersionStore = create<ActiveImmersionStore>()(
                   ...currentSession,
                   messages: finalSessionMessages,
                   learnedWords: updatedLearned,
+                  rewardedExchanges: currentRewarded + 1,
                   error: null,
                 },
               },

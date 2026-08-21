@@ -883,8 +883,17 @@ You MUST respond with valid JSON ONLY (no markdown code blocks, no backticks, no
   ],
   "newVocabWords": [
     { "word": "SpanishWord", "meaning": "English meaning" }
+  ],
+  "corrections": [
+    { "wrongPart": "exact incorrect student phrase/word", "correctedPart": "corrected Spanish phrase/word", "explanation": "brief reason" }
   ]
 }`;
+
+export interface ActiveImmersionCorrection {
+  wrongPart: string;
+  correctedPart: string;
+  explanation?: string;
+}
 
 export function buildActiveImmersionSystemPrompt(
   mode: ImmersionMode,
@@ -912,7 +921,7 @@ Before responding, always:
 2. Base your reply directly on what I actually said, not a generic script. Reference specific words or phrases I used.
 3. Adapt your Spanish difficulty to match my level (${level.toUpperCase()}): ${levelGuidance}
 4. If I ask a question, answer it directly before continuing the scenario or exercise.
-5. If I make a mistake, quote the part I got wrong, then show the corrected version, so the correction is clearly tied to my exact answer. Use: "¡Eso suena bien! Solo una cosita..." before corrections — never harsh.
+5. If I make a mistake, quote the part I got wrong, then show the corrected version, so the correction is clearly tied to my exact answer. Use: "¡Eso suena bien! Solo una cosita..." before corrections — never harsh. Also populate the structured "corrections" array in the JSON response.
 6. Remember earlier parts of this conversation (names, topics, mistakes already corrected) and don't repeat yourself.
 7. Never ignore my input to push your own script — follow me naturally if I go off-topic within a scenario.
 8. Use the full conversation history provided to you, not just my latest message, to keep continuity.
@@ -941,6 +950,7 @@ export interface ActiveImmersionResponse {
   };
   quickReplies: { text: string; translation: string }[];
   newVocabWords?: { word: string; meaning: string }[];
+  corrections?: ActiveImmersionCorrection[];
 }
 
 export async function getActiveImmersionResponse(
@@ -1004,6 +1014,16 @@ export async function getActiveImmersionResponse(
     }));
   } else {
     parsed.quickReplies = [];
+  }
+
+  if (parsed.corrections && Array.isArray(parsed.corrections)) {
+    parsed.corrections = parsed.corrections
+      .filter((c) => c && c.wrongPart && c.correctedPart)
+      .map((c) => ({
+        wrongPart: stripMarkdown(c.wrongPart),
+        correctedPart: stripMarkdown(c.correctedPart),
+        explanation: c.explanation ? stripMarkdown(c.explanation) : undefined,
+      }));
   }
 
   return { success: true, data: parsed };

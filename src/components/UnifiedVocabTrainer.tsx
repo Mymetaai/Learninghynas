@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, useRef, type FC } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { Check, X, HelpCircle, RefreshCw, Sparkles, Shuffle, ArrowRight, Award } from 'lucide-react';
+import { Check, X, HelpCircle, RefreshCw, Sparkles, Shuffle, ArrowRight, Award, Volume2 } from 'lucide-react';
 import { useVocabDeck } from '../hooks/useVocabDeck';
 import { getVocabCategories, getVocabByLevelAndCategory } from '../data/vocab';
 import type { VocabItem } from '../content/types';
@@ -8,6 +8,7 @@ import { useTrainingStore } from '../state/trainingStore';
 import { useStatsStore } from '../state/statsStore';
 import { Rating } from '../lib/fsrs';
 import { audioFeedback } from '../utils/audioFeedback';
+import { playSpanishPronunciation, fetchWordDefinition } from '../services/dictionaryService';
 
 const CEFR_LEVELS: VocabItem['level'][] = ['A1', 'A2', 'B1', 'B2', 'C1'];
 
@@ -247,6 +248,19 @@ const UnifiedVocabTrainer: FC = () => {
   const renderQuestion = () => {
     const hasExample = current.example && current.example.trim().length > 0;
     
+    const isWordVisible = status === 'correct' || status === 'revealed';
+
+    const handleSpeakWord = async (e?: React.MouseEvent) => {
+      e?.stopPropagation();
+      if (!current) return;
+      try {
+        const def = await fetchWordDefinition(current.es);
+        playSpanishPronunciation(current.es, def?.audioUrl);
+      } catch {
+        playSpanishPronunciation(current.es);
+      }
+    };
+
     if (hasExample && current.example) {
       const target = current.es.toLowerCase().trim();
       const sentence = current.example;
@@ -258,8 +272,22 @@ const UnifiedVocabTrainer: FC = () => {
         return (
           <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2 font-sans text-base font-semibold text-text-primary text-center">
             <span>{before}</span>
-            <span className="inline-block border-b border-accent-action px-2 py-0.5 text-accent-action min-w-[5rem]">
-              {status === 'correct' || status === 'revealed' ? current.es : '_____'}
+            <span className="inline-flex items-center gap-1.5 border-b border-accent-action px-2 py-0.5 text-accent-action min-w-[5rem]">
+              {isWordVisible ? (
+                <>
+                  <span>{current.es}</span>
+                  <button
+                    type="button"
+                    onClick={handleSpeakWord}
+                    title="Listen to pronunciation"
+                    className="p-1 rounded-full text-accent-action hover:bg-accent-action/15 transition-colors border-none bg-transparent cursor-pointer"
+                  >
+                    <Volume2 className="h-3.5 w-3.5" />
+                  </button>
+                </>
+              ) : (
+                '_____'
+              )}
             </span>
             <span>{after}</span>
           </div>
@@ -275,10 +303,20 @@ const UnifiedVocabTrainer: FC = () => {
         <p className="font-serif text-xl sm:text-2xl font-bold text-text-primary italic">
           &ldquo;{current.en}&rdquo;
         </p>
-        {(status === 'revealed') && (
-          <p className="mt-2 font-serif text-lg font-bold text-accent-action">
-            Answer: {current.es}
-          </p>
+        {isWordVisible && (
+          <div className="mt-2 flex items-center justify-center gap-2">
+            <p className="font-serif text-lg font-bold text-accent-action">
+              Answer: {current.es}
+            </p>
+            <button
+              type="button"
+              onClick={handleSpeakWord}
+              title="Listen to pronunciation"
+              className="p-1.5 rounded-full bg-accent-action/10 hover:bg-accent-action/20 text-accent-action transition-colors border-none cursor-pointer"
+            >
+              <Volume2 className="h-4 w-4" />
+            </button>
+          </div>
         )}
       </div>
     );

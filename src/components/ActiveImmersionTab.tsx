@@ -1,9 +1,17 @@
-import { useState, useRef, useEffect, type FC } from 'react';
+import { useState, useRef, useEffect, useMemo, type FC } from 'react';
 import { useActiveImmersionStore } from '../state/activeImmersionStore';
 import { useDailyQuestStore } from '../state/dailyQuestStore';
 import type { ImmersionMode } from '../utils/geminiService';
 import { isGeminiAvailable } from '../utils/geminiService';
 import SpanishVirtualKeyboard from './SpanishVirtualKeyboard';
+import VoiceCompanionOrb, { type VoiceOrbState } from './voice/VoiceCompanionOrb';
+import {
+  startPushToTalk,
+  stopListening,
+  speakCompanionResponse,
+  stopSpeaking,
+  isSpeechRecognitionSupported,
+} from '../services/voiceSpeechService';
 import {
   Send,
   Languages,
@@ -18,6 +26,9 @@ import {
   BookCheck,
   MapPin,
   ChevronRight,
+  Volume2,
+  Mic,
+  Loader2,
 } from 'lucide-react';
 
 /* ─── Mode Definitions ─────────────────────────────────────────────────────── */
@@ -106,9 +117,49 @@ const ActiveImmersionTab: FC = () => {
   const feedRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // Voice Companion State (Real Conversation mode only)
+  const [voiceState, setVoiceState] = useState<VoiceOrbState>('idle');
+  const [voiceError, setVoiceError] = useState<string | null>(null);
+  const [speakingMsgId, setSpeakingMsgId] = useState<string | null>(null);
+  const isVoiceTurnActiveRef = useRef(false);
+
+  const companionVoiceName = useMemo(() => {
+    if (selectedAccent === 'Mexico City') return 'Mateo';
+    if (selectedAccent === 'Buenos Aires') return 'Sofía';
+    return 'Elena';
+  }, [selectedAccent]);
+
   // Session key & data
   const sessionKey = activeMode && selectedTopic ? `${activeMode}-${selectedTopic}` : null;
   const currentSession = sessionKey ? sessions[sessionKey] : null;
+
+  // Clean up audio on unmount
+  useEffect(() => {
+    return () => {
+      stopListening();
+      stopSpeaking();
+    };
+  }, []);
+
+  const lastAssistantMsg = [...(currentSession?.messages || [])].reverse().find((m) => m.sender === 'assistant');
+
+  // When coach finishes replying and turn was started by voice, speak aloud
+  useEffect(() => {
+    if (isVoiceTurnActiveRef.current && !isTyping && lastAssistantMsg && voiceState === 'thinking') {
+      isVoiceTurnActiveRef.current = false;
+      setVoiceState('speaking');
+      setSpeakingMsgId(lastAssistantMsg.id);
+      speakCompanionResponse(
+        lastAssistantMsg.text,
+        companionVoiceName,
+        () => setVoiceState('speaking'),
+        () => {
+          setVoiceState('idle');
+          setSpeakingMsgId(null);
+        }
+      );
+    }
+  }, [isTyping, lastAssistantMsg, voiceState, companionVoiceName]);
 
   // Auto-scroll on new messages
   useEffect(() => {
@@ -133,6 +184,75 @@ const ActiveImmersionTab: FC = () => {
     setInputText('');
   };
 
+  const handleMicClick = () => {
+    if (voiceState === 'speaking') {
+      stopSpeaking();
+      setVoiceState('idle');
+      setSpeakingMsgId(null);
+      return;
+    }
+
+    if (voiceState === 'listening') {
+      stopListening();
+      setVoiceState('idle');
+      return;
+    }
+
+    if (!isSpeechRecognitionSupported()) {
+      setVoiceError('Speech recognition is not supported in this browser.');
+      return;
+    }
+
+    setVoiceError(null);
+    setVoiceState('listening');
+
+    startPushToTalk(
+      (transcript) => {
+        if (transcript.trim()) {
+          isVoiceTurnActiveRef.current = true;
+          setVoiceState('thinking');
+          handleSend(transcript.trim());
+        } else {
+          setVoiceState('idle');
+        }
+      },
+      (err) => {
+        setVoiceError(err);
+        setVoiceState('idle');
+      },
+      () => {
+        setVoiceState((prev) => (prev === 'listening' ? 'idle' : prev));
+      }
+    );
+  };
+
+  const handleStopSpeaking = () => {
+    stopSpeaking();
+    setVoiceState('idle');
+    setSpeakingMsgId(null);
+  };
+
+  const handleSpeakSpecificMessage = (msgId: string, text: string) => {
+    if (speakingMsgId === msgId) {
+      stopSpeaking();
+      setSpeakingMsgId(null);
+      setVoiceState('idle');
+      return;
+    }
+
+    setSpeakingMsgId(msgId);
+    setVoiceState('speaking');
+    speakCompanionResponse(
+      text,
+      companionVoiceName,
+      () => setVoiceState('speaking'),
+      () => {
+        setVoiceState('idle');
+        setSpeakingMsgId(null);
+      }
+    );
+  };
+
   const handleStartSession = (topic: string) => {
     if (!activeMode || !topic.trim()) return;
     setTopic(topic.trim());
@@ -140,12 +260,18 @@ const ActiveImmersionTab: FC = () => {
   };
 
   const handleBackToModes = () => {
+    stopSpeaking();
+    stopListening();
+    setVoiceState('idle');
     setMode(null);
     setTopic(null);
     setAccent(null);
   };
 
   const handleBackToTopics = () => {
+    stopSpeaking();
+    stopListening();
+    setVoiceState('idle');
     setTopic(null);
   };
 
@@ -349,10 +475,9 @@ const ActiveImmersionTab: FC = () => {
    * VIEW 3 — Active Chat / Structured Content View
    * ═══════════════════════════════════════════════════════════════════════════ */
   const isStructuredMode = activeMode === 'daily' || activeMode === 'vocabulary';
-  const lastAssistantMsg = [...currentSession.messages].reverse().find((m) => m.sender === 'assistant');
 
   return (
-    <div className="flex flex-col h-[75vh] min-h-[550px] border border-structural rounded-2xl overflow-hidden shadow-sm bg-bg-elevated">
+    <div className="flex flex-col h-[calc(100vh-10rem)] min-h-[580px] max-h-[850px] border border-structural rounded-2xl overflow-hidden shadow-sm bg-bg-elevated">
       {/* ── Session Header ─────────────────────────────────────────────── */}
       <div className="bg-bg-elevated-2 p-4 border-b border-structural flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-3">
@@ -405,24 +530,37 @@ const ActiveImmersionTab: FC = () => {
       </div>
 
       {/* ── Reward Banner ──────────────────────────────────────────────── */}
-      <div className="bg-accent-action/5 px-4 py-2 border-b border-accent-action/15 flex items-center justify-between text-xs text-text-secondary font-medium">
+      <div className="bg-accent-action/5 px-4 py-1.5 border-b border-accent-action/15 flex items-center justify-between text-xs text-text-secondary font-medium">
         <div className="flex items-center gap-2">
           <Sparkles className="h-3.5 w-3.5 text-accent-action" />
           <span>
-            <strong>Active Immersion:</strong> {isStructuredMode ? 'Structured coaching mode' : 'Free-form chat mode'}
+            <strong>Active Immersion:</strong> {isStructuredMode ? 'Structured coaching mode' : 'Real conversation practice'}
           </span>
         </div>
         <span className="text-[10px] font-mono text-text-tertiary hidden md:inline">
-          +10 XP • +5 Coins per message
+          +10 XP • +5 Coins per exchange (capped at 5/session)
         </span>
       </div>
 
-
+      {/* ── Voice Companion Strip (Real Conversation Mode Only) ─────────── */}
+      {activeMode === 'conversation' && (
+        <div className="bg-bg-elevated-2/90 border-b border-structural px-3 py-1">
+          <VoiceCompanionOrb
+            state={voiceState}
+            companionName={companionVoiceName}
+            onMicClick={handleMicClick}
+            onStopSpeaking={handleStopSpeaking}
+            disabled={isTyping}
+            errorMessage={voiceError}
+            compact={true}
+          />
+        </div>
+      )}
 
       {/* ── Message Feed ───────────────────────────────────────────────── */}
       <div
         ref={feedRef}
-        className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 [scrollbar-width:thin]"
+        className="flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 space-y-4 [scrollbar-width:thin]"
         style={{
           backgroundImage: 'radial-gradient(rgba(122, 112, 102, 0.05) 1px, transparent 1px)',
           backgroundSize: '16px 16px',
@@ -526,8 +664,8 @@ const ActiveImmersionTab: FC = () => {
                 </div>
 
                 {/* Action bar */}
-                {msg.translation && (
-                  <div className="mt-4 pt-3 border-t border-structural/50 flex items-center justify-between">
+                <div className="mt-4 pt-3 border-t border-structural/50 flex items-center justify-between gap-2">
+                  {msg.translation ? (
                     <button
                       onClick={() => toggleTranslation(msg.id)}
                       className={`flex items-center gap-1.5 text-[11px] font-mono px-2.5 py-1 rounded-lg transition-colors cursor-pointer ${
@@ -539,8 +677,23 @@ const ActiveImmersionTab: FC = () => {
                       <Languages className="h-3.5 w-3.5" />
                       {showTranslation ? 'Hide Translation' : 'Show Translation'}
                     </button>
-                  </div>
-                )}
+                  ) : (
+                    <div />
+                  )}
+
+                  <button
+                    onClick={() => handleSpeakSpecificMessage(msg.id, msg.text)}
+                    className={`flex items-center gap-1.5 text-[11px] font-mono px-2.5 py-1 rounded-lg transition-colors cursor-pointer border-none ${
+                      speakingMsgId === msg.id
+                        ? 'bg-[#7D927D]/20 text-[#5E735E] font-semibold'
+                        : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated'
+                    }`}
+                    title="Listen to Spanish audio"
+                  >
+                    <Volume2 className={`h-3.5 w-3.5 ${speakingMsgId === msg.id ? 'animate-pulse text-[#7D927D]' : ''}`} />
+                    <span>{speakingMsgId === msg.id ? 'Playing...' : 'Pronounce'}</span>
+                  </button>
+                </div>
               </div>
             </div>
           );
@@ -606,7 +759,7 @@ const ActiveImmersionTab: FC = () => {
             e.preventDefault();
             handleSend(inputText);
           }}
-          className="flex gap-3"
+          className="flex gap-2"
         >
           <input
             ref={inputRef}
@@ -621,6 +774,36 @@ const ActiveImmersionTab: FC = () => {
             }
             className="flex-1 bg-bg-elevated border border-structural text-text-primary rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-accent-action focus:border-accent-action placeholder:text-text-tertiary disabled:opacity-50"
           />
+
+          {/* Direct Mic Push-to-Talk Button (Conversation mode) */}
+          {activeMode === 'conversation' && (
+            <button
+              type="button"
+              onClick={voiceState === 'speaking' ? handleStopSpeaking : handleMicClick}
+              disabled={isTyping}
+              className={`px-3.5 py-3 rounded-xl flex items-center justify-center gap-1.5 transition-all font-sans text-xs font-bold border cursor-pointer shrink-0 ${
+                voiceState === 'listening'
+                  ? 'bg-emerald-500 text-white border-emerald-400 animate-pulse'
+                  : voiceState === 'speaking'
+                  ? 'bg-[#7D927D] text-white border-[#A3B899]'
+                  : voiceState === 'thinking'
+                  ? 'bg-amber-500 text-white border-amber-400'
+                  : 'bg-bg-elevated text-accent-action border-structural hover:border-accent-action hover:bg-accent-action/10'
+              }`}
+              title="Push to talk in Spanish"
+            >
+              {voiceState === 'listening' ? (
+                <Mic className="h-4 w-4 text-white animate-pulse" />
+              ) : voiceState === 'speaking' ? (
+                <Volume2 className="h-4 w-4 text-white animate-bounce" />
+              ) : voiceState === 'thinking' ? (
+                <Loader2 className="h-4 w-4 text-white animate-spin" />
+              ) : (
+                <Mic className="h-4 w-4" />
+              )}
+            </button>
+          )}
+
           <button
             type="submit"
             disabled={!inputText.trim() || isTyping}

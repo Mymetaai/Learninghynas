@@ -17,7 +17,8 @@ import {
   CheckCircle2,
   Zap,
   Flame,
-  Brain
+  Brain,
+  Globe
 } from 'lucide-react';
 import { useStatsStore } from '../state/statsStore';
 import { useTrainingStore } from '../state/trainingStore';
@@ -28,6 +29,7 @@ import ExerciseEngine from '../components/exercises/ExerciseEngine';
 import UnifiedVocabTrainer from '../components/UnifiedVocabTrainer';
 import AutoFlashcardsPlayer from '../components/AutoFlashcardsPlayer';
 import FeynmanDrill from '../components/FeynmanDrill';
+import TriviaDrillModal from '../components/training/TriviaDrillModal';
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -40,7 +42,8 @@ type DrillMode =
   | 'conjugation'
   | 'feynman'
   | 'quest'
-  | 'flashcards';
+  | 'flashcards'
+  | 'cultural-trivia';
 
 type ScreenView = 'hub' | 'session';
 
@@ -211,6 +214,7 @@ const PracticeScreen: FC = () => {
   const [view, setView] = useState<ScreenView>(quest ? 'session' : 'hub');
   const [activeMode, setActiveMode] = useState<DrillMode | null>(quest ? 'quest' : null);
   const [sessionResult, setSessionResult] = useState<SessionResult | null>(null);
+  const [isTriviaModalOpen, setIsTriviaModalOpen] = useState(false);
 
   // Data sources
   const learnedVocab = useStatsStore((s) => s.learnedVocab);
@@ -583,9 +587,28 @@ const PracticeScreen: FC = () => {
                 onStart={() => handleStartSession('feynman')}
                 index={7}
               />
+
+              {/* 9. Cultural Trivia (OpenTDB Drill) */}
+              <DrillTile
+                mode="cultural-trivia"
+                icon={<Globe className="h-6 w-6" />}
+                iconColor="text-[#7D927D]"
+                iconBg="bg-[#7D927D]/10 border-[#7D927D]/20"
+                title="Cultural Trivia"
+                subtitle="OpenTDB Drill • Hispanic culture, history & geography (+20 XP, +10 KC)"
+                ctaLabel="Start Trivia Drill"
+                onStart={() => setIsTriviaModalOpen(true)}
+                index={8}
+              />
             </AnimatePresence>
           </div>
         </div>
+
+        {/* Interactive Trivia Drill Modal */}
+        <TriviaDrillModal
+          isOpen={isTriviaModalOpen}
+          onClose={() => setIsTriviaModalOpen(false)}
+        />
 
         {/* Quick stats footer */}
         <div className="mt-8 flex items-center justify-center gap-6 font-mono text-[11px] text-[#777775]">
@@ -616,6 +639,7 @@ const TILE_CONFIG: Record<DrillMode, { title: string }> = {
   'feynman': { title: 'Teach the Chibi (Feynman Technique)' },
   'quest': { title: 'Quest Quiz' },
   'flashcards': { title: 'Auto Flashcards' },
+  'cultural-trivia': { title: 'Cultural Trivia Drill (OpenTDB)' },
 };
 
 // ── DrillTile Component ──────────────────────────────────────────────────────

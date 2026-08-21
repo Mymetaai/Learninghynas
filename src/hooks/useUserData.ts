@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useUser, useAuth } from '@clerk/clerk-react';
-import { createClerkSupabaseClient, setCurrentUserId } from '../lib/supabaseClient';
+import { createClerkSupabaseClient, setCurrentUserId, getStoredUserData, saveStoredUserData, syncLocalStoresToSupabase } from '../lib/supabaseClient';
 import { useStatsStore, calculateConsecutiveStreak, type WeeklyActivityItem } from '../state/statsStore';
 import { useProgressStore } from '../state/progressStore';
 import { useQuestStore } from '../state/questStore';
@@ -23,20 +23,6 @@ export interface UserProgressData {
   weekly_activity?: WeeklyActivityItem[];
 }
 
-const getStoredUserData = (userId: string): UserProgressData | null => {
-  try {
-    const raw = localStorage.getItem(`wayfarer_user_progress_${userId}`);
-    if (raw) return JSON.parse(raw);
-  } catch {}
-  return null;
-};
-
-const saveStoredUserData = (userId: string, data: UserProgressData) => {
-  try {
-    localStorage.setItem(`wayfarer_user_progress_${userId}`, JSON.stringify(data));
-  } catch {}
-};
-
 export function useUserData() {
   const { user, isLoaded: isUserLoaded, isSignedIn } = useUser();
   const { getToken } = useAuth();
@@ -46,8 +32,6 @@ export function useUserData() {
 
   /**
    * Helper to request Clerk Supabase JWT token specifically.
-   * If template 'supabase' is not configured or throws, returns null fallback
-   * so default Clerk RS256 session tokens are never passed to Supabase (preventing 401 errors).
    */
   const getSupabaseToken = useCallback(async (): Promise<string | null> => {
     try {
@@ -72,7 +56,7 @@ export function useUserData() {
         xp: Math.max(data.xp || 0, state.xp || 0),
         coins: Math.max(data.kitsune_coins || 0, state.coins || 0),
         streak: targetStreak,
-        ...(data.weekly_activity ? { weeklyActivity: data.weekly_activity } : {}),
+        ...(data.weekly_activity && data.weekly_activity.length > 0 ? { weeklyActivity: data.weekly_activity } : {}),
       };
     });
   }, []);
@@ -87,7 +71,7 @@ export function useUserData() {
         user_id: 'guest',
         xp: localStats.xp || 0,
         level: Math.max(1, Math.floor((localStats.xp || 0) / 600) + 1),
-        kitsune_coins: localStats.coins || 100,
+        kitsune_coins: typeof localStats.coins === 'number' ? localStats.coins : 100,
         streak_days: calculateConsecutiveStreak(localStats.dailyHistory, localStats.weeklyActivity),
         weekly_activity: localStats.weeklyActivity || [],
       };
@@ -102,7 +86,7 @@ export function useUserData() {
     // Check passive streak status (handles missed days / streak freezes)
     useStatsStore.getState().checkPassiveStreakStatus();
 
-    // 1. Load user-specific storage for this Clerk User ID
+    // 1. Load user-specific storage for this Clerk User ID and local state
     const savedLocal = getStoredUserData(user.id);
     const localStats = useStatsStore.getState();
 
@@ -112,11 +96,11 @@ export function useUserData() {
       calculateConsecutiveStreak(localStats.dailyHistory, localStats.weeklyActivity)
     );
 
-    const initialData: UserProgressData = savedLocal || {
+    const initialData: UserProgressData = {
       user_id: user.id,
-      xp: typeof localStats.xp === 'number' && localStats.xp > 0 ? localStats.xp : 0,
-      level: Math.max(1, Math.floor((localStats.xp || 0) / 600) + 1),
-      kitsune_coins: typeof localStats.coins === 'number' && localStats.coins > 0 ? localStats.coins : 100,
+      xp: Math.max(savedLocal?.xp || 0, localStats.xp || 0),
+      level: Math.max(1, Math.floor(Math.max(savedLocal?.xp || 0, localStats.xp || 0) / 600) + 1),
+      kitsune_coins: Math.max(savedLocal?.kitsune_coins || 0, typeof localStats.coins === 'number' ? localStats.coins : 100),
       streak_days: initialStreak,
       weekly_activity: localStats.weeklyActivity || [],
     };
@@ -139,6 +123,51 @@ export function useUserData() {
 
       if (error && error.code !== 'PGRST116') {
         console.warn('[useUserData] Fetch note:', error.message);
+      }
+
+      // Also fetch user_entitlements
+      const { data: entitlementsData } = await client
+        .from('user_entitlements')
+        .select('*')
+        .eq('user_id', user.id)
+        .maybeSingle();
+
+      if (entitlementsData) {
+        useEntitlementStore.getState().syncFromSupabase({
+          consumables: {
+            streak_freeze: entitlementsData.streak_freeze ?? 0,
+            hint_token: entitlementsData.hint_token ?? 0,
+            boss_retry: entitlementsData.boss_retry ?? 0,
+          },
+          ownedCards: entitlementsData.owned_cards || [],
+          unlockedThemes: entitlementsData.unlocked_themes || ['theme_parchment'],
+          unlockedAuras: entitlementsData.unlocked_auras || [],
+          unlockedPacks: entitlementsData.unlocked_packs || [],
+          activeThemeId: entitlementsData.active_theme || 'theme_parchment',
+          activeAuraId: entitlementsData.active_aura || null,
+        });
+      }
+
+      // Also fetch learned_vocabulary
+      const { data: vocabData } = await client
+        .from('learned_vocabulary')
+        .select('word, quest_id, date_learned')
+        .eq('user_id', user.id);
+
+      if (vocabData && vocabData.length > 0) {
+        useStatsStore.setState((s) => {
+          const existingMap = new Map(s.learnedVocab.map((v) => [v.word.toLowerCase(), v]));
+          vocabData.forEach((v: any) => {
+            if (!existingMap.has(v.word.toLowerCase())) {
+              existingMap.set(v.word.toLowerCase(), {
+                word: v.word,
+                questId: v.quest_id || 'manual',
+                date: v.date_learned || new Date().toISOString().split('T')[0],
+              });
+            }
+          });
+          return { ...s, learnedVocab: Array.from(existingMap.values()) };
+        });
       }
 
       if (data) {
@@ -175,9 +204,8 @@ export function useUserData() {
         saveStoredUserData(user.id, merged);
         syncToLocalStore(merged);
 
-        if (bestXp > (data.xp || 0) || bestCoins > (data.kitsune_coins || 0)) {
-          Promise.resolve(client.from('user_progress').upsert(merged, { onConflict: 'user_id' })).catch(() => {});
-        }
+        // Always sync back the merged state to Supabase so remote has latest
+        syncLocalStoresToSupabase(user.id, token).catch(() => {});
       } else {
         // First-time or missing row: Upsert initialData
         const { data: inserted, error: insertErr } = await client
@@ -194,6 +222,7 @@ export function useUserData() {
           if (insertErr) console.warn('[useUserData] Upsert note:', insertErr.message);
           saveStoredUserData(user.id, initialData);
         }
+        syncLocalStoresToSupabase(user.id, token).catch(() => {});
       }
     } catch (err) {
       console.warn('[useUserData] Fetch exception:', err);
@@ -238,24 +267,13 @@ export function useUserData() {
         };
 
         saveStoredUserData(user.id, updated);
-
-        getSupabaseToken().then((token) => {
-          const client = createClerkSupabaseClient(token);
-          Promise.resolve(client.from('user_progress').upsert(updated, { onConflict: 'user_id' }))
-            .then(({ error }: any) => {
-              if (error && !error.message?.includes('No suitable key')) {
-                console.warn('[useUserData] Background upsert note:', error.message);
-              }
-            })
-            .catch(() => {});
-        });
-
+        syncLocalStoresToSupabase(user.id).catch(() => {});
         return updated;
       });
     });
 
     return () => unsubscribe();
-  }, [isUserLoaded, isSignedIn, user, getSupabaseToken]);
+  }, [isUserLoaded, isSignedIn, user]);
 
   // Dedicated addXP Mutation Function with Optimistic UI & Supabase UPSERT
   const addXP = useCallback(
@@ -279,15 +297,10 @@ export function useUserData() {
         };
         setUserData(updatedData);
         saveStoredUserData(user.id, updatedData);
-
-        try {
-          const token = await getSupabaseToken();
-          const client = createClerkSupabaseClient(token);
-          await client.from('user_progress').upsert(updatedData, { onConflict: 'user_id' });
-        } catch {}
+        syncLocalStoresToSupabase(user.id).catch(() => {});
       }
     },
-    [userData, isSignedIn, user, getSupabaseToken]
+    [userData, isSignedIn, user]
   );
 
   // Dedicated addCoins Mutation Function with Optimistic UI & Supabase UPSERT
@@ -311,15 +324,10 @@ export function useUserData() {
         };
         setUserData(updatedData);
         saveStoredUserData(user.id, updatedData);
-
-        try {
-          const token = await getSupabaseToken();
-          const client = createClerkSupabaseClient(token);
-          await client.from('user_progress').upsert(updatedData, { onConflict: 'user_id' });
-        } catch {}
+        syncLocalStoresToSupabase(user.id).catch(() => {});
       }
     },
-    [userData, isSignedIn, user, getSupabaseToken]
+    [userData, isSignedIn, user]
   );
 
   // Dedicated spendCoins Mutation Function with Optimistic UI & Supabase UPSERT
@@ -345,24 +353,19 @@ export function useUserData() {
         };
         setUserData(updatedData);
         saveStoredUserData(user.id, updatedData);
-
-        try {
-          const token = await getSupabaseToken();
-          const client = createClerkSupabaseClient(token);
-          await client.from('user_progress').upsert(updatedData, { onConflict: 'user_id' });
-        } catch {}
+        syncLocalStoresToSupabase(user.id).catch(() => {});
       }
 
       return true;
     },
-    [userData, isSignedIn, user, getSupabaseToken]
+    [userData, isSignedIn, user]
   );
 
   const resetAllUserProgress = useCallback(async () => {
     const targetUserId = user?.id || 'guest';
 
     // 1. Reset ALL Zustand stores across the entire app
-    useStatsStore.getState().reset();
+    useStatsStore.getState().resetAllProgress();
     useProgressStore.getState().reset();
     useQuestStore.getState().resetQuestProgress();
     useDailyQuestStore.getState().resetDailyQuests();
@@ -459,4 +462,3 @@ export function useUserData() {
     refetch: fetchUserData,
   };
 }
-

@@ -18,7 +18,7 @@ export const SpanishVirtualKeyboard: React.FC<SpanishVirtualKeyboardProps> = ({
   compact = false,
 }) => {
   const [isUppercase, setIsUppercase] = useState(false);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const charList = isUppercase ? UPPERCASE_CHARS : LOWERCASE_CHARS;
 

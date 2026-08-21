@@ -3,6 +3,7 @@ import HomeScreen from './HomeScreen';
 import DailyQuestScreen from './DailyQuestScreen';
 import QuestJourneyScreen from './QuestJourneyScreen';
 import BasicEspanolScreen from './BasicEspanolScreen';
+import DailyProverbCard from '../components/dashboard/DailyProverbCard';
 
 type LearnSubView = 'dashboard' | 'daily-quest' | 'quest-journey' | 'basic-espanol';
 
@@ -63,10 +64,18 @@ export default function LearnScreen() {
       )}
 
       {/* Sub-view Content */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {activeSubView === 'dashboard' && <HomeScreen />}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        {activeSubView === 'dashboard' && (
+          <div className="space-y-6">
+            <DailyProverbCard />
+            <HomeScreen />
+          </div>
+        )}
         {activeSubView === 'daily-quest' && (
-          <DailyQuestScreen onActiveQuestChange={setIsQuestActive} />
+          <div className="space-y-6">
+            <DailyProverbCard />
+            <DailyQuestScreen onActiveQuestChange={setIsQuestActive} />
+          </div>
         )}
         {activeSubView === 'quest-journey' && <QuestJourneyScreen />}
         {activeSubView === 'basic-espanol' && <BasicEspanolScreen />}
