@@ -1,0 +1,1243 @@
+{
+  "title": "Spanish Fast-Track 30-Day Immersion Roadmap",
+  "nodes": [
+    {
+      "id": "week1-day1",
+      "week": 1,
+      "day": 1,
+      "title": "Day 1: First Words & Native Phonetics",
+      "summary": "Master Spanish vowel sounds (A-E-I-O-U) and learn your first 25 high-frequency words.",
+      "checklist": [
+        {
+          "id": "w1d1-1",
+          "label": "20 min: Anki sentence cards — first 25 high-frequency words",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w1d1-2",
+          "label": "20 min: Dreaming Spanish — Superbeginner (Mexico accent)",
+          "actionType": "external_video",
+          "payload": {
+            "url": "https://www.youtube.com/@DreamingSpanish"
+          }
+        },
+        {
+          "id": "w1d1-3",
+          "label": "15 min: Shadow 3-5 short native clips out loud",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        },
+        {
+          "id": "w1d1-trivia",
+          "label": "Play Cultural Trivia: First Spanish Expressions",
+          "actionType": "in_app_trivia",
+          "payload": {}
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/@DreamingSpanish",
+      "resourceLabel": "Watch: Dreaming Spanish – Superbeginner",
+      "unlocks": [
+        "week1-day2"
+      ],
+      "position": {
+        "x": 100,
+        "y": 0
+      }
+    },
+    {
+      "id": "week1-day2",
+      "week": 1,
+      "day": 2,
+      "title": "Day 2: Greetings & Basic Introductions",
+      "summary": "Introduce yourself like a native speaker: Me llamo, Soy de, Mucho gusto.",
+      "checklist": [
+        {
+          "id": "w1d2-1",
+          "label": "20 min: Anki — greetings & self-introduction sentences",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w1d2-2",
+          "label": "20 min: Input video — greetings & introductions",
+          "actionType": "external_video",
+          "payload": {
+            "url": "https://www.youtube.com/results?search_query=spanish%20greetings%20and%20introductions%20beginner%20mexico"
+          }
+        },
+        {
+          "id": "w1d2-3",
+          "label": "20 min: Book & take your first italki lesson — introduce yourself live",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=spanish%20greetings%20and%20introductions%20beginner%20mexico",
+      "resourceLabel": "Watch: Greetings & Introductions",
+      "unlocks": [
+        "week1-day3"
+      ],
+      "position": {
+        "x": 350,
+        "y": 160
+      }
+    },
+    {
+      "id": "week1-day3",
+      "week": 1,
+      "day": 3,
+      "title": "Day 3: Numbers, Prices & Asking Cost",
+      "summary": "Count effortlessly 1-100 and learn how to ask about costs (¿Cuánto cuesta?).",
+      "checklist": [
+        {
+          "id": "w1d3-1",
+          "label": "20 min: Anki — numbers & price phrases",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w1d3-2",
+          "label": "20 min: Input video — numbers and shopping dialogues",
+          "actionType": "external_video",
+          "payload": {
+            "url": "https://www.youtube.com/results?search_query=spanish%20numbers%201%20to%20100%20practice%20mexico"
+          }
+        },
+        {
+          "id": "w1d3-3",
+          "label": "20 min: Shadow numbers and prices out loud",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=spanish%20numbers%201%20to%20100%20practice%20mexico",
+      "resourceLabel": "Watch: Numbers 1-100 Practice",
+      "unlocks": [
+        "week1-day4"
+      ],
+      "position": {
+        "x": 100,
+        "y": 320
+      }
+    },
+    {
+      "id": "week1-day4",
+      "week": 1,
+      "day": 4,
+      "title": "Day 4: Crucial Verb 1 — SER vs ESTAR",
+      "summary": "Understand the core difference between permanent identity and current state.",
+      "checklist": [
+        {
+          "id": "w1d4-1",
+          "label": "20 min: Anki — ser/estar sentence pairs",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w1d4-2",
+          "label": "25 min: Input video explaining ser vs estar through examples",
+          "actionType": "external_video",
+          "payload": {
+            "url": "https://www.youtube.com/results?search_query=ser%20vs%20estar%20explained%20spanish"
+          }
+        },
+        {
+          "id": "w1d4-3",
+          "label": "15 min: Speak 10 sentences alternating ser/estar about yourself",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=ser%20vs%20estar%20explained%20spanish",
+      "resourceLabel": "Watch: Ser vs Estar Explained",
+      "unlocks": [
+        "week1-day5"
+      ],
+      "position": {
+        "x": 350,
+        "y": 480
+      }
+    },
+    {
+      "id": "week1-day5",
+      "week": 1,
+      "day": 5,
+      "title": "Day 5: Essential Nouns & Articles (Gender/Vocab)",
+      "summary": "Master grammatical gender in Spanish and learn 20 everyday nouns.",
+      "checklist": [
+        {
+          "id": "w1d5-1",
+          "label": "20 min: Anki — nouns with articles (el/la)",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w1d5-2",
+          "label": "20 min: Input video — everyday objects vocabulary",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w1d5-3",
+          "label": "15 min: Describe 10 objects around you out loud",
+          "actionType": "manual_check",
+          "payload": {}
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=spanish%20gender%20articles%20el%20la%20beginner",
+      "resourceLabel": "Watch: Gender & Articles Basics",
+      "unlocks": [
+        "week1-day6"
+      ],
+      "position": {
+        "x": 100,
+        "y": 640
+      }
+    },
+    {
+      "id": "week1-day6",
+      "week": 1,
+      "day": 6,
+      "title": "Day 6: Expressing Wants & Needs",
+      "summary": "Say what you want and need: quiero, necesito, me gustaría.",
+      "checklist": [
+        {
+          "id": "w1d6-1",
+          "label": "20 min: Anki — quiero/necesito sentence bank",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w1d6-2",
+          "label": "20 min: Input video — wants & needs dialogues",
+          "actionType": "external_video",
+          "payload": {
+            "url": "https://www.youtube.com/results?search_query=quiero%20necesito%20spanish%20practice"
+          }
+        },
+        {
+          "id": "w1d6-3",
+          "label": "20 min: italki session — practice ordering and requesting things",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=quiero%20necesito%20spanish%20practice",
+      "resourceLabel": "Watch: Wants & Needs Practice",
+      "unlocks": [
+        "week1-day7"
+      ],
+      "position": {
+        "x": 350,
+        "y": 800
+      }
+    },
+    {
+      "id": "week1-day7",
+      "week": 1,
+      "day": 7,
+      "title": "Day 7: Week 1 Milestones & Self-Assessment",
+      "summary": "Review of 30 essential vocabulary words and phrases learned this week.",
+      "checklist": [
+        {
+          "id": "w1d7-1",
+          "label": "15 min: Anki — full Week 1 review deck",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w1d7-2",
+          "label": "30 min: italki/Tandem — free talk using only Week 1 vocabulary",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w1d7-3",
+          "label": "10 min: Record yourself introducing yourself in Spanish",
+          "actionType": "manual_check",
+          "payload": {}
+        }
+      ],
+      "unlocks": [
+        "week2-day1"
+      ],
+      "position": {
+        "x": 100,
+        "y": 960
+      }
+    },
+    {
+      "id": "week2-day1",
+      "week": 2,
+      "day": 1,
+      "title": "Day 8: Ordering Food & Restaurant Spanish",
+      "summary": "Learn how to order, ask for the check, and navigate a menu.",
+      "checklist": [
+        {
+          "id": "w2d1-1",
+          "label": "20 min: Anki — restaurant & ordering phrases",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w2d1-2",
+          "label": "20 min: Input video — restaurant roleplay dialogue",
+          "actionType": "external_video",
+          "payload": {
+            "url": "https://www.youtube.com/results?search_query=ordering%20food%20in%20spanish%20restaurant%20conversation"
+          }
+        },
+        {
+          "id": "w2d1-3",
+          "label": "20 min: Roleplay ordering food with your tutor",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=ordering%20food%20in%20spanish%20restaurant%20conversation",
+      "resourceLabel": "Watch: Restaurant Spanish",
+      "unlocks": [
+        "week2-day2"
+      ],
+      "position": {
+        "x": 350,
+        "y": 1120
+      }
+    },
+    {
+      "id": "week2-day2",
+      "week": 2,
+      "day": 2,
+      "title": "Day 9: Asking for Directions & Navigation",
+      "summary": "Spanish spatial prepositions and how to ask for and understand directions.",
+      "checklist": [
+        {
+          "id": "w2d2-1",
+          "label": "20 min: Anki — direction & location phrases",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w2d2-2",
+          "label": "20 min: Input video — asking for directions",
+          "actionType": "external_video",
+          "payload": {
+            "url": "https://www.youtube.com/results?search_query=asking%20for%20directions%20in%20spanish%20practice"
+          }
+        },
+        {
+          "id": "w2d2-3",
+          "label": "20 min: Practice giving and asking directions with your tutor",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=asking%20for%20directions%20in%20spanish%20practice",
+      "resourceLabel": "Watch: Directions Practice",
+      "unlocks": [
+        "week2-day3"
+      ],
+      "position": {
+        "x": 100,
+        "y": 1280
+      }
+    },
+    {
+      "id": "week2-day3",
+      "week": 2,
+      "day": 3,
+      "title": "Day 10: Present Tense — Regular AR Verbs",
+      "summary": "Master present-tense conjugation for regular -AR verbs.",
+      "checklist": [
+        {
+          "id": "w2d3-1",
+          "label": "20 min: Anki — AR verb conjugation sentences",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w2d3-2",
+          "label": "20 min: Input video — AR verb conjugation patterns",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w2d3-3",
+          "label": "20 min: Speak 10 sentences about your day using AR verbs",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=spanish%20AR%20verbs%20present%20tense%20conjugation",
+      "resourceLabel": "Watch: AR Verbs Explained",
+      "unlocks": [
+        "week2-day4"
+      ],
+      "position": {
+        "x": 350,
+        "y": 1440
+      }
+    },
+    {
+      "id": "week2-day4",
+      "week": 2,
+      "day": 4,
+      "title": "Day 11: Present Tense — Regular ER/IR Verbs",
+      "summary": "Extend present-tense mastery to -ER and -IR verbs.",
+      "checklist": [
+        {
+          "id": "w2d4-1",
+          "label": "20 min: Anki — ER/IR verb sentence bank",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w2d4-2",
+          "label": "20 min: Input video — ER/IR verb conjugation patterns",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w2d4-3",
+          "label": "20 min: Narrate your morning routine out loud",
+          "actionType": "manual_check",
+          "payload": {}
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=spanish%20ER%20IR%20verbs%20present%20tense%20conjugation",
+      "resourceLabel": "Watch: ER/IR Verbs Explained",
+      "unlocks": [
+        "week2-day5"
+      ],
+      "position": {
+        "x": 100,
+        "y": 1600
+      }
+    },
+    {
+      "id": "week2-day5",
+      "week": 2,
+      "day": 5,
+      "title": "Day 12: Daily Routines & Reflexive Verbs",
+      "summary": "Talk about your day using reflexive verbs: levantarse, ducharse, acostarse.",
+      "checklist": [
+        {
+          "id": "w2d5-1",
+          "label": "20 min: Anki — reflexive verb sentences",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w2d5-2",
+          "label": "20 min: Input video — daily routine vocabulary",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w2d5-3",
+          "label": "20 min: Describe your full day to your tutor",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=reflexive%20verbs%20spanish%20daily%20routine",
+      "resourceLabel": "Watch: Reflexive Verbs & Routines",
+      "unlocks": [
+        "week2-day6"
+      ],
+      "position": {
+        "x": 350,
+        "y": 1760
+      }
+    },
+    {
+      "id": "week2-day6",
+      "week": 2,
+      "day": 6,
+      "title": "Day 13: Time, Days of the Week & Schedules",
+      "summary": "Tell time, name the days of the week, and talk about your weekly schedule.",
+      "checklist": [
+        {
+          "id": "w2d6-1",
+          "label": "20 min: Anki — time & schedule phrases",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w2d6-2",
+          "label": "20 min: Input video — telling time in Spanish",
+          "actionType": "external_video",
+          "payload": {
+            "url": "https://www.youtube.com/results?search_query=telling%20time%20in%20spanish%20practice"
+          }
+        },
+        {
+          "id": "w2d6-3",
+          "label": "20 min: Roleplay making an appointment with your tutor",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=telling%20time%20in%20spanish%20practice",
+      "resourceLabel": "Watch: Telling Time in Spanish",
+      "unlocks": [
+        "week2-day7"
+      ],
+      "position": {
+        "x": 100,
+        "y": 1920
+      }
+    },
+    {
+      "id": "week2-day7",
+      "week": 2,
+      "day": 7,
+      "title": "Day 14: Mid-Point Conversational Milestone",
+      "summary": "Continue everything you've learned in this 15-minute beginner-level conversation.",
+      "checklist": [
+        {
+          "id": "w2d7-1",
+          "label": "15 min: Anki — cumulative Week 1-2 review",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w2d7-2",
+          "label": "30 min: Tutor session — free talk, no script",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        },
+        {
+          "id": "w2d7-3",
+          "label": "10 min: Journal 5 sentences about what still feels hard",
+          "actionType": "manual_check",
+          "payload": {}
+        }
+      ],
+      "unlocks": [
+        "week3-day1"
+      ],
+      "position": {
+        "x": 350,
+        "y": 2080
+      }
+    },
+    {
+      "id": "week3-day1",
+      "week": 3,
+      "day": 1,
+      "title": "Day 15: Past Tense — Preterite Basics",
+      "summary": "Introduce the preterite tense for talking about completed past actions.",
+      "checklist": [
+        {
+          "id": "w3d1-1",
+          "label": "20 min: Anki — preterite tense sentence bank",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w3d1-2",
+          "label": "20 min: Input video — preterite tense introduction",
+          "actionType": "external_video",
+          "payload": {
+            "url": "https://www.youtube.com/results?search_query=spanish%20preterite%20tense%20basics%20for%20beginners"
+          }
+        },
+        {
+          "id": "w3d1-3",
+          "label": "15 min: Speak 5 sentences about what you did yesterday",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=spanish%20preterite%20tense%20basics%20for%20beginners",
+      "resourceLabel": "Watch: Preterite Tense Basics",
+      "unlocks": [
+        "week3-day2"
+      ],
+      "position": {
+        "x": 100,
+        "y": 2240
+      }
+    },
+    {
+      "id": "week3-day2",
+      "week": 3,
+      "day": 2,
+      "title": "Day 16: Talking About Yesterday & Last Week",
+      "summary": "Build fluency narrating recent past events.",
+      "checklist": [
+        {
+          "id": "w3d2-1",
+          "label": "20 min: Anki — past-tense narration sentences",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w3d2-2",
+          "label": "20 min: Input — native speaker recounting their week",
+          "actionType": "external_video",
+          "payload": {
+            "url": "https://www.youtube.com/results?search_query=spanish%20past%20tense%20conversation%20practice"
+          }
+        },
+        {
+          "id": "w3d2-3",
+          "label": "20 min: Tell your tutor about your last week",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=spanish%20past%20tense%20conversation%20practice",
+      "resourceLabel": "Watch: Past Tense Conversation",
+      "unlocks": [
+        "week3-day3"
+      ],
+      "position": {
+        "x": 350,
+        "y": 2400
+      }
+    },
+    {
+      "id": "week3-day3",
+      "week": 3,
+      "day": 3,
+      "title": "Day 17: Mexican Slang & Everyday Expressions",
+      "summary": "Learn the slang that actually gets used daily in Mexico: chido, güey, neta, no manches.",
+      "checklist": [
+        {
+          "id": "w3d3-1",
+          "label": "20 min: Anki — Mexican slang & expressions deck",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w3d3-2",
+          "label": "20 min: Input — Mexican street-interview style video",
+          "actionType": "external_video",
+          "payload": {
+            "url": "https://www.youtube.com/results?search_query=mexican%20spanish%20slang%20everyday%20expressions"
+          }
+        },
+        {
+          "id": "w3d3-3",
+          "label": "20 min: Try using 3 new slang words with your tutor",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=mexican%20spanish%20slang%20everyday%20expressions",
+      "resourceLabel": "Watch: Mexican Slang Explained",
+      "unlocks": [
+        "week3-day4"
+      ],
+      "position": {
+        "x": 100,
+        "y": 2560
+      }
+    },
+    {
+      "id": "week3-day4",
+      "week": 3,
+      "day": 4,
+      "title": "Day 18: Narrate Your Day Out Loud",
+      "summary": "Free-form daily narration to build retrieval speed without translating.",
+      "checklist": [
+        {
+          "id": "w3d4-1",
+          "label": "20 min: Anki — cumulative review",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w3d4-2",
+          "label": "20 min: Input — native-speed podcast segment (Mexico-accented)",
+          "actionType": "external_video",
+          "payload": {
+            "url": "https://www.youtube.com/results?search_query=spanish%20podcast%20for%20intermediate%20learners%20mexico"
+          }
+        },
+        {
+          "id": "w3d4-3",
+          "label": "20 min: Narrate your full day out loud, unscripted",
+          "actionType": "manual_check",
+          "payload": {}
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=spanish%20podcast%20for%20intermediate%20learners%20mexico",
+      "resourceLabel": "Listen: Spanish Podcast Segment",
+      "unlocks": [
+        "week3-day5"
+      ],
+      "position": {
+        "x": 350,
+        "y": 2720
+      }
+    },
+    {
+      "id": "week3-day5",
+      "week": 3,
+      "day": 5,
+      "title": "Day 19: Making Plans — Near Future Tense",
+      "summary": "Talk about upcoming plans using ir + a + infinitive.",
+      "checklist": [
+        {
+          "id": "w3d5-1",
+          "label": "20 min: Anki — near-future tense sentence bank",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w3d5-2",
+          "label": "20 min: Input video — making plans in Spanish",
+          "actionType": "external_video",
+          "payload": {
+            "url": "https://www.youtube.com/results?search_query=spanish%20near%20future%20tense%20ir%20a%20practice"
+          }
+        },
+        {
+          "id": "w3d5-3",
+          "label": "20 min: Roleplay planning a weekend with your tutor",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=spanish%20near%20future%20tense%20ir%20a%20practice",
+      "resourceLabel": "Watch: Near Future Tense (ir + a)",
+      "unlocks": [
+        "week3-day6"
+      ],
+      "position": {
+        "x": 100,
+        "y": 2880
+      }
+    },
+    {
+      "id": "week3-day6",
+      "week": 3,
+      "day": 6,
+      "title": "Day 20: Opinions, Likes & Preferences",
+      "summary": "Express opinions and preferences: me gusta, prefiero, creo que.",
+      "checklist": [
+        {
+          "id": "w3d6-1",
+          "label": "20 min: Anki — opinion & preference phrases",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w3d6-2",
+          "label": "20 min: Input — opinion/debate style video",
+          "actionType": "external_video",
+          "payload": {
+            "url": "https://www.youtube.com/results?search_query=spanish%20opinions%20likes%20and%20preferences%20practice"
+          }
+        },
+        {
+          "id": "w3d6-3",
+          "label": "20 min: Discuss a simple opinion topic with your tutor",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=spanish%20opinions%20likes%20and%20preferences%20practice",
+      "resourceLabel": "Watch: Opinions & Preferences",
+      "unlocks": [
+        "week3-day7"
+      ],
+      "position": {
+        "x": 350,
+        "y": 3040
+      }
+    },
+    {
+      "id": "week3-day7",
+      "week": 3,
+      "day": 7,
+      "title": "Day 21: Week 3 Review — Extended Conversation",
+      "summary": "A longer, less-guided conversation combining past, present, and future.",
+      "checklist": [
+        {
+          "id": "w3d7-1",
+          "label": "15 min: Anki — full Week 3 review",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w3d7-2",
+          "label": "40 min: Tutor session mixing tenses, minimal script",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        },
+        {
+          "id": "w3d7-3",
+          "label": "10 min: Journal which tenses still trip you up",
+          "actionType": "manual_check",
+          "payload": {}
+        }
+      ],
+      "unlocks": [
+        "week4-day1"
+      ],
+      "position": {
+        "x": 100,
+        "y": 3200
+      }
+    },
+    {
+      "id": "week4-day1",
+      "week": 4,
+      "day": 1,
+      "title": "Day 22: Renting an Apartment — Vocabulary",
+      "summary": "Learn the vocabulary for renta, depósito, casero, and viewing an apartment.",
+      "checklist": [
+        {
+          "id": "w4d1-1",
+          "label": "20 min: Anki — renting & housing vocabulary",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w4d1-2",
+          "label": "20 min: Input video — renting an apartment in Mexico",
+          "actionType": "external_video",
+          "payload": {
+            "url": "https://www.youtube.com/results?search_query=renting%20apartment%20spanish%20vocabulary%20mexico"
+          }
+        },
+        {
+          "id": "w4d1-3",
+          "label": "20 min: Roleplay an apartment viewing with your tutor",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=renting%20apartment%20spanish%20vocabulary%20mexico",
+      "resourceLabel": "Watch: Renting Vocabulary (Mexico)",
+      "unlocks": [
+        "week4-day2"
+      ],
+      "position": {
+        "x": 350,
+        "y": 3360
+      }
+    },
+    {
+      "id": "week4-day2",
+      "week": 4,
+      "day": 2,
+      "title": "Day 23: Banking & CURP/INE Paperwork",
+      "summary": "Navigate bureaucracy: CURP, INE, trámites, and opening a bank account.",
+      "checklist": [
+        {
+          "id": "w4d2-1",
+          "label": "20 min: Anki — bureaucracy & paperwork vocabulary",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w4d2-2",
+          "label": "20 min: Input video — Mexican paperwork basics (CURP/INE)",
+          "actionType": "external_video",
+          "payload": {
+            "url": "https://www.youtube.com/results?search_query=CURP%20INE%20mexico%20paperwork%20explained%20spanish"
+          }
+        },
+        {
+          "id": "w4d2-3",
+          "label": "20 min: Roleplay a bank visit with your tutor",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=CURP%20INE%20mexico%20paperwork%20explained%20spanish",
+      "resourceLabel": "Watch: CURP/INE Paperwork Explained",
+      "unlocks": [
+        "week4-day3"
+      ],
+      "position": {
+        "x": 100,
+        "y": 3520
+      }
+    },
+    {
+      "id": "week4-day3",
+      "week": 4,
+      "day": 3,
+      "title": "Day 24: Doctor Visits & Emergencies",
+      "summary": "Essential medical vocabulary and how to describe symptoms.",
+      "checklist": [
+        {
+          "id": "w4d3-1",
+          "label": "20 min: Anki — medical & emergency phrases",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w4d3-2",
+          "label": "20 min: Input video — doctor visit vocabulary",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w4d3-3",
+          "label": "20 min: Roleplay describing symptoms to your tutor",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=spanish%20doctor%20visit%20vocabulary%20emergency",
+      "resourceLabel": "Watch: Doctor Visit Vocabulary",
+      "unlocks": [
+        "week4-day4"
+      ],
+      "position": {
+        "x": 350,
+        "y": 3680
+      }
+    },
+    {
+      "id": "week4-day4",
+      "week": 4,
+      "day": 4,
+      "title": "Day 25: Public Transport — Camión & Pesero",
+      "summary": "Learn to navigate Mexican public transport: camión, pesero, metro.",
+      "checklist": [
+        {
+          "id": "w4d4-1",
+          "label": "20 min: Anki — public transport vocabulary",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w4d4-2",
+          "label": "20 min: Input video — Mexican public transport basics",
+          "actionType": "external_video",
+          "payload": {
+            "url": "https://www.youtube.com/results?search_query=mexican%20public%20transport%20spanish%20vocabulary%20camion%20pesero"
+          }
+        },
+        {
+          "id": "w4d4-3",
+          "label": "20 min: Roleplay asking for a bus route with your tutor",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=mexican%20public%20transport%20spanish%20vocabulary%20camion%20pesero",
+      "resourceLabel": "Watch: Mexican Public Transport",
+      "unlocks": [
+        "week4-day5"
+      ],
+      "position": {
+        "x": 100,
+        "y": 3840
+      }
+    },
+    {
+      "id": "week4-day5",
+      "week": 4,
+      "day": 5,
+      "title": "Day 26: Tianguis & Everyday Shopping",
+      "summary": "Shop at a tianguis (street market) and haggle politely.",
+      "checklist": [
+        {
+          "id": "w4d5-1",
+          "label": "20 min: Anki — shopping & market vocabulary",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w4d5-2",
+          "label": "20 min: Input video — tianguis market culture",
+          "actionType": "external_video",
+          "payload": {
+            "url": "https://www.youtube.com/results?search_query=tianguis%20mexico%20market%20shopping%20spanish"
+          }
+        },
+        {
+          "id": "w4d5-3",
+          "label": "20 min: Roleplay bargaining at a market with your tutor",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=tianguis%20mexico%20market%20shopping%20spanish",
+      "resourceLabel": "Watch: Tianguis Market Culture",
+      "unlocks": [
+        "week4-day6"
+      ],
+      "position": {
+        "x": 350,
+        "y": 4000
+      }
+    },
+    {
+      "id": "week4-day6",
+      "week": 4,
+      "day": 6,
+      "title": "Day 27: Small Talk With Neighbors",
+      "summary": "Build the social small talk needed to connect with neighbors and locals.",
+      "checklist": [
+        {
+          "id": "w4d6-1",
+          "label": "20 min: Anki — small talk phrases",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w4d6-2",
+          "label": "20 min: Input — casual conversation video",
+          "actionType": "external_video",
+          "payload": {
+            "url": "https://www.youtube.com/results?search_query=spanish%20small%20talk%20conversation%20practice"
+          }
+        },
+        {
+          "id": "w4d6-3",
+          "label": "20 min: Practice unscripted small talk with your tutor",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=spanish%20small%20talk%20conversation%20practice",
+      "resourceLabel": "Watch: Small Talk Practice",
+      "unlocks": [
+        "week4-day7"
+      ],
+      "position": {
+        "x": 100,
+        "y": 4160
+      }
+    },
+    {
+      "id": "week4-day7",
+      "week": 4,
+      "day": 7,
+      "title": "Day 28: Week 4 Review — Roleplay Marathon",
+      "summary": "Run through every relocation scenario back-to-back with your tutor.",
+      "checklist": [
+        {
+          "id": "w4d7-1",
+          "label": "15 min: Anki — full relocation vocabulary review",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w4d7-2",
+          "label": "45 min: Roleplay marathon — apartment, bank, doctor, market",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        },
+        {
+          "id": "w4d7-3",
+          "label": "10 min: Journal your 5 weakest scenarios",
+          "actionType": "manual_check",
+          "payload": {}
+        }
+      ],
+      "unlocks": [
+        "week5-day1"
+      ],
+      "position": {
+        "x": 350,
+        "y": 4320
+      }
+    },
+    {
+      "id": "week5-day1",
+      "week": 5,
+      "day": 1,
+      "title": "Day 29: Full Native-Speed Immersion Day",
+      "summary": "A full day consuming only native-speed Mexican media — no subtitles, no slow content.",
+      "checklist": [
+        {
+          "id": "w5d1-1",
+          "label": "30 min: Native Mexican YouTube/news, no subtitles",
+          "actionType": "external_video",
+          "payload": {
+            "url": "https://www.youtube.com/results?search_query=mexican%20news%20youtube%20live"
+          }
+        },
+        {
+          "id": "w5d1-2",
+          "label": "20 min: Shadow a native-speed clip",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        },
+        {
+          "id": "w5d1-3",
+          "label": "30 min: Free-talk tutor session — no English allowed",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        }
+      ],
+      "resourceUrl": "https://www.youtube.com/results?search_query=mexican%20news%20youtube%20live",
+      "resourceLabel": "Watch: Mexican News (Native Speed)",
+      "unlocks": [
+        "week5-day2"
+      ],
+      "position": {
+        "x": 100,
+        "y": 4480
+      }
+    },
+    {
+      "id": "week5-day2",
+      "week": 5,
+      "day": 2,
+      "title": "Day 30: Graduation — 30-Day Milestone Call",
+      "summary": "A full unscripted conversation with your tutor covering your move, your life, and your plans.",
+      "checklist": [
+        {
+          "id": "w5d2-1",
+          "label": "15 min: Anki — final cumulative review",
+          "actionType": "in_app_vocab",
+          "payload": {
+            "count": 10
+          }
+        },
+        {
+          "id": "w5d2-2",
+          "label": "45 min: Unscripted tutor conversation covering your move & plans",
+          "actionType": "in_app_chat",
+          "payload": {
+            "companion": "Mateo"
+          }
+        },
+        {
+          "id": "w5d2-3",
+          "label": "10 min: Write 10 sentences in Spanish about what you'll do next",
+          "actionType": "manual_check",
+          "payload": {}
+        }
+      ],
+      "unlocks": [],
+      "position": {
+        "x": 350,
+        "y": 4640
+      }
+    }
+  ]
+}

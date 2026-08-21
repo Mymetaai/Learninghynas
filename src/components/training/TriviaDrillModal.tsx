@@ -19,11 +19,12 @@ import { useDailyQuestStore } from '../../state/dailyQuestStore';
 import Confetti from '../Confetti';
 
 interface TriviaDrillModalProps {
-  isOpen: boolean;
+  isOpen?: boolean;
   onClose: () => void;
+  onComplete?: () => void;
 }
 
-export default function TriviaDrillModal({ isOpen, onClose }: TriviaDrillModalProps) {
+export default function TriviaDrillModal({ isOpen = true, onClose, onComplete }: TriviaDrillModalProps) {
   const [questions, setQuestions] = useState<TriviaQuestion[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -93,6 +94,11 @@ export default function TriviaDrillModal({ isOpen, onClose }: TriviaDrillModalPr
       // Dispatch daily quest progress
       updateTaskProgress('lesson_progress', 1);
       updateTaskProgress('vocab_review', 1);
+
+      // Fire onComplete callback
+      if (onComplete) {
+        onComplete();
+      }
     }
   };
 

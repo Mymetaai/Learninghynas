@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PracticeScreen from './PracticeScreen';
 import SpeakingScreen from './SpeakingScreen';
 import ConversationScreen from './ConversationScreen';
@@ -6,15 +7,27 @@ import WorldMapScreen from './WorldMapScreen';
 import DojoFloor from '../components/effects/DojoFloor';
 import Kitsune3D from '../components/Kitsune3D';
 import TodayTrainingRunner from '../components/training/TodayTrainingRunner';
+import TriviaDrillModal from '../components/training/TriviaDrillModal';
 import { assembleTodaySession } from '../lib/sessionDirector';
 import { useStatsStore } from '../state/statsStore';
 import { useTrainingStore } from '../state/trainingStore';
+import { useRoadmapStore } from '../state/roadmapStore';
 import { Flame, BookOpen, Target, Sparkles, Swords } from 'lucide-react';
 
-type PracticeSubView = 'training' | 'voice' | 'companion' | 'adventure-map';
+import RoadmapCanvas from '../components/roadmap/RoadmapCanvas';
+import NodeDetailDrawer from '../components/roadmap/NodeDetailDrawer';
+import type { TaskActionType } from '../data/roadmap.types';
+
+type PracticeSubView = 'training' | 'voice' | 'companion' | 'adventure-map' | 'adventure';
+type AdventureSubTab = 'roadmap' | 'story-path';
 
 export default function PracticeViewScreen() {
+  const navigate = useNavigate();
   const [activeSubView, setActiveSubView] = useState<PracticeSubView>('training');
+  const [adventureTab, setAdventureTab] = useState<AdventureSubTab>('roadmap');
+  const [activeRoadmapNode, setActiveRoadmapNode] = useState<string | null>(null);
+  const [showTriviaModal, setShowTriviaModal] = useState(false);
+  const [pendingRoadmapTask, setPendingRoadmapTask] = useState<{ nodeId: string; taskId: string } | null>(null);
   const [showTodayWorkout, setShowTodayWorkout] = useState(false);
 
   const streak = useStatsStore((s) => s.streak);
@@ -22,6 +35,20 @@ export default function PracticeViewScreen() {
   const mistakesCount = useTrainingStore((s) => s.mistakes.length);
 
   const sessionSteps = useMemo(() => assembleTodaySession(), []);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleLaunchTask = (nodeId: string, taskId: string, actionType: TaskActionType, _payload?: any) => {
+    if (actionType === 'in_app_trivia') {
+      setPendingRoadmapTask({ nodeId, taskId });
+      setShowTriviaModal(true);
+    } else if (actionType === 'in_app_chat') {
+      useRoadmapStore.getState().completeTask(nodeId, taskId);
+      navigate('/companion');
+    } else if (actionType === 'in_app_vocab') {
+      useRoadmapStore.getState().completeTask(nodeId, taskId);
+      setActiveSubView('training');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-bg-base text-text-primary pb-20 sm:pb-12 relative overflow-hidden">
@@ -77,7 +104,7 @@ export default function PracticeViewScreen() {
                 setActiveSubView('adventure-map');
               }}
               className={`px-4 sm:px-5 py-2 rounded-full font-sans text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                activeSubView === 'adventure-map'
+                activeSubView === 'adventure-map' || activeSubView === 'adventure'
                   ? 'bg-[#7D927D] text-white shadow-sm'
                   : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
               }`}
@@ -155,10 +182,68 @@ export default function PracticeViewScreen() {
             {activeSubView === 'training' && <PracticeScreen />}
             {activeSubView === 'voice' && <SpeakingScreen />}
             {activeSubView === 'companion' && <ConversationScreen />}
-            {activeSubView === 'adventure-map' && <WorldMapScreen />}
+            {(activeSubView === 'adventure-map' || activeSubView === 'adventure') && (
+              <div className="space-y-4">
+                {/* Sub-navigation inside Adventure Map */}
+                <div className="flex items-center justify-between flex-wrap gap-3 bg-bg-elevated/80 backdrop-blur-md px-3 py-2 rounded-2xl border border-structural/50 shadow-xs">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setAdventureTab('roadmap')}
+                      className={`px-4 py-1.5 rounded-xl font-sans text-xs font-bold transition-all cursor-pointer border-none ${
+                        adventureTab === 'roadmap'
+                          ? 'bg-[#7D927D] text-white shadow-xs'
+                          : 'bg-transparent text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
+                      }`}
+                    >
+                      🗺️ 30-Day Spanish Roadmap
+                    </button>
+                    <button
+                      onClick={() => setAdventureTab('story-path')}
+                      className={`px-4 py-1.5 rounded-xl font-sans text-xs font-bold transition-all cursor-pointer border-none ${
+                        adventureTab === 'story-path'
+                          ? 'bg-[#7D927D] text-white shadow-xs'
+                          : 'bg-transparent text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2'
+                      }`}
+                    >
+                      🦊 Kitsune's Path (World Map)
+                    </button>
+                  </div>
+                </div>
+
+                {adventureTab === 'roadmap' ? (
+                  <div className="h-[75vh] w-full relative overflow-hidden rounded-3xl border border-structural/40 bg-white dark:bg-bg-elevated shadow-inner">
+                    <RoadmapCanvas onNodeSelect={setActiveRoadmapNode} />
+                    <NodeDetailDrawer
+                      nodeId={activeRoadmapNode}
+                      onClose={() => setActiveRoadmapNode(null)}
+                      onLaunchTask={handleLaunchTask}
+                    />
+                  </div>
+                ) : (
+                  <WorldMapScreen />
+                )}
+              </div>
+            )}
           </>
         )}
       </div>
+
+      {/* Conditional Trivia Modal */}
+      {showTriviaModal && (
+        <TriviaDrillModal
+          isOpen={true}
+          onClose={() => {
+            setShowTriviaModal(false);
+            setPendingRoadmapTask(null);
+          }}
+          onComplete={() => {
+            if (pendingRoadmapTask) {
+              useRoadmapStore.getState().completeTask(pendingRoadmapTask.nodeId, pendingRoadmapTask.taskId);
+              setPendingRoadmapTask(null);
+            }
+          }}
+        />
+      )}
     </div>
   );
 }
