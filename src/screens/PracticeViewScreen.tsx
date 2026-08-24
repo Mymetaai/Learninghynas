@@ -8,11 +8,11 @@ import DojoFloor from '../components/effects/DojoFloor';
 import Kitsune3D from '../components/Kitsune3D';
 import TodayTrainingRunner from '../components/training/TodayTrainingRunner';
 import TriviaDrillModal from '../components/training/TriviaDrillModal';
-import { assembleTodaySession } from '../lib/sessionDirector';
+import { assembleTodaySession, getUserProgressLevelInfo } from '../lib/sessionDirector';
 import { useStatsStore } from '../state/statsStore';
 import { useTrainingStore } from '../state/trainingStore';
 import { useRoadmapStore } from '../state/roadmapStore';
-import { Flame, BookOpen, Target, Sparkles, Swords } from 'lucide-react';
+import { Flame, BookOpen, Target, Sparkles, Swords, Award } from 'lucide-react';
 
 import RoadmapCanvas from '../components/roadmap/RoadmapCanvas';
 import NodeDetailDrawer from '../components/roadmap/NodeDetailDrawer';
@@ -34,7 +34,8 @@ export default function PracticeViewScreen() {
   const learnedVocabCount = useStatsStore((s) => s.learnedVocab.length);
   const mistakesCount = useTrainingStore((s) => s.mistakes.length);
 
-  const sessionSteps = useMemo(() => assembleTodaySession(), []);
+  const userProgressInfo = useMemo(() => getUserProgressLevelInfo(), [learnedVocabCount]);
+  const sessionSteps = useMemo(() => assembleTodaySession(), [learnedVocabCount, mistakesCount]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleLaunchTask = (nodeId: string, taskId: string, actionType: TaskActionType, _payload?: any) => {
@@ -133,20 +134,24 @@ export default function PracticeViewScreen() {
                   {/* Center: Dialogue Speech Bubble & Title */}
                   <div className="flex-1 space-y-3 text-center md:text-left">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#7D927D]/15 border border-[#7D927D]/30 text-[#5E735E] font-mono text-[11px] font-bold uppercase tracking-wider">
-                      <Sparkles className="h-3.5 w-3.5 text-[#5E735E]" /> Chibi Sensei's Dojo
+                      <Sparkles className="h-3.5 w-3.5 text-[#5E735E]" /> Chibi Sensei's Dojo • {userProgressInfo.scalingLabel}
                     </div>
 
                     <div className="relative bg-[#F9F7F2] dark:bg-bg-base/80 p-4 rounded-2xl border border-[#7D927D]/20 shadow-xs">
                       <p className="font-serif text-base font-bold text-text-primary">
-                        "¡Bienvenido al Dojo! Ready for today's workout?"
+                        "¡Bienvenido al Dojo! Ready for your level-adapted workout?"
                       </p>
                       <p className="font-sans text-xs text-text-secondary mt-1">
-                        Sharpen your recall with adaptive drills or launch your personalized multi-step session below.
+                        Tests are assembled strictly from your unlocked progress ({userProgressInfo.rankTitle} • CEFR {userProgressInfo.cefr}). Difficulty & test volume scale automatically as you advance!
                       </p>
                     </div>
 
                     {/* Summary Chips */}
                     <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 pt-1">
+                      <div className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/20 font-mono text-xs font-bold text-amber-700 dark:text-amber-300">
+                        <Award className="h-3.5 w-3.5 text-amber-500" />
+                        <span>{userProgressInfo.rankTitle}</span>
+                      </div>
                       <div className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-orange-500/10 border border-orange-500/20 font-mono text-xs font-bold text-orange-600 dark:text-orange-400">
                         <Flame className="h-3.5 w-3.5 text-orange-500" />
                         <span>{streak} Day Streak</span>
@@ -166,12 +171,17 @@ export default function PracticeViewScreen() {
                   <div className="shrink-0 pt-2 md:pt-0">
                     <button
                       onClick={() => setShowTodayWorkout(true)}
-                      className="relative group px-6 py-3.5 rounded-2xl bg-[#7D927D] hover:bg-[#6B826B] text-white font-serif font-bold text-base shadow-lg shadow-[#7D927D]/30 transition-all flex items-center justify-center gap-3 cursor-pointer border-none"
+                      className="relative group px-6 py-3.5 rounded-2xl bg-[#7D927D] hover:bg-[#6B826B] text-white font-serif font-bold text-base shadow-lg shadow-[#7D927D]/30 transition-all flex flex-col items-center justify-center gap-1 cursor-pointer border-none"
                     >
-                      <Swords className="w-5 h-5 text-amber-300 animate-pulse" />
-                      <span>Start Today's Workout</span>
-                      <span className="text-xs bg-white/20 px-2.5 py-0.5 rounded-full font-mono font-bold">
-                        {sessionSteps.length} Steps
+                      <div className="flex items-center gap-2">
+                        <Swords className="w-5 h-5 text-amber-300 animate-pulse" />
+                        <span>Start Today's Workout</span>
+                        <span className="text-xs bg-white/20 px-2.5 py-0.5 rounded-full font-mono font-bold">
+                          {sessionSteps.length} Steps
+                        </span>
+                      </div>
+                      <span className="text-[10px] font-mono font-normal opacity-90">
+                        Adapted for {userProgressInfo.rankTitle}
                       </span>
                     </button>
                   </div>

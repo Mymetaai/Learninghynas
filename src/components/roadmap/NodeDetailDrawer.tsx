@@ -1,8 +1,11 @@
-﻿import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { X, CheckCircle, Play, MessageCircle, Globe, Swords, BookOpen } from 'lucide-react';
 import { useRoadmapStore } from '../../state/roadmapStore';
 import roadmapData from '../../data/roadmap.json';
 import type { TaskActionType, RoadmapContent } from '../../data/roadmap.types';
+
+import { getConnectedTabBadge } from './RoadmapNodeWidget';
+import MarqueeText from '../common/MarqueeText';
 
 const content = roadmapData as RoadmapContent;
 
@@ -106,6 +109,8 @@ export default function NodeDetailDrawer({ nodeId, onClose, onLaunchTask }: Node
             <div className="flex-1 overflow-y-auto p-6 space-y-4">
               {node.checklist.map((task) => {
                 const isDone = completedTasks.includes(task.id);
+                const tabInfo = getConnectedTabBadge(task.actionType);
+
                 return (
                   <div
                     key={task.id}
@@ -115,7 +120,7 @@ export default function NodeDetailDrawer({ nodeId, onClose, onLaunchTask }: Node
                         : 'border-structural bg-white dark:bg-bg-base shadow-xs'
                     }`}
                   >
-                    <div className="flex items-center gap-3 min-w-0">
+                    <div className="flex items-center gap-3 min-w-0 flex-1">
                       <div
                         className={`p-2 rounded-lg shrink-0 ${
                           isDone
@@ -125,13 +130,22 @@ export default function NodeDetailDrawer({ nodeId, onClose, onLaunchTask }: Node
                       >
                         {isDone ? <CheckCircle className="w-5 h-5" /> : getActionIcon(task.actionType)}
                       </div>
-                      <span
-                        className={`font-sans font-medium text-sm truncate ${
-                          isDone ? 'text-text-secondary line-through' : 'text-text-primary'
-                        }`}
-                      >
-                        {task.label}
-                      </span>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-2 mb-0.5">
+                          <span
+                            className={`px-2 py-0.5 rounded font-mono text-[10px] font-bold border ${tabInfo.color}`}
+                            title={`Connects with ${tabInfo.name} tab`}
+                          >
+                            📍 {tabInfo.name}
+                          </span>
+                        </div>
+                        <MarqueeText
+                          text={task.label}
+                          className={`font-sans font-medium text-sm ${
+                            isDone ? 'text-text-secondary line-through' : 'text-text-primary'
+                          }`}
+                        />
+                      </div>
                     </div>
 
                     {!isDone && (

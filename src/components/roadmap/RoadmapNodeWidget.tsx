@@ -1,4 +1,4 @@
-﻿import { memo } from 'react';
+import { memo } from 'react';
 import { Handle, Position, type NodeProps, type Node } from '@xyflow/react';
 import {
   Lock,
@@ -11,6 +11,7 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import type { RoadmapNode, TaskActionType } from '../../data/roadmap.types';
+import MarqueeText from '../common/MarqueeText';
 
 export interface RoadmapNodeData {
   node: RoadmapNode;
@@ -35,6 +36,21 @@ const getActionIcon = (actionType: TaskActionType) => {
       return <Video className="w-3.5 h-3.5" />;
     default:
       return <CheckCircle2 className="w-3.5 h-3.5" />;
+  }
+};
+
+export const getConnectedTabBadge = (actionType: TaskActionType) => {
+  switch (actionType) {
+    case 'in_app_vocab':
+      return { name: 'Training Grounds', short: 'Training', color: 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/20' };
+    case 'in_app_chat':
+      return { name: 'AI Companion', short: 'Companion', color: 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-500/20' };
+    case 'in_app_trivia':
+      return { name: 'Trivia Drill', short: 'Trivia', color: 'bg-sky-500/15 text-sky-700 dark:text-sky-300 border-sky-500/20' };
+    case 'external_video':
+      return { name: 'External Video', short: 'Video', color: 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/20' };
+    default:
+      return { name: 'Self-Check', short: 'Manual', color: 'bg-stone-500/15 text-stone-700 dark:text-stone-300 border-stone-500/20' };
   }
 };
 
@@ -134,23 +150,33 @@ const RoadmapNodeWidget = ({ data }: NodeProps<RoadmapCustomNode>) => {
         </p>
 
         {/* Actionable Task Chips Preview */}
-        <div className="mt-3 pt-2.5 border-t border-black/5 dark:border-white/10 flex flex-wrap gap-1.5">
-          {node.checklist.map((item) => (
-            <div
-              key={item.id}
-              className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-sans ${
-                isCompleted
-                  ? 'bg-white/15 text-white'
-                  : isActive
-                  ? 'bg-[#7D927D]/10 text-[#475847] dark:text-[#BED1BE] border border-[#7D927D]/20'
-                  : 'bg-stone-200/60 dark:bg-stone-800/60 text-stone-500'
-              }`}
-              title={item.label}
-            >
-              {getActionIcon(item.actionType)}
-              <span className="truncate max-w-[120px]">{item.label}</span>
-            </div>
-          ))}
+        <div className="mt-3 pt-2.5 border-t border-black/5 dark:border-white/10 space-y-1.5">
+          {node.checklist.map((item) => {
+            const tabInfo = getConnectedTabBadge(item.actionType);
+            return (
+              <div
+                key={item.id}
+                className={`w-full flex items-center justify-between gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-sans ${
+                  isCompleted
+                    ? 'bg-white/15 text-white'
+                    : isActive
+                    ? 'bg-[#7D927D]/10 text-[#3D4F3D] dark:text-[#BED1BE] border border-[#7D927D]/20'
+                    : 'bg-stone-200/60 dark:bg-stone-800/60 text-stone-500'
+                }`}
+              >
+                <div className="flex items-center gap-1.5 min-w-0 flex-1 overflow-hidden">
+                  <span className="shrink-0">{getActionIcon(item.actionType)}</span>
+                  <MarqueeText text={item.label} className="w-full text-[11px] font-medium" />
+                </div>
+                <span
+                  className={`shrink-0 px-1.5 py-0.2 rounded font-mono text-[9px] font-bold border ${tabInfo.color}`}
+                  title={`Connects with ${tabInfo.name} tab`}
+                >
+                  [{tabInfo.short}]
+                </span>
+              </div>
+            );
+          })}
         </div>
 
         {/* Progress Fill Bar for active card */}

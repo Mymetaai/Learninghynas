@@ -28,7 +28,7 @@ const CEFR_DECKS: Record<string, any[]> = {
 /**
  * Determines user's active CEFR level from completed lessons count.
  */
-function getActiveLevel(): string {
+export function getActiveLevel(): string {
   const completedCount = Object.values(
     useStatsStore.getState().completedLessons,
   ).filter(Boolean).length;
@@ -44,7 +44,7 @@ function getActiveLevel(): string {
  * Retrieves a batch of fresh, unlearned words for the user's active CEFR tier.
  * Filters out all words already in statsStore.learnedVocab or trainingStore.masteredWordIds.
  */
-export function getNextUnseenVocabBatch(batchSize = 4): VocabItem[] {
+export function getNextUnseenVocabBatch(batchSize = 4, targetLevel?: string): VocabItem[] {
   const { learnedVocab } = useStatsStore.getState();
   const { masteredWordIds } = useTrainingStore.getState();
 
@@ -54,12 +54,11 @@ export function getNextUnseenVocabBatch(batchSize = 4): VocabItem[] {
     ...Object.keys(masteredWordIds).map((w) => w.toLowerCase().trim()),
   ]);
 
-  const activeLevel = getActiveLevel();
+  const activeLevel = targetLevel || getActiveLevel();
   const deck = CEFR_DECKS[activeLevel] || a1Vocab;
   const unlearnedWords: VocabItem[] = [];
 
   // 1. Gather unseen words from the active CEFR deck
-  //    Vocab JSON shape: { id, level, category, es, en }
   for (const item of deck) {
     const spanishTerm = (item.es || '').trim();
     const englishMeaning = (item.en || '').trim();

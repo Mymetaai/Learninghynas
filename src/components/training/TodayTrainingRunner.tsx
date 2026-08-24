@@ -114,9 +114,10 @@ export const TodayTrainingRunner: FC<TodayTrainingRunnerProps> = ({ onClose }) =
   const grammarExercises: Exercise[] = useMemo(() => {
     if (currentStep?.type !== 'grammar_blitz') return [];
     const lesson = currentStep.payload?.lesson;
+    const itemsCount = currentStep.payload?.itemsCount || 4;
     const vocab = lesson?.vocabularyTable || [];
     if (vocab.length > 0) {
-      return vocab.slice(0, 4).map((v: any, i: number) => {
+      return vocab.slice(0, itemsCount).map((v: any, i: number) => {
         const correct = v.spanish;
         return {
           id: `grammar-step-${i}`,
