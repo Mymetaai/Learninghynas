@@ -1,4 +1,4 @@
-﻿import { useMemo, useCallback, memo } from 'react';
+import { useMemo, useCallback, memo } from 'react';
 import {
   ReactFlow,
   Background,
@@ -70,6 +70,7 @@ export function RoadmapCanvas({ onNodeSelect }: RoadmapCanvasProps) {
           source: node.id,
           target: targetId,
           type: 'smoothstep',
+          pathOptions: { borderRadius: 16 },
           animated: isSourceUnlocked && !isTargetUnlocked,
           style: {
             stroke: isSourceCompleted ? '#7D927D' : isSourceUnlocked ? '#D4AF37' : '#9CA3AF',

@@ -10,7 +10,7 @@
       "checklist": [
         {
           "id": "w1d1-1",
-          "label": "20 min: Anki sentence cards — first 25 high-frequency words",
+          "label": "20 min: Sentence cards — first 25 high-frequency words",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -58,7 +58,7 @@
       "checklist": [
         {
           "id": "w1d2-1",
-          "label": "20 min: Anki — greetings & self-introduction sentences",
+          "label": "20 min: Greetings & self-introduction sentences",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -87,8 +87,8 @@
         "week1-day3"
       ],
       "position": {
-        "x": 350,
-        "y": 160
+        "x": 500,
+        "y": 340
       }
     },
     {
@@ -100,7 +100,7 @@
       "checklist": [
         {
           "id": "w1d3-1",
-          "label": "20 min: Anki — numbers & price phrases",
+          "label": "20 min: Numbers & price phrases",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -130,7 +130,7 @@
       ],
       "position": {
         "x": 100,
-        "y": 320
+        "y": 680
       }
     },
     {
@@ -142,7 +142,7 @@
       "checklist": [
         {
           "id": "w1d4-1",
-          "label": "20 min: Anki — ser/estar sentence pairs",
+          "label": "20 min: Ser/estar sentence pairs",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -171,8 +171,8 @@
         "week1-day5"
       ],
       "position": {
-        "x": 350,
-        "y": 480
+        "x": 500,
+        "y": 1020
       }
     },
     {
@@ -184,7 +184,7 @@
       "checklist": [
         {
           "id": "w1d5-1",
-          "label": "20 min: Anki — nouns with articles (el/la)",
+          "label": "20 min: Nouns with articles (el/la)",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -212,7 +212,7 @@
       ],
       "position": {
         "x": 100,
-        "y": 640
+        "y": 1360
       }
     },
     {
@@ -224,7 +224,7 @@
       "checklist": [
         {
           "id": "w1d6-1",
-          "label": "20 min: Anki — quiero/necesito sentence bank",
+          "label": "20 min: Quiero/necesito sentence bank",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -253,8 +253,8 @@
         "week1-day7"
       ],
       "position": {
-        "x": 350,
-        "y": 800
+        "x": 500,
+        "y": 1700
       }
     },
     {
@@ -266,7 +266,7 @@
       "checklist": [
         {
           "id": "w1d7-1",
-          "label": "15 min: Anki — full Week 1 review deck",
+          "label": "15 min: Full Week 1 review deck",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -292,7 +292,7 @@
       ],
       "position": {
         "x": 100,
-        "y": 960
+        "y": 2040
       }
     },
     {
@@ -304,7 +304,7 @@
       "checklist": [
         {
           "id": "w2d1-1",
-          "label": "20 min: Anki — restaurant & ordering phrases",
+          "label": "20 min: Restaurant & ordering phrases",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -333,8 +333,8 @@
         "week2-day2"
       ],
       "position": {
-        "x": 350,
-        "y": 1120
+        "x": 500,
+        "y": 2380
       }
     },
     {
@@ -346,7 +346,7 @@
       "checklist": [
         {
           "id": "w2d2-1",
-          "label": "20 min: Anki — direction & location phrases",
+          "label": "20 min: Direction & location phrases",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -376,7 +376,7 @@
       ],
       "position": {
         "x": 100,
-        "y": 1280
+        "y": 2720
       }
     },
     {
@@ -388,7 +388,7 @@
       "checklist": [
         {
           "id": "w2d3-1",
-          "label": "20 min: Anki — AR verb conjugation sentences",
+          "label": "20 min: AR verb conjugation sentences",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -417,8 +417,8 @@
         "week2-day4"
       ],
       "position": {
-        "x": 350,
-        "y": 1440
+        "x": 500,
+        "y": 3060
       }
     },
     {
@@ -430,7 +430,7 @@
       "checklist": [
         {
           "id": "w2d4-1",
-          "label": "20 min: Anki — ER/IR verb sentence bank",
+          "label": "20 min: ER/IR verb sentence bank",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -458,7 +458,7 @@
       ],
       "position": {
         "x": 100,
-        "y": 1600
+        "y": 3400
       }
     },
     {
@@ -470,7 +470,7 @@
       "checklist": [
         {
           "id": "w2d5-1",
-          "label": "20 min: Anki — reflexive verb sentences",
+          "label": "20 min: Reflexive verb sentences",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -499,8 +499,8 @@
         "week2-day6"
       ],
       "position": {
-        "x": 350,
-        "y": 1760
+        "x": 500,
+        "y": 3740
       }
     },
     {
@@ -512,7 +512,7 @@
       "checklist": [
         {
           "id": "w2d6-1",
-          "label": "20 min: Anki — time & schedule phrases",
+          "label": "20 min: Time & schedule phrases",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -542,7 +542,7 @@
       ],
       "position": {
         "x": 100,
-        "y": 1920
+        "y": 4080
       }
     },
     {
@@ -554,7 +554,7 @@
       "checklist": [
         {
           "id": "w2d7-1",
-          "label": "15 min: Anki — cumulative Week 1-2 review",
+          "label": "15 min: Cumulative Week 1-2 review",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -579,8 +579,8 @@
         "week3-day1"
       ],
       "position": {
-        "x": 350,
-        "y": 2080
+        "x": 500,
+        "y": 4420
       }
     },
     {
@@ -592,7 +592,7 @@
       "checklist": [
         {
           "id": "w3d1-1",
-          "label": "20 min: Anki — preterite tense sentence bank",
+          "label": "20 min: Preterite tense sentence bank",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -622,7 +622,7 @@
       ],
       "position": {
         "x": 100,
-        "y": 2240
+        "y": 4760
       }
     },
     {
@@ -634,7 +634,7 @@
       "checklist": [
         {
           "id": "w3d2-1",
-          "label": "20 min: Anki — past-tense narration sentences",
+          "label": "20 min: Past-tense narration sentences",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -663,8 +663,8 @@
         "week3-day3"
       ],
       "position": {
-        "x": 350,
-        "y": 2400
+        "x": 500,
+        "y": 5100
       }
     },
     {
@@ -676,7 +676,7 @@
       "checklist": [
         {
           "id": "w3d3-1",
-          "label": "20 min: Anki — Mexican slang & expressions deck",
+          "label": "20 min: Mexican slang & expressions deck",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -706,7 +706,7 @@
       ],
       "position": {
         "x": 100,
-        "y": 2560
+        "y": 5440
       }
     },
     {
@@ -718,7 +718,7 @@
       "checklist": [
         {
           "id": "w3d4-1",
-          "label": "20 min: Anki — cumulative review",
+          "label": "20 min: Cumulative review",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -745,8 +745,8 @@
         "week3-day5"
       ],
       "position": {
-        "x": 350,
-        "y": 2720
+        "x": 500,
+        "y": 5780
       }
     },
     {
@@ -758,7 +758,7 @@
       "checklist": [
         {
           "id": "w3d5-1",
-          "label": "20 min: Anki — near-future tense sentence bank",
+          "label": "20 min: Near-future tense sentence bank",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -788,7 +788,7 @@
       ],
       "position": {
         "x": 100,
-        "y": 2880
+        "y": 6120
       }
     },
     {
@@ -800,7 +800,7 @@
       "checklist": [
         {
           "id": "w3d6-1",
-          "label": "20 min: Anki — opinion & preference phrases",
+          "label": "20 min: Opinion & preference phrases",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -829,8 +829,8 @@
         "week3-day7"
       ],
       "position": {
-        "x": 350,
-        "y": 3040
+        "x": 500,
+        "y": 6460
       }
     },
     {
@@ -842,7 +842,7 @@
       "checklist": [
         {
           "id": "w3d7-1",
-          "label": "15 min: Anki — full Week 3 review",
+          "label": "15 min: Full Week 3 review",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -868,7 +868,7 @@
       ],
       "position": {
         "x": 100,
-        "y": 3200
+        "y": 6800
       }
     },
     {
@@ -880,7 +880,7 @@
       "checklist": [
         {
           "id": "w4d1-1",
-          "label": "20 min: Anki — renting & housing vocabulary",
+          "label": "20 min: Renting & housing vocabulary",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -909,8 +909,8 @@
         "week4-day2"
       ],
       "position": {
-        "x": 350,
-        "y": 3360
+        "x": 500,
+        "y": 7140
       }
     },
     {
@@ -922,7 +922,7 @@
       "checklist": [
         {
           "id": "w4d2-1",
-          "label": "20 min: Anki — bureaucracy & paperwork vocabulary",
+          "label": "20 min: Bureaucracy & paperwork vocabulary",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -952,7 +952,7 @@
       ],
       "position": {
         "x": 100,
-        "y": 3520
+        "y": 7480
       }
     },
     {
@@ -964,7 +964,7 @@
       "checklist": [
         {
           "id": "w4d3-1",
-          "label": "20 min: Anki — medical & emergency phrases",
+          "label": "20 min: Medical & emergency phrases",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -993,8 +993,8 @@
         "week4-day4"
       ],
       "position": {
-        "x": 350,
-        "y": 3680
+        "x": 500,
+        "y": 7820
       }
     },
     {
@@ -1006,7 +1006,7 @@
       "checklist": [
         {
           "id": "w4d4-1",
-          "label": "20 min: Anki — public transport vocabulary",
+          "label": "20 min: Public transport vocabulary",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -1036,7 +1036,7 @@
       ],
       "position": {
         "x": 100,
-        "y": 3840
+        "y": 8160
       }
     },
     {
@@ -1048,7 +1048,7 @@
       "checklist": [
         {
           "id": "w4d5-1",
-          "label": "20 min: Anki — shopping & market vocabulary",
+          "label": "20 min: Shopping & market vocabulary",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -1077,8 +1077,8 @@
         "week4-day6"
       ],
       "position": {
-        "x": 350,
-        "y": 4000
+        "x": 500,
+        "y": 8500
       }
     },
     {
@@ -1090,7 +1090,7 @@
       "checklist": [
         {
           "id": "w4d6-1",
-          "label": "20 min: Anki — small talk phrases",
+          "label": "20 min: Small talk phrases",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -1120,7 +1120,7 @@
       ],
       "position": {
         "x": 100,
-        "y": 4160
+        "y": 8840
       }
     },
     {
@@ -1132,7 +1132,7 @@
       "checklist": [
         {
           "id": "w4d7-1",
-          "label": "15 min: Anki — full relocation vocabulary review",
+          "label": "15 min: Full relocation vocabulary review",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -1157,8 +1157,8 @@
         "week5-day1"
       ],
       "position": {
-        "x": 350,
-        "y": 4320
+        "x": 500,
+        "y": 9180
       }
     },
     {
@@ -1200,7 +1200,7 @@
       ],
       "position": {
         "x": 100,
-        "y": 4480
+        "y": 9520
       }
     },
     {
@@ -1212,7 +1212,7 @@
       "checklist": [
         {
           "id": "w5d2-1",
-          "label": "15 min: Anki — final cumulative review",
+          "label": "15 min: Final cumulative review",
           "actionType": "in_app_vocab",
           "payload": {
             "count": 10
@@ -1235,8 +1235,8 @@
       ],
       "unlocks": [],
       "position": {
-        "x": 350,
-        "y": 4640
+        "x": 500,
+        "y": 9860
       }
     }
   ]
