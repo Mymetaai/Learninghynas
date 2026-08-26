@@ -1,0 +1,250 @@
+One design gap I need to flag before the code
+
+Looking at trainingStore.ts closely: markReviewedCorrectly deletes a mistake once it's answered right twice. That means there's currently no memory of what a learner overcame — only what's still wrong today. A "history" page built on that would only ever show unsolved problems, never growth. So I'm adding one small, additive piece of state — resolvedMistakes — that archives an item at the moment it graduates out of the active list, instead of just discarding it. Nothing breaks; it's a new persisted array alongside the existing one.
+
+Here are all the pieces, in order.
+
+1. src/state/trainingStore.ts — archive mistakes instead of discarding them
+Ran a command
+
+Add this type near the existing MistakeEntry interface:
+
+ts
+export interface ResolvedMistakeEntry extends MistakeEntry {
+  /** ISO date (yyyy-mm-dd) when this mistake was cleared after 2 correct reviews. */
+  resolvedDate: string;
+}
+
+Add resolvedMistakes to TrainingState and DEFAULT_STATE:
+
+ts
+interface TrainingState {
+  mistakes: MistakeEntry[];
+  /** Archive of mistakes that have been cleared (2+ correct reviews) — powers Mistake History. */
+  resolvedMistakes: ResolvedMistakeEntry[];
+  srsCards: SRSCard[];
+  // ...rest unchanged
+}
+
+const DEFAULT_STATE = {
+  mistakes: [] as MistakeEntry[],
+  resolvedMistakes: [] as ResolvedMistakeEntry[],
+  srsCards: [] as SRSCard[],
+  // ...rest unchanged
+};
+
+Replace the existing markReviewedCorrectly with this version (same signature, now archives before deleting):
+
+ts
+markReviewedCorrectly: (word) => {
+  set((state) => {
+    const today = new Date().toISOString().slice(0, 10);
+    const newlyResolved: ResolvedMistakeEntry[] = [];
+
+    const updated = state.mistakes
+      .map((m) =>
+        m.word.toLowerCase() === word.toLowerCase()
+          ? { ...m, reviewedCorrectly: m.reviewedCorrectly + 1 }
+          : m,
+      )
+      .filter((m) => {
+        const isTarget = m.word.toLowerCase() === word.toLowerCase();
+        if (isTarget && m.reviewedCorrectly >= 2) {
+          newlyResolved.push({ ...m, resolvedDate: today });
+          return false; // graduated — drop from active list
+        }
+        return true;
+      });
+
+    return {
+      mistakes: updated,
+      resolvedMistakes:
+        newlyResolved.length > 0
+          ? [...state.resolvedMistakes, ...newlyResolved]
+          : state.resolvedMistakes,
+    };
+  });
+},
+
+Add one action (used by the history screen's "Clear history" button):
+
+ts
+clearResolvedMistakes: () => set({ resolvedMistakes: [] }),
+
+(add clearResolvedMistakes: () => void; to the TrainingState interface too)
+
+Update partialize so the archive actually persists:
+
+ts
+partialize: (state) => ({
+  mistakes: state.mistakes,
+  resolvedMistakes: state.resolvedMistakes,
+  srsCards: state.srsCards,
+  trainingSessionsCompleted: state.trainingSessionsCompleted,
+  lastActiveLevel: state.lastActiveLevel,
+  lastActiveCategory: state.lastActiveCategory,
+  categoryProgressIndex: state.categoryProgressIndex,
+  masteredWordIds: state.masteredWordIds,
+}),
+
+That's the only store change. Everything below is additive UI.
+
+2. src/app/routes.ts — register the new screen
+ts
+// with the other lazy imports:
+const MistakeHistoryScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/MistakeHistoryScreen'));
+
+// add to the RouteId union:
+export type RouteId =
+  | 'learn'
+  | 'practice'
+  // ...
+  | 'mistake-history'   // ← add this
+  | 'why-us';
+
+// add to the ROUTES array (anywhere, order doesn't matter since showInNav is false):
+{
+  id: 'mistake-history',
+  path: '/mistake-history',
+  label: 'Mistake History',
+  icon: 'History',
+  component: MistakeHistoryScreen,
+  showInNav: false,
+  navOrder: 99,
+},
+3. src/screens/HomeScreen.tsx — connect the real data
+
+Add the import:
+
+ts
+import { useTrainingStore } from '../state/trainingStore';
+
+Inside the component, alongside the other store hooks:
+
+ts
+const mistakes = useTrainingStore((s) => s.mistakes);
+const recentMistakes = useMemo(
+  () => [...mistakes].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 4),
+  [mistakes],
+);
+
+Replace the entire "4. BOTTOM SECTION: RECENT SLIP-UPS" block with:
+
+tsx
+{/* ── 4. BOTTOM SECTION: RECENT SLIP-UPS ─────────────────────── */}
+<div className="space-y-4 pt-2">
+  <div className="flex items-center justify-between">
+    <div className="flex items-center gap-2">
+      <h2 className="font-serif text-xl font-bold text-text-primary">
+        Recent Slip-ups
+      </h2>
+      <AlertTriangle className="h-4 w-4 text-[#C4796B]" />
+    </div>
+    {mistakes.length > 0 && (
+      <button
+        onClick={() => navigate('/mistake-history')}
+        className="font-sans text-xs font-semibold text-[#7D927D] hover:text-[#6B826B] transition-colors cursor-pointer"
+      >
+        View All ({mistakes.length}) &gt;
+      </button>
+    )}
+  </div>
+
+  {recentMistakes.length === 0 ? (
+    <div className="bg-bg-elevated/90 border border-structural/40 rounded-2xl p-6 text-center">
+      <p className="font-sans text-sm text-text-secondary">
+        No slip-ups yet — keep practicing and this space will track what to review.
+      </p>
+    </div>
+  ) : (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {recentMistakes.map((item, idx) => (
+        <div
+          key={`${item.word}-${idx}`}
+          className="bg-bg-elevated/90 backdrop-blur-xl border border-structural/40 hover:border-[#7D927D]/50 rounded-2xl p-5 shadow-xs flex items-center justify-between gap-4 transition-all duration-300"
+        >
+          <div className="flex items-start gap-3 min-w-0">
+            <div className="h-9 w-9 rounded-xl bg-[#C4796B]/15 border border-[#C4796B]/30 flex items-center justify-center text-[#C4796B] shrink-0 mt-0.5 shadow-xs">
+              <Repeat className="h-4 w-4" />
+            </div>
+            <div className="min-w-0">
+              <h4 className="font-serif text-sm font-bold text-text-primary truncate">
+                {item.word}
+              </h4>
+              <p className="font-sans text-xs text-text-secondary mt-0.5 leading-relaxed line-clamp-2">
+                Correct answer: {item.correctAnswer}
+              </p>
+            </div>
+          </div>
+
+          <button
+            onClick={() => navigate(`/training?mode=weak-spots&word=${encodeURIComponent(item.word)}`)}
+            className="p-2.5 rounded-xl text-[#7D927D] hover:bg-bg-elevated-2 border border-structural/40 transition-colors cursor-pointer shrink-0"
+            title="Review this"
+          >
+            <RotateCw className="h-4 w-4" />
+          </button>
+        </div>
+      ))}
+    </div>
+  )}
+</div>
+
+You can also delete the now-unused SlipUpItem interface and the slipUps: [...] array inside initialMockUserData — nothing else in the codebase references either.
+
+4. src/screens/PracticeScreen.tsx — make "Review this" actually jump into a drill
+
+Right now the hub only reacts to a quest param. Two small additions make the buttons above (and the history screen below) actually work instead of just landing on the hub:
+
+Read the new params, near the existing ones:
+
+ts
+const [params] = useSearchParams();
+const navigate = useNavigate();
+const questId = params.get('quest');
+const modeParam = params.get('mode') as DrillMode | null;   // ← add
+const wordParam = params.get('word');                        // ← add
+const quest = useMemo(() => (questId ? getQuest(questId) : null), [questId]);
+
+const [view, setView] = useState<ScreenView>(quest || modeParam ? 'session' : 'hub');           // ← updated
+const [activeMode, setActiveMode] = useState<DrillMode | null>(quest ? 'quest' : modeParam);    // ← updated
+
+In the sessionExercises switch, filter to a single item when word is present:
+
+ts
+case 'weak-spots': {
+  const pool = wordParam ? mistakes.filter((m) => m.word === wordParam) : mistakes;
+  return generateWeakSpotExercises(pool.length > 0 ? pool : mistakes);
+}
+
+That's it — the RotateCw button on the dashboard and the history screen below now drop the learner straight into a drill on exactly the item they missed, not just the training hub.
+
+5. src/screens/MistakeHistoryScreen.tsx — the new screen (full file)
+Created a file, ran a command, read a file
+
+That's the full new screen — drop it straight into src/screens/MistakeHistoryScreen.tsx.
+
+6. One-liner to link it from the Profile page
+
+In ProfileScreen.tsx, next to the existing "Reset Progress" / "Sign Out" buttons:
+
+tsx
+<button
+  onClick={() => navigate('/mistake-history')}
+  className="flex items-center justify-center gap-1.5 rounded-full border border-structural bg-bg-elevated px-4 py-2 font-sans text-xs font-semibold text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2 transition-all shadow-sm cursor-pointer"
+>
+  Mistake History
+</button>
+
+(needs const navigate = useNavigate(); and the useNavigate import added to that file, since it currently doesn't have one)
+
+Where this leaves the Supabase side, for Antigravity
+
+Everything above is pure Zustand + localStorage, so it'll work immediately with zero backend changes. When Antigravity wires the Supabase sync, the shape it needs to persist is exactly the two arrays in trainingStore:
+
+mistakes: MistakeEntry[] → { word, correctAnswer, wrongAnswer, exerciseType, date, reviewedCorrectly }
+resolvedMistakes: ResolvedMistakeEntry[] → same fields + resolvedDate
+
+A user_id-keyed table with those columns, upserted the same way syncUserStats already does for user_stats, is all it needs — no schema surprises.
+
+Two honest caveats worth knowing before you ship this: wrongAnswer is currently always saved as an empty string (ExerciseCard never passes the learner's actual wrong answer up to ExerciseEngine), so the history can show what was right, not what they typed — fixable later if you want that detail. And since resolvedMistakes starts empty for everyone, existing users won't see any "Mastered" history until they clear a mistake going forward — there's no way to retroactively recover what's already been deleted.

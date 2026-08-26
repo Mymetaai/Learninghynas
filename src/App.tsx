@@ -84,7 +84,6 @@ const LampLanding: FC = () => {
 
   const [isOn, setIsOn] = useState(false);
   const [hasToggled, setHasToggled] = useState(false);
-  const [showSignIn, setShowSignIn] = useState(false);
 
   // Bead offset from its resting position
   const dragX = useMotionValue(0);
@@ -123,17 +122,13 @@ const LampLanding: FC = () => {
   }, [prefersReducedMotion, dragX, dragY]);
 
   const triggerToggle = useCallback(() => {
-    if (showSignIn) return;
-    const newState = !isOn;
-    setIsOn(newState);
+    setIsOn((prev) => {
+      const next = !prev;
+      playSwitchSound();
+      return next;
+    });
     setHasToggled(true);
-    playSwitchSound();
-
-    if (newState) {
-      // After lamp illuminates, show the sign-in card
-      setTimeout(() => setShowSignIn(true), 600);
-    }
-  }, [isOn, showSignIn]);
+  }, []);
 
   const handleFixtureClick = () => {
     triggerToggle();
@@ -148,13 +143,10 @@ const LampLanding: FC = () => {
   };
 
   const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    if (showSignIn) {
-      springBack();
-      return;
-    }
     const pulled = Math.hypot(info.offset.x, info.offset.y);
     if (pulled > PULL_THRESHOLD) {
       triggerToggle();
+      playCordKick();
     }
     springBack();
   };
@@ -171,7 +163,7 @@ const LampLanding: FC = () => {
     <div className={`lamp-container ${isOn ? 'light-on' : 'light-off'}`}>
       <div className="ambient-glow" aria-hidden="true" />
 
-      <div className="scene">
+      <motion.div className="scene" layout>
         {/* ── LAMP: cone (behind) -> fixture (middle) -> cord + bead (front) ── */}
         <div className="lamp-visual">
           <svg
@@ -236,13 +228,13 @@ const LampLanding: FC = () => {
               r={BEAD_RADIUS}
               fill="url(#beadGrad)"
               style={{ x: dragX, y: dragY }}
-              drag={!showSignIn}
+              drag={true}
               dragConstraints={DRAG_CONSTRAINTS}
               dragElastic={0.35}
               dragMomentum={false}
               onDragEnd={handleDragEnd}
-              whileHover={showSignIn ? {} : { scale: 1.1 }}
-              whileDrag={showSignIn ? {} : { scale: 1.18 }}
+              whileHover={{ scale: 1.1 }}
+              whileDrag={{ scale: 1.18 }}
             />
           </svg>
 
@@ -261,84 +253,84 @@ const LampLanding: FC = () => {
           </AnimatePresence>
         </div>
 
-        {/* ── BRANDING TEXT (visible before cord pull) ── */}
-        <AnimatePresence>
-          {!showSignIn && (
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              className="text-center mt-4"
-              style={{ maxWidth: '400px' }}
-            >
-              <DynamicText />
-              <div className="flex items-center justify-center gap-3 mt-1">
-                <img
-                  src="/hyena-logo-marigold.png"
-                  alt="TheLearningHyena Logo"
-                  className="h-9 w-9 object-contain drop-shadow-md shrink-0"
-                />
-                <h1
-                  className="font-serif text-3xl font-bold text-white tracking-wide"
-                  style={{ fontFamily: "'Fraunces', 'Playfair Display', ui-serif, Georgia, serif" }}
-                >
-                  TheLearningHyena
-                </h1>
-              </div>
-              <ShimmerText text="The Unearthly Vault" />
-              <p
-                className="font-sans text-xs mt-4 leading-relaxed"
-                style={{ color: '#777775' }}
-              >
-                Pull the glowing cord to unlock the unearthly vault. Ancient Spanish secrets and mystical adventures await in the dark...
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* ── SIGN IN CARD (appears after cord pull illuminates the room) ── */}
-        <AnimatePresence>
-          {isOn && showSignIn && (
-            <motion.div
-              className="login-card"
-              initial={cardInitial}
-              animate={cardAnimate}
-              transition={cardTransition}
-            >
+        {/* ── BRANDING TEXT / SIGN IN CARD — single AnimatePresence with mode="wait" ── */}
+        <div style={{ minHeight: '280px', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', maxWidth: '400px' }}>
+          <AnimatePresence mode="wait">
+            {!isOn ? (
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="text-center py-6 flex flex-col items-center justify-center"
+                key="branding"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.35 }}
+                className="text-center mt-4"
+                style={{ maxWidth: '400px', width: '100%' }}
+              >
+                <DynamicText />
+                <div className="flex items-center justify-center gap-3 mt-1">
+                  <img
+                    src="/hyena-logo-marigold.png"
+                    alt="TheLearningHyena Logo"
+                    className="h-9 w-9 object-contain drop-shadow-md shrink-0"
+                  />
+                  <h1
+                    className="font-serif text-3xl font-bold text-white tracking-wide"
+                    style={{ fontFamily: "'Fraunces', 'Playfair Display', ui-serif, Georgia, serif" }}
+                  >
+                    TheLearningHyena
+                  </h1>
+                </div>
+                <ShimmerText text="The Unearthly Vault" />
+                <p
+                  className="font-sans text-xs mt-4 leading-relaxed"
+                  style={{ color: '#777775' }}
+                >
+                  Pull the glowing cord to unlock the unearthly vault. Ancient Spanish secrets and mystical adventures await in the dark...
+                </p>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="signin"
+                className="login-card"
+                initial={cardInitial}
+                animate={cardAnimate}
+                exit={{ opacity: 0, y: 10, scale: 0.96 }}
+                transition={cardTransition}
               >
                 <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: [0, 1.2, 1] }}
-                  transition={{ duration: 0.5 }}
-                  className="mb-4 flex h-14 w-14 items-center justify-center rounded-full"
-                  style={{ background: 'rgba(125,146,125,0.15)', color: '#7D927D', border: '1px solid rgba(125,146,125,0.3)' }}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-6 flex flex-col items-center justify-center"
                 >
-                  <CheckCircle2 className="h-8 w-8" />
-                </motion.div>
-                <h2>The Learning Hyenas</h2>
-                <p className="login-card-subtitle">Sign in to unlock your learning journey</p>
-
-                <SignInButton mode="modal">
-                  <button
-                    className="login-btn"
-                    style={{
-                      background: 'linear-gradient(135deg, #7D927D 0%, #5C7A5C 100%)',
-                      marginTop: '16px',
-                    }}
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: [0, 1.2, 1] }}
+                    transition={{ duration: 0.5 }}
+                    className="mb-4 flex h-14 w-14 items-center justify-center rounded-full"
+                    style={{ background: 'rgba(125,146,125,0.15)', color: '#7D927D', border: '1px solid rgba(125,146,125,0.3)' }}
                   >
-                    Sign In to Continue
-                  </button>
-                </SignInButton>
+                    <CheckCircle2 className="h-8 w-8" />
+                  </motion.div>
+                  <h2>The Learning Hyenas</h2>
+                  <p className="login-card-subtitle">Sign in to unlock your learning journey</p>
+
+                  <SignInButton mode="modal">
+                    <button
+                      className="login-btn"
+                      style={{
+                        background: 'linear-gradient(135deg, #7D927D 0%, #5C7A5C 100%)',
+                        marginTop: '16px',
+                      }}
+                    >
+                      Sign In to Continue
+                    </button>
+                  </SignInButton>
+                </motion.div>
               </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+            )}
+          </AnimatePresence>
+        </div>
+      </motion.div>
     </div>
   );
 };

@@ -209,10 +209,12 @@ const PracticeScreen: FC = () => {
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const questId = params.get('quest');
+  const modeParam = params.get('mode') as DrillMode | null;
+  const wordParam = params.get('word');
   const quest = useMemo(() => (questId ? getQuest(questId) : null), [questId]);
 
-  const [view, setView] = useState<ScreenView>(quest ? 'session' : 'hub');
-  const [activeMode, setActiveMode] = useState<DrillMode | null>(quest ? 'quest' : null);
+  const [view, setView] = useState<ScreenView>(quest || modeParam ? 'session' : 'hub');
+  const [activeMode, setActiveMode] = useState<DrillMode | null>(quest ? 'quest' : modeParam);
   const [sessionResult, setSessionResult] = useState<SessionResult | null>(null);
   const [isTriviaModalOpen, setIsTriviaModalOpen] = useState(false);
 
@@ -233,8 +235,10 @@ const PracticeScreen: FC = () => {
     if (quest) return quest.exercises;
     if (!activeMode) return [];
     switch (activeMode) {
-      case 'weak-spots':
-        return generateWeakSpotExercises(mistakes);
+      case 'weak-spots': {
+        const pool = wordParam ? mistakes.filter((m) => m.word === wordParam) : mistakes;
+        return generateWeakSpotExercises(pool.length > 0 ? pool : mistakes);
+      }
       case 'vocab-drill':
         return generateVocabExercises(learnedVocab);
       case 'listening-reps':

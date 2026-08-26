@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   User,
@@ -7,6 +8,7 @@ import {
   Flame,
   Trophy,
   RotateCcw,
+  History,
 } from 'lucide-react';
 import { useUser, SignOutButton } from '@clerk/clerk-react';
 import { useStatsStore } from '../state/statsStore';
@@ -14,6 +16,7 @@ import { useUserData } from '../hooks/useUserData';
 import { UserActivityDashboard } from '../components/analytics/UserActivityDashboard';
 
 const ProfileScreen: React.FC = () => {
+  const navigate = useNavigate();
   const { user, isLoaded, isSignedIn } = useUser();
   const { userData: liveUserData, resetAllUserProgress } = useUserData();
   const [showResetModal, setShowResetModal] = useState(false);
@@ -76,6 +79,13 @@ const ProfileScreen: React.FC = () => {
               className="flex items-center justify-center gap-1.5 rounded-full border border-rose-200 bg-rose-50 px-4 py-2 font-sans text-xs font-semibold text-rose-600 hover:bg-rose-100 transition-all shadow-sm cursor-pointer"
             >
               <RotateCcw className="h-3.5 w-3.5" /> Reset Progress
+            </button>
+
+            <button
+              onClick={() => navigate('/mistake-history')}
+              className="flex items-center justify-center gap-1.5 rounded-full border border-structural bg-bg-elevated px-4 py-2 font-sans text-xs font-semibold text-text-secondary hover:text-text-primary hover:bg-bg-elevated-2 transition-all shadow-sm cursor-pointer"
+            >
+              <History className="h-3.5 w-3.5" /> Mistake History
             </button>
 
             {isSignedIn && (

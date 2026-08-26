@@ -23,6 +23,7 @@ const QuestCompletionScreen: LazyExoticComponent<FC> = lazy(() => import('../scr
 const BossBattleScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/BossBattleScreen'));
 const BasicEspanolScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/BasicEspanolScreen'));
 const WhyUsScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/WhyUsScreen'));
+const MistakeHistoryScreen: LazyExoticComponent<FC> = lazy(() => import('../screens/MistakeHistoryScreen'));
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -44,6 +45,7 @@ export type RouteId =
   | 'quest-complete'
   | 'boss'
   | 'basic-espanol'
+  | 'mistake-history'
   | 'why-us';
 
 export interface RouteDef {
@@ -222,6 +224,15 @@ export const ROUTES: RouteDef[] = [
     label: 'Why Us',
     icon: 'Trophy',
     component: WhyUsScreen,
+    showInNav: false,
+    navOrder: 99,
+  },
+  {
+    id: 'mistake-history',
+    path: '/mistake-history',
+    label: 'Mistake History',
+    icon: 'History',
+    component: MistakeHistoryScreen,
     showInNav: false,
     navOrder: 99,
   },

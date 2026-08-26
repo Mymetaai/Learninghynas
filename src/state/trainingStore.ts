@@ -24,11 +24,18 @@ export interface MistakeEntry {
   reviewedCorrectly: number;
 }
 
+export interface ResolvedMistakeEntry extends MistakeEntry {
+  /** ISO date (yyyy-mm-dd) when this mistake was cleared after 2 correct reviews. */
+  resolvedDate: string;
+}
+
 export type SRSCard = VocabCardState
 
 interface TrainingState {
   /** Recorded mistakes from exercises. */
   mistakes: MistakeEntry[];
+  /** Archive of mistakes that have been cleared (2+ correct reviews) — powers Mistake History. */
+  resolvedMistakes: ResolvedMistakeEntry[];
   /** FSRS cards for spaced repetition vocabulary review. */
   srsCards: SRSCard[];
   /** Total training-session XP earned (display only). */
@@ -45,10 +52,12 @@ interface TrainingState {
 
   /** Record a mistake (deduped by word — updates existing if already tracked). */
   recordMistake: (entry: Omit<MistakeEntry, 'reviewedCorrectly'>) => void;
-  /** Mark a mistake-word as reviewed correctly once. Removes after 2 correct reviews. */
+  /** Mark a mistake-word as reviewed correctly once. Archives after 2 correct reviews. */
   markReviewedCorrectly: (word: string) => void;
   /** Clear all mistakes (testing / reset). */
   clearAllMistakes: () => void;
+  /** Clear resolved/mastered mistake history. */
+  clearResolvedMistakes: () => void;
   /** Reset entire training store to clean initial state. */
   resetTrainingStore: () => void;
   /** Increment sessions completed count. */
@@ -72,6 +81,7 @@ interface TrainingState {
 
 const DEFAULT_STATE = {
   mistakes: [] as MistakeEntry[],
+  resolvedMistakes: [] as ResolvedMistakeEntry[],
   srsCards: [] as SRSCard[],
   trainingSessionsCompleted: 0,
   lastActiveLevel: 'A1',
@@ -104,20 +114,37 @@ export const useTrainingStore = create<TrainingState>()(
 
       markReviewedCorrectly: (word) => {
         set((state) => {
+          const today = new Date().toISOString().slice(0, 10);
+          const newlyResolved: ResolvedMistakeEntry[] = [];
+
           const updated = state.mistakes
-            .map((m) => {
-              if (m.word.toLowerCase() === word.toLowerCase()) {
-                return { ...m, reviewedCorrectly: m.reviewedCorrectly + 1 };
+            .map((m) =>
+              m.word.toLowerCase() === word.toLowerCase()
+                ? { ...m, reviewedCorrectly: m.reviewedCorrectly + 1 }
+                : m,
+            )
+            .filter((m) => {
+              const isTarget = m.word.toLowerCase() === word.toLowerCase();
+              if (isTarget && m.reviewedCorrectly >= 2) {
+                newlyResolved.push({ ...m, resolvedDate: today });
+                return false; // graduated — drop from active list
               }
-              return m;
-            })
-            // Remove entries that have been reviewed correctly 2+ times
-            .filter((m) => m.reviewedCorrectly < 2);
-          return { mistakes: updated };
+              return true;
+            });
+
+          return {
+            mistakes: updated,
+            resolvedMistakes:
+              newlyResolved.length > 0
+                ? [...state.resolvedMistakes, ...newlyResolved]
+                : state.resolvedMistakes,
+          };
         });
       },
 
       clearAllMistakes: () => set({ mistakes: [] }),
+
+      clearResolvedMistakes: () => set({ resolvedMistakes: [] }),
 
       resetTrainingStore: () => set(DEFAULT_STATE),
 
@@ -189,6 +216,7 @@ export const useTrainingStore = create<TrainingState>()(
       name: 'wayfarer-training',
       partialize: (state) => ({
         mistakes: state.mistakes,
+        resolvedMistakes: state.resolvedMistakes,
         srsCards: state.srsCards,
         trainingSessionsCompleted: state.trainingSessionsCompleted,
         lastActiveLevel: state.lastActiveLevel,

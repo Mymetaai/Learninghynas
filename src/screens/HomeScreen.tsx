@@ -4,6 +4,7 @@ import { useUser } from '@clerk/clerk-react';
 import { useUserData } from '../hooks/useUserData';
 import { useStatsStore, type WeeklyActivityItem } from '../state/statsStore';
 import { useDailyQuestStore } from '../state/dailyQuestStore';
+import { useTrainingStore } from '../state/trainingStore';
 import {
   Lightbulb,
   AlertTriangle,
@@ -45,11 +46,7 @@ export interface RecommendedLessonItem {
   iconType: 'wand' | 'clock' | 'plane' | 'book';
 }
 
-export interface SlipUpItem {
-  id: string;
-  phrase: string;
-  explanation: string;
-}
+
 
 export interface MockUserData {
   userProgress: UserProgressData;
@@ -57,7 +54,6 @@ export interface MockUserData {
   lexiconStats: LexiconStatItem[];
   dynamicFact: string;
   recommendedLessons: RecommendedLessonItem[];
-  slipUps: SlipUpItem[];
 }
 
 export const initialMockUserData: MockUserData = {
@@ -106,18 +102,6 @@ export const initialMockUserData: MockUserData = {
       iconType: 'plane'
     }
   ],
-  slipUps: [
-    {
-      id: 'slip-1',
-      phrase: 'Ojalá que...',
-      explanation: 'Confused indicative vs subjunctive usage after expressions of hope.'
-    },
-    {
-      id: 'slip-2',
-      phrase: 'Por vs Para',
-      explanation: 'Used "por" instead of "para" when indicating deadline or purpose.'
-    }
-  ]
 };
 
 // Helper for rendering lesson icons dynamically
@@ -143,6 +127,13 @@ const HomeScreen: FC = () => {
   const statsXp = useStatsStore((s) => s.xp);
   const learnedVocab = useStatsStore((s) => s.learnedVocab);
   const completedLessons = useStatsStore((s) => s.completedLessons);
+
+  // Real mistake data from training store
+  const storeMistakes = useTrainingStore((s) => s.mistakes);
+  const recentMistakes = useMemo(
+    () => [...storeMistakes].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 4),
+    [storeMistakes],
+  );
 
   // Component State
   const [userData] = useState<MockUserData>(initialMockUserData);
@@ -556,44 +547,61 @@ const HomeScreen: FC = () => {
 
         {/* ── 4. BOTTOM SECTION: RECENT SLIP-UPS ─────────────────────── */}
         <div className="space-y-4 pt-2">
-          <div className="flex items-center gap-2">
-            <h2 className="font-serif text-xl font-bold text-text-primary">
-              Recent Slip-ups
-            </h2>
-            <AlertTriangle className="h-4 w-4 text-[#C4796B]" />
-          </div>
-
-          {/* Dynamic 2-Column Grid Mapping */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {userData.slipUps.map((item) => (
-              <div
-                key={item.id}
-                className="bg-bg-elevated/90 backdrop-blur-xl border border-structural/40 hover:border-[#7D927D]/50 rounded-2xl p-5 shadow-xs flex items-center justify-between gap-4 transition-all duration-300"
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <h2 className="font-serif text-xl font-bold text-text-primary">
+                Recent Slip-ups
+              </h2>
+              <AlertTriangle className="h-4 w-4 text-[#C4796B]" />
+            </div>
+            {storeMistakes.length > 0 && (
+              <button
+                onClick={() => navigate('/mistake-history')}
+                className="font-sans text-xs font-semibold text-[#7D927D] hover:text-[#6B826B] transition-colors cursor-pointer"
               >
-                <div className="flex items-start gap-3 min-w-0">
-                  <div className="h-9 w-9 rounded-xl bg-[#C4796B]/15 border border-[#C4796B]/30 flex items-center justify-center text-[#C4796B] shrink-0 mt-0.5 shadow-xs">
-                    <Repeat className="h-4 w-4" />
-                  </div>
-                  <div className="min-w-0">
-                    <h4 className="font-serif text-sm font-bold text-text-primary truncate">
-                      {item.phrase}
-                    </h4>
-                    <p className="font-sans text-xs text-text-secondary mt-0.5 leading-relaxed">
-                      {item.explanation}
-                    </p>
-                  </div>
-                </div>
-
-                <button
-                  onClick={() => navigate('/training')}
-                  className="p-2.5 rounded-xl text-[#7D927D] hover:bg-bg-elevated-2 border border-structural/40 transition-colors cursor-pointer shrink-0"
-                  title="Review phrase"
-                >
-                  <RotateCw className="h-4 w-4" />
-                </button>
-              </div>
-            ))}
+                View All ({storeMistakes.length}) &gt;
+              </button>
+            )}
           </div>
+
+          {recentMistakes.length === 0 ? (
+            <div className="bg-bg-elevated/90 border border-structural/40 rounded-2xl p-6 text-center">
+              <p className="font-sans text-sm text-text-secondary">
+                No slip-ups yet — keep practicing and this space will track what to review.
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {recentMistakes.map((item, idx) => (
+                <div
+                  key={`${item.word}-${idx}`}
+                  className="bg-bg-elevated/90 backdrop-blur-xl border border-structural/40 hover:border-[#7D927D]/50 rounded-2xl p-5 shadow-xs flex items-center justify-between gap-4 transition-all duration-300"
+                >
+                  <div className="flex items-start gap-3 min-w-0">
+                    <div className="h-9 w-9 rounded-xl bg-[#C4796B]/15 border border-[#C4796B]/30 flex items-center justify-center text-[#C4796B] shrink-0 mt-0.5 shadow-xs">
+                      <Repeat className="h-4 w-4" />
+                    </div>
+                    <div className="min-w-0">
+                      <h4 className="font-serif text-sm font-bold text-text-primary truncate">
+                        {item.word}
+                      </h4>
+                      <p className="font-sans text-xs text-text-secondary mt-0.5 leading-relaxed line-clamp-2">
+                        Correct answer: {item.correctAnswer}
+                      </p>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => navigate(`/training?mode=weak-spots&word=${encodeURIComponent(item.word)}`)}
+                    className="p-2.5 rounded-xl text-[#7D927D] hover:bg-bg-elevated-2 border border-structural/40 transition-colors cursor-pointer shrink-0"
+                    title="Review this"
+                  >
+                    <RotateCw className="h-4 w-4" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* ── RESET PROGRESS CONFIRMATION MODAL ──────────────────────── */}
