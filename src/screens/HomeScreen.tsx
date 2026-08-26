@@ -196,7 +196,18 @@ const HomeScreen: FC = () => {
     return stats;
   }, [learnedVocab]);
 
+  const loadTodayQuest = useDailyQuestStore((s) => s.loadTodayQuest);
   const currentQuest = useDailyQuestStore((s) => s.currentQuest);
+
+  useEffect(() => {
+    loadTodayQuest(user?.id ?? null);
+  }, [user?.id, loadTodayQuest]);
+
+  const tasks = currentQuest?.tasks ?? [];
+  const dailyGoalPercentage = tasks.length > 0
+    ? Math.round((tasks.filter((t) => t.completed).length / tasks.length) * 100)
+    : 0;
+
   const pendingQuestTask = useMemo(() => {
     return currentQuest?.tasks.find((t) => !t.completed);
   }, [currentQuest]);
@@ -243,9 +254,9 @@ const HomeScreen: FC = () => {
   // Dynamic Goal Circumference: Circumference = 2 * PI * 18 = 113.1
   const goalDashOffset = useMemo(() => {
     const circumference = 113.1;
-    const percentage = userData.userProgress.dailyGoalPercentage;
+    const percentage = dailyGoalPercentage;
     return circumference - (circumference * percentage) / 100;
-  }, [userData.userProgress.dailyGoalPercentage]);
+  }, [dailyGoalPercentage]);
 
 
 
@@ -333,7 +344,7 @@ const HomeScreen: FC = () => {
                   />
                 </svg>
                 <span className="absolute font-sans text-[10px] font-bold text-text-primary">
-                  {userData.userProgress.dailyGoalPercentage}%
+                  {dailyGoalPercentage}%
                 </span>
               </div>
               <div className="flex flex-col">
@@ -341,7 +352,7 @@ const HomeScreen: FC = () => {
                   DAILY GOAL
                 </span>
                 <span className="font-sans text-xs font-bold text-text-primary">
-                  {userData.userProgress.dailyGoalPercentage}% Complete
+                  {dailyGoalPercentage}% Complete
                 </span>
               </div>
             </div>
