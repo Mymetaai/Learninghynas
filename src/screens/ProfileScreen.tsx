@@ -9,9 +9,12 @@ import {
   Trophy,
   RotateCcw,
   History,
+  Keyboard,
+  Settings,
 } from 'lucide-react';
 import { useUser, SignOutButton } from '@clerk/clerk-react';
 import { useStatsStore } from '../state/statsStore';
+import { useSettingsStore } from '../state/settingsStore';
 import { useUserData } from '../hooks/useUserData';
 import { UserActivityDashboard } from '../components/analytics/UserActivityDashboard';
 
@@ -19,6 +22,7 @@ const ProfileScreen: React.FC = () => {
   const navigate = useNavigate();
   const { user, isLoaded, isSignedIn } = useUser();
   const { userData: liveUserData, resetAllUserProgress } = useUserData();
+  const { showGlobalKeyboard, toggleGlobalKeyboard } = useSettingsStore();
   const [showResetModal, setShowResetModal] = useState(false);
   const statsXp = useStatsStore((s) => s.xp);
   const statsCoins = useStatsStore((s) => s.coins);
@@ -130,6 +134,53 @@ const ProfileScreen: React.FC = () => {
         className="mb-8"
       >
         <UserActivityDashboard />
+      </motion.div>
+
+      {/* Learning Preferences Card */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.18 }}
+        className="rounded-2xl border border-structural bg-bg-elevated p-6 shadow-sm mb-8"
+      >
+        <div className="mb-4 flex items-center justify-between border-b border-structural/30 pb-3">
+          <h3 className="font-serif text-lg font-bold text-text-primary flex items-center gap-2">
+            <Settings className="h-5 w-5 text-[#7D927D]" /> Learning Preferences
+          </h3>
+        </div>
+
+        <div className="flex items-center justify-between gap-4 p-3.5 rounded-2xl border border-structural bg-bg-elevated-2/50">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 shrink-0">
+              <Keyboard className="h-5 w-5" />
+            </div>
+            <div>
+              <h4 className="font-sans text-xs font-semibold text-text-primary">
+                Spanish Virtual Keyboard (Teclado Español)
+              </h4>
+              <p className="font-sans text-[11px] text-text-secondary mt-0.5">
+                Floating quick-access bar for Spanish accents (á, é, í, ó, ú, ñ, ü, ¿, ¡).
+              </p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={toggleGlobalKeyboard}
+            className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
+              showGlobalKeyboard ? 'bg-[#7D927D]' : 'bg-gray-300 dark:bg-slate-700'
+            }`}
+            role="switch"
+            aria-checked={showGlobalKeyboard}
+            aria-label="Toggle Spanish Virtual Keyboard"
+          >
+            <span
+              className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-md ring-0 transition duration-200 ease-in-out ${
+                showGlobalKeyboard ? 'translate-x-5' : 'translate-x-0'
+              }`}
+            />
+          </button>
+        </div>
       </motion.div>
 
       {/* Achievements Card */}

@@ -10,7 +10,7 @@ import {
   SignInButton,
   UserButton
 } from '@clerk/clerk-react';
-import { Home, Swords, BookOpen, ShoppingBag, ScrollText, User } from 'lucide-react';
+import { Home, Swords, BookOpen, ShoppingBag, ScrollText, User, Keyboard } from 'lucide-react';
 
 const HUD: FC = () => {
   const { userData } = useUserData();
@@ -21,7 +21,7 @@ const HUD: FC = () => {
   const xp = typeof statsXp === 'number' ? statsXp : (userData?.xp ?? 0);
   const coins = typeof statsCoins === 'number' ? statsCoins : (userData?.kitsune_coins ?? 100);
   const streak = typeof statsStreak === 'number' ? statsStreak : (userData?.streak_days ?? 0);
-  const { language, setLanguage } = useSettingsStore();
+  const { language, setLanguage, showGlobalKeyboard, toggleGlobalKeyboard } = useSettingsStore();
 
   // ── Edge-Hover Auto-Scrolling ─────────────────────────────────────────
   const navScrollRef = useRef<HTMLDivElement>(null);
@@ -139,6 +139,29 @@ const HUD: FC = () => {
             >
               📜
             </Link>
+
+            <button
+              type="button"
+              onClick={toggleGlobalKeyboard}
+              className={`h-8 px-2 rounded-md border text-[11px] font-sans font-semibold flex items-center gap-1.5 transition-all cursor-pointer shrink-0 ${
+                showGlobalKeyboard
+                  ? 'border-amber-500/50 bg-amber-500/15 text-amber-700 dark:text-amber-300 shadow-xs'
+                  : 'border-structural bg-bg-elevated text-text-secondary hover:text-text-primary hover:border-text-secondary'
+              }`}
+              title={
+                showGlobalKeyboard
+                  ? 'Hide Spanish Keyboard (Ocultar Teclado Español)'
+                  : 'Show Spanish Keyboard (Mostrar Teclado Español)'
+              }
+              aria-label="Toggle Spanish Keyboard"
+              aria-pressed={showGlobalKeyboard}
+            >
+              <Keyboard className="h-3.5 w-3.5 shrink-0" />
+              <span className="hidden md:inline">Teclado</span>
+              {showGlobalKeyboard && (
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" />
+              )}
+            </button>
 
             <select
               value={language}

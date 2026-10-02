@@ -21,6 +21,9 @@ interface SettingsState {
   setLanguage: (lang: TranslationLanguage) => void;
   logoVariant: LogoVariant;
   setLogoVariant: (variant: LogoVariant) => void;
+  showGlobalKeyboard: boolean;
+  setShowGlobalKeyboard: (show: boolean) => void;
+  toggleGlobalKeyboard: () => void;
 }
 
 export const useSettingsStore = create<SettingsState>()(
@@ -30,6 +33,9 @@ export const useSettingsStore = create<SettingsState>()(
       setLanguage: (language) => set({ language }),
       logoVariant: 'executive',
       setLogoVariant: (logoVariant) => set({ logoVariant }),
+      showGlobalKeyboard: true,
+      setShowGlobalKeyboard: (showGlobalKeyboard) => set({ showGlobalKeyboard }),
+      toggleGlobalKeyboard: () => set((state) => ({ showGlobalKeyboard: !state.showGlobalKeyboard })),
     }),
     {
       name: 'thelearninghyena-settings',

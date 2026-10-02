@@ -39,3 +39,6 @@ Spanish Language/
 .agents/
 !.agents/AGENTS.md
 
+# Local code dumps and scratch bundles
+FULL_APP_CODEBASE*.txt
+bundle_app.*
